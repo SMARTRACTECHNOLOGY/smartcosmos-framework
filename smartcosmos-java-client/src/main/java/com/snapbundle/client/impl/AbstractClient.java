@@ -1,5 +1,6 @@
-package com.snapbundle.client;
+package com.snapbundle.client.impl;
 
+import com.snapbundle.client.SnapConfiguration;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +12,7 @@ import org.restlet.resource.ClientResource;
 
 import java.io.IOException;
 
-public class AbstractClient
+public abstract class AbstractClient
 {
     protected ClientResource createClient(String path)
     {
