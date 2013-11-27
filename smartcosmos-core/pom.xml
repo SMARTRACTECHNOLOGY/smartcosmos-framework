@@ -1,0 +1,134 @@
+<!--
+  ~ SnapBundle™ SDK
+  ~ (C) Copyright 2013 Tag Dynamics, LLC (http://tagdynamics.com/)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.snapbundle</groupId>
+    <artifactId>snap-model</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>jar</packaging>
+
+    <name>SnapBundle™ Model</name>
+    <description>Provides an interface driven object model for working with the SnapBundle™ platform</description>
+
+    <url>http://tagdynamices.com/</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jackson.version>2.1.0</jackson.version>
+    </properties>
+
+    <organization>
+        <name>Tag Dynamics, LLC</name>
+        <url>http://www.tagdynamics.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>tagd.engineering</id>
+            <name>Tag Dynamics</name>
+            <email>engineering@tagdynamics.net</email>
+            <organization>Tag Dynamics, Inc.</organization>
+            <timezone>-5</timezone>
+            <roles>
+                <role>Project Lead</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/snapbundle/sdk</url>
+        <connection>scm:git:git://github.com/snapbundle/sdk.git</connection>
+        <developerConnection>scm:git:git@github.com:snapbundle/sdk.git</developerConnection>
+    </scm>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20090211</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>15.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.1.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.3</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.5.1</version>
+                    <configuration>
+                        <compilerVersion>1.7</compilerVersion>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
