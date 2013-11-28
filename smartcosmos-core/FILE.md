@@ -62,7 +62,7 @@ Endpoint | Supported HTTP Methods | Events Generated
 ------------ | ------------- | ------------
 /app/files | PUT  | FileDefined
 /app/files/{urn}/{mimeType} | POST | FileUploaded
-/app/files/{entityReferenceType}/{referenceUrn} | GET |
+/app/files/query/{entityReferenceType}/{referenceUrn} | GET |
 /app/files/{urn} | GET |
 
 Developers must use the **PUT** endpoint to first define the file, then use the **POST** endpoint to physically upload the file to the Cloud for storage.

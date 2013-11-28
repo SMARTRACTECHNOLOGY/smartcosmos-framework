@@ -3,6 +3,13 @@ The SnapBundle™ platform defines searches differently from a direct lookup. Wi
 
 > Searching endpoints are read-only operations and by design do not generate any events.
 
+## File Searching Endpoints
+Searches for all Files associated with a specific object.
+
+Endpoint | Supported HTTP Methods
+------------ | ------------- 
+/app/files/query/{entityReferenceType}/{referenceUrn} | GET |
+
 ## Metadata Searching Endpoints
 Searches for all Metadata associated with a specific object.
 
@@ -11,6 +18,7 @@ Endpoint | Supported HTTP Methods
 /app/metadata/query/{entityReferenceType}/{referenceUrn} | GET
 
 ## Tag Searching Endpoints
+Searches for objects assigned a specific tag identified by `name`. Specifying an `entityReferenceType` restricts the search to specific object entity types. Furthermore, specifying both an `entityReferenceType` and a `referenceUrn` queries for those tags assigned to the specific object.  
 
 Endpoint | Supported HTTP Methods
 ------------ | ------------- 
