@@ -24,7 +24,7 @@ public enum ObjectType
     ISBN,
     DriversLicense,
     UTMGridLocation,
-    TwitterHashTag,
+    HashTag,
     FourSquareLocation,
     VehicleIdentificationNumber,
     IndependentlyDefined,
