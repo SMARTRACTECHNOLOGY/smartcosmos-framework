@@ -19,6 +19,8 @@ package com.snapbundle;
 
 public final class Constant
 {
+    public static final int REVISION = 1;
+
     public static final int RESULT_OK = 1;
 
     public static final int RESULT_FAIL = 0;
