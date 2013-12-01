@@ -23,6 +23,14 @@ public final class Constant
 
     public static final int RESULT_FAIL = 0;
 
+    public static final int RESULT_MISSING_FIELD = -1;
+
+    public static final int RESULT_NO_SUCH_OBJECT = -2;
+
+    public static final int RESULT_FEATURE_UNLICENSED = -3;
+
+    public static final int RESULT_UNKNOWN_TYPE = -4;
+
     public static final String EMAIL_VERIFICATION_TOKEN_FIELD = "emailVerificationToken";
 
     public static final String EMAIL_ADDRESS_FIELD = "emailAddress";
@@ -94,6 +102,8 @@ public final class Constant
     public static final String ENTITY_REFERENCE_TYPE = "entityReferenceType";
 
     public static final String MIME_TYPE_FIELD = "mimeType";
+
+    public static final String CONTENT_URL_FIELD = "contentUrl";
 
     public static final String KEY_FIELD = "key";
 
