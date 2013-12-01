@@ -64,8 +64,11 @@ Endpoint | Supported HTTP Methods | Events Generated
 /app/files/{urn}/{mimeType} | POST | FileUploaded
 /app/files/query/{entityReferenceType}/{referenceUrn} | GET |
 /app/files/{urn} | GET |
+/app/files/{urn}/content/ | GET |
 
-Developers must use the **PUT** endpoint to first define the file, then use the **POST** endpoint to physically upload the file to the Cloud for storage.
+Developers must use the **PUT** endpoint to first define the file, then use the **POST** endpoint to physically upload the file to the Cloud for storage. _However_, if the file content already exists at well-defined location on the web referenceable with an HTTP or HTTPS URL, then the developer may choose to include a `contentUrl` field in the PUT request. The platform checks for the existence of `contentUrl` and `mimeType` fields, and if present, not-null, and the content is successfully retrieved, then the PUT operation is self-contained. In this case, self-contained means that the PUT operation generated the File record _and_ downloaded the content of the given MIME type from the referenced URL and placed it into platform storage. If the `contentUrl` field is included with a `null` value or cannot be successfully downloaded, of if the `mimeType` field is omitted, then an HTTP 400 status code will be returned to the developer to convey the fact that file content is missing. This also means that the File record was _not_ saved either.
+
+**NOTE:** When issuing a POST where the `mimeType` is included in the endpoint path, developers _must_ URL Encode the MIME type with UTF-8 to prevent the **/** character from natively occurring in the path.
 
 For retrieval, when requesting by `{entityReferenceType}/{referenceUrn}`, the system will respond with a JSON array, detailing the set of File definitions associated with the referenced object. In contrast, the `{urn}` request represents the URN assigned to a specific File definition, returning the single JSON object defining the given File.
 

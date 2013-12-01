@@ -28,3 +28,10 @@ Endpoint | Supported HTTP Methods | Events Generated
 ------------ | ------------- | ------------
 /app/objects | PUT, GET, POST  | ObjectDefined,ObjectUpdated
 /app/objects/{objectUrn} | GET |
+
+**NOTE:** Every PUT operation includes a check against the account-unique `objectUrn` field for prior existence. Developers should pay attention to the HTTP status code returned from the PUT operation:
+
+ *  **201 Created** indicates that a new record was inserted into the database with the developer-assigned `objectUrn` field
+ *  **200 OK** indicates that no action was taken because the developer-assigned `objectUrn` field was already found in the database
+ 
+If after receiving a 200 the developer wants to update the record, they may issue a POST operation.

@@ -86,7 +86,7 @@ An Object Type is used to categorize the type of Object managed by the system.
 * ISBN
 * DriversLicense
 * UTMGridLocation
-* TwitterHashTag
+* HashTag
 * FourSquareLocation
 * VehicleIdentificationNumber
 * IndependentlyDefined
