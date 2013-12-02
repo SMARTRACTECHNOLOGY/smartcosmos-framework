@@ -25,33 +25,21 @@ package com.snapbundle.model.base;
  */
 public enum EntityReferenceType
 {
-    Account("AccountEntity"),
-    Device("DeviceEntity"),
-    User("UserEntity"),
+    Account,
+    Device,
+    User,
 
-    Object("ObjectEntity"),
-    ObjectAddress("ObjectAddressEntity"),
-    ObjectInteraction("ObjectInteractionEntity"),
-    ObjectInteractionSession("ObjectInteractionSessionEntity"),
+    Object,
+    ObjectAddress,
+    ObjectInteraction,
+    ObjectInteractionSession,
 
-    File("FileEntity"),
-    Metadata("MetadataEntity"),
-    Tag("TagEntity"),
+    File,
+    Metadata,
+    Tag,
 
-    Event("EventEntity"),
+    Event,
 
-    Extension("Extension"),
-    ExtensionScreenShot("ExtensionScreenShot");
-
-    private String entityName;
-
-    EntityReferenceType(String entityName)
-    {
-        this.entityName = entityName;
-    }
-
-    public String getEntityName()
-    {
-        return entityName;
-    }
+    Extension,
+    ExtensionScreenShot
 }
