@@ -37,6 +37,7 @@ public enum EntityReferenceType
     File,
     Metadata,
     Tag,
+    Relationship,
 
     Event,
 
