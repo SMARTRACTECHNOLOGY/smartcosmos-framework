@@ -42,6 +42,9 @@ public enum PermissionType
     MetadataRead,
     MetadataWrite,
 
+    RelationshipRead,
+    RelationshipWrite,
+
     TagRead,
     TagWrite,
 

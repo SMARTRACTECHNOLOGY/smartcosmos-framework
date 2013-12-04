@@ -25,7 +25,7 @@ public final class Constant
      */
     public static final String NULL_MONIKER = "4028E4F642B838590142B8659F390002";
 
-    public static final int REVISION = 3;
+    public static final int REVISION = 4;
 
     public static final int RESULT_OK = 1;
 
