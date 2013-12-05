@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.AddressType;
+import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IObjectAddress;
 import com.snapbundle.pojo.base.DomainResource;
@@ -176,6 +177,18 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
     public void setTimestamp(long timestamp)
     {
         this.timestamp = timestamp;
+    }
+
+    @Override
+    public IAccount getAccount()
+    {
+        return object.getAccount();
+    }
+
+    @Override
+    public void setAccount(IAccount account)
+    {
+        throw new IllegalStateException("Object Address account is inferred through it's parent Object");
     }
 
     @Override

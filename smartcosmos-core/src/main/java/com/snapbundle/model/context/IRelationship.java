@@ -1,10 +1,11 @@
 package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.EntityReferenceType;
+import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.IReferentialObject;
 
-public interface IRelationship extends IDomainResource<IRelationship>, IReferentialObject
+public interface IRelationship extends IAccountDomainResource<IRelationship>, IReferentialObject
 {
     RelationshipType getRelationshipType();
 

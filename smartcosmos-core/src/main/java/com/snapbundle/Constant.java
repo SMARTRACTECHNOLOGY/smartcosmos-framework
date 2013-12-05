@@ -31,6 +31,10 @@ public final class Constant
 
     public static final int RESULT_FAIL = 0;
 
+    public static final int RESULT_EXISTS = 1;
+
+    public static final int RESULT_NOT_EXISTS = 0;
+
     public static final int RESULT_MISSING_FIELD = -1;
 
     public static final int RESULT_NO_SUCH_OBJECT = -2;
@@ -108,6 +112,12 @@ public final class Constant
     public static final String REFERENCE_URN_FIELD = "referenceUrn";
 
     public static final String ENTITY_REFERENCE_TYPE = "entityReferenceType";
+
+    public static final String RELATED_REFERENCE_URN_FIELD = "relatedReferenceUrn";
+
+    public static final String RELATED_ENTITY_REFERENCE_TYPE = "relatedEntityReferenceType";
+
+    public static final String RELATIONSHIP_TYPE_FIELD = "relationshipType";
 
     public static final String MIME_TYPE_FIELD = "mimeType";
 

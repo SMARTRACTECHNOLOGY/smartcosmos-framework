@@ -17,15 +17,12 @@
 
 package com.snapbundle.model.context;
 
+import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.INamedObject;
 
-public interface IObjectInteractionSession extends IDomainResource<IObjectInteractionSession>, INamedObject<IObjectInteractionSession>
+public interface IObjectInteractionSession extends IAccountDomainResource<IObjectInteractionSession>, INamedObject<IObjectInteractionSession>
 {
-    IAccount getAccount();
-
-    void setAccount(IAccount account);
-
     IUser getUser();
 
     void setUser(IUser user);

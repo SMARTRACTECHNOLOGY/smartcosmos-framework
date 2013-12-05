@@ -17,15 +17,12 @@
 
 package com.snapbundle.model.context;
 
+import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.INamedObject;
 
-public interface IDevice extends IDomainResource<IDevice>, INamedObject<IDevice>
+public interface IDevice extends IAccountDomainResource<IDevice>, INamedObject<IDevice>
 {
-    IAccount getAccount();
-
-    void setAccount(IAccount account);
-
     DeviceType getDeviceType();
 
     void setDeviceType(DeviceType deviceType);

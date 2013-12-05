@@ -17,10 +17,11 @@
 
 package com.snapbundle.model.context;
 
+import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.IReferentialObject;
 
-public interface ITagAssignment extends IDomainResource<ITagAssignment>, IReferentialObject
+public interface ITagAssignment extends IAccountDomainResource<ITagAssignment>, IReferentialObject
 {
     ITag getTag();
 

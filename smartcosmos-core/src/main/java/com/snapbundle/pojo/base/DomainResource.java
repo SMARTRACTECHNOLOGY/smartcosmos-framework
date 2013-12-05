@@ -95,4 +95,26 @@ public abstract class DomainResource<T> implements IDomainResource<T>
 
         return mapper.writerWithView(viewClass).writeValueAsString(this);
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DomainResource that = (DomainResource) o;
+
+        if (uniqueId != that.uniqueId) return false;
+        if (!urn.equals(that.urn)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = (int) (uniqueId ^ (uniqueId >>> 32));
+        result = 31 * result + urn.hashCode();
+        return result;
+    }
 }

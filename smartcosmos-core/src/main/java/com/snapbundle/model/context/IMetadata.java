@@ -17,10 +17,11 @@
 
 package com.snapbundle.model.context;
 
+import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.IReferentialObject;
 
-public interface IMetadata extends IDomainResource<IMetadata>, IReferentialObject
+public interface IMetadata extends IAccountDomainResource<IMetadata>, IReferentialObject
 {
     MetadataDataType getDataType();
 

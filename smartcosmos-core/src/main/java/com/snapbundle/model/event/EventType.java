@@ -54,7 +54,7 @@ public enum EventType
 
     PermanentObjectAddressDefined,
     PermanentObjectAddressUpdated,
-    LastKnownObjectAddressDefine,
+    LastKnownObjectAddressDefined,
     PermanentObjectAddressDeleted,
 
     FileRetrieval,
@@ -85,6 +85,9 @@ public enum EventType
     TagAssigned,
     TagRevoked,
 
+    RelationshipDefined,
+    RelationshipDeleted,
+
     ExtensionDefined,
     ExtensionUpdated,
     ExtensionActivated,
@@ -108,5 +111,7 @@ public enum EventType
     ObjectAccessed,
     ObjectAddressAccessed,
     ObjectInteractionAccessed,
-    ObjectInteractionSessionAccessed
+    ObjectInteractionSessionAccessed,
+    RelationshipAccessed
+
 }

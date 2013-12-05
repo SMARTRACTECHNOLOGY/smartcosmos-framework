@@ -17,16 +17,13 @@
 
 package com.snapbundle.model.context;
 
+import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IBitemporalObject;
 import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.IGeoLocation;
 
-public interface IObjectInteraction extends IDomainResource<IObjectInteraction>, IBitemporalObject, IGeoLocation
+public interface IObjectInteraction extends IAccountDomainResource<IObjectInteraction>, IBitemporalObject, IGeoLocation
 {
-    IAccount getAccount();
-
-    void setAccount(IAccount account);
-
     IObject getObject();
 
     void setObject(IObject object);

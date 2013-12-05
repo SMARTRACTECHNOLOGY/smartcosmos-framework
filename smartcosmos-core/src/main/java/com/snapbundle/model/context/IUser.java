@@ -17,19 +17,15 @@
 
 package com.snapbundle.model.context;
 
-import com.snapbundle.model.base.IDomainResource;
+import com.snapbundle.model.base.IAccountDomainResource;
 
 import java.io.InputStream;
 
-public interface IUser extends IDomainResource<IUser>
+public interface IUser extends IAccountDomainResource<IUser>
 {
     String getEmailAddress();
 
     void setEmailAddress(String emailAddress);
-
-    IAccount getAccount();
-
-    void setAccount(IAccount account);
 
     IObject getAssociatedObject();
 

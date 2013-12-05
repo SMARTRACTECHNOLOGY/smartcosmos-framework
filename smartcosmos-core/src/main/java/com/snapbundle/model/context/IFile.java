@@ -17,10 +17,10 @@
 
 package com.snapbundle.model.context;
 
-import com.snapbundle.model.base.IDomainResource;
+import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IReferentialObject;
 
-public interface IFile extends IDomainResource<IFile>, IReferentialObject
+public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
 {
     IUser getUser();
 

@@ -17,15 +17,12 @@
 
 package com.snapbundle.model.context;
 
+import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.INamedObject;
 
-public interface IObject extends IDomainResource<IObject>, INamedObject<IObject>
+public interface IObject extends IAccountDomainResource<IObject>, INamedObject<IObject>
 {
-    IAccount getAccount();
-
-    void setAccount(IAccount account);
-
     String getObjectUrn();
 
     void setObjectUrn(String urn);
