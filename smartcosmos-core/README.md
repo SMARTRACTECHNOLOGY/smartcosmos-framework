@@ -16,7 +16,7 @@ The SnapBundle™ platform was built with these core tenets in mind:
 SnapBundle™ works with _any_ type of object that has either an assigned serial number or a made-up serial number (1, 2, 3, 4, ...) that is unique to your Account. Thus, the platform works equally well with barcodes, QR-codes, RFID & NFC tags as it does with plain old serial numbers. If it has a unique serial number, or you can make something up, it can be defined as an [Object](OBJECT.md "Object") in our system, and every Object provides a plethora of media-rich contextual association opportunities.
 
 ### Create Rich Associations.
-SnapBundle™ can easily associate virtually _anything_ with _anything_. Hashtags, key-value metadata, and arbitrary files of any type or size is easily associated with an Object and securely stored in the Cloud. Contextual search capabilities mean you can find matching Objects by looking for keywords instead of long, boring serial numbers. Check out our [primary data types](DATA_TYPES.md "Primary Data Types") to see our incredibly intuitive object model.
+SnapBundle™ can easily associate virtually _anything_ with _anything_. Hashtags, key-value metadata, and arbitrary files of any type or size is easily associated with an Object and securely stored in the Cloud. Each primary object type can be associated with any other object type with relationships like parent-child, peer, neighbor, follows, followed by, etc. Contextual search capabilities mean you can find matching objects by looking for keywords instead of long, boring serial numbers. Check out our [primary data types](DATA_TYPES.md "Primary Data Types") to see our incredibly intuitive object model.
 
 ### Near Real-Time Integrations
 We get it- *you* generated the data, *you* want to own the data, and, you want us to push it to you in a timely manner. That's exactly what the SnapBundle™ platform can do. Define a standard HTTPS end point in your data center, and as soon as we digitally sign and persist the data, we'll push a copy of the data to you using JavaScript Object Notation (JSON) as fast as the ether will carry the bits. Check out our [Event Stream](EVENT.md "Event Stream") model to see how easy it is to understand the data feed.
@@ -45,6 +45,7 @@ The SnapBundle™ platform is optimized for today's smart phones and tablets. Us
   *  [Object Addresses](OBJECT_ADDRESS.md "Object Address Management")
   *  [Object Interactions](OBJECT_INTERACTION.md "Object Interactions")
   *  [Object Interaction Sessions](OBJECT_INTERACTION_SESSION.md "Object Interaction Session")
+  *  [Relationships](RELATIONSHIP.md "Relationship Management")
   *  [Files](FILE.md "File Management")
   *  [Tags](TAG.md "Tag Management")
   *  [Metadata](METADATA.md "Metadata Management")

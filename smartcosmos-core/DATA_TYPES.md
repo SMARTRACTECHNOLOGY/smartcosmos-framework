@@ -20,6 +20,7 @@ The SnapBundle™ object model consists of a small number of primary data types.
 * [Object Address](OBJECT_ADDRESS.md "ObjectAddress")
 * [Object Interaction](OBJECT_INTERACTION.md "ObjectInteraction")
 * [Object Interaction Session](OBJECT_INTERACTION_SESSION.md "ObjectInteractionSession")
+* [Relationship](RELATIONSHIP.md "Relationship]")
 * [File](FILE.md "File")
 * [Metadata](METADATA.md "Metadata")
 * [Tag](TAG.md "Tag")
@@ -41,6 +42,7 @@ Each of the data types defined in this section are secondary types that are enti
 * [SessionType](#st)
 * [PermissionType](#pt)
 * [EventType](#et)
+* [RelationshipType](#relt)
 
 ### [EntityReferenceType](id:ert)
 An Entity Reference Type is used to provide context to a type-agnositc call, such as a search operation.  
@@ -230,6 +232,19 @@ The following is meant to be an authoritative list of all known event types gene
 * IntegrationEndpointEnrollmentPending 
 * IntegrationEndpointEnrolled
 * IntegrationEndpointWithdrawn  
+
+### [RelationshipType](id:relt)
+Every relationship is identified with a well-known Relationship Type that typically constrains the logical operations (arbitrarily defined by the developer). The following relationship types are presently supported:
+
+* Follows
+* FollowedBy
+* Friend
+* Parent
+* Child
+* Sibling
+* Peer
+* Neighbor
+* Owner  
 
 ## [Search Types](id:search)
 
