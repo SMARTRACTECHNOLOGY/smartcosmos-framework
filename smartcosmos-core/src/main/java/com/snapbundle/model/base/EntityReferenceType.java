@@ -38,6 +38,7 @@ public enum EntityReferenceType
     Metadata,
     Tag,
     Relationship,
+    Timeline,
 
     Event,
 

@@ -107,11 +107,18 @@ public enum EventType
     OAuthTokenRefreshed,
     TokenRevocation,
 
+    TimelineEntryDefined,
+    TimelineEntryUpdated,
+    TimelineEntryDeleted,
+    TimelineEntryHidden,
+    TimelineEntryShown,
+
     FileAccessed,
     ObjectAccessed,
     ObjectAddressAccessed,
     ObjectInteractionAccessed,
     ObjectInteractionSessionAccessed,
-    RelationshipAccessed
+    RelationshipAccessed,
+    TimelineEntryAccessed
 
 }

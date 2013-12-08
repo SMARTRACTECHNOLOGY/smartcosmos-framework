@@ -17,15 +17,13 @@
 
 package com.snapbundle;
 
-public final class Constant
+public final class Constant extends VersionData
 {
     /**
      * Use this value to re-assign the null value to a moniker field after it was
      * initially assigned with a value.
      */
     public static final String NULL_MONIKER = "4028E4F642B838590142B8659F390002";
-
-    public static final int REVISION = 4;
 
     public static final int RESULT_OK = 1;
 
