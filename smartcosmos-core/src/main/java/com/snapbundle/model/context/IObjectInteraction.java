@@ -19,7 +19,6 @@ package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IBitemporalObject;
-import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.IGeoLocation;
 
 public interface IObjectInteraction extends IAccountDomainResource<IObjectInteraction>, IBitemporalObject, IGeoLocation
@@ -45,6 +44,4 @@ public interface IObjectInteraction extends IAccountDomainResource<IObjectIntera
     IObjectInteractionSession getObjectInteractionSession();
 
     void setObjectInteractionSession(IObjectInteractionSession session);
-
-    void copy(IObjectInteraction objectInteraction);
 }
