@@ -33,5 +33,7 @@ public enum ObjectType
     HfRfid,
     QRCode,
     ScrapbookElement,
+    Task,
+    Hint,
     Unknown,
 }

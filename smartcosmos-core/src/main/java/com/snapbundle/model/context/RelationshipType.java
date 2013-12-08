@@ -11,5 +11,11 @@ public enum RelationshipType
     Sibling,
     Peer,
     Neighbor,
-    Owner
+    Owner,
+    CrewMember,
+    Asignee,
+    Operator,
+    Technician,
+    Auditor,
+    Custodian
 }
