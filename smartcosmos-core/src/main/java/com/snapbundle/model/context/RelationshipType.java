@@ -4,6 +4,7 @@ public enum RelationshipType
 {
     Follows,
     FollowedBy,
+    InResponseTo,
     Friend,
     Parent,
     Child,
