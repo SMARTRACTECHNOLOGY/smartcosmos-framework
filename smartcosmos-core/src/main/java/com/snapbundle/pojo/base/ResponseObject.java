@@ -41,6 +41,12 @@ public final class ResponseObject
         this.message = message;
     }
 
+    public ResponseObject(long result, String message, Object... args)
+    {
+        this.result = result;
+        this.message = String.format(message, args);
+    }
+
     public ResponseObject()
     {
 
