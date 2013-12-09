@@ -42,7 +42,7 @@ public class GeoJsonTest
         URL url = Resources.getResource(GeoJsonTest.class, "point.json");
         String json = Resources.toString(url, Charsets.UTF_8);
 
-        GeometricObject crs = mapper.readValue(json, GeometricObject.class);
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class GeoJsonTest
         URL url = Resources.getResource(GeoJsonTest.class, "line-string.json");
         String json = Resources.toString(url, Charsets.UTF_8);
 
-        GeometricObject crs = mapper.readValue(json, GeometricObject.class);
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class GeoJsonTest
         URL url = Resources.getResource(GeoJsonTest.class, "polygon.json");
         String json = Resources.toString(url, Charsets.UTF_8);
 
-        GeometricObject crs = mapper.readValue(json, GeometricObject.class);
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class GeoJsonTest
         URL url = Resources.getResource(GeoJsonTest.class, "polygon-with-holes.json");
         String json = Resources.toString(url, Charsets.UTF_8);
 
-        GeometricObject crs = mapper.readValue(json, GeometricObject.class);
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class GeoJsonTest
         URL url = Resources.getResource(GeoJsonTest.class, "multiline-string.json");
         String json = Resources.toString(url, Charsets.UTF_8);
 
-        GeometricObject crs = mapper.readValue(json, GeometricObject.class);
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class GeoJsonTest
         URL url = Resources.getResource(GeoJsonTest.class, "multipoint.json");
         String json = Resources.toString(url, Charsets.UTF_8);
 
-        GeometricObject crs = mapper.readValue(json, GeometricObject.class);
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class GeoJsonTest
         URL url = Resources.getResource(GeoJsonTest.class, "multi-polygon.json");
         String json = Resources.toString(url, Charsets.UTF_8);
 
-        GeometricObject crs = mapper.readValue(json, GeometricObject.class);
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class GeoJsonTest
         URL url = Resources.getResource(GeoJsonTest.class, "geometric-collection.json");
         String json = Resources.toString(url, Charsets.UTF_8);
 
-        GeometricObject crs = mapper.readValue(json, GeometricObject.class);
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class GeoJsonTest
         URL url = Resources.getResource(GeoJsonTest.class, "bbox.json");
         String json = Resources.toString(url, Charsets.UTF_8);
 
-        GeometricObject crs = mapper.readValue(json, GeometricObject.class);
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class GeoJsonTest
         URL url = Resources.getResource(GeoJsonTest.class, "feature-collection.json");
         String json = Resources.toString(url, Charsets.UTF_8);
 
-        GeometricObject crs = mapper.readValue(json, GeometricObject.class);
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
 }

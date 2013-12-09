@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GeometricObject
+public class GeometricShape
 {
     private Crs crs;
 
@@ -13,15 +13,15 @@ public class GeometricObject
 
     private JsonNode coordinates;
 
-    private List<GeometricObject> geometries = new ArrayList<>();
+    private List<GeometricShape> geometries = new ArrayList<>();
 
     private JsonNode properties;
 
-    private List<GeometricObject> features = new ArrayList<>();
+    private List<GeometricShape> features = new ArrayList<>();
 
     private float[] bbox;
 
-    private GeometricObject geometry;
+    private GeometricShape geometry;
 
     public GeometricType getType()
     {
@@ -43,12 +43,12 @@ public class GeometricObject
         this.coordinates = coordinates;
     }
 
-    public List<GeometricObject> getGeometries()
+    public List<GeometricShape> getGeometries()
     {
         return geometries;
     }
 
-    public void setGeometries(List<GeometricObject> geometries)
+    public void setGeometries(List<GeometricShape> geometries)
     {
         this.geometries = geometries;
     }
@@ -63,12 +63,12 @@ public class GeometricObject
         this.bbox = bbox;
     }
 
-    public GeometricObject getGeometry()
+    public GeometricShape getGeometry()
     {
         return geometry;
     }
 
-    public void setGeometry(GeometricObject geometry)
+    public void setGeometry(GeometricShape geometry)
     {
         this.geometry = geometry;
     }
@@ -83,12 +83,12 @@ public class GeometricObject
         this.crs = crs;
     }
 
-    public List<GeometricObject> getFeatures()
+    public List<GeometricShape> getFeatures()
     {
         return features;
     }
 
-    public void setFeatures(List<GeometricObject> features)
+    public void setFeatures(List<GeometricShape> features)
     {
         this.features = features;
     }
