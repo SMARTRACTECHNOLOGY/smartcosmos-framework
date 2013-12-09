@@ -41,6 +41,14 @@ public final class Constant extends VersionData
 
     public static final int RESULT_UNKNOWN_TYPE = -4;
 
+    public static final int RESULT_INTERNAL_SERVER_ERR = -500;
+
+    /**
+     * Indicates that the caller (if an extension) lacked the required PermissionType needed to access the resource,
+     * or the caller (if an actual user of the account) lacked the necessary RoleType needed to access the resource.
+     */
+    public static final int RESULT_NO_ACCESS = -600;
+
     public static final String EMAIL_VERIFICATION_TOKEN_FIELD = "emailVerificationToken";
 
     public static final String EMAIL_ADDRESS_FIELD = "emailAddress";
