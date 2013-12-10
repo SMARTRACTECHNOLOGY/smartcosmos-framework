@@ -4,7 +4,7 @@ import com.snapbundle.geo.GeometricShape;
 
 public interface IGeometrySupplier
 {
-    GeometricShape getGeometry();
+    GeometricShape getGeometricShape();
 
-    void setGeometry(GeometricShape geometricShape);
+    void setGeometricShape(GeometricShape geometricShape);
 }

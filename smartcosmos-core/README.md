@@ -49,6 +49,7 @@ The SnapBundle™ platform is optimized for today's smart phones and tablets. Us
   *  [Files](FILE.md "File Management")
   *  [Tags](TAG.md "Tag Management")
   *  [Metadata](METADATA.md "Metadata Management")
+  *  [Georectification](GEORECTIFICATION.md "Georectification Capabilities")
 * Chapter 5: Searching and Reporting
   *  [Events: _Full Account Audit Loggig_](EVENT.md "Understanding Events")
   *  [Searching](SEARCHING.md "Searching for Records")
