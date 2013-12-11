@@ -126,4 +126,17 @@ public class GeoJsonTest
         GeometricShape crs = mapper.readValue(json, GeometricShape.class);
     }
 
+    @Test
+    public void testFeatureCollectionBothWays() throws IOException
+    {
+        URL url = Resources.getResource(GeoJsonTest.class, "feature-collection.json");
+        String json = Resources.toString(url, Charsets.UTF_8);
+
+        GeometricShape crs = mapper.readValue(json, GeometricShape.class);
+
+        String jsonOutput = mapper.writeValueAsString(crs);
+
+        GeometricShape newCrs = mapper.readValue(jsonOutput, GeometricShape.class);
+    }
+
 }
