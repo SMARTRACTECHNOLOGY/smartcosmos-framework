@@ -19,10 +19,20 @@ package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
 
-import java.io.InputStream;
-
 public interface IUser extends IAccountDomainResource<IUser>
 {
+    String getGivenName();
+
+    void setGivenName(String givenName);
+
+    String getSurname();
+
+    void setSurname(String surname);
+
+    String getRealm();
+
+    void setRealm(String realm);
+
     String getEmailAddress();
 
     void setEmailAddress(String emailAddress);
@@ -30,14 +40,6 @@ public interface IUser extends IAccountDomainResource<IUser>
     IObject getAssociatedObject();
 
     void setAssociatedObject(IObject object);
-
-    boolean isActive();
-
-    void setActive(boolean flag);
-
-    String getPasswordHash();
-
-    void createPasswordHash(char[] password, InputStream saltStream);
 
     RoleType getRoleType();
 

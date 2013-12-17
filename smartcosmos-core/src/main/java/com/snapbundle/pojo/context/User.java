@@ -18,18 +18,14 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IUser;
 import com.snapbundle.model.context.RoleType;
 import com.snapbundle.pojo.base.DomainResource;
-import com.snapbundle.util.HashUtil;
 import com.snapbundle.util.JsonGenerationView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Logger;
 
 public class User extends DomainResource<IUser> implements IUser
@@ -37,30 +33,27 @@ public class User extends DomainResource<IUser> implements IUser
     private static Logger logger = Logger.getLogger(User.class.getName());
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected String emailAddress;
+    private String emailAddress;
 
     @JsonView(JsonGenerationView.Full.class)
     @JsonDeserialize(as = Account.class)
     protected IAccount account;
 
     @JsonView(JsonGenerationView.Standard.class)
-    protected boolean activeFlag;
-
-    @JsonView(JsonGenerationView.Standard.class)
     @JsonDeserialize(as = ObjectImpl.class)
     protected IObject object;
 
-    @JsonView(JsonGenerationView.Restricted.class)
-    protected String passwordHash;
+    @JsonView(JsonGenerationView.Standard.class)
+    private String givenName;
+
+    @JsonView(JsonGenerationView.Standard.class)
+    private String surname;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    private String realm;
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected RoleType roleType;
-
-    public static IUser fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, User.class);
-    }
 
     @Override
     public void copy(IUser user)
@@ -105,27 +98,39 @@ public class User extends DomainResource<IUser> implements IUser
     }
 
     @Override
-    public boolean isActive()
+    public String getGivenName()
     {
-        return activeFlag;
+        return givenName;
     }
 
     @Override
-    public void setActive(boolean flag)
+    public void setGivenName(String givenName)
     {
-        this.activeFlag = flag;
+        this.givenName = givenName;
     }
 
     @Override
-    public String getPasswordHash()
+    public String getSurname()
     {
-        return passwordHash;
+        return surname;
     }
 
     @Override
-    public void createPasswordHash(char[] password, InputStream saltStream)
+    public void setSurname(String surname)
     {
-        this.passwordHash = HashUtil.createHash(password, saltStream);
+        this.surname = surname;
+    }
+
+    @Override
+    public String getRealm()
+    {
+        return realm;
+    }
+
+    @Override
+    public void setRealm(String realm)
+    {
+        this.realm = realm;
     }
 
     @Override
