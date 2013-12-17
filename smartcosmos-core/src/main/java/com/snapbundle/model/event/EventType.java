@@ -20,14 +20,24 @@ package com.snapbundle.model.event;
 public enum EventType
 {
     RegistrationRequest,
-    NewAccountDefined,
+
+    RealmDefined,
+
+    AccountDefined,
     AccountConfirmed,
+    AccountUpdated,
+
     UserDefined,
+    UserUpdated,
     UserLoginSuccess,
     UserLoginFailure,
 
     DeviceDefined,
+    DeviceUpdated,
+
     ObjectDefined,
+    ObjectUpdated,
+
     ObjectInteraction,
 
     FileDefined,
@@ -45,10 +55,6 @@ public enum EventType
     DeviceBatchStart,
     DeviceBatchStop,
 
-    ObjectUpdated,
-    DeviceUpdated,
-    UserUpdated,
-    AccountUpdated,
 
     ObjectDeactivated,
 
