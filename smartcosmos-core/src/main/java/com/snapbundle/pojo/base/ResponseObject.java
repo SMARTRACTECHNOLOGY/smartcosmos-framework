@@ -35,6 +35,22 @@ public final class ResponseObject
         return mapper.readValue(json, ResponseObject.class);
     }
 
+    public static String toJson(long result, String message)
+    {
+        return ResponseObject.toJson(result, message, null);
+    }
+
+    public static String toJson(long result, String message, Object... args)
+    {
+        if (args != null)
+        {
+            return (new ResponseObject(result, message, args)).toJson();
+        } else
+        {
+            return (new ResponseObject(result, message)).toJson();
+        }
+    }
+
     public ResponseObject(long result, String message)
     {
         this.result = result;
@@ -57,9 +73,19 @@ public final class ResponseObject
         this.result = result;
     }
 
-    public String toJson() throws JsonProcessingException
+    public String toJson()
     {
-        return mapper.writeValueAsString(this);
+        String json = null;
+
+        try
+        {
+            json = mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e)
+        {
+            e.printStackTrace();
+        }
+
+        return json;
     }
 
     public long getResult()

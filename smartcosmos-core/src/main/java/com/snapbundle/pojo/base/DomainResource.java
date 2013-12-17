@@ -29,7 +29,7 @@ import com.snapbundle.util.JsonGenerationView;
 @JsonPropertyOrder(value = {"uniqueId", "urn", "lastModifiedTimestamp"})
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
-    protected ObjectMapper mapper = null;
+    protected static ObjectMapper mapper = null;
 
     @JsonView(JsonGenerationView.Restricted.class)
     protected long uniqueId;
@@ -86,14 +86,23 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     }
 
     @Override
-    public String toJson(Class<? extends JsonGenerationView.Published> viewClass) throws JsonProcessingException
+    public String toJson(Class<? extends JsonGenerationView.Published> viewClass)
     {
         Preconditions.checkArgument((viewClass != null), "The viewClass must not be null");
 
         mapper = new ObjectMapper()
                 .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false);
 
-        return mapper.writerWithView(viewClass).writeValueAsString(this);
+        String json = null;
+        try
+        {
+            json = mapper.writerWithView(viewClass).writeValueAsString(this);
+        } catch (JsonProcessingException e)
+        {
+            e.printStackTrace();
+        }
+
+        return json;
     }
 
     @Override
