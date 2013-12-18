@@ -19,10 +19,7 @@ package com.snapbundle.pojo.base;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Preconditions;
 import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.util.JsonGenerationView;
 
@@ -83,26 +80,6 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     public void setMoniker(String moniker)
     {
         this.moniker = moniker;
-    }
-
-    @Override
-    public String toJson(Class<? extends JsonGenerationView.Published> viewClass)
-    {
-        Preconditions.checkArgument((viewClass != null), "The viewClass must not be null");
-
-        mapper = new ObjectMapper()
-                .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false);
-
-        String json = null;
-        try
-        {
-            json = mapper.writerWithView(viewClass).writeValueAsString(this);
-        } catch (JsonProcessingException e)
-        {
-            e.printStackTrace();
-        }
-
-        return json;
     }
 
     @Override

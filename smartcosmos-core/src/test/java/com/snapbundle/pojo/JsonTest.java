@@ -25,6 +25,7 @@ import com.snapbundle.pojo.context.Account;
 import com.snapbundle.pojo.context.Metadata;
 import com.snapbundle.pojo.context.TypeSafeMetadata;
 import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.JsonUtil;
 import junit.framework.Assert;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,7 +51,7 @@ public class JsonTest
         testAccount.setDescription(description);
         testAccount.setActive(true);
 
-        String json = testAccount.toJson(JsonGenerationView.Full.class);
+        String json = JsonUtil.toJson(testAccount, JsonGenerationView.Full.class);
         assertTrue(json != null);
 
         System.out.println(json);
@@ -74,7 +75,7 @@ public class JsonTest
                 .setStringValue(MESSAGE)
                 .build();
 
-        String json = metadataObject.toJson(JsonGenerationView.Minimum.class);
+        String json = JsonUtil.toJson(metadataObject, JsonGenerationView.Minimum.class);
         System.out.println(json);
 
         IMetadata reconstituted = Metadata.fromJson(json);
@@ -98,7 +99,7 @@ public class JsonTest
                 .setJsonValue(jsonObject)
                 .build();
 
-        String json = metadataObject.toJson(JsonGenerationView.Minimum.class);
+        String json = JsonUtil.toJson(metadataObject, JsonGenerationView.Minimum.class);
         System.out.println(json);
 
         IMetadata reconstituted = Metadata.fromJson(json);

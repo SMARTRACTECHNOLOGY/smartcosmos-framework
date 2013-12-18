@@ -22,6 +22,7 @@ import com.snapbundle.model.context.IMetadata;
 import com.snapbundle.model.context.MetadataDataType;
 import com.snapbundle.pojo.context.Metadata;
 import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.JsonUtil;
 import com.snapbundle.util.mapper.BooleanMapper;
 import com.snapbundle.util.mapper.DateMapper;
 import com.snapbundle.util.mapper.DoubleMapper;
@@ -141,7 +142,7 @@ public class MapperTest
         metadata.setEntityReferenceType(EntityReferenceType.Device);
         metadata.setReferenceUrn("foo:bar");
 
-        String json = metadata.toJson(JsonGenerationView.Minimum.class);
+        String json = JsonUtil.toJson(metadata, JsonGenerationView.Minimum.class);
         System.out.println(json);
 
         IMetadata reconstitute = Metadata.fromJson(json);

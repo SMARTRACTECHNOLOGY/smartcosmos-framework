@@ -17,9 +17,6 @@
 
 package com.snapbundle.model.base;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.snapbundle.util.JsonGenerationView;
-
 /**
  * Internal interface not suitable for public use. Captures the unique key assigned by the underlying persistence
  * engine, and a few helper functions.
@@ -35,6 +32,4 @@ public interface IDomainResource<T> extends IUrnNamespace, IMoniker
     long getLastModifiedTimestamp();
 
     void copy(T object);
-
-    String toJson(Class<? extends JsonGenerationView.Published> viewClass) throws JsonProcessingException;
 }

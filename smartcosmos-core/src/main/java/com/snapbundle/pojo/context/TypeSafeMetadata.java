@@ -186,12 +186,6 @@ public class TypeSafeMetadata<T> implements IMetadata
     }
 
     @Override
-    public String toJson(Class<? extends JsonGenerationView.Published> viewClass) throws JsonProcessingException
-    {
-        return metadataObject.toJson(viewClass);
-    }
-
-    @Override
     public String getMoniker()
     {
         return metadataObject.getMoniker();
