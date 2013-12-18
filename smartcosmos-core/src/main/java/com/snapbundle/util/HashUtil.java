@@ -113,11 +113,18 @@ public final class HashUtil
         {
             SecureRandom csprng = SecureRandom.getInstance("SHA1PRNG");
 
-            for (int i = 0; i < (PASSWORD_LENGTH - 3); i++)
+            for (int i = 0; i < (PASSWORD_LENGTH - 5); i++)
             {
                 key = (csprng.nextInt(26) + 65);
                 builder.append((char) key);
             }
+
+            // at least one lower case letter
+            key = (csprng.nextInt(26) + 97);
+            builder.append((char) key);
+
+            // at least one number
+            builder.append((char) csprng.nextInt(10));
 
             builder.append(now.toCharArray()[now.length() - 1]);
 
