@@ -124,7 +124,8 @@ public final class HashUtil
             builder.append((char) key);
 
             // at least one number
-            builder.append((char) csprng.nextInt(10));
+            key = (csprng.nextInt(10) + 48);
+            builder.append((char) key);
 
             builder.append(now.toCharArray()[now.length() - 1]);
 
