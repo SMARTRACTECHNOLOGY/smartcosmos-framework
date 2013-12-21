@@ -84,6 +84,7 @@ public enum EventType
 
     MetadataUpserted,
     MetadataDeleted,
+    MetadataAccessed,
 
     TagUpserted,
     TagDeleted,
