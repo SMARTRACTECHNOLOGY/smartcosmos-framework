@@ -1,14 +1,11 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IRelationship;
 import com.snapbundle.model.context.RelationshipType;
 import com.snapbundle.pojo.base.ReferentialObject;
 import com.snapbundle.util.JsonGenerationView;
-
-import java.io.IOException;
 
 public class Relationship extends ReferentialObject<IRelationship> implements IRelationship
 {
@@ -61,11 +58,5 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
     public void copy(IRelationship object)
     {
         throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
-    public static IRelationship fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, Relationship.class);
     }
 }

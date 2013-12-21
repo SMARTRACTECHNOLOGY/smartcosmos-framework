@@ -40,12 +40,6 @@ public class Device extends NamedObject<IDevice> implements IDevice
     @JsonView(JsonGenerationView.Full.class)
     protected IAccount account;
 
-    public static IDevice fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, Device.class);
-    }
-
     @Override
     public void copy(IDevice device)
     {

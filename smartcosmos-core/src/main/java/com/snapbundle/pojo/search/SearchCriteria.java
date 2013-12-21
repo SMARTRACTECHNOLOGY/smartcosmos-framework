@@ -23,6 +23,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.snapbundle.model.base.EntityReferenceType;
+import com.snapbundle.util.JsonUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -137,8 +138,6 @@ public final class SearchCriteria
 
     public String toJson() throws JsonProcessingException
     {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-        return mapper.writeValueAsString(this);
+        return JsonUtil.toJson(this, JsonAutoDetect.Visibility.ANY);
     }
 }

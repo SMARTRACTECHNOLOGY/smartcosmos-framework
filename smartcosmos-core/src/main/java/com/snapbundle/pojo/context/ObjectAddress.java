@@ -236,12 +236,6 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
         return alt;
     }
 
-    public static IObjectAddress fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, ObjectAddress.class);
-    }
-
     @Override
     public void copy(IObjectAddress objectAddress)
     {

@@ -36,12 +36,6 @@ public class ExtensionScreenShot extends DomainResource<IExtensionScreenShot> im
     @JsonView(JsonGenerationView.Standard.class)
     protected int displaySequence;
 
-    public static ExtensionScreenShot fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, ExtensionScreenShot.class);
-    }
-
     @Override
     public IExtension getExtension()
     {

@@ -51,12 +51,6 @@ public class File extends ReferentialObject<IFile> implements IFile
     @JsonView(JsonGenerationView.Standard.class)
     protected String fileName;
 
-    public static IFile fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, File.class);
-    }
-
     @Override
     public void copy(IFile file)
     {

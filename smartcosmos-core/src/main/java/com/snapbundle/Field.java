@@ -17,37 +17,13 @@
 
 package com.snapbundle;
 
-public final class Constant extends VersionData
+public final class Field extends VersionData
 {
     /**
      * Use this value to re-assign the null value to a moniker field after it was
      * initially assigned with a value.
      */
     public static final String NULL_MONIKER = "4028E4F642B838590142B8659F390002";
-
-    public static final int RESULT_OK = 1;
-
-    public static final int RESULT_FAIL = 0;
-
-    public static final int RESULT_EXISTS = 1;
-
-    public static final int RESULT_NOT_EXISTS = 0;
-
-    public static final int RESULT_MISSING_FIELD = -1;
-
-    public static final int RESULT_NO_SUCH_OBJECT = -2;
-
-    public static final int RESULT_FEATURE_UNLICENSED = -3;
-
-    public static final int RESULT_UNKNOWN_TYPE = -4;
-
-    public static final int RESULT_INTERNAL_SERVER_ERR = -500;
-
-    /**
-     * Indicates that the caller (if an extension) lacked the required PermissionType needed to access the resource,
-     * or the caller (if an actual user of the account) lacked the necessary RoleType needed to access the resource.
-     */
-    public static final int RESULT_NO_ACCESS = -600;
 
     public static final String EMAIL_VERIFICATION_TOKEN_FIELD = "emailVerificationToken";
 
@@ -175,7 +151,7 @@ public final class Constant extends VersionData
 
     public static final String PERMISSION_TYPE_FIELD = "permissionType";
 
-    private Constant()
+    private Field()
     {
     }
 }

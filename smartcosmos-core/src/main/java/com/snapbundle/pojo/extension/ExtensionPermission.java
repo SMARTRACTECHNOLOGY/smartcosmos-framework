@@ -18,15 +18,12 @@
 package com.snapbundle.pojo.extension;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.extension.IExtension;
 import com.snapbundle.model.extension.IExtensionPermission;
 import com.snapbundle.model.extension.PermissionType;
 import com.snapbundle.pojo.base.DomainResource;
 import com.snapbundle.util.JsonGenerationView;
-
-import java.io.IOException;
 
 public class ExtensionPermission extends DomainResource<IExtensionPermission> implements IExtensionPermission
 {
@@ -65,11 +62,5 @@ public class ExtensionPermission extends DomainResource<IExtensionPermission> im
     public void copy(IExtensionPermission object)
     {
         throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
-    public static IExtensionPermission fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, ExtensionPermission.class);
     }
 }

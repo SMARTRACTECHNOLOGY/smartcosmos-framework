@@ -68,12 +68,6 @@ public class Extension extends NamedObjectEndpoint<IExtension> implements IExten
     @JsonView(JsonGenerationView.Restricted.class)
     protected long registrationTimestamp;
 
-    public static IExtension fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, Extension.class);
-    }
-
     @Override
     public int getVersion()
     {

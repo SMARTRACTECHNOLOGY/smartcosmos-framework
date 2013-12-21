@@ -145,7 +145,7 @@ public class MapperTest
         String json = JsonUtil.toJson(metadata, JsonGenerationView.Minimum.class);
         System.out.println(json);
 
-        IMetadata reconstitute = Metadata.fromJson(json);
+        IMetadata reconstitute = JsonUtil.fromJson(json, Metadata.class);
         byte[] rawBytes = reconstitute.getRawValue();
 
         JsonMapper mapper1 = new JsonMapper();

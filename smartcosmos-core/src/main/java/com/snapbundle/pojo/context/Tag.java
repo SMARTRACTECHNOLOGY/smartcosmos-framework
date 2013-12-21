@@ -18,26 +18,17 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.ITag;
 import com.snapbundle.pojo.base.NamedObject;
 import com.snapbundle.util.JsonGenerationView;
 
-import java.io.IOException;
-
 public class Tag extends NamedObject<ITag> implements ITag
 {
     @JsonDeserialize(as = Account.class)
     @JsonView(JsonGenerationView.Full.class)
     protected IAccount account;
-
-    public static ITag fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, Tag.class);
-    }
 
     @Override
     public void copy(ITag device)

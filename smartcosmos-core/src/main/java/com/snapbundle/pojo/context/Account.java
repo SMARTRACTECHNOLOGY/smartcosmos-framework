@@ -34,12 +34,6 @@ public class Account extends NamedObjectEndpoint<IAccount> implements IAccount
     @JsonView(JsonGenerationView.Minimum.class)
     protected boolean developerMode;
 
-    public static IAccount fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, Account.class);
-    }
-
     @Override
     public void copy(IAccount account)
     {

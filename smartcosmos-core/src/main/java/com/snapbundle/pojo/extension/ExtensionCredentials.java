@@ -17,15 +17,8 @@
 
 package com.snapbundle.pojo.extension;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
-
 public final class ExtensionCredentials
 {
-    private static final ObjectMapper mapper = new ObjectMapper();
-
     private String urn;
 
     private String clientId;
@@ -33,11 +26,6 @@ public final class ExtensionCredentials
     private String clientSecret;
 
     private String redirectUri;
-
-    public static ExtensionCredentials fromJson(String json) throws IOException
-    {
-        return mapper.readValue(json, ExtensionCredentials.class);
-    }
 
     public ExtensionCredentials(String urn, String clientId, String clientSecret, String redirectUri)
     {
@@ -60,11 +48,6 @@ public final class ExtensionCredentials
     public void setRedirectUri(String redirectUri)
     {
         this.redirectUri = redirectUri;
-    }
-
-    public String toJson() throws JsonProcessingException
-    {
-        return mapper.writeValueAsString(this);
     }
 
     public String getUrn()

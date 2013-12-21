@@ -18,7 +18,6 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IAccount;
@@ -35,7 +34,6 @@ import com.snapbundle.util.mapper.StringMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -225,11 +223,5 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
     public void copy(IMetadata object)
     {
         throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
-    public static IMetadata fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, Metadata.class);
     }
 }

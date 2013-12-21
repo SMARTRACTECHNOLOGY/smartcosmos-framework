@@ -17,23 +17,11 @@
 
 package com.snapbundle.pojo.base;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
-
 public class ChangeResetPasswordObject
 {
-    private static final ObjectMapper mapper = new ObjectMapper();
-
     private String emailAddress;
 
     private String newPassword;
-
-    public static ChangeResetPasswordObject fromJson(String json) throws IOException
-    {
-        return mapper.readValue(json, ChangeResetPasswordObject.class);
-    }
 
     public String getNewPassword()
     {
@@ -53,10 +41,5 @@ public class ChangeResetPasswordObject
     public void setEmailAddress(String emailAddress)
     {
         this.emailAddress = emailAddress;
-    }
-
-    public String toJson() throws JsonProcessingException
-    {
-        return mapper.writeValueAsString(this);
     }
 }

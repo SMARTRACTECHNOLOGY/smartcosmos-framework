@@ -18,8 +18,6 @@
 package com.snapbundle.pojo.search;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @JsonPropertyOrder(value = {"searchField", "searchPredicate", "value"})
 public class SearchClause
@@ -68,11 +66,5 @@ public class SearchClause
     public Object value()
     {
         return value;
-    }
-
-    public String toJson() throws JsonProcessingException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(this);
     }
 }

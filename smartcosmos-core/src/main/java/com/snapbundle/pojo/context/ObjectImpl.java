@@ -40,12 +40,6 @@ public class ObjectImpl extends NamedObject<IObject> implements IObject
     @JsonView(JsonGenerationView.Minimum.class)
     protected ObjectType objectType;
 
-    public static IObject fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, ObjectImpl.class);
-    }
-
     @Override
     public void copy(IObject object)
     {

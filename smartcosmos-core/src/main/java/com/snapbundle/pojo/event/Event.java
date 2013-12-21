@@ -47,12 +47,6 @@ public class Event extends DomainResource<IEvent> implements IEvent
     @JsonView(JsonGenerationView.Minimum.class)
     protected String source;
 
-    public static IEvent fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, Event.class);
-    }
-
     @Override
     public IUser getUser()
     {

@@ -33,12 +33,6 @@ public class TagAssignment extends ReferentialObject<ITagAssignment> implements 
     @JsonView(JsonGenerationView.Minimum.class)
     protected ITag tag;
 
-    public static ITagAssignment fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, TagAssignment.class);
-    }
-
     @Override
     public void copy(ITagAssignment object)
     {

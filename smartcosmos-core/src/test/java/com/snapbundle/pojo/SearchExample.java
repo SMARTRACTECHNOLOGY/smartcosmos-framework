@@ -17,11 +17,13 @@
 
 package com.snapbundle.pojo;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.pojo.search.SearchClause;
 import com.snapbundle.pojo.search.SearchCriteria;
 import com.snapbundle.pojo.search.SearchField;
 import com.snapbundle.pojo.search.SearchPredicate;
+import com.snapbundle.util.JsonUtil;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -58,7 +60,7 @@ public class SearchExample
 
         System.out.println(json);
 
-        ObjectInteractionSearchAssembly assembly = new ObjectInteractionSearchAssembly(SearchCriteria.fromJson(json));
+        ObjectInteractionSearchAssembly assembly = new ObjectInteractionSearchAssembly(JsonUtil.fromJson(json, SearchCriteria.class, JsonAutoDetect.Visibility.ANY));
         assembly.assemble();
         String whereClause = assembly.getWhereClause();
 

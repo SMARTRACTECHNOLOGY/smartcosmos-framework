@@ -48,12 +48,6 @@ public class ObjectInteractionSession extends NamedObject<IObjectInteractionSess
     @JsonView(JsonGenerationView.Minimum.class)
     protected SessionType sessionType;
 
-    public static IObjectInteractionSession fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, ObjectInteractionSession.class);
-    }
-
     public long getStartTimestamp()
     {
         return startTimestamp;

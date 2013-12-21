@@ -56,7 +56,7 @@ public class JsonTest
 
         System.out.println(json);
 
-        IAccount jsonAccount = Account.fromJson(json);
+        IAccount jsonAccount = JsonUtil.fromJson(json, Account.class);
 
         assertTrue(jsonAccount.getName().equals(name));
         assertTrue(jsonAccount.getDescription().equals(description));
@@ -78,7 +78,7 @@ public class JsonTest
         String json = JsonUtil.toJson(metadataObject, JsonGenerationView.Minimum.class);
         System.out.println(json);
 
-        IMetadata reconstituted = Metadata.fromJson(json);
+        IMetadata reconstituted = JsonUtil.fromJson(json, Metadata.class);
 
         TypeSafeMetadata<String> m = new TypeSafeMetadata<>(reconstituted);
 
@@ -102,7 +102,7 @@ public class JsonTest
         String json = JsonUtil.toJson(metadataObject, JsonGenerationView.Minimum.class);
         System.out.println(json);
 
-        IMetadata reconstituted = Metadata.fromJson(json);
+        IMetadata reconstituted = JsonUtil.fromJson(json, Metadata.class);
 
         TypeSafeMetadata<JSONObject> m = new TypeSafeMetadata<>(reconstituted);
 

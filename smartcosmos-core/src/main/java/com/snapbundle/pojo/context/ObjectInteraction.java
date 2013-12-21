@@ -76,12 +76,6 @@ public class ObjectInteraction extends DomainResource<IObjectInteraction> implem
     @JsonView(JsonGenerationView.Standard.class)
     protected IObjectInteractionSession objectInteractionSession;
 
-    public static IObjectInteraction fromJson(String json) throws IOException
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, ObjectInteraction.class);
-    }
-
     @Override
     public boolean hasGeoLocation()
     {
