@@ -5,7 +5,7 @@ import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IRelationship;
 import com.snapbundle.model.context.RelationshipType;
 import com.snapbundle.pojo.base.ReferentialObject;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public class Relationship extends ReferentialObject<IRelationship> implements IRelationship
 {

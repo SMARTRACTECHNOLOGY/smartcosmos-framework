@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.ITag;
 import com.snapbundle.pojo.base.NamedObject;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public class Tag extends NamedObject<ITag> implements ITag
 {

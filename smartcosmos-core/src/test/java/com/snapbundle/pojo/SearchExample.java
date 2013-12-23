@@ -23,7 +23,7 @@ import com.snapbundle.pojo.search.SearchClause;
 import com.snapbundle.pojo.search.SearchCriteria;
 import com.snapbundle.pojo.search.SearchField;
 import com.snapbundle.pojo.search.SearchPredicate;
-import com.snapbundle.util.JsonUtil;
+import com.snapbundle.util.json.JsonUtil;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

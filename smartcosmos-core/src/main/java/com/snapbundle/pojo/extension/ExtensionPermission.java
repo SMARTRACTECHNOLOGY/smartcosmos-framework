@@ -23,7 +23,7 @@ import com.snapbundle.model.extension.IExtension;
 import com.snapbundle.model.extension.IExtensionPermission;
 import com.snapbundle.model.extension.PermissionType;
 import com.snapbundle.pojo.base.DomainResource;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public class ExtensionPermission extends DomainResource<IExtensionPermission> implements IExtensionPermission
 {

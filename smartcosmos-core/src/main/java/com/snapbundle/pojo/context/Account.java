@@ -18,13 +18,10 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.LicenseType;
 import com.snapbundle.pojo.base.NamedObjectEndpoint;
-import com.snapbundle.util.JsonGenerationView;
-
-import java.io.IOException;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public class Account extends NamedObjectEndpoint<IAccount> implements IAccount
 {

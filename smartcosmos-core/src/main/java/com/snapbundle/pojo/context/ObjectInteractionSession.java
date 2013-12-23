@@ -18,16 +18,13 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IObjectInteractionSession;
 import com.snapbundle.model.context.IUser;
 import com.snapbundle.model.context.SessionType;
 import com.snapbundle.pojo.base.NamedObject;
-import com.snapbundle.util.JsonGenerationView;
-
-import java.io.IOException;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public class ObjectInteractionSession extends NamedObject<IObjectInteractionSession> implements IObjectInteractionSession
 {

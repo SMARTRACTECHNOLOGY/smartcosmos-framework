@@ -1,4 +1,4 @@
-package com.snapbundle.util;
+package com.snapbundle.util.json;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -63,7 +63,12 @@ public final class JsonUtil
 
     public static String toJson(Object object)
     {
-        return JsonUtil.toJson(object, JsonGenerationView.Standard.class);
+        return toJson(object, JsonGenerationView.Standard.class);
+    }
+
+    public static String toJson(Object object, ViewType viewType)
+    {
+        return JsonUtil.toJson(object, viewType.getViewClass());
     }
 
     public static String toJson(Object object, Class<? extends JsonGenerationView.Published> viewClass)

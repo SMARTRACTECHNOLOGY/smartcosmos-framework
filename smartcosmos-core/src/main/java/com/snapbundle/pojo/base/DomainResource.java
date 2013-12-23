@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.snapbundle.model.base.IDomainResource;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
 
 @JsonPropertyOrder(value = {"uniqueId", "urn", "lastModifiedTimestamp"})
 public abstract class DomainResource<T> implements IDomainResource<T>

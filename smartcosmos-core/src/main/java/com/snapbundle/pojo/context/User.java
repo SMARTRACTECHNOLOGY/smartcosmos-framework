@@ -24,7 +24,7 @@ import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IUser;
 import com.snapbundle.model.context.RoleType;
 import com.snapbundle.pojo.base.DomainResource;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
 
 import java.util.logging.Logger;
 

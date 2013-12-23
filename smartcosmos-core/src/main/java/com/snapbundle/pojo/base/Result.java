@@ -13,6 +13,7 @@ public enum Result
     ERR_ALREADY_EXISTS(-7, "A %s with matching key %s already exists"),
     ERR_NOT_EXISTS(-8, "No matching record with %s of %s exists"),
     ERR_UNKNOWN_ENTITY(-9, "Unknown %s entity with urn %s"),
+    ERR_UNKNOWN_TYPE(-10, "%s enum does not define type %s"),
 
     ERR_EXTENSION_SECURITY_RESTRICTION(-50, "Extensions are not permitted to perform %s"),
     ERR_EXTENSION_NO_ACCESS(-51, "Caller lacked the authorization to complete the requested operation"),
@@ -62,6 +63,10 @@ public enum Result
                 return ERR_ALREADY_EXISTS;
             case -8:
                 return ERR_NOT_EXISTS;
+            case -9:
+                return ERR_UNKNOWN_ENTITY;
+            case -10:
+                return ERR_UNKNOWN_TYPE;
             case -50:
                 return ERR_EXTENSION_SECURITY_RESTRICTION;
             case -51:

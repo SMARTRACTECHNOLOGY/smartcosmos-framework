@@ -3,7 +3,7 @@ package com.snapbundle.pojo.context;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.snapbundle.model.context.ITimeline;
 import com.snapbundle.pojo.base.ReferentialObject;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public class Timeline extends ReferentialObject<ITimeline> implements ITimeline
 {

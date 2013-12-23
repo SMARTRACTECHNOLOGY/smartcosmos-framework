@@ -23,7 +23,7 @@ import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.base.IReferentialObject;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.pojo.context.Account;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public abstract class ReferentialObject<T> extends DomainResource<T> implements IReferentialObject
 {

@@ -19,7 +19,7 @@ package com.snapbundle.pojo.base;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.snapbundle.model.base.INamedObject;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public abstract class NamedObject<T> extends DomainResource<T> implements INamedObject<T>
 {

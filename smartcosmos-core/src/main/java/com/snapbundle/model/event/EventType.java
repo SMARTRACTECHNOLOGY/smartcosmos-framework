@@ -34,6 +34,7 @@ public enum EventType
 
     DeviceDefined,
     DeviceUpdated,
+    DeviceAccessed,
 
     ObjectDefined,
     ObjectUpdated,

@@ -17,12 +17,10 @@
 
 package com.snapbundle.pojo.context;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IMetadata;
 import com.snapbundle.model.context.MetadataDataType;
-import com.snapbundle.util.JsonGenerationView;
 import com.snapbundle.util.mapper.BooleanMapper;
 import com.snapbundle.util.mapper.DateMapper;
 import com.snapbundle.util.mapper.DoubleMapper;

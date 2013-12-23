@@ -18,7 +18,6 @@
 package com.snapbundle.pojo.event;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IUser;
@@ -27,9 +26,7 @@ import com.snapbundle.model.event.IEvent;
 import com.snapbundle.pojo.base.DomainResource;
 import com.snapbundle.pojo.context.Account;
 import com.snapbundle.pojo.context.User;
-import com.snapbundle.util.JsonGenerationView;
-
-import java.io.IOException;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public class Event extends DomainResource<IEvent> implements IEvent
 {

@@ -18,14 +18,11 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IFile;
 import com.snapbundle.model.context.IUser;
 import com.snapbundle.pojo.base.ReferentialObject;
-import com.snapbundle.util.JsonGenerationView;
-
-import java.io.IOException;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public class File extends ReferentialObject<IFile> implements IFile
 {

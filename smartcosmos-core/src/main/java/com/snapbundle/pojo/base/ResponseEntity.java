@@ -1,8 +1,8 @@
 package com.snapbundle.pojo.base;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.snapbundle.util.JsonGenerationView;
-import com.snapbundle.util.JsonUtil;
+import com.snapbundle.util.json.JsonGenerationView;
+import com.snapbundle.util.json.JsonUtil;
 
 public class ResponseEntity
 {

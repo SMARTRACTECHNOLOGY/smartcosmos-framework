@@ -24,7 +24,7 @@ import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IMetadata;
 import com.snapbundle.model.context.MetadataDataType;
 import com.snapbundle.pojo.base.ReferentialObject;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
 import com.snapbundle.util.mapper.BooleanMapper;
 import com.snapbundle.util.mapper.DoubleMapper;
 import com.snapbundle.util.mapper.FloatMapper;

@@ -19,7 +19,7 @@ package com.snapbundle.pojo.base;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.snapbundle.model.base.INotificationEndpoint;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public abstract class NamedObjectEndpoint<T> extends NamedObject<T> implements INotificationEndpoint
 {

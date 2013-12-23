@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.snapbundle.util;
+package com.snapbundle.util.json;
 
 public class JsonGenerationView
 {

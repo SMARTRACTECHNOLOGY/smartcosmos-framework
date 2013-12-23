@@ -23,7 +23,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.snapbundle.model.base.EntityReferenceType;
-import com.snapbundle.util.JsonUtil;
+import com.snapbundle.util.json.JsonUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;

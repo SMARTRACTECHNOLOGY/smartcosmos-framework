@@ -18,16 +18,13 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.AddressType;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IObjectAddress;
 import com.snapbundle.pojo.base.DomainResource;
-import com.snapbundle.util.JsonGenerationView;
-
-import java.io.IOException;
+import com.snapbundle.util.json.JsonGenerationView;
 
 public class ObjectAddress extends DomainResource<IObjectAddress> implements IObjectAddress
 {
