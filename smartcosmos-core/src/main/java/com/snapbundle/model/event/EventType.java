@@ -92,6 +92,7 @@ public enum EventType
 
     TagAssigned,
     TagRevoked,
+    TagAccessed,
 
     RelationshipDefined,
     RelationshipDeleted,
