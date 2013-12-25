@@ -33,7 +33,7 @@ public final class Field extends VersionData
 
     public static final String EVENT_TYPE = "eventType";
 
-    public static final String RESULT_FIELD = "result";
+    public static final String CODE_FIELD = "code";
 
     public static final String MESSAGE_FIELD = "message";
 
