@@ -1,12 +1,12 @@
 package com.snapbundle.client.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.snapbundle.Constant;
+import com.snapbundle.Field;
 import com.snapbundle.client.CreationException;
 import com.snapbundle.client.IDeviceClient;
 import com.snapbundle.client.SnapEndpoint;
 import com.snapbundle.model.context.IDevice;
-import com.snapbundle.util.JsonGenerationView;
+import com.snapbundle.util.json.JsonGenerationView;
+import com.snapbundle.util.json.JsonUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.Status;
@@ -33,7 +33,7 @@ public class DeviceClient extends AbstractClient implements IDeviceClient
                 throw new CreationException("Status was not " + Status.SUCCESS_CREATED);
             }
 
-            urn = json.getString(Constant.MESSAGE_FIELD);
+            urn = json.getString(Field.MESSAGE_FIELD);
 
         } catch (JSONException | IOException e)
         {
@@ -49,10 +49,9 @@ public class DeviceClient extends AbstractClient implements IDeviceClient
     {
         try
         {
-            return create(new JSONObject(device.toJson(JsonGenerationView.Full.class)));
-        } catch (JsonProcessingException | JSONException e)
+            return create(new JSONObject(JsonUtil.toJson(device, JsonGenerationView.Full.class)));
+        } catch (JSONException e)
         {
-            e.printStackTrace();
             throw new CreationException(e);
         }
     }
