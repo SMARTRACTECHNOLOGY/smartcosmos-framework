@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +26,11 @@ public final class JsonUtil
     {
         mapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false);
 
+    }
+
+    public static <T> T fromJson(JSONObject jsonObject, Class<T> entityClass)
+    {
+        return JsonUtil.fromJson(jsonObject.toString(), entityClass);
     }
 
     public static <T> T fromJson(String json, Class<T> entityClass)
