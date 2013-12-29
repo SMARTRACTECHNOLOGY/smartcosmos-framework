@@ -1,11 +1,11 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.snapbundle.model.context.ITimeline;
+import com.snapbundle.model.context.ITimelineEntry;
 import com.snapbundle.pojo.base.ReferentialObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public class Timeline extends ReferentialObject<ITimeline> implements ITimeline
+public class TimelineEntry extends ReferentialObject<ITimelineEntry> implements ITimelineEntry
 {
     @JsonView(JsonGenerationView.Minimum.class)
     protected String name;
@@ -156,7 +156,7 @@ public class Timeline extends ReferentialObject<ITimeline> implements ITimeline
 
 
     @Override
-    public void copy(ITimeline object)
+    public void copy(ITimelineEntry object)
     {
         throw new UnsupportedOperationException("POJO doesn't support copying");
     }
