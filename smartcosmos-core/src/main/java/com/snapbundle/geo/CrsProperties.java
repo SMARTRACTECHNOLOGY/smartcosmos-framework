@@ -1,11 +1,17 @@
 package com.snapbundle.geo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.snapbundle.util.json.JsonGenerationView;
+
 public class CrsProperties
 {
+    @JsonView(JsonGenerationView.Minimum.class)
     private String type;
 
+    @JsonView(JsonGenerationView.Minimum.class)
     private String href;
 
+    @JsonView(JsonGenerationView.Minimum.class)
     private String name;
 
     public String getType()

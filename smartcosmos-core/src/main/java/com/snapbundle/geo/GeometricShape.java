@@ -1,26 +1,36 @@
 package com.snapbundle.geo;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.snapbundle.util.json.JsonGenerationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GeometricShape
 {
+    @JsonView(JsonGenerationView.Minimum.class)
     private Crs crs;
 
+    @JsonView(JsonGenerationView.Minimum.class)
     private GeometricType type;
 
+    @JsonView(JsonGenerationView.Minimum.class)
     private JsonNode coordinates;
 
+    @JsonView(JsonGenerationView.Minimum.class)
     private List<GeometricShape> geometries = new ArrayList<>();
 
+    @JsonView(JsonGenerationView.Minimum.class)
     private JsonNode properties;
 
+    @JsonView(JsonGenerationView.Minimum.class)
     private List<GeometricShape> features = new ArrayList<>();
 
+    @JsonView(JsonGenerationView.Minimum.class)
     private float[] bbox;
 
+    @JsonView(JsonGenerationView.Minimum.class)
     private GeometricShape geometry;
 
     public GeometricType getType()
