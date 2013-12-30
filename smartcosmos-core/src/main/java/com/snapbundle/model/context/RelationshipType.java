@@ -2,6 +2,8 @@ package com.snapbundle.model.context;
 
 public enum RelationshipType
 {
+    Likes,
+    References,
     Follows,
     FollowedBy,
     InResponseTo,

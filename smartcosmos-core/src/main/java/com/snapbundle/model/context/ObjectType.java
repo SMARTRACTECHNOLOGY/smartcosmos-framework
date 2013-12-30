@@ -35,7 +35,6 @@ public enum ObjectType
     ScrapbookElement,
     Task,
     Hint,
-    Like,
     Comment,
     Unknown,
 }
