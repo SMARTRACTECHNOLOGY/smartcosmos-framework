@@ -128,6 +128,9 @@ public enum EventType
     ObjectInteractionAccessed,
     ObjectInteractionSessionAccessed,
     RelationshipAccessed,
-    TimelineEntryAccessed
+    TimelineEntryAccessed,
 
+    GeorectificationDefined,
+    GeorectificationUpdated,
+    GeorectificationDeleted
 }

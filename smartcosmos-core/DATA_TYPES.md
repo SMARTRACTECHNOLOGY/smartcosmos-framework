@@ -24,6 +24,7 @@ The SnapBundle™ object model consists of a small number of primary data types.
 * [File](FILE.md "File")
 * [Metadata](METADATA.md "Metadata")
 * [Tag](TAG.md "Tag")
+* [GeoRectification](GEORECTIFICATION.MD "GeoRectification")
 
 > Only administrators have the ability to create and modify the first three types: Account, Users and Devices.
 
@@ -43,6 +44,7 @@ Each of the data types defined in this section are secondary types that are enti
 * [PermissionType](#pt)
 * [EventType](#et)
 * [RelationshipType](#relt)
+* [GeorectificationType](#gt)
 
 ### [EntityReferenceType](id:ert)
 An Entity Reference Type is used to provide context to a type-agnositc call, such as a search operation.  
@@ -231,7 +233,28 @@ The following is meant to be an authoritative list of all known event types gene
 * TokenRevocation
 * IntegrationEndpointEnrollmentPending 
 * IntegrationEndpointEnrolled
-* IntegrationEndpointWithdrawn  
+* IntegrationEndpointWithdrawn
+* RelationshipDefined
+* RelationshipDeleted
+* GeorectificationDefined
+* GeorectificationUpdated
+* GeorectificationDeleted
+* TimelineEntryDefined
+* TimelineEntryUpdated
+* TimelineEntryDeleted
+* TimelineEntryHidden
+* TimelineEntryShown
+
+
+
+
+### [GeorectificationType](id:gt)
+Each georectification is classified as a place (geo-fence), structure, or route. The platform makes no interpretation
+based on this classification.
+
+* Place
+* Structure
+* Route
 
 ### [RelationshipType](id:relt)
 Every relationship is identified with a well-known Relationship Type that typically constrains the logical operations (arbitrarily defined by the developer). The following relationship types are presently supported:

@@ -13,7 +13,7 @@ moniker | String  | false | true | Standard | null
 name | String  | true | true | Minimum | 
 description | String  | false | true | Standard | 
 activeFlag | Boolean  | true | false | Standard  | 
-account | IAccount  | true | fase | Full | Generated
+account | IAccount  | true | false | Full | Generated
 deviceType | DeviceType | true | true | Minimum | Unknown 
 identification | String | true | false | Minimum |
 

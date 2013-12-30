@@ -39,6 +39,7 @@ public enum EntityReferenceType
     Tag,
     Relationship,
     Timeline,
+    Georectification,
 
     Event,
 
