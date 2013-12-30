@@ -130,6 +130,10 @@ public final class Field extends VersionData
 
     public static final String ALT_FIELD = "alt";
 
+    public static final String GEORECTIFICATION_TYPE_FIELD = "georectificationType";
+
+    public static final String GEOMETRIC_SHAPE_FIELD = "geometricShape";
+
     //
     // Extension Fields
     //

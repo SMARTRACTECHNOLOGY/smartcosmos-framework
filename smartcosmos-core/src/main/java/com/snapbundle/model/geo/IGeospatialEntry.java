@@ -2,7 +2,6 @@ package com.snapbundle.model.geo;
 
 import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.INamedObject;
-import com.snapbundle.model.base.IReferentialObject;
 
 /**
  * Referential object that creates a geographic binding to a reference object. The underlying format is represented by
@@ -23,10 +22,10 @@ import com.snapbundle.model.base.IReferentialObject;
  * Features in GeoJSON contain a geometry object and additional properties, and a feature collection represents a list
  * of features.
  * <p/>
- * To capture the a temporal geo-rectification, create an {@link com.snapbundle.model.geo.IGeorectification} that refers
- * to the object, then use the {@link IGeorectification#getUrn()} and
+ * To capture the a temporal geo-rectification, create an {@link IGeospatialEntry} that refers
+ * to the object, then use the {@link IGeospatialEntry#getUrn()} and
  * {@link com.snapbundle.model.base.EntityReferenceType#Georectification} to place the location on an
- * {@link com.snapbundle.model.context.ITimeline}.
+ * {@link com.snapbundle.model.context.ITimelineEntry}.
  * <p/>
  * Possible uses of the georectification object include the definition of a complex geo-fence that marks
  * a job site, a multi-point set of coordinates that represents a courier route, or
@@ -36,7 +35,7 @@ import com.snapbundle.model.base.IReferentialObject;
  * identified in only general terms by the postal address and {@link com.snapbundle.model.base.IGeoLocation}
  * defined in the {@link com.snapbundle.model.context.IObjectAddress} record.
  */
-public interface IGeorectification extends IAccountDomainResource<IGeorectification>, IReferentialObject, IGeometrySupplier, INamedObject<IGeorectification>
+public interface IGeospatialEntry extends IAccountDomainResource<IGeospatialEntry>, INamedObject<IGeospatialEntry>, IGeometrySupplier
 {
     GeorectificationType getGeorectificationType();
 

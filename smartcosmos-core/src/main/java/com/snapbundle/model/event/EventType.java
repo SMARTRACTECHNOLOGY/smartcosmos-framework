@@ -130,7 +130,8 @@ public enum EventType
     RelationshipAccessed,
     TimelineEntryAccessed,
 
-    GeorectificationDefined,
-    GeorectificationUpdated,
-    GeorectificationDeleted
+    GeospatialEntryAccessed,
+    GeospatialEntryDefined,
+    GeospatialEntryUpdated,
+    GeospatialEntryDeleted
 }

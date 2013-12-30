@@ -2,6 +2,10 @@ package com.snapbundle.model.context;
 
 public enum RelationshipType
 {
+    /**
+     * Identify a relationship that defines a georectified geometric shape.
+     */
+    Georectification,
     Likes,
     References,
     Follows,
