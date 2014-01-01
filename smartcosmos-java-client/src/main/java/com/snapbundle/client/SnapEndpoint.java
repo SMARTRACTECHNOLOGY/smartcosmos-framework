@@ -2,6 +2,8 @@ package com.snapbundle.client;
 
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.MetadataDataType;
+import com.snapbundle.model.context.RelationshipType;
+import com.snapbundle.util.json.ViewType;
 
 public final class SnapEndpoint
 {
@@ -41,6 +43,33 @@ public final class SnapEndpoint
     public static String objects()
     {
         return PATH_OBJECTS;
+    }
+
+//    GET     /relationships/{urn} (com.snapbundle.resource.secure.relationships.RelationshipResource)
+//    DELETE  /relationships/{urn} (com.snapbundle.resource.secure.relationships.RelationshipResource)
+
+//    GET     /relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn} (com.snapbundle.resource.secure.relationships.RelationshipResource)
+//    GET     /relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}/{relationshipType} (com.snapbundle.resource.secure.relationships.RelationshipResource)
+
+    public static final String PATH_RELATIONSHIPS_URN = "/relationships/%s/%s";
+
+    public static String relationships(EntityReferenceType entityReferenceType, String referenceUrn)
+    {
+        return String.format(PATH_RELATIONSHIPS_URN, entityReferenceType, referenceUrn);
+    }
+
+    public static final String PATH_QUERY_RELATIONSHIPS_URN = "/relationships/%s/%s/%s?reverse=%s";
+
+    public static String queryRelationships(EntityReferenceType entityReferenceType, String referenceUrn, RelationshipType relationshipType, boolean reverse)
+    {
+        return String.format(PATH_QUERY_RELATIONSHIPS_URN, entityReferenceType, referenceUrn, relationshipType, reverse);
+    }
+
+    public static final String PATH_OBJECT_BY_OBJECT_URN = "/objects/object/%s?view=%s";
+
+    public static String objectsByObjectUrn(String objectUrn, ViewType viewType)
+    {
+        return String.format(PATH_OBJECT_BY_OBJECT_URN, objectUrn, viewType.name());
     }
 
     public static final String PATH_ENCODE_METADATA = "/metadata/mapper/encode/%s";
