@@ -19,9 +19,9 @@ package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IBitemporalObject;
-import com.snapbundle.model.base.IGeoLocation;
+import com.snapbundle.model.base.IReferentialObject;
 
-public interface IObjectInteraction extends IAccountDomainResource<IObjectInteraction>, IBitemporalObject, IGeoLocation
+public interface IObjectInteraction extends IAccountDomainResource<IObjectInteraction>, IBitemporalObject, IReferentialObject
 {
     IObject getObject();
 
@@ -30,10 +30,6 @@ public interface IObjectInteraction extends IAccountDomainResource<IObjectIntera
     IUser getUser();
 
     void setUser(IUser user);
-
-    IDevice getDevice();
-
-    void setDevice(IDevice device);
 
     String getData();
 

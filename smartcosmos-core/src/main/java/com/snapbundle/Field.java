@@ -63,8 +63,6 @@ public final class Field extends VersionData
 
     public static final String OBJECT_FIELD = "object";
 
-    public static final String DEVICE_FIELD = "device";
-
     public static final String OBJECT_URN_FIELD = "objectUrn";
 
     public static final String OBJECT_TYPE_FIELD = "objectType";
@@ -117,19 +115,11 @@ public final class Field extends VersionData
 
     public static final String FLAG_FIELD = "flag";
 
-    public static final String DEVICE_TIMESTAMP_FIELD = "recordedTimestamp";
+    public static final String RECORDED_TIMESTAMP_FIELD = "recordedTimestamp";
 
     //
     // Spatial Fields
     //
-    public static final String HAS_GEO_LOCATION_FIELD = "hasGeoLocation";
-
-    public static final String LAT_FIELD = "lat";
-
-    public static final String LON_FIELD = "lon";
-
-    public static final String ALT_FIELD = "alt";
-
     public static final String GEORECTIFICATION_TYPE_FIELD = "georectificationType";
 
     public static final String GEOMETRIC_SHAPE_FIELD = "geometricShape";

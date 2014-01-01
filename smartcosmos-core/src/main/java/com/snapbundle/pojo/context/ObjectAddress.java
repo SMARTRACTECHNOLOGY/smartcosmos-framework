@@ -189,51 +189,6 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
     }
 
     @Override
-    public boolean hasGeoLocation()
-    {
-        return hasGeoLocation;
-    }
-
-    @Override
-    public void setLat(double lat)
-    {
-        this.hasGeoLocation = true;
-        this.lat = lat;
-    }
-
-    @Override
-    public void setLon(double lon)
-    {
-        this.hasGeoLocation = true;
-        this.lon = lon;
-    }
-
-    @Override
-    public void setAlt(double alt)
-    {
-        this.hasGeoLocation = true;
-        this.alt = alt;
-    }
-
-    @Override
-    public double getLat()
-    {
-        return lat;
-    }
-
-    @Override
-    public double getLon()
-    {
-        return lon;
-    }
-
-    @Override
-    public double getAlt()
-    {
-        return alt;
-    }
-
-    @Override
     public void copy(IObjectAddress objectAddress)
     {
         throw new UnsupportedOperationException("POJO doesn't support copying");

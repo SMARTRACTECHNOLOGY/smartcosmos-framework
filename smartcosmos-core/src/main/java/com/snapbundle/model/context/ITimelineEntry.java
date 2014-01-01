@@ -1,7 +1,6 @@
 package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
-import com.snapbundle.model.base.IGeoLocation;
 import com.snapbundle.model.base.INamedObject;
 import com.snapbundle.model.base.IReferentialObject;
 
@@ -19,7 +18,7 @@ import com.snapbundle.model.base.IReferentialObject;
  * effectively hides the timeline forever unless a specific update is issued against the
  * that timeline entry to re-activate it.
  */
-public interface ITimelineEntry extends IAccountDomainResource<ITimelineEntry>, INamedObject<ITimelineEntry>, IGeoLocation, IReferentialObject
+public interface ITimelineEntry extends IAccountDomainResource<ITimelineEntry>, INamedObject<ITimelineEntry>, IReferentialObject
 {
     long getTimestamp();
 

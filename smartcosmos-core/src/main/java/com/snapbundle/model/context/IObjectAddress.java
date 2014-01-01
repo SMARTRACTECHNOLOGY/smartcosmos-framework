@@ -18,9 +18,8 @@
 package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
-import com.snapbundle.model.base.IGeoLocation;
 
-public interface IObjectAddress extends IAccountDomainResource<IObjectAddress>, IGeoLocation
+public interface IObjectAddress extends IAccountDomainResource<IObjectAddress>
 {
     IObject getObject();
 

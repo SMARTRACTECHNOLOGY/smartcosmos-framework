@@ -20,15 +20,14 @@ package com.snapbundle.pojo.context;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IAccount;
-import com.snapbundle.model.context.IDevice;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IObjectInteraction;
 import com.snapbundle.model.context.IObjectInteractionSession;
 import com.snapbundle.model.context.IUser;
-import com.snapbundle.pojo.base.DomainResource;
+import com.snapbundle.pojo.base.ReferentialObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public class ObjectInteraction extends DomainResource<IObjectInteraction> implements IObjectInteraction
+public class ObjectInteraction extends ReferentialObject<IObjectInteraction> implements IObjectInteraction
 {
     @JsonView(JsonGenerationView.Full.class)
     @JsonDeserialize(as = Account.class)
@@ -42,10 +41,6 @@ public class ObjectInteraction extends DomainResource<IObjectInteraction> implem
     @JsonDeserialize(as = User.class)
     protected IUser user;
 
-    @JsonView(JsonGenerationView.Minimum.class)
-    @JsonDeserialize(as = Device.class)
-    protected IDevice device;
-
     @JsonView(JsonGenerationView.Standard.class)
     protected String data;
 
@@ -55,29 +50,11 @@ public class ObjectInteraction extends DomainResource<IObjectInteraction> implem
     @JsonView(JsonGenerationView.Full.class)
     protected long receivedTimestamp;
 
-    @JsonView(JsonGenerationView.Standard.class)
-    protected double lat;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected double lon;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected double alt;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected boolean hasGeoLocation = false;
-
     @JsonView(JsonGenerationView.Minimum.class)
     protected boolean hasSessionMembership = false;
 
     @JsonView(JsonGenerationView.Standard.class)
     protected IObjectInteractionSession objectInteractionSession;
-
-    @Override
-    public boolean hasGeoLocation()
-    {
-        return hasGeoLocation;
-    }
 
     @Override
     public void copy(IObjectInteraction objectInteraction)
@@ -122,18 +99,6 @@ public class ObjectInteraction extends DomainResource<IObjectInteraction> implem
     }
 
     @Override
-    public IDevice getDevice()
-    {
-        return device;
-    }
-
-    @Override
-    public void setDevice(IDevice device)
-    {
-        this.device = device;
-    }
-
-    @Override
     public String getData()
     {
         return data;
@@ -167,45 +132,6 @@ public class ObjectInteraction extends DomainResource<IObjectInteraction> implem
     public void setReceivedTimestamp(long timestamp)
     {
         this.receivedTimestamp = timestamp;
-    }
-
-    @Override
-    public void setLat(double lat)
-    {
-        this.hasGeoLocation = true;
-        this.lat = lat;
-    }
-
-    @Override
-    public void setLon(double lon)
-    {
-        this.hasGeoLocation = true;
-        this.lon = lon;
-    }
-
-    @Override
-    public void setAlt(double alt)
-    {
-        this.hasGeoLocation = true;
-        this.alt = alt;
-    }
-
-    @Override
-    public double getLat()
-    {
-        return lat;
-    }
-
-    @Override
-    public double getLon()
-    {
-        return lon;
-    }
-
-    @Override
-    public double getAlt()
-    {
-        return alt;
     }
 
     @Override
