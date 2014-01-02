@@ -72,6 +72,13 @@ public final class SnapEndpoint
         return String.format(PATH_OBJECT_BY_OBJECT_URN, objectUrn, viewType.name());
     }
 
+    public static final String PATH_QUERY_OBJECTS = "/objects?objectUrnLike=%s";
+
+    public static String queryObjectsByObjectUrnLike(String objectUrnLike)
+    {
+        return String.format(PATH_QUERY_OBJECTS, objectUrnLike);
+    }
+
     public static final String PATH_ENCODE_METADATA = "/metadata/mapper/encode/%s";
 
     public static String encodeMetadata(MetadataDataType metadataDataType)
@@ -105,6 +112,27 @@ public final class SnapEndpoint
     public static String tags(EntityReferenceType entityReferenceType, String urn)
     {
         return String.format(PATH_ASSIGN_TAGS, entityReferenceType, urn);
+    }
+
+    public static final String PATH_QUERY_TAGS_BY_NAME_ONLY = "/tags?tagName=%s";
+
+    public static String queryTagsByTagName(String tagName)
+    {
+        return String.format(PATH_QUERY_TAGS_BY_NAME_ONLY, tagName);
+    }
+
+    public static final String PATH_QUERY_TAGS_BY_TYPE_BY_NAME = "/tags?entityReferenceType=%s&tagName=%s";
+
+    public static String queryTagsByTypeByName(EntityReferenceType entityReferenceType, String tagName)
+    {
+        return String.format(PATH_QUERY_TAGS_BY_TYPE_BY_NAME, entityReferenceType, tagName);
+    }
+
+    public static final String PATH_QUERY_TAGS_BY_REFERENTIAL = "/tags?entityReferenceType=%s&referenceUrn=%s";
+
+    public static String queryTagsByReferential(EntityReferenceType entityReferenceType, String referenceUrn)
+    {
+        return String.format(PATH_QUERY_TAGS_BY_REFERENTIAL, entityReferenceType, referenceUrn);
     }
 
     public static final String PATH_OBJECT_INTERACTION = "/interactions";
