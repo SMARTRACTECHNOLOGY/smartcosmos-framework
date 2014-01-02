@@ -29,6 +29,7 @@ public enum EventType
 
     UserDefined,
     UserUpdated,
+    UserAccessed,
     UserLoginSuccess,
     UserLoginFailure,
 

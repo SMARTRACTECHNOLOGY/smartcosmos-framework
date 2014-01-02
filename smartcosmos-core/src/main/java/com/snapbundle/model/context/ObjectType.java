@@ -19,22 +19,31 @@ package com.snapbundle.model.context;
 
 public enum ObjectType
 {
+    //
+    // Social Media Types
+    Post,
+    HashTag,
+    Comment,
+    FourSquareLocation,
+
+    //
+    // Auto-ID Types
+    Barcode,
+    UhfRfid,
+    HfRfid,
+    QRCode,
+
+    //
+    // Other Types
     Animal,
     Person,
     ISBN,
     DriversLicense,
     UTMGridLocation,
-    HashTag,
-    FourSquareLocation,
     VehicleIdentificationNumber,
     IndependentlyDefined,
-    Barcode,
-    UhfRfid,
-    HfRfid,
-    QRCode,
     ScrapbookElement,
     Task,
     Hint,
-    Comment,
     Unknown,
 }

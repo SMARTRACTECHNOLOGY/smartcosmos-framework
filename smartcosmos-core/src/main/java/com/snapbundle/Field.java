@@ -29,6 +29,10 @@ public final class Field extends VersionData
 
     public static final String EMAIL_ADDRESS_FIELD = "emailAddress";
 
+    public static final String GIVEN_NAME_FIELD = "givenName";
+
+    public static final String SURNAME_FIELD = "surname";
+
     public static final String REALM_FIELD = "realm";
 
     public static final String EVENT_TYPE = "eventType";
