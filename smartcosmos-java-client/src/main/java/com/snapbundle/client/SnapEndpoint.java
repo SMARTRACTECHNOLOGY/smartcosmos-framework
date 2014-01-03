@@ -24,11 +24,18 @@ public final class SnapEndpoint
         return PATH_REGISTRATION;
     }
 
-    public static final String PATH_CHANGE_PASSWORD = "/app/password";
+    public static final String PATH_CHANGE_MY_PASSWORD = "/account/password?setPassword=%s";
 
-    public static String changePassword()
+    public static String changePassword(String setPassword)
     {
-        return PATH_CHANGE_PASSWORD;
+        return String.format(PATH_CHANGE_MY_PASSWORD, setPassword);
+    }
+
+    public static final String PATH_RESET_MY_PASSWORD = "/account/password?resetPassword=true";
+
+    public static String resetMyPassword()
+    {
+        return PATH_RESET_MY_PASSWORD;
     }
 
     public static final String PATH_DEVICES = "/devices";
