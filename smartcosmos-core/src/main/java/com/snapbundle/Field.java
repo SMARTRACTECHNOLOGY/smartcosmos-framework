@@ -122,6 +122,16 @@ public final class Field extends VersionData
     public static final String RECORDED_TIMESTAMP_FIELD = "recordedTimestamp";
 
     //
+    // Timeline Specific Fields
+    //
+
+    public static final String TIMESTAMP_FIELD = "timestamp";
+
+    public static final String VISIBLE_FIELD = "visible";
+
+    public static final String HIGHLIGHT_FIELD = "highlight";
+
+    //
     // Spatial Fields
     //
     public static final String GEORECTIFICATION_TYPE_FIELD = "georectificationType";
