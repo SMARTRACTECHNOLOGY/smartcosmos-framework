@@ -102,6 +102,7 @@ public enum EventType
     ExtensionUpdated,
     ExtensionActivated,
     ExtensionDeactivated,
+    ExtensionAccessed,
     ExtensionDeleted,
     ExtensionScreenshotDefined,
     ExtensionScreenshotDeleted,
