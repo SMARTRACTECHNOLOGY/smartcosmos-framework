@@ -44,6 +44,9 @@ public enum EventType
 
     FileDefined,
     FileUploaded,
+    FileAccessed,
+    FileRetrieval,
+    FileDeleted,
 
     UserPasswordReset,
     UserPasswordChanged,
@@ -65,7 +68,6 @@ public enum EventType
     LastKnownObjectAddressDefined,
     PermanentObjectAddressDeleted,
 
-    FileRetrieval,
 
     InteractionSessionStart,
     InteractionSessionStop,
@@ -124,7 +126,6 @@ public enum EventType
     TimelineEntryHidden,
     TimelineEntryShown,
 
-    FileAccessed,
     ObjectAccessed,
     ObjectAddressAccessed,
     ObjectInteractionAccessed,
