@@ -1,8 +1,8 @@
 package com.snapbundle.client.endpoint;
 
-public interface IObjectInteractionSession
+public interface IGeospatialEndpoints
 {
-    final String BASE = "/sessions";
+    final String BASE = "/geospatial";
 
     final String CREATE__PUT = BASE;
 
@@ -11,5 +11,4 @@ public interface IObjectInteractionSession
     final String FIND_BY_NAME_LIKE__GET = BASE.concat("?nameLike=%s&view=%s");
 
     final String UPDATE__POST = BASE;
-
 }

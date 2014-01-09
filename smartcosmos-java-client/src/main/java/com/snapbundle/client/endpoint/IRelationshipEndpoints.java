@@ -1,6 +1,6 @@
 package com.snapbundle.client.endpoint;
 
-public interface IRelationship
+public interface IRelationshipEndpoints
 {
     final String BASE = "/relationships";
 
@@ -16,5 +16,5 @@ public interface IRelationship
 
     final String FIND_REVERSE_RELATIONSHIPS__GET = BASE.concat("/%s/%s/%s?reverse=true&view=%s");
 
-    final String DELETE__DELETE = BASE;
+    final String DELETE__DELETE = BASE.concat("/%s");
 }

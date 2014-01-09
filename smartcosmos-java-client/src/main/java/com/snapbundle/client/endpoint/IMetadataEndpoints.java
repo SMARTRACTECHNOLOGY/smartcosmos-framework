@@ -1,6 +1,6 @@
 package com.snapbundle.client.endpoint;
 
-public interface IMetadata
+public interface IMetadataEndpoints
 {
     final String BASE = "/metadata/%s/%s";
 
@@ -11,4 +11,8 @@ public interface IMetadata
     final String FINAL_ALL__GET = BASE.concat("?view=%s");
 
     final String DELETE__DELETE = BASE.concat("/%s");
+
+    final String ENCODE_METADATA__POST = "/metadata/mapper/encode/%s";
+
+    final String DECODE_METADATA__POST = "/metadata/mapper/decode/%s";
 }

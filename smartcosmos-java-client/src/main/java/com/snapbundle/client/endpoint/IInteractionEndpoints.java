@@ -1,6 +1,6 @@
 package com.snapbundle.client.endpoint;
 
-public interface IInteraction
+public interface IInteractionEndpoints
 {
     final String BASE = "/interactions";
 

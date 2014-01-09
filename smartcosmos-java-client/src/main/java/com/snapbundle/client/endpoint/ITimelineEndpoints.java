@@ -1,8 +1,11 @@
 package com.snapbundle.client.endpoint;
 
-public interface IGeospatial
+public interface ITimelineEndpoints
 {
-    final String BASE = "/geospatial";
+    /**
+     * {entityReferenceType}/{referenceUrn}
+     */
+    final String BASE = "/timelines/%s/%s";
 
     final String CREATE__PUT = BASE;
 
@@ -10,5 +13,6 @@ public interface IGeospatial
 
     final String FIND_BY_NAME_LIKE__GET = BASE.concat("?nameLike=%s&view=%s");
 
-    final String UPDATE__POST = BASE;
+    final String UPDATE__PUT = BASE;
 }
+

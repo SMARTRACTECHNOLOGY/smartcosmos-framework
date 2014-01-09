@@ -1,6 +1,6 @@
 package com.snapbundle.client.endpoint;
 
-public interface IUser
+public interface IUserEndpoints
 {
     final String BASE = "/users";
 

@@ -1,6 +1,6 @@
 package com.snapbundle.client.endpoint;
 
-public interface IDevice
+public interface IDeviceEndpoints
 {
     final String BASE = "/devices";
 

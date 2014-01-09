@@ -1,6 +1,6 @@
 package com.snapbundle.client.endpoint;
 
-public interface IObjectAddress
+public interface IObjectAddressEndpoints
 {
     final String BASE = "/objects/object/%s/address";
 
@@ -8,7 +8,7 @@ public interface IObjectAddress
 
     final String UPDATE__POST = BASE;
 
-    final String FIND_LAST_N__GET = BASE.concat("?cound=%s&view=%s");
+    final String FIND_LAST_N__GET = BASE.concat("?count=%s&view=%s");
 
     final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
 

@@ -1,6 +1,6 @@
 package com.snapbundle.client.endpoint;
 
-public interface IObject
+public interface IObjectEndpoints
 {
     final String BASE = "/objects";
 
@@ -14,5 +14,5 @@ public interface IObject
 
     final String QUERY_TYPE_SPECIFIC__GET = BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&objectUrnLike=%s&objectType=%s&view=%s");
 
-    final String FIND_BY_OBJECT_URN__GET = BASE.concat("/object/%s");
+    final String FIND_BY_OBJECT_URN__GET = BASE.concat("/object/%s?exact=%s&view=%s");
 }
