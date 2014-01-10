@@ -2,8 +2,38 @@ package com.snapbundle.client.endpoint;
 
 import com.snapbundle.util.json.ViewType;
 
-public class ExtensionEndpoints implements IExtensionEndpoints
+public final class ExtensionEndpoints
 {
+    private ExtensionEndpoints()
+    {
+    }
+
+    private static final String BASE = "/extensions";
+
+    private static final String CREATE__PUT = BASE;
+
+    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+
+    private static final String DELETE__DELETE = BASE.concat("/%s");
+
+    private static final String FIND_BY_NAME_LIKE__GET = BASE.concat("?nameLike=%s&view=%s");
+
+    private static final String UPDATE__POST = BASE;
+
+    private static final String CATALOG__GET = "/extensions/catalog";
+
+    private static final String PUBLISHED_EXTENSION__GET = "/extensions/catalog/%s";
+
+    public static String catalog()
+    {
+        return CATALOG__GET;
+    }
+
+    public static String publishedExtension(String urn)
+    {
+        return String.format(PUBLISHED_EXTENSION__GET, urn);
+    }
+
     public static String create()
     {
         return CREATE__PUT;

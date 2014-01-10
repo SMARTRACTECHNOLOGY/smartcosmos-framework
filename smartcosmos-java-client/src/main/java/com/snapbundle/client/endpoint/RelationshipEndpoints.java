@@ -4,8 +4,28 @@ import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.RelationshipType;
 import com.snapbundle.util.json.ViewType;
 
-public class RelationshipEndpoints implements IRelationshipEndpoints
+public final class RelationshipEndpoints
 {
+    private RelationshipEndpoints()
+    {
+    }
+
+    private static final String BASE = "/relationships";
+
+    private static final String UPSERT__PUT = BASE.concat("/%s/%s");
+
+    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+
+    private static final String FIND_ALL_BETWEEN_TWO_ENTITIES__GET = BASE.concat("/%s/%s/%s/%s?view=%s");
+
+    private static final String FIND_SPECIFIC_RELATIONSHIP__GET = BASE.concat("/%s/%s/%s/%s/%s?view=%s");
+
+    private static final String FIND_RELATIONSHIPS__GET = BASE.concat("/%s/%s/%s?reverse=false&view=%s");
+
+    private static final String FIND_REVERSE_RELATIONSHIPS__GET = BASE.concat("/%s/%s/%s?reverse=true&view=%s");
+
+    private static final String DELETE__DELETE = BASE.concat("/%s");
+
     public static String upsert(EntityReferenceType entityReferenceType, String referenceUrn)
     {
         return String.format(UPSERT__PUT, entityReferenceType, referenceUrn);

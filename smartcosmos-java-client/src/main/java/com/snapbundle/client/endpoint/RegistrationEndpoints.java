@@ -1,7 +1,19 @@
 package com.snapbundle.client.endpoint;
 
-public class RegistrationEndpoints implements IRegistrationEndpoints
+public final class RegistrationEndpoints
 {
+    private RegistrationEndpoints()
+    {
+    }
+
+    private static final String BASE = "/registration";
+
+    private static final String CREATE_REGISTRATION__PUT = BASE.concat("/register");
+
+    private static final String CHECK_REALM_AVAILABILITY__GET = BASE.concat("/realm/%s");
+
+    private static final String CONFIRM_REGISTRATION__GET = BASE.concat("/confirm/%s/%s");
+
     public static String checkRealmAvailability(String realm)
     {
         return String.format(CHECK_REALM_AVAILABILITY__GET, realm);

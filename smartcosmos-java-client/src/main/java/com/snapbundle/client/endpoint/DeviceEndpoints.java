@@ -2,8 +2,24 @@ package com.snapbundle.client.endpoint;
 
 import com.snapbundle.util.json.ViewType;
 
-public class DeviceEndpoints implements IDeviceEndpoints
+public final class DeviceEndpoints
 {
+    private DeviceEndpoints()
+    {
+    }
+
+    private static final String BASE = "/devices";
+
+    private static final String CREATE__PUT = BASE;
+
+    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+
+    private static final String FIND_BY_NAME_LIKE__GET = BASE.concat("?nameLike=%s&view=%s");
+
+    private static final String FIND_BY_DEVICE_ID__GET = BASE.concat("/device/%s?view=%s");
+
+    private static final String UPDATE__POST = BASE;
+
     public static String create()
     {
         return CREATE__PUT;

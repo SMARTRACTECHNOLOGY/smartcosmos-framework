@@ -2,8 +2,24 @@ package com.snapbundle.client.endpoint;
 
 import com.snapbundle.util.json.ViewType;
 
-public class ObjectAddressEndpoints implements IObjectAddressEndpoints
+public final class ObjectAddressEndpoints
 {
+    private ObjectAddressEndpoints()
+    {
+    }
+
+    private static final String BASE = "/objects/object/%s/address";
+
+    private static final String CREATE__PUT = BASE;
+
+    private static final String UPDATE__POST = BASE;
+
+    private static final String FIND_LAST_N__GET = BASE.concat("?count=%s&view=%s");
+
+    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+
+    private static final String DELETE__DELETE = BASE;
+
     public static String create()
     {
         return CREATE__PUT;

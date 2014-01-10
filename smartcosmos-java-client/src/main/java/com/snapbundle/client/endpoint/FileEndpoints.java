@@ -3,8 +3,34 @@ package com.snapbundle.client.endpoint;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.util.json.ViewType;
 
-public class FileEndpoints implements IFileEndpoints
+public final class FileEndpoints
 {
+    private FileEndpoints()
+    {
+    }
+
+    private static final String BASE = "/files";
+
+    private static final String CREATE__PUT = BASE;
+
+    private static final String DELETE__DELETE = BASE.concat("/%s");
+
+    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+
+    private static final String RETRIEVE_FILE_CONTENT__GET = BASE.concat("/%s/contents");
+
+    private static final String LIST_OWNED_BY__GET = BASE.concat("/%s/%s?view=%s");
+
+    /**
+     * MULTIPART_FORM_DATA with a file stream and filename content disposition.
+     */
+    private static final String UPLOAD_FILE_CONTENT__MULTIPART__POST = BASE.concat("/%s/multipart");
+
+    /**
+     * application/octet-stream
+     */
+    private static final String UPLOAD_FILE_CONTENT__OCTET_STREAM__POST = BASE.concat("/%s/octet");
+
     public static String create()
     {
         return CREATE__PUT;

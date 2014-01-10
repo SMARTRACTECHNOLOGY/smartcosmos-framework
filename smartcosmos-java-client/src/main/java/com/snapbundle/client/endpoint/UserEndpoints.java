@@ -2,8 +2,26 @@ package com.snapbundle.client.endpoint;
 
 import com.snapbundle.util.json.ViewType;
 
-public class UserEndpoints implements IUserEndpoints
+public final class UserEndpoints
 {
+    private UserEndpoints()
+    {
+    }
+
+    private static final String BASE = "/users";
+
+    private static final String CREATE__PUT = BASE;
+
+    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+
+    private static final String FIND_BY_EMAIL__GET = BASE.concat("/user/%s?view=%s");
+
+    private static final String CHANGE_USER_PASSWORD__POST = BASE.concat("/user/%s?resetPassword=false&setPassword=%s");
+
+    private static final String RESET_USER_PASSWORD__POST = BASE.concat("/user/%s?resetPassword=true");
+
+    private static final String UPDATE__POST = BASE;
+
     public static String create()
     {
         return CREATE__PUT;

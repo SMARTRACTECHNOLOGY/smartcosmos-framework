@@ -3,8 +3,26 @@ package com.snapbundle.client.endpoint;
 import com.snapbundle.model.context.ObjectType;
 import com.snapbundle.util.json.ViewType;
 
-public class ObjectEndpoints implements IObjectEndpoints
+public final class ObjectEndpoints
 {
+    private ObjectEndpoints()
+    {
+    }
+
+    private static final String BASE = "/objects";
+
+    private static final String CREATE__PUT = BASE;
+
+    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+
+    private static final String UPDATE__POST = BASE;
+
+    private static final String QUERY_TYPE_AGNOSTIC__GET = BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&objectUrnLike=%s&view=%s");
+
+    private static final String QUERY_TYPE_SPECIFIC__GET = BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&objectUrnLike=%s&objectType=%s&view=%s");
+
+    private static final String FIND_BY_OBJECT_URN__GET = BASE.concat("/object/%s?exact=%s&view=%s");
+
     public static String create()
     {
         return CREATE__PUT;

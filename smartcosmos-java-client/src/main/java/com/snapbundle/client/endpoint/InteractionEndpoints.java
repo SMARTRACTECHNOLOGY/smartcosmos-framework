@@ -2,8 +2,24 @@ package com.snapbundle.client.endpoint;
 
 import com.snapbundle.util.json.ViewType;
 
-public class InteractionEndpoints implements IInteractionEndpoints
+public final class InteractionEndpoints
 {
+    private InteractionEndpoints()
+    {
+    }
+
+    private static final String BASE = "/interactions";
+
+    private static final String CREATE__PUT = BASE;
+
+    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+
+    private static final String LIST_ALL__GET = BASE.concat("?view=%s");
+
+    private static final String FIND_BY_DATA_LIKE__GET = BASE.concat("?dataLike=%s&view=%s");
+
+    private static final String FIND_BY_OBJECT_URN_LIKE__GET = BASE.concat("?objectUrnLike=%s&view=%s");
+
     public static String create()
     {
         return CREATE__PUT;

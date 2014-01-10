@@ -4,8 +4,26 @@ import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.MetadataDataType;
 import com.snapbundle.util.json.ViewType;
 
-public class MetadataEndpoints implements IMetadataEndpoints
+public final class MetadataEndpoints
 {
+    private MetadataEndpoints()
+    {
+    }
+
+    private static final String BASE = "/metadata/%s/%s";
+
+    private static final String UPSERT__PUT = BASE;
+
+    private static final String FIND_SPECIFIC_KEY__GET = BASE.concat("?key=%s&view=%s");
+
+    private static final String FINAL_ALL__GET = BASE.concat("?view=%s");
+
+    private static final String DELETE__DELETE = BASE.concat("/%s");
+
+    private static final String ENCODE_METADATA__POST = "/metadata/mapper/encode/%s";
+
+    private static final String DECODE_METADATA__POST = "/metadata/mapper/decode/%s";
+
     public static String upsert(EntityReferenceType entityReferenceType, String referenceUrn)
     {
         return String.format(UPSERT__PUT, entityReferenceType, referenceUrn);

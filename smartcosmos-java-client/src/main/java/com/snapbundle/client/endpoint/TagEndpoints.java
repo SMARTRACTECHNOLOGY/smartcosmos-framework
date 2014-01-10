@@ -3,8 +3,30 @@ package com.snapbundle.client.endpoint;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.util.json.ViewType;
 
-public class TagEndpoints implements ITagEndpoints
+public final class TagEndpoints
 {
+    private TagEndpoints()
+    {
+    }
+
+    private static final String BASE = "/tags";
+
+    private static final String CREATE__PUT = BASE;
+
+    private static final String ASSIGN__PUT = BASE.concat("/%s/%s");
+
+    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+
+    private static final String FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_ENTITY__GET = BASE.concat("?entityReferenceType=%s&referenceUrn=%s&view=%s");
+
+    private static final String FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_TYPE__GET = BASE.concat("?entityReferenceType=%s&tagName=%s&view=%s");
+
+    private static final String FIND_ENTITIES_BY_TAGS_NAMED_LIKE__GET = BASE.concat("?tagName=%s&view=%s");
+
+    private static final String FIND_SPECIFIC_TAG__GET = BASE.concat("/tag/%s?view=%s");
+
+    private static final String DELETE__DELETE = BASE.concat("/tag/%s");
+
     public static String create()
     {
         return CREATE__PUT;
