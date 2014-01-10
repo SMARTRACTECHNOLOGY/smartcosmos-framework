@@ -141,6 +141,8 @@ public final class Field extends VersionData
     //
     // Extension Fields
     //
+    public static final String APP_CATALOG_URL_FIELD = "appCatalogUrl";
+
     public static final String SUPPORT_EMAIL_FIELD = "supportEmail";
 
     public static final String WEB_SITE_FIELD = "webSiteUrl";
