@@ -32,7 +32,7 @@ public class Extension extends NamedObjectEndpoint<IExtension> implements IExten
     @JsonDeserialize(as = Account.class)
     protected IAccount account;
 
-    @JsonView(JsonGenerationView.Published.class)
+    @JsonView(JsonGenerationView.Standard.class)
     protected String supportEmail;
 
     @JsonView(JsonGenerationView.Published.class)
@@ -50,10 +50,7 @@ public class Extension extends NamedObjectEndpoint<IExtension> implements IExten
     @JsonView(JsonGenerationView.Published.class)
     protected String appCatalogUrl;
 
-    @JsonView(JsonGenerationView.Published.class)
-    protected String shortDescription;
-
-    @JsonView(JsonGenerationView.Full.class)
+    @JsonView(JsonGenerationView.Standard.class)
     protected String longDescription;
 
     @JsonView(JsonGenerationView.Published.class)
@@ -141,18 +138,6 @@ public class Extension extends NamedObjectEndpoint<IExtension> implements IExten
     public void setRedirectUrl(String redirectUrl)
     {
         this.redirectUrl = redirectUrl;
-    }
-
-    @Override
-    public String getShortDescription()
-    {
-        return shortDescription;
-    }
-
-    @Override
-    public void setShortDescription(String shortDescription)
-    {
-        this.shortDescription = shortDescription;
     }
 
     @Override

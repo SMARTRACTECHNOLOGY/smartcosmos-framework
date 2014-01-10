@@ -149,8 +149,6 @@ public final class Field extends VersionData
 
     public static final String EXTENSION_PERMISSION_FIELD = "permissions";
 
-    public static final String SHORT_DESCRIPTION_FIELD = "shortDescription";
-
     public static final String LONG_DESCRIPTION_FIELD = "longDescription";
 
     public static final String EXTENSION_TYPE_FIELD = "extensionType";

@@ -50,10 +50,6 @@ public interface IExtension extends IDomainResource<IExtension>, INamedObject<IE
 
     void setRedirectUrl(String redirectUrl);
 
-    String getShortDescription();
-
-    void setShortDescription(String shortDescription);
-
     String getLongDescription();
 
     void setLongDescription(String longDescription);

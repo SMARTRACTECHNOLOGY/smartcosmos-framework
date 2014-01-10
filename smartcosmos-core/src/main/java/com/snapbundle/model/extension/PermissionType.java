@@ -22,36 +22,45 @@ public enum PermissionType
     AccountRead,
     AccountWrite,
 
-    UserRead,
-    UserWrite,
-
     DeviceRead,
     DeviceWrite,
 
-    ObjectRead,
-    ObjectWrite,
-    ObjectAddressRead,
-    ObjectAddressWrite,
-    ObjectInteractionRead,
-    ObjectInteractionSessionRead,
-    ObjectInteractionSessionWrite,
+    // Implies *Read permissions since JSON is included in all events
+    EventStream,
 
     FileRead,
     FileWrite,
 
+    GeospatialEntryRead,
+    GeospatialEntryWrite,
+
     MetadataRead,
     MetadataWrite,
+
+    ObjectRead,
+    ObjectWrite,
+
+    ObjectAddressRead,
+    ObjectAddressWrite,
+
+    ObjectInteractionRead,
+    ObjectInteractionWrite,
+
+    ObjectInteractionSessionRead,
+    ObjectInteractionSessionWrite,
 
     RelationshipRead,
     RelationshipWrite,
 
-    TagRead,
-    TagWrite,
-
     TagAssignmentRead,
     TagAssignmentWrite,
 
+    TagRead,
+    TagWrite,
 
-    // Implies *Read permissions since JSON is included in all events
-    EventStream
+    TimelineRead,
+    TimelineWrite,
+
+    UserRead,
+    UserWrite
 }
