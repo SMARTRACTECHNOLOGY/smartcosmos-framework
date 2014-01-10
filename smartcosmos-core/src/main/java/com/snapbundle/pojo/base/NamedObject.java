@@ -23,7 +23,7 @@ import com.snapbundle.util.json.JsonGenerationView;
 
 public abstract class NamedObject<T> extends DomainResource<T> implements INamedObject<T>
 {
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Published.class)
     protected String name;
 
     @JsonView(JsonGenerationView.Standard.class)
