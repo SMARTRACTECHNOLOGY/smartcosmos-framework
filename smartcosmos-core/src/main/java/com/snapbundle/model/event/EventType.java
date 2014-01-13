@@ -115,6 +115,7 @@ public enum EventType
     OAuthAuthorizationCodeIssued,
     OAuthRequestDenied,
     OAuthTokenIssued,
+    OAuthTokenScopeRequest,
     OAuthLoginSuccess,
     OAuthLoginFailure,
     OAuthTokenRefreshed,
