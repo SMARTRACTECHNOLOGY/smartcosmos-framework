@@ -19,7 +19,6 @@ package com.snapbundle.model.extension;
 
 public enum ExtensionType
 {
-    Reporting,
-    Security,
+    General,
     Workflow
 }
