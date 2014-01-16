@@ -121,6 +121,10 @@ public final class Field extends VersionData
 
     public static final String RECORDED_TIMESTAMP_FIELD = "recordedTimestamp";
 
+    public static final String OLD_PASSWORD_FIELD = "oldPassword";
+
+    public static final String NEW_PASSWORD_FIELD = "newPassword";
+
     //
     // Timeline Specific Fields
     //
