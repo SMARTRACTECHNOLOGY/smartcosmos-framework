@@ -118,6 +118,8 @@ public enum EventType
     OAuthTokenScopeRequest,
     OAuthLoginSuccess,
     OAuthLoginFailure,
+    OAuthLoginFailureDisabledUser,
+    OAuthLoginFailureStaleBearerAccessToken,
     OAuthTokenRefreshed,
     TokenRevocation,
 

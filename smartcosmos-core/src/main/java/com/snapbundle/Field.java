@@ -159,6 +159,8 @@ public final class Field extends VersionData
 
     public static final String PERMISSION_TYPE_FIELD = "permissionType";
 
+    public static final String STATE_FIELD = "state";
+
     private Field()
     {
     }
