@@ -13,4 +13,14 @@ public final class OAuthEndpoints
         return BASE.concat("/token");
     }
 
+    public static String revokeBearerCode()
+    {
+        return BASE.concat("/revoke/bearer");
+    }
+
+    public static String revokeRefreshCode()
+    {
+        return BASE.concat("/revoke/refresh");
+    }
+
 }
