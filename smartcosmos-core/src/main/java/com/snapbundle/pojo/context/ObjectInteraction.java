@@ -23,7 +23,6 @@ import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IObjectInteraction;
 import com.snapbundle.model.context.IObjectInteractionSession;
-import com.snapbundle.model.context.IUser;
 import com.snapbundle.pojo.base.ReferentialObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
@@ -36,10 +35,6 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
     @JsonView(JsonGenerationView.Minimum.class)
     @JsonDeserialize(as = ObjectImpl.class)
     protected IObject object;
-
-    @JsonView(JsonGenerationView.Minimum.class)
-    @JsonDeserialize(as = User.class)
-    protected IUser user;
 
     @JsonView(JsonGenerationView.Standard.class)
     protected String data;
@@ -84,18 +79,6 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
     public void setObject(IObject object)
     {
         this.object = object;
-    }
-
-    @Override
-    public IUser getUser()
-    {
-        return user;
-    }
-
-    @Override
-    public void setUser(IUser user)
-    {
-        this.user = user;
     }
 
     @Override

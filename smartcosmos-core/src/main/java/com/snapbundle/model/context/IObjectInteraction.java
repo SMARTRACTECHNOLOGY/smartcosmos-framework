@@ -27,10 +27,6 @@ public interface IObjectInteraction extends IAccountDomainResource<IObjectIntera
 
     void setObject(IObject object);
 
-    IUser getUser();
-
-    void setUser(IUser user);
-
     String getData();
 
     void setData(String data);
