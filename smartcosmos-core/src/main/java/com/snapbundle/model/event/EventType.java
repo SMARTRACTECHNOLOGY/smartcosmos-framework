@@ -60,14 +60,11 @@ public enum EventType
     DeviceBatchStart,
     DeviceBatchStop,
 
-
     ObjectDeactivated,
 
-    PermanentObjectAddressDefined,
-    PermanentObjectAddressUpdated,
-    LastKnownObjectAddressDefined,
-    PermanentObjectAddressDeleted,
-
+    ObjectAddressDefined,
+    ObjectAddressUpdated,
+    ObjectAddressDeleted,
 
     InteractionSessionStart,
     InteractionSessionStop,

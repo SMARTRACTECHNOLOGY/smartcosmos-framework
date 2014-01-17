@@ -33,6 +33,8 @@ public enum EntityReferenceType
 {
     Account,
 
+    Extension,
+
     NotificationEndpoint,
 
     Object,

@@ -57,8 +57,6 @@ public final class Field extends VersionData
 
     public static final String COUNTRY_ABBREVIATION_FIELD = "countryAbbreviation";
 
-    public static final String ADDRESS_TYPE_FIELD = "addressType";
-
     public static final String NAME_FIELD = "name";
 
     public static final String DESCRIPTION_FIELD = "description";
@@ -69,13 +67,9 @@ public final class Field extends VersionData
 
     public static final String OBJECT_URN_FIELD = "objectUrn";
 
-    public static final String OBJECT_TYPE_FIELD = "objectType";
-
     public static final String OBJECT_INTERACTION_URN_FIELD = "objectInteractionUrn";
 
     public static final String OBJECT_INTERACTION_SESSION_FIELD = "objectInteractionSession";
-
-    public static final String SESSION_TYPE_FIELD = "sessionType";
 
     public static final String START_TIMESTAMP_FIELD = "startTimestamp";
 
@@ -91,8 +85,6 @@ public final class Field extends VersionData
 
     public static final String DEVICE_IDENTIFICATION_FIELD = "identification";
 
-    public static final String DEVICE_TYPE_FIELD = "deviceType";
-
     public static final String REFERENCE_URN_FIELD = "referenceUrn";
 
     public static final String ENTITY_REFERENCE_TYPE = "entityReferenceType";
@@ -101,7 +93,7 @@ public final class Field extends VersionData
 
     public static final String RELATED_ENTITY_REFERENCE_TYPE = "relatedEntityReferenceType";
 
-    public static final String RELATIONSHIP_TYPE_FIELD = "relationshipType";
+    public static final String TYPE_FIELD = "type";
 
     public static final String MIME_TYPE_FIELD = "mimeType";
 
@@ -114,8 +106,6 @@ public final class Field extends VersionData
     public static final String DECODED_VALUE_FIELD = "decodedValue";
 
     public static final String DATA_TYPE_FIELD = "dataType";
-
-    public static final String DATA_FIELD = "data";
 
     public static final String FLAG_FIELD = "flag";
 
@@ -138,8 +128,6 @@ public final class Field extends VersionData
     //
     // Spatial Fields
     //
-    public static final String GEORECTIFICATION_TYPE_FIELD = "georectificationType";
-
     public static final String GEOMETRIC_SHAPE_FIELD = "geometricShape";
 
     //
