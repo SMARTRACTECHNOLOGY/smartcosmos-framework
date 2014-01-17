@@ -19,22 +19,21 @@ package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.snapbundle.model.base.ITypedObject;
 import com.snapbundle.model.context.IAccount;
-import com.snapbundle.model.context.IAddressType;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IObjectAddress;
 import com.snapbundle.pojo.base.DomainResource;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public class ObjectAddress extends DomainResource<IObjectAddress> implements IObjectAddress
+public class ObjectAddress extends DomainResource<IObjectAddress> implements IObjectAddress, ITypedObject
 {
     @JsonView(JsonGenerationView.Standard.class)
     @JsonDeserialize(as = ObjectImpl.class)
     protected IObject object;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @JsonDeserialize(as = AddressType.class)
-    private IAddressType addressType;
+    protected String type;
 
     @JsonView(JsonGenerationView.Minimum.class)
     private String line1;
@@ -70,15 +69,15 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
     }
 
     @Override
-    public IAddressType getAddressType()
+    public String getType()
     {
-        return addressType;
+        return type;
     }
 
     @Override
-    public void setAddressType(IAddressType addressType)
+    public void setType(String type)
     {
-        this.addressType = addressType;
+        this.type = type;
     }
 
     @Override
@@ -193,7 +192,7 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
         ObjectAddress that = (ObjectAddress) o;
 
         if (timestamp != that.timestamp) return false;
-        if (!addressType.equals(that.addressType)) return false;
+        if (!type.equals(that.type)) return false;
         if (city != null ? !city.equals(that.city) : that.city != null) return false;
         if (countryAbbreviation != null ? !countryAbbreviation.equals(that.countryAbbreviation) : that.countryAbbreviation != null)
             return false;
@@ -212,7 +211,7 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
     {
         int result = super.hashCode();
         result = 31 * result + object.hashCode();
-        result = 31 * result + addressType.hashCode();
+        result = 31 * result + type.hashCode();
         result = 31 * result + (line1 != null ? line1.hashCode() : 0);
         result = 31 * result + (line2 != null ? line2.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);

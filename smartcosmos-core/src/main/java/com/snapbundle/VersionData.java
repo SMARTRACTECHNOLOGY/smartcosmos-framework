@@ -1,6 +1,6 @@
 package com.snapbundle;
 
-public abstract class VersionData
+abstract class VersionData
 {
     public static final int REVISION = 6;
 

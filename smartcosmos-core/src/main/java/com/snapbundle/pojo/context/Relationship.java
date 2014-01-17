@@ -1,10 +1,9 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.base.Preconditions;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IRelationship;
-import com.snapbundle.model.context.IRelationshipType;
 import com.snapbundle.pojo.base.ReferentialObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
@@ -17,19 +16,19 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
     protected String relatedReferenceURN;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @JsonDeserialize(as = RelationshipType.class)
-    protected IRelationshipType relationshipType;
+    protected String type;
 
     @Override
-    public IRelationshipType getRelationshipType()
+    public String getType()
     {
-        return relationshipType;
+        return type;
     }
 
     @Override
-    public void setRelationshipType(IRelationshipType relationshipType)
+    public void setType(String type)
     {
-        this.relationshipType = relationshipType;
+        Preconditions.checkNotNull(type, "type must not be null");
+        this.type = type;
     }
 
     @Override
@@ -57,8 +56,28 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
     }
 
     @Override
-    public void copy(IRelationship object)
+    public boolean equals(Object o)
     {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Relationship that = (Relationship) o;
+
+        if (relatedEntityReferenceType != that.relatedEntityReferenceType) return false;
+        if (!relatedReferenceURN.equals(that.relatedReferenceURN)) return false;
+        if (!type.equals(that.type)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + relatedEntityReferenceType.hashCode();
+        result = 31 * result + relatedReferenceURN.hashCode();
+        result = 31 * result + type.hashCode();
+        return result;
     }
 }

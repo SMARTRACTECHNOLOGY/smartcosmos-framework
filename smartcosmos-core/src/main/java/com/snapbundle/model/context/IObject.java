@@ -18,18 +18,12 @@
 package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
-import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.INamedObject;
+import com.snapbundle.model.base.ITypedObject;
 
-public interface IObject extends IAccountDomainResource<IObject>, INamedObject<IObject>
+public interface IObject extends IAccountDomainResource<IObject>, INamedObject<IObject>, ITypedObject
 {
     String getObjectUrn();
 
     void setObjectUrn(String urn);
-
-    IObjectType getObjectType();
-
-    void setObjectType(IObjectType objectType);
-
-    void copy(IObject object);
 }

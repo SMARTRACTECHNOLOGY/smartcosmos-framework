@@ -49,12 +49,6 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
     protected IObjectInteractionSession objectInteractionSession;
 
     @Override
-    public void copy(IObjectInteraction objectInteraction)
-    {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
-    @Override
     public IAccount getAccount()
     {
         return account;

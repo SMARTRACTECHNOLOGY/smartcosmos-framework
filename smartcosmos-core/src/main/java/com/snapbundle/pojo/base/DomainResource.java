@@ -83,6 +83,12 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     }
 
     @Override
+    public void copy(T target)
+    {
+        throw new UnsupportedOperationException("POJO doesn't support copying");
+    }
+
+    @Override
     public boolean equals(Object o)
     {
         if (this == o) return true;

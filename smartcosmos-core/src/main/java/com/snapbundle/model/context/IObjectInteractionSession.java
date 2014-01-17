@@ -19,8 +19,9 @@ package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.INamedObject;
+import com.snapbundle.model.base.ITypedObject;
 
-public interface IObjectInteractionSession extends IAccountDomainResource<IObjectInteractionSession>, INamedObject<IObjectInteractionSession>
+public interface IObjectInteractionSession extends IAccountDomainResource<IObjectInteractionSession>, INamedObject<IObjectInteractionSession>, ITypedObject
 {
     long getStartTimestamp();
 
@@ -29,8 +30,4 @@ public interface IObjectInteractionSession extends IAccountDomainResource<IObjec
     long getStopTimestamp();
 
     void setStopTimestamp(long timestamp);
-
-    ISessionType getSessionType();
-
-    void setSessionType(ISessionType sessionType);
 }

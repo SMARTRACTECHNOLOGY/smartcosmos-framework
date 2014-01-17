@@ -26,12 +26,8 @@ import com.snapbundle.model.context.RoleType;
 import com.snapbundle.pojo.base.DomainResource;
 import com.snapbundle.util.json.JsonGenerationView;
 
-import java.util.logging.Logger;
-
 public class User extends DomainResource<IUser> implements IUser
 {
-    private static Logger logger = Logger.getLogger(User.class.getName());
-
     @JsonView(JsonGenerationView.Minimum.class)
     private String emailAddress;
 
@@ -143,5 +139,39 @@ public class User extends DomainResource<IUser> implements IUser
     public void setRoleType(RoleType roleType)
     {
         this.roleType = roleType;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        User user = (User) o;
+
+        if (!account.equals(user.account)) return false;
+        if (!emailAddress.equals(user.emailAddress)) return false;
+        if (givenName != null ? !givenName.equals(user.givenName) : user.givenName != null) return false;
+        if (object != null ? !object.equals(user.object) : user.object != null) return false;
+        if (!realm.equals(user.realm)) return false;
+        if (roleType != user.roleType) return false;
+        if (surname != null ? !surname.equals(user.surname) : user.surname != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + emailAddress.hashCode();
+        result = 31 * result + account.hashCode();
+        result = 31 * result + (object != null ? object.hashCode() : 0);
+        result = 31 * result + (givenName != null ? givenName.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + realm.hashCode();
+        result = 31 * result + roleType.hashCode();
+        return result;
     }
 }

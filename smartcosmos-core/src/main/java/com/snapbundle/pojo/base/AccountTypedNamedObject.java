@@ -2,12 +2,12 @@ package com.snapbundle.pojo.base;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.snapbundle.model.base.ITypeObject;
+import com.snapbundle.model.base.IAccountOwner;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.pojo.context.Account;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public abstract class TypeObject<T> extends NamedObject<T> implements ITypeObject<T>
+public class AccountTypedNamedObject<T> extends TypedNamedObject<T> implements IAccountOwner
 {
     @JsonDeserialize(as = Account.class)
     @JsonView(JsonGenerationView.Full.class)
@@ -26,19 +26,13 @@ public abstract class TypeObject<T> extends NamedObject<T> implements ITypeObjec
     }
 
     @Override
-    public void copy(T type)
-    {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
-    @Override
     public boolean equals(Object o)
     {
         if (this == o) return true;
-        if (!(o instanceof TypeObject)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        TypeObject that = (TypeObject) o;
+        AccountTypedNamedObject that = (AccountTypedNamedObject) o;
 
         if (!account.equals(that.account)) return false;
 

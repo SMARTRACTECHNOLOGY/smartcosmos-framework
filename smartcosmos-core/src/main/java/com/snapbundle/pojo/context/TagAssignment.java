@@ -31,12 +31,6 @@ public class TagAssignment extends ReferentialObject<ITagAssignment> implements 
     protected ITag tag;
 
     @Override
-    public void copy(ITagAssignment object)
-    {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
-    @Override
     public ITag getTag()
     {
         return tag;
@@ -46,6 +40,28 @@ public class TagAssignment extends ReferentialObject<ITagAssignment> implements 
     public void setTag(ITag tag)
     {
         this.tag = tag;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        TagAssignment that = (TagAssignment) o;
+
+        if (!tag.equals(that.tag)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + tag.hashCode();
+        return result;
     }
 }
 

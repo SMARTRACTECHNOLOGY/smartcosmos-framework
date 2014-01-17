@@ -22,18 +22,6 @@ public class TimelineEntry extends ReferentialObject<ITimelineEntry> implements 
     @JsonView(JsonGenerationView.Standard.class)
     protected boolean activeFlag;
 
-    @JsonView(JsonGenerationView.Standard.class)
-    protected double lat;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected double lon;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected double alt;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected boolean hasGeoLocation = false;
-
     @JsonView(JsonGenerationView.Minimum.class)
     protected long timelineTimestamp;
 
@@ -109,10 +97,35 @@ public class TimelineEntry extends ReferentialObject<ITimelineEntry> implements 
         this.timelineTimestamp = timestamp;
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        TimelineEntry that = (TimelineEntry) o;
+
+        if (activeFlag != that.activeFlag) return false;
+        if (highlightFlag != that.highlightFlag) return false;
+        if (timelineTimestamp != that.timelineTimestamp) return false;
+        if (visibleFlag != that.visibleFlag) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (!name.equals(that.name)) return false;
+
+        return true;
+    }
 
     @Override
-    public void copy(ITimelineEntry object)
+    public int hashCode()
     {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
+        int result = super.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (highlightFlag ? 1 : 0);
+        result = 31 * result + (visibleFlag ? 1 : 0);
+        result = 31 * result + (activeFlag ? 1 : 0);
+        result = 31 * result + (int) (timelineTimestamp ^ (timelineTimestamp >>> 32));
+        return result;
     }
 }

@@ -18,28 +18,17 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IObjectInteractionSession;
-import com.snapbundle.model.context.ISessionType;
-import com.snapbundle.pojo.base.NamedObject;
+import com.snapbundle.pojo.base.AccountTypedNamedObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public class ObjectInteractionSession extends NamedObject<IObjectInteractionSession> implements IObjectInteractionSession
+public class ObjectInteractionSession extends AccountTypedNamedObject<IObjectInteractionSession> implements IObjectInteractionSession
 {
-    @JsonView(JsonGenerationView.Full.class)
-    @JsonDeserialize(as = Account.class)
-    protected IAccount account;
-
     @JsonView(JsonGenerationView.Minimum.class)
     protected long startTimestamp;
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected long stopTimestamp;
-
-    @JsonView(JsonGenerationView.Minimum.class)
-    @JsonDeserialize(as = SessionType.class)
-    protected ISessionType sessionType;
 
     public long getStartTimestamp()
     {
@@ -61,32 +50,6 @@ public class ObjectInteractionSession extends NamedObject<IObjectInteractionSess
         this.stopTimestamp = stopTimestamp;
     }
 
-    public ISessionType getSessionType()
-    {
-        return sessionType;
-    }
-
-    public void setSessionType(ISessionType sessionType)
-    {
-        this.sessionType = sessionType;
-    }
-
-    public IAccount getAccount()
-    {
-        return account;
-    }
-
-    public void setAccount(IAccount account)
-    {
-        this.account = account;
-    }
-
-    @Override
-    public void copy(IObjectInteractionSession object)
-    {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
     @Override
     public boolean equals(Object o)
     {
@@ -98,8 +61,6 @@ public class ObjectInteractionSession extends NamedObject<IObjectInteractionSess
 
         if (startTimestamp != that.startTimestamp) return false;
         if (stopTimestamp != that.stopTimestamp) return false;
-        if (!account.equals(that.account)) return false;
-        if (!sessionType.equals(that.sessionType)) return false;
 
         return true;
     }
@@ -108,10 +69,8 @@ public class ObjectInteractionSession extends NamedObject<IObjectInteractionSess
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + account.hashCode();
         result = 31 * result + (int) (startTimestamp ^ (startTimestamp >>> 32));
         result = 31 * result + (int) (stopTimestamp ^ (stopTimestamp >>> 32));
-        result = 31 * result + sessionType.hashCode();
         return result;
     }
 }

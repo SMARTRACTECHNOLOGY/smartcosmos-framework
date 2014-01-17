@@ -32,12 +32,6 @@ public class Account extends NamedObject<IAccount> implements IAccount
     protected boolean developerMode;
 
     @Override
-    public void copy(IAccount account)
-    {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
-    @Override
     public LicenseType getLicenseType()
     {
         return licenseType;

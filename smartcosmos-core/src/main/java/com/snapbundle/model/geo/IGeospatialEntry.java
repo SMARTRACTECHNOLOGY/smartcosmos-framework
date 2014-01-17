@@ -2,6 +2,7 @@ package com.snapbundle.model.geo;
 
 import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.INamedObject;
+import com.snapbundle.model.base.ITypedObject;
 
 /**
  * Referential object that creates a geographic binding to a reference object. The underlying format is represented by
@@ -35,9 +36,6 @@ import com.snapbundle.model.base.INamedObject;
  * identified in only general terms by the postal address and {@link com.snapbundle.model.base.IGeoLocation}
  * defined in the {@link com.snapbundle.model.context.IObjectAddress} record.
  */
-public interface IGeospatialEntry extends IAccountDomainResource<IGeospatialEntry>, INamedObject<IGeospatialEntry>, IGeometrySupplier
+public interface IGeospatialEntry extends IAccountDomainResource<IGeospatialEntry>, INamedObject<IGeospatialEntry>, IGeometrySupplier, ITypedObject
 {
-    IGeospatialType getGeospatialType();
-
-    void setGeospatialType(IGeospatialType geospatialType);
 }

@@ -220,12 +220,6 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
     }
 
     @Override
-    public void copy(IMetadata object)
-    {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
-    @Override
     public boolean equals(Object o)
     {
         if (this == o) return true;

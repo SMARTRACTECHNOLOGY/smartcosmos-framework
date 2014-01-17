@@ -1,84 +1,15 @@
 package com.snapbundle.pojo.geo;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.geo.GeometricShape;
-import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.geo.IGeospatialEntry;
-import com.snapbundle.model.geo.IGeospatialType;
-import com.snapbundle.pojo.base.DomainResource;
-import com.snapbundle.pojo.context.Account;
+import com.snapbundle.pojo.base.AccountTypedNamedObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public class GeospatialEntry extends DomainResource<IGeospatialEntry> implements IGeospatialEntry
+public class GeospatialEntry extends AccountTypedNamedObject<IGeospatialEntry> implements IGeospatialEntry
 {
-    @JsonView(JsonGenerationView.Full.class)
-    @JsonDeserialize(as = Account.class)
-    protected IAccount account;
-
-    @JsonView(JsonGenerationView.Minimum.class)
-    @JsonDeserialize(as = GeospatialType.class)
-    protected IGeospatialType geospatialType;
-
     @JsonView(JsonGenerationView.Minimum.class)
     protected GeometricShape geometricShape;
-
-    @JsonView(JsonGenerationView.Minimum.class)
-    protected String name;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected String description;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected boolean activeFlag;
-
-    @Override
-    public String getName()
-    {
-        return name;
-    }
-
-    @Override
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    @Override
-    public String getDescription()
-    {
-        return description;
-    }
-
-    @Override
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    @Override
-    public boolean isActive()
-    {
-        return activeFlag;
-    }
-
-    @Override
-    public void setActive(boolean flag)
-    {
-        this.activeFlag = flag;
-    }
-
-    @Override
-    public IGeospatialType getGeospatialType()
-    {
-        return geospatialType;
-    }
-
-    @Override
-    public void setGeospatialType(IGeospatialType geospatialType)
-    {
-        this.geospatialType = geospatialType;
-    }
 
     @Override
     public GeometricShape getGeometricShape()
@@ -93,21 +24,25 @@ public class GeospatialEntry extends DomainResource<IGeospatialEntry> implements
     }
 
     @Override
-    public void copy(IGeospatialEntry object)
+    public boolean equals(Object o)
     {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        GeospatialEntry that = (GeospatialEntry) o;
+
+        if (!geometricShape.equals(that.geometricShape)) return false;
+
+        return true;
     }
 
     @Override
-    public IAccount getAccount()
+    public int hashCode()
     {
-        return account;
-    }
-
-    @Override
-    public void setAccount(IAccount account)
-    {
-        this.account = account;
+        int result = super.hashCode();
+        result = 31 * result + geometricShape.hashCode();
+        return result;
     }
 }
 

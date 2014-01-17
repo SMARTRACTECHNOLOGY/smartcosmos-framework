@@ -17,35 +17,10 @@
 
 package com.snapbundle.pojo.context;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.ITag;
-import com.snapbundle.pojo.base.NamedObject;
-import com.snapbundle.util.json.JsonGenerationView;
+import com.snapbundle.pojo.base.AccountNamedObject;
 
-public class Tag extends NamedObject<ITag> implements ITag
+public class Tag extends AccountNamedObject<ITag> implements ITag
 {
-    @JsonDeserialize(as = Account.class)
-    @JsonView(JsonGenerationView.Full.class)
-    protected IAccount account;
-
-    @Override
-    public void copy(ITag device)
-    {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
-    @Override
-    public IAccount getAccount()
-    {
-        return account;
-    }
-
-    @Override
-    public void setAccount(IAccount account)
-    {
-        this.account = account;
-    }
 }
 

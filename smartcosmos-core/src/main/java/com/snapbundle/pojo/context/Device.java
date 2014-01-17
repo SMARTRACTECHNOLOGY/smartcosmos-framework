@@ -18,55 +18,14 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IDevice;
-import com.snapbundle.model.context.IDeviceType;
-import com.snapbundle.pojo.base.NamedObject;
+import com.snapbundle.pojo.base.AccountTypedNamedObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public class Device extends NamedObject<IDevice> implements IDevice
+public class Device extends AccountTypedNamedObject<IDevice> implements IDevice
 {
-    @JsonView(JsonGenerationView.Standard.class)
-    @JsonDeserialize(as = DeviceType.class)
-    protected IDeviceType deviceType;
-
     @JsonView(JsonGenerationView.Minimum.class)
     protected String identification;
-
-    @JsonDeserialize(as = Account.class)
-    @JsonView(JsonGenerationView.Full.class)
-    protected IAccount account;
-
-    @Override
-    public void copy(IDevice device)
-    {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
-
-    @Override
-    public IAccount getAccount()
-    {
-        return account;
-    }
-
-    @Override
-    public void setAccount(IAccount account)
-    {
-        this.account = account;
-    }
-
-    @Override
-    public IDeviceType getDeviceType()
-    {
-        return deviceType;
-    }
-
-    @Override
-    public void setDeviceType(IDeviceType deviceType)
-    {
-        this.deviceType = deviceType;
-    }
 
     @Override
     public String getIdentification()
@@ -89,8 +48,7 @@ public class Device extends NamedObject<IDevice> implements IDevice
 
         Device device = (Device) o;
 
-        if (!account.equals(device.account)) return false;
-        if (!deviceType.equals(device.deviceType)) return false;
+        if (!type.equals(device.type)) return false;
         if (!identification.equals(device.identification)) return false;
 
         return true;
@@ -100,9 +58,8 @@ public class Device extends NamedObject<IDevice> implements IDevice
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + deviceType.hashCode();
+        result = 31 * result + type.hashCode();
         result = 31 * result + identification.hashCode();
-        result = 31 * result + account.hashCode();
         return result;
     }
 }

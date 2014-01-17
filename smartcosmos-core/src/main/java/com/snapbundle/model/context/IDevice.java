@@ -19,13 +19,10 @@ package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.INamedObject;
+import com.snapbundle.model.base.ITypedObject;
 
-public interface IDevice extends IAccountDomainResource<IDevice>, INamedObject<IDevice>
+public interface IDevice extends IAccountDomainResource<IDevice>, INamedObject<IDevice>, ITypedObject
 {
-    IDeviceType getDeviceType();
-
-    void setDeviceType(IDeviceType deviceType);
-
     String getIdentification();
 
     void setIdentification(String identification);

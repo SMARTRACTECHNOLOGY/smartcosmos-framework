@@ -18,9 +18,7 @@
 package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IFile;
-import com.snapbundle.model.context.IUser;
 import com.snapbundle.pojo.base.ReferentialObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
@@ -43,12 +41,6 @@ public class File extends ReferentialObject<IFile> implements IFile
 
     @JsonView(JsonGenerationView.Standard.class)
     protected String fileName;
-
-    @Override
-    public void copy(IFile file)
-    {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
 
     @Override
     public long getTimestamp()

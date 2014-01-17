@@ -18,16 +18,13 @@
 package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
+import com.snapbundle.model.base.ITypedObject;
 
-public interface IObjectAddress extends IAccountDomainResource<IObjectAddress>
+public interface IObjectAddress extends IAccountDomainResource<IObjectAddress>, ITypedObject
 {
     IObject getObject();
 
     void setObject(IObject object);
-
-    IAddressType getAddressType();
-
-    void setAddressType(IAddressType addressType);
 
     String getLine1();
 
