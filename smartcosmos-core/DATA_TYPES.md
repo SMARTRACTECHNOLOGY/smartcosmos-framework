@@ -3,37 +3,36 @@ The SnapBundle™ platform consists of three distinct categories of data types:
 
 * [Primary](#primary)
 * [Secondary](#secondary)
-* [Search](#search)
+
+The **Primary** types (both foundational and supporting) exist on their own. 
 
 The **Secondary** types cannot exist on their own. In object oriented parlance, they cannot be an _is-a_ and are relegated to being composed role inside of a primary type.
 
-The **Search** types are used exclusively for defining powerful search queries and are not actually part of the persistence model of the platform.
-
 
 ## [Primary Types](id:primary)
-The SnapBundle™ object model consists of a small number of primary data types. A primary data type is a _first class citizen_ in the SnapBundle™ platform. These types have the ability to stand on their own:
+The SnapBundle™ object model consists of a small number of primary data types. A primary data type is a _first class citizen_ in the SnapBundle™ platform. These types have the ability to stand on their own. Primary types are sub-categorized as _foundational_ or _supporting_. Again, all primary types can stand on their own. The primary types include:
 
-* [Account](ACCOUNT.md "Account")
+### Foundational
+* [Object](OBJECT.md "Object")
+* [Relationship](RELATIONSHIP.md "Relationship]")
+* [Object Interaction](OBJECT_INTERACTION.md "ObjectInteraction")
+
+### Supporting
 * [User](USER.md "User")
 * [Device](DEVICE.md "Device")
-* [Object](OBJECT.md "Object")
-* [Object Address](OBJECT_ADDRESS.md "ObjectAddress")
-* [Object Interaction](OBJECT_INTERACTION.md "ObjectInteraction")
-* [Object Interaction Session](OBJECT_INTERACTION_SESSION.md "ObjectInteractionSession")
-* [Relationship](RELATIONSHIP.md "Relationship]")
 * [File](FILE.md "File")
-* [Metadata](METADATA.md "Metadata")
-* [Tag](TAG.md "Tag")
 * [GeoRectification](GEORECTIFICATION.MD "GeoRectification")
+* [Object Interaction Session](OBJECT_INTERACTION_SESSION.md "ObjectInteractionSession")
 
-> Only administrators have the ability to create and modify the first three types: Account, Users and Devices.
-
-With the exception of the Account object, which is always singular, all of the other types in the object model are limited only by the Account's SnapBundle™ subscription plan; there is no physical limitation on how many instances can be created.
+There is no physical limitation on how many instances can be created, though additional service fees may be applied to your account based on your subscription plan.
 
 ## [Secondary Types](id:secondary)
-Each of the data types defined in this section are secondary types that are entirely contained within a primary data type; they cannot stand on their own. For example, SecurityRole is _not_ a primary data type; it only exists within the context of a User primary data type.
+Each of the data types defined in this section are secondary types that are entirely contained within a primary data type or directly refer to a pre-existing primary data type entity; they cannot stand on their own. For example, `SecurityRole` is _not_ a primary data type; it only exists within the context of a User primary data type. Similarly, an `ObjectAddress`  is _not_ a primary data type because it must be associated with an existing `Obect` at creation time. (In OO parlance, an Object "has-a" Object Address)
 
 * [EntityReferenceType](#ert)
+* [Object Address](OBJECT_ADDRESS.md "ObjectAddress")
+* [Metadata](METADATA.md "Metadata")
+* [Tag](TAG.md "Tag")
 * [AddressType](#at)
 * [DeviceType](#dt)
 * [ObjectType](#ot)

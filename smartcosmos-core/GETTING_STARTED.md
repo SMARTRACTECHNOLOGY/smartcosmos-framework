@@ -10,7 +10,7 @@ The SnapBundle™ Java Framework is available at GitHub. Today, there isn't a de
 
 ## SnapBundle™ REST API
 ### Overview
-The SnapBundle™ API is built using RESTful design principles. The primary datatypes are organized around the three foundation entities: *`Objects`, `Relationships`, and `Interactions`*. There are also supporting entities: *`Metadata`, `Devices`, `Tags`, `Files`, `Geospatial`, and `Timelines`*.
+The SnapBundle™ API is built using RESTful design principles. The primary datatypes are organized around the three foundation entities (*`Objects`, `Relationships`, and `Interactions`*) and a number of supporting entities (*`Users`,`Devices`,`Files`, and `Geospatial`*).
 
 
 ### Working with the API
