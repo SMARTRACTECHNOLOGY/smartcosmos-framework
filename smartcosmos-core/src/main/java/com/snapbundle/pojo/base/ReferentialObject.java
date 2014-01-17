@@ -35,18 +35,30 @@ public abstract class ReferentialObject<T> extends DomainResource<T> implements 
     protected EntityReferenceType entityReferenceType;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected String referenceURN;
+    protected String referenceUrn;
 
     @Override
     public String getReferenceUrn()
     {
-        return referenceURN;
+        return referenceUrn;
     }
 
     @Override
     public void setReferenceUrn(String urn)
     {
-        this.referenceURN = urn;
+        this.referenceUrn = urn;
+    }
+
+    @Override
+    public EntityReferenceType getEntityReferenceType()
+    {
+        return entityReferenceType;
+    }
+
+    @Override
+    public void setEntityReferenceType(EntityReferenceType entityReferenceType)
+    {
+        this.entityReferenceType = entityReferenceType;
     }
 
     @Override
@@ -62,15 +74,28 @@ public abstract class ReferentialObject<T> extends DomainResource<T> implements 
     }
 
     @Override
-    public EntityReferenceType getEntityReferenceType()
+    public boolean equals(Object o)
     {
-        return entityReferenceType;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        ReferentialObject that = (ReferentialObject) o;
+
+        if (!account.equals(that.account)) return false;
+        if (entityReferenceType != that.entityReferenceType) return false;
+        if (!referenceUrn.equals(that.referenceUrn)) return false;
+
+        return true;
     }
 
     @Override
-    public void setEntityReferenceType(EntityReferenceType entityReferenceType)
+    public int hashCode()
     {
-        this.entityReferenceType = entityReferenceType;
+        int result = super.hashCode();
+        result = 31 * result + account.hashCode();
+        result = 31 * result + entityReferenceType.hashCode();
+        result = 31 * result + referenceUrn.hashCode();
+        return result;
     }
-
 }

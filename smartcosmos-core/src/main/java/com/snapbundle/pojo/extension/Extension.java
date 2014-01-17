@@ -22,11 +22,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.extension.ExtensionType;
 import com.snapbundle.model.extension.IExtension;
-import com.snapbundle.pojo.base.NamedObjectEndpoint;
+import com.snapbundle.pojo.base.NamedObject;
 import com.snapbundle.pojo.context.Account;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public class Extension extends NamedObjectEndpoint<IExtension> implements IExtension
+public class Extension extends NamedObject<IExtension> implements IExtension
 {
     @JsonView(JsonGenerationView.Restricted.class)
     @JsonDeserialize(as = Account.class)

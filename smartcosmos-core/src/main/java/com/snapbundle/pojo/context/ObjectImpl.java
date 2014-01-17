@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IObject;
-import com.snapbundle.model.context.ObjectType;
+import com.snapbundle.model.context.IObjectType;
 import com.snapbundle.pojo.base.NamedObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
@@ -35,7 +35,8 @@ public class ObjectImpl extends NamedObject<IObject> implements IObject
     protected String objectUrn;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected ObjectType objectType;
+    @JsonDeserialize(as = ObjectType.class)
+    protected IObjectType objectType;
 
     @Override
     public void copy(IObject object)
@@ -68,14 +69,40 @@ public class ObjectImpl extends NamedObject<IObject> implements IObject
     }
 
     @Override
-    public ObjectType getObjectType()
+    public IObjectType getObjectType()
     {
         return objectType;
     }
 
     @Override
-    public void setObjectType(ObjectType objectType)
+    public void setObjectType(IObjectType objectType)
     {
         this.objectType = objectType;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        ObjectImpl object = (ObjectImpl) o;
+
+        if (!account.equals(object.account)) return false;
+        if (!objectType.equals(object.objectType)) return false;
+        if (!objectUrn.equals(object.objectUrn)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + account.hashCode();
+        result = 31 * result + objectUrn.hashCode();
+        result = 31 * result + objectType.hashCode();
+        return result;
     }
 }

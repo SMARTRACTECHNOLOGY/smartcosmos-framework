@@ -19,8 +19,8 @@ package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.snapbundle.model.context.AddressType;
 import com.snapbundle.model.context.IAccount;
+import com.snapbundle.model.context.IAddressType;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IObjectAddress;
 import com.snapbundle.pojo.base.DomainResource;
@@ -33,7 +33,8 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
     protected IObject object;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    private AddressType addressType;
+    @JsonDeserialize(as = AddressType.class)
+    private IAddressType addressType;
 
     @JsonView(JsonGenerationView.Minimum.class)
     private String line1;
@@ -56,18 +57,6 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
     @JsonView(JsonGenerationView.Standard.class)
     private long timestamp;
 
-    @JsonView(JsonGenerationView.Standard.class)
-    protected double lat;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected double lon;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected double alt;
-
-    @JsonView(JsonGenerationView.Standard.class)
-    protected boolean hasGeoLocation = false;
-
     @Override
     public IObject getObject()
     {
@@ -81,13 +70,13 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
     }
 
     @Override
-    public AddressType getAddressType()
+    public IAddressType getAddressType()
     {
         return addressType;
     }
 
     @Override
-    public void setAddressType(AddressType addressType)
+    public void setAddressType(IAddressType addressType)
     {
         this.addressType = addressType;
     }
@@ -192,5 +181,45 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
     public void copy(IObjectAddress objectAddress)
     {
         throw new UnsupportedOperationException("POJO doesn't support copying");
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        ObjectAddress that = (ObjectAddress) o;
+
+        if (timestamp != that.timestamp) return false;
+        if (!addressType.equals(that.addressType)) return false;
+        if (city != null ? !city.equals(that.city) : that.city != null) return false;
+        if (countryAbbreviation != null ? !countryAbbreviation.equals(that.countryAbbreviation) : that.countryAbbreviation != null)
+            return false;
+        if (line1 != null ? !line1.equals(that.line1) : that.line1 != null) return false;
+        if (line2 != null ? !line2.equals(that.line2) : that.line2 != null) return false;
+        if (!object.equals(that.object)) return false;
+        if (postalCode != null ? !postalCode.equals(that.postalCode) : that.postalCode != null) return false;
+        if (stateProvince != null ? !stateProvince.equals(that.stateProvince) : that.stateProvince != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + object.hashCode();
+        result = 31 * result + addressType.hashCode();
+        result = 31 * result + (line1 != null ? line1.hashCode() : 0);
+        result = 31 * result + (line2 != null ? line2.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (stateProvince != null ? stateProvince.hashCode() : 0);
+        result = 31 * result + (postalCode != null ? postalCode.hashCode() : 0);
+        result = 31 * result + (countryAbbreviation != null ? countryAbbreviation.hashCode() : 0);
+        result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
+        return result;
     }
 }

@@ -37,7 +37,7 @@ import com.snapbundle.model.base.INamedObject;
  */
 public interface IGeospatialEntry extends IAccountDomainResource<IGeospatialEntry>, INamedObject<IGeospatialEntry>, IGeometrySupplier
 {
-    GeorectificationType getGeorectificationType();
+    IGeospatialType getGeospatialType();
 
-    void setGeorectificationType(GeorectificationType georectificationType);
+    void setGeospatialType(IGeospatialType geospatialType);
 }

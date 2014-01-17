@@ -19,10 +19,9 @@ package com.snapbundle.model.extension;
 
 import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.INamedObject;
-import com.snapbundle.model.base.INotificationEndpoint;
 import com.snapbundle.model.context.IAccount;
 
-public interface IExtension extends IDomainResource<IExtension>, INamedObject<IExtension>, INotificationEndpoint
+public interface IExtension extends IDomainResource<IExtension>, INamedObject<IExtension>
 {
     int getVersion();
 

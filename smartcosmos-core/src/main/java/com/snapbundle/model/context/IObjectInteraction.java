@@ -27,10 +27,6 @@ public interface IObjectInteraction extends IAccountDomainResource<IObjectIntera
 
     void setObject(IObject object);
 
-    String getData();
-
-    void setData(String data);
-
     boolean isSessionMember();
 
     IObjectInteractionSession getObjectInteractionSession();

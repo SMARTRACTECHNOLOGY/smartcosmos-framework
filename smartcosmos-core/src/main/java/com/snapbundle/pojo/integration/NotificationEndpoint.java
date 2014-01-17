@@ -15,14 +15,22 @@
  * limitations under the License.
  */
 
-package com.snapbundle.pojo.base;
+package com.snapbundle.pojo.integration;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.snapbundle.model.base.INotificationEndpoint;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.snapbundle.model.context.IAccount;
+import com.snapbundle.model.integration.INotificationEndpoint;
+import com.snapbundle.pojo.base.ReferentialObject;
+import com.snapbundle.pojo.context.Account;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public abstract class NamedObjectEndpoint<T> extends NamedObject<T> implements INotificationEndpoint
+public class NotificationEndpoint extends ReferentialObject<INotificationEndpoint> implements INotificationEndpoint
 {
+    @JsonView(JsonGenerationView.Restricted.class)
+    @JsonDeserialize(as = Account.class)
+    protected IAccount referenceAccount;
+
     @JsonView(JsonGenerationView.Standard.class)
     protected String encodedPublicKey;
 
@@ -41,6 +49,62 @@ public abstract class NamedObjectEndpoint<T> extends NamedObject<T> implements I
     @JsonView(JsonGenerationView.Full.class)
     protected boolean pendingConfirmation;
 
+    @JsonView(JsonGenerationView.Published.class)
+    protected String name;
+
+    @JsonView(JsonGenerationView.Standard.class)
+    protected String description;
+
+    @JsonView(JsonGenerationView.Standard.class)
+    protected boolean activeFlag;
+
+    @Override
+    public String getName()
+    {
+        return name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    @Override
+    public boolean isActive()
+    {
+        return activeFlag;
+    }
+
+    @Override
+    public void setActive(boolean flag)
+    {
+        this.activeFlag = flag;
+    }
+
+    @Override
+    public IAccount getReferenceAccount()
+    {
+        return referenceAccount;
+    }
+
+    @Override
+    public void setReferenceAccount(IAccount referenceAccount)
+    {
+        this.referenceAccount = referenceAccount;
+    }
 
     @Override
     public boolean isPendingConfirmation()
@@ -100,5 +164,11 @@ public abstract class NamedObjectEndpoint<T> extends NamedObject<T> implements I
     public void setSubscriptionArn(String subscriptionArn)
     {
         this.subscriptionArn = subscriptionArn;
+    }
+
+    @Override
+    public void copy(INotificationEndpoint object)
+    {
+        throw new UnsupportedOperationException("POJO doesn't support copying");
     }
 }

@@ -22,10 +22,6 @@ import com.snapbundle.model.base.IReferentialObject;
 
 public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
 {
-    IUser getUser();
-
-    void setUser(IUser user);
-
     long getTimestamp();
 
     void setTimestamp(long timestamp);

@@ -35,22 +35,24 @@ public final class HashUtil
 
     public static final char[] SPECIAL_CHARACTERS = new char[]{'!', '@', '#', '$', '%', '&', '*', '+', '?'};
 
+    private static final int BLOCK_SIZE = 1024;
+
+    private static final int HASH_ITERATIONS = 2048;
+
     private HashUtil()
     {
     }
 
-    public static String createHash(IFile file)
+    public static String createHash(IFile file, InputStream fileContents)
     {
         String contentHash = null;
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
         try
         {
             DataOutputStream dos = new DataOutputStream(baos);
 
             dos.writeUTF(file.getAccount().getUrn());
-            dos.writeUTF(file.getUser().getUrn());
             dos.writeUTF(file.getUrn());
             dos.writeUTF(file.getEntityReferenceType().name());
             dos.writeUTF(file.getReferenceUrn());
@@ -60,8 +62,16 @@ public final class HashUtil
 
             MessageDigest digest = MessageDigest.getInstance("MD5");
 
-            byte[] hash = digest.digest(baos.toByteArray());
+            byte[] block = new byte[BLOCK_SIZE];
+            int len;
+            while ((len = fileContents.read(block, 0, BLOCK_SIZE)) > 0)
+            {
+                digest.update(block, 0, len);
+            }
 
+            digest.update(baos.toByteArray());
+
+            byte[] hash = digest.digest();
             contentHash = Base64.encodeToString(hash);
 
         } catch (NoSuchAlgorithmException | IOException e)
@@ -74,7 +84,7 @@ public final class HashUtil
 
     public static String createHash(char[] chars, InputStream saltStream)
     {
-        return (new Sha256Hash(chars, saltStream, 1024)).toBase64();
+        return (new Sha256Hash(chars, saltStream, HASH_ITERATIONS).toBase64());
     }
 
     public static String createRandomToken(int length)
@@ -127,9 +137,9 @@ public final class HashUtil
             key = (csprng.nextInt(10) + 48);
             builder.append((char) key);
 
-            builder.append(now.toCharArray()[now.length() - 1]);
-
             builder.append(SPECIAL_CHARACTERS[csprng.nextInt(SPECIAL_CHARACTERS.length)]);
+
+            builder.append(now.toCharArray()[now.length() - 1]);
 
         } catch (NoSuchAlgorithmException e)
         {

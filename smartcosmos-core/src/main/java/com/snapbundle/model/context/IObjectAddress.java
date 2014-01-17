@@ -25,9 +25,9 @@ public interface IObjectAddress extends IAccountDomainResource<IObjectAddress>
 
     void setObject(IObject object);
 
-    AddressType getAddressType();
+    IAddressType getAddressType();
 
-    void setAddressType(AddressType addressType);
+    void setAddressType(IAddressType addressType);
 
     String getLine1();
 

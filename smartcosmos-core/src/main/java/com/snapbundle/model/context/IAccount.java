@@ -19,7 +19,6 @@ package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.INamedObject;
-import com.snapbundle.model.base.INotificationEndpoint;
 
 /**
  * Collection of foundational attributes that define a platform subscription. Each {@link IAccount} will have a unique
@@ -27,7 +26,7 @@ import com.snapbundle.model.base.INotificationEndpoint;
  * inaccessible to all. The public key is accessible to account administrators, and may be used to verify digitally
  * signed data downloaded from platform to confirm it hasn't been tampered with after download.
  */
-public interface IAccount extends IDomainResource<IAccount>, INamedObject<IAccount>, INotificationEndpoint
+public interface IAccount extends IDomainResource<IAccount>, INamedObject<IAccount>
 {
     LicenseType getLicenseType();
 

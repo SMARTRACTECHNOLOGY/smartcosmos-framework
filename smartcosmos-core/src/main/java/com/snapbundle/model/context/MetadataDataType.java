@@ -28,5 +28,5 @@ public enum MetadataDataType
     FloatType,
     DoubleType,
     JSONType,
-    XMLType;
+    XMLType
 }

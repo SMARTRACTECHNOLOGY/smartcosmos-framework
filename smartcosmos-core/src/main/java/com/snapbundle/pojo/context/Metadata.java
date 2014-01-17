@@ -165,7 +165,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
             Metadata object = new Metadata();
             object.dataType = this.type;
             object.account = this.account;
-            object.referenceURN = this.referenceURN;
+            object.referenceUrn = this.referenceURN;
             object.entityReferenceType = this.entityReferenceType;
             object.key = this.key;
             object.rawValue = this.rawValue;
@@ -223,5 +223,31 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
     public void copy(IMetadata object)
     {
         throw new UnsupportedOperationException("POJO doesn't support copying");
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Metadata metadata = (Metadata) o;
+
+        if (dataType != metadata.dataType) return false;
+        if (!key.equals(metadata.key)) return false;
+        if (!Arrays.equals(rawValue, metadata.rawValue)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + dataType.hashCode();
+        result = 31 * result + key.hashCode();
+        result = 31 * result + Arrays.hashCode(rawValue);
+        return result;
     }
 }

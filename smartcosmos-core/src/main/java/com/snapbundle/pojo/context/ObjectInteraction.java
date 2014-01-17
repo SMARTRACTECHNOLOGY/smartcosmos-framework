@@ -37,9 +37,6 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
     protected IObject object;
 
     @JsonView(JsonGenerationView.Standard.class)
-    protected String data;
-
-    @JsonView(JsonGenerationView.Standard.class)
     protected long recordedTimestamp;
 
     @JsonView(JsonGenerationView.Full.class)
@@ -82,18 +79,6 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
     }
 
     @Override
-    public String getData()
-    {
-        return data;
-    }
-
-    @Override
-    public void setData(String data)
-    {
-        this.data = data;
-    }
-
-    @Override
     public long getRecordedTimestamp()
     {
         return recordedTimestamp;
@@ -132,5 +117,38 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
     {
         this.objectInteractionSession = objectInteractionSession;
         hasSessionMembership = (this.objectInteractionSession != null);
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        ObjectInteraction that = (ObjectInteraction) o;
+
+        if (hasSessionMembership != that.hasSessionMembership) return false;
+        if (receivedTimestamp != that.receivedTimestamp) return false;
+        if (recordedTimestamp != that.recordedTimestamp) return false;
+        if (!account.equals(that.account)) return false;
+        if (!object.equals(that.object)) return false;
+        if (objectInteractionSession != null ? !objectInteractionSession.equals(that.objectInteractionSession) : that.objectInteractionSession != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + account.hashCode();
+        result = 31 * result + object.hashCode();
+        result = 31 * result + (int) (recordedTimestamp ^ (recordedTimestamp >>> 32));
+        result = 31 * result + (int) (receivedTimestamp ^ (receivedTimestamp >>> 32));
+        result = 31 * result + (hasSessionMembership ? 1 : 0);
+        result = 31 * result + (objectInteractionSession != null ? objectInteractionSession.hashCode() : 0);
+        return result;
     }
 }

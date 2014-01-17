@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.geo.GeometricShape;
 import com.snapbundle.model.context.IAccount;
-import com.snapbundle.model.geo.GeorectificationType;
 import com.snapbundle.model.geo.IGeospatialEntry;
+import com.snapbundle.model.geo.IGeospatialType;
 import com.snapbundle.pojo.base.DomainResource;
 import com.snapbundle.pojo.context.Account;
 import com.snapbundle.util.json.JsonGenerationView;
@@ -17,7 +17,8 @@ public class GeospatialEntry extends DomainResource<IGeospatialEntry> implements
     protected IAccount account;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected GeorectificationType georectificationType;
+    @JsonDeserialize(as = GeospatialType.class)
+    protected IGeospatialType geospatialType;
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected GeometricShape geometricShape;
@@ -68,15 +69,15 @@ public class GeospatialEntry extends DomainResource<IGeospatialEntry> implements
     }
 
     @Override
-    public GeorectificationType getGeorectificationType()
+    public IGeospatialType getGeospatialType()
     {
-        return georectificationType;
+        return geospatialType;
     }
 
     @Override
-    public void setGeorectificationType(GeorectificationType georectificationType)
+    public void setGeospatialType(IGeospatialType geospatialType)
     {
-        this.georectificationType = georectificationType;
+        this.geospatialType = geospatialType;
     }
 
     @Override

@@ -26,10 +26,6 @@ import com.snapbundle.util.json.JsonGenerationView;
 
 public class File extends ReferentialObject<IFile> implements IFile
 {
-    @JsonView(JsonGenerationView.Standard.class)
-    @JsonDeserialize(as = User.class)
-    protected IUser user;
-
     @JsonView(JsonGenerationView.Minimum.class)
     protected String url;
 
@@ -79,18 +75,6 @@ public class File extends ReferentialObject<IFile> implements IFile
     }
 
     @Override
-    public IUser getUser()
-    {
-        return user;
-    }
-
-    @Override
-    public void setUser(IUser user)
-    {
-        this.user = user;
-    }
-
-    @Override
     public String getFileName()
     {
         return fileName;
@@ -136,5 +120,37 @@ public class File extends ReferentialObject<IFile> implements IFile
     public String getContentHash()
     {
         return contentHash;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        File file = (File) o;
+
+        if (pending != file.pending) return false;
+        if (timestamp != file.timestamp) return false;
+        if (contentHash != null ? !contentHash.equals(file.contentHash) : file.contentHash != null) return false;
+        if (fileName != null ? !fileName.equals(file.fileName) : file.fileName != null) return false;
+        if (!mimeType.equals(file.mimeType)) return false;
+        if (url != null ? !url.equals(file.url) : file.url != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + mimeType.hashCode();
+        result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
+        result = 31 * result + (pending ? 1 : 0);
+        result = 31 * result + (contentHash != null ? contentHash.hashCode() : 0);
+        result = 31 * result + (fileName != null ? fileName.hashCode() : 0);
+        return result;
     }
 }

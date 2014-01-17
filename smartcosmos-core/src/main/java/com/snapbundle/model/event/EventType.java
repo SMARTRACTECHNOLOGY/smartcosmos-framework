@@ -106,10 +106,6 @@ public enum EventType
     ExtensionDeactivated,
     ExtensionAccessed,
     ExtensionDeleted,
-    ExtensionScreenshotDefined,
-    ExtensionScreenshotDeleted,
-    ExtensionPermissionDefined,
-    ExtensionPermissionDeleted,
 
     OAuthRequest,
     OAuthAuthorizationCodeIssued,

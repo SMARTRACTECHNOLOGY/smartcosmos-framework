@@ -21,8 +21,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IObjectInteractionSession;
-import com.snapbundle.model.context.IUser;
-import com.snapbundle.model.context.SessionType;
+import com.snapbundle.model.context.ISessionType;
 import com.snapbundle.pojo.base.NamedObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
@@ -33,17 +32,14 @@ public class ObjectInteractionSession extends NamedObject<IObjectInteractionSess
     protected IAccount account;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @JsonDeserialize(as = User.class)
-    protected IUser user;
-
-    @JsonView(JsonGenerationView.Minimum.class)
     protected long startTimestamp;
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected long stopTimestamp;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected SessionType sessionType;
+    @JsonDeserialize(as = SessionType.class)
+    protected ISessionType sessionType;
 
     public long getStartTimestamp()
     {
@@ -65,12 +61,12 @@ public class ObjectInteractionSession extends NamedObject<IObjectInteractionSess
         this.stopTimestamp = stopTimestamp;
     }
 
-    public SessionType getSessionType()
+    public ISessionType getSessionType()
     {
         return sessionType;
     }
 
-    public void setSessionType(SessionType sessionType)
+    public void setSessionType(ISessionType sessionType)
     {
         this.sessionType = sessionType;
     }
@@ -85,19 +81,37 @@ public class ObjectInteractionSession extends NamedObject<IObjectInteractionSess
         this.account = account;
     }
 
-    public IUser getUser()
-    {
-        return user;
-    }
-
-    public void setUser(IUser user)
-    {
-        this.user = user;
-    }
-
     @Override
     public void copy(IObjectInteractionSession object)
     {
         throw new UnsupportedOperationException("POJO doesn't support copying");
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        ObjectInteractionSession that = (ObjectInteractionSession) o;
+
+        if (startTimestamp != that.startTimestamp) return false;
+        if (stopTimestamp != that.stopTimestamp) return false;
+        if (!account.equals(that.account)) return false;
+        if (!sessionType.equals(that.sessionType)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + account.hashCode();
+        result = 31 * result + (int) (startTimestamp ^ (startTimestamp >>> 32));
+        result = 31 * result + (int) (stopTimestamp ^ (stopTimestamp >>> 32));
+        result = 31 * result + sessionType.hashCode();
+        return result;
     }
 }

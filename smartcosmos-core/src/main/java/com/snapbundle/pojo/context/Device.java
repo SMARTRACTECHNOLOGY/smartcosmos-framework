@@ -19,16 +19,17 @@ package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.snapbundle.model.context.DeviceType;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IDevice;
+import com.snapbundle.model.context.IDeviceType;
 import com.snapbundle.pojo.base.NamedObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
 public class Device extends NamedObject<IDevice> implements IDevice
 {
     @JsonView(JsonGenerationView.Standard.class)
-    protected DeviceType deviceType;
+    @JsonDeserialize(as = DeviceType.class)
+    protected IDeviceType deviceType;
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected String identification;
@@ -56,13 +57,13 @@ public class Device extends NamedObject<IDevice> implements IDevice
     }
 
     @Override
-    public DeviceType getDeviceType()
+    public IDeviceType getDeviceType()
     {
         return deviceType;
     }
 
     @Override
-    public void setDeviceType(DeviceType deviceType)
+    public void setDeviceType(IDeviceType deviceType)
     {
         this.deviceType = deviceType;
     }
@@ -77,5 +78,31 @@ public class Device extends NamedObject<IDevice> implements IDevice
     public void setIdentification(String identification)
     {
         this.identification = identification;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Device device = (Device) o;
+
+        if (!account.equals(device.account)) return false;
+        if (!deviceType.equals(device.deviceType)) return false;
+        if (!identification.equals(device.identification)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + deviceType.hashCode();
+        result = 31 * result + identification.hashCode();
+        result = 31 * result + account.hashCode();
+        return result;
     }
 }

@@ -90,7 +90,8 @@ public abstract class DomainResource<T> implements IDomainResource<T>
 
         DomainResource that = (DomainResource) o;
 
-        if (uniqueId != that.uniqueId) return false;
+        if (lastModifiedTimestamp != that.lastModifiedTimestamp) return false;
+        if (moniker != null ? !moniker.equals(that.moniker) : that.moniker != null) return false;
         if (!urn.equals(that.urn)) return false;
 
         return true;
@@ -99,8 +100,9 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     @Override
     public int hashCode()
     {
-        int result = (int) (uniqueId ^ (uniqueId >>> 32));
-        result = 31 * result + urn.hashCode();
+        int result = urn.hashCode();
+        result = 31 * result + (int) (lastModifiedTimestamp ^ (lastModifiedTimestamp >>> 32));
+        result = 31 * result + (moniker != null ? moniker.hashCode() : 0);
         return result;
     }
 }

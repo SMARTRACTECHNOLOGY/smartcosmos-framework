@@ -20,10 +20,10 @@ package com.snapbundle.pojo.context;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.LicenseType;
-import com.snapbundle.pojo.base.NamedObjectEndpoint;
+import com.snapbundle.pojo.base.NamedObject;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public class Account extends NamedObjectEndpoint<IAccount> implements IAccount
+public class Account extends NamedObject<IAccount> implements IAccount
 {
     @JsonView(JsonGenerationView.Restricted.class)
     protected LicenseType licenseType;
@@ -59,11 +59,5 @@ public class Account extends NamedObjectEndpoint<IAccount> implements IAccount
     public void setDeveloperMode(boolean developerMode)
     {
         this.developerMode = developerMode;
-    }
-
-    @Override
-    public IAccount getAccount()
-    {
-        return this;
     }
 }

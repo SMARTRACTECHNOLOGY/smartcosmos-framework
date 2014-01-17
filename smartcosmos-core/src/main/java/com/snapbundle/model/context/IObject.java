@@ -27,9 +27,9 @@ public interface IObject extends IAccountDomainResource<IObject>, INamedObject<I
 
     void setObjectUrn(String urn);
 
-    ObjectType getObjectType();
+    IObjectType getObjectType();
 
-    void setObjectType(ObjectType objectType);
+    void setObjectType(IObjectType objectType);
 
     void copy(IObject object);
 }
