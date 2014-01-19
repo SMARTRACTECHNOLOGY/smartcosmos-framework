@@ -37,7 +37,7 @@ public class File extends ReferentialObject<IFile> implements IFile
     protected boolean pending;
 
     @JsonView(JsonGenerationView.Full.class)
-    protected String contentHash;
+    protected String digitalSignature;
 
     @JsonView(JsonGenerationView.Standard.class)
     protected String fileName;
@@ -103,15 +103,15 @@ public class File extends ReferentialObject<IFile> implements IFile
     }
 
     @Override
-    public void setContentHash(String contentHash)
+    public void setDigitalSignature(String digitalSignature)
     {
-        this.contentHash = contentHash;
+        this.digitalSignature = digitalSignature;
     }
 
     @Override
-    public String getContentHash()
+    public String getDigitalSignature()
     {
-        return contentHash;
+        return digitalSignature;
     }
 
     @Override
@@ -125,7 +125,8 @@ public class File extends ReferentialObject<IFile> implements IFile
 
         if (pending != file.pending) return false;
         if (timestamp != file.timestamp) return false;
-        if (contentHash != null ? !contentHash.equals(file.contentHash) : file.contentHash != null) return false;
+        if (digitalSignature != null ? !digitalSignature.equals(file.digitalSignature) : file.digitalSignature != null)
+            return false;
         if (fileName != null ? !fileName.equals(file.fileName) : file.fileName != null) return false;
         if (!mimeType.equals(file.mimeType)) return false;
         if (url != null ? !url.equals(file.url) : file.url != null) return false;
@@ -141,7 +142,7 @@ public class File extends ReferentialObject<IFile> implements IFile
         result = 31 * result + mimeType.hashCode();
         result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
         result = 31 * result + (pending ? 1 : 0);
-        result = 31 * result + (contentHash != null ? contentHash.hashCode() : 0);
+        result = 31 * result + (digitalSignature != null ? digitalSignature.hashCode() : 0);
         result = 31 * result + (fileName != null ? fileName.hashCode() : 0);
         return result;
     }

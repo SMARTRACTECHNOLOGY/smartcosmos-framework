@@ -18,14 +18,11 @@
 package com.snapbundle.util;
 
 import com.snapbundle.model.context.IFile;
-import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
@@ -43,43 +40,25 @@ public final class HashUtil
     {
     }
 
-    public static String createHash(IFile file, InputStream fileContents)
+    public static JSONObject signFile(IFile file, byte[] signature) throws JSONException
     {
-        String contentHash = null;
+        JSONObject body = new JSONObject()
+                .put("accountUrn", file.getAccount().getUrn())
+                .put("fileUrn", file.getUrn())
+                .put("entityReferenceType", file.getEntityReferenceType())
+                .put("referenceUrn", file.getReferenceUrn())
+                .put("url", file.getUrl())
+                .put("contentsSignature", HexUtil.bytesToHex(signature));
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try
-        {
-            DataOutputStream dos = new DataOutputStream(baos);
+        String hash = new Sha256Hash(body.toString(3)).toHex();
 
-            dos.writeUTF(file.getAccount().getUrn());
-            dos.writeUTF(file.getUrn());
-            dos.writeUTF(file.getEntityReferenceType().name());
-            dos.writeUTF(file.getReferenceUrn());
-            dos.writeUTF(file.getMimeType());
-            dos.writeLong(file.getTimestamp());
-            dos.writeUTF(file.getUrl());
-
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-
-            byte[] block = new byte[BLOCK_SIZE];
-            int len;
-            while ((len = fileContents.read(block, 0, BLOCK_SIZE)) > 0)
-            {
-                digest.update(block, 0, len);
-            }
-
-            digest.update(baos.toByteArray());
-
-            byte[] hash = digest.digest();
-            contentHash = Base64.encodeToString(hash);
-
-        } catch (NoSuchAlgorithmException | IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        return contentHash;
+        return new JSONObject()
+                .put("signedBody", body)
+                .put("signature", hash)
+                .put("algorithm", "SHA-256")
+                .put("iterations", 1)
+                .put("library", "Apache Shiro (Java)")
+                .put("description", "The contentsSignature is of the file contents exclusively. The root signature is of the signedBody exclusively");
     }
 
     public static String createHash(char[] chars, InputStream saltStream)

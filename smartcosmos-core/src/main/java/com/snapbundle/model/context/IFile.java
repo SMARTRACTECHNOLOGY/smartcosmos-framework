@@ -42,9 +42,7 @@ public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
 
     void setMimeType(String mimeType);
 
-    void setContentHash(String contentHash);
+    void setDigitalSignature(String contentHash);
 
-    String getContentHash();
-
-    void copy(IFile file);
+    String getDigitalSignature();
 }
