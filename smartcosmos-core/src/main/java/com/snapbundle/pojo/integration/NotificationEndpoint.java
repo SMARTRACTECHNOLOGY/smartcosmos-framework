@@ -131,13 +131,13 @@ public class NotificationEndpoint extends ReferentialObject<INotificationEndpoin
     }
 
     @Override
-    public String getIntegrationEndpointUrl()
+    public String getNotificationEndpointUrl()
     {
         return integrationEndpointUrl;
     }
 
     @Override
-    public void setIntegrationEndpointUrl(String integrationEndpointUrl)
+    public void setNotificationEndpointUrl(String integrationEndpointUrl)
     {
         this.integrationEndpointUrl = integrationEndpointUrl;
     }

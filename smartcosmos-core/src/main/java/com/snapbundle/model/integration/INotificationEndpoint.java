@@ -26,9 +26,9 @@ public interface INotificationEndpoint extends INamedObject<INotificationEndpoin
 
     void setSubscriptionArn(String subscriptionArn);
 
-    String getIntegrationEndpointUrl();
+    String getNotificationEndpointUrl();
 
-    void setIntegrationEndpointUrl(String endpointUrl);
+    void setNotificationEndpointUrl(String endpointUrl);
 
     boolean isPendingConfirmation();
 

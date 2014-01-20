@@ -163,6 +163,10 @@ The following is meant to be an authoritative list of all known event types gene
 * ObjectAddressDeleted
 * InteractionSessionStart
 * InteractionSessionStop
+* NotificationDefined,
+* NotificationUpdated,
+* NotificationDeleted,
+* NotificationAccessed,
 * NotificationEnroll
 * NotificationSubscribe
 * NotificationSubscriptionConfirmed

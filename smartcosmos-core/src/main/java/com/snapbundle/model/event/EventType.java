@@ -69,6 +69,11 @@ public enum EventType
     InteractionSessionStart,
     InteractionSessionStop,
 
+    NotificationDefined,
+    NotificationUpdated,
+    NotificationDeleted,
+    NotificationAccessed,
+
     NotificationEnroll,
     NotificationSubscribe,
     NotificationSubscriptionConfirmed,

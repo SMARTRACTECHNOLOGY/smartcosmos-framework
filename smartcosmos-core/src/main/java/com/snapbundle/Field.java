@@ -75,11 +75,9 @@ public final class Field extends VersionData
 
     public static final String STOP_TIMESTAMP_FIELD = "stopTimestamp";
 
-    public static final String INTEGRATION_TOKEN = "token";
+    public static final String NOTIFICATION_ENROLLMENT_CONFIRMATION_TOKEN = "token";
 
-    public static final String INTEGRATION_ACTION = "action";
-
-    public static final String INTEGRATION_ENDPOINT_URL = "integrationEndpointUrl";
+    public static final String NOTIFICATION_ENDPOINT_URL = "endpointUrl";
 
     public static final String ROLE_TYPE_FIELD = "roleType";
 
