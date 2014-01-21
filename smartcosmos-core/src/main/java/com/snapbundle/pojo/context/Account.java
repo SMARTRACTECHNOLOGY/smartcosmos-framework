@@ -17,41 +17,9 @@
 
 package com.snapbundle.pojo.context;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.snapbundle.model.context.IAccount;
-import com.snapbundle.model.context.LicenseType;
 import com.snapbundle.pojo.base.NamedObject;
-import com.snapbundle.util.json.JsonGenerationView;
 
 public class Account extends NamedObject<IAccount> implements IAccount
 {
-    @JsonView(JsonGenerationView.Restricted.class)
-    protected LicenseType licenseType;
-
-    @JsonView(JsonGenerationView.Minimum.class)
-    protected boolean developerMode;
-
-    @Override
-    public LicenseType getLicenseType()
-    {
-        return licenseType;
-    }
-
-    @Override
-    public void setLicenseType(LicenseType licenseType)
-    {
-        this.licenseType = licenseType;
-    }
-
-    @Override
-    public boolean isDeveloperMode()
-    {
-        return developerMode;
-    }
-
-    @Override
-    public void setDeveloperMode(boolean developerMode)
-    {
-        this.developerMode = developerMode;
-    }
 }

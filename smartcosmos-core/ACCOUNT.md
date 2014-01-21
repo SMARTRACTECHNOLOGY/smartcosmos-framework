@@ -1,7 +1,7 @@
 
 # Account
 
-An _Account_ record is created automatically at the time of _registration confirmation_ (not at the time of registration), along with a User record. Generally, the Account record's _name, description and integrationEndpointUrl_ are the only fields directly edited by the Account administrator. Each of the restricted keys are only updatable indirectly through other SnapBundle™ operations. For example, the _licenseType_ field is managed by the SnapBundle™ platform when a production license purchased or upgraded.
+An _Account_ record is created automatically at the time of _registration confirmation_ (not at the time of registration), along with your administrator User record. Generally, the Account record's _name, description and integrationEndpointUrl_ are the only fields directly edited by the Account administrator. Each of the restricted keys are only updatable indirectly through other SnapBundle™ operations. For example, the _licenseType_ field is managed by the SnapBundle™ platform when a production license purchased or upgraded.
 
 > The licenseType field is assigned based on your purchased license level. Valid license type values include: IndividualFree, IndividualPremium, Enterprise, Developer
 

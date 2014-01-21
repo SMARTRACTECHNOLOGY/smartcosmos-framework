@@ -28,11 +28,4 @@ import com.snapbundle.model.base.INamedObject;
  */
 public interface IAccount extends IDomainResource<IAccount>, INamedObject<IAccount>
 {
-    LicenseType getLicenseType();
-
-    void setLicenseType(LicenseType licenseType);
-
-    void setDeveloperMode(boolean flag);
-
-    boolean isDeveloperMode();
 }
