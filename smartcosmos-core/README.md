@@ -94,8 +94,6 @@ Ready to learn more?
   * [Account](ACCOUNT.md "Account Management") 
   * [Users](USER.md "User Management")
   * [Devices](DEVICE.md "Device Management")
-  * [Batch Operations](BATCH_OPERATIONS.md "Batch Operations")
-  * [Development Mode](DEVELOPMENT_MODE.md "Development Mode")
 * Chapter 4: User Managed Objects
   *  [Objects](OBJECT.md "Object Management")
   *  [Object Addresses](OBJECT_ADDRESS.md "Object Address Management")
@@ -108,7 +106,6 @@ Ready to learn more?
   *  [Georectification](GEORECTIFICATION.md "Georectification Capabilities")
 * Chapter 5: Searching and Reporting
   *  [Events: _Full Account Audit Loggig_](EVENT.md "Understanding Events")
-  *  [Searching](SEARCHING.md "Searching for Records")
 * Chapter 6: Integration and Customization
   *  [Back Office Integration](INTEGRATION.md "Back Office Integration")
   *  [Extending the Platform](EXTENSION_FRAMEWORK.md "Extension Framework")
