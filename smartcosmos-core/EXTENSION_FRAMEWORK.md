@@ -10,31 +10,21 @@ The SnapBundle™ Extension is a declaration of an external actor that may be gr
 
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-uniqueId | long  | true | false | Restricted | Generated
 urn | String  | true | false | Minimum | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Standard | null
 account | IAccount  | true | fase | Full | Generated
-version | integer  | true | true | Minimum | 
 name | String  | true | true | Minimum | 
 description | String  | false | true | Standard | 
 activeFlag | Boolean  | true | false | Standard  | 
-encodedPublicKey | String  | true | false | Standard | Generated
-encodedPrivateKey | String  | true  | false | Restricted | Generated 
-topicArn | String  | false | true | Restricted | 
-subscriptionArn | String  | false | true | Restricted | 
-integrationEndpointUrl | String  | false | true | Full | 
-pendingConfirmation | Boolean  | false | true | Full | 
 supportEmail | String | false | true | Published |
 webSiteUrl | String | false | true | Published |
 clientId | String | true | false | Full | Generated |
 clientSecret | String | true | false | Full | Generated |
 redirectUrl | String | true | true | Full |
 appCatalogUrl | String | true | false | Published | Generated
-shortDescription | String | true | true | Published | 
 longDescription | String | false | true | Full |
 extensionType | ExtensionType | true | true | Published |
-registrationTimestamp | long | true | false | Restricted | Generated
 
 The `webSiteUrl` is the URL where an Administrator User will be directed if they want to subscribe to your Extension point. Generally, this page serves as the gateway for the User to initiate an OAuth 2 authentication process authorizing your Extension access to their data. If your Extensions requires a paid subscription, etc., then you should use this URL to solicit all required information from the User before initiating the OAuth 2 authentication process.
 
@@ -49,24 +39,10 @@ Endpoint | Supported HTTP Methods | Events Generated
 /admin/extensions | PUT, POST  | ExtensionActivated, ExtensionUpdated, ExtensionDeactivate
 /extensions/{urn} | GET, DELETE | TokenRevocation, ExtensionDeleted 
 
-## Extension Permission
-The SnapBundle™ platform's Extension Permission design operates against a snapshot metaphor. The permission set your Extension publishes as required at the time the User authorizes your Extension access to their data represents the only permissions authorized for use by the Extension on that account. Conceptually, it is a model that mirrors the way Android's app security policy works. When an app changes its security permissions, the User must phyiscally review and authorize the changes; they don't instantly take effect.
+##Extension Permissions
+Extension authorization is managed using the OAuth 2.0 `scope` concept. As such, an extension declares what permissions it is seeking during the OAuth 2.0 handshake. If the user authorizes the scopes requested by the extension, then the extension has those permissions until the token is either revoked or permanently expires.
 
-Field | Data Type | Required | Can Update | Serialization Level | Default Value
------------- | ------------- | ------------ | ------------ | ------------ | ------------
-uniqueId | long  | true | false | Restricted | Generated
-urn | String  | true | false | Minimum | Generated
-lastModifiedTimestamp | long   | true | false | Standard | Generated
-moniker | String  | false | true | Standard | null
-extension | IExtension | true | false | Standard | 
-permissionType | PermissionType | true | false | Standard |
-
-Each Extension must explicitly declare the security permission(s) that the extension requires. Permissions are very granular and include a concrete separation between a _read-only_ and a _write_ permission. For example, an extension may be granted `UserRead` authorization, but may not be given `UserWrite` permission. This would allow the SnapBundle™ Extension to query an Account's User listing, but not generate a new User.
-
-Permissions are enforced _at the time an account authorizes an Extension's access request._ Stated differently, an Extension is locked into the permissions that it it requested from the user _at the time of authorization_. Any future modifications to the Extension's list of permissions is **not** reflected in any existing Account authorization grants. This prevents an Extension from requesting read-only permission at the time of authorization, and then claiming it requires write permission after the fact. If an Extension requires new permissions, it must self-revoke its current access token and request new authorization from the User's account with the new set of required permissions.
-
-The general expectation is that most SnapBundle™ Extensions will request access to an account's Event Stream. The Event Stream is a literal stream of read-only events that collectively represent the overall activity on the account. The Event Stream includes both administrative event notifications as well as operational notifications across 50+ different event types, including the seminal MarkerDefined, MarkerInteraction, and VFSObjectUploaded events. By monitoring the Event Stream, an Extension is able to receive near real-time notification of marker interactions and respond accordingly. For example, the Event Stream could be used to monitor marker interactions for real-time billing calculations, perform deep analytical operations, etc.
-
+Review the [Permission Types](DATA_TYPES.md#pt "Permission Type") datatype for a listing of available scope names.
 
 
 ## Sample Script for Extension Definnition
