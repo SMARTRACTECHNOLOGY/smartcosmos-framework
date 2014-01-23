@@ -24,7 +24,7 @@ import com.snapbundle.util.json.JsonGenerationView;
 
 public class File extends ReferentialObject<IFile> implements IFile
 {
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected String url;
 
     @JsonView(JsonGenerationView.Minimum.class)
