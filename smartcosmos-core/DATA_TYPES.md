@@ -81,14 +81,6 @@ The `JSONType` and `XMLType` are convenient mechanism for storing structured met
 
 > If an entirely proprietary encoding scheme is required, use the `Custom` MetadataDataType.
 
-### [LicenseType](id:lt)
-Every Account is associated with a License Type that constrains the operations of its Users. Various SnapBundle™ platform capabilities, such as Object Interaction Sessions, are only available to Enterprise subscribers (or Developer licenses building solutions atop the platform, for development only).
-
-* IndividualFree
-* IndividualPremium
-* Enterprise
-* Developer
-
 ### [PermissionType](id:pt)
 Every Extension must explicitly declare a set of permissions that it is requesting from a User. 
 
