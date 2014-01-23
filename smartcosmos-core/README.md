@@ -86,7 +86,6 @@ Ready to learn more?
   * [Getting Started](GETTING_STARTED.md "Getting Started")
   * [Registration](REGISTRATION.md "Registering for an SnapBundle™ Account")
   * [Quick Setup via **cURL**](SAMPLE_SETUP_SCRIPT.md "Sample Setup Script")
-  * [Idea Book: _What kinds of things can the SnapBundle™ Platform do?_](IDEAS.md "Idea Book")
 * Chapter 2: Object Model
   * [Primary Data Types](DATA_TYPES.md#primary "Data Type")
   * [Secondary Data Types](DATA_TYPES.md#secondary "Data Type")
