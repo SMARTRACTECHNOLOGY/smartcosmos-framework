@@ -1,11 +1,10 @@
 # Metadata
-The SnapBundle™ platform provides a powerful type-safe key-value pair mechanism to capture additional data beyond the platform's core data model. Similar to the [File](FILE.md "File"), a collection of metadata can be associated with any of the platform's [primary data types](DATA_TYPES.md "Data Types"), literally. There is no physical limit on the number of key-value pair associations.
+The SnapBundle™ platform provides a powerful type-safe key-value pair mechanism to capture additional data beyond the platform's core data model. Similar to the [File](FILE.md "File"), a collection of metadata can be associated with any of the platform's [primary data types](DATA_TYPES.md "Data Types"). There is no physical limit on the number of key-value pair associations.
 
 ## Metadata Fields
 
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-uniqueId | long  | true | false | Restricted | Generated
 urn | String  | true | false | Minimum | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Standard | null
@@ -16,7 +15,7 @@ dataType | MetadataDataType | true | false | Minimum |
 key | String | true | false | Minimum |
 rawValue | byte[] | true | true | Minimum |
 
-Generally speaking, if the `rawValue` is going to be over several kilobytes in size, developers are **strongly** encouraged to store the data in a more efficient manner: as a [File](FILE.MD "File").
+Generally speaking, if the `rawValue` is going to be over several kilobytes in size, developers are **strongly** encouraged to store the data in a more efficient manner: as a [File](FILE.MD "File"). The default implementation is to store the rawValue as a byte array, but because JSON doesn't provide a byte array datatype, values are explicitly Base64 encoded, thus expanding the overall storage space. The maximum rawValue size is 64K, but that doesn't mean one could successfully store a 64K byte array due to the encoded expansion. 
 
 The `rawValue` is persisted as a byte[] (stored as a blob). Developers must either use the MetadataObject.MetadataObjectBuilder class, which follows the Builder design pattern and ensures a canonical encoding of type-safe data into the byte[], or use one of the publicly accessible mapping endpoints described below that accept any of the given metadata datatypes, responding back with a `text/plain` String that is suitable for submission with the MetadataObject record.
 
@@ -28,8 +27,8 @@ The `Custom` MetaDataType places the onus entirely on the developer to provide a
 
 Endpoint | Supported HTTP Methods | Events Generated
 ------------ | ------------- | ------------
-/public/metadata/mapper/encode/{metadataDataType} | POST  | 
-/public/metadata/mapper/decode/{metadataDataType} | POST  | 
+/metadata/mapper/encode/{metadataDataType} | POST  | 
+/metadata/mapper/decode/{metadataDataType} | POST  | 
 
 The _encode_ endpoint is expecting the body of the POST to be `text/plain`, and the response back will be JSON object with a single field, `rawValue` that represents the encoded byte[] that the platform knows how to successfully decode based on the declared metadataDataType.
 
@@ -61,10 +60,10 @@ CIn effect, the encoding endpoint response is just placed into the Metadata JSON
 
 Endpoint | Supported HTTP Methods | Events Generated
 ------------ | ------------- | ------------
-/app/metadata/{entityReferenceType}/{referenceUrn} | PUT  | MetadataUpserted
-/app/metadata/{entityReferenceType}/{referenceUrn}/{key} | DELETE | MetadataDeleted
-/app/metadata/query/{entityReferenceType}/{referenceUrn} | GET |
-/app/metadata/query/{entityReferenceType}/{referenceUrn}/{key} | GET |
+/metadata/{entityReferenceType}/{referenceUrn} | PUT  | MetadataUpserted
+/metadata/{entityReferenceType}/{referenceUrn}/{key} | DELETE | MetadataDeleted
+/metadata/{entityReferenceType}/{referenceUrn} | GET | MetadataAccessed (for each key)
+/metadata/{entityReferenceType}/{referenceUrn}?key=Foo | GET | MetadataAccessed
 
 The HTTP PUT endpoint uses an **upsert** algorithm, inserting the metadata record(s) if the named key doesn't already exist, or updating the value (and only the value) of the metadata record if the key already exists.
 
@@ -72,5 +71,5 @@ The HTTP PUT operation expects the submission of a JSON array. The design allows
 
 The HTTP DELETE operation deletes the specific named key, if it exists, under the referenced object. If the key doesn't exist, the operation fails silently, returning a **200** status.
 
-The two HTTP GET query operations return all the metadata key-values for the specified reference object in a JSON array, or a single key-value pair for the specific key as a JSON object.
+The HTTP GET query operations each return metadata key-values for the specified reference object in a JSON array. If no `key`-like query parameter is included, then all of the key-values will be returned for the target entity reference type and referenceUrn combination.
 
