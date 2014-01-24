@@ -1,47 +1,37 @@
 FORMAT: 1A
-HOST: http://www.google.com
+HOST: https://snapbundle.tagdynamics.net
 
-# Notes API
-Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+# SnapBundle API
+SnapBundle is a platform purposefully built to be an application's contextual data store.
 
-# Group Notes
-Notes related resources of the **Notes API**
+# Registration Notes
+Registering for an SnapBundle Account and then confirming the email address associated with the Account registration are the only perquisites for using the platform. These two steps are required before any endpoints that require authentication can be successfully accessed.
 
-## Notes Collection [/notes]
-### List all Notes [GET]
-+ Response 200 (application/json)
-
-        [{
-          "id": 1, "title": "Jogging in park"
-        }, {
-          "id": 2, "title": "Pick-up posters from post-office"
-        }]
-
-### Create a Note [POST]
-+ Request (application/json)
-
-        { "title": "Buy cheese and bread for breakfast." }
-
-+ Response 201 (application/json)
-
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
-
-## Note [/notes/{id}]
-A single Note object with all its details
+## Security Realm [/registration/realm/{realm}]
+### Check Realm Availability [GET]
 
 + Parameters
-    + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
+        + realm (required, string, 'foo.com') ... Check to see if the named realm is available for registration
 
-### Retrieve a Note [GET]
 + Response 200 (application/json)
 
-    + Header
+        {
+          "result": 0, 
+          "message": "foo.com"
+        }
 
-            X-My-Header: The Value
+## Account Registration [/registration/register]
+### Register for a new SnapBundle account
 
-    + Body
++ Request (application/json)
 
-            { "id": 2, "title": "Pick-up posters from post-office" }
+        { "emailAddress": "you@foo.com", "realm" : "foobar.com" }
 
-### Remove a Note [DELETE]
-+ Response 204
++ Response 200 (application/json)
+
+        {
+                "urn" : "urn:uuid:64618d0b-3b8c-456a-87d0-31bc1a0bc579",
+                "lastModifiedTimestamp" : 1382828220349,
+                "emailAddress" : "you@foo.com",
+                "realm" : "foo.com",
+        }
