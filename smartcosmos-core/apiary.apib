@@ -4,34 +4,77 @@ HOST: https://snapbundle.tagdynamics.net
 # SnapBundle API
 SnapBundle is a platform purposefully built to be an application's contextual data store.
 
-# Registration Notes
-Registering for an SnapBundle Account and then confirming the email address associated with the Account registration are the only perquisites for using the platform. These two steps are required before any endpoints that require authentication can be successfully accessed.
+NOTE: This document is a **work in progress**.
 
-## Security Realm [/registration/realm/{realm}]
-### Check Realm Availability [GET]
+# Group Registration Endpoints
+Every SnapBundle Account belongs to a _security realm_. By default, the registration endpoint will extract the domain name from your email address. However, if you are using a popular email service like GMail or Yahoo, you **must** provide a custom realm name at registation. Use the **Realm Availability** endpoint to see if your desired realm name is available.   
+
+Once you've identified a realm name, your ready to complete registration. Registering for an SnapBundle Account and then confirming the email address associated with the Account registration are the only perquisites for using the platform. These two steps are required before any endpoints that require authentication can be successfully accessed.
+
+## Realm Availability [/registration/realm/{realm}]
+### Checks to see if the named realm is available for registration [GET]
 
 + Parameters
     + realm (required, string, `foo.com`) ... Check to see if the named realm is available for registration
 
 + Response 200 (application/json)
 
-        {
-          "result": 0, 
-          "message": "foo.com"
-        }
+            {
+                "result": 0,
+                "message" : "foo.com"
+            }
 
 ## Account Registration [/registration/register]
-### Register for a new SnapBundle account
+### Register for a new SnapBundle account [POST]
 
 + Request (application/json)
 
-        { "emailAddress": "you@foo.com", "realm" : "foobar.com" }
+            {
+                "emailAddress": "you@foo.com",
+                "realm" : "foobar.com"
+            }
 
 + Response 200 (application/json)
 
-        {
+            {
                 "urn" : "urn:uuid:64618d0b-3b8c-456a-87d0-31bc1a0bc579",
                 "lastModifiedTimestamp" : 1382828220349,
                 "emailAddress" : "you@foo.com",
                 "realm" : "foo.com",
-        }
+            }
+
+# Group Account Management Endpoints
+The following endpoints offer self-service password management features.
+
+## Change Your Password [/account/password/change]
+### Changes the authenticated user's password, presuming they know their existing password to change to a new password. [POST]
+
++ Request (application/json)
+    
+            {
+                "oldPassword" : "0lDs3cr3t!",
+                "newPassword" : "N3ws3cr3t?"
+            }
+
++ Response 200 (application/json)
+
+            {
+                "result" : 1,
+                "message": "Password successfully changed"
+            }
+
+## Reset Lost Password [/account/password/reset]
+### Triggers a password reset workflow via email for the specified Account associated with the indicated email address. [POST]
+
++ Request (application/json)
+    
+            {
+                "emailAddress" : "you@foo.com"
+            }
+
++ Response 200 (application/json)
+
+            {
+                "result" : 1,
+                "message": "Password reset email has been sent"
+            }
