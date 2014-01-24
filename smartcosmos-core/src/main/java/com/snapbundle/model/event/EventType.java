@@ -24,6 +24,7 @@ public enum EventType
     RealmDefined,
 
     AccountDefined,
+    AccountAccessed,
     AccountConfirmed,
     AccountUpdated,
 
