@@ -19,6 +19,8 @@ package com.snapbundle;
 
 public final class Field extends VersionData
 {
+    public static final String HTTP_EVENT_HEADER = "SnapBundle-Event";
+
     /**
      * Use this value to re-assign the null value to a moniker field after it was
      * initially assigned with a value.
