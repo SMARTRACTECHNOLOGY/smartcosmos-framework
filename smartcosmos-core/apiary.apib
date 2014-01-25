@@ -369,7 +369,7 @@ Field | Data Type | Required | Can Update | Serialization Level | Default Value
 urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
-moniker | String  | false | true | Standard | null
+moniker | String  | false | true | Full | null
 name | String  | true | true | Minimum | 
 description | String  | false | true | Standard | 
 activeFlag | Boolean  | true | true | Standard  | true
@@ -513,7 +513,7 @@ request body.
     + Body
     
             {
-                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d,
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "lastModifiedTimestamp" : 1390607277299,
                 "identification" : "gqorighfawpftjqevznxclmndaawetha",
                 "name" : "Jason's Phone",
@@ -547,7 +547,7 @@ request body.
     + Body
     
             {
-                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d,
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "lastModifiedTimestamp" : 1390607277299,
                 "identification" : "gqorighfawpftjqevznxclmndaawetha",
                 "name" : "Jason's Phone",
@@ -584,7 +584,7 @@ Call always returns a JSON array, which may be an empty array if no devices are 
     
             [
                 {
-                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d,
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                     "lastModifiedTimestamp" : 1390607277299,
                     "identification" : "gqorighfawpftjqevznxclmndaawetha",
                     "name" : "Jason's Phone",
@@ -621,7 +621,7 @@ Field | Data Type | Required | Can Update | Serialization Level | Default Value
 urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | fase | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
-moniker | String  | false | true | Standard | null
+moniker | String  | false | true | Full | null
 emailAddress | String  | true | false | Minimum | 
 givenName | String | false | true | Full | null
 surname | String | false | true | Full | null
@@ -634,7 +634,7 @@ roleType | RoleType  | true  | true | Minimum | User
 ## User Management [/users]
 ### Create a new user associated with the specified email address   [PUT]
 
-The following user attributes are used to create a new record:
+The following user fields may be used to create a new record:
 
 - `emailAddress` is required and constrained to 128 characters 
 - `roleType` is required and constrained to the case-sensitive values of **Administrator** or **User**
@@ -757,7 +757,7 @@ include that field in the request body.
     + Body
     
             {
-                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d,
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "lastModifiedTimestamp" : 1390607277299,
                 "emailAddress" : "coworker@foo.com",
                 "roleType" : "User"
@@ -787,7 +787,7 @@ include that field in the request body.
     + Body
     
             {
-                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d,
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "lastModifiedTimestamp" : 1390607277299,
                 "emailAddress" : "coworker@foo.com",
                 "roleType" : "User"
@@ -833,3 +833,242 @@ the user's password will be changed to that password.
                 "code" : -5,
                 "message" : "JSON is missing a required field: emailAddress"
             }
+
+# Group Object Endpoints
+## Overview
+The platform supports arbitrarily defined object types. This means that the platform makes no assumptions about the composition of an 
+object identifier, and the platform _never_ attempts to infer any logic from either the Object's `objectUrn` (developer assigned URN) or 
+its arbitarily defined `type` field. To illustrate this concept, an Object could represent a Person, a Bank Account, a vehicle, an animal, 
+or even a place (optionally complimented by a geospatial definition to precisely define the place).
+
+## Object Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | fase | Full | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Full | null
+name | String  | true | true | Minimum | 
+description | String  | false | true | Standard | null 
+activeFlag | Boolean  | true | true | Standard  | true
+objectUrn | String | true | false | Minimum | 
+type | String | true | true | Minimum |  
+
+### Field Notes
+- The `objectUrn` field is considered the authoritative URN when dealing with objects, although a system-assigned `urn` is still generated. 
+The `objectUrn` field must be unique across object records in your account.
+- The `type` field is available to create an ontology or high level categories that can be used to group related objects. 
+The platform makes no inferences about this case-sensitive field.
+
+
+## Object Management [/objects]
+### Create a new object   [PUT]
+
+The following object fields may be used to create a new record:
+
+- `objectUrn` is required and constrained to 1024 characters 
+- `type` is required and constrained to 255 characters
+- `name` is required and constrained to 255 characters
+- `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
+- `activeFlag` is optional and may be omitted; defaults to **true**
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+
+#### Idempotent Behavior
+This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result 
+
+- **201 SUCCESS_CREATED** if the record is new
+- **200 SUCCESS_OK** if an Object with the given `objectUrn` already existed in the database, in which 
+case **no data is merged; existing record is left as-is**
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "objectUrn": "urn:building:mall:ParadiseValley",
+                "type": "Building",
+                "name": "Paradise Valley Merchant's Mall"
+            }
+            
++ Response 201 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : ObjectDefined
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : UserAccessed
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: objectUrn"
+            }
+
+### Update an existing object [POST]
+
+The request body must include a valid `objectUrn` field. Only those fields being updated need to 
+be included in the JSON body. For example, if you only want to update the `name` of the object, only 
+include that field in the request body.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "objectUrn": "urn:building:mall:ParadiseValley",
+                "name": "Paradise Valley Mercantile Mall"
+            }
+            
++ Response 204
+
+    + Headers
+
+            SnapBundle-Event : ObjectUpdated    
+
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: objectUrn"
+            }   
+            
+## Lookup Specific Object by URN [/objects/{urn}{?view}]
+### Lookup a specific object by its system-assigned URN key [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : ObjectAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "objectUrn": "urn:building:mall:ParadiseValley",
+                "type": "Building",
+                "name": "Paradise Valley Merchant's Mall",
+                "description" : null,
+                "activeFlag" : true
+                "lastModifiedTimestamp" : 1390607277299,
+            }
+
+ 
+## Lookup Object by Object URN [/objects/object/{objectUrn}{?view,exact}]
+### Lookup a specific object by their arbitrary developer assigned object URN [GET]
+
++ Parameters
+    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN to locate
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + exact (optional, boolean, `true`) ... Defaults to true; when false, a starts-with search is performed 
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : ObjectAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "objectUrn": "urn:building:mall:ParadiseValley",
+                "type": "Building",
+                "name": "Paradise Valley Merchant's Mall",
+                "description" : null,
+                "activeFlag" : true
+                "lastModifiedTimestamp" : 1390607277299,
+            }
+            
+## Query Objects [/objects{?view,modifiedAfter,monikerLike,nameLike,objectUrnLike,type}]
+### Lookup an array of matching objects [GET]
+
+####Additive Nature
+Each query string parameter is **AND**ed with other parameters. It is not possible to define a parenthetical or mixed Boolean logic
+query at this time.
+
++ Parameters
+    + objectUrnLike (optional, string, `urn:building:mall`) ... Case-sensitive `objectUrn` *starts with* pattern to locate
+    + type (optional, string, `Building`) ... Case-sensitive `type` *starts with* pattern to locate
+    + nameLike (optional, string, `Paradise`) ... Case-sensitive `name` *starts with* pattern to locate
+    + monikerLike (optional, string, `urn:uuid:123`) ... Case-sensitive `moniker` *starts with* pattern to locate
+    + modifiedAfter (optional, long, `1390607270000`) ... Locate `lastModifiedTimestamp` values equal to or greater than this
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : ObjectAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            [
+                {
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                    "objectUrn": "urn:building:mall:ParadiseValley",
+                    "type": "Building",
+                    "name": "Paradise Valley Merchant's Mall",
+                    "description" : null,
+                    "activeFlag" : true
+                    "lastModifiedTimestamp" : 1390607277299,
+                }
+            ]
+            
