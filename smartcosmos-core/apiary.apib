@@ -1079,6 +1079,20 @@ object *A*, for example, could *follows* object *B*. Or, the relationship could 
 *B*. Verbs are supported as well, such that *a person* *drove* *a car*, where person and car are just Objects with a `type` of person 
 and car, respectively. 
 
+The `relatedEntityReferenceType` and `relatedReferenceUrn` should always be treated as the subordinate object in the relationship that is described by the `relationshipType` field. Consider these examples that illustrate this concept:
+
+`````
+Entity Reference Type `Object` identified by Reference URN 1A2B3C has a Child relationship type with Related Entity Reference Type `Object` identified by Reference URN 4D5E6F.
+`````  
+
+`````
+Entity Reference Type `ObjectInteractionSession` identified by Reference URN 1A2B3C has a Child relationship type with Related Entity Reference Type `Device` identified by Reference URN 4D5E6F.
+`````  
+
+`````
+Entity Reference Type `Object` identified by Reference URN 1A2B3C has a Peer relationship type with Related Entity Reference Type `Object` identified by Reference URN 4D5E6F.
+`````  
+
 The relationship `type` field is used to capture the high level categorization that describes the logical interaction between the two 
 referenced objects. The platform makes no inferences from any relationships defined.  
 
@@ -1101,7 +1115,7 @@ relatedReferenceURN | String | true | false | Minimum |
 - The `type` field is available to create an ontology or high level categories that can be used to group related relationships. 
 The platform makes no inferences about this case-sensitive field.
 
-## Relationship Management [/relationships]
+## Relationship Management [/relationships/{entityReferenceType}/{referenceUrn}]
 ### Create a new object   [PUT]
 
 The following object fields are all required to create a new record:
@@ -1122,6 +1136,10 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 - **200 SUCCESS_OK** if a relationship between the referenced objects already existed in the database, in which 
 case **the `type` field and `moniker` fields are updated to reflect the values submitted**
 
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+
 + Request (application/json)
 
     + Headers
@@ -1131,8 +1149,6 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
     + Body
     
             {
-                "entityReferenceType": "Object",
-                "referenceURN" : "urn:uuid:12345",
                 "type": "Owns",
                 "relatedEntityReferenceType": "Object",
                 "relatedReferenceURN" : "urn:uuid:54321"
@@ -1172,3 +1188,188 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
                 "code" : -8,
                 "message" : "No matching record with Object of urn:uuid:12345 exists"
             }
+
+## Relationship Management by URN [/relationships/{urn}{?view}]
+### Lookup a specific relationship by its system-assigned URN key [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "entityReferenceType": "Object",
+                "referenceUrn" : "urn:uuid:12345",
+                "type" : "Owns",
+                "relatedEntityReferenceType": "Object",
+                "relatedReferenceURN" : "urn:uuid:54321",
+                "lastModifiedTimestamp" : 1390607277299,
+            }
+
+### Deletes an existing relationship by its system-assigned URN key [DELETE]
+
++ Response 204 
+
+    + Headers
+
+            SnapBundle-Event : RelationshipDeleted
+
+## Lookup All Relationships Between Entities [/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}{?view}]
+### Lookup an array of all defined relationships between any two entities [GET]
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + relatedEntityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + relatedReferenceUrn (required, string, `urn:uuid:54321`) ... Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            [
+                {
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                    "entityReferenceType": "Object",
+                    "referenceUrn" : "urn:uuid:12345",
+                    "type" : "Owns",
+                    "relatedEntityReferenceType": "Object",
+                    "relatedReferenceURN" : "urn:uuid:54321",
+                    "lastModifiedTimestamp" : 1390607277299,
+                }
+            ]
+
++ Response 204 
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:12345 exists"
+            }
+
+## Lookup Specific Relationship Between Entities [/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}/{type}{?view}]
+### Lookup a specific relationships between any two entities [GET]
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + relatedEntityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + relatedReferenceUrn (required, string, `urn:uuid:54321`) ... Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
+    + type (required, string `Owns`) ... Case-sensitive `type` of relationship to look for
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "entityReferenceType": "Object",
+                "referenceUrn" : "urn:uuid:12345",
+                "type" : "Owns",
+                "relatedEntityReferenceType": "Object",
+                "relatedReferenceURN" : "urn:uuid:54321",
+                "lastModifiedTimestamp" : 1390607277299,
+            }
+
++ Response 204 
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:12345 exists"
+            }
+
+## Lookup Relationships by Type [/relationships/{entityReferenceType}/{referenceUrn}/{type}{?view,reverse}]
+### Lookup an array of all defined relationships of the specific type [GET]
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + type (required, string `Owns`) ... Case-sensitive `type` of relationship to look for
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + reverse (optional, boolean, `false`) ... Flips the query around, finding those relationships where the `entityReferenceType` and `referenceUrn` are in the related fields(defalts to false)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            [
+                {
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                    "entityReferenceType": "Object",
+                    "referenceUrn" : "urn:uuid:12345",
+                    "type" : "Owns",
+                    "relatedEntityReferenceType": "Object",
+                    "relatedReferenceURN" : "urn:uuid:54321",
+                    "lastModifiedTimestamp" : 1390607277299,
+                }
+            ]
+
++ Response 204 
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:12345 exists"
+            }
+
+ 
