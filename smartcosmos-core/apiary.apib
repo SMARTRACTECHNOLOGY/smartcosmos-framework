@@ -13,100 +13,164 @@ This document is a **work in progress**.
 - Every app tries to capture metadata, tags, location data, timestamps, files, etc.
 - Every app seemingly designs these same patterns _over, and over and over and over…_
 
-SnapBundle was designed as a platform; with minimal effort it can sit atop of other platform services you are already paying for, lowering the total cost of adoption.
+SnapBundle was designed as a platform; with minimal effort it can sit atop of other platform services you are already paying 
+for, lowering the total cost of adoption.
 
 ## What is a _Context_ Data Store?
-Every application captures context to some degree. There will always be application specific entities that don't map well into the SnapBundle platform. SnapBundle isn't intended to totally eliminate the need for your application to have some type of persistence layer. It is, however, intended to compliment that layer by offering *context services*. So how does SnapBundle define context?
+Every application captures context to some degree. There will always be application specific entities that don't map well into 
+the SnapBundle platform. SnapBundle isn't intended to totally eliminate the need for your application to have some type of 
+persistence layer. It is, however, intended to compliment that layer by offering *context services*. So how does SnapBundle 
+define context?
 
-Context starts the notion of a *thing*. This could be any noun-- think person, place, or (sorry) thing. Every *thing* in your system can be described using various types of *characteristics*. These characteristics may be simple, like eye color is blue or shape is square, or they may be more advanced, such as a 3D model of a building. Context changes over time, so every contextual model must consider both *space and time* (adding that 4th dimension to the mix). Finally, context must include the concepts of *relationship* and *interaction*. For example, a person Jason may have a relationship with Foo Bank, and he interacts with the bank everytime he makes a deposit or withdrawl. 
+Context starts the notion of a *thing*. This could be any noun-- think person, place, or (sorry) thing. Every *thing* in your 
+system can be described using various types of *characteristics*. These characteristics may be simple, like eye color is blue 
+or shape is square, or they may be more advanced, such as a 3D model of a building. Context changes over time, so every 
+contextual model must consider both *space and time* (adding that 4th dimension to the mix). Finally, context must include the 
+concepts of *relationship* and *interaction*. For example, a person Jason may have a relationship with Foo Bank, and he interacts 
+with the bank everytime he makes a deposit or withdrawl. 
 
-A few final noteworthy comments about context. First, relationships are binary in nature; true or false. Either Jason has an account with Foo Bank, or he doesn't. There is no inbetween or ambiguity. Second, interactions operate using a "0, 1, or many" cardinality. Finally, the notion of a relationship isn't restricted to the traditional "is-a" or "has-a" concepts defined by the semantic web. Verbs are valid relationships! *Jason "likes" Meredith* and *Jason "worked on" Air Conditioner* are both valid relationships. 
+A few final noteworthy comments about context. First, relationships are binary in nature; true or false. Either Jason has an 
+account with Foo Bank, or he doesn't. There is no inbetween or ambiguity. Second, interactions operate using a "0, 1, or many" 
+cardinality. Finally, the notion of a relationship isn't restricted to the traditional "is-a" or "has-a" concepts defined by 
+the semantic web. Verbs are valid relationships! *Jason "likes" Meredith* and *Jason "worked on" Air Conditioner* are both 
+valid relationships. 
 
 ## How SnapBundle Models Context
 ### Objects
-The contextual *thing* we talked about above is simply referred to as an *Object* in SnapBundle. Every Object can be fully described using the SnapBundle platform. Take a look at this graphic:
+The contextual *thing* we talked about above is simply referred to as an *Object* in SnapBundle. Every Object can be fully 
+described using the SnapBundle platform. Take a look at this graphic:
 
 ![alt text](https://raw2.github.com/snapbundle/sdk/master/images/object-characteristics.png "Object Characteristics")
   
-An Object can use the type-safe key-value pairs of *metadata* to describe characteristics. It can have a relationship with one or more geospatial definitions, built using the open [GeoJSON 1.0 Specification](http://geojson.org "GeoJSON Web Site"). 
+An Object can use the type-safe key-value pairs of *metadata* to describe characteristics. It can have a relationship with one 
+or more geospatial definitions, built using the open [GeoJSON 1.0 Specification](http://geojson.org "GeoJSON Web Site"). 
 
-Today's world has rapidly become smart device driven. Smartphones, tablets, laptops, and even specialized fashion accessories like Google Glass and smart watches are both fashion statements and the norm. Every *devices* in SnapBundle is a first-class citizen, and possession of a device can be linked to an Object. *Joe "borrowed" iPad* and *Sam "owns" iWatch* are legitimate device relationships with an Object.
+Today's world has rapidly become smart device driven. Smartphones, tablets, laptops, and even specialized fashion accessories 
+like Google Glass and smart watches are both fashion statements and the norm. Every *devices* in SnapBundle is a first-class 
+citizen, and possession of a device can be linked to an Object. *Joe "borrowed" iPad* and *Sam "owns" iWatch* are legitimate 
+device relationships with an Object.
 
-An Object may be assigned any number of *tags*. Tags are like categories, but they are intended to be much more specific. In the blog world, for example, tags are used to create a mini index into a specific blog posting. In contrast, blog categories tend to represent a table of contents. Tags are also (typically) intended to be used as they are in Twitter, Facebook, and other social media applications.
+An Object may be assigned any number of *tags*. Tags are like categories, but they are intended to be much more specific. In the 
+blog world, for example, tags are used to create a mini index into a specific blog posting. In contrast, blog categories tend to 
+represent a table of contents. Tags are also (typically) intended to be used as they are in Twitter, Facebook, and other social 
+media applications.
 
-An Object may be responsible for producing any number of *files*, including pictures, videos, documents, presentations, manuals, etc. 
+An Object may be responsible for producing any number of *files*, including pictures, videos, documents, presentations, manuals, 
+etc. 
 
-Depending on the type of Object, it may have a *geospatial* relationship that precisely defines the perimeter of a building, it could represent a "check-in" at a common location, or it could represent the complete path, including stops, if the Object happens to be a delivery driver.
+Depending on the type of Object, it may have a *geospatial* relationship that precisely defines the perimeter of a building, 
+it could represent a "check-in" at a common location, or it could represent the complete path, including stops, if the Object 
+happens to be a delivery driver.
 
-Capturing chronological sequencing is import when dealing with context. Did the Object do A or B first? A *timeline* provides a means to capture the chronological history of an Object.
+Capturing chronological sequencing is import when dealing with context. Did the Object do A or B first? A *timeline* provides 
+a means to capture the chronological history of an Object.
 
 ### Relationships
-Relationships are a critical component in understanding context. Relationships in SnapBundle are binary in nature, true or false, exists or do not exist. 
+Relationships are a critical component in understanding context. Relationships in SnapBundle are binary in nature, true or 
+false, exists or do not exist. 
  
 ![alt text](https://raw2.github.com/snapbundle/sdk/master/images/relationship.png "Relationship Between 2 Objects")
 
-Modeling relationships with snap bundle is not restricted to the traditional "is-a" or "has-a" concepts commonly associated with the semantic web. Relationships may be action verbs to indicate a higher order relationship between two objects. Relationships in SnapBundle are not transitive per se. If a object Foo likes object Bar, that doesn't imply that Bar likes Foo. In order to capture the transitive nature, a second reciprocal relationship would have to explicitly be defined.
+Modeling relationships with snap bundle is not restricted to the traditional "is-a" or "has-a" concepts commonly associated 
+with the semantic web. Relationships may be action verbs to indicate a higher order relationship between two objects. 
+Relationships in SnapBundle are not transitive per se. If a object Foo likes object Bar, that doesn't imply that Bar likes Foo. 
+In order to capture the transitive nature, a second reciprocal relationship would have to explicitly be defined.
 
 ### Interactions
-Unlike relationships that are meant to captures a binary existence, an interaction maintains a higher cardinality; they are intended to be singular or recurring events.
-
+Unlike relationships that are meant to captures a binary existence, an interaction maintains a higher cardinality; they are 
+intended to be singular or recurring events.
+  
 Interactions share the same set of descriptive capabilities found on an Object, as depicted below.
 
 ![alt text](https://raw2.github.com/snapbundle/sdk/master/images/interaction.png "Interaction Between 2 Objects")
 
-Check out our [primary data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Primary Data Types") to see our incredibly intuitive object model.
+Check out our [primary data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Primary Data Types") to see 
+our incredibly intuitive object model.
 
 ### A Contextual Illustration
-Consider the following arbitrary example. Jason, a person, is represented as an Object in the system. He has metadata that describes his stature, files that contain pictures of him, etc. 
+Consider the following arbitrary example. Jason, a person, is represented as an Object in the system. He has metadata that 
+describes his stature, files that contain pictures of him, etc. 
 
-Jeep Rubicon, a vehicle, is also represent as an Object in the system. It has metadata that describe the vehicle, like color = black. It also has a geospatial representation associated with it the accurately defines the perimeter of the vehicle, like its wheel base, height, width, etc. 
+Jeep Rubicon, a vehicle, is also represent as an Object in the system. It has metadata that describe the vehicle, like color = 
+black. It also has a geospatial representation associated with it the accurately defines the perimeter of the vehicle, like its 
+wheel base, height, width, etc. 
 
 There is a relationship captures that indicates that Jason "owns" Jeep Rubicon.
 
-A series of interactions are captured to represent each time that Jason drove the Jeep Rubicon. Each interaction captures a geospatial object that represents the physical route that Jason followed while driving the vehicle. Since Jason made 3 stops while he was out, those stops are captured with the timeline. During the drive, Jason had a flat tire, so there is a tag "#flat" associated with that interaction. He also filled up with gas before returning home, so another tag "#fillup" is noted.
+A series of interactions are captured to represent each time that Jason drove the Jeep Rubicon. Each interaction captures a 
+geospatial object that represents the physical route that Jason followed while driving the vehicle. Since Jason made 3 stops
+while he was out, those stops are captured with the timeline. During the drive, Jason had a flat tire, so there is a tag 
+"#flat" associated with that interaction. He also filled up with gas before returning home, so another tag "#fillup" is noted.
 
 ## What SnapBundle Isn't
 ### It's About Persistence
-As you can see, SnapBundle can easily associate virtually _anything_ with _anything_. Hashtags, key-value metadata, and arbitrary files of any type or size are easily associated with an Object or other top level entities. Data is securely stored in the Cloud. SnapBundle can capture innate relationships like parent-child, peer and neighbor, and it can equally capture actions by or between objects.
+As you can see, SnapBundle can easily associate virtually _anything_ with _anything_. Hashtags, key-value metadata, and 
+arbitrary files of any type or size are easily associated with an Object or other top level entities. Data is securely stored 
+in the Cloud. SnapBundle can capture innate relationships like parent-child, peer and neighbor, and it can equally capture 
+actions by or between objects.
 
 ### It's not an Analytical Engine
-The platform wasn't built to perform Big Data analytics- it was meant to store the data that can be fed into a Big Data analytics system. It's a subtle difference that shouldn't be quickly dismissed. There are dozens, if not hundreds of analytical and expert systems on the market today. Ask yourself this simple question:
+The platform wasn't built to perform Big Data analytics- it was meant to store the data that can be fed into a Big Data 
+analytics system. It's a subtle difference that shouldn't be quickly dismissed. There are dozens, if not hundreds of analytical 
+and expert systems on the market today. Ask yourself this simple question:
 
 *Where are you going to store the authoritative copy of your raw underlining data?*
 
-If you are searching for a solution to free you from storing your data in a proprietary system, possibly creating some type of "vendor lock-in," then SnapBundle is what you are looking for. Using Web Services and JSON, push your authoritative records to SnapBundle. Wire up SnapBundle to your current preferred analytics engine. Interested in seeing what this new expert system can do with your data? Then wire up SnapBundle to push data into that system and give it try. 
+If you are searching for a solution to free you from storing your data in a proprietary system, possibly creating some type 
+of "vendor lock-in," then SnapBundle is what you are looking for. Using Web Services and JSON, push your authoritative records 
+to SnapBundle. Wire up SnapBundle to your current preferred analytics engine. Interested in seeing what this new expert system 
+can do with your data? Then wire up SnapBundle to push data into that system and give it try. 
 
 ## Other Noteworthy Features
 
 ### Near Real-Time Integration
-We get it- *you* generated the data, *you* want to own the data, and, you want us to push it "over here" in a timely manner. That's exactly what the SnapBundle platform can do. Today the platform can push data to any HTTPS end point. As soon as we digitally sign and persist the data we just received, we'll push a copy of that data to you using JavaScript Object Notation (JSON) as fast as the ether will carry the bits. Check out our [Event Stream](EVENT.md "Event Stream") model to see how easy it is to understand the data feed.
+We get it- *you* generated the data, *you* want to own the data, and, you want us to push it "over here" in a timely manner. 
+That's exactly what the SnapBundle platform can do. Today the platform can push data to any HTTPS end point. As soon as we 
+digitally sign and persist the data we just received, we'll push a copy of that data to you using JavaScript Object Notation 
+(JSON) as fast as the ether will carry the bits. Check out our [Event Stream](EVENT.md "Event Stream") model to see how easy 
+it is to understand the data feed.
 
 ### Extension Architecture
-The SnapBundle platform was designed from scratch with a plugin model; we call them *extensions*. Remember how we said that we aren't an analytical engine? We aren't, but maybe you are. Use any modern language- Python, Ruby, Java, .NET, or anything that can talk to us using HTTP and JSON. We built our authorization model around the [OAuth 2.0 Specification (RFC 6749)](http://tools.ietf.org/html/rfc6749 "OAuth 2.0 Specification"), and data owners can grant you read or write access in a very granular fashion.
+The SnapBundle platform was designed from scratch with a plugin model; we call them *extensions*. Remember how we said that 
+we aren't an analytical engine? We aren't, but maybe you are. Use any modern language- Python, Ruby, Java, .NET, or anything 
+that can talk to us using HTTP and JSON. We built our authorization model around the 
+[OAuth 2.0 Specification (RFC 6749)](http://tools.ietf.org/html/rfc6749 "OAuth 2.0 Specification"), and data owners can grant 
+you read or write access in a very granular fashion.
 
 ## Technical Notes
 ### URNs as Keys
-All SnapBundle™ objects are keyed off of a **UUID**, represented using the standard URN nomenclature for a UUID:  **urn:uuid:<opaque key>**
+All SnapBundle™ objects are keyed off of a **UUID**, represented using the standard URN nomenclature for a UUID: 
+**urn:uuid:<opaque key>**
 
-> Any API call that requires a `{referenceUrn}` parameter must provide a full URN UUID reference, e.g. *urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d*
+> Any API call that requires a `{referenceUrn}` parameter must provide a full URN UUID reference, 
+e.g. *urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d*
 
 ### Error States
 The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used.
 
 ### Tracking Modification Timestamps
-All SnapBundle objects maintain a `lastModifiedTimestamp` field to track when the record was last updated. The purpose of this timestamp is to provide a valid eTag for HTTP cache support.
+All SnapBundle objects maintain a `lastModifiedTimestamp` field to track when the record was last updated. The purpose of this 
+timestamp is to provide a valid eTag for HTTP cache support.
 
 ### Moniker: Arbitrary External System Alias
-All SnapBundle objects support a `moniker` field that can be used as the developer sees fit. This field is **never** interpreted by the platform, and it may be null if the developer chooses not to use it (null is the default value if the field is omitted in a **PUT** call).
+All SnapBundle objects support a `moniker` field that can be used as the developer sees fit. This field is **never** 
+interpreted by the platform, and it may be null if the developer chooses not to use it (null is the default value if the 
+field is omitted in a **PUT** call).
 
-> The SnapBundle authors promise developers that the platform itself will never rely on the moniker value for any feature, now or in the future, leaving it entirely available for 3rd party developers to use as they see fit in their applications.
+> The SnapBundle authors promise developers that the platform itself will never rely on the moniker value for any feature, 
+now or in the future, leaving it entirely available for 3rd party developers to use as they see fit in their applications.
 
-A popular usage of the `moniker` field is to provide a logical link between an SnapBundle object, say an RFID Object record, and some type of proprietary (abstract) key in your back office account, e.g. ADDR-123-43-2013. This could be a link to a legacy key, or a JSON or XML stanza for more structure content.
+A popular usage of the `moniker` field is to provide a logical link between an SnapBundle object, say an RFID Object record, 
+and some type of proprietary (abstract) key in your back office account, e.g. ADDR-123-43-2013. This could be a link to a 
+legacy key, or a JSON or XML stanza for more structure content.
 
-**NOTE:** The `moniker` field is **limited to a maximum of 2048 characters** at this time. If you need more space than that, create a **File** and use the moniker to store the file's system-assigned URN.
+**NOTE:** The `moniker` field is **limited to a maximum of 2048 characters** at this time. If you need more space than that, 
+create a **File** and use the moniker to store the file's system-assigned URN.
 
 ### JSON Serialization Views
-Every **GET** endpoint allows the developer to control the verbosity of the JSON response. Generally, this fact is encapsulated and of little concern to most developers. However, it is possible in rare situations to observe the same identical object, as indicated by its URN key, serialized with more (or less) fields. The serialization levels supported by the platform include:
+Every **GET** endpoint allows the developer to control the verbosity of the JSON response. Generally, this fact is encapsulated 
+and of little concern to most developers. However, it is possible in rare situations to observe the same identical object, as 
+indicated by its URN key, serialized with more (or less) fields. The serialization levels supported by the platform include:
 
    * **Published** - Publicly accessible fields (specific to the Extension Framework)
 
@@ -117,12 +181,16 @@ Every **GET** endpoint allows the developer to control the verbosity of the JSON
    * **Full** - All Standard fields, plus fields rarely referenced
 
 
-   * **Restricted** - Opaque fields accessible only to the SnapBundle platform's cloud-side code and *never transmitted over the wire* under any circumstance. These fields are *never updatable* by the developer. If a `view` query parameter is set to **Restricted**, it returns **Standard**.
+   * **Restricted** - Opaque fields accessible only to the SnapBundle platform's cloud-side code and 
+   *never transmitted over the wire* under any circumstance. These fields are *never updatable* by the developer. If a `view` 
+query parameter is set to **Restricted**, it returns **Standard**.
 
 #### Requesting a Specific Serialization View
-Every **GET** endpoint is serialized using the **Standard* JSON view by default, but can be overrode by the developer by including a `view` query string parameter set to the case-sensitive name of one of the serialization views.
+Every **GET** endpoint is serialized using the **Standard* JSON view by default, but can be overrode by the developer by 
+including a `view` query string parameter set to the case-sensitive name of one of the serialization views.
 
-The query string parameter `view` must be a case-sensitive value matching one of the following: {`Published`, `Minimum`, `Standard`, or `Full`}. _Any value outside of this range automatically defaults to `Standard`. 
+The query string parameter `view` must be a case-sensitive value matching one of the following: {`Published`, `Minimum`, 
+`Standard`, or `Full`}. _Any value outside of this range automatically defaults to `Standard`. 
 
 **NOTE:** The default serialization view for any POST that returns a response is `Standard` and cannot be changed at this time.
 
@@ -130,14 +198,26 @@ The query string parameter `view` must be a case-sensitive value matching one of
 The fastest way to obtain support is by emailing <engineering@tagdynamics.net>.
 
 # Group Registration Endpoints
-Every SnapBundle Account belongs to a _security realm_. By default, the registration endpoint will extract the domain name from your email address. However, if you are using a popular email service like GMail or Yahoo, you **must** provide a custom realm name at registation. Use the **Realm Availability** endpoint to see if your desired realm name is available.   
+Every SnapBundle Account belongs to a _security realm_. By default, the registration endpoint will extract the domain name 
+from your email address. However, if you are using a popular email service like GMail or Yahoo, you **must** provide a custom 
+realm name at registation. Use the **Realm Availability** endpoint to see if your desired realm name is available.   
 
-Once you've identified a realm name, your ready to complete registration. Registering for an SnapBundle Account and then confirming the email address associated with the Account registration are the only perquisites for using the platform. These two steps are required before any endpoints that require authentication can be successfully accessed.
+Once you've identified a realm name, your ready to complete registration. Registering for an SnapBundle Account and then 
+confirming the email address associated with the Account registration are the only perquisites for using the platform. These 
+two steps are required before any endpoints that require authentication can be successfully accessed.
 
 ## Understanding Realms
-The SnapBundle™ platform is a multi-tenant system by design. Each Account operates within its own _security realm_ in order to keep one Account's data separate from another Account's data. By default, the security realm is established _based on the Account registration email address' top level domain_. For example, registering for an Account with the email address developer@tagdynamics.com would result in the automatic assignment of the _tagdynamics.com_ realm, if it is available. It is possible to override this default behavior by including a _realm_ attribute in the JSON document submitted to the registration endpoint.
+The SnapBundle™ platform is a multi-tenant system by design. Each Account operates within its own _security realm_ in order 
+to keep one Account's data separate from another Account's data. By default, the security realm is established _based on the 
+Account registration email address' top level domain_. For example, registering for an Account with the email address 
+developer@tagdynamics.com would result in the automatic assignment of the _tagdynamics.com_ realm, if it is available. It is 
+possible to override this default behavior by including a _realm_ attribute in the JSON document submitted to the registration 
+endpoint.
 
-> If you are an Individual or a Developer registering with a popular email address from say yahoo.com, gmail.com, etc. then it is strongly recommended that you register using a unique, custom realm. This approach will allow the use of a individual email, e.g. you@yahoo.com, even though a realm like yahoo.com is prohibited. If you are an Enterprise, it is strongly recommended you omit the realm, which will automatically register your email address domain as your realm.
+> If you are an Individual or a Developer registering with a popular email address from say yahoo.com, gmail.com, etc. then 
+it is strongly recommended that you register using a unique, custom realm. This approach will allow the use of a individual 
+email, e.g. you@yahoo.com, even though a realm like yahoo.com is prohibited. If you are an Enterprise, it is strongly 
+recommended you omit the realm, which will automatically register your email address domain as your realm.
 
 ## Realm Availability [/registration/realm/{realm}]
 ### Check to see if the named realm is available for registration [GET]
@@ -179,7 +259,8 @@ The SnapBundle™ platform is a multi-tenant system by design. Each Account oper
 
 # Group Account Management Endpoints
 
-An _Account_ record is created automatically at the time of _registration confirmation_ (not at the time of registration), along with your administrator User record. The Account record holds your account _name_, and _description_.
+An _Account_ record is created automatically at the time of _registration confirmation_ (not at the time of registration), 
+along with your administrator User record. The Account record holds your account _name_, and _description_.
 
 ## Account Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
@@ -274,12 +355,13 @@ The platform offers two endpoints for password self-service, supporting both pas
 
 # Group Device Endpoints
 ## Overview
-SnapBundle may be used to capture metadata about devices in order to make the association that _this user used this device_. The 
-`identification` field is the most important field in this data type, as it represents the unique identifier of the device. On a 
-laptop, this could be the computer's network MAC address, or serial number printed on an asset tag affixed to the computer, or 
-on a cell phone it could be the manufacturer's IMEI string or perhaps the phone number.
+SnapBundle may be used to capture metadata about devices in order to make the association that _this user used this device_. 
+The `identification` field is the most important field in this data type, as it represents the unique identifier of the device. 
+On a laptop, this could be the computer's network MAC address, or serial number printed on an asset tag affixed to the computer, 
+or on a cell phone it could be the manufacturer's IMEI string or perhaps the phone number.
 
-> SnapBundle makes no inferences from the device identification. Theoretically, an account with 100 devices could simply sequence the identification of each device, i.e. 1, 2, 3, etc.
+> SnapBundle makes no inferences from the device identification. Theoretically, an account with 100 devices could simply 
+sequence the identification of each device, i.e. 1, 2, 3, etc.
 
 ## Device Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
@@ -295,28 +377,33 @@ identification | String | true | false | Minimum |
 type | String | true | true | Minimum |  
 
 ### Field Notes
-- The `identification` key MUST be treated as a unique value within your Account's Device set. Multiple devices with identical values is explicitly _not_ supported.
-- The `type` field is available to create an ontology or high level categories that can be used to group related devices. The platform makes no inferences about this case-sensitive field.
+- The `identification` key MUST be treated as a unique value within your Account's Device set. Multiple devices with 
+identical values is explicitly _not_ supported.
+- The `type` field is available to create an ontology or high level categories that can be used to group related devices. 
+The platform makes no inferences about this case-sensitive field.
 
 ## Device Definitions [/devices]
 ### Create a new device associated with an arbitrary identification value [PUT]
 
 The following device attributes are used to create a new record:
 
-- `identification` is required and is constrained to 255 characters. It is arbitrarily defined by the developer, but a consistent approach should be utilized. For example, 
-the device's phone number or IMEI could be used consistently to identify a smartphone
-- `name` is required and is constrained to 255 characters
-- `type` is required and is constrained to 255 characters. It is arbitrarily defined by the developer; the platform never interprets the value stored in this field. It could
+- `identification` is required and constrained to 255 characters. It is arbitrarily defined by the developer, but a 
+consistent approach should be utilized. For example, the device's phone number or IMEI could be used consistently to 
+identify a smartphone
+- `name` is required and constrained to 255 characters
+- `type` is required and constrained to 255 characters. It is arbitrarily defined by the developer; the platform never 
+interprets the value stored in this field. It could
 be general, like *laptop*, or it could be very specific like *MacBook Pro 15" Laptop*  
-- `description` is optional and may be omitted (defaults to **null**)
-- `activeFlag` is optional and may be omitted (defaults to **true**)
-- `moniker` is optional and may be omitted (defaults to **null**)
+- `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
+- `activeFlag` is optional and may be omitted; defaults to **true**
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
 
 #### Idempotent Behavior
 This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result 
 
 - **201 SUCCESS_CREATED** if the record is new
-- **200 SUCCESS_OK** if a Device with the given `identification` already existed in the database, in which case **no data is merged; existing record is left as-is**
+- **200 SUCCESS_OK** if a Device with the given `identification` already existed in the database, in which case 
+**no data is merged; existing record is left as-is**
 
 + Request (application/json)
 
@@ -332,19 +419,6 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "type": "Android"
             }
             
-+ Response 200 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : DeviceDefined
-            
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
-            }
-
 + Response 201 (application/json)
 
     + Headers
@@ -358,6 +432,19 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
             }
             
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : DeviceAccessed
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
 + Response 400 (application/json)
 
     + Body
@@ -384,7 +471,7 @@ request body.
     
             {
                 "identification": "gqorighfawpftjqevznxclmndaawetha",
-                "name": "Jason's New Phone",
+                "name": "Jason's New Phone"
             }
             
 + Response 204
@@ -407,7 +494,7 @@ request body.
 ### Lookup a specific device by its system-assigned URN key [GET]
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN key assigned to the device at creation time
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
     + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
 
 + Request
@@ -431,7 +518,7 @@ request body.
                 "identification" : "gqorighfawpftjqevznxclmndaawetha",
                 "name" : "Jason's Phone",
                 "description" : null,
-                "type" : "Android"
+                "type" : "Android",
                 "activeFlag" : true
             }
 
@@ -440,7 +527,8 @@ request body.
 ### Lookup a specific device by its system-assigned URN key [GET]
 
 + Parameters
-    + identification (required, string, `gqorighfawpftjqevznxclmndaawetha`) ... Exact case-sensitive identification value to locate
+    + identification (required, string, `gqorighfawpftjqevznxclmndaawetha`) ... Exact case-sensitive identification value to 
+    locate
     + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
 
 + Request
@@ -464,7 +552,7 @@ request body.
                 "identification" : "gqorighfawpftjqevznxclmndaawetha",
                 "name" : "Jason's Phone",
                 "description" : null,
-                "type" : "Android"
+                "type" : "Android",
                 "activeFlag" : true
             }
 
@@ -475,7 +563,8 @@ request body.
 Call always returns a JSON array, which may be an empty array if no devices are found that match the `nameLike` query parameter.
 
 + Parameters
-    + nameLike (optional, string, `Jaso`) ... A case-sensitive *starts with* string pattern to match against. If omitted, then all records will be returned.
+    + nameLike (optional, string, `Jaso`) ... A case-sensitive *starts with* string pattern to match against. If omitted, 
+    then all records will be returned.
     + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
 
 + Request
@@ -500,8 +589,247 @@ Call always returns a JSON array, which may be an empty array if no devices are 
                     "identification" : "gqorighfawpftjqevznxclmndaawetha",
                     "name" : "Jason's Phone",
                     "description" : null,
-                    "type" : "Android"
+                    "type" : "Android",
                     "activeFlag" : true
                 }
             ]
 
+# Group User Endpoints
+## User Endpoint Security
+SnapBundle only permits users with a `roleType` of **Administrator** to set or reset other user account passwords.
+
+## Overview
+The initial registration account is automatically defined with a `roleType` of **Administrator**. Additional users can be 
+created using any valid email address.
+
+### SnapBundle is not a directory service 
+The only metadata collected about a user includes first name, last name, email address, and role type. The use of the email 
+address is expected to provide a suitable means of identification of an actual user within the account.
+
+The platform's default directory service plugin relies on the [Stormpath](http://stormpath.com "Stormpath Web Site") 
+authentication and authorization PaaS as its default directory service provider. **This means that SnapBundle doesn't manage 
+any user credentials, delegating all of this responsibility to Stormpath.**
+
+Direct access to an account's Stormpath data is prohibited. For example, password self-service is only accessible via the 
+SnapBundle Account Management self-service endpoints.  
+  
+**It is impossible to retrieve credentials through the API since it is neither stored nor managed by SnapBundle**.  
+
+## User Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | fase | Full | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Standard | null
+emailAddress | String  | true | false | Minimum | 
+givenName | String | false | true | Full | null
+surname | String | false | true | Full | null
+roleType | RoleType  | true  | true | Minimum | User 
+
+### Field Notes
+- The `roleType` field is used as a security filter that may restrict the user from certain sensitive operations 
+*in future API versions*. The only supported values at this time are *Administrator* and *User*. 
+
+## User Management [/users]
+### Create a new user associated with the specified email address   [PUT]
+
+The following user attributes are used to create a new record:
+
+- `emailAddress` is required and constrained to 128 characters 
+- `roleType` is required and constrained to the case-sensitive values of **Administrator** or **User**
+- `givenName` is optional and constrained to 50 characters and defaults to **null**
+- `surname` is optional and constrained to 50 characters; it defaults to **null**
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+
+#### Idempotent Behavior
+This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result 
+
+- **201 SUCCESS_CREATED** if the record is new
+- **200 SUCCESS_OK** if a User with the given `emailAddress` already existed in the database, in which 
+case **no data is merged; existing record is left as-is**
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "emailAddress": "coworker@foo.com",
+                "roleType": "User"
+            }
+            
++ Response 201 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : UserDefined
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "r@nd0mP@ssword!"
+            }
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : UserAccessed
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: emailAddress"
+            }
+            
+
+### Update an existing user [POST]
+
+The request body must include a valid `emailAddress` field. Only those fields being updated need to 
+be included in the JSON body. For example, if you only want to update the `surname` of the user, only 
+include that field in the request body.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "emailAddress": "coworker@foo.com",
+                "givenName": "Homeslice",
+                "surname": "Simpson"
+            }
+            
++ Response 204
+
+    + Headers
+
+            SnapBundle-Event : UserUpdated    
+
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: identification"
+            }
+            
+## Lookup Specific User by URN [/users/{urn}{?view}]
+### Lookup a specific user by its system-assigned URN key [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : UserAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d,
+                "lastModifiedTimestamp" : 1390607277299,
+                "emailAddress" : "coworker@foo.com",
+                "roleType" : "User"
+            }
+
+
+## Lookup Specific User by Email Address [/users/user/{emailAddress}{?view}]
+### Lookup a specific user by their email address [GET]
+
++ Parameters
+    + emailAddress (required, string, `coworker@foo.com`) ... Exact case-sensitive email address to locate
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : UserAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d,
+                "lastModifiedTimestamp" : 1390607277299,
+                "emailAddress" : "coworker@foo.com",
+                "roleType" : "User"
+            }
+
+## Change or Reset User Password [/users/user]
+### Initiate a reset password workflow or specifically define the user's password [POST]
+
+The request body must include a valid `emailAddress` field. If the body only includes an `emailAddress` then
+the password reset workflow will be initiated. However, if the body also includes a `newPassword` field, then
+the user's password will be changed to that password.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "emailAddress": "coworker@foo.com",
+            }
+            
++ Response 200
+
+    + Headers
+
+            SnapBundle-Event : UserPasswordReset    
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "Password has been reset"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: emailAddress"
+            }
