@@ -1072,3 +1072,103 @@ query at this time.
                 }
             ]
             
+# Group Relationship Endpoints
+## Overview
+SnapBundle provides a simple, flexible, and incredibly powerful relationship modeling mechanism. The model allows the declaration that 
+object *A*, for example, could *follows* object *B*. Or, the relationship could be defined where object *A* is a *neighbor* of object 
+*B*. Verbs are supported as well, such that *a person* *drove* *a car*, where person and car are just Objects with a `type` of person 
+and car, respectively. 
+
+The relationship `type` field is used to capture the high level categorization that describes the logical interaction between the two 
+referenced objects. The platform makes no inferences from any relationships defined.  
+
+## Relationship Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | fase | Full | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Full | null
+entityReferenceType | EntityReferenceType | true | false | Minimum |
+referenceURN | String | true | false | Minimum |
+type | String | true | false | Minimum | 
+relatedEntityReferenceType | EntityReferenceType | true | false | Minimum |
+relatedReferenceURN | String | true | false | Minimum |
+
+### Field Notes
+- The `entityReferenceType` and `referenceURN` fields jointly represent the *owner* or *initiator* of the relationship
+- The `relatedEntityReferenceType` and `relatedReferenceURN` fields jointly represent the *subordinate* member of the relationship
+- The `type` field is available to create an ontology or high level categories that can be used to group related relationships. 
+The platform makes no inferences about this case-sensitive field.
+
+## Relationship Management [/relationships]
+### Create a new object   [PUT]
+
+The following object fields are all required to create a new record:
+
+- `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
+[data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Data Types")
+- `referenceURN` must point to a pre-existing record of the given `entityReferenceType`
+- `type` is required and constrained to 255 characters
+- `relatedEntityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
+[data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Data Types")
+- `relatedReferenceURN` must point to a pre-existing record of the given `relatedEntityReferenceType`
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+
+#### Idempotent Behavior
+This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result 
+
+- **201 SUCCESS_CREATED** if the record is new
+- **200 SUCCESS_OK** if a relationship between the referenced objects already existed in the database, in which 
+case **the `type` field and `moniker` fields are updated to reflect the values submitted**
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "entityReferenceType": "Object",
+                "referenceURN" : "urn:uuid:12345",
+                "type": "Owns",
+                "relatedEntityReferenceType": "Object",
+                "relatedReferenceURN" : "urn:uuid:54321"
+            }
+            
++ Response 201 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipDefined
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipDefined
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:12345 exists"
+            }
