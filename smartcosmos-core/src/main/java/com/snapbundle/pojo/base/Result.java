@@ -15,6 +15,7 @@ public enum Result
     ERR_UNKNOWN_ENTITY(-9, "Unknown %s entity with urn %s"),
     ERR_UNKNOWN_TYPE(-10, "%s enum does not define type %s"),
     ERR_SESSION_ALREADY_CLOSED(-11, "session was previously closed"),
+    ERR_NO_SUCH_EMAIL(-12, "No user associated with email address %s"),
 
     ERR_EXTENSION_SECURITY_RESTRICTION(-50, "Extensions are not permitted to perform %s"),
     ERR_EXTENSION_NO_ACCESS(-51, "Caller lacked the authorization to complete the requested operation"),
