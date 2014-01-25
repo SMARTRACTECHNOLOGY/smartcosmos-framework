@@ -23,6 +23,10 @@ public final class Field extends VersionData
 
     public static final String HTTP_HEADER_VIEW = "SnapBundle-View";
 
+    public static final String HTTP_HEADER_START_TIMESTAMP = "SnapBundle-Session-Start";
+
+    public static final String HTTP_HEADER_STOP_TIMESTAMP = "SnapBundle-Session-Stop";
+
     /**
      * Use this value to re-assign the null value to a moniker field after it was
      * initially assigned with a value.
