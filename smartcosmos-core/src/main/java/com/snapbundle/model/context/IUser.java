@@ -29,10 +29,6 @@ public interface IUser extends IAccountDomainResource<IUser>
 
     void setSurname(String surname);
 
-    String getRealm();
-
-    void setRealm(String realm);
-
     String getEmailAddress();
 
     void setEmailAddress(String emailAddress);

@@ -35,27 +35,18 @@ public class User extends DomainResource<IUser> implements IUser
     @JsonDeserialize(as = Account.class)
     protected IAccount account;
 
-    @JsonView(JsonGenerationView.Standard.class)
+    @JsonView(JsonGenerationView.Full.class)
     @JsonDeserialize(as = ObjectImpl.class)
     protected IObject object;
 
-    @JsonView(JsonGenerationView.Standard.class)
+    @JsonView(JsonGenerationView.Full.class)
     private String givenName;
 
-    @JsonView(JsonGenerationView.Standard.class)
+    @JsonView(JsonGenerationView.Full.class)
     private String surname;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    private String realm;
-
-    @JsonView(JsonGenerationView.Minimum.class)
     protected RoleType roleType;
-
-    @Override
-    public void copy(IUser user)
-    {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
-    }
 
     @Override
     public String getEmailAddress()
@@ -118,18 +109,6 @@ public class User extends DomainResource<IUser> implements IUser
     }
 
     @Override
-    public String getRealm()
-    {
-        return realm;
-    }
-
-    @Override
-    public void setRealm(String realm)
-    {
-        this.realm = realm;
-    }
-
-    @Override
     public RoleType getRoleType()
     {
         return roleType;
@@ -154,7 +133,6 @@ public class User extends DomainResource<IUser> implements IUser
         if (!emailAddress.equals(user.emailAddress)) return false;
         if (givenName != null ? !givenName.equals(user.givenName) : user.givenName != null) return false;
         if (object != null ? !object.equals(user.object) : user.object != null) return false;
-        if (!realm.equals(user.realm)) return false;
         if (roleType != user.roleType) return false;
         if (surname != null ? !surname.equals(user.surname) : user.surname != null) return false;
 
@@ -170,7 +148,6 @@ public class User extends DomainResource<IUser> implements IUser
         result = 31 * result + (object != null ? object.hashCode() : 0);
         result = 31 * result + (givenName != null ? givenName.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + realm.hashCode();
         result = 31 * result + roleType.hashCode();
         return result;
     }
