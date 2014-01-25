@@ -4,7 +4,49 @@ HOST: https://snapbundle.tagdynamics.net
 # SnapBundle™ Platform API
 SnapBundle™ is a platform purposefully built to be an application's contextual data store.
 
-NOTE: This document is a **work in progress**.
+**NOTE:** This document is a **work in progress**.
+
+## General Design Notes
+### URNs as Keys
+All SnapBundle™ objects are keyed off of a **UUID**, represented using the standard URN nomenclature for a UUID:  **urn:uuid:<opaque key>**
+
+> Any API call that requires a `{referenceUrn}` parameter must provide a full URN UUID reference, e.g. *urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d*
+
+### Tracking Modification Timestamps
+All SnapBundle objects maintain a `lastModifiedTimestamp` field to track when the record was last updated. The purpose of this timestamp is to provide a valid eTag for HTTP cache support.
+
+### Moniker: Arbitrary External System Alias
+All SnapBundle objects support a `moniker` field that can be used as the developer sees fit. This field is **never** interpreted by the platform, and it may be null if the developer chooses not to use it (null is the default value if the field is omitted in a **PUT** call).
+
+> The SnapBundle authors promise developers that the platform itself will never rely on the moniker value for any feature, now or in the future, leaving it entirely available for 3rd party developers to use as they see fit in their applications.
+
+A popular usage of the `moniker` field is to provide a logical link between an SnapBundle object, say an RFID Object record, and some type of proprietary (abstract) key in your back office account, e.g. ADDR-123-43-2013. This could be a link to a legacy key, or a JSON or XML stanza for more structure content.
+
+**NOTE:** The `moniker` field is **limited to a maximum of 2048 characters** at this time. If you need more space than that, create a **File** and use the moniker to store the file's system-assigned URN.
+
+### JSON Serialization Views
+Every **GET** endpoint allows the developer to control the verbosity of the JSON response. Generally, this fact is encapsulated and of little concern to most developers. However, it is possible in rare situations to observe the same identical object, as indicated by its URN key, serialized with more (or less) fields. The serialization levels supported by the platform include:
+
+   * **Published** - Publicly accessible fields (specific to the Extension Framework)
+
+   * **Minimum** - All Published fields, plus highly pertinent fields
+
+   * **Standard** - [**default**] All Minimum fields, plus additional contextual fields
+
+   * **Full** - All Standard fields, plus fields rarely referenced
+
+
+   * **Restricted** - Opaque fields accessible only to the SnapBundle platform's cloud-side code and *never transmitted over the wire* under any circumstance. These fields are *never updatable* by the developer. If a `view` query parameter is set to **Restricted**, it returns **Standard**.
+
+#### Requesting a Specific Serialization View
+Every **GET** endpoint is serialized using the **Standard* JSON view by default, but can be overrode by the developer by including a `view` query string parameter set to the case-sensitive name of one of the serialization views.
+
+The query string parameter `view` must be a case-sensitive value matching one of the following: {`Published`, `Minimum`, `Standard`, or `Full`}. _Any value outside of this range automatically defaults to `Standard`. 
+
+**NOTE:** The default serialization view for any POST that returns a response is `Standard` and cannot be changed at this time.
+
+## Support
+The fastest way to obtain support is by emailing <engineering@tagdynamics.net>.
 
 # Group Registration Endpoints
 Every SnapBundle Account belongs to a _security realm_. By default, the registration endpoint will extract the domain name from your email address. However, if you are using a popular email service like GMail or Yahoo, you **must** provide a custom realm name at registation. Use the **Realm Availability** endpoint to see if your desired realm name is available.   
@@ -17,7 +59,7 @@ The SnapBundle™ platform is a multi-tenant system by design. Each Account oper
 > If you are an Individual or a Developer registering with a popular email address from say yahoo.com, gmail.com, etc. then it is strongly recommended that you register using a unique, custom realm. This approach will allow the use of a individual email, e.g. you@yahoo.com, even though a realm like yahoo.com is prohibited. If you are an Enterprise, it is strongly recommended you omit the realm, which will automatically register your email address domain as your realm.
 
 ## Realm Availability [/registration/realm/{realm}]
-### Checks to see if the named realm is available for registration [GET]
+### Check to see if the named realm is available for registration [GET]
 
 + Parameters
     + realm (required, string, `foo.com`) ... Check to see if the named realm is available for registration
@@ -25,7 +67,7 @@ The SnapBundle™ platform is a multi-tenant system by design. Each Account oper
 + Response 200 (application/json)
 
             {
-                "result": 0,
+                "code": 0,
                 "message" : "foo.com"
             }
 
@@ -43,7 +85,7 @@ The SnapBundle™ platform is a multi-tenant system by design. Each Account oper
 
     + Headers
 
-            SnapBundle-Event: RegistrationRequest, AccountDefined
+            SnapBundle-Event : RegistrationRequest, AccountDefined
             
     + Body
     
@@ -57,8 +99,11 @@ The SnapBundle™ platform is a multi-tenant system by design. Each Account oper
 # Group Account Management Endpoints
 The following endpoints offer self-service password management features.
 
-## Account Details [/account]
-### Display account details [GET]
+## Account Details [/account{?view}]
+### Lookup my account details [GET]
+
++ Parameters
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
 
 + Request
 
@@ -70,7 +115,8 @@ The following endpoints offer self-service password management features.
 
     + Headers
 
-            SnapBundle-Event: AccountAccessed
+            SnapBundle-Event : AccountAccessed
+            SnapBundle-View : Standard
             
     + Body
     
@@ -83,7 +129,7 @@ The following endpoints offer self-service password management features.
             }
 
 ## Change Your Password [/account/password/change]
-### Changes the authenticated user's password, presuming they know their existing password to change to a new password. [POST]
+### Change the authenticated user's password, presuming they know their existing password to change to a new password. [POST]
 
 + Request (application/json)
 
@@ -106,12 +152,12 @@ The following endpoints offer self-service password management features.
     + Body
     
             {
-                "result" : 1,
+                "code" : 1,
                 "message": "Password successfully changed"
             }
 
 ## Reset Lost Password [/account/password/reset]
-### Triggers a password reset workflow via email for the specified Account associated with the indicated email address. [POST]
+### Trigger a password reset workflow via email for the specified Account associated with the indicated email address. [POST]
 
 + Request (application/json)
     
@@ -128,6 +174,177 @@ The following endpoints offer self-service password management features.
     + Body   
     
             {
-                "result" : 1,
+                "code" : 1,
                 "message": "Password reset email has been sent"
             }
+
+# Group Device Management Endpoints
+
+## Device Definitions [/devices]
+### Create a new device associated with an arbitrary identification value [PUT]
+
+The following device attributes are used to create a new record:
+
+- `identification` is required and is constrained to 255 characters. It is arbitrarily defined by the developer, but a consistent approach should be utilized. For example, 
+the device's phone number or IMEI could be used consistently to identify a smartphone
+- `name` is required and is constrained to 255 characters
+- `type` is required and is constrained to 255 characters. It is arbitrarily defined by the developer; the platform never interprets the value stored in this field. It could
+be general, like *laptop*, or it could be very specific like *MacBook Pro 15" Laptop*  
+- `description` is optional and may be omitted (defaults to **null**)
+- `activeFlag` is optional and may be omitted (defaults to **true**)
+- `moniker` is optional and may be omitted (defaults to **null**)
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "identification": "gqorighfawpftjqevznxclmndaawetha",
+                "name": "Jason's Phone",
+                "type": "Android"
+            }
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : DeviceDefined
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
+### Update an existing device [POST]
+
+The request body must include a value in either an `identification` or the `urn` field. Only those fields being updated need to 
+be included in the JSON body. For example, if you only want to update the `name` of the device, only include that field in the 
+request body.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "identification": "gqorighfawpftjqevznxclmndaawetha",
+                "name": "Jason's New Phone",
+            }
+            
++ Response 204
+
+    + Headers
+
+            SnapBundle-Event : DeviceUpdated    
+
+## Lookup Specific Device by URN [/devices/{urn}{?view}]
+### Lookup a specific device by its system-assigned URN key [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN key assigned to the device at creation time
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : DeviceAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d,
+                "lastModifiedTimestamp" : 1390607277299,
+                "identification" : "gqorighfawpftjqevznxclmndaawetha",
+                "name" : "Jason's Phone",
+                "description" : null,
+                "type" : "Android"
+                "activeFlag" : true
+            }
+
+
+## Lookup Specific Device by Identification [/devices/device/{identification}{?view}]
+### Lookup a specific device by its system-assigned URN key [GET]
+
++ Parameters
+    + identification (required, string, `gqorighfawpftjqevznxclmndaawetha`) ... Exact case-sensitive identification value to locate
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : DeviceAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d,
+                "lastModifiedTimestamp" : 1390607277299,
+                "identification" : "gqorighfawpftjqevznxclmndaawetha",
+                "name" : "Jason's Phone",
+                "description" : null,
+                "type" : "Android"
+                "activeFlag" : true
+            }
+
+
+## Lookup Devices with Name Pattern [/devices{?nameLike,view}]
+### Lookup an array of matching devices [GET]
+
+Call always returns a JSON array, which may be an empty array if no devices are found that match the `nameLike` query parameter.
+
++ Parameters
+    + nameLike (optional, string, `Jaso`) ... A case-sensitive *starts with* string pattern to match against. If omitted, then all records will be returned.
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : DeviceAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            [
+                {
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d,
+                    "lastModifiedTimestamp" : 1390607277299,
+                    "identification" : "gqorighfawpftjqevznxclmndaawetha",
+                    "name" : "Jason's Phone",
+                    "description" : null,
+                    "type" : "Android"
+                    "activeFlag" : true
+                }
+            ]
+
