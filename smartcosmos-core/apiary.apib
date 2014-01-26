@@ -1564,3 +1564,93 @@ include that field in the request body.
             
 + Response 204 
  
+# Group Object Interaction Endpoints
+## Overview
+The Object Interaction is the major metaphor that the entire platform is effectively designed around. An Object Interaction 
+captures context; _this_ Object did _something_ with _that_ object at _this_ time. The interaction is typically decorated with 
+additional characteristics, including metadata, tags, geospatial references, etc. 
+
+The primary difference between a _Reference_ and an _Interaction_ is cardinality. Either you are a customer with that bank,
+or you aren't a customer- but if you are a customer then each deposit or withdrawl would be a separate interaction. Where
+a Reference is treated as a binary relationship (yes or no, true or false), an Interaction is treated as a 0, 1, or many
+relationship.
+
+> Every Object Interaction is read-only once submitted! Field values cannot be updated; records cannot be deleted once 
+the interaction is persisted by design.
+
+Object Interactions are inherently _bi-temporal_ in nature. There is the time of interaction as captured on a device, perhaps a 
+smartphone or laptop, and there is the time of receipt as captured by the platform in the cloud. These two times could have a 
+difference of minutes, hours, or perhaps days in those instances where the device lacked an active Internet connection.
+
+## Object Interaction Session Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | fase | Full | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Full | null
+entityReferenceType | EntityReferenceType | true | false | Minimum |
+referenceURN | String | true | false | Minimum |
+object | IObject | true | false | Minimum |
+recordedTimestamp | long | true | false | Standard |
+receivedTimestamp | long | true | false | Full | Generated
+hasSessionMembership | Boolean | true | false | Minimum | Generated
+objectInteractionSession | IObjectInteractionSession | false | false | Standard | null
+
+### Field Notes
+- The `entityReferenceType` and `referenceURN` fields jointly represent the *owner* or *initiator* of the interaction
+- The `recordedTimestamp` field is developer-assigned and identifies the *actual* time of the interaction
+- The `receivedTimestamp` field is system-assigned when the **PUT** call is made.
+- The `type` field is available to create an ontology or high level categories that can be used to group related interactions. 
+The platform makes no inferences about this case-sensitive field.
+- The `object` must be defined using the developer-assigned `objectUrn` when issuing a **PUT** call to capture the interaction.
+
+
+## Interaction Management [/interactions]
+### Capture a specific interaction [PUT]
+
+The following interaction fields may be used to create a new record:
+
+- `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
+[data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Data Types")
+- `referenceURN` must point to a pre-existing record of the given `entityReferenceType`
+- `type` is required and constrained to 255 characters
+- `recordedTimestamp` is required an must a valid long since the unix epoch
+- `objectInteractionSession` is optional and may be omitted; defaults to null. Set value to the system-assigned URN on **PUT** call
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "name": "Daily Tag Scan",
+                "type": "RFID Scan"
+            }
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : InteractionSessionStart
+            SnapBundle-Session-Start : 2013-04-17T09:12:36-00:00
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: type"
+            }
