@@ -20,8 +20,9 @@ package com.snapbundle.model.context;
 import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IBitemporalObject;
 import com.snapbundle.model.base.IReferentialObject;
+import com.snapbundle.model.base.ITypedObject;
 
-public interface IObjectInteraction extends IAccountDomainResource<IObjectInteraction>, IBitemporalObject, IReferentialObject
+public interface IObjectInteraction extends IAccountDomainResource<IObjectInteraction>, IBitemporalObject, IReferentialObject, ITypedObject
 {
     IObject getObject();
 

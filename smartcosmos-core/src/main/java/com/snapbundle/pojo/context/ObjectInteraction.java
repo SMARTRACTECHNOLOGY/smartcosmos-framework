@@ -19,6 +19,7 @@ package com.snapbundle.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.base.Preconditions;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IObjectInteraction;
@@ -47,6 +48,22 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
 
     @JsonView(JsonGenerationView.Standard.class)
     protected IObjectInteractionSession objectInteractionSession;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    protected String type;
+
+    @Override
+    public String getType()
+    {
+        return type;
+    }
+
+    @Override
+    public void setType(String type)
+    {
+        Preconditions.checkNotNull(type, "type must not be null");
+        this.type = type;
+    }
 
     @Override
     public IAccount getAccount()
