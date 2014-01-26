@@ -1628,22 +1628,24 @@ The following interaction fields may be used to create a new record:
     + Body
     
             {
-                "name": "Daily Tag Scan",
-                "type": "RFID Scan"
+                "objectUrn" : "urn:instagram:FooBar:ec3819a1-bc9b-4550-afda-4bd8cbb1dd16",
+                "entityReferenceType" : "Object",
+                "referenceUrn" : "urn:instagram:FooQux:47c23bc6-2a58-4e37-93b0-848776b42404",
+                "recordedTimestamp" : 1390779082039,
+                "type" : "Transaction",
             }
             
 + Response 200 (application/json)
 
     + Headers
 
-            SnapBundle-Event : InteractionSessionStart
-            SnapBundle-Session-Start : 2013-04-17T09:12:36-00:00
-            
+            SnapBundle-Event : ObjectInteraction
+
     + Body
     
             {
                 "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+                "message" : "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
             }
             
 + Response 400 (application/json)
@@ -1654,3 +1656,95 @@ The following interaction fields may be used to create a new record:
                 "code" : -5,
                 "message" : "JSON is missing a required field: type"
             }
+
+## Lookup Matching Interactions [/interactions{?view,objectUrn}]
+### Lookup an array of matching sessions [GET]
+
+If not `objectUrn` query parameter is included, then all interactions are returned.
+
++ Parameters
+    + objectUrn (optional, string, `urn:instagram:FooBar:ec3819a1-bc9b-4550-afda-4bd8cbb1dd16`) ... Developer-assigned `objectUrn` to search for
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : ObjectInteractionAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            [
+                {
+                   "entityReferenceType": "Object",
+                   "hasSessionMembership": false,
+                   "lastModifiedTimestamp": 1390779082063,
+                   "object": {
+                      "activeFlag": true,
+                      "description": null,
+                      "lastModifiedTimestamp": 1390779081986,
+                      "name": "foo",
+                      "objectUrn": "urn:instagram:FooBar:ec3819a1-bc9b-4550-afda-4bd8cbb1dd16",
+                      "type": "Transaction",
+                      "urn": "urn:uuid:ac912b9e-fa52-48e4-a477-aa99f0a2bf92"
+                   },
+                   "objectInteractionSession": null,
+                   "recordedTimestamp": 1390779082039,
+                   "referenceURN": "urn:instagram:FooQux:47c23bc6-2a58-4e37-93b0-848776b42404",
+                   "urn": "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
+                }
+            ]
+            
++ Response 204 
+
+
+## Lookup Specific Object Interaction by URN [/interactions/{urn}{?view}]
+### Lookup a specific interaction by its system-assigned URN key [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : ObjectInteractionAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            {
+               "entityReferenceType": "Object",
+               "hasSessionMembership": false,
+               "lastModifiedTimestamp": 1390779082063,
+               "object": {
+                  "activeFlag": true,
+                  "description": null,
+                  "lastModifiedTimestamp": 1390779081986,
+                  "name": "foo",
+                  "objectUrn": "urn:instagram:FooBar:ec3819a1-bc9b-4550-afda-4bd8cbb1dd16",
+                  "type": "Transaction",
+                  "urn": "urn:uuid:ac912b9e-fa52-48e4-a477-aa99f0a2bf92"
+               },
+               "objectInteractionSession": null,
+               "recordedTimestamp": 1390779082039,
+               "referenceURN": "urn:instagram:FooQux:47c23bc6-2a58-4e37-93b0-848776b42404",
+               "urn": "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
+            }
+            
++ Response 204 
+
