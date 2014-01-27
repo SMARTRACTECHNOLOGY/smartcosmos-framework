@@ -133,8 +133,6 @@ public final class Field extends VersionData
     // Timeline Specific Fields
     //
 
-    public static final String TIMESTAMP_FIELD = "timestamp";
-
     public static final String VISIBLE_FIELD = "visible";
 
     public static final String HIGHLIGHT_FIELD = "highlight";

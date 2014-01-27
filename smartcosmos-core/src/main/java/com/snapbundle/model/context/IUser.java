@@ -19,6 +19,14 @@ package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
 
+/**
+ * System user with login and query privileges. Users are typically
+ * not considered part of the contextual model captured by the system.
+ * <p/>
+ * SnapBundle is <i>not a directory services</i> platform, so the constituent
+ * parts of a user are relatively simplistic. Directory services are instead
+ * a delegated operation based on the configuration of the platform as a whole.
+ */
 public interface IUser extends IAccountDomainResource<IUser>
 {
     String getGivenName();

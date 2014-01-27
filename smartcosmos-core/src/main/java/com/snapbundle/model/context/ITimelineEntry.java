@@ -37,9 +37,9 @@ import com.snapbundle.model.base.IReferentialObject;
  */
 public interface ITimelineEntry extends IAccountDomainResource<ITimelineEntry>, INamedObject<ITimelineEntry>, IReferentialObject
 {
-    long getTimestamp();
+    long getRecordedTimestamp();
 
-    void setTimestamp(long timestamp);
+    void setRecordedTimestamp(long recordedTimestamp);
 
     boolean isHighlight();
 

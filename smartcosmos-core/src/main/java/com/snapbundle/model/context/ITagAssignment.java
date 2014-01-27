@@ -18,9 +18,12 @@
 package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
-import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.base.IReferentialObject;
 
+/**
+ * Captures a {@link com.snapbundle.model.context.ITag} assignment with a specific
+ * {@link com.snapbundle.model.base.IReferentialObject} within a specific account context.
+ */
 public interface ITagAssignment extends IAccountDomainResource<ITagAssignment>, IReferentialObject
 {
     ITag getTag();

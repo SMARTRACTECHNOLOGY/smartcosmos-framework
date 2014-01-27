@@ -15,21 +15,9 @@
  * limitations under the License.
  */
 
-package com.snapbundle.model.context;
-
 /**
- * Supported type-safe data types supported by {@link com.snapbundle.model.context.IMetadata}.
+ * Collection of SnapBundle context modeling artifacts. The interfaces and
+ * enumerations within this package form the foundation for the major
+ * contextual object model components.
  */
-public enum MetadataDataType
-{
-    Custom,
-    StringType,
-    DateType,
-    IntegerType,
-    LongType,
-    BooleanType,
-    FloatType,
-    DoubleType,
-    JSONType,
-    XMLType
-}
+package com.snapbundle.model.context;

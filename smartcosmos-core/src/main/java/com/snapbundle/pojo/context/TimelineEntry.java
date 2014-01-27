@@ -103,15 +103,15 @@ public class TimelineEntry extends ReferentialObject<ITimelineEntry> implements 
     }
 
     @Override
-    public long getTimestamp()
+    public long getRecordedTimestamp()
     {
         return timelineTimestamp;
     }
 
     @Override
-    public void setTimestamp(long timestamp)
+    public void setRecordedTimestamp(long recordedTimestamp)
     {
-        this.timelineTimestamp = timestamp;
+        this.timelineTimestamp = recordedTimestamp;
     }
 
     @Override
