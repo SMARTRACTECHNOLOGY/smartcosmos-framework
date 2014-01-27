@@ -1103,6 +1103,230 @@ query at this time.
                 }
             ]
             
+            
+# Group Object Address Endpoints
+## Overview
+Every SnapBundle `Object` may optionally be linked to a physical address. Addresses are usually broadly defined with the `type` field, 
+e.g. _physical_ or _last known_. The difference between object address `type` values is arbitrarily defined by the developer.
+
+**NOTE:** There is no limit on how many different address types an object could be associated with. For example, using the `type` field 
+one could define a _physical_ and a _mailing_ record set. Likewise, with the `timestamp` field one could insert multiple addresses, 
+capturing a series of addresses visited or even a _last known address_ concept.
+
+The Object Address entry differs with a geospatial entry in that addresses rely on political descriptors, e.g. a city names, instead of a 
+latitude and longitude on a map projection. The record types are considered complimentary.  
+
+Incomplete or partial addresses are fully supported by the platform. Only an `objectUrn` and a `type` are required to create an address record.  
+
+## Object Address Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Full | null
+object | IObject | true | false | Standard |
+type | String | true | true | Minimum |  
+line1 | String | false | true | Minimum | null
+line2 | String | false | true | Minumum | null
+city | String | false | true | Minimum | null
+stateProvince | String | false | true | Minimum | null
+countryAbbreviation | String | false | true | Minimum | null
+timestamp | long | false | true | Standard | 0
+
+### Field Notes
+- The `type` field is available to create an ontology or high level categories that can be used to group related addresses. 
+The platform makes no inferences about this case-sensitive field.
+
+## Object Address Management [/objects/object/{objectUrn}/address]
+### Create a new object address   [PUT]
+
+The following object fields may be used to create a new record:
+
+- `objectUrn` is required and constrained to 1024 characters 
+- `type` is required and constrained to 255 characters
+- `timestamp` is optional and its context is arbitrarily defined by the developer
+- `line1` and `line2` are optional and constrained to 1024 characters
+- `city` is optional and constrained to 1024 characters
+- `stateProvince` is optional and constrained to 50 characters
+- `postalCode` is optional and constrained to 20 characters
+- `countryAbbreviation` is optional and constrained to 2 characters. Developers MUST use [ISO 3166-1](http://www.iso.org/iso/country_codes "ISO 3166"), 
+the internationally recognized standard for country codes.
+
++ Parameters
+    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN to assign the address to
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "type": "Mailing Address",
+                "line1": "123 Street",
+                "stateProvince" : "CA",
+                "countryAbbreviation" : "US"
+            }
+            
++ Response 201 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : ObjectAddressDefined
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:0c7b4d26-1843-44eb-a134-3fbcbbf0578d"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: type"
+            }
+
+## Update Specific Object Address [/objects/object/{objectUrn}/address/{urn}]
+### Update an existing object address [POST]
+
+The request body only needs to include those fields being updated. For example, if you only want to update 
+the `stateProvince` of the object, only include that field in the request body.
+
++ Parameters
+    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "stateProvince": "TX"
+            }
+            
++ Response 204
+
+    + Headers
+
+            SnapBundle-Event : ObjectAddressUpdated    
+
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }   
+                        
+## Lookup Specific Object Address by URN [/objects/object/{objectUrn}/address/{urn}{?view}]
+### Lookup a specific object address by its system-assigned URN key [GET]
+
++ Parameters
+    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : ObjectAddressAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            {
+               "city": null,
+               "countryAbbreviation": "US",
+               "lastModifiedTimestamp": 1390787660961,
+               "line1": "123 Street",
+               "line2": null,
+               "object": {
+                  "activeFlag": true,
+                  "description": null,
+                  "lastModifiedTimestamp": 1390787660901,
+                  "name": "foo",
+                  "objectUrn": "urn:instagram:FooBar:8fbc1d55-0c3f-461a-ba60-29d7631147fc",
+                  "type": "Person",
+                  "urn": "urn:uuid:74e9e97a-1f6b-4d38-a12e-a61c42c7c126"
+               },
+               "postalCode": null,
+               "stateProvince": "CA",
+               "timestamp": 1390787660961,
+               "type": "Mailing",
+               "urn": "urn:uuid:0c7b4d26-1843-44eb-a134-3fbcbbf0578d"
+            }
+
++ Response 204 
+             
+## Lookup Matching Object Addresses by URN [/objects/object/{objectUrn}/address{?view,count}]
+### Lookup an array of matching object addresses [GET]
+
++ Parameters
+    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
+    + count (optional, integer, `1`) ... Maximum number of address records to return; defaults to 1
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : ObjectAddressAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            [
+                {
+                   "city": null,
+                   "countryAbbreviation": "US",
+                   "lastModifiedTimestamp": 1390787660961,
+                   "line1": "123 Street",
+                   "line2": null,
+                   "object": {
+                      "activeFlag": true,
+                      "description": null,
+                      "lastModifiedTimestamp": 1390787660901,
+                      "name": "foo",
+                      "objectUrn": "urn:instagram:FooBar:8fbc1d55-0c3f-461a-ba60-29d7631147fc",
+                      "type": "Person",
+                      "urn": "urn:uuid:74e9e97a-1f6b-4d38-a12e-a61c42c7c126"
+                   },
+                   "postalCode": null,
+                   "stateProvince": "CA",
+                   "timestamp": 1390787660961,
+                   "type": "Mailing",
+                   "urn": "urn:uuid:0c7b4d26-1843-44eb-a134-3fbcbbf0578d"
+                }
+            ]
+
++ Response 204 
+             
+            
 # Group Relationship Endpoints
 ## Overview
 SnapBundle provides a simple, flexible, and incredibly powerful relationship modeling mechanism. The model allows the declaration that 
