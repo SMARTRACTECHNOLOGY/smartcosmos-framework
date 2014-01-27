@@ -2,7 +2,7 @@
 
 
 # NEW! Documentation at apiary
-The documentation here is **stale** and being ported to [http://docs.snapbundle.apiary.io](http://docs.snapbundle.apiary.io "SnapBundle at apiary).
+The documentation here is **stale** and being ported to [http://docs.snapbundle.apiary.io](http://docs.snapbundle.apiary.io "SnapBundle at apiary").
 
 ## The SnapBundle™ Hypothesis
 
