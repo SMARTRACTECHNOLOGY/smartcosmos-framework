@@ -19,12 +19,12 @@ package com.snapbundle.pojo.base;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.snapbundle.model.base.IAccountOwner;
+import com.snapbundle.model.base.IAccountContext;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.pojo.context.Account;
 import com.snapbundle.util.json.JsonGenerationView;
 
-public class AccountNamedObject<T> extends NamedObject<T> implements IAccountOwner
+public class AccountNamedObject<T> extends NamedObject<T> implements IAccountContext
 {
     @JsonDeserialize(as = Account.class)
     @JsonView(JsonGenerationView.Full.class)

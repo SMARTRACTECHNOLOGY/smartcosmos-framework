@@ -17,11 +17,13 @@
 
 package com.snapbundle.model.base;
 
-import com.snapbundle.model.context.IAccount;
-
-public interface IAccountDomainResource<T> extends IDomainResource<T>
+/**
+ * Account scoped domain resource. SnapBundle is a multi-tenant system and relies
+ * on this interface to ensure that all web service calls are appropriately
+ * sandboxed within the sole account of the authenticated user.
+ *
+ * @param <T>
+ */
+public interface IAccountDomainResource<T> extends IDomainResource<T>, IAccountContext
 {
-    IAccount getAccount();
-
-    void setAccount(IAccount account);
 }

@@ -17,14 +17,14 @@
 
 package com.snapbundle.model.base;
 
-import com.snapbundle.model.context.IAccount;
-
-public interface IReferentialObject
+/**
+ * Defines an explicit relationship between two otherwise disparate domain
+ * resources <i>within the same account context</i>. The pairing is always
+ * based on the combination of the {@link com.snapbundle.model.base.EntityReferenceType}
+ * and the system-assigned URN, the "reference urn."
+ */
+public interface IReferentialObject extends IAccountContext
 {
-    IAccount getAccount();
-
-    void setAccount(IAccount account);
-
     String getReferenceUrn();
 
     void setReferenceUrn(String urn);

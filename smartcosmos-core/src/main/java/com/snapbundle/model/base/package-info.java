@@ -16,7 +16,6 @@
  */
 
 /**
- * Collection of GeoJSON specific POJO classes.
+ * Foundational interfaces from which the entire SnapBundle object model is derived.
  */
-package com.snapbundle.geo;
-
+package com.snapbundle.model.base;

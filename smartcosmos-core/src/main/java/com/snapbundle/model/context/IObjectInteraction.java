@@ -18,15 +18,22 @@
 package com.snapbundle.model.context;
 
 import com.snapbundle.model.base.IAccountDomainResource;
-import com.snapbundle.model.base.IBitemporalObject;
 import com.snapbundle.model.base.IReferentialObject;
 import com.snapbundle.model.base.ITypedObject;
 
-public interface IObjectInteraction extends IAccountDomainResource<IObjectInteraction>, IBitemporalObject, IReferentialObject, ITypedObject
+public interface IObjectInteraction extends IAccountDomainResource<IObjectInteraction>, IReferentialObject, ITypedObject
 {
     IObject getObject();
 
     void setObject(IObject object);
+
+    long getRecordedTimestamp();
+
+    void setRecordedTimestamp(long timestamp);
+
+    long getReceivedTimestamp();
+
+    void setReceivedTimestamp(long timestamp);
 
     boolean isSessionMember();
 

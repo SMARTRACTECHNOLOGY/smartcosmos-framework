@@ -17,18 +17,14 @@
 
 package com.snapbundle.model.base;
 
+import com.snapbundle.model.context.IAccount;
+
 /**
- * Captures two key temporal values: the time an object was actually recorded and the time the object was actually
- * received in the Cloud. Due to a network outage, these timestamps could be dramatically different, perhaps days
- * apart.
+ * Establishes an account context that formally owns the domain resource.
  */
-public interface IBitemporalObject
+public interface IAccountContext
 {
-    long getRecordedTimestamp();
+    IAccount getAccount();
 
-    void setRecordedTimestamp(long timestamp);
-
-    long getReceivedTimestamp();
-
-    void setReceivedTimestamp(long timestamp);
+    void setAccount(IAccount account);
 }
