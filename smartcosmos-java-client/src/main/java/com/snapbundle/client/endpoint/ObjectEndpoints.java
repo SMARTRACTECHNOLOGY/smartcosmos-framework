@@ -1,6 +1,5 @@
 package com.snapbundle.client.endpoint;
 
-import com.snapbundle.model.context.ObjectType;
 import com.snapbundle.util.json.ViewType;
 
 public final class ObjectEndpoints
@@ -73,7 +72,7 @@ public final class ObjectEndpoints
 
         String objectUrnLike = "*";
 
-        ObjectType objectType = null;
+        String objectType = null;
 
         ViewType view = ViewType.Standard;
 
@@ -106,7 +105,7 @@ public final class ObjectEndpoints
             return this;
         }
 
-        public Builder type(ObjectType objectType)
+        public Builder type(String objectType)
         {
             this.objectType = objectType;
             return this;

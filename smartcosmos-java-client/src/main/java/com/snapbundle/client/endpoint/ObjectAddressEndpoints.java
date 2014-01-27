@@ -12,37 +12,37 @@ public final class ObjectAddressEndpoints
 
     private static final String CREATE__PUT = BASE;
 
-    private static final String UPDATE__POST = BASE;
+    private static final String UPDATE__POST = BASE.concat("/%s");
 
     private static final String FIND_LAST_N__GET = BASE.concat("?count=%s&view=%s");
 
     private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
 
-    private static final String DELETE__DELETE = BASE;
+    private static final String DELETE__DELETE = BASE.concat("/%s");
 
-    public static String create()
+    public static String create(String objectUrn)
     {
-        return CREATE__PUT;
+        return String.format(CREATE__PUT, objectUrn);
     }
 
-    public static String delete()
+    public static String delete(String objectUrn, String urn)
     {
-        return DELETE__DELETE;
+        return String.format(DELETE__DELETE, objectUrn, urn);
     }
 
-    public static String update()
+    public static String update(String objectUrn, String urn)
     {
-        return UPDATE__POST;
+        return String.format(UPDATE__POST, objectUrn, urn);
     }
 
-    public static String findByUrn(String urn)
+    public static String findByUrn(String objectUrn, String urn)
     {
-        return findByUrn(urn, ViewType.Standard);
+        return findByUrn(objectUrn, urn, ViewType.Standard);
     }
 
-    public static String findByUrn(String urn, ViewType viewType)
+    public static String findByUrn(String objectUrn, String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN__GET, objectUrn, urn, viewType);
     }
 
     public static String findLast(int count)
