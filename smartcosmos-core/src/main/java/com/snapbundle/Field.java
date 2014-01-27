@@ -63,6 +63,8 @@ public final class Field extends VersionData
 
     public static final String STATE_PROVINCE_FIELD = "stateProvince";
 
+    public static final String POSTAL_CODE_FIELD = "postalCode";
+
     public static final String COUNTRY_ABBREVIATION_FIELD = "countryAbbreviation";
 
     public static final String NAME_FIELD = "name";
