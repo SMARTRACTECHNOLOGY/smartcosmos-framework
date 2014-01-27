@@ -6,6 +6,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
+import com.snapbundle.Field;
+import com.snapbundle.model.event.IEvent;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,6 +68,32 @@ public final class JsonUtil
         }
 
         return instance;
+    }
+
+    public static JSONObject translateEvent(IEvent event) throws JSONException
+    {
+        JSONObject curEvent = new JSONObject()
+                .put(Field.URN_FIELD, event.getUrn())
+                .put(Field.EVENT_TYPE, event.getEventType())
+                .put(Field.LAST_MODIFIED_TIMESTAMP_FIELD, event.getLastModifiedTimestamp());
+
+        if (event.getUser() != null)
+        {
+            curEvent.put(Field.USER_FIELD, new JSONObject(JsonUtil.toJson(event.getUser(), ViewType.Minimum)));
+        } else
+        {
+            curEvent.put(Field.USER_FIELD, (String) null);
+        }
+
+        if (event.getSource() != null)
+        {
+            curEvent.put(Field.SOURCE_FIELD, new JSONObject(event.getSource()));
+        } else
+        {
+            curEvent.put(Field.SOURCE_FIELD, (String) null);
+        }
+
+        return curEvent;
     }
 
     public static String toJson(Object object)

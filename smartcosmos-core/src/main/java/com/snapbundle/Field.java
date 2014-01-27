@@ -43,6 +43,8 @@ public final class Field extends VersionData
 
     public static final String REALM_FIELD = "realm";
 
+    public static final String SOURCE_FIELD = "source";
+
     public static final String EVENT_TYPE = "eventType";
 
     public static final String CODE_FIELD = "code";
@@ -60,6 +62,10 @@ public final class Field extends VersionData
     public static final String LINE_2_FIELD = "line2";
 
     public static final String CITY_FIELD = "city";
+
+    public static final String LAST_MODIFIED_TIMESTAMP_FIELD = "lastModifiedTimestamp";
+
+    public static final String USER_FIELD = "user";
 
     public static final String STATE_PROVINCE_FIELD = "stateProvince";
 

@@ -28,6 +28,8 @@ public enum EventType
     AccountConfirmed,
     AccountUpdated,
 
+    EventQuery,
+
     UserDefined,
     UserUpdated,
     UserAccessed,
