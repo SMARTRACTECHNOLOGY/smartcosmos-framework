@@ -1413,7 +1413,7 @@ The platform makes no inferences about this case-sensitive field.
 ## Session Management [/sessions]
 ### Start a new object interaction session   [PUT]
 
-The following object fields may be used to create a new record:
+The following fields may be used to create a new record:
 
 - `type` is required and constrained to 255 characters
 - `name` is required and constrained to 255 characters
@@ -1582,7 +1582,7 @@ Object Interactions are inherently _bi-temporal_ in nature. There is the time of
 smartphone or laptop, and there is the time of receipt as captured by the platform in the cloud. These two times could have a 
 difference of minutes, hours, or perhaps days in those instances where the device lacked an active Internet connection.
 
-## Object Interaction Session Fields
+## Object Interaction Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
 urn | String  | true | false | Minimum | Generated
@@ -1658,9 +1658,9 @@ The following interaction fields may be used to create a new record:
             }
 
 ## Lookup Matching Interactions [/interactions{?view,objectUrn}]
-### Lookup an array of matching sessions [GET]
+### Lookup an array of matching interactions [GET]
 
-If not `objectUrn` query parameter is included, then all interactions are returned.
+If no `objectUrn` query parameter is included, then all interactions are returned.
 
 + Parameters
     + objectUrn (optional, string, `urn:instagram:FooBar:ec3819a1-bc9b-4550-afda-4bd8cbb1dd16`) ... Developer-assigned `objectUrn` to search for
@@ -1748,3 +1748,489 @@ If not `objectUrn` query parameter is included, then all interactions are return
             
 + Response 204 
 
+# Group Geospatial Endpoints
+## Overview
+SnapBundle™ fully supports the [GeoJSON 1.0 Specification](http://geojson.org/geojson-spec.html). This powerful specification 
+allows develoeprs to _fully_ define georectified shapes for any object managed by the platform.
+
+The design is similar to popular social media sites that offer check-in capabilities. It is reasonble to define a single 
+georectified entity and then create multiple relationships, such as check-ins, etc. (Remember, the relationship type is an 
+arbitrary String, so a relationship type of "Check-In" could be arbitrarily defined by the developer)
+
+## Geospatial Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Full | null
+account | IAccount  | true | fase | Full | Generated
+name | String  | true | true | Minimum |
+description | String  | false | true | Standard |
+activeFlag | Boolean  | true | false | Standard  |
+geometricShape | GeometricShape | true | true | Minimum | 
+type | String | true | true | Minimum | 
+
+
+### Field Notes
+- The `geometricShape` field fully contains the georectified shape definition.
+- The `type` field is available to create an ontology or high level categories that can be used to group related interactions. 
+The platform makes no inferences about this case-sensitive field.
+
+## Geospatial Management [/geospatial]
+### Define a geospatial entry [PUT]
+
+The following fields may be used to create a new record:
+
+- `name` is required and constrained to 255 characters
+- `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
+- `activeFlag` is optional and may be omitted; defaults to **true**
+- `geometricShape` is required and constrained to a valid GeometricShapeType value defined in 
+[data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Data Types")
+- `type` is required and constrained to 255 characters
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "name" : "Campus at 5th Street",
+                "type" : "Building",
+                "geometricShape" :
+                    {
+                      "type": "FeatureCollection",
+                      "features": [{
+                        "type": "Feature",
+                        "geometry": {
+                          "type": "Polygon",
+                          "coordinates": [[
+                            [13.42634, 52.49533],
+                            [13.42660, 52.49524],
+                            [13.42619, 52.49483],
+                            [13.42583, 52.49495],
+                            [13.42590, 52.49501],
+                            [13.42611, 52.49494],
+                            [13.42640, 52.49525],
+                            [13.42630, 52.49529],
+                            [13.42634, 52.49533]
+                          ]]
+                        },
+                        "properties": {
+                          "color": "rgb(255,200,150)",
+                          "height": 150
+                        }
+                      }, {
+                        "type": "Feature",
+                        "geometry": {
+                          "type": "Polygon",
+                          "coordinates": [[
+                            [13.42706, 52.49535],
+                            [13.42675, 52.49503],
+                            [13.42694, 52.49496],
+                            [13.42678, 52.49480],
+                            [13.42657, 52.49486],
+                            [13.42650, 52.49478],
+                            [13.42686, 52.49466],
+                            [13.42714, 52.49494],
+                            [13.42692, 52.49501],
+                            [13.42717, 52.49525],
+                            [13.42741, 52.49516],
+                            [13.42745, 52.49520],
+                            [13.42745, 52.49520],
+                            [13.42706, 52.49535]
+                          ]]
+                        },
+                        "properties": {
+                          "color": "rgb(180,240,180)",
+                          "height": 130
+                        }
+                      }, {
+                        "type": "Feature",
+                        "geometry": {
+                          "type": "MultiPolygon",
+                          "coordinates": [
+                            [[
+                              [13.42746, 52.49440],
+                              [13.42794, 52.49494],
+                              [13.42799, 52.49492],
+                              [13.42755, 52.49442],
+                              [13.42798, 52.49428],
+                              [13.42846, 52.49480],
+                              [13.42851, 52.49478],
+                              [13.42800, 52.49422],
+                              [13.42746, 52.49440]
+                            ]],
+                            [[
+                              [13.42803, 52.49497],
+                              [13.42800, 52.49493],
+                              [13.42844, 52.49479],
+                              [13.42847, 52.49483],
+                              [13.42803, 52.49497]
+                            ]]
+                          ]
+                        },
+                        "properties": {
+                          "color": "rgb(200,200,250)",
+                          "height": 120
+                        }
+                      }, {
+                        "type": "Feature",
+                        "geometry": {
+                          "type": "Polygon",
+                          "coordinates": [[
+                            [13.42857, 52.49480],
+                            [13.42853, 52.49476],
+                            [13.42863, 52.49473],
+                            [13.42821, 52.49428],
+                            [13.42837, 52.49423],
+                            [13.42882, 52.49469],
+                            [13.42896, 52.49465],
+                            [13.42850, 52.49419],
+                            [13.42867, 52.49412],
+                            [13.42918, 52.49465],
+                            [13.42857, 52.49480]
+                          ]]
+                        },
+                        "properties": {
+                          "color": "rgb(150,180,210)",
+                          "height": 140
+                        }
+                      }]
+                    }
+            }
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : GeospatialEntryDefined
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: type"
+            }
+
+### Update an existing geospatial entry [POST]
+
+The request body must include a valid `urn` field. Only those fields being updated need to be included in the 
+JSON body. For example, if you only want to update the `name` of the entry, only include that field in the 
+request body.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8",
+                "name": "Columbus Campus"
+            }
+            
++ Response 204
+
+    + Headers
+
+            SnapBundle-Event : GeospatialEntryUpdated    
+
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: urn"
+            }
+            
+            
+## Lookup Matching Geospatial Entries [/geospatial{?view,nameLike}]
+### Lookup an array of matching geospatial entries [GET]
+
+If no `nameLike` query parameter is included, then all interactions are returned.
+
++ Parameters
+    + nameLike (optional, string, `Campus`) ... A case-sensitive *starts with* string pattern to match against. If omitted, 
+    then all records will be returned.
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : GeospatialEntryAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+            [
+                {
+                    "urn": "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8",
+                    "lastModifiedTimestamp": 1390779082063,
+                    "name" : "Campus at 5th Street",
+                    "description" : null,
+                    "activeFlag" : true,
+                    "type" : "Building",
+                    "geometricShape" :
+                        {
+                          "type": "FeatureCollection",
+                          "features": [{
+                            "type": "Feature",
+                            "geometry": {
+                              "type": "Polygon",
+                              "coordinates": [[
+                                [13.42634, 52.49533],
+                                [13.42660, 52.49524],
+                                [13.42619, 52.49483],
+                                [13.42583, 52.49495],
+                                [13.42590, 52.49501],
+                                [13.42611, 52.49494],
+                                [13.42640, 52.49525],
+                                [13.42630, 52.49529],
+                                [13.42634, 52.49533]
+                              ]]
+                            },
+                            "properties": {
+                              "color": "rgb(255,200,150)",
+                              "height": 150
+                            }
+                          }, {
+                            "type": "Feature",
+                            "geometry": {
+                              "type": "Polygon",
+                              "coordinates": [[
+                                [13.42706, 52.49535],
+                                [13.42675, 52.49503],
+                                [13.42694, 52.49496],
+                                [13.42678, 52.49480],
+                                [13.42657, 52.49486],
+                                [13.42650, 52.49478],
+                                [13.42686, 52.49466],
+                                [13.42714, 52.49494],
+                                [13.42692, 52.49501],
+                                [13.42717, 52.49525],
+                                [13.42741, 52.49516],
+                                [13.42745, 52.49520],
+                                [13.42745, 52.49520],
+                                [13.42706, 52.49535]
+                              ]]
+                            },
+                            "properties": {
+                              "color": "rgb(180,240,180)",
+                              "height": 130
+                            }
+                          }, {
+                            "type": "Feature",
+                            "geometry": {
+                              "type": "MultiPolygon",
+                              "coordinates": [
+                                [[
+                                  [13.42746, 52.49440],
+                                  [13.42794, 52.49494],
+                                  [13.42799, 52.49492],
+                                  [13.42755, 52.49442],
+                                  [13.42798, 52.49428],
+                                  [13.42846, 52.49480],
+                                  [13.42851, 52.49478],
+                                  [13.42800, 52.49422],
+                                  [13.42746, 52.49440]
+                                ]],
+                                [[
+                                  [13.42803, 52.49497],
+                                  [13.42800, 52.49493],
+                                  [13.42844, 52.49479],
+                                  [13.42847, 52.49483],
+                                  [13.42803, 52.49497]
+                                ]]
+                              ]
+                            },
+                            "properties": {
+                              "color": "rgb(200,200,250)",
+                              "height": 120
+                            }
+                          }, {
+                            "type": "Feature",
+                            "geometry": {
+                              "type": "Polygon",
+                              "coordinates": [[
+                                [13.42857, 52.49480],
+                                [13.42853, 52.49476],
+                                [13.42863, 52.49473],
+                                [13.42821, 52.49428],
+                                [13.42837, 52.49423],
+                                [13.42882, 52.49469],
+                                [13.42896, 52.49465],
+                                [13.42850, 52.49419],
+                                [13.42867, 52.49412],
+                                [13.42918, 52.49465],
+                                [13.42857, 52.49480]
+                              ]]
+                            },
+                            "properties": {
+                              "color": "rgb(150,180,210)",
+                              "height": 140
+                            }
+                          }]
+                        }
+                }
+            ]
+            
++ Response 204 
+
+
+## Lookup Specific Geospatial Entity by URN [/geospatial/{urn}{?view}]
+### Lookup a specific geospatial entity by its system-assigned URN key [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : GeospatialEntryAccessed
+            SnapBundle-View : Standard
+            
+    + Body
+    
+                {
+                    "urn": "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8",
+                    "lastModifiedTimestamp": 1390779082063,
+                    "name" : "Campus at 5th Street",
+                    "description" : null,
+                    "activeFlag" : true,
+                    "type" : "Building",
+                    "geometricShape" :
+                        {
+                          "type": "FeatureCollection",
+                          "features": [{
+                            "type": "Feature",
+                            "geometry": {
+                              "type": "Polygon",
+                              "coordinates": [[
+                                [13.42634, 52.49533],
+                                [13.42660, 52.49524],
+                                [13.42619, 52.49483],
+                                [13.42583, 52.49495],
+                                [13.42590, 52.49501],
+                                [13.42611, 52.49494],
+                                [13.42640, 52.49525],
+                                [13.42630, 52.49529],
+                                [13.42634, 52.49533]
+                              ]]
+                            },
+                            "properties": {
+                              "color": "rgb(255,200,150)",
+                              "height": 150
+                            }
+                          }, {
+                            "type": "Feature",
+                            "geometry": {
+                              "type": "Polygon",
+                              "coordinates": [[
+                                [13.42706, 52.49535],
+                                [13.42675, 52.49503],
+                                [13.42694, 52.49496],
+                                [13.42678, 52.49480],
+                                [13.42657, 52.49486],
+                                [13.42650, 52.49478],
+                                [13.42686, 52.49466],
+                                [13.42714, 52.49494],
+                                [13.42692, 52.49501],
+                                [13.42717, 52.49525],
+                                [13.42741, 52.49516],
+                                [13.42745, 52.49520],
+                                [13.42745, 52.49520],
+                                [13.42706, 52.49535]
+                              ]]
+                            },
+                            "properties": {
+                              "color": "rgb(180,240,180)",
+                              "height": 130
+                            }
+                          }, {
+                            "type": "Feature",
+                            "geometry": {
+                              "type": "MultiPolygon",
+                              "coordinates": [
+                                [[
+                                  [13.42746, 52.49440],
+                                  [13.42794, 52.49494],
+                                  [13.42799, 52.49492],
+                                  [13.42755, 52.49442],
+                                  [13.42798, 52.49428],
+                                  [13.42846, 52.49480],
+                                  [13.42851, 52.49478],
+                                  [13.42800, 52.49422],
+                                  [13.42746, 52.49440]
+                                ]],
+                                [[
+                                  [13.42803, 52.49497],
+                                  [13.42800, 52.49493],
+                                  [13.42844, 52.49479],
+                                  [13.42847, 52.49483],
+                                  [13.42803, 52.49497]
+                                ]]
+                              ]
+                            },
+                            "properties": {
+                              "color": "rgb(200,200,250)",
+                              "height": 120
+                            }
+                          }, {
+                            "type": "Feature",
+                            "geometry": {
+                              "type": "Polygon",
+                              "coordinates": [[
+                                [13.42857, 52.49480],
+                                [13.42853, 52.49476],
+                                [13.42863, 52.49473],
+                                [13.42821, 52.49428],
+                                [13.42837, 52.49423],
+                                [13.42882, 52.49469],
+                                [13.42896, 52.49465],
+                                [13.42850, 52.49419],
+                                [13.42867, 52.49412],
+                                [13.42918, 52.49465],
+                                [13.42857, 52.49480]
+                              ]]
+                            },
+                            "properties": {
+                              "color": "rgb(150,180,210)",
+                              "height": 140
+                            }
+                          }]
+                        }
+                }
+
++ Response 204 
