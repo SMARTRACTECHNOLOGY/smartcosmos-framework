@@ -119,7 +119,7 @@ and expert systems on the market today. Ask yourself this simple question:
 If you are searching for a solution to free you from storing your data in a proprietary system, possibly creating some type 
 of "vendor lock-in," then SnapBundle is what you are looking for. Using Web Services and JSON, push your authoritative records 
 to SnapBundle. Wire up SnapBundle to your current preferred analytics engine. Interested in seeing what this new expert system 
-can do with your data? Then wire up SnapBundle to push data into that system and give it try. 
+can do with your data? Wire up SnapBundle to push data into that system and give it try! 
 
 ## Other Noteworthy Features
 
@@ -138,17 +138,43 @@ that can talk to us using HTTP and JSON. We built our authorization model around
 you read or write access in a very granular fashion.
 
 ## Technical Notes
+
+### RESTful Web Service Architecture
+The SnapBundle platform is built around a set of RESTful web service endpoints that use JavaScript Object Notation (JSON) to 
+represent state. The platform's RESTful JSON architecture means you can easily adopt the platform using _any_ modern programmaing 
+language.
+
+#### Wire Level Format
+Requests and responses are always formatted using JavaScript Object Notation (JSON). 
+
+The platform's model is organized around the three foundational entities (*`Objects`, `Relationships`, and `Interactions`*). These
+foundational entities rely on supporting entities (*`Users`,`Devices`,`Files`, `Tags`, `Metadata`, and `Geospatial`*) to capture
+additional context.
+
 ### URNs as Keys
-All SnapBundle™ objects are keyed off of a **UUID**, represented using the standard URN nomenclature for a UUID: 
+All SnapBundle objects are keyed off of a **UUID**, represented using the standard URN nomenclature for a UUID:  
+
 **urn:uuid:<opaque key>**
 
 > Any API call that requires a `{referenceUrn}` parameter must provide a full URN UUID reference, 
 e.g. *urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d*
 
+#### Object URN
+The only URN in the entire model that is arbitrarily defined by the developer is the `objectUrn` field for an Object record.
+
 ### Error States
 The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used.
 
-### Tracking Modification Timestamps
+### Date Format
+SnapBundle dates _when represented as a string_ are formatted using **RFC 3339**. All times must be in UTC, e.g.
+
+__2013-07-04T09:00:00-00:00__
+
+#### Use of Unix Time
+SnapBundle timestamps are always represented in JSON with a `long` datatype, where the value must be interpretted as a 
+[Unix Timestap](http://en.wikipedia.org/wiki/Unix_time "Unix time definiton").
+
+#### Tracking Modification Timestamps
 All SnapBundle objects maintain a `lastModifiedTimestamp` field to track when the record was last updated. The purpose of this 
 timestamp is to provide a valid eTag for HTTP cache support.
 
