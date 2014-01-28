@@ -33,6 +33,15 @@ public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
 
     void setTimestamp(long timestamp);
 
+    /**
+     * Indicates if the file is defined in the data store but not yet physically
+     * uploaded to the file store. Extensions can easily determine if the file's actual
+     * content is available by watching for {@link com.snapbundle.model.event.EventType#FileUploaded}
+     *
+     * @return true, if only the data store record exists and the file contents are not yet available
+     * @see com.snapbundle.model.event.EventType#FileDefined
+     * @see com.snapbundle.model.event.EventType#FileUploaded
+     */
     boolean isPending();
 
     void setPending(boolean flag);
@@ -41,6 +50,14 @@ public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
 
     void setFileName(String fileName);
 
+    /**
+     * Private, internal, secured URL that callers generally do not have permissions
+     * to directly access. The URL stored here is served up indirectly through the appropriate
+     * SnapBundle file endpoint.
+     *
+     * @return Internal, private, secure, and typically inaccessible internally managed URL
+     * depicting where the file is stored
+     */
     String getUrl();
 
     void setUrl(String url);
@@ -51,5 +68,33 @@ public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
 
     void setDigitalSignature(String contentHash);
 
+    /**
+     * JSON structure that represents two distinct digital signatures, a signature of the actual file contents
+     * upon submission to the platform and a second signature of the metadata used to describe the file definition
+     * (including the digital signature of the file itself).
+     * <p/>
+     * The JSON digital signature block also includes narrative on how the digital signatures were generated, including
+     * algorithm, iterations, and the actual library used. A prototypical example of a digital signature JSON block is
+     * below for reference:
+     * <p/>
+     * <code>{<br/>
+     * "algorithm": "SHA-256",<br/>
+     * "description": "The contentsSignature is of the file contents exclusively. The root signature is of the signedBody exclusively",<br/>
+     * "iterations": 1,<br/>
+     * "library": "Apache Shiro (Java)",<br/>
+     * "signature": "8ae65ce110ab15fbea8df6e61adedaf9ca36dc02ebcd5d451da0f7d18a790abe",<br/>
+     * "signedBody":<br/>
+     * &nbsp;&nbsp;{<br/>
+     * &nbsp;&nbsp;&nbsp;&nbsp;"accountUrn": "urn:uuid:9728d95e-9ae5-482f-84a7-b8f1fce80389",<br/>
+     * &nbsp;&nbsp;&nbsp;&nbsp;"contentsSignature": "8F866F53645218F77957675EC197678F2F9D3155455A01FF6F4E6FF68C5696C7",<br/>
+     * &nbsp;&nbsp;&nbsp;&nbsp;"entityReferenceType": "ObjectInteraction",<br/>
+     * &nbsp;&nbsp;&nbsp;&nbsp;"fileUrn": "urn:uuid:5655cf2d-a843-4d7b-941d-c3abe70a007b",<br/>
+     * &nbsp;&nbsp;&nbsp;&nbsp;"referenceUrn": "urn:uuid:6889da4e-7fed-49b5-821b-b5a9f06740d4",<br/>
+     * &nbsp;&nbsp;&nbsp;&nbsp;"url": "https://net.tagdynamics.snapbundle.stage.s3.amazonaws.blahblahblahblah/file.mp4"<br/>
+     * &nbsp;&nbsp;}<br/>
+     * }</code><br/>
+     *
+     * @return JSON structure describing the digital signature
+     */
     String getDigitalSignature();
 }
