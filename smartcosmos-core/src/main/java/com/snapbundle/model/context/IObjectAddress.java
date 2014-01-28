@@ -20,6 +20,11 @@ package com.snapbundle.model.context;
 import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.ITypedObject;
 
+/**
+ * Captures a political address for a specific {@link com.snapbundle.model.context.IObject}. The
+ * addresses differ from {@link com.snapbundle.model.geo.IGeospatialEntry} in that these
+ * addresses are in the context of street, city, state, country and not latitude and longitude.
+ */
 public interface IObjectAddress extends IAccountDomainResource<IObjectAddress>, ITypedObject
 {
     IObject getObject();

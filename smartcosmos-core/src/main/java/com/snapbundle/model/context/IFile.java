@@ -20,6 +20,13 @@ package com.snapbundle.model.context;
 import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.IReferentialObject;
 
+/**
+ * Represents any type of multimedia file that is explicitly associated with a single
+ * {@link com.snapbundle.model.base.IReferentialObject}. If a file needs to be shared
+ * with multiple objects, developers should design and implement a novel scheme using
+ * {@link com.snapbundle.model.context.IRelationship} definitions (recommended) or
+ * {@link com.snapbundle.model.context.IMetadata} (alternative).
+ */
 public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
 {
     long getTimestamp();
