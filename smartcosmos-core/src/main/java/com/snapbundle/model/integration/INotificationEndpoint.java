@@ -21,6 +21,10 @@ import com.snapbundle.model.base.INamedObject;
 import com.snapbundle.model.base.IReferentialObject;
 import com.snapbundle.model.context.IAccount;
 
+/**
+ * Defines a single external integration endpoint whereby the platform will issue an
+ * HTTP/S POST of events occurring within a given account context in near real-time.
+ */
 public interface INotificationEndpoint extends INamedObject<INotificationEndpoint>, IReferentialObject
 {
     IAccount getAccount();
