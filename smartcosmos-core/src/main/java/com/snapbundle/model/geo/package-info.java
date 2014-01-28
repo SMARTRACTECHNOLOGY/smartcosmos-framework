@@ -15,14 +15,8 @@
  * limitations under the License.
  */
 
-package com.snapbundle.model.context;
-
 /**
- * Minimalist set of security roles.
+ * Geo-JSON support.
+ * @see com.snapbundle.geo.GeometricShape
  */
-public enum RoleType
-{
-    Administrator,
-    Developer,
-    User
-}
+package com.snapbundle.model.geo;

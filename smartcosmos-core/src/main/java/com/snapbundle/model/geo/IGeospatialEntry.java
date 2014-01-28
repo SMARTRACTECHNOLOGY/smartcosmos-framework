@@ -17,6 +17,7 @@
 
 package com.snapbundle.model.geo;
 
+import com.snapbundle.geo.GeometricShape;
 import com.snapbundle.model.base.IAccountDomainResource;
 import com.snapbundle.model.base.INamedObject;
 import com.snapbundle.model.base.ITypedObject;
@@ -50,9 +51,12 @@ import com.snapbundle.model.base.ITypedObject;
  * perhaps an analytical view of aggregated data. Another use case is to link an
  * {@link com.snapbundle.model.context.IObjectAddress} with a georectification to provide
  * a three-dimensional representation of the building located at a specific address
- * identified in only general terms by the postal address and {@link com.snapbundle.model.base.IGeoLocation}
- * defined in the {@link com.snapbundle.model.context.IObjectAddress} record.
+ * identified in only general terms by the postal address defined in the
+ * {@link com.snapbundle.model.context.IObjectAddress} record.
  */
-public interface IGeospatialEntry extends IAccountDomainResource<IGeospatialEntry>, INamedObject<IGeospatialEntry>, IGeometrySupplier, ITypedObject
+public interface IGeospatialEntry extends IAccountDomainResource<IGeospatialEntry>, INamedObject<IGeospatialEntry>, ITypedObject
 {
+    GeometricShape getGeometricShape();
+
+    void setGeometricShape(GeometricShape geometricShape);
 }

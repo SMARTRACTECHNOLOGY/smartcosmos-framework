@@ -15,14 +15,13 @@
  * limitations under the License.
  */
 
-package com.snapbundle.model.context;
-
 /**
- * Minimalist set of security roles.
+ * Defines a plugin metaphor whereby 3rd party developers can tap into an
+ * account's contextual data in order to perform advanced computations that
+ * are not natively supported by the SnapBundle platform. The primary means
+ * of near real-time integration with these external components is via an
+ * {@link com.snapbundle.model.event.EventType} notification delivered to
+ * an {@link com.snapbundle.model.integration.INotificationEndpoint} managed
+ * by the extension.
  */
-public enum RoleType
-{
-    Administrator,
-    Developer,
-    User
-}
+package com.snapbundle.model.extension;

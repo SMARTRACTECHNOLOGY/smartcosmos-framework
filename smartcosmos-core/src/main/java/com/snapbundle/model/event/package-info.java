@@ -15,13 +15,9 @@
  * limitations under the License.
  */
 
-package com.snapbundle.model.geo;
-
-import com.snapbundle.geo.GeometricShape;
-
-public interface IGeometrySupplier
-{
-    GeometricShape getGeometricShape();
-
-    void setGeometricShape(GeometricShape geometricShape);
-}
+/**
+ * Core event definitions that facilitate near real-time integration with external components
+ * authorized via OAuth 2.0, whereby the events are delivered to an
+ * {@link com.snapbundle.model.integration.INotificationEndpoint}.
+ */
+package com.snapbundle.model.event;

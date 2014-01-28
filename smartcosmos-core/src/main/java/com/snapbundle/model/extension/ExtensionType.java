@@ -17,6 +17,9 @@
 
 package com.snapbundle.model.extension;
 
+/**
+ * Broad categorization of the type of work an extension provides.
+ */
 public enum ExtensionType
 {
     General,

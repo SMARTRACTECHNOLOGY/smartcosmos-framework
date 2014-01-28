@@ -21,6 +21,13 @@ import com.snapbundle.model.base.IDomainResource;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IUser;
 
+/**
+ * Flexible mechanism for capturing user interactions with the platform. The source
+ * field contains JSON values that correlate with the specific {@link com.snapbundle.model.event.EventType}. For
+ * example, if the event is {@link EventType#ObjectAccessed}, then the {@link #getSource()} will
+ * contain the {@link com.snapbundle.util.json.JsonGenerationView.Standard} serialization of
+ * the {@link com.snapbundle.model.context.IObject} that was accessed.
+ */
 public interface IEvent extends IDomainResource<IEvent>
 {
     EventType getEventType();
