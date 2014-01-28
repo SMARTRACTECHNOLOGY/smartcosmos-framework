@@ -1,5 +1,5 @@
 /*
- * SnapBundle™ SDK
+ * SnapBundle SDK
  * (C) Copyright 2013-2014 Tag Dynamics, LLC (http://tagdynamics.com/)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

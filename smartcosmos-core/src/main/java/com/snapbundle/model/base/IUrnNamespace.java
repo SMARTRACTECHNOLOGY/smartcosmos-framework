@@ -1,5 +1,5 @@
 /*
- * SnapBundle™ SDK
+ * SnapBundle SDK
  * (C) Copyright 2013-2014 Tag Dynamics, LLC (http://tagdynamics.com/)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,9 +18,9 @@
 package com.snapbundle.model.base;
 
 /**
- * Sole means of uniquely identifying a specific object in the SnapBundle™ platform. Developers must not rely on
+ * Sole means of uniquely identifying a specific object in the SnapBundle platform. Developers must not rely on
  * the {@link IDomainResource#getUniqueId()} value, as neither its uniqueness nor
- * consistency is guaranteed by the SnapBundle™ platform.
+ * consistency is guaranteed by the SnapBundle platform.
  */
 public interface IUrnNamespace
 {
@@ -30,7 +30,7 @@ public interface IUrnNamespace
      * {@link IReferentialObject#getReferenceUrn()} value.
      *
      * @return System-assigned UUID
-     * @see {@link com.snapbundle.model.base.IReferentialObject}
+     * @see com.snapbundle.model.base.IReferentialObject
      */
     String getUrn();
 
