@@ -17,8 +17,13 @@
 
 package com.snapbundle.util.json;
 
-import com.snapbundle.util.json.JsonGenerationView;
-
+/**
+ * Defines a view hierarchy for SnapBundle JSON serialization as enums for easy switching
+ * and rapid interpretation from Stringified view names.
+ *
+ * @see com.snapbundle.util.json.JsonUtil
+ * @see com.snapbundle.util.json.JsonGenerationView
+ */
 public enum ViewType
 {
     Full(JsonGenerationView.Full.class),

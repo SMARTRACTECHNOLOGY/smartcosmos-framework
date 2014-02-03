@@ -25,6 +25,10 @@ import com.snapbundle.pojo.base.ReferentialObject;
 import com.snapbundle.pojo.context.Account;
 import com.snapbundle.util.json.JsonGenerationView;
 
+/**
+ * Represents an HTTP/S integration endpoint POJO that SnapBundle uses to push SnapBundle events in JSON form
+ * in near real-time. These endpoints are used for back office integration and 3rd party extension integration.
+ */
 public class NotificationEndpoint extends ReferentialObject<INotificationEndpoint> implements INotificationEndpoint
 {
     @JsonView(JsonGenerationView.Restricted.class)
@@ -167,8 +171,43 @@ public class NotificationEndpoint extends ReferentialObject<INotificationEndpoin
     }
 
     @Override
-    public void copy(INotificationEndpoint object)
+    public boolean equals(Object o)
     {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        NotificationEndpoint that = (NotificationEndpoint) o;
+
+        if (activeFlag != that.activeFlag) return false;
+        if (pendingConfirmation != that.pendingConfirmation) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (!encodedPrivateKey.equals(that.encodedPrivateKey)) return false;
+        if (!encodedPublicKey.equals(that.encodedPublicKey)) return false;
+        if (!integrationEndpointUrl.equals(that.integrationEndpointUrl)) return false;
+        if (!name.equals(that.name)) return false;
+        if (!referenceAccount.equals(that.referenceAccount)) return false;
+        if (subscriptionArn != null ? !subscriptionArn.equals(that.subscriptionArn) : that.subscriptionArn != null)
+            return false;
+        if (topicArn != null ? !topicArn.equals(that.topicArn) : that.topicArn != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + referenceAccount.hashCode();
+        result = 31 * result + encodedPublicKey.hashCode();
+        result = 31 * result + encodedPrivateKey.hashCode();
+        result = 31 * result + (topicArn != null ? topicArn.hashCode() : 0);
+        result = 31 * result + (subscriptionArn != null ? subscriptionArn.hashCode() : 0);
+        result = 31 * result + integrationEndpointUrl.hashCode();
+        result = 31 * result + (pendingConfirmation ? 1 : 0);
+        result = 31 * result + name.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (activeFlag ? 1 : 0);
+        return result;
     }
 }

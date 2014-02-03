@@ -31,6 +31,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Arrays;
 
+/**
+ * Collection of AES-family cipher utilities.
+ */
 public class CryptoUtil
 {
     /**
@@ -39,12 +42,10 @@ public class CryptoUtil
      * @param clearTextBytes Clear text to encrypt
      * @return Cipher text
      * @throws java.io.UnsupportedEncodingException
-     *
      * @throws NoSuchAlgorithmException
      * @throws NoSuchPaddingException
      * @throws InvalidKeyException
      * @throws InvalidAlgorithmParameterException
-     *
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
      */
@@ -67,12 +68,10 @@ public class CryptoUtil
      * @param cipherTextBytes Cipher text to decrypt
      * @return Clear text
      * @throws java.io.UnsupportedEncodingException
-     *
      * @throws NoSuchAlgorithmException
      * @throws NoSuchPaddingException
      * @throws InvalidKeyException
      * @throws InvalidAlgorithmParameterException
-     *
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
      */

@@ -171,8 +171,47 @@ public class Extension extends NamedObject<IExtension> implements IExtension
     }
 
     @Override
-    public void copy(IExtension object)
+    public boolean equals(Object o)
     {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Extension extension = (Extension) o;
+
+        if (registrationTimestamp != extension.registrationTimestamp) return false;
+        if (version != extension.version) return false;
+        if (!account.equals(extension.account)) return false;
+        if (appCatalogUrl != null ? !appCatalogUrl.equals(extension.appCatalogUrl) : extension.appCatalogUrl != null)
+            return false;
+        if (!clientId.equals(extension.clientId)) return false;
+        if (!clientSecret.equals(extension.clientSecret)) return false;
+        if (extensionType != extension.extensionType) return false;
+        if (longDescription != null ? !longDescription.equals(extension.longDescription) : extension.longDescription != null)
+            return false;
+        if (!redirectUrl.equals(extension.redirectUrl)) return false;
+        if (supportEmail != null ? !supportEmail.equals(extension.supportEmail) : extension.supportEmail != null)
+            return false;
+        if (webSiteUrl != null ? !webSiteUrl.equals(extension.webSiteUrl) : extension.webSiteUrl != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + (account != null ? account.hashCode() : 0);
+        result = 31 * result + (supportEmail != null ? supportEmail.hashCode() : 0);
+        result = 31 * result + (webSiteUrl != null ? webSiteUrl.hashCode() : 0);
+        result = 31 * result + clientId.hashCode();
+        result = 31 * result + clientSecret.hashCode();
+        result = 31 * result + redirectUrl.hashCode();
+        result = 31 * result + (appCatalogUrl != null ? appCatalogUrl.hashCode() : 0);
+        result = 31 * result + (longDescription != null ? longDescription.hashCode() : 0);
+        result = 31 * result + (extensionType != null ? extensionType.hashCode() : 0);
+        result = 31 * result + version;
+        result = 31 * result + (int) (registrationTimestamp ^ (registrationTimestamp >>> 32));
+        return result;
     }
 }

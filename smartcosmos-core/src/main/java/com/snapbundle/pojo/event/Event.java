@@ -91,8 +91,30 @@ public class Event extends DomainResource<IEvent> implements IEvent
     }
 
     @Override
-    public void copy(IEvent object)
+    public boolean equals(Object o)
     {
-        throw new UnsupportedOperationException("POJO doesn't support copying");
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Event event = (Event) o;
+
+        if (account != null ? !account.equals(event.account) : event.account != null) return false;
+        if (eventType != event.eventType) return false;
+        if (source != null ? !source.equals(event.source) : event.source != null) return false;
+        if (user != null ? !user.equals(event.user) : event.user != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (account != null ? account.hashCode() : 0);
+        result = 31 * result + eventType.hashCode();
+        result = 31 * result + (source != null ? source.hashCode() : 0);
+        return result;
     }
 }

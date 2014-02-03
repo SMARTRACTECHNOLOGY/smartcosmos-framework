@@ -26,13 +26,14 @@ import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+/**
+ * Collection of SHA-family utilities.
+ */
 public final class HashUtil
 {
     public static final int PASSWORD_LENGTH = 12;
 
     public static final char[] SPECIAL_CHARACTERS = new char[]{'!', '@', '#', '$', '%', '&', '*', '+', '?'};
-
-    private static final int BLOCK_SIZE = 1024;
 
     private static final int HASH_ITERATIONS = 2048;
 

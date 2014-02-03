@@ -17,6 +17,13 @@
 
 package com.snapbundle.util.json;
 
+/**
+ * Defines a view hierarchy for SnapBundle JSON serialization that selectively includes (or excludes)
+ * certain verbose fields when perform a JSON conversion operation.
+ *
+ * @see com.snapbundle.util.json.JsonUtil
+ * @see com.snapbundle.util.json.ViewType
+ */
 public class JsonGenerationView
 {
     public static class Published

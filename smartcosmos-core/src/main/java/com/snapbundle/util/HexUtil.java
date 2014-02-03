@@ -17,6 +17,9 @@
 
 package com.snapbundle.util;
 
+/**
+ * Collection of byte hexadecimal conversion routines.
+ */
 public final class HexUtil
 {
     private HexUtil()

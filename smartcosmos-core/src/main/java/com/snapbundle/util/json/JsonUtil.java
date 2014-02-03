@@ -32,6 +32,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+/**
+ * Collection of type-safe JSON serialization and de-serialization utilities.
+ */
 public final class JsonUtil
 {
     private static final Logger LOG = LoggerFactory.getLogger(JsonUtil.class);
