@@ -379,6 +379,249 @@ The platform offers two endpoints for password self-service, supporting both pas
                 "message": "Password reset email has been sent"
             }
 
+# Group User Endpoints
+## User Endpoint Security
+SnapBundle only permits users with a `roleType` of **Administrator** to set or reset other user account passwords.
+
+## Overview
+The initial registration account is automatically defined with a `roleType` of **Administrator**. Additional users can be
+created using any valid email address.
+
+### SnapBundle is not a directory service
+The only metadata collected about a user includes first name, last name, email address, and role type. The use of the email
+address is expected to provide a suitable means of identification of an actual user within the account.
+
+The platform's default directory service plugin relies on the [Stormpath](http://stormpath.com "Stormpath Web Site")
+authentication and authorization PaaS as its default directory service provider. **This means that SnapBundle doesn't manage
+any user credentials, delegating all of this responsibility to Stormpath.**
+
+Direct access to an account's Stormpath data is prohibited. For example, password self-service is only accessible via the
+SnapBundle Account Management self-service endpoints.
+
+**It is impossible to retrieve credentials through the API since it is neither stored nor managed by SnapBundle**.
+
+## User Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | fase | Full | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Full | null
+emailAddress | String  | true | false | Minimum |
+givenName | String | false | true | Full | null
+surname | String | false | true | Full | null
+roleType | RoleType  | true  | true | Minimum | User
+
+### Field Notes
+- The `roleType` field is used as a security filter that may restrict the user from certain sensitive operations
+*in future API versions*. The only supported values at this time are *Administrator* and *User*.
+
+## User Management [/users]
+### Create a new user associated with the specified email address   [PUT]
+
+The following user fields may be used to create a new record:
+
+- `emailAddress` is required and constrained to 128 characters
+- `roleType` is required and constrained to the case-sensitive values of **Administrator** or **User**
+- `givenName` is optional and constrained to 50 characters and defaults to **null**
+- `surname` is optional and constrained to 50 characters; it defaults to **null**
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+
+#### Idempotent Behavior
+This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result
+
+- **201 SUCCESS_CREATED** if the record is new
+- **200 SUCCESS_OK** if a User with the given `emailAddress` already existed in the database, in which
+case **no data is merged; existing record is left as-is**
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
+    + Body
+
+            {
+                "emailAddress": "coworker@foo.com",
+                "roleType": "User"
+            }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : UserDefined
+
+    + Body
+
+            {
+                "code" : 1,
+                "message" : "r@nd0mP@ssword!"
+            }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : UserAccessed
+
+    + Body
+
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: emailAddress"
+            }
+
+
+### Update an existing user [POST]
+
+The request body must include a valid `emailAddress` field. Only those fields being updated need to
+be included in the JSON body. For example, if you only want to update the `surname` of the user, only
+include that field in the request body.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
+    + Body
+
+            {
+                "emailAddress": "coworker@foo.com",
+                "givenName": "Homeslice",
+                "surname": "Simpson"
+            }
+
++ Response 204
+
+    + Headers
+
+            SnapBundle-Event : UserUpdated
+
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: identification"
+            }
+
+## Lookup Specific User by URN [/users/{urn}{?view}]
+### Lookup a specific user by its system-assigned URN key [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : UserAccessed
+            SnapBundle-View : Standard
+
+    + Body
+
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "lastModifiedTimestamp" : 1390607277299,
+                "emailAddress" : "coworker@foo.com",
+                "roleType" : "User"
+            }
+
+
++ Response 204
+
+
+## Lookup Specific User by Email Address [/users/user/{emailAddress}{?view}]
+### Lookup a specific user by their email address [GET]
+
++ Parameters
+    + emailAddress (required, string, `coworker@foo.com`) ... Exact case-sensitive email address to locate
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : UserAccessed
+            SnapBundle-View : Standard
+
+    + Body
+
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "lastModifiedTimestamp" : 1390607277299,
+                "emailAddress" : "coworker@foo.com",
+                "roleType" : "User"
+            }
+
+## Change or Reset User Password [/users/user]
+### Initiate a reset password workflow or specifically define the user's password [POST]
+
+The request body must include a valid `emailAddress` field. If the body only includes an `emailAddress` then
+the password reset workflow will be initiated. However, if the body also includes a `newPassword` field, then
+the user's password will be changed to that password.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
+    + Body
+
+            {
+                "emailAddress": "coworker@foo.com",
+            }
+
++ Response 200
+
+    + Headers
+
+            SnapBundle-Event : UserPasswordReset
+
+    + Body
+
+            {
+                "code" : 1,
+                "message" : "Password has been reset"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: emailAddress"
+            }
+
 # Group Device Endpoints
 ## Overview
 SnapBundle may be used to capture metadata about devices in order to make the association that _this user used this device_. 
@@ -620,249 +863,6 @@ Call always returns a JSON array, which may be an empty array if no devices are 
                     "activeFlag" : true
                 }
             ]
-
-# Group User Endpoints
-## User Endpoint Security
-SnapBundle only permits users with a `roleType` of **Administrator** to set or reset other user account passwords.
-
-## Overview
-The initial registration account is automatically defined with a `roleType` of **Administrator**. Additional users can be 
-created using any valid email address.
-
-### SnapBundle is not a directory service 
-The only metadata collected about a user includes first name, last name, email address, and role type. The use of the email 
-address is expected to provide a suitable means of identification of an actual user within the account.
-
-The platform's default directory service plugin relies on the [Stormpath](http://stormpath.com "Stormpath Web Site") 
-authentication and authorization PaaS as its default directory service provider. **This means that SnapBundle doesn't manage 
-any user credentials, delegating all of this responsibility to Stormpath.**
-
-Direct access to an account's Stormpath data is prohibited. For example, password self-service is only accessible via the 
-SnapBundle Account Management self-service endpoints.  
-  
-**It is impossible to retrieve credentials through the API since it is neither stored nor managed by SnapBundle**.  
-
-## User Fields
-Field | Data Type | Required | Can Update | Serialization Level | Default Value
------------- | ------------- | ------------ | ------------ | ------------ | ------------
-urn | String  | true | false | Minimum | Generated
-account | IAccount  | true | fase | Full | Generated
-lastModifiedTimestamp | long   | true | false | Standard | Generated
-moniker | String  | false | true | Full | null
-emailAddress | String  | true | false | Minimum | 
-givenName | String | false | true | Full | null
-surname | String | false | true | Full | null
-roleType | RoleType  | true  | true | Minimum | User 
-
-### Field Notes
-- The `roleType` field is used as a security filter that may restrict the user from certain sensitive operations 
-*in future API versions*. The only supported values at this time are *Administrator* and *User*. 
-
-## User Management [/users]
-### Create a new user associated with the specified email address   [PUT]
-
-The following user fields may be used to create a new record:
-
-- `emailAddress` is required and constrained to 128 characters 
-- `roleType` is required and constrained to the case-sensitive values of **Administrator** or **User**
-- `givenName` is optional and constrained to 50 characters and defaults to **null**
-- `surname` is optional and constrained to 50 characters; it defaults to **null**
-- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
-
-#### Idempotent Behavior
-This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result 
-
-- **201 SUCCESS_CREATED** if the record is new
-- **200 SUCCESS_OK** if a User with the given `emailAddress` already existed in the database, in which 
-case **no data is merged; existing record is left as-is**
-
-+ Request (application/json)
-
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-    + Body
-    
-            {
-                "emailAddress": "coworker@foo.com",
-                "roleType": "User"
-            }
-            
-+ Response 201 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : UserDefined
-            
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "r@nd0mP@ssword!"
-            }
-            
-+ Response 200 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : UserAccessed
-            
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
-            }
-
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "code" : -5,
-                "message" : "JSON is missing a required field: emailAddress"
-            }
-            
-
-### Update an existing user [POST]
-
-The request body must include a valid `emailAddress` field. Only those fields being updated need to 
-be included in the JSON body. For example, if you only want to update the `surname` of the user, only 
-include that field in the request body.
-
-+ Request (application/json)
-
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-    + Body
-    
-            {
-                "emailAddress": "coworker@foo.com",
-                "givenName": "Homeslice",
-                "surname": "Simpson"
-            }
-            
-+ Response 204
-
-    + Headers
-
-            SnapBundle-Event : UserUpdated    
-
-            
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "code" : -5,
-                "message" : "JSON is missing a required field: identification"
-            }
-            
-## Lookup Specific User by URN [/users/{urn}{?view}]
-### Lookup a specific user by its system-assigned URN key [GET]
-
-+ Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-
-+ Request
-    
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-+ Response 200 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : UserAccessed
-            SnapBundle-View : Standard
-            
-    + Body
-    
-            {
-                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
-                "lastModifiedTimestamp" : 1390607277299,
-                "emailAddress" : "coworker@foo.com",
-                "roleType" : "User"
-            }
-
-
-+ Response 204 
- 
-
-## Lookup Specific User by Email Address [/users/user/{emailAddress}{?view}]
-### Lookup a specific user by their email address [GET]
-
-+ Parameters
-    + emailAddress (required, string, `coworker@foo.com`) ... Exact case-sensitive email address to locate
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-
-+ Request
-
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-+ Response 200 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : UserAccessed
-            SnapBundle-View : Standard
-            
-    + Body
-    
-            {
-                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
-                "lastModifiedTimestamp" : 1390607277299,
-                "emailAddress" : "coworker@foo.com",
-                "roleType" : "User"
-            }
-
-## Change or Reset User Password [/users/user]
-### Initiate a reset password workflow or specifically define the user's password [POST]
-
-The request body must include a valid `emailAddress` field. If the body only includes an `emailAddress` then
-the password reset workflow will be initiated. However, if the body also includes a `newPassword` field, then
-the user's password will be changed to that password.
-
-+ Request (application/json)
-
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-    + Body
-    
-            {
-                "emailAddress": "coworker@foo.com",
-            }
-            
-+ Response 200
-
-    + Headers
-
-            SnapBundle-Event : UserPasswordReset    
-
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "Password has been reset"
-            }
-            
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "code" : -5,
-                "message" : "JSON is missing a required field: emailAddress"
-            }
 
 # Group Object Endpoints
 ## Overview
@@ -1325,309 +1325,7 @@ the `stateProvince` of the object, only include that field in the request body.
             ]
 
 + Response 204 
-             
-            
-# Group Relationship Endpoints
-## Overview
-SnapBundle provides a simple, flexible, and incredibly powerful relationship modeling mechanism. The model allows the declaration that 
-object *A*, for example, could *follows* object *B*. Or, the relationship could be defined where object *A* is a *neighbor* of object 
-*B*. Verbs are supported as well, such that *a person* *drove* *a car*, where person and car are just Objects with a `type` of person 
-and car, respectively. 
 
-The `relatedEntityReferenceType` and `relatedReferenceUrn` should always be treated as the subordinate object in the relationship that is described by the `relationshipType` field. Consider these examples that illustrate this concept:
-
-`````
-Entity Reference Type `Object` identified by Reference URN 1A2B3C has a Child relationship type with Related Entity Reference Type `Object` identified by Reference URN 4D5E6F.
-`````  
-
-`````
-Entity Reference Type `ObjectInteractionSession` identified by Reference URN 1A2B3C has a Child relationship type with Related Entity Reference Type `Device` identified by Reference URN 4D5E6F.
-`````  
-
-`````
-Entity Reference Type `Object` identified by Reference URN 1A2B3C has a Peer relationship type with Related Entity Reference Type `Object` identified by Reference URN 4D5E6F.
-`````  
-
-The relationship `type` field is used to capture the high level categorization that describes the logical interaction between the two 
-referenced objects. The platform makes no inferences from any relationships defined.  
-
-## Relationship Fields
-Field | Data Type | Required | Can Update | Serialization Level | Default Value
------------- | ------------- | ------------ | ------------ | ------------ | ------------
-urn | String  | true | false | Minimum | Generated
-account | IAccount  | true | fase | Full | Generated
-lastModifiedTimestamp | long   | true | false | Standard | Generated
-moniker | String  | false | true | Full | null
-entityReferenceType | EntityReferenceType | true | false | Minimum |
-referenceURN | String | true | false | Minimum |
-type | String | true | false | Minimum | 
-relatedEntityReferenceType | EntityReferenceType | true | false | Minimum |
-relatedReferenceURN | String | true | false | Minimum |
-
-### Field Notes
-- The `entityReferenceType` and `referenceURN` fields jointly represent the *owner* or *initiator* of the relationship
-- The `relatedEntityReferenceType` and `relatedReferenceURN` fields jointly represent the *subordinate* member of the relationship
-- The `type` field is available to create an ontology or high level categories that can be used to group related relationships. 
-The platform makes no inferences about this case-sensitive field.
-
-## Relationship Management [/relationships/{entityReferenceType}/{referenceUrn}]
-### Create a new object   [PUT]
-
-The following object fields are all required to create a new record:
-
-- `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
-[data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Data Types")
-- `referenceURN` must point to a pre-existing record of the given `entityReferenceType`
-- `type` is required and constrained to 255 characters
-- `relatedEntityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
-[data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Data Types")
-- `relatedReferenceURN` must point to a pre-existing record of the given `relatedEntityReferenceType`
-- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
-
-#### Idempotent Behavior
-This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result 
-
-- **201 SUCCESS_CREATED** if the record is new
-- **200 SUCCESS_OK** if a relationship between the referenced objects already existed in the database, in which 
-case **the `type` field and `moniker` fields are updated to reflect the values submitted**
-
-+ Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
-
-+ Request (application/json)
-
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-    + Body
-    
-            {
-                "type": "Owns",
-                "relatedEntityReferenceType": "Object",
-                "relatedReferenceURN" : "urn:uuid:54321"
-            }
-            
-+ Response 201 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : RelationshipDefined
-            
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
-            }
-            
-+ Response 200 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : RelationshipDefined
-            
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
-            }
-
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "code" : -8,
-                "message" : "No matching record with Object of urn:uuid:12345 exists"
-            }
-
-## Relationship Management by URN [/relationships/{urn}{?view}]
-### Lookup a specific relationship by its system-assigned URN key [GET]
-
-+ Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-
-+ Request
-    
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-+ Response 200 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : RelationshipAccessed
-            SnapBundle-View : Standard
-            
-    + Body
-    
-            {
-                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
-                "entityReferenceType": "Object",
-                "referenceUrn" : "urn:uuid:12345",
-                "type" : "Owns",
-                "relatedEntityReferenceType": "Object",
-                "relatedReferenceURN" : "urn:uuid:54321",
-                "lastModifiedTimestamp" : 1390607277299,
-            }
-
-+ Response 204 
- 
-### Deletes an existing relationship by its system-assigned URN key [DELETE]
-
-+ Response 204 
-
-    + Headers
-
-            SnapBundle-Event : RelationshipDeleted
-
-## Lookup All Relationships Between Entities [/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}{?view}]
-### Lookup an array of all defined relationships between any two entities [GET]
-
-+ Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
-    + relatedEntityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + relatedReferenceUrn (required, string, `urn:uuid:54321`) ... Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-
-+ Request
-    
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-+ Response 200 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : RelationshipAccessed
-            SnapBundle-View : Standard
-            
-    + Body
-    
-            [
-                {
-                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
-                    "entityReferenceType": "Object",
-                    "referenceUrn" : "urn:uuid:12345",
-                    "type" : "Owns",
-                    "relatedEntityReferenceType": "Object",
-                    "relatedReferenceURN" : "urn:uuid:54321",
-                    "lastModifiedTimestamp" : 1390607277299,
-                }
-            ]
-
-+ Response 204 
-
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "code" : -8,
-                "message" : "No matching record with Object of urn:uuid:12345 exists"
-            }
-
-## Lookup Specific Relationship Between Entities [/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}/{type}{?view}]
-### Lookup a specific relationships between any two entities [GET]
-
-+ Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
-    + relatedEntityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + relatedReferenceUrn (required, string, `urn:uuid:54321`) ... Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
-    + type (required, string `Owns`) ... Case-sensitive `type` of relationship to look for
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-
-+ Request
-    
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-+ Response 200 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : RelationshipAccessed
-            SnapBundle-View : Standard
-            
-    + Body
-    
-            {
-                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
-                "entityReferenceType": "Object",
-                "referenceUrn" : "urn:uuid:12345",
-                "type" : "Owns",
-                "relatedEntityReferenceType": "Object",
-                "relatedReferenceURN" : "urn:uuid:54321",
-                "lastModifiedTimestamp" : 1390607277299,
-            }
-
-+ Response 204 
-
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "code" : -8,
-                "message" : "No matching record with Object of urn:uuid:12345 exists"
-            }
-
-## Lookup Relationships by Type [/relationships/{entityReferenceType}/{referenceUrn}/{type}{?view,reverse}]
-### Lookup an array of all defined relationships of the specific type [GET]
-
-+ Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
-    + type (required, string `Owns`) ... Case-sensitive `type` of relationship to look for
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-    + reverse (optional, boolean, `false`) ... Flips the query around, finding those relationships where the `entityReferenceType` and `referenceUrn` are in the related fields(defalts to false)
-
-+ Request
-    
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-+ Response 200 (application/json)
-
-    + Headers
-
-            SnapBundle-Event : RelationshipAccessed
-            SnapBundle-View : Standard
-            
-    + Body
-    
-            [
-                {
-                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
-                    "entityReferenceType": "Object",
-                    "referenceUrn" : "urn:uuid:12345",
-                    "type" : "Owns",
-                    "relatedEntityReferenceType": "Object",
-                    "relatedReferenceURN" : "urn:uuid:54321",
-                    "lastModifiedTimestamp" : 1390607277299,
-                }
-            ]
-
-+ Response 204 
-
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "code" : -8,
-                "message" : "No matching record with Object of urn:uuid:12345 exists"
-            }
 
 # Group Object Interaction Session Endpoints
 ## Overview
@@ -1997,6 +1695,309 @@ If no `objectUrn` query parameter is included, then all interactions are returne
             }
             
 + Response 204 
+
+# Group Relationship Endpoints
+## Overview
+SnapBundle provides a simple, flexible, and incredibly powerful relationship modeling mechanism. The model allows the declaration that
+object *A*, for example, could *follows* object *B*. Or, the relationship could be defined where object *A* is a *neighbor* of object
+*B*. Verbs are supported as well, such that *a person* *drove* *a car*, where person and car are just Objects with a `type` of person
+and car, respectively.
+
+The `relatedEntityReferenceType` and `relatedReferenceUrn` should always be treated as the subordinate object in the relationship that is described by the `relationshipType` field. Consider these examples that illustrate this concept:
+
+`````
+Entity Reference Type `Object` identified by Reference URN 1A2B3C has a Child relationship type with Related Entity Reference Type `Object` identified by Reference URN 4D5E6F.
+`````
+
+`````
+Entity Reference Type `ObjectInteractionSession` identified by Reference URN 1A2B3C has a Child relationship type with Related Entity Reference Type `Device` identified by Reference URN 4D5E6F.
+`````
+
+`````
+Entity Reference Type `Object` identified by Reference URN 1A2B3C has a Peer relationship type with Related Entity Reference Type `Object` identified by Reference URN 4D5E6F.
+`````
+
+The relationship `type` field is used to capture the high level categorization that describes the logical interaction between the two
+referenced objects. The platform makes no inferences from any relationships defined.
+
+## Relationship Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | fase | Full | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Full | null
+entityReferenceType | EntityReferenceType | true | false | Minimum |
+referenceURN | String | true | false | Minimum |
+type | String | true | false | Minimum |
+relatedEntityReferenceType | EntityReferenceType | true | false | Minimum |
+relatedReferenceURN | String | true | false | Minimum |
+
+### Field Notes
+- The `entityReferenceType` and `referenceURN` fields jointly represent the *owner* or *initiator* of the relationship
+- The `relatedEntityReferenceType` and `relatedReferenceURN` fields jointly represent the *subordinate* member of the relationship
+- The `type` field is available to create an ontology or high level categories that can be used to group related relationships.
+The platform makes no inferences about this case-sensitive field.
+
+## Relationship Management [/relationships/{entityReferenceType}/{referenceUrn}]
+### Create a new object   [PUT]
+
+The following object fields are all required to create a new record:
+
+- `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in
+[data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Data Types")
+- `referenceURN` must point to a pre-existing record of the given `entityReferenceType`
+- `type` is required and constrained to 255 characters
+- `relatedEntityReferenceType` is required and constrained to a valid EntityReferenceType value defined in
+[data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Data Types")
+- `relatedReferenceURN` must point to a pre-existing record of the given `relatedEntityReferenceType`
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+
+#### Idempotent Behavior
+This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result
+
+- **201 SUCCESS_CREATED** if the record is new
+- **200 SUCCESS_OK** if a relationship between the referenced objects already existed in the database, in which
+case **the `type` field and `moniker` fields are updated to reflect the values submitted**
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
+    + Body
+
+            {
+                "type": "Owns",
+                "relatedEntityReferenceType": "Object",
+                "relatedReferenceURN" : "urn:uuid:54321"
+            }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipDefined
+
+    + Body
+
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipDefined
+
+    + Body
+
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:12345 exists"
+            }
+
+## Relationship Management by URN [/relationships/{urn}{?view}]
+### Lookup a specific relationship by its system-assigned URN key [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipAccessed
+            SnapBundle-View : Standard
+
+    + Body
+
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "entityReferenceType": "Object",
+                "referenceUrn" : "urn:uuid:12345",
+                "type" : "Owns",
+                "relatedEntityReferenceType": "Object",
+                "relatedReferenceURN" : "urn:uuid:54321",
+                "lastModifiedTimestamp" : 1390607277299,
+            }
+
++ Response 204
+
+### Deletes an existing relationship by its system-assigned URN key [DELETE]
+
++ Response 204
+
+    + Headers
+
+            SnapBundle-Event : RelationshipDeleted
+
+## Lookup All Relationships Between Entities [/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}{?view}]
+### Lookup an array of all defined relationships between any two entities [GET]
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + relatedEntityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + relatedReferenceUrn (required, string, `urn:uuid:54321`) ... Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipAccessed
+            SnapBundle-View : Standard
+
+    + Body
+
+            [
+                {
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                    "entityReferenceType": "Object",
+                    "referenceUrn" : "urn:uuid:12345",
+                    "type" : "Owns",
+                    "relatedEntityReferenceType": "Object",
+                    "relatedReferenceURN" : "urn:uuid:54321",
+                    "lastModifiedTimestamp" : 1390607277299,
+                }
+            ]
+
++ Response 204
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:12345 exists"
+            }
+
+## Lookup Specific Relationship Between Entities [/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}/{type}{?view}]
+### Lookup a specific relationships between any two entities [GET]
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + relatedEntityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + relatedReferenceUrn (required, string, `urn:uuid:54321`) ... Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
+    + type (required, string `Owns`) ... Case-sensitive `type` of relationship to look for
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipAccessed
+            SnapBundle-View : Standard
+
+    + Body
+
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "entityReferenceType": "Object",
+                "referenceUrn" : "urn:uuid:12345",
+                "type" : "Owns",
+                "relatedEntityReferenceType": "Object",
+                "relatedReferenceURN" : "urn:uuid:54321",
+                "lastModifiedTimestamp" : 1390607277299,
+            }
+
++ Response 204
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:12345 exists"
+            }
+
+## Lookup Relationships by Type [/relationships/{entityReferenceType}/{referenceUrn}/{type}{?view,reverse}]
+### Lookup an array of all defined relationships of the specific type [GET]
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + type (required, string `Owns`) ... Case-sensitive `type` of relationship to look for
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + reverse (optional, boolean, `false`) ... Flips the query around, finding those relationships where the `entityReferenceType` and `referenceUrn` are in the related fields(defalts to false)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : RelationshipAccessed
+            SnapBundle-View : Standard
+
+    + Body
+
+            [
+                {
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                    "entityReferenceType": "Object",
+                    "referenceUrn" : "urn:uuid:12345",
+                    "type" : "Owns",
+                    "relatedEntityReferenceType": "Object",
+                    "relatedReferenceURN" : "urn:uuid:54321",
+                    "lastModifiedTimestamp" : 1390607277299,
+                }
+            ]
+
++ Response 204
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:12345 exists"
+            }
+
 
 # Group Geospatial Endpoints
 ## Overview
@@ -2484,3 +2485,266 @@ If no `nameLike` query parameter is included, then all interactions are returned
                 }
 
 + Response 204 
+
+# Group Tag Endpoints
+## Overview
+TO BE DOCUMENTED
+
+# Group File Endpoints
+## Overview
+TO BE DOCUMENTED
+
+# Group Metadata Endpoints
+## Overview
+SnapBundle provides an extremely flexible way to capture type-safe key-value pairs in order to capture a complete
+representation of an object. The system uses either a built-in (opaque to the developer) encoding mechanism to ensure
+type-safety, or alternatively a developer defined encoding mechanism (opaque to the platform) encoding
+mechanism. The primitive data types supported by the built-in (opaque to the developer) encoding include:
+
+   * **String**
+   * **Date**
+   * **Integer**
+   * **Long**
+   * **Boolean**
+   * **Float**
+   * **Double**
+
+Each of these primitive data types guarantee a precision described by the Java Language Specification. In addition to
+these primitives, the following two complex data types are also supported by the built-in (opaque to the developer)
+encoding:
+
+   * **JSON**
+   * **XML**
+
+Internally, these are stored as Strings but the declaration of the more formal type may provide a more convenient client
+binding mechanism.
+
+Finally, the platform also supports a **Custom** encoding (opaque to the platform) where the developer assumes full
+responsibility for the serialization and deserialization of a type-safe value for the key.
+
+> Built-in platform encoding must be treated as an opaque encoding. It presently relies on a 3rd party open-source
+library (Jackson Data Binding). There is no current vision to replace this library, but if a more compact encoding is
+discovered the existing approach may be replaced. If you don't want to rely on platform encoding, then you are free
+to craft your own custom representation as described.
+
+## Metadata Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | false | Full | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Full | null
+entityReferenceType | EntityReferenceType | true | false | Minimum |
+referenceURN | String | true | false | Minimum |
+dataType | MetadataDataType | true | false | Minimum |
+key | String  | true | true | Minimum |
+rawValue | String  | true | true | Minimum  | Opaque Base64 encoded value when using built-in encoding
+
+### Field Notes
+- The `rawValue` field MUST be serialized and deserialized using the endpoints documented below *unless* a **Custom**
+`dataType` value is assigned.
+
+
+## Type-Safe Encoding [/metadata/mapper/encode/{metadataDataType}]
+### Encodes a strongly typed value using the platform's built-in (opaque to the developer) encoded  [POST]
+
+The body of the HTTP POST must contain a valid String representation of the specified `metadataDataType` specified.
+
+- **200 SUCCESS_OK** the value was within the range of the specified `metadataDataType` and has been successfully
+encoded
+
++ Parameters
+    + metadataDataType (required, MetadataDataType, `BooleanType`) ... Valid MetadataDataType enum value
+
++ Request (text/plain)
+
+    + Body
+
+            true
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "rawValue" : "AQ=="
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : 0,
+                "message" : "Unsupported MetadataType: foo"
+            }
+
+## Type-Safe Decoding [/metadata/mapper/decode/{metadataDataType}]
+### Decodes a strongly typed value previously encoded using the platform's built-in (opaque to the developer) encoder [POST]
+
+The body of the HTTP POST must contain a valid String representation of a platform encoded value of the type
+`metadataDataType` specified.
+
+- **200 SUCCESS_OK** the value was within the range of the specified `metadataDataType` and has been successfully
+decoded
+
++ Request (text/plain)
+
+    + Body
+
+            AQ==
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "decodedValue" : true
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : 0,
+                "message" : "Unsupported MetadataType: foo"
+            }
+
+## Metadata Upsertion [/metadata/{entityReferenceType}/{referenceUrn}]
+### Inserts a new key-value or updates an existing key value related to the specified entity [PUT]
+
+The request body is a JSON array, and each entry must include a `key`, `dataType`, and a properly
+encoded `rawValue` field. Metadata values are restricted to *an encoded representation* that is no more than
+4K in size. If you were to encode a 4K string, the resulting encoding would be too large for the field. Instead,
+large values should use a file instead of metadata.
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
+    + Body
+
+            [
+               {
+                  "dataType": "BooleanType",
+                  "key": "alpha",
+                  "rawValue": "AQ=="
+               },
+               {
+                  "dataType": "Custom",
+                  "key": "foo",
+                  "rawValue": "KioqKioqKioqKioqKg=="
+               }
+            ]
+
++ Response 200
+
+    + Headers
+
+            SnapBundle-Event : MetadataUpserted
+
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
+
+## Metadata Deletion [/metadata/{entityReferenceType}/{referenceUrn}/{key}]
+### Deletes an existing metadata key by its system-assigned URN key [DELETE]
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + key (required, string `alpha`) ... Case-sensitive `key` used to index the metadata raw value
+
++ Response 204
+
+    + Headers
+
+            SnapBundle-Event : MetadataDeleted
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
+
+## Lookup Associated Metadata [/metadata/{entityReferenceType}/{referenceUrn}{?view,key}]
+### Lookup all metadata that matches the specified key pattern [GET]
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + key (optional, string, `alpha`) ... A valid, case-sensitive *startsWith* key name pattern. If omitted, then all key-values are returned.
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : MetadataAccessed
+            SnapBundle-View : Standard
+
+    + Body
+
+            [
+               {
+                  "dataType": "BooleanType",
+                  "entityReferenceType": "Object",
+                  "key": "alpha",
+                  "lastModifiedTimestamp": 1393328943191,
+                  "rawValue": "AQ==",
+                  "referenceURN": "urn:FooBar:dae58c07-f92e-43ff-91aa-90a62e75b3ba",
+                  "urn": "urn:uuid:47fe5a7d-1d0d-4c12-b256-96b970698623"
+               },
+               {
+                  "dataType": "Custom",
+                  "entityReferenceType": "Object",
+                  "key": "foo",
+                  "lastModifiedTimestamp": 1393328943205,
+                  "rawValue": "KioqKioqKioqKioqKg==",
+                  "referenceURN": "urn:FooBar:dae58c07-f92e-43ff-91aa-90a62e75b3ba",
+                  "urn": "urn:uuid:5365e9f5-3eb4-492e-b2e0-95d57bc0662b"
+               }
+            ]
+
++ Response 204
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
+
+# Group Extension Endpoints
+## Overview
+
+# Group Notification Endpoints
+## Overview
+
+# Group Event Endpoints
+## Overview
+
