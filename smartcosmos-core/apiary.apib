@@ -2775,7 +2775,7 @@ mimeType | String | true | false | Minimum |
 timestamp | long | true | false | Standard |
 pending | Boolean | true | true | Full |
 digitalSignature | String | true | false | Full |
-fileName | String | true | false | Standard |
+fileName | String | true | false | Minimum |
 
 ### Field Notes
 The `timestamp` differs from the `lastModifiedTimestamp` based on file creation time. In other words, the `timestamp`
@@ -2820,7 +2820,36 @@ The `url` represents the physical URL of where the file is stored inside of the 
 
 > The toggle of the `pending` flag to false is the only indication to an [Extension](EXTENSION_FRAMEWORK.md "Extension Framework") listening in on the Event Stream that the media is available for download. Instead of relying on the `pending` flag, integrators should instead look for the `FileUploaded` event (instead of `FileDefined`) for confirmation that the actual file is available for download.
 
+> Developers must use the **PUT** endpoint to first define the File, then use one of the **POST** endpoints to physically
+upload the file to the cloud for storage. The multi-part endpoint expects a multi-part mime type, while the octet
+expects an octet-stream mime type.
+
+If the file content already exists at a well-defined location on the web that can be referenced with an HTTP or HTTPS
+URL, then the developer may optionally choose to include a `contentUrl` field in the **PUT** request. The platform checks
+for the existence of `contentUrl` and `mimeType` fields, and if present, not-null, and the content is successfully
+retrieved, then the **PUT** operation is self-contained. In this case, self-contained means that the **PUT** operation
+generated the File record _and_ downloaded the content of the given MIME type from the referenced URL and placed it
+into platform storage. If the `contentUrl` field is included with a `null` value or cannot be successfully downloaded,
+or if the `mimeType` field is omitted, then an HTTP 400 status code will be returned to the developer to convey the fact
+that file content is missing or inaccessible. This also means that the File record was _not_ saved either.
+
+
+For retrieval, when requesting by `{entityReferenceType}/{referenceUrn}`, the system will always respond with a
+JSON array, detailing the set of File definitions associated with the referenced object. In contrast, the `{urn}`
+GET request represents the URN assigned to a specific File definition, returning the single JSON object defining
+the given File.
+
 ** Endpoint Definitions To Be Documented **
+
+Endpoint | Supported HTTP Methods | Events Generated
+------------ | ------------- | ------------
+/files | PUT  | FileDefined
+/files/{urn}/octet | POST | FileUploaded
+/files/{urn}/multipart | POST | FileUploaded
+/files/{urn}/contents | GET | FileAccessed
+/files/{urn} | GET | FileAccessed
+/files/{entityReferenceType}/{referenceUrn} | GET | FileAccessed (for each file)
+/files/{urn} | DELETE | FileDeleted
 
 # Group Tag Endpoints
 ## Overview
