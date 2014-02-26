@@ -2758,7 +2758,69 @@ large values should use a file instead of metadata.
 
 # Group File Endpoints
 ## Overview
-TO BE DOCUMENTED
+The SnapBundle platform can associate *any* type of file with *any* of the platform's primary entity types. Furthermore,
+there is no physical restriction on how many files may be associated with an object.
+
+## File Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | false | Full | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Full | null
+entityReferenceType | EntityReferenceType | true | false | Minimum |
+referenceURN | String | true | false | Minimum |
+url | String | true | false | Restricted | Generated
+mimeType | String | true | false | Minimum |
+timestamp | long | true | false | Standard |
+pending | Boolean | true | true | Full |
+digitalSignature | String | true | false | Full |
+fileName | String | true | false | Standard |
+
+### Field Notes
+The `timestamp` differs from the `lastModifiedTimestamp` based on file creation time. In other words, the `timestamp`
+should represent the creation time of the media, while the `lastModifiedTimestamp` will represent the time at which the
+media was uploaded to the platform for storage. Please keep in mind that the creation time of the media is easily
+manipulated in modern operating systems and may not be a truly accurate creation timestamp- this is beyond the control
+of the platform and affects all software.
+
+The combination of `entityReferenceType` and `referenceURN` links the File to be associated with any
+[primary data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Primary Data Types"), including the
+following:
+
+   * Device
+   * User
+   * File
+   * Metadata
+   * Object
+   * ObjectAddress
+   * ObjectInteraction
+   * ObjectInteractionSession
+   * Relationship
+   * Timeline
+   * Georectification
+
+The following arbitrary examples are intended to illustrate the power of this design:
+
+   * A set of media could be associated with the Device, such as a picture of the actual laptop that shows its color, shape, etc.
+   * A set of media could be associated with the User, such as the user's picture, their assigned company car, etc.
+   * A set of media could be associated with an existing File definition, thus creating a nested tree of parent-child relationships.
+   * A set of media could be associated with a piece of metadata, linking say the model year of the car associated with the VIN (stored in a Object record) with a PDF of the user manual for that year vehicle.
+   * A set of media could be associated with an Object, showing what the object looks like, where it placed on its host, etc.
+   * A set of media could be associated with an Object Address, showing what the building looks like from the outside.
+   * A set of media could be associated with an Object Interaction, capturing additional context, like a video of the machine associated with the object actually started and running
+   * A set of media could be associated with an Object Interaction Session, such as capturing a narrative about the location where the batch scan was initiated.
+   * Etc.
+
+> The delivery of a File is inherently a two-step process.
+
+**First**, the actual database record (File) is defined. **Second**, the associated media file is physically uploaded to the SnapBundle™ platform. During the first operation, the File is marked as `pending = true` to indicate that the File record exists, but the actual file hasn't been physically uploaded to the cloud yet. After the file upload completes, the system automatically changes `pending = false` to indicate that the actual media is now available to the platform.
+
+The `url` represents the physical URL of where the file is stored inside of the virtual file system (VFS). For security reasons, this URL isn't directly accessible and is therefore annotated as a Restricted field.
+
+> The toggle of the `pending` flag to false is the only indication to an [Extension](EXTENSION_FRAMEWORK.md "Extension Framework") listening in on the Event Stream that the media is available for download. Instead of relying on the `pending` flag, integrators should instead look for the `FileUploaded` event (instead of `FileDefined`) for confirmation that the actual file is available for download.
+
+** Endpoint Definitions To Be Documented **
 
 # Group Tag Endpoints
 ## Overview
@@ -2818,7 +2880,7 @@ definition of a File is a two-stepped procedure. First, the File record is defin
 that the physical media hasn't yet been uploaded to the cloud. This state is represented with the *FileDefined* event
 type. If an Extension actually needs to retrieve the media from the SnapBundle platform, it must wait until the
 *FileUploaded* event triggers, indicating that the file is now ready for download from the cloud. In fact, the
-*FileUploaded* event's `source` will contain a JSON representation of the updated File that includes the `url` that the
+*FileUploaded* event's `source` will contain a JSON representation of the updated File that includes the `urn` that the
 Extension can use to fetch the actual content.
 
 > For a complete list of `EventType` values, please review the [primary data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Primary Data Types") documentation.
