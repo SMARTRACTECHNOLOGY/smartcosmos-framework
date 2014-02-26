@@ -2547,13 +2547,13 @@ rawValue | String  | true | true | Minimum  | Opaque Base64 encoded value when u
 
 ### Field Notes
 - The `rawValue` field MUST be serialized and deserialized using the endpoints documented below *unless* a **Custom**
-`dataType` value is assigned.
+`dataType` value is assigned. 
 
 
 ## Type-Safe Encoding [/metadata/mapper/encode/{metadataDataType}]
-### Encodes a strongly typed value using the platform's built-in (opaque to the developer) encoded  [POST]
-
-The body of the HTTP POST must contain a valid String representation of the specified `metadataDataType` specified.
+### Encodes a strongly typed value using the platform's built-in encoder [POST]
+ 
+*The built-in encoder algorithm is opaque to the developer.* The body of the HTTP POST must contain a valid String representation of the specified `metadataDataType` specified. 
 
 - **200 SUCCESS_OK** the value was within the range of the specified `metadataDataType` and has been successfully
 encoded
@@ -2585,9 +2585,9 @@ encoded
             }
 
 ## Type-Safe Decoding [/metadata/mapper/decode/{metadataDataType}]
-### Decodes a strongly typed value previously encoded using the platform's built-in (opaque to the developer) encoder [POST]
+### Decodes a strongly typed value previously encoded using the platform's built-in encoder [POST]
 
-The body of the HTTP POST must contain a valid String representation of a platform encoded value of the type
+*The built-in encoder algorithm is opaque to the developer.* The body of the HTTP POST must contain a valid `rawValue` representation of a platform encoded value of the type
 `metadataDataType` specified.
 
 > Generally, most developers will just take the entire metadata JSON record and POST it for value decoding, although only
@@ -2839,18 +2839,124 @@ JSON array, detailing the set of File definitions associated with the referenced
 GET request represents the URN assigned to a specific File definition, returning the single JSON object defining
 the given File.
 
-** Endpoint Definitions To Be Documented **
+**Endpoint Definitions To Be Documented**
 
 Endpoint | Supported HTTP Methods | Events Generated
 ------------ | ------------- | ------------
-/files | PUT  | FileDefined
-/files/{urn}/octet | POST | FileUploaded
-/files/{urn}/multipart | POST | FileUploaded
 /files/{urn}/contents | GET | FileAccessed
 /files/{urn} | GET | FileAccessed
 /files/{entityReferenceType}/{referenceUrn} | GET | FileAccessed (for each file)
 /files/{urn} | DELETE | FileDeleted
 
+
+
+## File Definition [/files]
+### Define the metadata of a file in preparation of an actual file upload [PUT]
+
+The following file fields may be used to create a new file record:
+
+- `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
+[data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Data Types")
+- `referenceURN` must point to a pre-existing record of the given `entityReferenceType`
+- `mimeType` is required and constrained to 100 characters
+- `contentUrl` is optional and may be omitted; defaults to null. Set value to an HTTP or HTTPS URL to define the file *and* associate the physical file content in a singular call
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "entityReferenceType" : "Object",
+                "referenceUrn" : "urn:instagram:FooQux:47c23bc6-2a58-4e37-93b0-848776b42404",
+                "mimeType" : "image/jpg",
+                "contentUrl" : "http://www.example.com/images/logo.jpg"
+            }
+            
++ Response 201 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : FileDefined, FileUploaded
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: mimeType"
+            }
+
+## File Upload - Octet-Stream [/files/{urn}/octet]
+### Upload actual file bytes to the cloud using an octet-stream [POST]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
+
++ Request (application/octet-stream)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            **Octet Stream**
+     
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : FileUploaded
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
+            }
+                        
+## File Upload - Multi-Part Form Data [/files/{urn}/multipart]
+### Upload actual file bytes to the cloud using an multi-part form data submission from a web form [POST]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
+
++ Request (multipart/form-data)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            **Form Data**
+     
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : FileUploaded
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
+            }
+                        
 # Group Tag Endpoints
 ## Overview
 Tags have grown in popularity across the Web for assigning quick search terms to everything from blog postings to
