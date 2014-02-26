@@ -2839,17 +2839,6 @@ JSON array, detailing the set of File definitions associated with the referenced
 GET request represents the URN assigned to a specific File definition, returning the single JSON object defining
 the given File.
 
-**Endpoint Definitions To Be Documented**
-
-Endpoint | Supported HTTP Methods | Events Generated
------------- | ------------- | ------------
-/files/{urn}/contents | GET | FileAccessed
-/files/{urn} | GET | FileAccessed
-/files/{entityReferenceType}/{referenceUrn} | GET | FileAccessed (for each file)
-/files/{urn} | DELETE | FileDeleted
-
-
-
 ## File Definition [/files]
 ### Define the metadata of a file in preparation of an actual file upload [PUT]
 
@@ -2930,6 +2919,7 @@ The following file fields may be used to create a new file record:
                         
 ## File Upload - Multi-Part Form Data [/files/{urn}/multipart]
 ### Upload actual file bytes to the cloud using an multi-part form data submission from a web form [POST]
+By supporting a multi-part form data upload endpoint, Snapbundle allows a web form to be used to upload a file to the cloud.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
@@ -2956,6 +2946,121 @@ The following file fields may be used to create a new file record:
                 "code" : 1,
                 "message" : "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
             }
+
+## Specific File Definition Retrieval [/files/{urn}{?view}]                
+### Retrieves the file definition [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : FileAccessed
+            
+    + Body
+    
+            {
+                "urn" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "timestamp" : 1393453813429,
+                "lastModifiedTimestamp" : 1393453815268,
+                "fileName" : "system-generated-file-name-to-prevent-collisions",
+                "entityReferenceType" : "Object",
+                "referenceUrn" : "urn:instagram:FooQux:47c23bc6-2a58-4e37-93b0-848776b42404",
+                "mimeType" : "image/jpg",
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
+            
+## File Content Retrieval [/files/{urn}/contents]                
+### Retrieves the actual file content from the cloud [GET]
+
+> The actual MIME type of the response *is the MIME type from the file definition*. For this reason it is critical that the MIME type is 
+accurately reported when defining the file.
+
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
+
++ Response 200
+
+    + Headers
+
+            SnapBundle-Event : FileRetrieval
+            Content-Disposition : attachment; filename="system-generated-file-name-to-prevent-collisions"
+            
+    + Body
+    
+            **File contents**
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
+
+## Related File Definitions Retrieval [/files/{entityReferenceType}/{referenceUrn}{?view}]                
+### Retrieves the complete collection of file definitions associated with the specified entity [GET]
+Always returns a JSON array where each member of the array is a file definition associated with the specified entity.
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Response 200
+
+    + Headers
+
+            SnapBundle-Event : FileAccessed
+            
+    + Body
+
+            [    
+                {
+                    "urn" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                    "timestamp" : 1393453813429,
+                    "lastModifiedTimestamp" : 1393453815268,
+                    "fileName" : "system-generated-file-name-to-prevent-collisions",
+                    "entityReferenceType" : "Object",
+                    "referenceUrn" : "urn:instagram:FooQux:47c23bc6-2a58-4e37-93b0-848776b42404",
+                    "mimeType" : "image/jpg",
+                }
+            ]
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
+            
+## File Deletion [/files/{urn}]                
+### Deletes an existing relationship by its system-assigned URN key [DELETE]
+Immediately purges both the file definition and the physical file stored in the cloud.
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
+
++ Response 204
+
+    + Headers
+
+            SnapBundle-Event : FileDeleted
                         
 # Group Tag Endpoints
 ## Overview
