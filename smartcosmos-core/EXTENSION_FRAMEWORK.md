@@ -1,7 +1,12 @@
 # Extension Framework
-SnapBundle™ Extensions provide an open means for writing value-add services atop of the SnapBundle™ platform. An Extension could be authored by a third-party, or by the account owner. The SnapBundle™ Extension mechanism is built around a RESTful interface using JavaScript Object Notation (JSON) messages, which means that virtually any programming language or operating system with network access can be used.
+SnapBundle™ Extensions provide an open means for writing value-add services atop of the SnapBundle™ platform. An
+Extension could be authored by a third-party, or by the account owner. The SnapBundle™ Extension mechanism is built
+around a RESTful interface using JavaScript Object Notation (JSON) messages, which means that virtually any programming
+language or operating system with network access can be used.
 
-The SnapBundle™ Extension security model uses the open standard OAuth 2.0 specification. For a detailed explanation of the SnapBundle™ OAuth security model, please refer to the SnapBundle™ OAuth 2.0 Guide _once you've finished setting up your Extension, as defined here._
+The SnapBundle™ Extension security model uses the open standard OAuth 2.0 specification. For a detailed explanation of
+the SnapBundle™ OAuth security model, please refer to the SnapBundle™ OAuth 2.0 Guide _once you've finished setting up
+your Extension, as defined here._
 
 ## Extension
 The SnapBundle™ Extension is a declaration of an external actor that may be granted access to one or more SnapBundle™ Accounts where access is restricted to a finite set of permissions.
