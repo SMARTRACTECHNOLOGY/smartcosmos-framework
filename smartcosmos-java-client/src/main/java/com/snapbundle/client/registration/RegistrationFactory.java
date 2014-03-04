@@ -15,29 +15,20 @@
  * limitations under the License.
  */
 
-package com.snapbundle.client.endpoint;
+package com.snapbundle.client.registration;
 
-public final class OAuthEndpoints
+/**
+ * Creates an instance of a registration client.
+ */
+public final class RegistrationFactory
 {
-    private OAuthEndpoints()
+    /**
+     * Creates a new instance of a registration client.
+     *
+     * @return New registration client instance
+     */
+    public static IRegistrationClient createRegistrationClient()
     {
+        return new RegistrationClient();
     }
-
-    private static final String BASE = "/oauth2";
-
-    public static String exchangeCode()
-    {
-        return BASE.concat("/token");
-    }
-
-    public static String revokeBearerCode()
-    {
-        return BASE.concat("/revoke/bearer");
-    }
-
-    public static String revokeRefreshCode()
-    {
-        return BASE.concat("/revoke/refresh");
-    }
-
 }

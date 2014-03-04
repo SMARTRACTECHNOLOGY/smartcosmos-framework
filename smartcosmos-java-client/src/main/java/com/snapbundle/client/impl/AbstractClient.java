@@ -1,6 +1,23 @@
+/*
+ * SnapBundle SDK
+ * (C) Copyright 2013-2014 Tag Dynamics, LLC (http://tagdynamics.com/)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.snapbundle.client.impl;
 
-import com.snapbundle.client.SnapConfiguration;
+import com.snapbundle.client.ServerContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,13 +31,16 @@ import java.io.IOException;
 
 public abstract class AbstractClient
 {
+    private ServerContext context;
+
     protected ClientResource createClient(String path)
     {
-        return createClient(path, false);
+        return createClient(path, false, new ServerContext());
     }
 
-    protected ClientResource createClient(String path, boolean authenticatedFlag)
+    protected ClientResource createClient(String path, boolean authenticatedFlag, ServerContext context)
     {
+        this.context = context;
         ClientResource service = new ClientResource(assembleEndpoint(path));
 
         if (authenticatedFlag)
@@ -28,8 +48,8 @@ public abstract class AbstractClient
             ChallengeScheme scheme = ChallengeScheme.HTTP_BASIC;
 
             ChallengeResponse authentication = new ChallengeResponse(scheme,
-                    SnapConfiguration.getEmailAddress(),
-                    SnapConfiguration.getCredentials());
+                    context.getEmailAddress(),
+                    context.getCredentials());
 
             service.setChallengeResponse(authentication);
         }
@@ -39,7 +59,7 @@ public abstract class AbstractClient
 
     private String assembleEndpoint(String path)
     {
-        return SnapConfiguration.SERVER_BASE_URL().concat(path);
+        return context.getServerUrl().concat(path);
     }
 
     protected JSONObject toJsonObject(Representation representation) throws IOException, JSONException

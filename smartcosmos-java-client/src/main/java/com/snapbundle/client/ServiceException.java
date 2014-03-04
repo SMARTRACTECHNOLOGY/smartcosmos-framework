@@ -15,29 +15,46 @@
  * limitations under the License.
  */
 
-package com.snapbundle.client.endpoint;
+package com.snapbundle.client;
 
-public final class OAuthEndpoints
+import com.snapbundle.pojo.base.ResponseEntity;
+
+public class ServiceException extends Exception
 {
-    private OAuthEndpoints()
+    private boolean hasCode = false;
+
+    private int code;
+
+    public ServiceException(ResponseEntity response)
     {
+        this(response.getMessage());
+        this.code = response.getCode();
+        this.hasCode = true;
     }
 
-    private static final String BASE = "/oauth2";
-
-    public static String exchangeCode()
+    public ServiceException(int code)
     {
-        return BASE.concat("/token");
+        this.code = code;
+        this.hasCode = true;
     }
 
-    public static String revokeBearerCode()
+    private ServiceException(String message)
     {
-        return BASE.concat("/revoke/bearer");
+        super(message);
     }
 
-    public static String revokeRefreshCode()
+    public ServiceException(Exception e)
     {
-        return BASE.concat("/revoke/refresh");
+        super(e);
     }
 
+    public boolean hasCode()
+    {
+        return hasCode;
+    }
+
+    public int getCode()
+    {
+        return code;
+    }
 }
