@@ -3138,9 +3138,194 @@ TO BE DOCUMENTED
 
 # Group Notification Endpoints
 ## Overview
-TO BE DOCUMENTED
+The SnapBundle platform was built from the ground up to be back-office integration friendly. Design decisions early on included 
+focusing on an **event-driven model** built around **JSON**. The platform supports nearly 100 different event types, and counting. 
+Integration uses the terminology *notificaiton endpoint* to reflect the fact that the endpoint is being *notified of an event* that
+occurred.
+
+> For a complete list of `EventType` values, please review the [primary data types](https://github.com/snapbundle/sdk/blob/master/DATA_TYPES.md "Primary Data Types") documentation.
+
+### How Integration Works
+Integration is accomplished by registering an endpoint with the platform that receives each individual event via an HTTP POST 
+where the body of the post contains the singular JSON event. **The endpoint defined must by SSL/TLS terminated (HTTPS) for security 
+reasons.** The endpoint must also be online at the time the notification endpoint is registered in order to receive the confirmation 
+token that must be re-submitted to prove ownership of the endpoint.
+
+Notification endpoint registration should be considered an opaque operation, a venerable black box. However, we will peel back the covers 
+here and reveal that the current is built around Amazon Web Services (AWS). AWS uses a handshake protocol where they post an enrollment token
+to the endpoint, and that token needs to be re-submitted back to AWS to confirm ownership of the Web application running at that location.
+
+> It is absolutely critical that you re-submit the token back through Snapbundle and not directly to AWS. Failure to route the confirmation 
+through SnapBundle would result in the endpoint remaining in the **pending** state. No data is delivered to the notification endpoint until 
+the state is marked as **active**.
+
+The latency between the recording of the actual event in the platform and the notification broadcast of that event is generally a few seconds,
+at best, but ultimately is dictated by how quickly AWS delivers the queued payload to the endpont. Generally, integration can be described as 
+"near real-time" because the latency is so low.
+
+> Visit the SnapBundle GitHub page for a complete sample web application that can capture the subscription confirmation token, demonstrate
+how to use OAuth 2 to sign onto the SnapBundle platform as an extension acting on behalf of an existing account, and capture event notifications
+in near real-time.
+
+## Notification Endpoint Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | fase | Full | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+moniker | String  | false | true | Full | null
+entityReferenceType | EntityReferenceType | true | false | Minimum |
+referenceURN | String | true | false | Minimum |
+encodedPublicKey | String | true | false | Standard | Generated
+notificationEndpointUrl | String | true | false | Minimum | 
+pendingConfirmation | Boolean  | true | true | Full  | true
+name | String  | true | true | Minimum |
+description | String  | false | true | Standard |
+activeFlag | Boolean  | true | false | Standard  | true
+
+## Endpoint Enrollment [/notifications/enroll]
+### Enroll an existing endpoint running a web app ready to confirm a subscription and receive events [PUT]
+
+An additional `referenceUrn` field must be included **if the endpoint enrollment is being requested by an extension** on behalf of another account. 
+In this case, the Authorization header would *not* be Basic but, but a standard OAuth 2 Bearer token header.
+
+Definition of an endpoint results in an endpoint that is *pending* confirmation. Until the actual web application at the defined endpoint receives 
+the confirmation token *and* posts that confirmation token to the /notifications/confirm/{topicArn} endpoint *no events will be delivered to the endpoint*.
 
 **All notification endpoint URLs must rely on SSL/TLS by specifying an https:// address**.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "endpointUrl" : "http://www.example.com/events",
+                "name" : "My SnapBundle SAP Integration",
+                "description" : "lorem ipsum",
+            }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+            
+## Endpoint Enrollment Confirmation [/notifications/confirm/{topicArn}]
+### Confirms the enrollment of an endpoint running a web app that received a `topicArn` [PUT]
+
+Definition of an endpoint results in an endpoint that is *pending* confirmation. Until the actual web application at the defined endpoint receives 
+the confirmation token *and* posts that confirmation token to the /notifications/confirm/{topicArn} endpoint *no events will be delivered to the endpoint*.
+
+The confirmation token will be a *big* string, perhaps 288 characters in length or more. Once the confirmation is processed by the platform, the 
+status of the endpoint will be set to *active* and *events will be delivered to the endpoint in near real-time.*
+
+Part of this enrollment message will be the `topicArn` defined by the notifcation endpoint. This is a *different value* than the system assigned URN
+that is returned when the notification endpoint is defined.
+
++ Parameters
+    + topicArn (required, String, `arn:aws:sns:us-east-1:1234567890:Foo`) ... Randomly generated topicArn posted to the endpoint along with the confirmation token
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            2336412f37b6872e6e13dcb.......
+
++ Response 204
+            
+    + Headers
+
+            SnapBundle-Event : NotificationSubscriptionConfirmed
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
+            
+## Endpoint Withdraw [/notifications/withdraw]
+### Withdraw or terminate delivery of events to an existing endpoint [PUT]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "urn" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
++ Response 204
+
+    + Headers
+
+            SnapBundle-Event : NotificationUnsubscribe, NotificationWithdrawn, NotificationDeleted
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: urn"
+            }
+
+
+## Lookup Specific Notification Endpoint by URN [/notifications/{urn}{?view}]
+### Lookup a specific notification endpoint by its system-assigned URN key [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SnapBundle-Event : NotificationAccessed
+            SnapBundle-View : Standard
+
+    + Body
+
+            {
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "entityReferenceType": "Account",
+                "referenceUrn" : "urn:uuid:12345",
+                "lastModifiedTimestamp": 1393328943191,
+                "activeFlag": true,
+                "name" : "My SnapBundle SAP Integration",
+                "description" : "lorem ipsum",
+              }
+
++ Response 204
+
 
 # Group Event Stream Endpoints
 ## Overview
