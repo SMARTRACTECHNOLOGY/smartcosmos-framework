@@ -77,21 +77,19 @@ public enum EventType
     InteractionSessionStart,
     InteractionSessionStop,
 
-    NotificationDefined,
-    NotificationUpdated,
-    NotificationDeleted,
-    NotificationAccessed,
-
     NotificationEnroll,
     NotificationSubscribe,
+    NotificationDefined,
+
     NotificationSubscriptionConfirmed,
-    NotificationBroadcast,
+
     NotificationUnsubscribe,
     NotificationWithdrawn,
+    NotificationDeleted,
 
-    IntegrationEndpointEnrollmentPending,
-    IntegrationEndpointEnrolled,
-    IntegrationEndpointWithdrawn,
+    NotificationAccessed,
+
+    NotificationBroadcast,
 
     SetDeveloperLicense,
     UnsetDeveloperLicense,
