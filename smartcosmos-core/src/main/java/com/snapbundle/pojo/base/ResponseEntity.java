@@ -29,6 +29,32 @@ public class ResponseEntity
     @JsonView(JsonGenerationView.Minimum.class)
     private String message;
 
+    public static class Builder
+    {
+        private final ResponseEntity entity = new ResponseEntity();
+
+        public Builder(int code)
+        {
+            entity.setCode(code);
+        }
+
+        public Builder(String message)
+        {
+            entity.setMessage(message);
+        }
+
+        public Builder(int code, String message)
+        {
+            entity.setCode(code);
+            entity.setMessage(message);
+        }
+
+        public ResponseEntity build()
+        {
+            return entity;
+        }
+    }
+
     public int getCode()
     {
         return code;
