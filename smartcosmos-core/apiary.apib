@@ -16,6 +16,28 @@ This document is a **work in progress**. It only describes the **public facing A
 SnapBundle was designed as a platform; with minimal effort it can sit atop of other platform services you are already paying 
 for, lowering the total cost of adoption.
 
+## Semantic Web, #with verbs#
+Most definitions of the #semantic web# indirectly focus on nouns. The idea of creating both a human-readable and machine-readable definition
+of what constitutes a car, a recipe, a book, etc. SnapBundle expands upon this concept by recognizing that verbs can benefit from this type
+of duality as well. 
+
+Under the Semantic Web definition, "Person" drives "Truck" would typically capture all the metadata around the person and the truck. However, with
+SnapBundle context can also be captured around the verb in the sentence, *drives*. The resulting trigraph could have its own complete set of context. 
+"Person" could contain details about me, my driver's license number, my height, weight, address, passport RFID number, etc. Similar characteristics 
+could be captured for "Truck" such as the fact it is a 2004 model, it is black, has a VIN number of XYZ, etc. That brings us to the verb, #drives#. 
+The "drives" member of the graph could also have context - a complete timeline and history of each and every trip the person took with the truck:
+
+When did a trip start?
+Where did the person stop during the drive?
+What was the average speed over the duration of a given drive?
+How many miles did the person travel over the entire drive?
+
+Using the SnapBundle timeline feature, one could easily capture every drive "Person" ever completed with "Truck" and rapidly feed those results into 
+3rd party analytical engines by virtue of the OAuth powered event-driven extension mechanism. 
+
+To oversimplify: The semantic web concepts tend to break down because its foundation is predicated upon capturing fidelity 
+only around the nouns. All context is critical, and SnapBundle was designed to embrace capture nouns and verbs equally effectively.
+
 ## What is a _Context_ Data Store?
 Every application captures context to some degree. There will always be application specific entities that don't map well into 
 the SnapBundle platform. SnapBundle isn't intended to totally eliminate the need for your application to have some type of 
