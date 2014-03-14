@@ -35,15 +35,15 @@ public abstract class AbstractClient
 
     protected ClientResource createClient(String path)
     {
-        return createClient(path, false, new ServerContext());
+        return createClient(path, new ServerContext());
     }
 
-    protected ClientResource createClient(String path, boolean authenticatedFlag, ServerContext context)
+    protected ClientResource createClient(String path, ServerContext context)
     {
         this.context = context;
         ClientResource service = new ClientResource(assembleEndpoint(path));
 
-        if (authenticatedFlag)
+        if (context.getEmailAddress() != null)
         {
             ChallengeScheme scheme = ChallengeScheme.HTTP_BASIC;
 
