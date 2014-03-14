@@ -18,6 +18,7 @@
 package com.snapbundle.client.registration;
 
 import com.snapbundle.Field;
+import com.snapbundle.client.ServerContext;
 import com.snapbundle.client.ServiceException;
 import com.snapbundle.client.endpoint.RegistrationEndpoints;
 import com.snapbundle.client.impl.AbstractClient;
@@ -39,15 +40,23 @@ final class RegistrationClient extends AbstractClient implements IRegistrationCl
 {
     final static Logger LOGGER = LoggerFactory.getLogger(RegistrationClient.class);
 
-    RegistrationClient()
+    private final ServerContext context;
+
+    RegistrationClient(ServerContext context)
     {
+        this.context = context;
+    }
+
+    public RegistrationClient()
+    {
+        this.context = new ServerContext();
     }
 
     @Override
     public boolean isRealmAvailable(String realm) throws ServiceException
     {
         boolean isAvailable = false;
-        ClientResource service = createClient(RegistrationEndpoints.checkRealmAvailability(realm));
+        ClientResource service = createClient(RegistrationEndpoints.checkRealmAvailability(realm), context);
 
         try
         {
@@ -99,7 +108,7 @@ final class RegistrationClient extends AbstractClient implements IRegistrationCl
 
             JsonRepresentation sndJsonRepresentation = new JsonRepresentation(jsonObject.toString());
 
-            ClientResource service = createClient(RegistrationEndpoints.registration());
+            ClientResource service = createClient(RegistrationEndpoints.registration(), context);
             Representation result = service.post(sndJsonRepresentation);
 
             if (service.getStatus().equals(Status.CLIENT_ERROR_CONFLICT) ||

@@ -23,14 +23,14 @@ public class RegistrationIT
 {
     public void checkRealmAvailability() throws ServiceException
     {
-        IRegistrationClient client = RegistrationFactory.createRegistrationClient();
+        IRegistrationClient client = RegistrationFactory.createClient();
         boolean isAvailable = client.isRealmAvailable("trrllc.com");
         System.out.println("Available? " + isAvailable);
     }
 
     public void register() throws ServiceException
     {
-        IRegistrationClient client = RegistrationFactory.createRegistrationClient();
+        IRegistrationClient client = RegistrationFactory.createClient();
         RegistrationResponse response = client.register("jason@trrllc.com");
 
         System.out.println("URN:   " + response.getUrn());

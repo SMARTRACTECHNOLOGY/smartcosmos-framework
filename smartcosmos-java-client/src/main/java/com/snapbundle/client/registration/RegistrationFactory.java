@@ -17,18 +17,33 @@
 
 package com.snapbundle.client.registration;
 
+import com.snapbundle.client.ServerContext;
+
 /**
- * Creates an instance of a registration client.
+ * Registration Client Factory.
  */
 public final class RegistrationFactory
 {
+    private RegistrationFactory()
+    {
+    }
+
     /**
      * Creates a new instance of a registration client.
      *
      * @return New registration client instance
      */
-    public static IRegistrationClient createRegistrationClient()
+    public static IRegistrationClient createClient()
     {
         return new RegistrationClient();
+    }
+    /**
+     * Creates a new instance of a registration client pointing at a specific server instance.
+     *
+     * @return New registration client instance
+     */
+    public static IRegistrationClient createClient(ServerContext context)
+    {
+        return new RegistrationClient(context);
     }
 }
