@@ -17,17 +17,9 @@
 
 package com.snapbundle.client.extension;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.IUpdateableBaseClient;
 import com.snapbundle.model.extension.IExtension;
 
-public interface IExtensionClient extends IBaseClient<IExtension>
+public interface IExtensionClient extends IUpdateableBaseClient<IExtension>
 {
-    /**
-     * Submits every field for update. Use this method if you aren't sure what fields changed or if
-     * you aren't concerned about network utilization.
-     *
-     * @param instance
-     */
-    void update(IExtension instance) throws ServiceException;
 }

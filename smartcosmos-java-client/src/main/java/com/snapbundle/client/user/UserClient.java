@@ -17,50 +17,38 @@
 
 package com.snapbundle.client.user;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.endpoint.UserEndpoints;
+import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
 import com.snapbundle.model.context.IUser;
 import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.context.User;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
-class UserClient extends AbstractClient implements IUserClient
+class UserClient extends AbstractUpdateableBaseClient<IUser> implements IUserClient
 {
-    private final ServerContext context;
-
     UserClient(ServerContext context)
     {
-        this.context = context;
-    }
-
-    @Override
-    public void update(IUser instance) throws ServiceException
-    {
-
-    }
-
-    @Override
-    public IUser findByUrn(String urn) throws ServiceException
-    {
-        return null;
+        super(context);
     }
 
     @Override
     public IUser findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity create(IUser instance) throws ServiceException
-    {
-        return null;
+        return findByUrn(urn, viewType, UserEndpoints.findByUrn(urn, viewType), User.class);
     }
 
     @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
-        return null;
+        return create(instance, UserEndpoints.create());
+    }
+
+    @Override
+    public void update(JSONObject instance) throws ServiceException
+    {
+        update(instance, UserEndpoints.update());
     }
 }

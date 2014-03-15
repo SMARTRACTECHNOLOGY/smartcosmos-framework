@@ -17,17 +17,9 @@
 
 package com.snapbundle.client.timeline;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.IUpdateableBaseClient;
 import com.snapbundle.model.context.ITimelineEntry;
 
-public interface ITimelineClient extends IBaseClient<ITimelineEntry>
+public interface ITimelineClient extends IUpdateableBaseClient<ITimelineEntry>
 {
-    /**
-     * Submits every field for update. Use this method if you aren't sure what fields changed or if
-     * you aren't concerned about network utilization.
-     *
-     * @param instance
-     */
-    void update(ITimelineEntry instance) throws ServiceException;
 }

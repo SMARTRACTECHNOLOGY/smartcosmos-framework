@@ -17,50 +17,66 @@
 
 package com.snapbundle.client.device;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.endpoint.DeviceEndpoints;
+import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
 import com.snapbundle.model.context.IDevice;
 import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.context.Device;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
-class DeviceClient extends AbstractClient implements IDeviceClient
-{
-    private final ServerContext context;
+import java.util.Collection;
 
+class DeviceClient extends AbstractUpdateableBaseClient<IDevice> implements IDeviceClient
+{
     DeviceClient(ServerContext context)
     {
-        this.context = context;
-    }
-
-    @Override
-    public void update(IDevice instance) throws ServiceException
-    {
-
-    }
-
-    @Override
-    public IDevice findByUrn(String urn) throws ServiceException
-    {
-        return null;
-    }
-
-    @Override
-    public IDevice findByUrn(String urn, ViewType viewType) throws ServiceException
-    {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity create(IDevice instance) throws ServiceException
-    {
-        return null;
+        super(context);
     }
 
     @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
-        return null;
+        return create(instance, DeviceEndpoints.create());
+    }
+
+    @Override
+    public Collection<IDevice> findByNameLike(String nameLike, ViewType viewType)
+    {
+        // TODO: find device with name like
+        throw new UnsupportedOperationException("Not Yet Implemented");
+    }
+
+    @Override
+    public IDevice findByDeviceIdentification(String identification, ViewType viewType)
+    {
+        // TODO: find device with identification
+        throw new UnsupportedOperationException("Not Yet Implemented");
+    }
+
+    @Override
+    public IDevice findByUrn(String urn, ViewType viewType) throws ServiceException
+    {
+        return findByUrn(urn, viewType, DeviceEndpoints.findByUrn(urn, viewType), Device.class);
+    }
+
+    @Override
+    public Collection<IDevice> findByNameLike(String nameLike)
+    {
+        return findByNameLike(nameLike, ViewType.Standard);
+    }
+
+    @Override
+    public IDevice findByDeviceIdentification(String identification)
+    {
+        return findByDeviceIdentification(identification, ViewType.Standard);
+    }
+
+    @Override
+    public void update(JSONObject instance) throws ServiceException
+    {
+        update(instance, DeviceEndpoints.update());
     }
 }

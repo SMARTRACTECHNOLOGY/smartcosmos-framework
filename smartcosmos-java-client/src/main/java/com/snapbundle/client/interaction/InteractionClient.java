@@ -17,44 +17,32 @@
 
 package com.snapbundle.client.interaction;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.endpoint.InteractionEndpoints;
+import com.snapbundle.client.impl.AbstractCreateableBaseClient;
 import com.snapbundle.model.context.IObjectInteraction;
 import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.context.ObjectInteraction;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
-class ObjectInteractionClient extends AbstractClient implements IObjectInteractionClient
+class InteractionClient extends AbstractCreateableBaseClient<IObjectInteraction> implements IInteractionClient
 {
-    private final ServerContext context;
-
-    ObjectInteractionClient(ServerContext context)
+    InteractionClient(ServerContext context)
     {
-        this.context = context;
-    }
-
-    @Override
-    public IObjectInteraction findByUrn(String urn) throws ServiceException
-    {
-        return null;
+        super(context);
     }
 
     @Override
     public IObjectInteraction findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity create(IObjectInteraction instance) throws ServiceException
-    {
-        return null;
+        return findByUrn(urn, viewType, InteractionEndpoints.findByUrn(urn, viewType), ObjectInteraction.class);
     }
 
     @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
-        return null;
+        return create(instance, InteractionEndpoints.create());
     }
 }

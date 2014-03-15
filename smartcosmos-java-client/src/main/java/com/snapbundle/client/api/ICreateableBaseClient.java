@@ -15,35 +15,13 @@
  * limitations under the License.
  */
 
-package com.snapbundle.client;
+package com.snapbundle.client.api;
 
 import com.snapbundle.pojo.base.ResponseEntity;
-import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
-public interface IBaseClient<T>
+public interface ICreateableBaseClient<T> extends IFindableBaseClient<T>
 {
-    /**
-     * Locate the object that has a case-sensitive match on the given URN.
-     * <p/>
-     * Returns a {@link com.snapbundle.util.json.ViewType#Standard} view.
-     *
-     * @param urn
-     * @return T if exists, or null if no match found
-     * @throws ServiceException
-     */
-    T findByUrn(String urn) throws ServiceException;
-
-    /**
-     * Locate the object that has a case-sensitive match on the given URN.
-     *
-     * @param urn
-     * @param viewType Field verbosity
-     * @return T if exists, or null if no match found
-     * @throws ServiceException
-     */
-    T findByUrn(String urn, ViewType viewType) throws ServiceException;
-
     /**
      * Creates a new instance of T, submitting every member field. Use this method if you aren't sure what fields
      * have been defined or if you aren't concerned about network utilization.

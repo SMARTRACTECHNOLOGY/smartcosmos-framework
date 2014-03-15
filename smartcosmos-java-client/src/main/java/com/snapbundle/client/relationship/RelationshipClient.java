@@ -17,27 +17,39 @@
 
 package com.snapbundle.client.relationship;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.endpoint.RelationshipEndpoints;
+import com.snapbundle.client.impl.AbstractUpsertableBaseClient;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IRelationship;
-import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.context.Relationship;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
 import java.util.Collection;
 
-class RelationshipClient implements IRelationshipClient
+class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> implements IRelationshipClient
 {
-    private final ServerContext context;
-
     RelationshipClient(ServerContext context)
     {
-        this.context = context;
+        super(context);
     }
 
     @Override
-    public void upsert(IRelationship instance) throws ServiceException
+    public void delete(IRelationship instance) throws ServiceException
+    {
+
+    }
+
+    @Override
+    public void delete(JSONObject instance) throws ServiceException
+    {
+
+    }
+
+    @Override
+    public void upsert(JSONObject instance) throws ServiceException
     {
 
     }
@@ -91,32 +103,8 @@ class RelationshipClient implements IRelationshipClient
     }
 
     @Override
-    public void delete(IRelationship relationship) throws ServiceException
-    {
-
-    }
-
-    @Override
-    public IRelationship findByUrn(String urn) throws ServiceException
-    {
-        return null;
-    }
-
-    @Override
     public IRelationship findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity create(IRelationship instance) throws ServiceException
-    {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity create(JSONObject instance) throws ServiceException
-    {
-        return null;
+        return findByUrn(urn, viewType, RelationshipEndpoints.findByUrn(urn, viewType), Relationship.class);
     }
 }

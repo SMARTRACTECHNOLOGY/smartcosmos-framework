@@ -18,8 +18,8 @@
 package com.snapbundle.client.registration;
 
 import com.snapbundle.builder.ObjectBuilder;
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.endpoint.ObjectEndpoints;
 import com.snapbundle.client.object.IObjectClient;
 import com.snapbundle.client.object.ObjectFactory;

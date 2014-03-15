@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-package com.snapbundle.client.interaction;
+package com.snapbundle.client.impl.command;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.model.context.IObjectInteraction;
+import com.snapbundle.client.api.ServiceException;
 
-public interface IObjectInteractionClient extends IBaseClient<IObjectInteraction>
+public interface ICommand<T, E>
 {
+    T call(Class<? extends E> clazz, String path) throws ServiceException;
 }

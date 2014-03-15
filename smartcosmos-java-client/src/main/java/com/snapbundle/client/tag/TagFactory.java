@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.tag;
 
-import com.snapbundle.client.ServerContext;
+import com.snapbundle.client.api.ServerContext;
 
 public final class TagFactory
 {

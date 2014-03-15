@@ -17,17 +17,9 @@
 
 package com.snapbundle.client.geospatial;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.IUpdateableBaseClient;
 import com.snapbundle.model.geo.IGeospatialEntry;
 
-public interface IGeospatialClient extends IBaseClient<IGeospatialEntry>
+public interface IGeospatialClient extends IUpdateableBaseClient<IGeospatialEntry>
 {
-    /**
-     * Submits every field for update. Use this method if you aren't sure what fields changed or if
-     * you aren't concerned about network utilization.
-     *
-     * @param instance
-     */
-    void update(IGeospatialEntry instance) throws ServiceException;
 }

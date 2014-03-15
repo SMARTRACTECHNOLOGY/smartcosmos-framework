@@ -18,10 +18,10 @@
 package com.snapbundle.client.account;
 
 import com.snapbundle.Field;
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.endpoint.AccountEndpoints;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.impl.AbstractFindableBaseClient;
 import com.snapbundle.model.context.IAccount;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.base.Result;
@@ -39,15 +39,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-class AccountClient extends AbstractClient implements IAccountClient
+class AccountClient extends AbstractFindableBaseClient<IAccount> implements IAccountClient
 {
     final static Logger LOGGER = LoggerFactory.getLogger(AccountClient.class);
 
-    private final ServerContext context;
-
     AccountClient(ServerContext context)
     {
-        this.context = context;
+        super(context);
     }
 
     @Override
@@ -60,7 +58,7 @@ class AccountClient extends AbstractClient implements IAccountClient
     public IAccount fetch(ViewType viewType) throws ServiceException
     {
         IAccount account;
-        ClientResource service = createClient(AccountEndpoints.view(viewType), context);
+        ClientResource service = createClient(AccountEndpoints.view(viewType));
 
         try
         {
@@ -93,7 +91,7 @@ class AccountClient extends AbstractClient implements IAccountClient
     {
         boolean wasChanged;
 
-        ClientResource service = createClient(AccountEndpoints.changeMyPassword(), context);
+        ClientResource service = createClient(AccountEndpoints.changeMyPassword());
 
         try
         {
@@ -129,6 +127,12 @@ class AccountClient extends AbstractClient implements IAccountClient
     @Override
     public void resetPassword(String emailAddress) throws ServiceException
     {
+        // TODO: reset password routine
+    }
 
+    @Override
+    public IAccount findByUrn(String urn, ViewType viewType) throws ServiceException
+    {
+        throw new UnsupportedOperationException("Method not available as part of the SDK");
     }
 }

@@ -17,30 +17,26 @@
 
 package com.snapbundle.client.impl;
 
-import com.snapbundle.client.ServerContext;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.snapbundle.client.api.ServerContext;
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
-import org.restlet.ext.json.JsonRepresentation;
-import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
-public abstract class AbstractClient
+public class AbstractBaseClient
 {
-    private ServerContext context;
+    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractBaseClient.class);
+
+    protected final ServerContext context;
+
+    protected AbstractBaseClient(ServerContext context)
+    {
+        this.context = context;
+    }
 
     protected ClientResource createClient(String path)
     {
-        return createClient(path, new ServerContext());
-    }
-
-    protected ClientResource createClient(String path, ServerContext context)
-    {
-        this.context = context;
         ClientResource service = new ClientResource(assembleEndpoint(path));
 
         if (context.getEmailAddress() != null)
@@ -60,15 +56,5 @@ public abstract class AbstractClient
     private String assembleEndpoint(String path)
     {
         return context.getServerUrl().concat(path);
-    }
-
-    protected JSONObject toJsonObject(Representation representation) throws IOException, JSONException
-    {
-        return new JsonRepresentation(representation).getJsonObject();
-    }
-
-    protected JSONArray toJsonArray(Representation representation) throws IOException, JSONException
-    {
-        return new JsonRepresentation(representation).getJsonArray();
     }
 }

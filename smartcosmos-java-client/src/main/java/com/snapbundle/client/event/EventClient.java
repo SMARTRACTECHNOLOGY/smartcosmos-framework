@@ -17,14 +17,24 @@
 
 package com.snapbundle.client.event;
 
-import com.snapbundle.client.ServerContext;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.endpoint.EventEndpoints;
+import com.snapbundle.client.impl.AbstractFindableBaseClient;
+import com.snapbundle.model.event.IEvent;
+import com.snapbundle.pojo.event.Event;
+import com.snapbundle.util.json.ViewType;
 
-class EventClient implements IEventClient
+class EventClient extends AbstractFindableBaseClient<IEvent> implements IEventClient
 {
-    private final ServerContext context;
-
     EventClient(ServerContext context)
     {
-        this.context = context;
+        super(context);
+    }
+
+    @Override
+    public IEvent findByUrn(String urn, ViewType viewType) throws ServiceException
+    {
+        return findByUrn(urn, viewType, EventEndpoints.findByUrn(urn, viewType), Event.class);
     }
 }

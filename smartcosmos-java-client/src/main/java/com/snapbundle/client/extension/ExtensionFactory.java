@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.extension;
 
-import com.snapbundle.client.ServerContext;
+import com.snapbundle.client.api.ServerContext;
 
 public final class ExtensionFactory
 {

@@ -17,50 +17,32 @@
 
 package com.snapbundle.client.file;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.endpoint.FileEndpoints;
+import com.snapbundle.client.impl.AbstractCreateableBaseClient;
 import com.snapbundle.model.context.IFile;
 import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.context.File;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
-class FileClient extends AbstractClient implements IFileClient
+class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileClient
 {
-    private final ServerContext context;
-
     FileClient(ServerContext context)
     {
-        this.context = context;
-    }
-
-    @Override
-    public void update(IFile instance) throws ServiceException
-    {
-
-    }
-
-    @Override
-    public IFile findByUrn(String urn) throws ServiceException
-    {
-        return null;
+        super(context);
     }
 
     @Override
     public IFile findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity create(IFile instance) throws ServiceException
-    {
-        return null;
+        return findByUrn(urn, viewType, FileEndpoints.findByUrn(urn, viewType), File.class);
     }
 
     @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
-        return null;
+        return create(instance, FileEndpoints.create());
     }
 }

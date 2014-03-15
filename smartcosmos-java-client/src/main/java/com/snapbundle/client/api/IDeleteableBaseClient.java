@@ -15,35 +15,25 @@
  * limitations under the License.
  */
 
-package com.snapbundle.client.registration;
+package com.snapbundle.client.api;
 
-import com.snapbundle.client.api.ServerContext;
+import org.json.JSONObject;
 
-/**
- * Registration Client Factory.
- */
-public final class RegistrationFactory
+public interface IDeleteableBaseClient<T>
 {
-    private RegistrationFactory()
-    {
-    }
+    /**
+     * Removes an existing instance, if it exists.
+     *
+     * @param instance
+     * @throws ServiceException
+     */
+    void delete(T instance) throws ServiceException;
 
     /**
-     * Creates a new instance of a registration client.
+     * Removes an existing instance based on the {@link com.snapbundle.Field#URN_FIELD} value, if it exists.
      *
-     * @return New registration client instance
+     * @param instance
+     * @throws ServiceException
      */
-    public static IRegistrationClient createClient()
-    {
-        return new RegistrationClient();
-    }
-    /**
-     * Creates a new instance of a registration client pointing at a specific server instance.
-     *
-     * @return New registration client instance
-     */
-    public static IRegistrationClient createClient(ServerContext context)
-    {
-        return new RegistrationClient(context);
-    }
+    void delete(JSONObject instance) throws ServiceException;
 }

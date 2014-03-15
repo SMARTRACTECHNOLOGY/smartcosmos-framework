@@ -17,26 +17,17 @@
 
 package com.snapbundle.client.relationship;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.IDeleteableBaseClient;
+import com.snapbundle.client.api.IUpsertableBaseClient;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IRelationship;
 import com.snapbundle.util.json.ViewType;
 
 import java.util.Collection;
 
-public interface IRelationshipClient extends IBaseClient<IRelationship>
+public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship>, IDeleteableBaseClient<IRelationship>
 {
-    /**
-     * Inserts a new or updates an existing record if the URNs and entity types in the relationship definition already
-     * have an existing relationship.
-     * <p/>
-     * It is not possible to define multiple identical relationships where only the timestamps differ.
-     *
-     * @param instance
-     */
-    void upsert(IRelationship instance) throws ServiceException;
-
     Collection<IRelationship> findAllBetweenTwoEntities(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn) throws ServiceException;
 
     Collection<IRelationship> findAllBetweenTwoEntities(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn, ViewType viewType) throws ServiceException;
@@ -52,12 +43,4 @@ public interface IRelationshipClient extends IBaseClient<IRelationship>
     Collection<IRelationship> findReverseRelationships(EntityReferenceType entityReferenceType, String referenceUrn, String relationshipType) throws ServiceException;
 
     Collection<IRelationship> findReverseRelationships(EntityReferenceType entityReferenceType, String referenceUrn, String relationshipType, ViewType viewType) throws ServiceException;
-
-    /**
-     * Removes an existing relationship, if it exists.
-     *
-     * @param relationship
-     * @throws ServiceException
-     */
-    void delete(IRelationship relationship) throws ServiceException;
 }

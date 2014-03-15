@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.device;
 
-import com.snapbundle.client.ServerContext;
+import com.snapbundle.client.api.ServerContext;
 
 public final class DeviceFactory
 {

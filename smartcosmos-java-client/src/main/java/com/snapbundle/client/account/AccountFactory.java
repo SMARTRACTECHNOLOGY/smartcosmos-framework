@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.account;
 
-import com.snapbundle.client.ServerContext;
+import com.snapbundle.client.api.ServerContext;
 
 public final class AccountFactory
 {

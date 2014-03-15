@@ -15,24 +15,11 @@
  * limitations under the License.
  */
 
-package com.snapbundle.client.geospatial;
+package com.snapbundle.client.interaction;
 
-import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ICreateableBaseClient;
+import com.snapbundle.model.context.IObjectInteraction;
 
-public final class GeospatialFactory
+public interface IInteractionClient extends ICreateableBaseClient<IObjectInteraction>
 {
-    private GeospatialFactory()
-    {
-    }
-
-    /**
-     * Creates a new instance of a geospatial client that will work with objects at the specified server context.
-     *
-     * @param context Server connection information
-     * @return New relationship client instance
-     */
-    public static IGeospatialClient createClient(ServerContext context)
-    {
-        return new GeospatialClient(context);
-    }
 }

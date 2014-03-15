@@ -17,17 +17,10 @@
 
 package com.snapbundle.client.tag;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.ICreateableBaseClient;
+import com.snapbundle.client.api.IDeleteableBaseClient;
 import com.snapbundle.model.context.ITag;
 
-public interface ITagClient extends IBaseClient<ITag>
+public interface ITagClient extends ICreateableBaseClient<ITag>, IDeleteableBaseClient<ITag>
 {
-    /**
-     * Submits every field for update. Use this method if you aren't sure what fields changed or if
-     * you aren't concerned about network utilization.
-     *
-     * @param instance
-     */
-    void update(ITag instance) throws ServiceException;
 }

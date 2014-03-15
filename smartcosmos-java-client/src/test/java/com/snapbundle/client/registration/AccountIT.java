@@ -17,8 +17,8 @@
 
 package com.snapbundle.client.registration;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.account.AccountFactory;
 import com.snapbundle.client.account.IAccountClient;
 import com.snapbundle.model.context.IAccount;

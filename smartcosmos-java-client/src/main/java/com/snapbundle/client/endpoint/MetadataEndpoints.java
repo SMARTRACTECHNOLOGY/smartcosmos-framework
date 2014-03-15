@@ -31,6 +31,8 @@ public final class MetadataEndpoints
 
     private static final String UPSERT__PUT = BASE;
 
+    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+
     private static final String FIND_SPECIFIC_KEY__GET = BASE.concat("?key=%s&view=%s");
 
     private static final String FINAL_ALL__GET = BASE.concat("?view=%s");
@@ -40,6 +42,16 @@ public final class MetadataEndpoints
     private static final String ENCODE_METADATA__POST = "/metadata/mapper/encode/%s";
 
     private static final String DECODE_METADATA__POST = "/metadata/mapper/decode/%s";
+
+    public static String findByUrn(String urn)
+    {
+        return findByUrn(urn, ViewType.Standard);
+    }
+
+    public static String findByUrn(String urn, ViewType viewType)
+    {
+        return String.format(FIND_BY_URN__GET, urn, viewType);
+    }
 
     public static String upsert(EntityReferenceType entityReferenceType, String referenceUrn)
     {

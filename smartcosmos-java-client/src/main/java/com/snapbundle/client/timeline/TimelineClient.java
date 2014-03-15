@@ -17,50 +17,38 @@
 
 package com.snapbundle.client.timeline;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.endpoint.TimelineEndpoints;
+import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
 import com.snapbundle.model.context.ITimelineEntry;
 import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.context.TimelineEntry;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
-class TimelineClient extends AbstractClient implements ITimelineClient
+class TimelineClient extends AbstractUpdateableBaseClient<ITimelineEntry> implements ITimelineClient
 {
-    private final ServerContext context;
-
     TimelineClient(ServerContext context)
     {
-        this.context = context;
-    }
-
-    @Override
-    public void update(ITimelineEntry instance) throws ServiceException
-    {
-
-    }
-
-    @Override
-    public ITimelineEntry findByUrn(String urn) throws ServiceException
-    {
-        return null;
+        super(context);
     }
 
     @Override
     public ITimelineEntry findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity create(ITimelineEntry instance) throws ServiceException
-    {
-        return null;
+        return findByUrn(urn, viewType, TimelineEndpoints.findByUrn(urn, viewType), TimelineEntry.class);
     }
 
     @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
-        return null;
+        return create(instance, TimelineEndpoints.create());
+    }
+
+    @Override
+    public void update(JSONObject instance) throws ServiceException
+    {
+        update(instance, TimelineEndpoints.update());
     }
 }

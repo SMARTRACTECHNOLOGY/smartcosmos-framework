@@ -17,17 +17,6 @@
 
 package com.snapbundle.client.object.address;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.client.ServiceException;
-import com.snapbundle.model.context.IObjectAddress;
-
-public interface IObjectAddressClient extends IBaseClient<IObjectAddress>
+public interface IObjectAddressClient
 {
-    /**
-     * Submits every field for update. Use this method if you aren't sure what fields changed or if
-     * you aren't concerned about network utilization.
-     *
-     * @param instance
-     */
-    void update(IObjectAddress instance) throws ServiceException;
 }

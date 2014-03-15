@@ -17,17 +17,19 @@
 
 package com.snapbundle.client.device;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.IUpdateableBaseClient;
 import com.snapbundle.model.context.IDevice;
+import com.snapbundle.util.json.ViewType;
 
-public interface IDeviceClient extends IBaseClient<IDevice>
+import java.util.Collection;
+
+public interface IDeviceClient extends IUpdateableBaseClient<IDevice>
 {
-    /**
-     * Submits every field for update. Use this method if you aren't sure what fields changed or if
-     * you aren't concerned about network utilization.
-     *
-     * @param instance
-     */
-    void update(IDevice instance) throws ServiceException;
+    Collection<IDevice> findByNameLike(String nameLike);
+
+    Collection<IDevice> findByNameLike(String nameLike, ViewType viewType);
+
+    IDevice findByDeviceIdentification(String identification);
+
+    IDevice findByDeviceIdentification(String identification, ViewType viewType);
 }

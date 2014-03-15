@@ -17,50 +17,44 @@
 
 package com.snapbundle.client.tag;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.endpoint.TagEndpoints;
+import com.snapbundle.client.impl.AbstractCreateableBaseClient;
 import com.snapbundle.model.context.ITag;
 import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.context.Tag;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
-class TagClient extends AbstractClient implements ITagClient
+class TagClient extends AbstractCreateableBaseClient<ITag> implements ITagClient
 {
-    private final ServerContext context;
-
     TagClient(ServerContext context)
     {
-        this.context = context;
-    }
-
-    @Override
-    public void update(ITag instance) throws ServiceException
-    {
-
-    }
-
-    @Override
-    public ITag findByUrn(String urn) throws ServiceException
-    {
-        return null;
+        super(context);
     }
 
     @Override
     public ITag findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity create(ITag instance) throws ServiceException
-    {
-        return null;
+        return findByUrn(urn, viewType, TagEndpoints.findByUrn(urn, viewType), Tag.class);
     }
 
     @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
-        return null;
+        return create(instance, TagEndpoints.create());
+    }
+
+    @Override
+    public void delete(ITag instance) throws ServiceException
+    {
+
+    }
+
+    @Override
+    public void delete(JSONObject instance) throws ServiceException
+    {
+
     }
 }

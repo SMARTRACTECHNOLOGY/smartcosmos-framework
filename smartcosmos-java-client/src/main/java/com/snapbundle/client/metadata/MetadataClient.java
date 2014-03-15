@@ -17,50 +17,31 @@
 
 package com.snapbundle.client.metadata;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.endpoint.MetadataEndpoints;
+import com.snapbundle.client.impl.AbstractUpsertableBaseClient;
 import com.snapbundle.model.context.IMetadata;
-import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.context.Metadata;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
-class MetadataClient extends AbstractClient implements IMetadataClient
+class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements IMetadataClient
 {
-    private final ServerContext context;
-
     MetadataClient(ServerContext context)
     {
-        this.context = context;
-    }
-
-    @Override
-    public void upsert(IMetadata instance) throws ServiceException
-    {
-
-    }
-
-    @Override
-    public IMetadata findByUrn(String urn) throws ServiceException
-    {
-        return null;
+        super(context);
     }
 
     @Override
     public IMetadata findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return null;
+        return findByUrn(urn, viewType, MetadataEndpoints.findByUrn(urn, viewType), Metadata.class);
     }
 
     @Override
-    public ResponseEntity create(IMetadata instance) throws ServiceException
+    public void upsert(JSONObject instance) throws ServiceException
     {
-        return null;
-    }
 
-    @Override
-    public ResponseEntity create(JSONObject instance) throws ServiceException
-    {
-        return null;
     }
 }

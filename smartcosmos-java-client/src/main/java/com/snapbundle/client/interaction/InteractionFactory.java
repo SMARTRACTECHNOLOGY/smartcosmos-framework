@@ -17,11 +17,11 @@
 
 package com.snapbundle.client.interaction;
 
-import com.snapbundle.client.ServerContext;
+import com.snapbundle.client.api.ServerContext;
 
-public final class ObjectInteractionFactory
+public final class InteractionFactory
 {
-    private ObjectInteractionFactory()
+    private InteractionFactory()
     {
     }
 
@@ -31,8 +31,8 @@ public final class ObjectInteractionFactory
      * @param context Server connection information
      * @return New relationship client instance
      */
-    public static IObjectInteractionClient createClient(ServerContext context)
+    public static IInteractionClient createClient(ServerContext context)
     {
-        return new ObjectInteractionClient(context);
+        return new InteractionClient(context);
     }
 }

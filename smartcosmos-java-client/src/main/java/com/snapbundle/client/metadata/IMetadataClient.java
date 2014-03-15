@@ -17,17 +17,9 @@
 
 package com.snapbundle.client.metadata;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.IUpsertableBaseClient;
 import com.snapbundle.model.context.IMetadata;
 
-public interface IMetadataClient extends IBaseClient<IMetadata>
+public interface IMetadataClient extends IUpsertableBaseClient<IMetadata>
 {
-    /**
-     * Submits every field for update. Use this method if you aren't sure what fields changed or if
-     * you aren't concerned about network utilization.
-     *
-     * @param instance
-     */
-    void upsert(IMetadata instance) throws ServiceException;
 }

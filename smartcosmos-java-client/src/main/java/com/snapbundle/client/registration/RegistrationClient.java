@@ -18,10 +18,10 @@
 package com.snapbundle.client.registration;
 
 import com.snapbundle.Field;
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.endpoint.RegistrationEndpoints;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.impl.AbstractBaseClient;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.base.Result;
 import com.snapbundle.util.json.JsonUtil;
@@ -36,27 +36,25 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-final class RegistrationClient extends AbstractClient implements IRegistrationClient
+final class RegistrationClient extends AbstractBaseClient implements IRegistrationClient
 {
     final static Logger LOGGER = LoggerFactory.getLogger(RegistrationClient.class);
 
-    private final ServerContext context;
+    public RegistrationClient()
+    {
+        super(new ServerContext());
+    }
 
     RegistrationClient(ServerContext context)
     {
-        this.context = context;
-    }
-
-    public RegistrationClient()
-    {
-        this.context = new ServerContext();
+        super(context);
     }
 
     @Override
     public boolean isRealmAvailable(String realm) throws ServiceException
     {
         boolean isAvailable = false;
-        ClientResource service = createClient(RegistrationEndpoints.checkRealmAvailability(realm), context);
+        ClientResource service = createClient(RegistrationEndpoints.checkRealmAvailability(realm));
 
         try
         {
@@ -108,7 +106,7 @@ final class RegistrationClient extends AbstractClient implements IRegistrationCl
 
             JsonRepresentation sndJsonRepresentation = new JsonRepresentation(jsonObject.toString());
 
-            ClientResource service = createClient(RegistrationEndpoints.registration(), context);
+            ClientResource service = createClient(RegistrationEndpoints.registration());
             Representation result = service.post(sndJsonRepresentation);
 
             if (service.getStatus().equals(Status.CLIENT_ERROR_CONFLICT) ||

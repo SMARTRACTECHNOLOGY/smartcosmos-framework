@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.registration;
 
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.ServiceException;
 
 public class RegistrationIT
 {

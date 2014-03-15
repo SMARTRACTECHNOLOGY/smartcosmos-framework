@@ -17,50 +17,30 @@
 
 package com.snapbundle.client.object.address;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.impl.AbstractBaseClient;
 import com.snapbundle.model.context.IObjectAddress;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
-class ObjectAddressClient extends AbstractClient implements IObjectAddressClient
+class ObjectAddressClient extends AbstractBaseClient implements IObjectAddressClient
 {
-    private final ServerContext context;
-
     ObjectAddressClient(ServerContext context)
     {
-        this.context = context;
+        super(context);
     }
 
-    @Override
-    public void update(IObjectAddress instance) throws ServiceException
+    public IObjectAddress findByUrn(String objectUrn, String urn, ViewType viewType) throws ServiceException
     {
-
-    }
-
-    @Override
-    public IObjectAddress findByUrn(String urn) throws ServiceException
-    {
+//        return findByUrn(urn, viewType, ObjectAddressEndpoints.findByUrn(objectUrn, urn, viewType), ObjectAddress.class);
         return null;
     }
 
-    @Override
-    public IObjectAddress findByUrn(String urn, ViewType viewType) throws ServiceException
-    {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity create(IObjectAddress instance) throws ServiceException
-    {
-        return null;
-    }
-
-    @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
+//        return create(instance, ObjectAddressEndpoints.create())
         return null;
     }
 }

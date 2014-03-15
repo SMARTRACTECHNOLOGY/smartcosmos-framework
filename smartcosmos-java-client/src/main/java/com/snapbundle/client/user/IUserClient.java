@@ -17,17 +17,9 @@
 
 package com.snapbundle.client.user;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.IUpdateableBaseClient;
 import com.snapbundle.model.context.IUser;
 
-public interface IUserClient extends IBaseClient<IUser>
+public interface IUserClient extends IUpdateableBaseClient<IUser>
 {
-    /**
-     * Submits every field for update. Use this method if you aren't sure what fields changed or if
-     * you aren't concerned about network utilization.
-     *
-     * @param instance
-     */
-    void update(IUser instance) throws ServiceException;
 }

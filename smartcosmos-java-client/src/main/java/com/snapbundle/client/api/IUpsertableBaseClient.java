@@ -15,24 +15,20 @@
  * limitations under the License.
  */
 
-package com.snapbundle.client.geospatial;
+package com.snapbundle.client.api;
 
-import com.snapbundle.client.api.ServerContext;
+import org.json.JSONObject;
 
-public final class GeospatialFactory
+public interface IUpsertableBaseClient<T> extends IFindableBaseClient<T>
 {
-    private GeospatialFactory()
-    {
-    }
-
     /**
-     * Creates a new instance of a geospatial client that will work with objects at the specified server context.
+     * Submits every field for update if a record with a matching system assigned URN already exists, or inserts a new
+     * record if no matching system URN already exists. Use this method if you aren't sure what fields changed or if
+     * you aren't concerned about network utilization.
      *
-     * @param context Server connection information
-     * @return New relationship client instance
+     * @param instance
      */
-    public static IGeospatialClient createClient(ServerContext context)
-    {
-        return new GeospatialClient(context);
-    }
+    void upsert(T instance) throws ServiceException;
+
+    void upsert(JSONObject instance) throws ServiceException;
 }

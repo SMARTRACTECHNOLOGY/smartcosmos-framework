@@ -17,50 +17,38 @@
 
 package com.snapbundle.client.geospatial;
 
-import com.snapbundle.client.ServerContext;
-import com.snapbundle.client.ServiceException;
-import com.snapbundle.client.impl.AbstractClient;
+import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.endpoint.GeospatialEndpoints;
+import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
 import com.snapbundle.model.geo.IGeospatialEntry;
 import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.geo.GeospatialEntry;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
 
-public class GeospatialClient extends AbstractClient implements IGeospatialClient
+class GeospatialClient extends AbstractUpdateableBaseClient<IGeospatialEntry> implements IGeospatialClient
 {
-    private final ServerContext context;
-
     GeospatialClient(ServerContext context)
     {
-        this.context = context;
+        super(context);
     }
 
     @Override
-    public void update(IGeospatialEntry instance) throws ServiceException
+    public void update(JSONObject instance) throws ServiceException
     {
-
-    }
-
-    @Override
-    public IGeospatialEntry findByUrn(String urn) throws ServiceException
-    {
-        return null;
+        update(instance, GeospatialEndpoints.update());
     }
 
     @Override
     public IGeospatialEntry findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity create(IGeospatialEntry instance) throws ServiceException
-    {
-        return null;
+        return findByUrn(urn, viewType, GeospatialEndpoints.findByUrn(urn, viewType), GeospatialEntry.class);
     }
 
     @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
-        return null;
+        return create(instance, GeospatialEndpoints.create());
     }
 }

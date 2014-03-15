@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.file;
 
-import com.snapbundle.client.ServerContext;
+import com.snapbundle.client.api.ServerContext;
 
 public final class FileFactory
 {

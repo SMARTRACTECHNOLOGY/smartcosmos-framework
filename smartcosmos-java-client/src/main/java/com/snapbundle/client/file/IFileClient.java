@@ -17,17 +17,9 @@
 
 package com.snapbundle.client.file;
 
-import com.snapbundle.client.IBaseClient;
-import com.snapbundle.client.ServiceException;
+import com.snapbundle.client.api.ICreateableBaseClient;
 import com.snapbundle.model.context.IFile;
 
-public interface IFileClient extends IBaseClient<IFile>
+public interface IFileClient extends ICreateableBaseClient<IFile>
 {
-    /**
-     * Submits every field for update. Use this method if you aren't sure what fields changed or if
-     * you aren't concerned about network utilization.
-     *
-     * @param instance
-     */
-    void update(IFile instance) throws ServiceException;
 }
