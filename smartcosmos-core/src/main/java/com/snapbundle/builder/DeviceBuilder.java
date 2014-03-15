@@ -19,36 +19,26 @@ package com.snapbundle.builder;
 
 import com.google.common.base.Preconditions;
 import com.snapbundle.model.context.IAccount;
-import com.snapbundle.model.context.IObject;
-import com.snapbundle.pojo.context.ObjectImpl;
+import com.snapbundle.model.context.IDevice;
+import com.snapbundle.pojo.context.Device;
 
-/**
- * Convenience Builder pattern class for creating new object instances.
- * <p/>
- * The minimum fields required to define a new Object are
- * <ul>
- * <li>ObjectURN</li>
- * <li>Name</li>
- * <li>Type</li>
- * </ul>
- */
-public final class ObjectBuilder extends AbstractNamedObjectBuilder<IObject, ObjectBuilder>
+public final class DeviceBuilder extends AbstractNamedObjectBuilder<IDevice, DeviceBuilder>
 {
-    public ObjectBuilder(String objectUrn)
+    public DeviceBuilder(String identification)
     {
-        super(new ObjectImpl());
+        super(new Device());
 
-        Preconditions.checkNotNull(objectUrn);
-        instance.setObjectUrn(objectUrn);
+        Preconditions.checkNotNull(identification);
+        instance.setIdentification(identification);
     }
 
-    public ObjectBuilder setAccount(IAccount account)
+    public DeviceBuilder setAccount(IAccount account)
     {
         instance.setAccount(account);
         return this;
     }
 
-    public ObjectBuilder setType(String type)
+    public DeviceBuilder setType(String type)
     {
         instance.setType(type);
         return this;
