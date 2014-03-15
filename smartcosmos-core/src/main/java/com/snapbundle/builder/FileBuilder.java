@@ -17,10 +17,23 @@
 
 package com.snapbundle.builder;
 
-public class BuilderException extends RuntimeException
+import com.google.common.base.Preconditions;
+import com.snapbundle.model.context.IFile;
+import com.snapbundle.pojo.context.File;
+
+public final class FileBuilder extends AbstractReferentialBuilder<IFile, FileBuilder>
 {
-    public BuilderException(String message)
+    public FileBuilder(String mimeType)
     {
-        super(message);
+        super(new File());
+        instance.setMimeType(mimeType);
+    }
+
+    @Override
+    protected void onValidate()
+    {
+        Preconditions.checkNotNull(instance.getReferenceUrn(), "Reference Urn must not be null");
+        Preconditions.checkNotNull(instance.getEntityReferenceType(), "Entity Reference Type must not be null");
+        Preconditions.checkNotNull(instance.getMimeType(), "MIME type must not be null");
     }
 }

@@ -18,45 +18,43 @@
 package com.snapbundle.builder;
 
 import com.google.common.base.Preconditions;
-import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IObject;
-import com.snapbundle.pojo.context.ObjectImpl;
+import com.snapbundle.model.context.IUser;
+import com.snapbundle.model.context.RoleType;
+import com.snapbundle.pojo.context.User;
 
-/**
- * Convenience Builder pattern class for creating new object instances.
- * <p/>
- * The minimum fields required to define a new Object are
- * <ul>
- * <li>ObjectURN</li>
- * <li>Name</li>
- * <li>Type</li>
- * </ul>
- */
-public final class ObjectBuilder extends AbstractNamedObjectBuilder<IObject, ObjectBuilder>
+public final class UserBuilder extends AbstractMonikerBuilder<IUser, UserBuilder>
 {
-    public ObjectBuilder(String objectUrn)
+    public UserBuilder(String emailAddress)
     {
-        super(new ObjectImpl());
+        super(new User());
 
-        Preconditions.checkNotNull(objectUrn);
-        instance.setObjectUrn(objectUrn);
+        Preconditions.checkNotNull(emailAddress);
+        instance.setEmailAddress(emailAddress);
+        instance.setRoleType(RoleType.User);
     }
 
-    public ObjectBuilder setAccount(IAccount account)
+    public UserBuilder setGivenName(String givenName)
     {
-        instance.setAccount(account);
+        instance.setGivenName(givenName);
         return this;
     }
 
-    public ObjectBuilder setType(String type)
+    public UserBuilder setSurname(String surname)
     {
-        instance.setType(type);
+        instance.setSurname(surname);
         return this;
     }
 
-    @Override
-    protected void onValidate()
+    public UserBuilder setRoleType(RoleType roleType)
     {
-        Preconditions.checkNotNull(instance.getType(), "type must not be null");
+        instance.setRoleType(roleType);
+        return this;
+    }
+
+    public UserBuilder setAssociatedObject(IObject object)
+    {
+        instance.setAssociatedObject(object);
+        return this;
     }
 }

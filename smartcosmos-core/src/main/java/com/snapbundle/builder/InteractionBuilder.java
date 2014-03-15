@@ -18,39 +18,27 @@
 package com.snapbundle.builder;
 
 import com.google.common.base.Preconditions;
-import com.snapbundle.model.context.IAccount;
-import com.snapbundle.model.context.IObject;
-import com.snapbundle.pojo.context.ObjectImpl;
+import com.snapbundle.model.context.IObjectInteraction;
+import com.snapbundle.model.context.IObjectInteractionSession;
+import com.snapbundle.pojo.context.ObjectInteraction;
 
-/**
- * Convenience Builder pattern class for creating new object instances.
- * <p/>
- * The minimum fields required to define a new Object are
- * <ul>
- * <li>ObjectURN</li>
- * <li>Name</li>
- * <li>Type</li>
- * </ul>
- */
-public final class ObjectBuilder extends AbstractNamedObjectBuilder<IObject, ObjectBuilder>
+public final class InteractionBuilder extends AbstractReferentialBuilder<IObjectInteraction, InteractionBuilder>
 {
-    public ObjectBuilder(String objectUrn)
+    public InteractionBuilder(long recordedTimestamp)
     {
-        super(new ObjectImpl());
-
-        Preconditions.checkNotNull(objectUrn);
-        instance.setObjectUrn(objectUrn);
+        super(new ObjectInteraction());
+        instance.setRecordedTimestamp(recordedTimestamp);
     }
 
-    public ObjectBuilder setAccount(IAccount account)
+    public InteractionBuilder setType(String type)
     {
-        instance.setAccount(account);
+        instance.setType(type);
         return this;
     }
 
-    public ObjectBuilder setType(String type)
+    public InteractionBuilder setObjectInteractionSession(IObjectInteractionSession session)
     {
-        instance.setType(type);
+        instance.setObjectInteractionSession(session);
         return this;
     }
 

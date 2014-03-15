@@ -43,4 +43,11 @@ public final class DeviceBuilder extends AbstractNamedObjectBuilder<IDevice, Dev
         instance.setType(type);
         return this;
     }
+
+    @Override
+    protected void onValidate()
+    {
+        Preconditions.checkNotNull(instance.getType(), "type must not be null");
+    }
+
 }

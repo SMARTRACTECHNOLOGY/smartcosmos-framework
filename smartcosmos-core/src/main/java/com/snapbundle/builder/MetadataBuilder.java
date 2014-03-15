@@ -18,45 +18,34 @@
 package com.snapbundle.builder;
 
 import com.google.common.base.Preconditions;
-import com.snapbundle.model.context.IAccount;
-import com.snapbundle.model.context.IObject;
-import com.snapbundle.pojo.context.ObjectImpl;
+import com.snapbundle.model.context.IMetadata;
+import com.snapbundle.model.context.MetadataDataType;
+import com.snapbundle.pojo.context.Metadata;
 
-/**
- * Convenience Builder pattern class for creating new object instances.
- * <p/>
- * The minimum fields required to define a new Object are
- * <ul>
- * <li>ObjectURN</li>
- * <li>Name</li>
- * <li>Type</li>
- * </ul>
- */
-public final class ObjectBuilder extends AbstractNamedObjectBuilder<IObject, ObjectBuilder>
+public final class MetadataBuilder extends AbstractReferentialBuilder<IMetadata, MetadataBuilder>
 {
-    public ObjectBuilder(String objectUrn)
+    public MetadataBuilder(MetadataDataType dataType)
     {
-        super(new ObjectImpl());
-
-        Preconditions.checkNotNull(objectUrn);
-        instance.setObjectUrn(objectUrn);
+        super(new Metadata());
+        instance.setDataType(dataType);
     }
 
-    public ObjectBuilder setAccount(IAccount account)
+    public MetadataBuilder setKey(String key)
     {
-        instance.setAccount(account);
+        instance.setKey(key);
         return this;
     }
 
-    public ObjectBuilder setType(String type)
+    public MetadataBuilder setRawValue(byte[] rawValue)
     {
-        instance.setType(type);
+        instance.setRawValue(rawValue);
         return this;
     }
 
     @Override
     protected void onValidate()
     {
-        Preconditions.checkNotNull(instance.getType(), "type must not be null");
+        Preconditions.checkNotNull(instance.getKey(), "key must not be null");
+        Preconditions.checkNotNull(instance.getRawValue(), "raw value must not be null");
     }
 }

@@ -17,36 +17,20 @@
 
 package com.snapbundle.builder;
 
-import com.snapbundle.model.base.IMoniker;
+import com.google.common.base.Preconditions;
+import com.snapbundle.model.context.ITag;
+import com.snapbundle.pojo.context.Tag;
 
-abstract class AbstractMonikerBuilder<T extends IMoniker, E>
+public final class TagBuilder extends AbstractNamedObjectBuilder<ITag, TagBuilder>
 {
-    protected final T instance;
-
-    AbstractMonikerBuilder(T instance)
+    public TagBuilder()
     {
-        this.instance = instance;
+        super(new Tag());
     }
 
-    public E setMoniker(String moniker)
-    {
-        instance.setMoniker(moniker);
-        return (E) this;
-    }
-
-    public T build()
-    {
-        onValidate();
-        return instance;
-    }
-
+    @Override
     protected void onValidate()
     {
-
-    }
-
-    public boolean meetsCreationMinimum()
-    {
-        return true;
+        Preconditions.checkNotNull(instance.getName(), "name must not be null");
     }
 }

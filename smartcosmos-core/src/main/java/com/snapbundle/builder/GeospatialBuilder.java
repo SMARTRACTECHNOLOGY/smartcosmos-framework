@@ -18,37 +18,27 @@
 package com.snapbundle.builder;
 
 import com.google.common.base.Preconditions;
+import com.snapbundle.geo.GeometricShape;
 import com.snapbundle.model.context.IAccount;
-import com.snapbundle.model.context.IObject;
-import com.snapbundle.pojo.context.ObjectImpl;
+import com.snapbundle.model.geo.IGeospatialEntry;
+import com.snapbundle.pojo.geo.GeospatialEntry;
 
-/**
- * Convenience Builder pattern class for creating new object instances.
- * <p/>
- * The minimum fields required to define a new Object are
- * <ul>
- * <li>ObjectURN</li>
- * <li>Name</li>
- * <li>Type</li>
- * </ul>
- */
-public final class ObjectBuilder extends AbstractNamedObjectBuilder<IObject, ObjectBuilder>
+public final class GeospatialBuilder extends AbstractNamedObjectBuilder<IGeospatialEntry, GeospatialBuilder>
 {
-    public ObjectBuilder(String objectUrn)
+    public GeospatialBuilder(GeometricShape shape)
     {
-        super(new ObjectImpl());
-
-        Preconditions.checkNotNull(objectUrn);
-        instance.setObjectUrn(objectUrn);
+        super(new GeospatialEntry());
+        Preconditions.checkNotNull(shape);
+        instance.setGeometricShape(shape);
     }
 
-    public ObjectBuilder setAccount(IAccount account)
+    public GeospatialBuilder setAccount(IAccount account)
     {
         instance.setAccount(account);
         return this;
     }
 
-    public ObjectBuilder setType(String type)
+    public GeospatialBuilder setType(String type)
     {
         instance.setType(type);
         return this;
@@ -60,3 +50,4 @@ public final class ObjectBuilder extends AbstractNamedObjectBuilder<IObject, Obj
         Preconditions.checkNotNull(instance.getType(), "type must not be null");
     }
 }
+
