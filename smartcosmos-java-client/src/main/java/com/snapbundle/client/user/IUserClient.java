@@ -18,8 +18,17 @@
 package com.snapbundle.client.user;
 
 import com.snapbundle.client.api.IUpdateableBaseClient;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.context.IUser;
+import com.snapbundle.util.json.ViewType;
 
 public interface IUserClient extends IUpdateableBaseClient<IUser>
 {
+    IUser findByEmailAddress(String emailAddress) throws ServiceException;
+
+    IUser findByEmailAddress(String emailAddress, ViewType viewType) throws ServiceException;
+
+    void changePassword(String emailAddress, String newPassword) throws ServiceException;
+
+    void resetPassword(String emailAddress) throws ServiceException;
 }
