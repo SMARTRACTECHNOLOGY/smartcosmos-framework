@@ -105,6 +105,6 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
     @Override
     public IRelationship findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, RelationshipEndpoints.findByUrn(urn, viewType), Relationship.class);
+        return findByUrn(urn, RelationshipEndpoints.findByUrn(urn, viewType), Relationship.class);
     }
 }

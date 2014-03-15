@@ -37,7 +37,7 @@ class ExtensionClient extends AbstractUpdateableBaseClient<IExtension> implement
     @Override
     public IExtension findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, ExtensionEndpoints.findByUrn(urn, viewType), Extension.class);
+        return findByUrn(urn, ExtensionEndpoints.findByUrn(urn, viewType), Extension.class);
     }
 
     @Override

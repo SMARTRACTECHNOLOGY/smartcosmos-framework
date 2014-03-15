@@ -21,6 +21,8 @@ import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.endpoint.DeviceEndpoints;
 import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
+import com.snapbundle.client.impl.command.GetCollectionCommand;
+import com.snapbundle.client.impl.command.GetCommand;
 import com.snapbundle.model.context.IDevice;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.context.Device;
@@ -43,33 +45,33 @@ class DeviceClient extends AbstractUpdateableBaseClient<IDevice> implements IDev
     }
 
     @Override
-    public Collection<IDevice> findByNameLike(String nameLike, ViewType viewType)
+    public Collection<IDevice> findByNameLike(String nameLike, ViewType viewType) throws ServiceException
     {
-        // TODO: find device with name like
-        throw new UnsupportedOperationException("Not Yet Implemented");
+        GetCollectionCommand<IDevice> command = new GetCollectionCommand<>(context);
+        return command.call(Device.class, DeviceEndpoints.findByNameLike(nameLike, viewType));
     }
 
     @Override
-    public IDevice findByDeviceIdentification(String identification, ViewType viewType)
+    public IDevice findByDeviceIdentification(String identification, ViewType viewType) throws ServiceException
     {
-        // TODO: find device with identification
-        throw new UnsupportedOperationException("Not Yet Implemented");
+        GetCommand<IDevice> command = new GetCommand<>(context);
+        return command.call(Device.class, DeviceEndpoints.findByDeviceIdentification(identification, viewType));
     }
 
     @Override
     public IDevice findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, DeviceEndpoints.findByUrn(urn, viewType), Device.class);
+        return findByUrn(urn, DeviceEndpoints.findByUrn(urn, viewType), Device.class);
     }
 
     @Override
-    public Collection<IDevice> findByNameLike(String nameLike)
+    public Collection<IDevice> findByNameLike(String nameLike) throws ServiceException
     {
         return findByNameLike(nameLike, ViewType.Standard);
     }
 
     @Override
-    public IDevice findByDeviceIdentification(String identification)
+    public IDevice findByDeviceIdentification(String identification) throws ServiceException
     {
         return findByDeviceIdentification(identification, ViewType.Standard);
     }

@@ -21,8 +21,8 @@ import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.endpoint.ObjectEndpoints;
 import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
-import com.snapbundle.client.impl.command.FindCollectionCommand;
-import com.snapbundle.client.impl.command.FindExactCommand;
+import com.snapbundle.client.impl.command.GetCollectionCommand;
+import com.snapbundle.client.impl.command.GetCommand;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.context.ObjectImpl;
@@ -45,7 +45,7 @@ class ObjectClient extends AbstractUpdateableBaseClient<IObject> implements IObj
     @Override
     public IObject findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, ObjectEndpoints.findByUrn(urn, viewType), ObjectImpl.class);
+        return findByUrn(urn, ObjectEndpoints.findByUrn(urn, viewType), ObjectImpl.class);
     }
 
     @Override
@@ -69,14 +69,14 @@ class ObjectClient extends AbstractUpdateableBaseClient<IObject> implements IObj
     @Override
     public IObject findByExactObjectUrn(String objectUrn, ViewType viewType) throws ServiceException
     {
-        FindExactCommand<IObject> command = new FindExactCommand<>(context);
+        GetCommand<IObject> command = new GetCommand<>(context);
         return command.call(ObjectImpl.class, ObjectEndpoints.findByExactObjectUrn(objectUrn, viewType));
     }
 
     @Override
     public Collection<IObject> query(ObjectEndpoints.Builder builder) throws ServiceException
     {
-        FindCollectionCommand<IObject> command = new FindCollectionCommand<>(context);
+        GetCollectionCommand<IObject> command = new GetCollectionCommand<>(context);
         return command.call(ObjectImpl.class, builder.build());
     }
 }

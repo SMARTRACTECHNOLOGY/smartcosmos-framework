@@ -37,7 +37,7 @@ class TagClient extends AbstractCreateableBaseClient<ITag> implements ITagClient
     @Override
     public ITag findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, TagEndpoints.findByUrn(urn, viewType), Tag.class);
+        return findByUrn(urn, TagEndpoints.findByUrn(urn, viewType), Tag.class);
     }
 
     @Override

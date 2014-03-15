@@ -32,14 +32,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Collection;
 
-public class FindExactCommand<T> extends AbstractBaseClient implements ICommand<T, T>
+public class GetCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(FindExactCommand.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(GetCommand.class);
 
-    public FindExactCommand(ServerContext context)
+    public GetCommand(ServerContext context)
     {
         super(context);
+    }
+
+    @Override
+    public T call(Class<? extends T> clazz, String path, JSONObject inputJson) throws ServiceException
+    {
+        throw new UnsupportedOperationException("GET command doesn't accept input JSON");
     }
 
     @Override
@@ -56,7 +63,7 @@ public class FindExactCommand<T> extends AbstractBaseClient implements ICommand<
 
             if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
             {
-                onNoContent(path);
+                LOGGER.info("No matching found {}", path);
             } else if (service.getStatus().equals(Status.SUCCESS_OK))
             {
                 JSONObject jsonResult = jsonRepresentation.getJsonObject();
@@ -66,7 +73,7 @@ public class FindExactCommand<T> extends AbstractBaseClient implements ICommand<
                 JSONObject jsonResult = jsonRepresentation.getJsonObject();
                 ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
 
-                LOGGER.error("Unexpected HTTP status code returned: %s", service.getStatus().getCode());
+                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
                 throw new ServiceException(responseEntity);
             }
 
@@ -77,10 +84,5 @@ public class FindExactCommand<T> extends AbstractBaseClient implements ICommand<
         }
 
         return instance;
-    }
-
-    private void onNoContent(String path)
-    {
-        LOGGER.info("No matching found %s", path);
     }
 }

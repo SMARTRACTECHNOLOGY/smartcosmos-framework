@@ -35,6 +35,6 @@ class EventClient extends AbstractFindableBaseClient<IEvent> implements IEventCl
     @Override
     public IEvent findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, EventEndpoints.findByUrn(urn, viewType), Event.class);
+        return findByUrn(urn, EventEndpoints.findByUrn(urn, viewType), Event.class);
     }
 }

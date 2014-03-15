@@ -37,7 +37,7 @@ class TimelineClient extends AbstractUpdateableBaseClient<ITimelineEntry> implem
     @Override
     public ITimelineEntry findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, TimelineEndpoints.findByUrn(urn, viewType), TimelineEntry.class);
+        return findByUrn(urn, TimelineEndpoints.findByUrn(urn, viewType), TimelineEntry.class);
     }
 
     @Override

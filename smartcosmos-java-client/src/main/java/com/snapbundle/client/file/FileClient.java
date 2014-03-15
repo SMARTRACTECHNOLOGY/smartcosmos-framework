@@ -37,7 +37,7 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
     @Override
     public IFile findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, FileEndpoints.findByUrn(urn, viewType), File.class);
+        return findByUrn(urn, FileEndpoints.findByUrn(urn, viewType), File.class);
     }
 
     @Override

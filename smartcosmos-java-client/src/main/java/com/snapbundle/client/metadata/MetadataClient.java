@@ -36,7 +36,7 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
     @Override
     public IMetadata findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, MetadataEndpoints.findByUrn(urn, viewType), Metadata.class);
+        return findByUrn(urn, MetadataEndpoints.findByUrn(urn, viewType), Metadata.class);
     }
 
     @Override

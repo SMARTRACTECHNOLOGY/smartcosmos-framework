@@ -22,7 +22,6 @@ import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.impl.AbstractBaseClient;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.util.json.JsonUtil;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.Status;
@@ -33,47 +32,50 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 
-public class FindCollectionCommand<T> extends AbstractBaseClient implements ICommand<Collection<T>, T>
+import static com.snapbundle.Field.URN_FIELD;
+
+public class PostCommand extends AbstractBaseClient implements ICommand<Object, Object>
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(FindCollectionCommand.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(PostCommand.class);
 
-    public FindCollectionCommand(ServerContext context)
+    public PostCommand(ServerContext context)
     {
         super(context);
     }
 
     @Override
-    public Collection<T> call(Class<? extends T> clazz, String path) throws ServiceException
+    public Object call(Class<?> clazz, String path) throws ServiceException
     {
-        Collection<T> matches = new ArrayList<>();
+        throw new UnsupportedOperationException("POST command must have inputJson");
+    }
 
+    @Override
+    public Object call(Class<?> clazz, String path, JSONObject inputJson) throws ServiceException
+    {
         ClientResource service = createClient(path);
 
         try
         {
-            Representation result = service.get();
-            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+            Representation result = service.post(new JsonRepresentation(inputJson));
 
-            if (!service.getStatus().equals(Status.SUCCESS_OK))
+            if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
             {
-                JSONObject jsonResult = jsonRepresentation.getJsonObject();
-                ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-
-                LOGGER.error("Unexpected HTTP status code returned: %s", service.getStatus().getCode());
-
-                throw new ServiceException(responseEntity);
+                if (inputJson.has(URN_FIELD))
+                {
+                    LOGGER.info("Successfully updated URN {} at path {}", inputJson.getString(URN_FIELD), path);
+                } else
+                {
+                    LOGGER.info("Successfully updated entity at path {}", path);
+                }
             } else
             {
-                JSONArray jsonArray = jsonRepresentation.getJsonArray();
-                for (int i = 0; i < jsonArray.length(); i++)
-                {
-                    JSONObject curObject = jsonArray.getJSONObject(i);
-                    T instance = JsonUtil.fromJson(curObject, clazz);
-                    matches.add(instance);
-                }
+                JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+                JSONObject jsonResult = jsonRepresentation.getJsonObject();
+
+                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
+                ResponseEntity response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+                throw new ServiceException(response);
             }
 
         } catch (JSONException | IOException e)
@@ -82,6 +84,6 @@ public class FindCollectionCommand<T> extends AbstractBaseClient implements ICom
             throw new ServiceException(e);
         }
 
-        return matches;
+        return null;
     }
 }

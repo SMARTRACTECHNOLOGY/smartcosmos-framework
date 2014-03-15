@@ -18,6 +18,7 @@
 package com.snapbundle.client.device;
 
 import com.snapbundle.client.api.IUpdateableBaseClient;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.context.IDevice;
 import com.snapbundle.util.json.ViewType;
 
@@ -25,11 +26,11 @@ import java.util.Collection;
 
 public interface IDeviceClient extends IUpdateableBaseClient<IDevice>
 {
-    Collection<IDevice> findByNameLike(String nameLike);
+    Collection<IDevice> findByNameLike(String nameLike) throws ServiceException;
 
-    Collection<IDevice> findByNameLike(String nameLike, ViewType viewType);
+    Collection<IDevice> findByNameLike(String nameLike, ViewType viewType) throws ServiceException;
 
-    IDevice findByDeviceIdentification(String identification);
+    IDevice findByDeviceIdentification(String identification) throws ServiceException;
 
-    IDevice findByDeviceIdentification(String identification, ViewType viewType);
+    IDevice findByDeviceIdentification(String identification, ViewType viewType) throws ServiceException;
 }

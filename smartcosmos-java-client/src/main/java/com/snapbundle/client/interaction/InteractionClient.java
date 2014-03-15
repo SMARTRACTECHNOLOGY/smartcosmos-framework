@@ -37,7 +37,7 @@ class InteractionClient extends AbstractCreateableBaseClient<IObjectInteraction>
     @Override
     public IObjectInteraction findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, InteractionEndpoints.findByUrn(urn, viewType), ObjectInteraction.class);
+        return findByUrn(urn, InteractionEndpoints.findByUrn(urn, viewType), ObjectInteraction.class);
     }
 
     @Override

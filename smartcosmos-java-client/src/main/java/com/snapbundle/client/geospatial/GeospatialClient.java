@@ -43,7 +43,7 @@ class GeospatialClient extends AbstractUpdateableBaseClient<IGeospatialEntry> im
     @Override
     public IGeospatialEntry findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, GeospatialEndpoints.findByUrn(urn, viewType), GeospatialEntry.class);
+        return findByUrn(urn, GeospatialEndpoints.findByUrn(urn, viewType), GeospatialEntry.class);
     }
 
     @Override

@@ -55,33 +55,34 @@ public abstract class AbstractUpsertableBaseClient<T> extends AbstractFindableBa
 
     protected void upsert(JSONObject instance, String path) throws ServiceException
     {
-
         // TODO: Update the HTTP status code checks to match upsert logic
+        throw new UnsupportedOperationException("HTTP status code check logic not fully implemented");
 
-        ClientResource service = createClient(path);
 
-        try
-        {
-            Representation result = service.post(new JsonRepresentation(instance));
-
-            if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
-            {
-                LOGGER.info("Successfully updated URN %s at path %s", instance.getString(Field.URN_FIELD), path);
-            } else
-            {
-                JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
-                JSONObject jsonResult = jsonRepresentation.getJsonObject();
-
-                LOGGER.error("Unexpected HTTP status code returned: %s", service.getStatus().getCode());
-                ResponseEntity response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-                throw new ServiceException(response);
-            }
-
-        } catch (JSONException | IOException e)
-        {
-            LOGGER.error("Unexpected Exception", e);
-            throw new ServiceException(e);
-        }
+//        ClientResource service = createClient(path);
+//
+//        try
+//        {
+//            Representation result = service.put(new JsonRepresentation(instance));
+//
+//            if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
+//            {
+//                LOGGER.info("Successfully updated URN %s at path %s", instance.getString(Field.URN_FIELD), path);
+//            } else
+//            {
+//                JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+//                JSONObject jsonResult = jsonRepresentation.getJsonObject();
+//
+//                LOGGER.error("Unexpected HTTP status code returned: %s", service.getStatus().getCode());
+//                ResponseEntity response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+//                throw new ServiceException(response);
+//            }
+//
+//        } catch (JSONException | IOException e)
+//        {
+//            LOGGER.error("Unexpected Exception", e);
+//            throw new ServiceException(e);
+//        }
     }
 }
 

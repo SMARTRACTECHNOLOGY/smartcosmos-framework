@@ -17,25 +17,23 @@
 
 package com.snapbundle.client.registration;
 
-import com.snapbundle.builder.ObjectBuilder;
+import com.snapbundle.builder.DeviceBuilder;
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.endpoint.ObjectEndpoints;
-import com.snapbundle.client.object.IObjectClient;
-import com.snapbundle.client.object.ObjectFactory;
-import com.snapbundle.model.context.IObject;
+import com.snapbundle.client.device.DeviceFactory;
+import com.snapbundle.client.device.IDeviceClient;
+import com.snapbundle.model.context.IDevice;
 import org.json.JSONException;
 
-import java.util.Collection;
-import java.util.UUID;
-
-public class ObjectIT
+public class DeviceIT
 {
     private static final String USERNAME = "jason@trrllc.com";
 
     private static final String PASSWORD = "!ABCDEFGm9@2";
 
-    private static final String TEST_URN_ALPHA = "urn:rfid:badge:36b2a8cc-92c5-4408-b4e5-4f7cb019cffd";
+    private static final String TEST_IDENTIFICATION = "urn:device:imei:990000862471854";
+
+    private static final String TEST_URN_ALPHA = "urn:uuid:5a1ef494-ab49-4c0d-a7a3-cbaa5c434857";
 
     private static final String TEST_URN_BETA = "urn:rfid:badge:7e5e8e21-566c-4aea-a460-dbafd4c92392";
 
@@ -43,13 +41,11 @@ public class ObjectIT
     {
         ServerContext context = new ServerContext(USERNAME, PASSWORD);
 
-        IObjectClient client = ObjectFactory.createClient(context);
+        IDeviceClient client = DeviceFactory.createClient(context);
 
-        String objectUrn = "urn:rfid:badge:" + UUID.randomUUID();
-
-        IObject entity = new ObjectBuilder(objectUrn)
-                .setName("My RFID Tag")
-                .setType("Badge")
+        IDevice entity = new DeviceBuilder(TEST_IDENTIFICATION)
+                .setName("My Phone")
+                .setMoniker("foo")
                 .build();
 
         client.create(entity);
@@ -59,39 +55,34 @@ public class ObjectIT
     {
         ServerContext context = new ServerContext(USERNAME, PASSWORD);
 
-        IObjectClient client = ObjectFactory.createClient(context);
+        IDeviceClient client = DeviceFactory.createClient(context);
 
-        IObject entity = client.findByExactObjectUrn(TEST_URN_ALPHA);
+        IDevice entity = client.findByDeviceIdentification(TEST_IDENTIFICATION);
 
         System.out.println(entity.getName());
 
-        entity.setName("Updated RFID Tag Name");
+        entity.setName("Updated Phone Name");
         entity.setMoniker("foo-moniker");
 
         client.update(entity);
     }
 
-
-    public void testSearchAlpha() throws ServiceException
+    public void testFetchByUrn() throws ServiceException
     {
         ServerContext context = new ServerContext(USERNAME, PASSWORD);
-        IObjectClient client = ObjectFactory.createClient(context);
 
-        ObjectEndpoints.Builder builder = new ObjectEndpoints.Builder()
-                .objectUrnLike("urn:rfid:badge:36");
+        IDeviceClient client = DeviceFactory.createClient(context);
 
-        Collection<IObject> matches = client.query(builder);
+        IDevice entity = client.findByUrn(TEST_URN_ALPHA);
 
-        System.out.println(matches.size());
-
+        System.out.println(entity.getName());
     }
 
     public static void main(String[] args) throws JSONException, ServiceException
     {
-        ObjectIT instance = new ObjectIT();
-//        instance.createObject();
-        instance.testFetch();
-        instance.testSearchAlpha();
+        DeviceIT instance = new DeviceIT();
+//        instance.testCreate();
+//        instance.testFetch();
+        instance.testFetchByUrn();
     }
-
 }

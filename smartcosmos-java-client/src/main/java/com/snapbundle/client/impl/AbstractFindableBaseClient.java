@@ -20,19 +20,10 @@ package com.snapbundle.client.impl;
 import com.snapbundle.client.api.IFindableBaseClient;
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.pojo.base.ResponseEntity;
-import com.snapbundle.util.json.JsonUtil;
+import com.snapbundle.client.impl.command.GetCommand;
 import com.snapbundle.util.json.ViewType;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.restlet.data.Status;
-import org.restlet.ext.json.JsonRepresentation;
-import org.restlet.representation.Representation;
-import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public abstract class AbstractFindableBaseClient<T> extends AbstractBaseClient implements IFindableBaseClient<T>
 {
@@ -48,39 +39,9 @@ public abstract class AbstractFindableBaseClient<T> extends AbstractBaseClient i
         return findByUrn(urn, ViewType.Standard);
     }
 
-    protected T findByUrn(String urn, ViewType viewType, String path, Class<? extends T> clazz) throws ServiceException
+    protected T findByUrn(String urn, String path, Class<? extends T> clazz) throws ServiceException
     {
-        T instance = null;
-
-        ClientResource service = createClient(path);
-
-        try
-        {
-            Representation result = service.get();
-            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
-
-            if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
-            {
-                LOGGER.info("No matching URN %s at path %s", urn, path);
-            } else if (service.getStatus().equals(Status.SUCCESS_OK))
-            {
-                JSONObject jsonResult = jsonRepresentation.getJsonObject();
-                instance = JsonUtil.fromJson(jsonResult, clazz);
-            } else
-            {
-                JSONObject jsonResult = jsonRepresentation.getJsonObject();
-                ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-
-                LOGGER.error("Unexpected HTTP status code returned: %s", service.getStatus().getCode());
-                throw new ServiceException(responseEntity);
-            }
-
-        } catch (JSONException | IOException e)
-        {
-            LOGGER.error("Unexpected Exception", e);
-            throw new ServiceException(e);
-        }
-
-        return instance;
+        GetCommand<T> command = new GetCommand<>(context);
+        return command.call(clazz, path);
     }
 }

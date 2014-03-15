@@ -37,7 +37,7 @@ class UserClient extends AbstractUpdateableBaseClient<IUser> implements IUserCli
     @Override
     public IUser findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, viewType, UserEndpoints.findByUrn(urn, viewType), User.class);
+        return findByUrn(urn, UserEndpoints.findByUrn(urn, viewType), User.class);
     }
 
     @Override

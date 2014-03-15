@@ -18,8 +18,11 @@
 package com.snapbundle.client.impl.command;
 
 import com.snapbundle.client.api.ServiceException;
+import org.json.JSONObject;
 
 public interface ICommand<T, E>
 {
     T call(Class<? extends E> clazz, String path) throws ServiceException;
+
+    T call(Class<? extends E> clazz, String path, JSONObject inputJson) throws ServiceException;
 }
