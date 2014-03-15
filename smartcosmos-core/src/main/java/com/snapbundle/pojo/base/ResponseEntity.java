@@ -80,11 +80,6 @@ public class ResponseEntity
         return Result.translate(getCode());
     }
 
-    public static String toJson(Result result)
-    {
-        return ResponseEntity.toJson(result, null);
-    }
-
     public static String toJson(Result result, Object... args)
     {
         ResponseEntity re = new ResponseEntity();
