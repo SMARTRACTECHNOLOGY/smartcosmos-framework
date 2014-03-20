@@ -19,8 +19,35 @@ package com.snapbundle.client.tag;
 
 import com.snapbundle.client.api.ICreateableBaseClient;
 import com.snapbundle.client.api.IDeleteableBaseClient;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.ITag;
+import com.snapbundle.model.context.ITagAssignment;
+import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.util.json.ViewType;
+import org.json.JSONArray;
+
+import java.util.Collection;
 
 public interface ITagClient extends ICreateableBaseClient<ITag>, IDeleteableBaseClient<ITag>
 {
+    ResponseEntity assign(EntityReferenceType entityReferenceType, String referenceUrn, Collection<ITag> tag) throws ServiceException;
+
+    ResponseEntity assign(EntityReferenceType entityReferenceType, String referenceUrn, JSONArray jsonArray) throws ServiceException;
+
+    Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException;
+
+    Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType) throws ServiceException;
+
+    Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName) throws ServiceException;
+
+    Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName, ViewType viewType) throws ServiceException;
+
+    Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName) throws ServiceException;
+
+    Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName, ViewType viewType) throws ServiceException;
+
+    ITag findByTag(String tagName) throws ServiceException;
+
+    ITag findByTag(String tagName, ViewType viewType) throws ServiceException;
 }
