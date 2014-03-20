@@ -23,6 +23,7 @@ import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.endpoint.RelationshipEndpoints;
 import com.snapbundle.client.impl.AbstractUpsertableBaseClient;
+import com.snapbundle.client.impl.command.DeleteCommand;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.client.impl.command.GetCommand;
 import com.snapbundle.client.impl.command.PostCommand;
@@ -48,21 +49,6 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
     }
 
     @Override
-    public void delete(JSONObject instance) throws ServiceException
-    {
-        Preconditions.checkState(instance.has(URN_FIELD));
-
-        try
-        {
-            PostCommand command = new PostCommand(context);
-            command.call(Object.class, RelationshipEndpoints.delete(instance.getString(Field.URN_FIELD)));
-        } catch (JSONException e)
-        {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     public void upsert(JSONObject instance) throws ServiceException
     {
         Preconditions.checkState(instance.has(ENTITY_REFERENCE_TYPE));
@@ -73,6 +59,21 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
             EntityReferenceType ert = EntityReferenceType.valueOf(instance.getString(ENTITY_REFERENCE_TYPE));
             upsert(instance, RelationshipEndpoints.upsert(ert, instance.getString(REFERENCE_URN_FIELD)));
         } catch (IllegalArgumentException | JSONException e)
+        {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void delete(JSONObject instance) throws ServiceException
+    {
+        Preconditions.checkState(instance.has(URN_FIELD));
+
+        try
+        {
+            DeleteCommand command = new DeleteCommand(context);
+            command.call(Object.class, RelationshipEndpoints.delete(instance.getString(Field.URN_FIELD)));
+        } catch (JSONException e)
         {
             throw new ServiceException(e);
         }
