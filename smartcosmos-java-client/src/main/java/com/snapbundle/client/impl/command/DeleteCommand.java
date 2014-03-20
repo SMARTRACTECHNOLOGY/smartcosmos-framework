@@ -33,59 +33,36 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 
-public class GetCollectionCommand<T> extends AbstractBaseClient implements ICommand<Collection<T>, T>
+public class DeleteCommand extends AbstractBaseClient implements ICommand<Object, Object>
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(GetCollectionCommand.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(DeleteCommand.class);
 
-    public GetCollectionCommand(ServerContext context)
+    public DeleteCommand(ServerContext context)
     {
         super(context);
     }
 
     @Override
-    public Collection<T> call(Class<? extends T> clazz, String path, JSONObject inputJson) throws ServiceException
+    public Object call(Class<?> clazz, String path) throws ServiceException
     {
-        throw new UnsupportedOperationException("GET command doesn't accept input JSON");
-    }
-
-    @Override
-    public Collection<T> call(Class<? extends T> clazz, String path, JSONArray inputJson) throws ServiceException
-    {
-        throw new UnsupportedOperationException("GET command doesn't accept input JSON");
-    }
-
-    @Override
-    public Collection<T> call(Class<? extends T> clazz, String path) throws ServiceException
-    {
-        Collection<T> matches = new ArrayList<>();
-
         ClientResource service = createClient(path);
 
         try
         {
-            Representation result = service.get();
-            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+            Representation result = service.delete();
 
-            if (!service.getStatus().equals(Status.SUCCESS_OK))
+            if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
             {
-                JSONObject jsonResult = jsonRepresentation.getJsonObject();
-                ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-
-                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
-
-                throw new ServiceException(responseEntity);
+                LOGGER.info("Successfully deleted {}", path);
             } else
             {
-                JSONArray jsonArray = jsonRepresentation.getJsonArray();
-                for (int i = 0; i < jsonArray.length(); i++)
-                {
-                    JSONObject curObject = jsonArray.getJSONObject(i);
-                    T instance = JsonUtil.fromJson(curObject, clazz);
-                    matches.add(instance);
-                }
+                JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+                JSONObject jsonResult = jsonRepresentation.getJsonObject();
+
+                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
+                ResponseEntity response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+                throw new ServiceException(response);
             }
 
         } catch (JSONException | IOException e)
@@ -94,6 +71,19 @@ public class GetCollectionCommand<T> extends AbstractBaseClient implements IComm
             throw new ServiceException(e);
         }
 
-        return matches;
+        return null;
+    }
+
+    @Override
+    public Object call(Class<?> clazz, String path, JSONObject inputJson) throws ServiceException
+    {
+        throw new UnsupportedOperationException("DELETE command must not have inputJson");
+    }
+
+    @Override
+    public Object call(Class<?> clazz, String path, JSONArray inputJson) throws ServiceException
+    {
+        throw new UnsupportedOperationException("DELETE command must not have inputJson");
     }
 }
+

@@ -22,6 +22,7 @@ import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.impl.AbstractBaseClient;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.util.json.JsonUtil;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.Status;
@@ -68,6 +69,37 @@ public class PostCommand extends AbstractBaseClient implements ICommand<Object, 
                 {
                     LOGGER.info("Successfully updated entity at path {}", path);
                 }
+            } else
+            {
+                JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+                JSONObject jsonResult = jsonRepresentation.getJsonObject();
+
+                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
+                ResponseEntity response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+                throw new ServiceException(response);
+            }
+
+        } catch (JSONException | IOException e)
+        {
+            LOGGER.error("Unexpected Exception", e);
+            throw new ServiceException(e);
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object call(Class<?> clazz, String path, JSONArray inputJson) throws ServiceException
+    {
+        ClientResource service = createClient(path);
+
+        try
+        {
+            Representation result = service.post(new JsonRepresentation(inputJson));
+
+            if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
+            {
+                LOGGER.info("Successfully updated entity at path {}", path);
             } else
             {
                 JsonRepresentation jsonRepresentation = new JsonRepresentation(result);

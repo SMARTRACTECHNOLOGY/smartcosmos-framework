@@ -22,6 +22,7 @@ import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.impl.AbstractBaseClient;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.util.json.JsonUtil;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.Status;
@@ -45,6 +46,12 @@ public class GetCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 
     @Override
     public T call(Class<? extends T> clazz, String path, JSONObject inputJson) throws ServiceException
+    {
+        throw new UnsupportedOperationException("GET command doesn't accept input JSON");
+    }
+
+    @Override
+    public T call(Class<? extends T> clazz, String path, JSONArray inputJson) throws ServiceException
     {
         throw new UnsupportedOperationException("GET command doesn't accept input JSON");
     }

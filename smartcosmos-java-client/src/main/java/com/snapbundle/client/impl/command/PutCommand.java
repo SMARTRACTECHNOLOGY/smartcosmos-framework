@@ -24,6 +24,7 @@ import com.snapbundle.client.impl.AbstractBaseClient;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.base.Result;
 import com.snapbundle.util.json.JsonUtil;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.Status;
@@ -55,6 +56,59 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 
     @Override
     public T call(Class<? extends T> clazz, String path, JSONObject inputJson) throws ServiceException
+    {
+        T response;
+
+        Preconditions.checkNotNull(inputJson);
+
+        ClientResource service = createClient(path);
+
+        try
+        {
+            Representation result = service.put(new JsonRepresentation(inputJson));
+            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+            JSONObject jsonResult = jsonRepresentation.getJsonObject();
+
+            response = JsonUtil.fromJson(jsonResult, clazz);
+
+            if (!service.getStatus().equals(Status.SUCCESS_CREATED))
+            {
+                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
+
+                try
+                {
+                    if (jsonResult.has(CODE_FIELD) && jsonResult.has(MESSAGE_FIELD))
+                    {
+                        ResponseEntity responseEntity = new ResponseEntity();
+                        responseEntity.setCode(jsonResult.getInt(CODE_FIELD));
+                        responseEntity.setMessage(jsonResult.getString(MESSAGE_FIELD));
+
+                        throw new ServiceException(responseEntity);
+
+                    } else if (jsonResult.has(CODE_FIELD))
+                    {
+                        throw new ServiceException(jsonResult.getInt(CODE_FIELD));
+                    }
+                } catch (JSONException e)
+                {
+                    throw new ServiceException(Result.ERR_FAILURE.getCode());
+                }
+            } else
+            {
+                LOGGER.debug(((ResponseEntity) response).getMessage());
+            }
+
+        } catch (JSONException | IOException e)
+        {
+            LOGGER.error("Unexpected Exception", e);
+            throw new ServiceException(e);
+        }
+
+        return response;
+    }
+
+    @Override
+    public T call(Class<? extends T> clazz, String path, JSONArray inputJson) throws ServiceException
     {
         T response;
 

@@ -24,6 +24,7 @@ import com.snapbundle.client.impl.AbstractBaseClient;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.base.Result;
 import com.snapbundle.util.json.JsonUtil;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.Status;
@@ -50,7 +51,13 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
     @Override
     public T call(Class<? extends T> clazz, String path) throws ServiceException
     {
-        throw new UnsupportedOperationException("PUT command must have inputJson");
+        throw new UnsupportedOperationException("UPSERT command must have inputJson");
+    }
+
+    @Override
+    public T call(Class<? extends T> clazz, String path, JSONArray inputJson) throws ServiceException
+    {
+        throw new UnsupportedOperationException("UPSERT command doesn't support JSONArray");
     }
 
     @Override
