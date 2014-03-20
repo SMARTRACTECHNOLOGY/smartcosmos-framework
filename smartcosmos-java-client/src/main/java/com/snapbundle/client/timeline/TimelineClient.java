@@ -21,11 +21,14 @@ import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.endpoint.TimelineEndpoints;
 import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
+import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.model.context.ITimelineEntry;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.context.TimelineEntry;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
+
+import java.util.Collection;
 
 class TimelineClient extends AbstractUpdateableBaseClient<ITimelineEntry> implements ITimelineClient
 {
@@ -50,5 +53,18 @@ class TimelineClient extends AbstractUpdateableBaseClient<ITimelineEntry> implem
     public void update(JSONObject instance) throws ServiceException
     {
         update(instance, TimelineEndpoints.update());
+    }
+
+    @Override
+    public Collection<ITimelineEntry> findByNameLike(String nameLike) throws ServiceException
+    {
+        return findByNameLike(nameLike, ViewType.Standard);
+    }
+
+    @Override
+    public Collection<ITimelineEntry> findByNameLike(String nameLike, ViewType viewType) throws ServiceException
+    {
+        GetCollectionCommand<ITimelineEntry> command = new GetCollectionCommand<>(context);
+        return command.call(TimelineEntry.class, TimelineEndpoints.findByNameLike(nameLike, viewType));
     }
 }

@@ -18,8 +18,15 @@
 package com.snapbundle.client.timeline;
 
 import com.snapbundle.client.api.IUpdateableBaseClient;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.context.ITimelineEntry;
+import com.snapbundle.util.json.ViewType;
+
+import java.util.Collection;
 
 public interface ITimelineClient extends IUpdateableBaseClient<ITimelineEntry>
 {
+    Collection<ITimelineEntry> findByNameLike(String nameLike) throws ServiceException;
+
+    Collection<ITimelineEntry> findByNameLike(String nameLike, ViewType viewType) throws ServiceException;
 }
