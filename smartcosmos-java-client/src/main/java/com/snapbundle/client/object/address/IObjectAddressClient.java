@@ -17,6 +17,21 @@
 
 package com.snapbundle.client.object.address;
 
-public interface IObjectAddressClient
+import com.snapbundle.client.api.IDeleteableBaseClient;
+import com.snapbundle.client.api.IUpdateableBaseClient;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.model.context.IObjectAddress;
+import com.snapbundle.util.json.ViewType;
+
+import java.util.Collection;
+
+public interface IObjectAddressClient extends IUpdateableBaseClient<IObjectAddress>, IDeleteableBaseClient<IObjectAddress>
 {
+    IObjectAddress findByUrn(String objectUrn, String urn) throws ServiceException;
+
+    IObjectAddress findByUrn(String objectUrn, String urn, ViewType viewType) throws ServiceException;
+
+    Collection<IObjectAddress> findLastN(String objectUrn, int count) throws ServiceException;
+
+    Collection<IObjectAddress> findLastN(String objectUrn, int count, ViewType viewType) throws ServiceException;
 }

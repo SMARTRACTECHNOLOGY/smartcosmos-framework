@@ -31,11 +31,11 @@ public final class ObjectAddressEndpoints
 
     private static final String UPDATE__POST = BASE.concat("/%s");
 
-    private static final String FIND_LAST_N__GET = BASE.concat("?count=%s&view=%s");
-
     private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
 
     private static final String DELETE__DELETE = BASE.concat("/%s");
+
+    private static final String FIND_LAST_N__GET = BASE.concat("?count=%s&view=%s");
 
     public static String create(String objectUrn)
     {
@@ -62,12 +62,12 @@ public final class ObjectAddressEndpoints
         return String.format(FIND_BY_URN__GET, objectUrn, urn, viewType);
     }
 
-    public static String findLast(int count)
+    public static String findLast(String objectUrn, int count)
     {
-        return findLast(count, ViewType.Standard);
+        return findLast(objectUrn, count, ViewType.Standard);
     }
 
-    public static String findLast(int count, ViewType viewType)
+    public static String findLast(String objectUrn, int count, ViewType viewType)
     {
         return String.format(FIND_LAST_N__GET, count, viewType);
     }
