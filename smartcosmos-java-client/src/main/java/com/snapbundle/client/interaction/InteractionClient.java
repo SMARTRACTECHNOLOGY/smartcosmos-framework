@@ -21,11 +21,14 @@ import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.endpoint.InteractionEndpoints;
 import com.snapbundle.client.impl.AbstractCreateableBaseClient;
+import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.model.context.IObjectInteraction;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.context.ObjectInteraction;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
+
+import java.util.Collection;
 
 class InteractionClient extends AbstractCreateableBaseClient<IObjectInteraction> implements IInteractionClient
 {
@@ -44,5 +47,44 @@ class InteractionClient extends AbstractCreateableBaseClient<IObjectInteraction>
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
         return create(instance, InteractionEndpoints.create());
+    }
+
+    @Override
+    public Collection<IObjectInteraction> listAll(ViewType viewType) throws ServiceException
+    {
+        GetCollectionCommand<IObjectInteraction> command = new GetCollectionCommand<>(context);
+        return command.call(ObjectInteraction.class, InteractionEndpoints.listAllInteractions(viewType));
+    }
+
+    @Override
+    public Collection<IObjectInteraction> findByDataLike(String dataLike, ViewType viewType) throws ServiceException
+    {
+        GetCollectionCommand<IObjectInteraction> command = new GetCollectionCommand<>(context);
+        return command.call(ObjectInteraction.class, InteractionEndpoints.findByDataLike(dataLike, viewType));
+    }
+
+    @Override
+    public Collection<IObjectInteraction> findByObjectUrnLike(String objectUrnLike, ViewType viewType) throws ServiceException
+    {
+        GetCollectionCommand<IObjectInteraction> command = new GetCollectionCommand<>(context);
+        return command.call(ObjectInteraction.class, InteractionEndpoints.findByObjectUrnLike(objectUrnLike, viewType));
+    }
+
+    @Override
+    public Collection<IObjectInteraction> listAll() throws ServiceException
+    {
+        return listAll(ViewType.Standard);
+    }
+
+    @Override
+    public Collection<IObjectInteraction> findByDataLike(String dataLike) throws ServiceException
+    {
+        return findByDataLike(dataLike, ViewType.Standard);
+    }
+
+    @Override
+    public Collection<IObjectInteraction> findByObjectUrnLike(String objectUrnLike) throws ServiceException
+    {
+        return findByObjectUrnLike(objectUrnLike, ViewType.Standard);
     }
 }

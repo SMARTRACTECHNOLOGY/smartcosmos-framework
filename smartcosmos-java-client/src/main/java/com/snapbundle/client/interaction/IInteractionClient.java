@@ -18,8 +18,23 @@
 package com.snapbundle.client.interaction;
 
 import com.snapbundle.client.api.ICreateableBaseClient;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.context.IObjectInteraction;
+import com.snapbundle.util.json.ViewType;
+
+import java.util.Collection;
 
 public interface IInteractionClient extends ICreateableBaseClient<IObjectInteraction>
 {
+    Collection<IObjectInteraction> listAll() throws ServiceException;
+
+    Collection<IObjectInteraction> listAll(ViewType viewType) throws ServiceException;
+
+    Collection<IObjectInteraction> findByDataLike(String dataLike) throws ServiceException;
+
+    Collection<IObjectInteraction> findByDataLike(String dataLike, ViewType viewType) throws ServiceException;
+
+    Collection<IObjectInteraction> findByObjectUrnLike(String objectUrnLike) throws ServiceException;
+
+    Collection<IObjectInteraction> findByObjectUrnLike(String objectUrnLike, ViewType viewType) throws ServiceException;
 }
