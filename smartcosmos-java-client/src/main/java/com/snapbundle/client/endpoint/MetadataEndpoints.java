@@ -58,9 +58,9 @@ public final class MetadataEndpoints
         return String.format(UPSERT__PUT, entityReferenceType, referenceUrn);
     }
 
-    public static String delete(EntityReferenceType entityReferenceType, String referenceUrn)
+    public static String delete(EntityReferenceType entityReferenceType, String referenceUrn, String key)
     {
-        return String.format(DELETE__DELETE, entityReferenceType, referenceUrn);
+        return String.format(DELETE__DELETE, entityReferenceType, referenceUrn, key);
     }
 
     public static String findAll(EntityReferenceType entityReferenceType, String referenceUrn)

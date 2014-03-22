@@ -17,9 +17,28 @@
 
 package com.snapbundle.client.metadata;
 
+import com.snapbundle.client.api.IDeleteableBaseClient;
 import com.snapbundle.client.api.IUpsertableBaseClient;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IMetadata;
+import com.snapbundle.model.context.MetadataDataType;
+import com.snapbundle.util.json.ViewType;
+import org.json.JSONObject;
 
-public interface IMetadataClient extends IUpsertableBaseClient<IMetadata>
+import java.util.Collection;
+
+public interface IMetadataClient extends IUpsertableBaseClient<IMetadata>, IDeleteableBaseClient<IMetadata>
 {
+    IMetadata findSpecificKey(EntityReferenceType entityReferenceType, String referenceUrn, String key) throws ServiceException;
+
+    IMetadata findSpecificKey(EntityReferenceType entityReferenceType, String referenceUrn, String key, ViewType viewType) throws ServiceException;
+
+    Collection<IMetadata> findAll(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException;
+
+    Collection<IMetadata> findAll(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType) throws ServiceException;
+
+    <T> String encodeMetadata(MetadataDataType metadataDataType, T instance) throws ServiceException;
+
+    JSONObject decodeMetadata(MetadataDataType metadataDataType, JSONObject jsonObject) throws ServiceException;
 }
