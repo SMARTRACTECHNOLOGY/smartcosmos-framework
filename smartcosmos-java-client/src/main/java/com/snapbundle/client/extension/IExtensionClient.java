@@ -17,9 +17,21 @@
 
 package com.snapbundle.client.extension;
 
+import com.snapbundle.client.api.IDeleteableBaseClient;
 import com.snapbundle.client.api.IUpdateableBaseClient;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.extension.IExtension;
+import com.snapbundle.util.json.ViewType;
 
-public interface IExtensionClient extends IUpdateableBaseClient<IExtension>
+import java.util.Collection;
+
+public interface IExtensionClient extends IUpdateableBaseClient<IExtension>, IDeleteableBaseClient<IExtension>
 {
+    Collection<IExtension> findByNameLike(String nameLike) throws ServiceException;
+
+    Collection<IExtension> findByNameLike(String nameLike, ViewType viewType) throws ServiceException;
+
+    Collection<IExtension> catalog() throws ServiceException;
+
+    IExtension getPublishedExtension(String urn) throws ServiceException;
 }
