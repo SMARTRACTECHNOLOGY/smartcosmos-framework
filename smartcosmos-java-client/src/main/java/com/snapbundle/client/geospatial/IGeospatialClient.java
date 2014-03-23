@@ -18,8 +18,15 @@
 package com.snapbundle.client.geospatial;
 
 import com.snapbundle.client.api.IUpdateableBaseClient;
+import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.geo.IGeospatialEntry;
+import com.snapbundle.util.json.ViewType;
+
+import java.util.Collection;
 
 public interface IGeospatialClient extends IUpdateableBaseClient<IGeospatialEntry>
 {
+    Collection<IGeospatialEntry> findByNameLike(String nameLike) throws ServiceException;
+
+    Collection<IGeospatialEntry> findByNameLike(String nameLike, ViewType viewType) throws ServiceException;
 }

@@ -21,11 +21,14 @@ import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.endpoint.GeospatialEndpoints;
 import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
+import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.model.geo.IGeospatialEntry;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.geo.GeospatialEntry;
 import com.snapbundle.util.json.ViewType;
 import org.json.JSONObject;
+
+import java.util.Collection;
 
 class GeospatialClient extends AbstractUpdateableBaseClient<IGeospatialEntry> implements IGeospatialClient
 {
@@ -50,5 +53,18 @@ class GeospatialClient extends AbstractUpdateableBaseClient<IGeospatialEntry> im
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
         return create(instance, GeospatialEndpoints.create());
+    }
+
+    @Override
+    public Collection<IGeospatialEntry> findByNameLike(String nameLike, ViewType viewType) throws ServiceException
+    {
+        GetCollectionCommand<IGeospatialEntry> command = new GetCollectionCommand<>(context);
+        return command.call(GeospatialEntry.class, GeospatialEndpoints.findByNameLike(nameLike, viewType));
+    }
+
+    @Override
+    public Collection<IGeospatialEntry> findByNameLike(String nameLike) throws ServiceException
+    {
+        return findByNameLike(nameLike, ViewType.Standard);
     }
 }
