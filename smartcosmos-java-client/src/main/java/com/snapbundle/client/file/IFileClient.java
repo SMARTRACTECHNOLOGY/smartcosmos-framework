@@ -18,8 +18,28 @@
 package com.snapbundle.client.file;
 
 import com.snapbundle.client.api.ICreateableBaseClient;
+import com.snapbundle.client.api.IDeleteableBaseClient;
+import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IFile;
+import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.util.json.ViewType;
+import org.restlet.data.MediaType;
 
-public interface IFileClient extends ICreateableBaseClient<IFile>
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+
+public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBaseClient<IFile>
 {
+    Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException;
+
+    Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType) throws ServiceException;
+
+    ResponseEntity uploadOctetStream(String urn, File file, MediaType mediaType) throws ServiceException;
+
+    ResponseEntity uploadAsMultiPartFormData(String urn, java.io.File file, MediaType mediaType) throws ServiceException;
+
+    InputStream getFileContents(String urn) throws IOException;
 }

@@ -104,6 +104,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet.ext.html</artifactId>
+            <version>${restlet.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.1.1</version>
