@@ -25,6 +25,8 @@ import com.snapbundle.client.device.IDeviceClient;
 import com.snapbundle.model.context.IDevice;
 import org.json.JSONException;
 
+import java.util.Collection;
+
 public class DeviceIT
 {
     private static final String USERNAME = "jason@trrllc.com";
@@ -39,9 +41,7 @@ public class DeviceIT
 
     public void testCreate() throws JSONException, ServiceException
     {
-        ServerContext context = new ServerContext(USERNAME, PASSWORD);
-
-        IDeviceClient client = DeviceFactory.createClient(context);
+        IDeviceClient client = createClient();
 
         IDevice entity = new DeviceBuilder(TEST_IDENTIFICATION)
                 .setName("My Phone")
@@ -53,9 +53,7 @@ public class DeviceIT
 
     public void testFetch() throws ServiceException
     {
-        ServerContext context = new ServerContext(USERNAME, PASSWORD);
-
-        IDeviceClient client = DeviceFactory.createClient(context);
+        IDeviceClient client = createClient();
 
         IDevice entity = client.findByDeviceIdentification(TEST_IDENTIFICATION);
 
@@ -69,13 +67,35 @@ public class DeviceIT
 
     public void testFetchByUrn() throws ServiceException
     {
-        ServerContext context = new ServerContext(USERNAME, PASSWORD);
-
-        IDeviceClient client = DeviceFactory.createClient(context);
+        IDeviceClient client = createClient();
 
         IDevice entity = client.findByUrn(TEST_URN_ALPHA);
 
         System.out.println(entity.getName());
+    }
+
+    private void testFindByIdentification() throws ServiceException
+    {
+        IDeviceClient client = createClient();
+
+        IDevice entity = client.findByDeviceIdentification(TEST_IDENTIFICATION);
+
+        System.out.println(entity.getName());
+    }
+
+    private void testFindByName() throws ServiceException
+    {
+        IDeviceClient client = createClient();
+
+        Collection<IDevice> matches = client.findByNameLike("Up");
+
+        System.out.println(matches.size());
+    }
+
+    private IDeviceClient createClient()
+    {
+        ServerContext context = new ServerContext(USERNAME, PASSWORD);
+        return DeviceFactory.createClient(context);
     }
 
     public static void main(String[] args) throws JSONException, ServiceException
@@ -84,5 +104,7 @@ public class DeviceIT
 //        instance.testCreate();
 //        instance.testFetch();
         instance.testFetchByUrn();
+        instance.testFindByName();
+        instance.testFindByIdentification();
     }
 }
