@@ -19,8 +19,8 @@ package com.snapbundle.client.event;
 
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.endpoint.EventEndpoints;
-import com.snapbundle.client.impl.AbstractFindableBaseClient;
+import com.snapbundle.client.impl.endpoint.EventEndpoints;
+import com.snapbundle.client.impl.base.AbstractFindableBaseClient;
 import com.snapbundle.model.event.IEvent;
 import com.snapbundle.pojo.event.Event;
 import com.snapbundle.util.json.ViewType;

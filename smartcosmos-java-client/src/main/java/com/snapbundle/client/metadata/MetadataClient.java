@@ -21,8 +21,8 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.Field;
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.endpoint.MetadataEndpoints;
-import com.snapbundle.client.impl.AbstractUpsertableBaseClient;
+import com.snapbundle.client.impl.endpoint.MetadataEndpoints;
+import com.snapbundle.client.impl.base.AbstractUpsertableBaseClient;
 import com.snapbundle.client.impl.command.DeleteCommand;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.client.impl.command.GetCommand;
@@ -66,7 +66,7 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
     }
 
     @Override
-    public void upsert(JSONObject instance) throws ServiceException
+    public ResponseEntity upsert(JSONObject instance) throws ServiceException
     {
         Preconditions.checkState(instance.has(ENTITY_REFERENCE_TYPE));
         Preconditions.checkState(instance.has(REFERENCE_URN_FIELD));
@@ -74,7 +74,7 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
         try
         {
             EntityReferenceType ert = EntityReferenceType.valueOf(instance.getString(ENTITY_REFERENCE_TYPE));
-            upsert(instance, MetadataEndpoints.upsert(ert, instance.getString(REFERENCE_URN_FIELD)));
+            return upsert(instance, MetadataEndpoints.upsert(ert, instance.getString(REFERENCE_URN_FIELD)));
         } catch (IllegalArgumentException | JSONException e)
         {
             throw new ServiceException(e);

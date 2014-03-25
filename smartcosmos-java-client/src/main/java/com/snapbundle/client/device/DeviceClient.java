@@ -19,8 +19,8 @@ package com.snapbundle.client.device;
 
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.endpoint.DeviceEndpoints;
-import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
+import com.snapbundle.client.impl.endpoint.DeviceEndpoints;
+import com.snapbundle.client.impl.base.AbstractUpdateableBaseClient;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.client.impl.command.GetCommand;
 import com.snapbundle.model.context.IDevice;

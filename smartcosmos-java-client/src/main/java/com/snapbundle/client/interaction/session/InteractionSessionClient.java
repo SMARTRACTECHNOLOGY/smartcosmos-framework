@@ -19,8 +19,8 @@ package com.snapbundle.client.interaction.session;
 
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.endpoint.ObjectInteractionSessionEndpoints;
-import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
+import com.snapbundle.client.impl.endpoint.ObjectInteractionSessionEndpoints;
+import com.snapbundle.client.impl.base.AbstractUpdateableBaseClient;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.model.context.IObjectInteractionSession;
 import com.snapbundle.pojo.base.ResponseEntity;

@@ -17,8 +17,8 @@
 
 package com.snapbundle.client.file;
 
-import com.snapbundle.client.api.ICreateableBaseClient;
-import com.snapbundle.client.api.IDeleteableBaseClient;
+import com.snapbundle.client.impl.ICreateableBaseClient;
+import com.snapbundle.client.impl.IDeleteableBaseClient;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IFile;

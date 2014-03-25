@@ -17,8 +17,8 @@
 
 package com.snapbundle.client.object.address;
 
-import com.snapbundle.client.api.IDeleteableBaseClient;
-import com.snapbundle.client.api.IUpdateableBaseClient;
+import com.snapbundle.client.impl.IDeleteableBaseClient;
+import com.snapbundle.client.impl.IUpdateableBaseClient;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.context.IObjectAddress;
 import com.snapbundle.util.json.ViewType;

@@ -19,7 +19,7 @@ package com.snapbundle.client.impl.command;
 
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.impl.AbstractBaseClient;
+import com.snapbundle.client.impl.base.AbstractBaseClient;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.util.json.JsonUtil;
 import org.json.JSONArray;
@@ -33,7 +33,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Collection;
 
 public class GetCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 {

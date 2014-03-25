@@ -21,14 +21,14 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.Field;
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.endpoint.RelationshipEndpoints;
-import com.snapbundle.client.impl.AbstractUpsertableBaseClient;
+import com.snapbundle.client.impl.endpoint.RelationshipEndpoints;
+import com.snapbundle.client.impl.base.AbstractUpsertableBaseClient;
 import com.snapbundle.client.impl.command.DeleteCommand;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.client.impl.command.GetCommand;
-import com.snapbundle.client.impl.command.PostCommand;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IRelationship;
+import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.context.Relationship;
 import com.snapbundle.util.json.JsonUtil;
 import com.snapbundle.util.json.ViewType;
@@ -49,7 +49,7 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
     }
 
     @Override
-    public void upsert(JSONObject instance) throws ServiceException
+    public ResponseEntity upsert(JSONObject instance) throws ServiceException
     {
         Preconditions.checkState(instance.has(ENTITY_REFERENCE_TYPE));
         Preconditions.checkState(instance.has(REFERENCE_URN_FIELD));
@@ -57,7 +57,7 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
         try
         {
             EntityReferenceType ert = EntityReferenceType.valueOf(instance.getString(ENTITY_REFERENCE_TYPE));
-            upsert(instance, RelationshipEndpoints.upsert(ert, instance.getString(REFERENCE_URN_FIELD)));
+            return upsert(instance, RelationshipEndpoints.upsert(ert, instance.getString(REFERENCE_URN_FIELD)));
         } catch (IllegalArgumentException | JSONException e)
         {
             throw new ServiceException(e);

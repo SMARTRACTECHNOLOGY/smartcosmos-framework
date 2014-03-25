@@ -19,8 +19,8 @@ package com.snapbundle.client.timeline;
 
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.endpoint.TimelineEndpoints;
-import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
+import com.snapbundle.client.impl.endpoint.TimelineEndpoints;
+import com.snapbundle.client.impl.base.AbstractUpdateableBaseClient;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.model.context.ITimelineEntry;
 import com.snapbundle.pojo.base.ResponseEntity;

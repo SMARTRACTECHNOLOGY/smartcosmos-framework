@@ -21,12 +21,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Defines a SnapBundle server context consisting of an email address, credentials, and a server location.
+ * Defines a SnapBundle server context consisting of an email address, credentials, and a server location, where the
+ * credentials are optional in those situations where a public (non-protected) endpoint is being invoked. Examples of
+ * public (non-protected) endpoints include the use of {@link com.snapbundle.client.registration.IRegistrationClient}
+ * and the encode/decode operations defined by {@link com.snapbundle.client.metadata.IMetadataClient}.
+ * <p/>
+ * The default {@link #getServerUrl()} is <b>https://snapbundle.tagdynamics.net</b>
  */
 public final class ServerContext
 {
     final static Logger LOGGER = LoggerFactory.getLogger(ServerContext.class);
 
+    // TODO: Update to HTTPS once the cert is installed at the AWS load balancer
     private String server = "http://snapbundle.tagdynamics.net:8080";
 
     private String emailAddress;

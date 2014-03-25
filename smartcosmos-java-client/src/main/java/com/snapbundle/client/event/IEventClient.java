@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.event;
 
-import com.snapbundle.client.api.IFindableBaseClient;
+import com.snapbundle.client.impl.IFindableBaseClient;
 import com.snapbundle.model.event.IEvent;
 
 public interface IEventClient extends IFindableBaseClient<IEvent>

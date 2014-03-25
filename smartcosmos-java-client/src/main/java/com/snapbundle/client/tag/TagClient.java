@@ -21,8 +21,8 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.Field;
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.endpoint.TagEndpoints;
-import com.snapbundle.client.impl.AbstractCreateableBaseClient;
+import com.snapbundle.client.impl.endpoint.TagEndpoints;
+import com.snapbundle.client.impl.base.AbstractUpsertableBaseClient;
 import com.snapbundle.client.impl.command.DeleteCommand;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.client.impl.command.GetCommand;
@@ -43,7 +43,7 @@ import java.util.Collection;
 
 import static com.snapbundle.Field.URN_FIELD;
 
-class TagClient extends AbstractCreateableBaseClient<ITag> implements ITagClient
+class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
 {
     TagClient(ServerContext context)
     {
@@ -57,9 +57,9 @@ class TagClient extends AbstractCreateableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public ResponseEntity create(JSONObject instance) throws ServiceException
+    public ResponseEntity upsert(JSONObject instance) throws ServiceException
     {
-        return create(instance, TagEndpoints.create());
+        return upsert(instance, TagEndpoints.upsert());
     }
 
     @Override

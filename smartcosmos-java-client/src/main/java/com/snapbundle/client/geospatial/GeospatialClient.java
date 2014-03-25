@@ -19,8 +19,8 @@ package com.snapbundle.client.geospatial;
 
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.endpoint.GeospatialEndpoints;
-import com.snapbundle.client.impl.AbstractUpdateableBaseClient;
+import com.snapbundle.client.impl.endpoint.GeospatialEndpoints;
+import com.snapbundle.client.impl.base.AbstractUpdateableBaseClient;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.model.geo.IGeospatialEntry;
 import com.snapbundle.pojo.base.ResponseEntity;

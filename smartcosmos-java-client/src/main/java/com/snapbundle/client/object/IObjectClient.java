@@ -17,9 +17,9 @@
 
 package com.snapbundle.client.object;
 
-import com.snapbundle.client.api.IUpdateableBaseClient;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.endpoint.ObjectEndpoints;
+import com.snapbundle.client.impl.endpoint.ObjectEndpoints;
+import com.snapbundle.client.impl.IUpdateableBaseClient;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.util.json.ViewType;
 
@@ -34,7 +34,7 @@ public interface IObjectClient extends IUpdateableBaseClient<IObject>
      * Returns a {@link com.snapbundle.util.json.ViewType#Standard} view.
      *
      * @param objectUrn Exact, case-sensitive object URN to locate
-     * @return
+     * @return Matching object
      */
     IObject findByExactObjectUrn(String objectUrn) throws ServiceException;
 
@@ -44,7 +44,7 @@ public interface IObjectClient extends IUpdateableBaseClient<IObject>
      *
      * @param objectUrn Exact, case-sensitive object URN to locate
      * @param viewType  Field verbosity
-     * @return
+     * @return Matching object
      */
     IObject findByExactObjectUrn(String objectUrn, ViewType viewType) throws ServiceException;
 
@@ -52,7 +52,7 @@ public interface IObjectClient extends IUpdateableBaseClient<IObject>
      * Complex query for a collection of matching objects.
      *
      * @param builder Builder that defines the query to perform
-     * @return
+     * @return Non-null collection of matching entities; collection may have a size of 0 to indicate no matches found
      */
     Collection<IObject> query(ObjectEndpoints.Builder builder) throws ServiceException;
 }

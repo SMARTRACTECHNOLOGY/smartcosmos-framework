@@ -117,6 +117,66 @@
 
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <groups>
+                                <group>
+                                    <title>Entity Clients</title>
+                                    <packages>
+                                        com.snapbundle.client.account:com.snapbundle.client.device:com.snapbundle.client.event:com.snapbundle.client.extension:com.snapbundle.client.file:com.snapbundle.client.geospatial:com.snapbundle.client.interaction*:com.snapbundle.client.metadata:com.snapbundle.client.object*:com.snapbundle.client.registration:com.snapbundle.client.relationship:com.snapbundle.client.tag:com.snapbundle.client.timeline:com.snapbundle.client.user
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Server Connectivity</title>
+                                    <packages>com.snapbundle.client.api</packages>
+                                </group>
+                                <group>
+                                    <title>Private Implementation</title>
+                                    <packages>com.snapbundle.client.impl*</packages>
+                                </group>
+                            </groups>
+                            <show>protected</show>
+                            <nohelp>true</nohelp>
+                            <docfilessubdirs>true</docfilessubdirs>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -137,9 +197,20 @@
                     </configuration>
                 </plugin>
 
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <!--
+                          During release:perform, enable the "release" profile
+                         -->
+                        <releaseProfiles>release</releaseProfiles>
+                        <goals>deploy assembly:single</goals>
+                    </configuration>
+                </plugin>
+
             </plugins>
         </pluginManagement>
-
     </build>
 
 </project>

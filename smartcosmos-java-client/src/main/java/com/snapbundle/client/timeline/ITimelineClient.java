@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.timeline;
 
-import com.snapbundle.client.api.IUpdateableBaseClient;
+import com.snapbundle.client.impl.IUpdateableBaseClient;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.context.ITimelineEntry;
 import com.snapbundle.util.json.ViewType;

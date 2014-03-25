@@ -19,11 +19,26 @@ package com.snapbundle.client.api;
 
 import com.snapbundle.pojo.base.ResponseEntity;
 
+/**
+ * Generalized exception that indicates the underlying platform web service call failed. In most instances, the
+ * {@link #getCode()} will map to a enum values found in {@link com.snapbundle.pojo.base.Result}, several examples of
+ * which are illustrated below with see links.
+ * <p/>
+ * Service exceptions <i>may</i> include a well-defined {@link com.snapbundle.pojo.base.Result} error code if and only
+ * if the web service itself was actually reached and invoked. In those cases where, for example, an Internet connection
+ * wasn't available and the web service call never actually reached the cloud, the {@link #hasCode} will return false
+ * and {@link #getCode()} will return null. In these situations, developers must debug the nested exception to determine
+ * the exact reason for failure.
+ *
+ * @see com.snapbundle.pojo.base.Result#ERR_UNKNOWN_TYPE
+ * @see com.snapbundle.pojo.base.Result#ERR_UNKNOWN_ENTITY
+ * @see com.snapbundle.pojo.base.Result#ERR_FAILURE
+ */
 public class ServiceException extends Exception
 {
     private boolean hasCode = false;
 
-    private int code;
+    private Integer code = null;
 
     public ServiceException(ResponseEntity response)
     {
@@ -48,12 +63,22 @@ public class ServiceException extends Exception
         super(e);
     }
 
+    /**
+     * Verifies that the web service was actually invoked and resulted in a well-defined error code.
+     *
+     * @return true, if the web service was able to provide an explicit error code to indicate why the failure occurred
+     */
     public boolean hasCode()
     {
         return hasCode;
     }
 
-    public int getCode()
+    /**
+     * One of the {@link com.snapbundle.pojo.base.Result} ERR_xxxxx values to indicate why the web service call failed.
+     *
+     * @return web service assigned error code, if available,
+     */
+    public Integer getCode()
     {
         return code;
     }

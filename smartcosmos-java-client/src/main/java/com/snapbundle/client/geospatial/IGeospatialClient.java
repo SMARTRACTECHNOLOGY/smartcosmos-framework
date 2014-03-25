@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.geospatial;
 
-import com.snapbundle.client.api.IUpdateableBaseClient;
+import com.snapbundle.client.impl.IUpdateableBaseClient;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.geo.IGeospatialEntry;
 import com.snapbundle.util.json.ViewType;

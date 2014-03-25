@@ -17,8 +17,8 @@
 
 package com.snapbundle.client.tag;
 
-import com.snapbundle.client.api.ICreateableBaseClient;
-import com.snapbundle.client.api.IDeleteableBaseClient;
+import com.snapbundle.client.impl.IDeleteableBaseClient;
+import com.snapbundle.client.impl.IUpsertableBaseClient;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.ITag;
@@ -29,7 +29,7 @@ import org.json.JSONArray;
 
 import java.util.Collection;
 
-public interface ITagClient extends ICreateableBaseClient<ITag>, IDeleteableBaseClient<ITag>
+public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBaseClient<ITag>
 {
     ResponseEntity assign(EntityReferenceType entityReferenceType, String referenceUrn, Collection<ITag> tag) throws ServiceException;
 

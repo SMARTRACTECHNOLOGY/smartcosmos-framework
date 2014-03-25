@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.device;
 
-import com.snapbundle.client.api.IUpdateableBaseClient;
+import com.snapbundle.client.impl.IUpdateableBaseClient;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.model.context.IDevice;
 import com.snapbundle.util.json.ViewType;
