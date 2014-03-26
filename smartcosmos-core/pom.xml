@@ -215,17 +215,6 @@
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.1</version>
-                    <configuration>
-                        <mavenExecutorId>forked-path</mavenExecutorId>
-                        <useReleaseProfile>false</useReleaseProfile>
-                        <arguments>${arguments} -Psonatype-oss-release</arguments>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
                     <version>1.5</version>
                 </plugin>
@@ -255,6 +244,7 @@
                          -->
                         <releaseProfiles>release</releaseProfiles>
                         <goals>deploy assembly:single</goals>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
                 </plugin>
 
