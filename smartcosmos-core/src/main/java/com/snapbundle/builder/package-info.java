@@ -16,10 +16,7 @@
  */
 
 /**
- * Interfaces and enumerations that comprise the SnapBundle public model.
- *
- * <b>NOTE:</b> These are the only entities that are considered part of the public contract for
- * Java bindings. All development should focus on the contracts described by the
- * interfaces and not concrete or utility classes.
+ * Collection of entity builder objects used to quickly and efficiently assemble a complete
+ * entity definition.
  */
-package com.snapbundle.model;
+package com.snapbundle.builder;

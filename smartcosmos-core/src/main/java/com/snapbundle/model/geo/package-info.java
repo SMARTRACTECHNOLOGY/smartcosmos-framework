@@ -16,7 +16,7 @@
  */
 
 /**
- * Geo-JSON support.
+ * Geospatial entity definition.
  * @see com.snapbundle.geo.GeometricShape
  */
 package com.snapbundle.model.geo;

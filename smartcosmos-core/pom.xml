@@ -107,6 +107,82 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <groups>
+                                <group>
+                                    <title>Model</title>
+                                    <packages>
+                                        com.snapbundle.model.base:com.snapbundle.model.context:com.snapbundle.pojo.base:com.snapbundle.pojo.context:com.snapbundle.builder
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>GeoJSON Support</title>
+                                    <packages>
+                                        com.snapbundle.model.geo:com.snapbundle.geo:com.snapbundle.pojo.geo
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Integration</title>
+                                    <packages>
+                                        com.snapbundle.model.event:com.snapbundle.model.integration:com.snapbundle.pojo.event:com.snapbundle.pojo.integration
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Extensions</title>
+                                    <packages>
+                                        com.snapbundle.model.extension:com.snapbundle.pojo.extension
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Utilities</title>
+                                    <packages>
+                                        com.snapbundle.util*:com.snapbundle
+                                    </packages>
+                                </group>
+                            </groups>
+                            <show>protected</show>
+                            <nohelp>true</nohelp>
+                            <docfilessubdirs>true</docfilessubdirs>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -124,6 +200,18 @@
                         <compilerVersion>1.7</compilerVersion>
                         <source>1.7</source>
                         <target>1.7</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <!--
+                          During release:perform, enable the "release" profile
+                         -->
+                        <releaseProfiles>release</releaseProfiles>
+                        <goals>deploy assembly:single</goals>
                     </configuration>
                 </plugin>
 

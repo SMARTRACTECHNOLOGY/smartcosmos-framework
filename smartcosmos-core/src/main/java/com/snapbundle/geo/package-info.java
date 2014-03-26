@@ -16,7 +16,7 @@
  */
 
 /**
- * Collection of GeoJSON specific POJO classes.
+ * Convenience collection of GeoJSON POJOs used for serializing and deserializing to and from JSON, respectively.
  */
 package com.snapbundle.geo;
 

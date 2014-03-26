@@ -21,7 +21,7 @@ import com.snapbundle.model.base.INamedObject;
 
 abstract class AbstractNamedObjectBuilder<T extends INamedObject, E> extends AbstractMonikerBuilder<T, E>
 {
-    protected AbstractNamedObjectBuilder(T instance)
+    AbstractNamedObjectBuilder(T instance)
     {
         super(instance);
         instance.setActive(true);

@@ -16,6 +16,6 @@
  */
 
 /**
- * Collection of constant values
+ * Constant values, eg {@link com.snapbundle.Field}.
  */
 package com.snapbundle;

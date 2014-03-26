@@ -16,6 +16,6 @@
  */
 
 /**
- * Geospatial POJOs.
+ * Geospatial POJO.
  */
 package com.snapbundle.pojo.geo;

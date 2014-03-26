@@ -26,7 +26,7 @@ import com.snapbundle.model.context.IAccount;
 
 abstract class AbstractReferentialBuilder<T extends IMoniker, E> extends AbstractMonikerBuilder<T, E>
 {
-    protected AbstractReferentialBuilder(T instance)
+    AbstractReferentialBuilder(T instance)
     {
         super(instance);
     }
