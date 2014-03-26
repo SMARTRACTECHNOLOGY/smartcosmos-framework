@@ -18,14 +18,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.snapbundle</groupId>
+    <groupId>com.tagdynamics</groupId>
     <artifactId>snap-model</artifactId>
     <version>2.1-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
-    <name>SnapBundle™ Model</name>
-    <description>Provides an interface driven object model for working with the SnapBundle™ platform</description>
+    <name>SnapBundle Model</name>
+    <description>Provides an interface driven object model for working with the SnapBundle platform</description>
 
     <url>http://tagdynamices.com/</url>
 
@@ -52,7 +52,7 @@
             <id>tagd.engineering</id>
             <name>Tag Dynamics</name>
             <email>engineering@tagdynamics.net</email>
-            <organization>Tag Dynamics, Inc.</organization>
+            <organization>Tag Dynamics, LLC.</organization>
             <timezone>-5</timezone>
             <roles>
                 <role>Project Lead</role>
@@ -61,8 +61,8 @@
     </developers>
 
     <scm>
-        <url>https://github.com/snapbundle/sdk</url>
-        <connection>scm:git:git://github.com/snapbundle/sdk.git</connection>
+        <url>scm:git:git@github.com:snapbundle/sdk.git</url>
+        <connection>scm:git:git@github.com:snapbundle/sdk.git</connection>
         <developerConnection>scm:git:git@github.com:snapbundle/sdk.git</developerConnection>
       <tag>HEAD</tag>
   </scm>
