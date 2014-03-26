@@ -453,8 +453,7 @@ The following user fields may be used to create a new record:
 This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result
 
 - **201 SUCCESS_CREATED** if the record is new
-- **200 SUCCESS_OK** if a User with the given `emailAddress` already existed in the database, in which
-case **no data is merged; existing record is left as-is**
+- **409 CONFLICT** if a User with the given `emailAddress` already existed in the database
 
 + Request (application/json)
 
@@ -482,7 +481,7 @@ case **no data is merged; existing record is left as-is**
                 "message" : "r@nd0mP@ssword!"
             }
 
-+ Response 200 (application/json)
++ Response 409 (application/json)
 
     + Headers
 
