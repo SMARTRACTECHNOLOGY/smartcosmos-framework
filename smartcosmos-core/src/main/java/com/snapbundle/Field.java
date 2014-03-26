@@ -17,7 +17,7 @@
 
 package com.snapbundle;
 
-public final class Field extends VersionData
+public final class Field
 {
     public static final String HTTP_HEADER_EVENT = "SnapBundle-Event";
 
