@@ -21,7 +21,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.snapbundle</groupId>
+    <groupId>com.tagdynamics</groupId>
     <artifactId>snap-client</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -71,8 +71,8 @@
     </developers>
 
     <scm>
-        <url>https://github.com/snapbundle/client</url>
-        <connection>scm:git:git://github.com/snapbundle/client.git</connection>
+        <url>scm:git:git@github.com:snapbundle/client.git</url>
+        <connection>scm:git:git@github.com:snapbundle/client.git</connection>
         <developerConnection>scm:git:git@github.com:snapbundle/client.git</developerConnection>
     </scm>
 
