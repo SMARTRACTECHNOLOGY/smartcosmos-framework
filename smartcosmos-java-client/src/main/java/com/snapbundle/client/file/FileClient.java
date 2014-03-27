@@ -21,14 +21,15 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.Field;
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.impl.endpoint.FileEndpoints;
-import com.snapbundle.client.impl.endpoint.RelationshipEndpoints;
 import com.snapbundle.client.impl.base.AbstractCreateableBaseClient;
 import com.snapbundle.client.impl.command.DeleteCommand;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
+import com.snapbundle.client.impl.endpoint.FileEndpoints;
+import com.snapbundle.client.impl.endpoint.RelationshipEndpoints;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IFile;
 import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.base.Result;
 import com.snapbundle.pojo.context.File;
 import com.snapbundle.util.json.JsonUtil;
 import com.snapbundle.util.json.ViewType;
@@ -188,11 +189,38 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
     }
 
     @Override
-    public InputStream getFileContents(String urn) throws IOException
+    public InputStream getFileContents(String urn) throws ServiceException, IOException
     {
         ClientResource service = createClient(FileEndpoints.retrieveContents(urn));
         Representation representation = service.get();
-        return representation.getStream();
+
+        if (service.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
+        {
+            // No such URN
+            ResponseEntity responseEntity = null;
+            try
+            {
+                JsonRepresentation jsonRepresentation = new JsonRepresentation(representation);
+                JSONObject jsonResult = jsonRepresentation.getJsonObject();
+                responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+            } catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+
+            throw new ServiceException(responseEntity);
+
+        } else if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
+        {
+            // URN found but no file has been uploaded as of yet
+            ResponseEntity responseEntity = new ResponseEntity.Builder(Result.ERR_NO_FILE_CONTENT.getCode(),
+                    String.format(Result.ERR_NO_FILE_CONTENT.getFormattedMessage(), urn))
+                    .build();
+            throw new ServiceException(responseEntity);
+        } else
+        {
+            return representation.getStream();
+        }
     }
 
     @Override
