@@ -2930,7 +2930,25 @@ The following file fields may be used to create a new file record:
                 "code" : 1,
                 "message" : "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
             }
-                        
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
+
++ Response 409 (application/json)
+
+    + Body
+
+            {
+                "code" : 0,
+                "message" : "File with URN urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8 exists and already has had content uploaded"
+            }
+
 ## File Upload - Multi-Part Form Data [/files/{urn}/multipart]
 ### Upload actual file bytes to the cloud using an multi-part form data submission from a web form [POST]
 By supporting a multi-part form data upload endpoint, Snapbundle allows a web form to be used to upload a file to the cloud.
@@ -2959,6 +2977,24 @@ By supporting a multi-part form data upload endpoint, Snapbundle allows a web fo
             {
                 "code" : 1,
                 "message" : "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
+
++ Response 409 (application/json)
+
+    + Body
+
+            {
+                "code" : 0,
+                "message" : "File with URN urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8 exists and already has had content uploaded"
             }
 
 ## Specific File Definition Retrieval [/files/{urn}{?view}]                
