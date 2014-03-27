@@ -33,8 +33,6 @@ public final class InteractionEndpoints
 
     private static final String LIST_ALL__GET = BASE.concat("?view=%s");
 
-    private static final String FIND_BY_DATA_LIKE__GET = BASE.concat("?dataLike=%s&view=%s");
-
     private static final String FIND_BY_OBJECT_URN_LIKE__GET = BASE.concat("?objectUrnLike=%s&view=%s");
 
     public static String create()
@@ -60,16 +58,6 @@ public final class InteractionEndpoints
     public static String listAllInteractions(ViewType viewType)
     {
         return String.format(LIST_ALL__GET, viewType);
-    }
-
-    public static String findByDataLike(String dataLike)
-    {
-        return findByDataLike(dataLike, ViewType.Standard);
-    }
-
-    public static String findByDataLike(String dataLike, ViewType viewType)
-    {
-        return String.format(FIND_BY_DATA_LIKE__GET, dataLike, viewType);
     }
 
     public static String findByObjectUrnLike(String objectUrnLike)

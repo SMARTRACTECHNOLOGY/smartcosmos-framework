@@ -19,9 +19,9 @@ package com.snapbundle.client.interaction;
 
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.impl.endpoint.InteractionEndpoints;
 import com.snapbundle.client.impl.base.AbstractCreateableBaseClient;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
+import com.snapbundle.client.impl.endpoint.InteractionEndpoints;
 import com.snapbundle.model.context.IObjectInteraction;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.context.ObjectInteraction;
@@ -57,13 +57,6 @@ class InteractionClient extends AbstractCreateableBaseClient<IObjectInteraction>
     }
 
     @Override
-    public Collection<IObjectInteraction> findByDataLike(String dataLike, ViewType viewType) throws ServiceException
-    {
-        GetCollectionCommand<IObjectInteraction> command = new GetCollectionCommand<>(context);
-        return command.call(ObjectInteraction.class, InteractionEndpoints.findByDataLike(dataLike, viewType));
-    }
-
-    @Override
     public Collection<IObjectInteraction> findByObjectUrnLike(String objectUrnLike, ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<IObjectInteraction> command = new GetCollectionCommand<>(context);
@@ -74,12 +67,6 @@ class InteractionClient extends AbstractCreateableBaseClient<IObjectInteraction>
     public Collection<IObjectInteraction> listAll() throws ServiceException
     {
         return listAll(ViewType.Standard);
-    }
-
-    @Override
-    public Collection<IObjectInteraction> findByDataLike(String dataLike) throws ServiceException
-    {
-        return findByDataLike(dataLike, ViewType.Standard);
     }
 
     @Override

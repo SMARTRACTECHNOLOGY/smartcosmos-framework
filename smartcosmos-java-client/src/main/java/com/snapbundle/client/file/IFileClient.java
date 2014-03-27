@@ -94,6 +94,8 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      *            is associated with
      * @return Non-null input stream
      * @throws IOException
+     * @throws com.snapbundle.client.api.ServiceException to indicate if the file has no content or the URN specified
+     *                                                    cannot be located
      */
     InputStream getFileContents(String urn) throws ServiceException, IOException;
 }
