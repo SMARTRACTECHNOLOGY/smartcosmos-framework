@@ -92,7 +92,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.snapbundle</groupId>
+            <groupId>com.tagdynamics</groupId>
             <artifactId>snap-model</artifactId>
             <version>${snapbundle.version}</version>
         </dependency>
