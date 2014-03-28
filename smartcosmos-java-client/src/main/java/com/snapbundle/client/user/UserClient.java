@@ -21,10 +21,10 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.Field;
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.impl.endpoint.UserEndpoints;
 import com.snapbundle.client.impl.base.AbstractUpdateableBaseClient;
 import com.snapbundle.client.impl.command.GetCommand;
 import com.snapbundle.client.impl.command.PostCommand;
+import com.snapbundle.client.impl.endpoint.UserEndpoints;
 import com.snapbundle.model.context.IUser;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.context.User;
@@ -103,7 +103,13 @@ class UserClient extends AbstractUpdateableBaseClient<IUser> implements IUserCli
     @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
-        return create(instance, UserEndpoints.create());
+        try
+        {
+            return create(instance, UserEndpoints.create());
+        } catch (ServiceException e)
+        {
+            return e.toResponseEntity();
+        }
     }
 
     @Override

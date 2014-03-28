@@ -18,6 +18,7 @@
 package com.snapbundle.client.api;
 
 import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.base.Result;
 
 /**
  * Generalized exception that indicates the underlying platform web service call failed. In most instances, the
@@ -51,6 +52,17 @@ public class ServiceException extends Exception
     {
         this.code = code;
         this.hasCode = true;
+    }
+
+    public ResponseEntity toResponseEntity()
+    {
+        if (hasCode)
+        {
+            return new ResponseEntity.Builder(getCode(), getMessage()).build();
+        } else
+        {
+            return new ResponseEntity.Builder(Result.ERR_FAILURE.getCode(), getMessage()).build();
+        }
     }
 
     private ServiceException(String message)
