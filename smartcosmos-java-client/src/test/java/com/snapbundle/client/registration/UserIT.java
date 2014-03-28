@@ -58,7 +58,7 @@ public class UserIT
 
         ResponseEntity responseEntity = client.create(newUser);
 
-        System.out.println(responseEntity.getMessage());
+        System.out.printf("Code: %s, %s", responseEntity.getCode(), responseEntity.getMessage());
     }
 
     public static void main(String[] args) throws JSONException, ServiceException

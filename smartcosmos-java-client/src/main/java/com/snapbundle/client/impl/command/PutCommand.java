@@ -18,6 +18,7 @@
 package com.snapbundle.client.impl.command;
 
 import com.google.common.base.Preconditions;
+import com.snapbundle.Field;
 import com.snapbundle.client.api.ServerContext;
 import com.snapbundle.client.api.ServiceException;
 import com.snapbundle.client.impl.base.AbstractBaseClient;
@@ -31,6 +32,7 @@ import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,11 +67,31 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 
         try
         {
-            Representation result = service.put(new JsonRepresentation(inputJson));
-            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
-            JSONObject jsonResult = jsonRepresentation.getJsonObject();
+            JSONObject jsonResult;
+            try
+            {
+                Representation result = service.put(new JsonRepresentation(inputJson));
+                JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+                jsonResult = jsonRepresentation.getJsonObject();
 
-            response = JsonUtil.fromJson(jsonResult, clazz);
+                response = JsonUtil.fromJson(jsonResult, clazz);
+
+            } catch (ResourceException e)
+            {
+                if (e.getStatus().equals(Status.CLIENT_ERROR_CONFLICT))
+                {
+                    ResponseEntity entity = new ResponseEntity.Builder(
+                            Result.ERR_ALREADY_EXISTS.getCode(),
+                            String.format(Result.ERR_ALREADY_EXISTS.getFormattedMessage(), "user", inputJson.getString(Field.EMAIL_ADDRESS_FIELD)))
+                            .build();
+
+                    throw new ServiceException(entity);
+                } else
+                {
+                    LOGGER.error("Unexpected Resource Exception", e);
+                    throw new ServiceException(e);
+                }
+            }
 
             if (!service.getStatus().equals(Status.SUCCESS_CREATED))
             {
