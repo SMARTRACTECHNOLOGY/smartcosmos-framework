@@ -29,6 +29,9 @@ import org.json.JSONArray;
 
 import java.util.Collection;
 
+/**
+ * Upserts, deletes, or queries for {@link com.snapbundle.model.context.ITag} instances.
+ */
 public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBaseClient<ITag>
 {
     ResponseEntity assign(EntityReferenceType entityReferenceType, String referenceUrn, Collection<ITag> tag) throws ServiceException;

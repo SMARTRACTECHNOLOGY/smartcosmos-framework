@@ -18,13 +18,16 @@
 package com.snapbundle.client.object;
 
 import com.snapbundle.client.api.ServiceException;
-import com.snapbundle.client.impl.endpoint.ObjectEndpoints;
 import com.snapbundle.client.impl.IUpdateableBaseClient;
+import com.snapbundle.client.impl.endpoint.ObjectEndpoints;
 import com.snapbundle.model.context.IObject;
 import com.snapbundle.util.json.ViewType;
 
 import java.util.Collection;
 
+/**
+ * Defines or queries for {@link com.snapbundle.model.context.IObject} instances.
+ */
 public interface IObjectClient extends IUpdateableBaseClient<IObject>
 {
     /**

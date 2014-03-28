@@ -26,6 +26,9 @@ import com.snapbundle.util.json.ViewType;
 
 import java.util.Collection;
 
+/**
+ * Defines, deletes, or queries for {@link com.snapbundle.model.context.IRelationship} instances.
+ */
 public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship>, IDeleteableBaseClient<IRelationship>
 {
     Collection<IRelationship> findAllBetweenTwoEntities(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn) throws ServiceException;
