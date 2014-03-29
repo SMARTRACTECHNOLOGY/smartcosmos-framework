@@ -16,7 +16,7 @@
  */
 
 /**
- * <b>GO AWAY</b> this is a non-public implementation package that developers should avoid for all intents and purposes.
+ * <b>GO AWAY</b> non-public implementation package that developers should avoid for all intents and purposes.
  * It defines a collection of RESTful endpoints for each SnapBundle entity type, and includes a set of parameterized
  * URLs to ensure that the client classes in this library are using the correct number of parameters when constructing
  * their REST endpoint URL.

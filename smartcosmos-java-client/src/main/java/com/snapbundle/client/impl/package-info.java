@@ -16,7 +16,7 @@
  */
 
 /**
- * <b>GO AWAY</b> this is a non-public implementation package that developers should avoid for all intents and purposes.
+ * <b>GO AWAY</b> non-public implementation package that developers should avoid for all intents and purposes.
  * The package defines a collective set of CRUD interfaces driven off of either an explicit entity instance, e.g. an
  * instance of say {@link com.snapbundle.model.context.IObject}, or a more fluid and dynamic {@link org.json.JSONObject}
  * instance.
