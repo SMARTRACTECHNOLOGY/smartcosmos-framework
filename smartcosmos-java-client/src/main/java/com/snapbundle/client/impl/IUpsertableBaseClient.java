@@ -51,7 +51,7 @@ public interface IUpsertableBaseClient<T> extends IFindableBaseClient<T>
      * record if no matching system URN already exists. Use this method if you aren't sure what fields changed or if
      * you aren't concerned about network utilization.
      *
-     * @param instance
+     * @param instance entity instance
      */
     ResponseEntity upsert(T instance) throws ServiceException;
 

@@ -32,7 +32,7 @@ public interface IObjectAddressClient extends IUpdateableBaseClient<IObjectAddre
 {
     /**
      * Find a specific {@link com.snapbundle.model.context.IObject#getObjectUrn()} address using a case-sensitive
-     * exact match  using a {@link com.snapbundle.util.json.ViewType#Standard} view.
+     * exact match using a {@link com.snapbundle.util.json.ViewType#Standard} view.
      *
      * @param objectUrn Exact, case-sensitive object URN to locate
      * @param urn       Exact, case-sensitive system-assigned URN of the address record to locate
