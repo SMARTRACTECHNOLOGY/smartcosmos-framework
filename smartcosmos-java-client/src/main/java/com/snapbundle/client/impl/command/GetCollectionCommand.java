@@ -69,15 +69,10 @@ public class GetCollectionCommand<T> extends AbstractBaseClient implements IComm
             Representation result = service.get();
             JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
 
-            if (!service.getStatus().equals(Status.SUCCESS_OK))
+            if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
             {
-                JSONObject jsonResult = jsonRepresentation.getJsonObject();
-                ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-
-                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
-
-                throw new ServiceException(responseEntity);
-            } else
+                // No content - just let an empty array list be
+            } else if (service.getStatus().equals(Status.SUCCESS_OK))
             {
                 JSONArray jsonArray = jsonRepresentation.getJsonArray();
                 for (int i = 0; i < jsonArray.length(); i++)
@@ -86,6 +81,14 @@ public class GetCollectionCommand<T> extends AbstractBaseClient implements IComm
                     T instance = JsonUtil.fromJson(curObject, clazz);
                     matches.add(instance);
                 }
+            } else
+            {
+                JSONObject jsonResult = jsonRepresentation.getJsonObject();
+                ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+
+                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
+
+                throw new ServiceException(responseEntity);
             }
 
         } catch (JSONException | IOException e)
