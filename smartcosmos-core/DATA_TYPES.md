@@ -1,16 +1,15 @@
 # SnapBundle™ Data Types
-The SnapBundle™ platform consists of three distinct categories of data types:
+The SnapBundle™ platform consists of two distinct categories of data types:
 
-* [Primary](#primary)
-* [Secondary](#secondary)
-
-The **Primary** types (both foundational and supporting) exist on their own. 
-
-The **Secondary** types cannot exist on their own. In object oriented parlance, they cannot be an _is-a_ and are relegated to being composed inside of a primary type.
-
+* [Primary](#primary) (both foundational and supporting) exist on their own
+* [Secondary](#secondary) cannot exist on their own. In object oriented parlance, they cannot be an _is-a_ and are
+relegated to being composed inside of a primary type.
 
 ## [Primary Types](id:primary)
-The SnapBundle™ object model consists of a small number of primary data types. A primary data type is a _first class citizen_ in the SnapBundle™ platform. These types have the ability to stand on their own. Primary types are sub-categorized as _foundational_ or _supporting_. Again, all primary types can stand on their own. The primary types include:
+The SnapBundle™ object model consists of a small number of primary data types. A primary data type is a _first class
+citizen_ in the SnapBundle™ platform. These types have the ability to stand on their own. Primary types are
+sub-categorized as _foundational_ or _supporting_. Again, all primary types can stand on their own. The primary types
+include:
 
 ### Foundational
 * [Object](OBJECT.md "Object")
@@ -23,10 +22,15 @@ The SnapBundle™ object model consists of a small number of primary data types.
 * [File](FILE.md "File")
 * [GeoRectification](GEORECTIFICATION.MD "GeoRectification")
 
-There is no physical limitation on how many instances can be created, though additional service fees may be applied to your account based on your subscription plan.
+There is no physical limitation on how many instances can be created, though additional service fees may be applied to
+your account based on your subscription plan.
 
 ## [Secondary Types](id:secondary)
-Each of the data types defined in this section are secondary types that are entirely contained within a primary data type or directly refer to a pre-existing primary data type entity; they cannot stand on their own. For example, `SecurityRole` is _not_ a primary data type; it only exists within the context of a User primary data type. Similarly, an `ObjectAddress`  is _not_ a primary data type because it must be associated with an existing `Obect` at creation time. (In OO parlance, an Object "has-a" Object Address)
+Each of the data types defined in this section are secondary types that are entirely contained within a primary data
+type or directly refer to a pre-existing primary data type entity; they cannot stand on their own. For example,
+`SecurityRole` is _not_ a primary data type; it only exists within the context of a User primary data type. Similarly,
+an `ObjectAddress`  is _not_ a primary data type because it must be associated with an existing `Obect` at creation
+time. (In OO parlance, an Object "has-a" Object Address)
 
 * [EntityReferenceType](#ert)
 * [Object Address](OBJECT_ADDRESS.md "ObjectAddress")

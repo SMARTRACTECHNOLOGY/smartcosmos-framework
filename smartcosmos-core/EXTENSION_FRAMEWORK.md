@@ -1,97 +1,21 @@
 # Extension Framework
-SnapBundle™ Extensions provide an open means for writing value-add services atop of the SnapBundle™ platform. An
-Extension could be authored by a third-party, or by the account owner. The SnapBundle™ Extension mechanism is built
-around a RESTful interface using JavaScript Object Notation (JSON) messages, which means that virtually any programming
-language or operating system with network access can be used.
-
 The SnapBundle™ Extension security model uses the open standard OAuth 2.0 specification. For a detailed explanation of
 the SnapBundle™ OAuth security model, please refer to the SnapBundle™ OAuth 2.0 Guide _once you've finished setting up
-your Extension, as defined here._
+your Extension._
 
 ## Extension
-The SnapBundle™ Extension is a declaration of an external actor that may be granted access to one or more SnapBundle™ Accounts where access is restricted to a finite set of permissions.
-
-## Extension Fields
-
-Field | Data Type | Required | Can Update | Serialization Level | Default Value
------------- | ------------- | ------------ | ------------ | ------------ | ------------
-urn | String  | true | false | Minimum | Generated
-lastModifiedTimestamp | long   | true | false | Standard | Generated
-moniker | String  | false | true | Standard | null
-account | IAccount  | true | fase | Full | Generated
-name | String  | true | true | Minimum | 
-description | String  | false | true | Standard | 
-activeFlag | Boolean  | true | false | Standard  | 
-supportEmail | String | false | true | Published |
-webSiteUrl | String | false | true | Published |
-clientId | String | true | false | Full | Generated |
-clientSecret | String | true | false | Full | Generated |
-redirectUrl | String | true | true | Full |
-appCatalogUrl | String | true | false | Published | Generated
-longDescription | String | false | true | Full |
-extensionType | ExtensionType | true | true | Published |
-
-The `webSiteUrl` is the URL where an Administrator User will be directed if they want to subscribe to your Extension point. Generally, this page serves as the gateway for the User to initiate an OAuth 2 authentication process authorizing your Extension access to their data. If your Extensions requires a paid subscription, etc., then you should use this URL to solicit all required information from the User before initiating the OAuth 2 authentication process.
-
-In contrast, the `redirectUrl` is used explicitly during the OAuth 2 authentication process. Unlike the `webSiteUrl` which is intended to be User facing, the `redirectUrl` is expected to be an endpoint capable of processing the bearer token, token expiration timestamp, and the refresh token _in addition to confirming with the User that registration has completed successfully._
-
-The `clientId` and the `clientSecret` conceptually represent your Extension's username and password when performing an OAuth 2 handshake.
- 
-## Extension Endpoints
-
-Endpoint | Supported HTTP Methods | Events Generated
------------- | ------------- | ------------
-/admin/extensions | PUT, POST  | ExtensionActivated, ExtensionUpdated, ExtensionDeactivate
-/extensions/{urn} | GET, DELETE | TokenRevocation, ExtensionDeleted 
+The SnapBundle™ Extension is a declaration of an external actor that may be granted access to one or more SnapBundle™
+Accounts where access is restricted to a finite set of permissions.
 
 ##Extension Permissions
-Extension authorization is managed using the OAuth 2.0 `scope` concept. As such, an extension declares what permissions it is seeking during the OAuth 2.0 handshake. If the user authorizes the scopes requested by the extension, then the extension has those permissions until the token is either revoked or permanently expires.
+Extension authorization is managed using the OAuth 2.0 `scope` concept. As such, an extension declares what permissions
+it is seeking during the OAuth 2.0 handshake. If the user authorizes the scopes requested by the extension, then the
+extension has those permissions until the token is either revoked or permanently expires.
 
-Review the [Permission Types](DATA_TYPES.md#pt "Permission Type") datatype for a listing of available scope names.
-
-
-## Sample Script for Extension Definnition
-
-#### Define a New Extension
-**curl** https://snapbundle.tagdynamics.net/v1/admin/extensions \  
--u them@bar.com:password123 \  
--d '{"name" : "Event Stream Extension","redirectUrl" : "https://snapbundle.tagdynamics.net/restlet/registration/complete","shortDescription" : "short descr","extensionType" : "Reporting"}' \  
--H "Content-Type:application/json" \  
--X PUT
-
-```
-{
-   "urn" : "urn:uuid:bc834586-4778-4c39-89f8-55e031dc6043",
-   "clientId" : "973d6f32bcd2422a813b237e171d3941",
-   "clientSecret" : "a46d69bcdc3c48d5a723ab7d5f754a84",
-   "redirectUri" : "https://snapbundle.tagdynamics.net/extension/registration/complete"
-}
-
-```
-
-#### Assign EventStream Permission to Extension
-curl https://stage.tagdynamics.net/v1/admin/extensions/urn:uuid:bc834586-4778-4c39-89f8-55e031dc6043/permissions \  
--u them@bar.com:password123 \  
--d '[{ "permissionType" : "EventStream" }]' \  
--H "Content-Type:application/json" \  
--X PUT  
-
-```
-{
-   "result" : 1,
-   "message" : "Permissions Assigned: 1"
-}
-```
-
-#### Activate the Developer License on the Account for Testing
-**curl** https://snapbundle.tagdynamics.net/v1/admin/account/configure/developer/true \  
--u them@bar.com:password123 \  
--H "Content-Type:application/json" \  
--X POST  
+Review the [Permission Types](DATA_TYPES.md#pt "Permission Type") data types for a listing of available scope names.
 
 #### Setup an HTTPS Endpoint for the Event Sink
 Consider using the sample web application at <https://github.com/snapbundle/samples/> for this step until you are comfortable with the architecture of an event sink.
-
 
 #### Define the Extension Integration Endpoint for Event Stream Delivery
 **curl** https://snapbundle.tagdynamics.net/v1/admin/extensions/urn:uuid:bc834586-4778-4c39-89f8-55e031dc6043/integration/enroll \  
