@@ -51,7 +51,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
 
         private EntityReferenceType entityReferenceType;
 
-        private String referenceURN;
+        private String referenceUrn;
 
         public MetadataObjectBuilder(MetadataDataType type)
         {
@@ -72,7 +72,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
 
         public MetadataObjectBuilder setReferenceUrn(String urn)
         {
-            this.referenceURN = urn;
+            this.referenceUrn = urn;
             return this;
         }
 
@@ -165,7 +165,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
             Metadata object = new Metadata();
             object.dataType = this.type;
             object.account = this.account;
-            object.referenceUrn = this.referenceURN;
+            object.referenceUrn = this.referenceUrn;
             object.entityReferenceType = this.entityReferenceType;
             object.key = this.key;
             object.rawValue = this.rawValue;
