@@ -53,25 +53,25 @@ public interface IInteractionClient extends ICreateableBaseClient<IObjectInterac
 
     /**
      * Lists all known object interactions under the authenticated account with an
-     * {@link com.snapbundle.model.context.IObject#getObjectUrn()} that starts with a case-sensitive
-     * match to the specified objectUrnLike parameter using a
+     * {@link com.snapbundle.model.context.IObject#getObjectUrn()} that exactly
+     * matches to the specified objectUrn parameter using a
      * {@link com.snapbundle.util.json.ViewType#Standard} view.
      *
-     * @param objectUrnLike Case-sensitive object URN like pattern (do not append any special characters like % or * to the end)
+     * @param objectUrn Object URN
      * @return Non-null (but possibly empty) collection of object interaction definitions
      * @throws ServiceException
      */
-    Collection<IObjectInteraction> findByObjectUrnLike(String objectUrnLike) throws ServiceException;
+    Collection<IObjectInteraction> findByObjectUrn(String objectUrn) throws ServiceException;
 
     /**
      * Lists all known object interactions under the authenticated account with an
-     * {@link com.snapbundle.model.context.IObject#getObjectUrn()} that starts with a case-sensitive
-     * match to the specified objectUrnLike parameter using the specified field verbosity.
+     * {@link com.snapbundle.model.context.IObject#getObjectUrn()} that exactly
+     * matches to the specified objectUrn parameter using the specified field verbosity.
      *
-     * @param objectUrnLike Case-sensitive object URN like pattern (do not append any special characters like % or * to the end)
+     * @param objectUrn Object URN
      * @param viewType      Field verbosity
      * @return Non-null (but possibly empty) collection of object interaction definitions
      * @throws ServiceException
      */
-    Collection<IObjectInteraction> findByObjectUrnLike(String objectUrnLike, ViewType viewType) throws ServiceException;
+    Collection<IObjectInteraction> findByObjectUrn(String objectUrn, ViewType viewType) throws ServiceException;
 }

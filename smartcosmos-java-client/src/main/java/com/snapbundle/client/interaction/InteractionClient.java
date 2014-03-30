@@ -57,10 +57,10 @@ class InteractionClient extends AbstractCreateableBaseClient<IObjectInteraction>
     }
 
     @Override
-    public Collection<IObjectInteraction> findByObjectUrnLike(String objectUrnLike, ViewType viewType) throws ServiceException
+    public Collection<IObjectInteraction> findByObjectUrn(String objectUrn, ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<IObjectInteraction> command = new GetCollectionCommand<>(context);
-        return command.call(ObjectInteraction.class, InteractionEndpoints.findByObjectUrnLike(objectUrnLike, viewType));
+        return command.call(ObjectInteraction.class, InteractionEndpoints.findByObjectUrn(objectUrn, viewType));
     }
 
     @Override
@@ -70,8 +70,8 @@ class InteractionClient extends AbstractCreateableBaseClient<IObjectInteraction>
     }
 
     @Override
-    public Collection<IObjectInteraction> findByObjectUrnLike(String objectUrnLike) throws ServiceException
+    public Collection<IObjectInteraction> findByObjectUrn(String objectUrn) throws ServiceException
     {
-        return findByObjectUrnLike(objectUrnLike, ViewType.Standard);
+        return findByObjectUrn(objectUrn, ViewType.Standard);
     }
 }
