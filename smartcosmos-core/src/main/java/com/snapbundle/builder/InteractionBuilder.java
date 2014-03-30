@@ -18,6 +18,7 @@
 package com.snapbundle.builder;
 
 import com.google.common.base.Preconditions;
+import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IObjectInteraction;
 import com.snapbundle.model.context.IObjectInteractionSession;
 import com.snapbundle.pojo.context.ObjectInteraction;
@@ -39,6 +40,12 @@ public final class InteractionBuilder extends AbstractReferentialBuilder<IObject
     public InteractionBuilder setObjectInteractionSession(IObjectInteractionSession session)
     {
         instance.setObjectInteractionSession(session);
+        return this;
+    }
+
+    public InteractionBuilder setObject(IObject interactedObject)
+    {
+        instance.setObject(interactedObject);
         return this;
     }
 
