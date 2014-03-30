@@ -31,6 +31,12 @@ public final class RelationshipBuilder extends AbstractMonikerBuilder<IRelations
         instance.setReferenceUrn(referenceUrn);
     }
 
+    public RelationshipBuilder setType(String type)
+    {
+        instance.setType(type);
+        return this;
+    }
+
     public RelationshipBuilder setRelatedReferenceUrn(String urn)
     {
         Preconditions.checkNotNull(urn);
