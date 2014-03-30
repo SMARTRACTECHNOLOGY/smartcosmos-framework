@@ -20,9 +20,13 @@ package com.snapbundle.pojo.base;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.snapbundle.util.json.JsonGenerationView;
 import com.snapbundle.util.json.JsonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ResponseEntity
 {
+    private static final Logger LOG = LoggerFactory.getLogger(ResponseEntity.class);
+
     @JsonView(JsonGenerationView.Minimum.class)
     private int code;
 
@@ -87,5 +91,10 @@ public class ResponseEntity
         re.setCode(result.getCode());
 
         return JsonUtil.toJson(re);
+    }
+
+    public void log()
+    {
+        LOG.info("Response Code: {}, Response Message: {}", getCode(), getMessage());
     }
 }
