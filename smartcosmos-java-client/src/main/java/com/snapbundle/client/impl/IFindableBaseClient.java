@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.impl;
 
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.util.json.ViewType;
 
 /**
@@ -47,7 +47,7 @@ public interface IFindableBaseClient<T>
      *
      * @param urn System generated URN assigned to the entity at creation time
      * @return Instance of T with all {@link com.snapbundle.util.json.ViewType#Standard} fields populated
-     * @throws com.snapbundle.client.api.ServiceException if no matching URN exists
+     * @throws com.snapbundle.client.connectivity.ServiceException if no matching URN exists
      */
     T findByUrn(String urn) throws ServiceException;
 

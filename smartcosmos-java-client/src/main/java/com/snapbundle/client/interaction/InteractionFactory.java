@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.interaction;
 
-import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.connectivity.ServerContext;
 
 public final class InteractionFactory
 {

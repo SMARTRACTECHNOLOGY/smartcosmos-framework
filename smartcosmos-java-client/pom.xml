@@ -162,8 +162,8 @@
                                     </packages>
                                 </group>
                                 <group>
-                                    <title>Server Connectivity</title>
-                                    <packages>com.snapbundle.client.api</packages>
+                                    <title>Connectivity</title>
+                                    <packages>com.snapbundle.client.connectivity</packages>
                                 </group>
                                 <group>
                                     <title>Private Implementation</title>

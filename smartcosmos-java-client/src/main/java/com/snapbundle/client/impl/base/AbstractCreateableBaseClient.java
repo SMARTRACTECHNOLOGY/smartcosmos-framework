@@ -17,8 +17,8 @@
 
 package com.snapbundle.client.impl.base;
 
-import com.snapbundle.client.api.ServerContext;
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServerContext;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.client.impl.ICreateableBaseClient;
 import com.snapbundle.client.impl.command.PutCommand;
 import com.snapbundle.pojo.base.ResponseEntity;

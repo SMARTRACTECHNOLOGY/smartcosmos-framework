@@ -17,6 +17,6 @@
 
 /**
  * {@link com.snapbundle.model.context.IDevice} factory that can create a client instance with
- * {@link com.snapbundle.client.device.DeviceFactory#createClient(com.snapbundle.client.api.ServerContext)}.
+ * {@link com.snapbundle.client.device.DeviceFactory#createClient(com.snapbundle.client.connectivity.ServerContext)}.
  */
 package com.snapbundle.client.device;

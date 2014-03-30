@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.file;
 
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.client.impl.ICreateableBaseClient;
 import com.snapbundle.client.impl.IDeleteableBaseClient;
 import com.snapbundle.model.base.EntityReferenceType;
@@ -94,7 +94,7 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      *            is associated with
      * @return Non-null input stream
      * @throws IOException
-     * @throws com.snapbundle.client.api.ServiceException to indicate if the file has no content or the URN specified
+     * @throws com.snapbundle.client.connectivity.ServiceException to indicate if the file has no content or the URN specified
      *                                                    cannot be located
      */
     InputStream getFileContents(String urn) throws ServiceException, IOException;

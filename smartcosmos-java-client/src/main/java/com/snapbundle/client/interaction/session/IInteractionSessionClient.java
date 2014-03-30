@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.interaction.session;
 
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.client.impl.IUpdateableBaseClient;
 import com.snapbundle.model.context.IObjectInteractionSession;
 import com.snapbundle.util.json.ViewType;

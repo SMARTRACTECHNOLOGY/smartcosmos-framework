@@ -17,8 +17,8 @@
 
 package com.snapbundle.client.interaction;
 
-import com.snapbundle.client.api.ServerContext;
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServerContext;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.client.impl.base.AbstractCreateableBaseClient;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.client.impl.endpoint.InteractionEndpoints;

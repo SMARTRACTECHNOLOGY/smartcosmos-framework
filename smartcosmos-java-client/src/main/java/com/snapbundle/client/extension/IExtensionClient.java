@@ -19,7 +19,7 @@ package com.snapbundle.client.extension;
 
 import com.snapbundle.client.impl.IDeleteableBaseClient;
 import com.snapbundle.client.impl.IUpdateableBaseClient;
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.model.extension.IExtension;
 import com.snapbundle.util.json.ViewType;
 

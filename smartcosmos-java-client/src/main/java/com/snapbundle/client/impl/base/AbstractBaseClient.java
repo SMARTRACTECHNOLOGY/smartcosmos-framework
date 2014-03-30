@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.impl.base;
 
-import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.connectivity.ServerContext;
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;

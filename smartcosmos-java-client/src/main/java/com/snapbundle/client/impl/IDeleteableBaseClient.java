@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.impl;
 
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServiceException;
 import org.json.JSONObject;
 
 /**
@@ -44,7 +44,7 @@ public interface IDeleteableBaseClient<T>
      * Removes an existing instance, if it exists.
      *
      * @param instance
-     * @throws com.snapbundle.client.api.ServiceException
+     * @throws com.snapbundle.client.connectivity.ServiceException
      */
     void delete(T instance) throws ServiceException;
 

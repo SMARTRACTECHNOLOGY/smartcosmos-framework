@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.registration;
 
-import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.connectivity.ServerContext;
 
 /**
  * Registration Client Factory.

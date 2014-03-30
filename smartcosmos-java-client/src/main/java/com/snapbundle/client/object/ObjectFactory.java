@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.object;
 
-import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.connectivity.ServerContext;
 
 /**
  * Object Client Factory.

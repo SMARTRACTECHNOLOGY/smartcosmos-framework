@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.relationship;
 
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.client.impl.IDeleteableBaseClient;
 import com.snapbundle.client.impl.IUpsertableBaseClient;
 import com.snapbundle.model.base.EntityReferenceType;

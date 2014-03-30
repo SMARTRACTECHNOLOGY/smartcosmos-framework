@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.impl;
 
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.pojo.base.ResponseEntity;
 import org.json.JSONObject;
 
@@ -54,7 +54,7 @@ public interface ICreateableBaseClient<T> extends IFindableBaseClient<T>
      * @return response entity that contains the system-assigned URN in
      * {@link com.snapbundle.pojo.base.ResponseEntity#getMessage()} when the
      * {@link com.snapbundle.pojo.base.ResponseEntity#getCode()} equals {@link com.snapbundle.pojo.base.Result#OK}
-     * @throws com.snapbundle.client.api.ServiceException
+     * @throws com.snapbundle.client.connectivity.ServiceException
      */
     ResponseEntity create(T instance) throws ServiceException;
 

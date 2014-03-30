@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.user;
 
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.client.impl.IUpdateableBaseClient;
 import com.snapbundle.model.context.IUser;
 import com.snapbundle.util.json.ViewType;

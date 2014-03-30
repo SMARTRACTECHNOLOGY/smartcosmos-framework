@@ -18,8 +18,8 @@
 package com.snapbundle.client.registration;
 
 import com.snapbundle.Field;
-import com.snapbundle.client.api.ServerContext;
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServerContext;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.client.impl.endpoint.RegistrationEndpoints;
 import com.snapbundle.client.impl.base.AbstractBaseClient;
 import com.snapbundle.pojo.base.ResponseEntity;

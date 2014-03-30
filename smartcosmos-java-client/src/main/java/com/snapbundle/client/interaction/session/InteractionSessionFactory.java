@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.interaction.session;
 
-import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.connectivity.ServerContext;
 
 public final class InteractionSessionFactory
 {

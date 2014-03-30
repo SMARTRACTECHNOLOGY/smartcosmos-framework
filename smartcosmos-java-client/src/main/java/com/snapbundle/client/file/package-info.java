@@ -17,6 +17,6 @@
 
 /**
  * {@link com.snapbundle.model.context.IFile} factory that can create a client instance with
- * {@link com.snapbundle.client.file.FileFactory#createClient(com.snapbundle.client.api.ServerContext)}.
+ * {@link com.snapbundle.client.file.FileFactory#createClient(com.snapbundle.client.connectivity.ServerContext)}.
  */
 package com.snapbundle.client.file;

@@ -19,8 +19,8 @@ package com.snapbundle.client.metadata;
 
 import com.google.common.base.Preconditions;
 import com.snapbundle.Field;
-import com.snapbundle.client.api.ServerContext;
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServerContext;
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.client.impl.endpoint.MetadataEndpoints;
 import com.snapbundle.client.impl.base.AbstractUpsertableBaseClient;
 import com.snapbundle.client.impl.command.DeleteCommand;

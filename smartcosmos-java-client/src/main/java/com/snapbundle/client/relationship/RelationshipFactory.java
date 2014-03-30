@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.relationship;
 
-import com.snapbundle.client.api.ServerContext;
+import com.snapbundle.client.connectivity.ServerContext;
 
 /**
  * Relationship Client Factory

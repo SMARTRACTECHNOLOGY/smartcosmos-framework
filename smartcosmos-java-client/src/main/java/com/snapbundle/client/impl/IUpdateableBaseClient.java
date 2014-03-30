@@ -17,7 +17,7 @@
 
 package com.snapbundle.client.impl;
 
-import com.snapbundle.client.api.ServiceException;
+import com.snapbundle.client.connectivity.ServiceException;
 import org.json.JSONObject;
 
 /**

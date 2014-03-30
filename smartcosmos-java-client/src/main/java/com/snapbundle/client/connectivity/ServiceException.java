@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.snapbundle.client.api;
+package com.snapbundle.client.connectivity;
 
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.base.Result;

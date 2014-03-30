@@ -17,6 +17,6 @@
 
 /**
  * {@link com.snapbundle.model.extension.IExtension} factory that can create a client instance with
- * {@link com.snapbundle.client.extension.ExtensionFactory#createClient(com.snapbundle.client.api.ServerContext)}.
+ * {@link com.snapbundle.client.extension.ExtensionFactory#createClient(com.snapbundle.client.connectivity.ServerContext)}.
  */
 package com.snapbundle.client.extension;

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.snapbundle.client.api;
+package com.snapbundle.client.connectivity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

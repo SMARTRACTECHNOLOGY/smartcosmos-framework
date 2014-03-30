@@ -17,6 +17,6 @@
 
 /**
  * {@link com.snapbundle.model.context.IAccount} factory that can create a client instance with
- * {@link com.snapbundle.client.account.AccountFactory#createClient(com.snapbundle.client.api.ServerContext)}.
+ * {@link com.snapbundle.client.account.AccountFactory#createClient(com.snapbundle.client.connectivity.ServerContext)}.
  */
 package com.snapbundle.client.account;
