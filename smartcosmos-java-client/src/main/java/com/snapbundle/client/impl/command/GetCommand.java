@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Collection;
 
 public class GetCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 {
@@ -50,9 +51,9 @@ public class GetCommand<T> extends AbstractBaseClient implements ICommand<T, T>
     }
 
     @Override
-    public T call(Class<? extends T> clazz, String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
     {
-        throw new UnsupportedOperationException("GET command doesn't accept input JSON");
+        throw new UnsupportedOperationException("GET command doesn't accept input as a JSONArray");
     }
 
     @Override

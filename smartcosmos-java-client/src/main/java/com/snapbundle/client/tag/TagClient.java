@@ -21,12 +21,12 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.Field;
 import com.snapbundle.client.connectivity.ServerContext;
 import com.snapbundle.client.connectivity.ServiceException;
-import com.snapbundle.client.impl.endpoint.TagEndpoints;
 import com.snapbundle.client.impl.base.AbstractUpsertableBaseClient;
 import com.snapbundle.client.impl.command.DeleteCommand;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.client.impl.command.GetCommand;
 import com.snapbundle.client.impl.command.PutCommand;
+import com.snapbundle.client.impl.endpoint.TagEndpoints;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.ITag;
 import com.snapbundle.model.context.ITagAssignment;
@@ -91,7 +91,7 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public ResponseEntity assign(EntityReferenceType entityReferenceType, String referenceUrn, Collection<ITag> tags) throws ServiceException
+    public Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, Collection<ITag> tags) throws ServiceException
     {
         JSONArray array = new JSONArray();
 
@@ -113,11 +113,11 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public ResponseEntity assign(EntityReferenceType entityReferenceType, String referenceUrn, JSONArray jsonArray) throws ServiceException
+    public Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, JSONArray jsonArray) throws ServiceException
     {
         // PUT
         PutCommand<ResponseEntity> command = new PutCommand<>(context);
-        return command.call(ResponseEntity.class, TagEndpoints.assign(entityReferenceType, referenceUrn), jsonArray);
+        return command.call(TagEndpoints.assign(entityReferenceType, referenceUrn), jsonArray);
     }
 
     @Override

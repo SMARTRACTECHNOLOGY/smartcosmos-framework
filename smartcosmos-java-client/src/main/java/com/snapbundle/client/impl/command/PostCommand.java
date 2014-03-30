@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import static com.snapbundle.Field.URN_FIELD;
 
@@ -110,33 +111,8 @@ public class PostCommand extends AbstractBaseClient implements ICommand<Object, 
     }
 
     @Override
-    public Object call(Class<?> clazz, String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
     {
-        ClientResource service = createClient(path);
-
-        try
-        {
-            Representation result = service.post(new JsonRepresentation(inputJson));
-
-            if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
-            {
-                LOGGER.info("Successfully updated entity at path {}", path);
-            } else
-            {
-                JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
-                JSONObject jsonResult = jsonRepresentation.getJsonObject();
-
-                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
-                ResponseEntity response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-                throw new ServiceException(response);
-            }
-
-        } catch (JSONException | IOException e)
-        {
-            LOGGER.error("Unexpected Exception", e);
-            throw new ServiceException(e);
-        }
-
-        return null;
+        throw new UnsupportedOperationException("POST command doesn't accept input as a JSONArray");
     }
 }

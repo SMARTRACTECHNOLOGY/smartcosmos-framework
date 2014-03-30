@@ -18,13 +18,18 @@
 package com.snapbundle.client.impl.base;
 
 import com.snapbundle.client.connectivity.ServerContext;
+import com.snapbundle.client.connectivity.ServiceException;
+import com.snapbundle.pojo.base.ResponseEntity;
+import org.json.JSONArray;
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractBaseClient
+import java.util.Collection;
+
+public abstract class AbstractBaseClient
 {
     private final static Logger LOGGER = LoggerFactory.getLogger(AbstractBaseClient.class);
 

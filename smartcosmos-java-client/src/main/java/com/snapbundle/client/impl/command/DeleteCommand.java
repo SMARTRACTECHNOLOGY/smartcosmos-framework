@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Collection;
 
 public class DeleteCommand extends AbstractBaseClient implements ICommand<Object, Object>
 {
@@ -81,9 +82,9 @@ public class DeleteCommand extends AbstractBaseClient implements ICommand<Object
     }
 
     @Override
-    public Object call(Class<?> clazz, String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
     {
-        throw new UnsupportedOperationException("DELETE command must not have inputJson");
+        throw new UnsupportedOperationException("DELETE command doesn't accept input as a JSONArray");
     }
 }
 

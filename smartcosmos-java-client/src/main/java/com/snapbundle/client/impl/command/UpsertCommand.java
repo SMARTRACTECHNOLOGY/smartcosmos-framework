@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import static com.snapbundle.Field.CODE_FIELD;
 import static com.snapbundle.Field.MESSAGE_FIELD;
@@ -55,9 +56,9 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
     }
 
     @Override
-    public T call(Class<? extends T> clazz, String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
     {
-        throw new UnsupportedOperationException("UPSERT command doesn't support JSONArray");
+        throw new UnsupportedOperationException("UPSERT command doesn't accept input as a JSONArray");
     }
 
     @Override

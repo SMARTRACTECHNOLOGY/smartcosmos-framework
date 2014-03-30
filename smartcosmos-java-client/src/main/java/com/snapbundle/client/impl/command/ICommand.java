@@ -18,8 +18,11 @@
 package com.snapbundle.client.impl.command;
 
 import com.snapbundle.client.connectivity.ServiceException;
+import com.snapbundle.pojo.base.ResponseEntity;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.Collection;
 
 public interface ICommand<T, E>
 {
@@ -27,5 +30,5 @@ public interface ICommand<T, E>
 
     T call(Class<? extends E> clazz, String path, JSONObject inputJson) throws ServiceException;
 
-    T call(Class<? extends E> clazz, String path, JSONArray inputJson) throws ServiceException;
+    Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException;
 }

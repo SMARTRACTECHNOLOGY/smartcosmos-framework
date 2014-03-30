@@ -43,10 +43,10 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param entityReferenceType Entity reference type
      * @param referenceUrn        Reference URN
      * @param tags                Collection of tags to assign to the indicated entity
-     * @return response entity indicating the success (or failure) of the assignment
+     * @return response entity indicating the success (or failure) of each assignment
      * @throws ServiceException
      */
-    ResponseEntity assign(EntityReferenceType entityReferenceType, String referenceUrn, Collection<ITag> tags) throws ServiceException;
+    Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, Collection<ITag> tags) throws ServiceException;
 
     /**
      * Assigns the collection of tags to the specified entity indicated by the entity reference type and reference URN.
@@ -57,10 +57,10 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param referenceUrn        Reference URN
      * @param jsonArray           Collection of {@link com.snapbundle.model.context.ITag#getName()} values to assign to
      *                            the indicated entity
-     * @return response entity indicating the success (or failure) of the assignment
+     * @return response entity indicating the success (or failure) of each assignment
      * @throws ServiceException
      */
-    ResponseEntity assign(EntityReferenceType entityReferenceType, String referenceUrn, JSONArray jsonArray) throws ServiceException;
+    Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, JSONArray jsonArray) throws ServiceException;
 
     /**
      * Retrieves a collection of {@link com.snapbundle.model.context.ITagAssignment} records that represent the tags

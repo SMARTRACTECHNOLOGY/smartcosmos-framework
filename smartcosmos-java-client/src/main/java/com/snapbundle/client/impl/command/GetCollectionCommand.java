@@ -52,9 +52,9 @@ public class GetCollectionCommand<T> extends AbstractBaseClient implements IComm
     }
 
     @Override
-    public Collection<T> call(Class<? extends T> clazz, String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
     {
-        throw new UnsupportedOperationException("GET command doesn't accept input JSON");
+        throw new UnsupportedOperationException("GET command doesn't accept input as a JSONArray");
     }
 
     @Override

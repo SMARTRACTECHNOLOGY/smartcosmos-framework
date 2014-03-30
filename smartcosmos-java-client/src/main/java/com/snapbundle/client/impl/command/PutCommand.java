@@ -37,6 +37,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static com.snapbundle.Field.CODE_FIELD;
 import static com.snapbundle.Field.MESSAGE_FIELD;
@@ -138,9 +140,9 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
     }
 
     @Override
-    public T call(Class<? extends T> clazz, String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
     {
-        T response;
+        Collection<ResponseEntity> response = new ArrayList<>();
 
         Preconditions.checkNotNull(inputJson);
 
@@ -150,14 +152,12 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
         {
             Representation result = service.put(new JsonRepresentation(inputJson));
             JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
-            JSONObject jsonResult = jsonRepresentation.getJsonObject();
 
-            response = JsonUtil.fromJson(jsonResult, clazz);
-
-            if (!service.getStatus().equals(Status.SUCCESS_CREATED))
+            if (!service.getStatus().equals(Status.SUCCESS_OK))
             {
                 LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
 
+                JSONObject jsonResult = jsonRepresentation.getJsonObject();
                 try
                 {
                     if (jsonResult.has(CODE_FIELD) && jsonResult.has(MESSAGE_FIELD))
@@ -178,7 +178,19 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                 }
             } else
             {
-                LOGGER.debug(((ResponseEntity) response).getMessage());
+                JSONArray jsonResult = jsonRepresentation.getJsonArray();
+
+                for (int i = 0; i < jsonResult.length(); i++)
+                {
+                    JSONObject jsonObject = jsonResult.getJSONObject(i);
+
+                    ResponseEntity responseEntity = new ResponseEntity();
+                    responseEntity.setCode(jsonObject.getInt(CODE_FIELD));
+                    responseEntity.setMessage(jsonObject.getString(MESSAGE_FIELD));
+
+                    response.add(responseEntity);
+
+                }
             }
 
         } catch (JSONException | IOException e)
