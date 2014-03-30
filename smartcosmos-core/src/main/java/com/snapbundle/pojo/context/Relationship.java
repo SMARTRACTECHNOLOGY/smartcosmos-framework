@@ -30,7 +30,7 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
     protected EntityReferenceType relatedEntityReferenceType;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected String relatedReferenceURN;
+    protected String relatedReferenceUrn;
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected String type;
@@ -51,13 +51,13 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
     @Override
     public String getRelatedReferenceUrn()
     {
-        return relatedReferenceURN;
+        return relatedReferenceUrn;
     }
 
     @Override
     public void setRelatedReferenceUrn(String urn)
     {
-        this.relatedReferenceURN = urn;
+        this.relatedReferenceUrn = urn;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
         Relationship that = (Relationship) o;
 
         if (relatedEntityReferenceType != that.relatedEntityReferenceType) return false;
-        if (!relatedReferenceURN.equals(that.relatedReferenceURN)) return false;
+        if (!relatedReferenceUrn.equals(that.relatedReferenceUrn)) return false;
         if (!type.equals(that.type)) return false;
 
         return true;
@@ -93,7 +93,7 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
     {
         int result = super.hashCode();
         result = 31 * result + relatedEntityReferenceType.hashCode();
-        result = 31 * result + relatedReferenceURN.hashCode();
+        result = 31 * result + relatedReferenceUrn.hashCode();
         result = 31 * result + type.hashCode();
         return result;
     }
