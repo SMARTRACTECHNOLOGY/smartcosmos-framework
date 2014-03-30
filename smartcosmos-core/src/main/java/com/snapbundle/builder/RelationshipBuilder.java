@@ -48,6 +48,7 @@ public final class RelationshipBuilder extends AbstractMonikerBuilder<IRelations
     @Override
     protected void onValidate()
     {
+        Preconditions.checkNotNull(instance.getType(), "type must not be null");
         Preconditions.checkNotNull(instance.getReferenceUrn(), "reference urn must not be null");
         Preconditions.checkNotNull(instance.getRelatedReferenceUrn(), "related reference urn must not be null");
         Preconditions.checkNotNull(instance.getEntityReferenceType(), "entity reference type must not be null");
