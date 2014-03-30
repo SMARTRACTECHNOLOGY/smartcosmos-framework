@@ -39,7 +39,7 @@ public class InteractionSessionBuilder extends AbstractNamedObjectBuilder<IObjec
     protected void onValidate()
     {
         Preconditions.checkNotNull(instance.getType(), "type must not be null");
-        Preconditions.checkNotNull(instance.getType(), "name must not be null");
+        Preconditions.checkNotNull(instance.getName(), "name must not be null");
         Preconditions.checkState(instance.getStartTimestamp() > 0, "start timestamp must be a positive value");
     }
 }
