@@ -86,6 +86,14 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                             .build();
 
                     throw new ServiceException(entity);
+                } else if (e.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
+                {
+                    ResponseEntity entity = new ResponseEntity.Builder(
+                            Result.ERR_FAILURE.getCode(),
+                            String.format(Result.ERR_FAILURE.getFormattedMessage(), "Bad Request - if this was an interaction, was your session already closed?"))
+                            .build();
+
+                    throw new ServiceException(entity);
                 } else
                 {
                     LOGGER.error("Unexpected Resource Exception", e);
