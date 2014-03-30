@@ -31,7 +31,7 @@ public enum Result
     ERR_NOT_EXISTS(-8, "No matching record with %s of %s exists"),
     ERR_UNKNOWN_ENTITY(-9, "Unknown %s entity with urn %s"),
     ERR_UNKNOWN_TYPE(-10, "%s enum does not define type %s"),
-    ERR_SESSION_ALREADY_CLOSED(-11, "session was previously closed"),
+    ERR_SESSION_ALREADY_CLOSED(-11, "session with URN %s was previously closed"),
     ERR_NO_SUCH_EMAIL(-12, "No user associated with email address %s"),
     ERR_NO_FILE_CONTENT(-13, "File URN %s exists but is flagged as pending content upload"),
 
