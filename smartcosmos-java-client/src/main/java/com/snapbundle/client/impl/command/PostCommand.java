@@ -21,6 +21,7 @@ import com.snapbundle.client.connectivity.ServerContext;
 import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.client.impl.base.AbstractBaseClient;
 import com.snapbundle.pojo.base.ResponseEntity;
+import com.snapbundle.pojo.base.Result;
 import com.snapbundle.util.json.JsonUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +30,7 @@ import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,25 +60,44 @@ public class PostCommand extends AbstractBaseClient implements ICommand<Object, 
 
         try
         {
-            Representation result = service.post(new JsonRepresentation(inputJson));
-
-            if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
+            try
             {
-                if (inputJson.has(URN_FIELD))
+                Representation result = service.post(new JsonRepresentation(inputJson));
+
+                if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
                 {
-                    LOGGER.info("Successfully updated URN {} at path {}", inputJson.getString(URN_FIELD), path);
+                    if (inputJson.has(URN_FIELD))
+                    {
+                        LOGGER.info("Successfully updated URN {} at path {}", inputJson.getString(URN_FIELD), path);
+                    } else
+                    {
+                        LOGGER.info("Successfully updated entity at path {}", path);
+                    }
                 } else
                 {
-                    LOGGER.info("Successfully updated entity at path {}", path);
-                }
-            } else
-            {
-                JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
-                JSONObject jsonResult = jsonRepresentation.getJsonObject();
+                    JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+                    JSONObject jsonResult = jsonRepresentation.getJsonObject();
 
-                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
-                ResponseEntity response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-                throw new ServiceException(response);
+                    LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
+                    ResponseEntity response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+                    throw new ServiceException(response);
+                }
+
+            } catch (ResourceException e)
+            {
+                if (e.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
+                {
+                    ResponseEntity entity = new ResponseEntity.Builder(
+                            Result.ERR_FAILURE.getCode(),
+                            String.format(Result.ERR_FAILURE.getFormattedMessage(), e.getMessage()))
+                            .build();
+
+                    throw new ServiceException(entity);
+                } else
+                {
+                    LOGGER.error("Unexpected Resource Exception", e);
+                    throw new ServiceException(e);
+                }
             }
 
         } catch (JSONException | IOException e)
