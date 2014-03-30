@@ -47,6 +47,7 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
     protected boolean hasSessionMembership = false;
 
     @JsonView(JsonGenerationView.Standard.class)
+    @JsonDeserialize(as = ObjectInteractionSession.class)
     protected IObjectInteractionSession objectInteractionSession;
 
     @JsonView(JsonGenerationView.Minimum.class)
