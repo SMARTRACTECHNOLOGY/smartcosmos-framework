@@ -24,9 +24,11 @@ import com.snapbundle.pojo.context.Relationship;
 
 public final class RelationshipBuilder extends AbstractMonikerBuilder<IRelationship, RelationshipBuilder>
 {
-    public RelationshipBuilder()
+    public RelationshipBuilder(EntityReferenceType entityReferenceType, String referenceUrn)
     {
         super(new Relationship());
+        instance.setEntityReferenceType(entityReferenceType);
+        instance.setReferenceUrn(referenceUrn);
     }
 
     public RelationshipBuilder setRelatedReferenceUrn(String urn)
