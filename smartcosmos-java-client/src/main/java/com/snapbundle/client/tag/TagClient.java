@@ -149,6 +149,13 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
+    public void revokeAssignment(String tagName, EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException
+    {
+        DeleteCommand command = new DeleteCommand(context);
+        command.call(Object.class, TagEndpoints.revokeAssignment(entityReferenceType, referenceUrn, tagName));
+    }
+
+    @Override
     public Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName) throws ServiceException
     {
         return findEntitiesByTagsAssignedToType(entityReferenceType, tagName, ViewType.Standard);
@@ -165,6 +172,7 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     {
         return findByTag(tagName, ViewType.Standard);
     }
+
 
     @Override
     public Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException

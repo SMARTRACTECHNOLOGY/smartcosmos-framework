@@ -20,17 +20,24 @@ package com.snapbundle.client.impl.endpoint;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.util.json.ViewType;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public final class TagEndpoints
 {
     private TagEndpoints()
     {
     }
 
+    private static final String ENCODING = "UTF-8";
+
     private static final String BASE = "/tags";
 
     private static final String UPSERT__PUT = BASE;
 
     private static final String ASSIGN__PUT = BASE.concat("/%s/%s");
+
+    private static final String REVOKE_ASSIGNMENT__DELETE = BASE.concat("/tag/%s/%s/%s");
 
     private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
 
@@ -69,6 +76,20 @@ public final class TagEndpoints
         return String.format(ASSIGN__PUT, entityReferenceType, referenceUrn);
     }
 
+    public static String revokeAssignment(EntityReferenceType entityReferenceType, String referenceUrn, String tagName)
+    {
+        String encodedTagName = null;
+        try
+        {
+            encodedTagName = URLEncoder.encode(tagName, ENCODING);
+        } catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
+
+        return String.format(REVOKE_ASSIGNMENT__DELETE, encodedTagName, entityReferenceType, referenceUrn);
+    }
+
     public static String findByTag(String tagName)
     {
         return findByTag(tagName, ViewType.Standard);
@@ -76,7 +97,15 @@ public final class TagEndpoints
 
     public static String findByTag(String tagName, ViewType viewType)
     {
-        return String.format(FIND_SPECIFIC_TAG__GET, tagName, viewType);
+        String encodedTagName = null;
+        try
+        {
+            encodedTagName = URLEncoder.encode(tagName, ENCODING);
+        } catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
+        return String.format(FIND_SPECIFIC_TAG__GET, encodedTagName, viewType);
     }
 
     public static String findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn)

@@ -190,4 +190,14 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @throws ServiceException
      */
     ITag findByTag(String tagName, ViewType viewType) throws ServiceException;
+
+    /**
+     * Revoke a specific tag assignment from the specified entity, if it exists.
+     *
+     * @param tagName             Case-sensitive name of the tag
+     * @param entityReferenceType Entity reference type
+     * @param referenceUrn        Reference URN
+     * @throws ServiceException
+     */
+    void revokeAssignment(String tagName, EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException;
 }
