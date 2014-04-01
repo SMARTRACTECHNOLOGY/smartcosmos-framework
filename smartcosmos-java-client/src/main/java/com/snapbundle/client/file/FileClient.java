@@ -42,6 +42,7 @@ import org.restlet.ext.html.FormData;
 import org.restlet.ext.html.FormDataSet;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.FileRepresentation;
+import org.restlet.representation.InputRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
@@ -129,7 +130,43 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
 
             if (service.getStatus().equals(Status.SUCCESS_OK))
             {
-                LOGGER.info("Successfully uploaded multipart-form data to path {}", FileEndpoints.uploadContentsAsMultipart(urn));
+                LOGGER.info("Successfully uploaded file to path {}", FileEndpoints.uploadContentsAsMultipart(urn));
+            } else
+            {
+                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
+                throw new ServiceException(response);
+            }
+
+        } catch (JSONException | IOException e)
+        {
+            LOGGER.error("Unexpected Exception", e);
+            throw new ServiceException(e);
+        }
+
+        return response;
+    }
+
+    @Override
+    public ResponseEntity uploadOctetStream(String urn, InputStream inputStream, MediaType mediaType) throws ServiceException
+    {
+        ResponseEntity response;
+
+        InputRepresentation inputRepresentation = new InputRepresentation(inputStream, mediaType);
+        inputRepresentation.setMediaType(MediaType.APPLICATION_OCTET_STREAM);
+
+        ClientResource service = createClient(FileEndpoints.uploadContentsAsOctetStream(urn));
+        service.accept(MediaType.APPLICATION_JSON);
+
+        try
+        {
+            Representation result = service.post(inputRepresentation);
+            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+            JSONObject jsonResult = jsonRepresentation.getJsonObject();
+            response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+
+            if (service.getStatus().equals(Status.SUCCESS_OK))
+            {
+                LOGGER.info("Successfully uploaded input stream to path {}", FileEndpoints.uploadContentsAsMultipart(urn));
             } else
             {
                 LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());

@@ -74,6 +74,19 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
     ResponseEntity uploadOctetStream(String urn, File file, MediaType mediaType) throws ServiceException;
 
     /**
+     * Uploads a specific local file as an application/octet-stream. This is the preferred method for uploading a file's
+     * actual contents to the platform.
+     *
+     * @param urn         System-assigned {@link com.snapbundle.model.context.IFile#getUrn()} with which this file content
+     *                    is associated with
+     * @param inputStream Input stream to upload
+     * @param mediaType   Media type of the file being uploaded (must not be null)
+     * @return Response entity indicating the success or failure of the operation
+     * @throws ServiceException
+     */
+    ResponseEntity uploadOctetStream(String urn, InputStream inputStream, MediaType mediaType) throws ServiceException;
+
+    /**
      * Uploads a specific local file as an multipart/form-data. This capability is generally intended to be used by web
      * forms within a browser; it's inclusion in the API is for completeness. The recommended approach for uploading
      * a file's content from Java is {@link #uploadOctetStream(String, java.io.File, org.restlet.data.MediaType)}.
@@ -95,7 +108,7 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      * @return Non-null input stream
      * @throws IOException
      * @throws com.snapbundle.client.connectivity.ServiceException to indicate if the file has no content or the URN specified
-     *                                                    cannot be located
+     *                                                             cannot be located
      */
     InputStream getFileContents(String urn) throws ServiceException, IOException;
 }
