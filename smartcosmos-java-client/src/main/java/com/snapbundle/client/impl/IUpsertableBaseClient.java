@@ -19,7 +19,10 @@ package com.snapbundle.client.impl;
 
 import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.pojo.base.ResponseEntity;
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.Collection;
 
 /**
  * Type-safe upsert routines for SnapBundle entities either by upserting an explicit strongly typed instance or
@@ -56,4 +59,7 @@ public interface IUpsertableBaseClient<T> extends IFindableBaseClient<T>
     ResponseEntity upsert(T instance) throws ServiceException;
 
     ResponseEntity upsert(JSONObject instance) throws ServiceException;
+
+    Collection<ResponseEntity> upsert(JSONArray jsonArray) throws ServiceException;
+
 }

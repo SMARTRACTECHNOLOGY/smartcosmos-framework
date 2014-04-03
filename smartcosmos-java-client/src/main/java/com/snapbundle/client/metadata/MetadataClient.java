@@ -21,11 +21,11 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.Field;
 import com.snapbundle.client.connectivity.ServerContext;
 import com.snapbundle.client.connectivity.ServiceException;
-import com.snapbundle.client.impl.endpoint.MetadataEndpoints;
 import com.snapbundle.client.impl.base.AbstractUpsertableBaseClient;
 import com.snapbundle.client.impl.command.DeleteCommand;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.client.impl.command.GetCommand;
+import com.snapbundle.client.impl.endpoint.MetadataEndpoints;
 import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IMetadata;
 import com.snapbundle.model.context.MetadataDataType;
@@ -33,6 +33,7 @@ import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.context.Metadata;
 import com.snapbundle.util.json.JsonUtil;
 import com.snapbundle.util.json.ViewType;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.Status;
@@ -74,7 +75,16 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
         try
         {
             EntityReferenceType ert = EntityReferenceType.valueOf(instance.getString(ENTITY_REFERENCE_TYPE));
-            return upsert(instance, MetadataEndpoints.upsert(ert, instance.getString(REFERENCE_URN_FIELD)));
+            JSONArray jsonArray = new JSONArray().put(instance);
+
+            Collection<ResponseEntity> response = upsert(jsonArray, MetadataEndpoints.upsert(ert, instance.getString(REFERENCE_URN_FIELD)));
+
+            if (response.size() != 1)
+            {
+                throw new ServiceException(new IllegalStateException("Response from server should have contained at least one ResponseEntry"));
+            }
+            return response.iterator().next();
+
         } catch (IllegalArgumentException | JSONException e)
         {
             throw new ServiceException(e);

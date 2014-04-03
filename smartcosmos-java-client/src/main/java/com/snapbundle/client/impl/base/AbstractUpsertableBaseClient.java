@@ -24,8 +24,11 @@ import com.snapbundle.client.impl.command.UpsertCommand;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.util.json.JsonUtil;
 import com.snapbundle.util.json.ViewType;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Collection;
 
 public abstract class AbstractUpsertableBaseClient<T> extends AbstractFindableBaseClient<T> implements IUpsertableBaseClient<T>
 {
@@ -51,6 +54,18 @@ public abstract class AbstractUpsertableBaseClient<T> extends AbstractFindableBa
     {
         UpsertCommand<ResponseEntity> command = new UpsertCommand<>(context);
         return command.call(ResponseEntity.class, path, instance);
+    }
+
+    protected Collection<ResponseEntity> upsert(JSONArray jsonArray, String path) throws ServiceException
+    {
+        UpsertCommand<ResponseEntity> command = new UpsertCommand<>(context);
+        return command.call(path, jsonArray);
+    }
+
+    @Override
+    public Collection<ResponseEntity> upsert(JSONArray jsonArray) throws ServiceException
+    {
+        throw new UnsupportedOperationException();
     }
 }
 

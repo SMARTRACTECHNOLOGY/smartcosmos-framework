@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import static com.snapbundle.Field.CODE_FIELD;
@@ -58,7 +59,58 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
     @Override
     public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
     {
-        throw new UnsupportedOperationException("UPSERT command doesn't accept input as a JSONArray");
+        Collection<ResponseEntity> responses = new ArrayList<>();
+
+        Preconditions.checkNotNull(inputJson);
+
+        ClientResource service = createClient(path);
+
+        try
+        {
+            Representation result = service.put(new JsonRepresentation(inputJson));
+            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+
+            if (service.getStatus().equals(Status.SUCCESS_OK))
+            {
+                JSONArray jsonArray = jsonRepresentation.getJsonArray();
+
+                for (int i = 0; i < jsonArray.length(); i++)
+                {
+                    ResponseEntity response = JsonUtil.fromJson(jsonArray.getJSONObject(i), ResponseEntity.class);
+                    responses.add(response);
+                }
+            } else
+            {
+                JSONObject jsonResult = jsonRepresentation.getJsonObject();
+                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
+
+                try
+                {
+                    if (jsonResult.has(CODE_FIELD) && jsonResult.has(MESSAGE_FIELD))
+                    {
+                        ResponseEntity responseEntity = new ResponseEntity();
+                        responseEntity.setCode(jsonResult.getInt(CODE_FIELD));
+                        responseEntity.setMessage(jsonResult.getString(MESSAGE_FIELD));
+
+                        throw new ServiceException(responseEntity);
+
+                    } else if (jsonResult.has(CODE_FIELD))
+                    {
+                        throw new ServiceException(jsonResult.getInt(CODE_FIELD));
+                    }
+                } catch (JSONException e)
+                {
+                    throw new ServiceException(Result.ERR_FAILURE.getCode());
+                }
+            }
+
+        } catch (JSONException | IOException e)
+        {
+            LOGGER.error("Unexpected Exception", e);
+            throw new ServiceException(e);
+        }
+
+        return responses;
     }
 
     @Override
