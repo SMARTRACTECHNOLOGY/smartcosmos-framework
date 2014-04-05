@@ -55,9 +55,10 @@ public class GeometricShape
         return type;
     }
 
-    public void setType(GeometricType type)
+    public GeometricShape setType(GeometricType type)
     {
         this.type = type;
+        return this;
     }
 
     public JsonNode getCoordinates()
@@ -65,9 +66,10 @@ public class GeometricShape
         return coordinates;
     }
 
-    public void setCoordinates(JsonNode coordinates)
+    public GeometricShape setCoordinates(JsonNode coordinates)
     {
         this.coordinates = coordinates;
+        return this;
     }
 
     public List<GeometricShape> getGeometries()
@@ -75,9 +77,10 @@ public class GeometricShape
         return geometries;
     }
 
-    public void setGeometries(List<GeometricShape> geometries)
+    public GeometricShape setGeometries(List<GeometricShape> geometries)
     {
         this.geometries = geometries;
+        return this;
     }
 
     public float[] getBbox()
@@ -85,9 +88,10 @@ public class GeometricShape
         return bbox;
     }
 
-    public void setBbox(float[] bbox)
+    public GeometricShape setBbox(float[] bbox)
     {
         this.bbox = bbox;
+        return this;
     }
 
     public GeometricShape getGeometry()
@@ -95,9 +99,10 @@ public class GeometricShape
         return geometry;
     }
 
-    public void setGeometry(GeometricShape geometry)
+    public GeometricShape setGeometry(GeometricShape geometry)
     {
         this.geometry = geometry;
+        return this;
     }
 
     public Crs getCrs()
@@ -105,9 +110,10 @@ public class GeometricShape
         return crs;
     }
 
-    public void setCrs(Crs crs)
+    public GeometricShape setCrs(Crs crs)
     {
         this.crs = crs;
+        return this;
     }
 
     public List<GeometricShape> getFeatures()
@@ -115,9 +121,10 @@ public class GeometricShape
         return features;
     }
 
-    public void setFeatures(List<GeometricShape> features)
+    public GeometricShape setFeatures(List<GeometricShape> features)
     {
         this.features = features;
+        return this;
     }
 
     public JsonNode getProperties()
@@ -125,8 +132,9 @@ public class GeometricShape
         return properties;
     }
 
-    public void setProperties(JsonNode properties)
+    public GeometricShape setProperties(JsonNode properties)
     {
         this.properties = properties;
+        return this;
     }
 }
