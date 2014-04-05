@@ -21,12 +21,12 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.Field;
 import com.snapbundle.client.connectivity.ServerContext;
 import com.snapbundle.client.connectivity.ServiceException;
-import com.snapbundle.client.impl.endpoint.ObjectAddressEndpoints;
 import com.snapbundle.client.impl.base.AbstractUpdateableBaseClient;
 import com.snapbundle.client.impl.command.DeleteCommand;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
 import com.snapbundle.client.impl.command.GetCommand;
 import com.snapbundle.client.impl.command.PostCommand;
+import com.snapbundle.client.impl.endpoint.ObjectAddressEndpoints;
 import com.snapbundle.model.context.IObjectAddress;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.context.ObjectAddress;
@@ -64,11 +64,17 @@ class ObjectAddressClient extends AbstractUpdateableBaseClient<IObjectAddress> i
     @Override
     public void delete(JSONObject instance) throws ServiceException
     {
-        Preconditions.checkState(instance.has(URN_FIELD));
-        Preconditions.checkState(instance.has(OBJECT_URN_FIELD));
-
         try
         {
+            if (instance.has(Field.OBJECT_FIELD))
+            {
+                JSONObject object = instance.getJSONObject(Field.OBJECT_FIELD);
+                instance.put(Field.OBJECT_URN_FIELD, object.getString(Field.OBJECT_URN_FIELD));
+            }
+
+            Preconditions.checkState(instance.has(URN_FIELD));
+            Preconditions.checkState(instance.has(OBJECT_URN_FIELD));
+
             DeleteCommand command = new DeleteCommand(context);
             command.call(ObjectAddress.class, ObjectAddressEndpoints.delete(instance.getString(Field.OBJECT_URN_FIELD),
                     instance.getString(Field.URN_FIELD)));
@@ -88,11 +94,17 @@ class ObjectAddressClient extends AbstractUpdateableBaseClient<IObjectAddress> i
     @Override
     public void update(JSONObject instance) throws ServiceException
     {
-        Preconditions.checkState(instance.has(URN_FIELD));
-        Preconditions.checkState(instance.has(OBJECT_URN_FIELD));
-
         try
         {
+            if (instance.has(Field.OBJECT_FIELD))
+            {
+                JSONObject object = instance.getJSONObject(Field.OBJECT_FIELD);
+                instance.put(Field.OBJECT_URN_FIELD, object.getString(Field.OBJECT_URN_FIELD));
+            }
+
+            Preconditions.checkState(instance.has(URN_FIELD));
+            Preconditions.checkState(instance.has(OBJECT_URN_FIELD));
+
             PostCommand command = new PostCommand(context);
             command.call(ObjectAddress.class,
                     ObjectAddressEndpoints.update(instance.getString(OBJECT_URN_FIELD), instance.getString(URN_FIELD)),
@@ -106,11 +118,17 @@ class ObjectAddressClient extends AbstractUpdateableBaseClient<IObjectAddress> i
     @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
-        Preconditions.checkState(instance.has(OBJECT_URN_FIELD));
-        Preconditions.checkState(instance.has(TYPE_FIELD));
-
         try
         {
+            if (instance.has(Field.OBJECT_FIELD))
+            {
+                JSONObject object = instance.getJSONObject(Field.OBJECT_FIELD);
+                instance.put(Field.OBJECT_URN_FIELD, object.getString(Field.OBJECT_URN_FIELD));
+            }
+
+            Preconditions.checkState(instance.has(OBJECT_URN_FIELD));
+            Preconditions.checkState(instance.has(TYPE_FIELD));
+
             return create(instance, ObjectAddressEndpoints.create(instance.getString(OBJECT_URN_FIELD)));
         } catch (JSONException e)
         {
