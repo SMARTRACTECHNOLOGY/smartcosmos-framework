@@ -19,16 +19,21 @@ package com.snapbundle.client.timeline;
 
 import com.snapbundle.client.connectivity.ServerContext;
 import com.snapbundle.client.connectivity.ServiceException;
-import com.snapbundle.client.impl.endpoint.TimelineEndpoints;
 import com.snapbundle.client.impl.base.AbstractUpdateableBaseClient;
 import com.snapbundle.client.impl.command.GetCollectionCommand;
+import com.snapbundle.client.impl.endpoint.TimelineEndpoints;
+import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.ITimelineEntry;
 import com.snapbundle.pojo.base.ResponseEntity;
 import com.snapbundle.pojo.context.TimelineEntry;
 import com.snapbundle.util.json.ViewType;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Collection;
+
+import static com.snapbundle.Field.ENTITY_REFERENCE_TYPE;
+import static com.snapbundle.Field.REFERENCE_URN_FIELD;
 
 class TimelineClient extends AbstractUpdateableBaseClient<ITimelineEntry> implements ITimelineClient
 {
@@ -46,7 +51,15 @@ class TimelineClient extends AbstractUpdateableBaseClient<ITimelineEntry> implem
     @Override
     public ResponseEntity create(JSONObject instance) throws ServiceException
     {
-        return create(instance, TimelineEndpoints.create());
+        try
+        {
+            EntityReferenceType ert = EntityReferenceType.valueOf(instance.getString(ENTITY_REFERENCE_TYPE));
+            String referenceUrn = instance.getString(REFERENCE_URN_FIELD);
+            return create(instance, TimelineEndpoints.create(ert, referenceUrn));
+        } catch (JSONException e)
+        {
+            throw new ServiceException(e);
+        }
     }
 
     @Override

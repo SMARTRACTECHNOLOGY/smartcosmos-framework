@@ -17,6 +17,7 @@
 
 package com.snapbundle.client.impl.endpoint;
 
+import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.util.json.ViewType;
 
 public final class TimelineEndpoints
@@ -28,9 +29,9 @@ public final class TimelineEndpoints
     /**
      * {entityReferenceType}/{referenceUrn}
      */
-    private static final String BASE = "/timelines/%s/%s";
+    private static final String BASE = "/timelines";
 
-    private static final String CREATE__PUT = BASE;
+    private static final String CREATE__PUT = BASE.concat("/%s/%s");
 
     private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
 
@@ -38,9 +39,10 @@ public final class TimelineEndpoints
 
     private static final String UPDATE__PUT = BASE;
 
-    public static String create()
+    public static String create(EntityReferenceType entityReferenceType, String referenceUrn)
     {
-        return CREATE__PUT;
+
+        return String.format(CREATE__PUT, entityReferenceType, referenceUrn);
     }
 
     public static String update()
