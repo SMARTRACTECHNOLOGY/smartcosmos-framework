@@ -35,7 +35,7 @@ public final class ObjectAddressEndpoints
 
     private static final String DELETE__DELETE = BASE.concat("/%s");
 
-    private static final String FIND_LAST_N__GET = BASE.concat("?count=%s&view=%s");
+    private static final String FIND_LAST_N__GET = BASE.concat("?count=%d&view=%s");
 
     public static String create(String objectUrn)
     {
@@ -69,7 +69,7 @@ public final class ObjectAddressEndpoints
 
     public static String findLast(String objectUrn, int count, ViewType viewType)
     {
-        return String.format(FIND_LAST_N__GET, count, viewType);
+        return String.format(FIND_LAST_N__GET, objectUrn, count, viewType);
     }
 
 }
