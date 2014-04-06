@@ -46,7 +46,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <snapbundle.version>2.5</snapbundle.version>
+        <snapbundle.version>2.6</snapbundle.version>
         <restlet.version>2.2-M3</restlet.version>
     </properties>
 
