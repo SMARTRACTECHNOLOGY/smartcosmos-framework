@@ -17,6 +17,7 @@
 
 package com.snapbundle.client.impl.endpoint;
 
+import com.snapbundle.model.event.EventType;
 import com.snapbundle.util.json.ViewType;
 
 public final class EventEndpoints
@@ -29,7 +30,9 @@ public final class EventEndpoints
 
     private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
 
-    private static final String FIND_BY_QUERY__POST = BASE;
+    private static final String FIND_BY_EVENT_TYPE__GET = BASE.concat("?eventType=%s&view=%s");
+
+    private static final String FIND_BY_TIMESTAMP__GET = BASE.concat("?timestamp=%s&view=%s");
 
     public static String findByUrn(String urn)
     {
@@ -41,15 +44,24 @@ public final class EventEndpoints
         return String.format(FIND_BY_URN__GET, urn, viewType);
     }
 
-    public static String findByQuery()
+    public static String findByTimestamp(long timestamp)
     {
-        return findByUrn(ViewType.Standard);
+        return findSince(timestamp, ViewType.Standard);
     }
 
-    public static String findByUrn(ViewType viewType)
+    public static String findSince(long timestamp, ViewType viewType)
     {
-        return String.format(FIND_BY_QUERY__POST, viewType);
+        return String.format(FIND_BY_TIMESTAMP__GET, timestamp, viewType);
     }
 
+    public static String findByEventType(EventType eventType)
+    {
+        return findByEventType(eventType, ViewType.Standard);
+    }
+
+    public static String findByEventType(EventType eventType, ViewType viewType)
+    {
+        return String.format(FIND_BY_EVENT_TYPE__GET, eventType, viewType);
+    }
 }
 

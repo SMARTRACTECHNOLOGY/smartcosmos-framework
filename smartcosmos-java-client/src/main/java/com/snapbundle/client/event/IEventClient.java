@@ -17,9 +17,21 @@
 
 package com.snapbundle.client.event;
 
+import com.snapbundle.client.connectivity.ServiceException;
 import com.snapbundle.client.impl.IFindableBaseClient;
+import com.snapbundle.model.event.EventType;
 import com.snapbundle.model.event.IEvent;
+import com.snapbundle.util.json.ViewType;
+
+import java.util.Collection;
 
 public interface IEventClient extends IFindableBaseClient<IEvent>
 {
+    Collection<IEvent> findByEventType(EventType eventType) throws ServiceException;
+
+    Collection<IEvent> findByEventType(EventType eventType, ViewType viewType) throws ServiceException;
+
+    Collection<IEvent> findSince(long timestamp) throws ServiceException;
+
+    Collection<IEvent> findSince(long timestamp, ViewType viewType) throws ServiceException;
 }
