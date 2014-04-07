@@ -1,7 +1,8 @@
 ![alt text](images/snapbundle.png "Title")
 
-# NEW! Full platform API documentation is available at apiary.io
-The authoritative documentation can be found at [http://docs.snapbundle.apiary.io](http://docs.snapbundle.apiary.io "SnapBundle at apiary").
+# Platform API Documentation
+  * The authoritative REST documentation can be found at [http://docs.snapbundle.apiary.io](http://docs.snapbundle.apiary.io "SnapBundle at apiary").
+  * The latest stable Model SDK JavaDoc can be found at [http://snapbundle.github.io/sdk/stable/index.html](http://snapbundle.github.io/sdk/stable/index.html "SnapBundle Stable Model SDK").
 
 ### Extension Architecture
 The SnapBundle platform was designed from scratch with a plugin model; we call them *extensions*. Remember how we said
