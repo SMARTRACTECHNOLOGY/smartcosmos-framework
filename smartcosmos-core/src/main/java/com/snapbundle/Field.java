@@ -153,15 +153,11 @@ public final class Field
 
     public static final String REDIRECT_URL_FIELD = "redirectUrl";
 
-    public static final String EXTENSION_PERMISSION_FIELD = "permissions";
-
     public static final String LONG_DESCRIPTION_FIELD = "longDescription";
 
     public static final String EXTENSION_TYPE_FIELD = "extensionType";
 
     public static final String DISPLAY_SEQUENCE_FIELD = "displaySequence";
-
-    public static final String PERMISSION_TYPE_FIELD = "permissionType";
 
     public static final String STATE_FIELD = "state";
 
