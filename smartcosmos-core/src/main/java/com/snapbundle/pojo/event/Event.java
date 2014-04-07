@@ -117,4 +117,16 @@ public class Event extends DomainResource<IEvent> implements IEvent
         result = 31 * result + (source != null ? source.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Event{" +
+                super.toString() +
+                "user=" + user +
+                ", account=" + account +
+                ", eventType=" + eventType +
+                ", source='" + source + '\'' +
+                '}';
+    }
 }

@@ -111,4 +111,15 @@ public abstract class DomainResource<T> implements IDomainResource<T>
         result = 31 * result + (moniker != null ? moniker.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString()
+    {
+        return "DomainResource{" +
+                "uniqueId=" + uniqueId +
+                ", urn='" + urn + '\'' +
+                ", lastModifiedTimestamp=" + lastModifiedTimestamp +
+                ", moniker='" + moniker + '\'' +
+                '}';
+    }
 }
