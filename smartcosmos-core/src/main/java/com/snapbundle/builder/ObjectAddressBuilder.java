@@ -22,6 +22,14 @@ import com.snapbundle.model.context.IObject;
 import com.snapbundle.model.context.IObjectAddress;
 import com.snapbundle.pojo.context.ObjectAddress;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.context.IObjectAddress} instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#OBJECT_URN_FIELD}</li>
+ * </ul>
+ */
 public final class ObjectAddressBuilder extends AbstractMonikerBuilder<IObjectAddress, ObjectAddressBuilder>
 {
     public ObjectAddressBuilder(IObject owner)

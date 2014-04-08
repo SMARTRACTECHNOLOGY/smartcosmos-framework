@@ -23,6 +23,15 @@ import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.geo.IGeospatialEntry;
 import com.snapbundle.pojo.geo.GeospatialEntry;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.extension.IExtension} instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#NAME_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#TYPE_FIELD}</li>
+ * </ul>
+ */
 public final class GeospatialBuilder extends AbstractNamedObjectBuilder<IGeospatialEntry, GeospatialBuilder>
 {
     public GeospatialBuilder(GeometricShape shape)
@@ -47,6 +56,7 @@ public final class GeospatialBuilder extends AbstractNamedObjectBuilder<IGeospat
     @Override
     protected void onValidate()
     {
+        Preconditions.checkNotNull(instance.getName(), "name must not be null");
         Preconditions.checkNotNull(instance.getType(), "type must not be null");
     }
 }

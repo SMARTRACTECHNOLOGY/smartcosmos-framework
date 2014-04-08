@@ -22,6 +22,20 @@ import com.snapbundle.model.extension.ExtensionType;
 import com.snapbundle.model.extension.IExtension;
 import com.snapbundle.pojo.extension.Extension;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.extension.IExtension} instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#NAME_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#DESCRIPTION_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#LONG_DESCRIPTION_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#REDIRECT_URL_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#EXTENSION_TYPE_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#SUPPORT_EMAIL_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#WEB_SITE_FIELD}</li>
+ * </ul>
+ */
 public final class ExtensionBuilder extends AbstractNamedObjectBuilder<IExtension, ExtensionBuilder>
 {
     public ExtensionBuilder(String name)

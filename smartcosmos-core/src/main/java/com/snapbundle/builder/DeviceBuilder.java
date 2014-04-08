@@ -22,6 +22,14 @@ import com.snapbundle.model.context.IAccount;
 import com.snapbundle.model.context.IDevice;
 import com.snapbundle.pojo.context.Device;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.context.IDevice} instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#DEVICE_IDENTIFICATION_FIELD}</li>
+ * </ul>
+ */
 public final class DeviceBuilder extends AbstractNamedObjectBuilder<IDevice, DeviceBuilder>
 {
     public DeviceBuilder(String identification)

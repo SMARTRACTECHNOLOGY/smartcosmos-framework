@@ -23,6 +23,14 @@ import com.snapbundle.model.context.IUser;
 import com.snapbundle.model.context.RoleType;
 import com.snapbundle.pojo.context.User;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.context.IUser} instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#EMAIL_ADDRESS_FIELD}</li>
+ * </ul>
+ */
 public final class UserBuilder extends AbstractMonikerBuilder<IUser, UserBuilder>
 {
     public UserBuilder(String emailAddress)

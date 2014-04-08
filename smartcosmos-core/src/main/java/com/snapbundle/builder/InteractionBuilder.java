@@ -23,6 +23,14 @@ import com.snapbundle.model.context.IObjectInteraction;
 import com.snapbundle.model.context.IObjectInteractionSession;
 import com.snapbundle.pojo.context.ObjectInteraction;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.context.IObjectInteraction} instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#TYPE_FIELD}</li>
+ * </ul>
+ */
 public final class InteractionBuilder extends AbstractReferentialBuilder<IObjectInteraction, InteractionBuilder>
 {
     public InteractionBuilder(long recordedTimestamp)

@@ -23,6 +23,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * Convenience builder for assembling a collection of {@link com.snapbundle.model.context.ITag} instances
+ * to define via a singular call.
+ */
 public final class TagCollectionBuilder
 {
     Collection<ITag> tagCollection = new ArrayList<>();

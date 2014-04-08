@@ -22,6 +22,15 @@ import com.snapbundle.model.context.IMetadata;
 import com.snapbundle.model.context.MetadataDataType;
 import com.snapbundle.pojo.context.Metadata;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.context.IMetadata} instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#KEY_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#RAW_VALUE_FIELD}</li>
+ * </ul>
+ */
 public final class MetadataBuilder extends AbstractReferentialBuilder<IMetadata, MetadataBuilder>
 {
     public MetadataBuilder(MetadataDataType dataType)

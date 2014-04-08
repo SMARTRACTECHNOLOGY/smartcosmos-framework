@@ -23,13 +23,13 @@ import com.snapbundle.model.context.IObject;
 import com.snapbundle.pojo.context.ObjectImpl;
 
 /**
- * Convenience Builder pattern class for creating new object instances.
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.context.IObject} instances.
  * <p/>
  * The minimum fields required to define a new Object are
  * <ul>
- * <li>ObjectURN</li>
- * <li>Name</li>
- * <li>Type</li>
+ * <li>{@link com.snapbundle.Field#OBJECT_URN_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#NAME_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#TYPE_FIELD}</li>
  * </ul>
  */
 public final class ObjectBuilder extends AbstractNamedObjectBuilder<IObject, ObjectBuilder>

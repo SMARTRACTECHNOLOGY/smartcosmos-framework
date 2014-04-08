@@ -21,6 +21,14 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.model.context.ITag;
 import com.snapbundle.pojo.context.Tag;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.context.ITag} instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#NAME_FIELD}</li>
+ * </ul>
+ */
 public final class TagBuilder extends AbstractNamedObjectBuilder<ITag, TagBuilder>
 {
     public TagBuilder()

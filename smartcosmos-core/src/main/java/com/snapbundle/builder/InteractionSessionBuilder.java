@@ -21,6 +21,17 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.model.context.IObjectInteractionSession;
 import com.snapbundle.pojo.context.ObjectInteractionSession;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.context.IObjectInteractionSession}
+ * instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#NAME_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#TYPE_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#START_TIMESTAMP_FIELD}</li>
+ * </ul>
+ */
 public class InteractionSessionBuilder extends AbstractNamedObjectBuilder<IObjectInteractionSession, InteractionSessionBuilder>
 {
     public InteractionSessionBuilder(long startTimestamp)

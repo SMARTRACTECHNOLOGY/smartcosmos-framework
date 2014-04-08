@@ -21,6 +21,16 @@ import com.google.common.base.Preconditions;
 import com.snapbundle.model.context.IFile;
 import com.snapbundle.pojo.context.File;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.context.IFile} instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#ENTITY_REFERENCE_TYPE}</li>
+ * <li>{@link com.snapbundle.Field#REFERENCE_URN_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#MIME_TYPE_FIELD}</li>
+ * </ul>
+ */
 public final class FileBuilder extends AbstractReferentialBuilder<IFile, FileBuilder>
 {
     public FileBuilder(String mimeType)

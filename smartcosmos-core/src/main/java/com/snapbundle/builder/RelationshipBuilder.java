@@ -22,6 +22,18 @@ import com.snapbundle.model.base.EntityReferenceType;
 import com.snapbundle.model.context.IRelationship;
 import com.snapbundle.pojo.context.Relationship;
 
+/**
+ * Convenience Builder pattern class for creating new {@link com.snapbundle.model.context.IRelationship} instances.
+ * <p/>
+ * The minimum fields required to define a new instance are:
+ * <ul>
+ * <li>{@link com.snapbundle.Field#ENTITY_REFERENCE_TYPE}</li>
+ * <li>{@link com.snapbundle.Field#REFERENCE_URN_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#RELATED_ENTITY_REFERENCE_TYPE}</li>
+ * <li>{@link com.snapbundle.Field#RELATED_REFERENCE_URN_FIELD}</li>
+ * <li>{@link com.snapbundle.Field#TYPE_FIELD}</li>
+ * </ul>
+ */
 public final class RelationshipBuilder extends AbstractMonikerBuilder<IRelationship, RelationshipBuilder>
 {
     public RelationshipBuilder(EntityReferenceType entityReferenceType, String referenceUrn)
