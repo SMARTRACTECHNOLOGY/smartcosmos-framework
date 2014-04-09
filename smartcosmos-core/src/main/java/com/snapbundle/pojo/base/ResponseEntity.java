@@ -23,6 +23,12 @@ import com.snapbundle.util.json.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Communicates the outcome of the RESTful operation submitted to the server, where {@link #getCode()} has a numeric
+ * value that always maps back to a {@link com.snapbundle.pojo.base.Result}, and {@link #getMessage()} contains
+ * the system assigned URN stored in {@link com.snapbundle.model.base.IDomainResource#getUrn()} or a detailed error
+ * message describing the failure.
+ */
 public class ResponseEntity
 {
     private static final Logger LOG = LoggerFactory.getLogger(ResponseEntity.class);
@@ -33,6 +39,9 @@ public class ResponseEntity
     @JsonView(JsonGenerationView.Minimum.class)
     private String message;
 
+    /**
+     * Convenience method for quickly building a ResponseEntity.
+     */
     public static class Builder
     {
         private final ResponseEntity entity = new ResponseEntity();
@@ -59,6 +68,11 @@ public class ResponseEntity
         }
     }
 
+    /**
+     * Result code from the server operation as represented by {@link com.snapbundle.pojo.base.Result} enum codes.
+     *
+     * @return Result code
+     */
     public int getCode()
     {
         return code;
@@ -69,6 +83,12 @@ public class ResponseEntity
         this.code = code;
     }
 
+    /**
+     * Textual description of the outcome of the most recent server operation.
+     *
+     * @return Contains either the system assigned URN when {@link Result#OK} is in the {@link #getCode()}, or a
+     * detailed error message describing the failure.
+     */
     public String getMessage()
     {
         return message;

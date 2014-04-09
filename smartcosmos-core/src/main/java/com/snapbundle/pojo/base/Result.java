@@ -17,6 +17,12 @@
 
 package com.snapbundle.pojo.base;
 
+/**
+ * Collection of standardized {@link ResponseEntity#getCode()} values returned from the SnapBundle platform. Each code
+ * is mapped to a substitution string used to create consistently worded error messages.
+ * <p/>
+ * Effectively, any {@link ResponseEntity#getCode()} value less than zero is an error condition.
+ */
 public enum Result
 {
     OK(1, "%s"),
@@ -89,6 +95,10 @@ public enum Result
                 return ERR_UNKNOWN_TYPE;
             case -11:
                 return ERR_SESSION_ALREADY_CLOSED;
+            case -12:
+                return ERR_NO_SUCH_EMAIL;
+            case -13:
+                return ERR_NO_FILE_CONTENT;
             case -50:
                 return ERR_EXTENSION_SECURITY_RESTRICTION;
             case -51:
