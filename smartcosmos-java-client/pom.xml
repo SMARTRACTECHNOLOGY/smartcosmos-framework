@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ SnapBundle SDK
-  ~ (C) Copyright 2013-2014 Tag Dynamics, LLC (http://tagdynamics.com/)
+  ~ SMART COSMOS SDK
+  ~ (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
+  ~ 267 Cane Creek Rd, Fletcher, NC, 28732, USA
+  ~ All Rights Reserved.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,8 +17,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -25,14 +27,14 @@
         <version>7</version>
     </parent>
 
-    <groupId>com.tagdynamics</groupId>
-    <artifactId>snap-client</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <groupId>net.smartcosmos</groupId>
+    <artifactId>java-client</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
-    <name>SnapBundle Client</name>
-    <description>Provides a thin client wrapper for accessing the SnapBundle RESTful web services</description>
+    <name>SMART COSMOS Java Client</name>
+    <description>Provides a thin client wrapper for accessing the SMART COSMOS platform web services</description>
 
     <url>http://tagdynamices.com/</url>
 
@@ -46,7 +48,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <snapbundle.version>2.7</snapbundle.version>
+        <sdk.version>1.0-SNAPSHOT</sdk.version>
         <restlet.version>2.2-M3</restlet.version>
     </properties>
 
@@ -97,9 +99,9 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.tagdynamics</groupId>
-            <artifactId>snap-model</artifactId>
-            <version>${snapbundle.version}</version>
+            <groupId>net.smartcosmos</groupId>
+            <artifactId>java-sdk</artifactId>
+            <version>${sdk.version}</version>
         </dependency>
 
         <dependency>
@@ -163,16 +165,16 @@
                                 <group>
                                     <title>Entity Clients</title>
                                     <packages>
-                                        com.snapbundle.client.account:com.snapbundle.client.device:com.snapbundle.client.event:com.snapbundle.client.extension:com.snapbundle.client.file:com.snapbundle.client.geospatial:com.snapbundle.client.interaction*:com.snapbundle.client.metadata:com.snapbundle.client.object*:com.snapbundle.client.registration:com.snapbundle.client.relationship:com.snapbundle.client.tag:com.snapbundle.client.timeline:com.snapbundle.client.user
+                                        net.smartcosmos.client.account:net.smartcosmos.client.device:net.smartcosmos.client.event:net.smartcosmos.client.extension:net.smartcosmos.client.file:net.smartcosmos.client.geospatial:net.smartcosmos.client.interaction*:net.smartcosmos.client.metadata:net.smartcosmos.client.object*:net.smartcosmos.client.registration:net.smartcosmos.client.relationship:net.smartcosmos.client.tag:net.smartcosmos.client.timeline:net.smartcosmos.client.user
                                     </packages>
                                 </group>
                                 <group>
                                     <title>Connectivity</title>
-                                    <packages>com.snapbundle.client.connectivity</packages>
+                                    <packages>net.smartcosmos.client.connectivity</packages>
                                 </group>
                                 <group>
                                     <title>Private Implementation</title>
-                                    <packages>com.snapbundle.client.impl*</packages>
+                                    <packages>net.smartcosmos.client.impl*</packages>
                                 </group>
                             </groups>
                             <show>protected</show>

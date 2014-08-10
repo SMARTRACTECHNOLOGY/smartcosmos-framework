@@ -1,4 +1,4 @@
-![alt text](images/snapbundle.png "Title")
+![alt text](images/smartcosmos.png "Title")
 
 SnapBundle Client
 ======
