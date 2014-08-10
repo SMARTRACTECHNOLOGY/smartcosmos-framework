@@ -1,4 +1,4 @@
-![alt text](images/snapbundle.png "Title")
+![alt text](images/smartcosmos.png "SMART COSMOS Logo")
 
 # Platform API Documentation
   * The authoritative REST documentation can be found at [http://docs.snapbundle.apiary.io](http://docs.snapbundle.apiary.io "SnapBundle at apiary").

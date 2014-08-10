@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ SnapBundle™ SDK
-  ~ (C) Copyright 2013-2014 Tag Dynamics, LLC (http://tagdynamics.com/)
+  ~ SMART COSMOS SDK
+  ~ (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
+  ~ 267 Cane Creek Rd, Fletcher, NC, 28732, USA
+  ~ All Rights Reserved.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -25,16 +27,16 @@
         <version>7</version>
     </parent>
 
-    <groupId>com.tagdynamics</groupId>
-    <artifactId>snap-model</artifactId>
-    <version>2.9-SNAPSHOT</version>
+    <groupId>net.smartcosmos</groupId>
+    <artifactId>java-sdk</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
-    <name>SnapBundle Model</name>
-    <description>Provides an interface driven object model for working with the SnapBundle platform</description>
+    <name>SMART COSMOS Java SDK</name>
+    <description>Provides an interface driven SDK for working with the SMART COSMOS platform services</description>
 
-    <url>http://tagdynamices.com/</url>
+    <url>http://www.smart-cosmos.com/</url>
 
     <licenses>
         <license>
@@ -50,16 +52,16 @@
     </properties>
 
     <organization>
-        <name>Tag Dynamics, LLC</name>
-        <url>http://www.tagdynamics.com</url>
+        <name>Smartrac Technology</name>
+        <url>http://www.smartrac-group.com</url>
     </organization>
 
     <developers>
         <developer>
-            <id>tagd.engineering</id>
-            <name>Tag Dynamics</name>
-            <email>engineering@tagdynamics.net</email>
-            <organization>Tag Dynamics, LLC.</organization>
+            <id>cloud.engineering</id>
+            <name>Smartrac API Team</name>
+            <email>api@smartrac-group.com</email>
+            <organization>Smartrac Technology</organization>
             <timezone>-5</timezone>
             <roles>
                 <role>Project Lead</role>
@@ -146,33 +148,51 @@
                         <configuration>
                             <groups>
                                 <group>
-                                    <title>Model</title>
+                                    <title>Builders</title>
                                     <packages>
-                                        com.snapbundle.model.base:com.snapbundle.model.context:com.snapbundle.pojo.base:com.snapbundle.pojo.context:com.snapbundle.builder
+                                        net.smartcosmos.builder:net.smartcosmos.objects.builder:net.smartcosmos.profiles.builder:net.smartcosmos.flows.builder
                                     </packages>
                                 </group>
                                 <group>
-                                    <title>GeoJSON Support</title>
+                                    <title>SMART COSMOS Profiles</title>
                                     <packages>
-                                        com.snapbundle.model.geo:com.snapbundle.geo:com.snapbundle.pojo.geo
+                                        net.smartcosmos.profiles.model*:net.smartcosmos.profiles.pojo:net.smartcosmos.profiles
                                     </packages>
                                 </group>
                                 <group>
-                                    <title>Integration</title>
+                                    <title>SMART COSMOS Objects</title>
                                     <packages>
-                                        com.snapbundle.model.event:com.snapbundle.model.integration:com.snapbundle.pojo.event:com.snapbundle.pojo.integration
+                                        net.smartcosmos.objects.model*:net.smartcosmos.objects.pojo*
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>SMART COSMOS Flows</title>
+                                    <packages>
+                                        net.smartcosmos.flows.model:net.smartcosmos.flows.pojo
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Audit and Integration Event Generation</title>
+                                    <packages>
+                                        net.smartcosmos.model.integration:net.smartcosmos.pojo.integration:net.smartcosmos.model.event:net.smartcosmos.pojo.event
                                     </packages>
                                 </group>
                                 <group>
                                     <title>Extensions</title>
                                     <packages>
-                                        com.snapbundle.model.extension:com.snapbundle.pojo.extension
+                                        net.smartcosmos.model.extension:net.smartcosmos.pojo.extension
                                     </packages>
                                 </group>
                                 <group>
                                     <title>Utilities</title>
                                     <packages>
-                                        com.snapbundle.util*:com.snapbundle
+                                        net.smartcosmos.util*
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Common Core</title>
+                                    <packages>
+                                        net.smartcosmos.model.base:net.smartcosmos.model.context:net.smartcosmos:net.smartcosmos.geo:net.smartcosmos.pojo*
                                     </packages>
                                 </group>
                             </groups>
