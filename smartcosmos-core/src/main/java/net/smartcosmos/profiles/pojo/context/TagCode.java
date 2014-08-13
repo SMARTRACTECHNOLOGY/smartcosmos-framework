@@ -17,15 +17,26 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.flows.model;
+package net.smartcosmos.profiles.pojo.context;
 
-public interface IRuleEngineAction
+import com.fasterxml.jackson.annotation.JsonView;
+import net.smartcosmos.profiles.model.context.ITagCode;
+import net.smartcosmos.util.json.JsonGenerationView;
+
+public class TagCode implements ITagCode
 {
-    IRule getRule();
+    @JsonView(JsonGenerationView.Minimum.class)
+    private int tagCode;
 
-    void setRule(IRule rule);
+    @Override
+    public int getTagCode()
+    {
+        return tagCode;
+    }
 
-    EngineActionType getEngineAction();
-
-    void setEngineAction(EngineActionType engineActionType);
+    @Override
+    public void setTagCode(int tagCode)
+    {
+        this.tagCode = tagCode;
+    }
 }

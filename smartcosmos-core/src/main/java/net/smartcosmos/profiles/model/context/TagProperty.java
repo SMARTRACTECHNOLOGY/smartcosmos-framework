@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.profiles;
+package net.smartcosmos.profiles.model.context;
 
 public final class TagProperty
 {

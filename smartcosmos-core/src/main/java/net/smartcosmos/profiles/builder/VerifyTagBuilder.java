@@ -22,7 +22,7 @@ package net.smartcosmos.profiles.builder;
 import com.google.common.base.Preconditions;
 import net.smartcosmos.builder.AbstractBuilder;
 import net.smartcosmos.profiles.model.context.IVerifyTag;
-import net.smartcosmos.profiles.pojo.VerifyTag;
+import net.smartcosmos.profiles.pojo.context.VerifyTag;
 
 public class VerifyTagBuilder extends AbstractBuilder<IVerifyTag>
 {

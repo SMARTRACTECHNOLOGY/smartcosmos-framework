@@ -22,7 +22,7 @@ package net.smartcosmos.profiles.builder;
 import com.google.common.base.Preconditions;
 import net.smartcosmos.builder.AbstractBuilder;
 import net.smartcosmos.profiles.model.context.ITagProperties;
-import net.smartcosmos.profiles.pojo.TagProperties;
+import net.smartcosmos.profiles.pojo.context.TagProperties;
 
 public class TagPropertiesBuilder extends AbstractBuilder<ITagProperties>
 {

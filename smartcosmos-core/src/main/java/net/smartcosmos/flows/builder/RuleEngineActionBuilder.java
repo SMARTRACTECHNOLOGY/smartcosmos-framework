@@ -24,7 +24,7 @@ import net.smartcosmos.builder.AbstractBuilder;
 import net.smartcosmos.flows.model.EngineActionType;
 import net.smartcosmos.flows.model.IRule;
 import net.smartcosmos.flows.model.IRuleEngineAction;
-import net.smartcosmos.flows.pojo.RuleEngineAction;
+import net.smartcosmos.flows.pojo.context.RuleEngineAction;
 
 public final class RuleEngineActionBuilder extends AbstractBuilder<IRuleEngineAction>
 {

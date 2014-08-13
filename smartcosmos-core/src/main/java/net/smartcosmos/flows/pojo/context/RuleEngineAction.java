@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.flows.pojo;
+package net.smartcosmos.flows.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.Preconditions;

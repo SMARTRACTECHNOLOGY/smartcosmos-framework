@@ -17,11 +17,7 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.flows.model;
-
-public enum EngineActionType
-{
-    StartRule,
-    StopRule,
-    ManuallyRunRule
-}
+/**
+ * Collection of SMART COSMOS wide context modeling artifacts.
+ */
+package net.smartcosmos.pojo.context;

@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.profiles.pojo;
+package net.smartcosmos.profiles.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.Preconditions;
