@@ -20,13 +20,13 @@ package net.smartcosmos;
 
 public final class Field
 {
-    public static final String HTTP_HEADER_EVENT = "SnapBundle-Event";
+    public static final String HTTP_HEADER_EVENT = "SmartCosmos-Event";
 
-    public static final String HTTP_HEADER_VIEW = "SnapBundle-View";
+    public static final String HTTP_HEADER_VIEW = "SmartCosmos-View";
 
-    public static final String HTTP_HEADER_START_TIMESTAMP = "SnapBundle-Session-Start";
+    public static final String HTTP_HEADER_START_TIMESTAMP = "SmartCosmos-Session-Start";
 
-    public static final String HTTP_HEADER_STOP_TIMESTAMP = "SnapBundle-Session-Stop";
+    public static final String HTTP_HEADER_STOP_TIMESTAMP = "SmartCosmos-Session-Stop";
 
     /**
      * Use this value to re-assign the null value to a moniker field after it was

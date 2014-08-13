@@ -70,9 +70,9 @@
     </developers>
 
     <scm>
-        <url>scm:git:git@github.com:snapbundle/sdk.git</url>
-        <connection>scm:git:git@github.com:snapbundle/sdk.git</connection>
-        <developerConnection>scm:git:git@github.com:snapbundle/sdk.git</developerConnection>
+        <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/sdk.git</url>
+        <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/sdk.git</connection>
+        <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/sdk.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 

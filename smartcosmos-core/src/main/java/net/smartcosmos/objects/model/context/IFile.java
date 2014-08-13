@@ -55,7 +55,7 @@ public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
     /**
      * Private, internal, secured URL that callers generally do not have permissions
      * to directly access. The URL stored here is served up indirectly through the appropriate
-     * SnapBundle file endpoint.
+     * SMART COSMOS Objects file endpoint.
      *
      * @return Internal, private, secure, and typically inaccessible internally managed URL
      * depicting where the file is stored
@@ -92,7 +92,7 @@ public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
      * &nbsp;&nbsp;&nbsp;&nbsp;"entityReferenceType": "ObjectInteraction",<br/>
      * &nbsp;&nbsp;&nbsp;&nbsp;"fileUrn": "urn:uuid:5655cf2d-a843-4d7b-941d-c3abe70a007b",<br/>
      * &nbsp;&nbsp;&nbsp;&nbsp;"referenceUrn": "urn:uuid:6889da4e-7fed-49b5-821b-b5a9f06740d4",<br/>
-     * &nbsp;&nbsp;&nbsp;&nbsp;"url": "https://net.tagdynamics.snapbundle.stage.s3.amazonaws.blahblahblahblah/file.mp4"<br/>
+     * &nbsp;&nbsp;&nbsp;&nbsp;"url": "https://net.smartcosmos.objects.stage.s3.amazonaws.blahblahblahblah/file.mp4"<br/>
      * &nbsp;&nbsp;}<br/>
      * }</code><br/>
      *

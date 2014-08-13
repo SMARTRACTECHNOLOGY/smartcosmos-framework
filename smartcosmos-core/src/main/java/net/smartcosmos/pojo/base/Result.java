@@ -20,7 +20,7 @@
 package net.smartcosmos.pojo.base;
 
 /**
- * Collection of standardized {@link ResponseEntity#getCode()} values returned from the SnapBundle platform. Each code
+ * Collection of standardized {@link ResponseEntity#getCode()} values returned from the SMART COSMOS Objects platform. Each code
  * is mapped to a substitution string used to create consistently worded error messages.
  * <p/>
  * Effectively, any {@link ResponseEntity#getCode()} value less than zero is an error condition.

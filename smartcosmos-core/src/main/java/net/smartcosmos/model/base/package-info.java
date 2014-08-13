@@ -18,6 +18,6 @@
  */
 
 /**
- * Foundational interfaces from which the entire SnapBundle object model is derived.
+ * Foundational interfaces from which the entire SMART COSMOS object model is derived.
  */
 package net.smartcosmos.model.base;

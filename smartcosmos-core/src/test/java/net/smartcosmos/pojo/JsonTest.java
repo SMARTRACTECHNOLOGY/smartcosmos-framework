@@ -1,6 +1,8 @@
 /*
- * SnapBundle SDK
- * (C) Copyright 2013-2014 Tag Dynamics, LLC (http://tagdynamics.com/)
+ * SMART COSMOS SDK
+ * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
+ * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
+ * All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +43,7 @@ public class JsonTest
     @Test
     public void testAccount() throws IOException
     {
-        String urn = "com.tagdynamics";
+        String urn = "net.smartcosmos";
         String name = "Test Account";
         String description = "My test Description";
 

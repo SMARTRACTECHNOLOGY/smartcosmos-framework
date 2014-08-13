@@ -19,9 +19,9 @@
 package net.smartcosmos.model.base;
 
 /**
- * Sole means of uniquely identifying a specific object in the SnapBundle platform. Developers must not rely on
+ * Sole means of uniquely identifying a specific object in the SMART COSMOS platform. Developers must not rely on
  * the {@link IDomainResource#getUniqueId()} value, as neither its uniqueness nor
- * consistency is guaranteed by the SnapBundle platform.
+ * consistency is guaranteed by the SMART COSMOS platform.
  */
 public interface IUrnNamespace
 {

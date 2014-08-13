@@ -20,7 +20,7 @@
 package net.smartcosmos.util.json;
 
 /**
- * Defines a view hierarchy for SnapBundle JSON serialization that selectively includes (or excludes)
+ * Defines a view hierarchy for SMART COSMOS JSON serialization that selectively includes (or excludes)
  * certain verbose fields when perform a JSON conversion operation.
  *
  * @see JsonUtil

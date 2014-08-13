@@ -28,7 +28,7 @@ import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
 
 /**
- * Represents an HTTP/S integration endpoint POJO that SnapBundle uses to push SnapBundle events in JSON form
+ * Represents an HTTP/S integration endpoint POJO that SMART COSMOS uses to push SMART COSMOS events in JSON form
  * in near real-time. These endpoints are used for back office integration and 3rd party extension integration.
  */
 public class NotificationEndpoint extends ReferentialObject<INotificationEndpoint> implements INotificationEndpoint

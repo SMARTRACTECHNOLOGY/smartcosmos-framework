@@ -20,7 +20,7 @@
 package net.smartcosmos.util.json;
 
 /**
- * Defines a view hierarchy for SnapBundle JSON serialization as enums for easy switching
+ * Defines a view hierarchy for SMART COSMOS JSON serialization as enums for easy switching
  * and rapid interpretation from Stringified view names.
  *
  * @see JsonUtil

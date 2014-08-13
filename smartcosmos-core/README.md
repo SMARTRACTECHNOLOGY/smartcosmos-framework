@@ -5,25 +5,25 @@
   * The latest stable Model SDK JavaDoc can be found at [http://snapbundle.github.io/sdk/stable/index.html](http://snapbundle.github.io/sdk/stable/index.html "SnapBundle Stable Model SDK").
 
 # Maven
-Java developers that rely on Maven can access the SnapBundle Model SDK using the following coordinates:
+Java developers that rely on Maven can access the SMART COSMOS™ Model SDK using the following coordinates:
 
     <dependency>
-      <groupId>com.tagdynamics</groupId>
-      <artifactId>snap-model</artifactId>
+      <groupId>net.smartcosmos</groupId>
+      <artifactId>sdk</artifactId>
       <version>2.7</version>
     </dependency>
 
-Likewise, Java developers who want to use the SnapBundle Client library for easy access to the platform, eliminating the
-need to deal directly with HTTP, JSON, and REST calls, the Maven coordinates are:
+Likewise, Java developers who want to use the SMART COSMOS™ Client library for easy access to the platform, eliminating
+the need to deal directly with HTTP, JSON, and REST calls, the Maven coordinates are:
 
     <dependency>
-      <groupId>com.tagdynamics</groupId>
-      <artifactId>snap-client</artifactId>
+      <groupId>net.smartcosmos</groupId>
+      <artifactId>client</artifactId>
       <version>1.3</version>
     </dependency>
 
 ### Extension Architecture
-The SnapBundle platform was designed from scratch with a plugin model; we call them *extensions*. Remember how we said
+The SMART COSMOS™ platform was designed from scratch with a plugin model; we call them *extensions*. Remember how we said
 that we aren't an analytical engine? We aren't, but maybe you are. Use any modern language- Python, Ruby, Java, .NET, or
 anything that can talk to us using HTTP and JSON. We built our authorization model around the
 [OAuth 2.0 Specification (RFC 6749)](http://tools.ietf.org/html/rfc6749 "OAuth 2.0 Specification"), and data owners can

@@ -20,7 +20,7 @@
 package net.smartcosmos.model.event;
 
 /**
- * Collection of SnapBundle events that capture virtually all interactions between a user and the platform. In
+ * Collection of SMART COSMOS events that capture virtually all interactions between a user and the platform. In
  * many ways, the event mechanism that powers the integration features also indirectly provides a complete
  * audit of user activities.
  */

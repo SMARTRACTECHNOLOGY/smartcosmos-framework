@@ -21,7 +21,7 @@ package net.smartcosmos.model.base;
 /**
  * Arbitrary textual field that is guaranteed to <b>never</b> be directly interpreted by the platform. Monikers are
  * provided to developers to store additional contextual data outside of the scope defined by the platform. A typical
- * usage is to store an external system alias or key, linking the SnapBundle entity to an entity managed and stored
+ * usage is to store an external system alias or key, linking the SMART COSMOS entity to an entity managed and stored
  * outside of the platform.
  * <p/>
  * If a moniker value is assigned, it can be reset to its original (default) null value by passing in the special

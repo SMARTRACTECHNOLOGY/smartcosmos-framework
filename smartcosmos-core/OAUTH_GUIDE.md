@@ -1,6 +1,6 @@
 # OAuth 2.0 Guide
 
-Every SnapBundle™ Extension connects to the SnapBundle™ platform using [OAuth 2.0](http://oauth.net/2/ "OAuth 2.0 Reference"), a standard used by most APIs for authenticating and authorizing users. This guide will walk you through authenticating an Extension that wishes to use the SnapBundle™ API.
+Every SMART COSMOS™ Extension connects to the SMART COSMOS™ platform using [OAuth 2.0](http://oauth.net/2/ "OAuth 2.0 Reference"), a standard used by most APIs for authenticating and authorizing users. This guide will walk you through authenticating an Extension that wishes to use the SMART COSMOS™ API.
 
 **Testing:** When the Account administrator toggles on [Development mode](DEVELOPMENT_MODE.md "Development Mode"), the `redirect_uri` for an Extension may be set to one of following local http endpoints suitable for development:     
 
@@ -13,7 +13,7 @@ Every _production_ Extension **must** have an HTTPS endpoint URL, or it will be 
 ## Sample End-to-End OAuth Test
 ### Leg 1: Initiate the authentication and authorization process
 
-Perform a `GET` or a `POST`  to `https://snapbundle.tagdynamics.net/v1/oauth2/authorize` with the following parameters:
+Perform a `GET` or a `POST`  to `https://objects.smartcosmos.net/v1/oauth2/authorize` with the following parameters:
 
 
 ### Leg 2: Exchange the Authorization Code for a Bearer Access Token
@@ -37,7 +37,7 @@ Perform a `GET` or a `POST`  to `https://snapbundle.tagdynamics.net/v1/oauth2/au
 {
    "urn" : "urn:uuid:d5fc741f-e6a7-48b6-bb40-631a1139c75c",
    "name" : "hostaccount.com Account",
-   "description" : "Your SnapBundle(TM) Account",
+   "description" : "Your SMART COSMOS(TM) Account",
    "activeFlag" : true,
    "encodedPublicKey" : "308201b73082012c06072a8648ce3804013082011f02818100fd7f53811d75122952df4a9c2eece4e7f611b7523cef4400c31e3f80b6512669455d402251fb593d8d58fabfc5f5ba30f6cb9b556cd7813b801d346ff26660b76b9950a5a49f9fe8047b1022c24fbba9d7feb7c61bf83b57e7c6a8a6150f04fb83f6d3c51ec3023554135a169132f675f3ae2b61d72aeff22203199dd14801c70215009760508f15230bccb292b982a2eb840bf0581cf502818100f7e1a085d69b3ddecbbcab5c36b857b97994afbbfa3aea82f9574c0b3d0782675159578ebad4594fe67107108180b449167123e84c281613b7cf09328cc8a6e13c167a8b547c8d28e0a3ae1e2bb3a675916ea37f0bfa213562f1fb627a01243bcca4f1bea8519089a883dfe15ae59f06928b665e807b552564014c3bfecf492a038184000281806d33b405e7a36a443f8b17e11f7f4089ec46437524c15cb4985e163b71bef625959c0ebecb135e76e25b369c31a6cedfcdf8e04dc9d84103b84269a1a0cad59b32a0bece1f8a3a638b51a093065b51c87388ef3a1945962b8bdccf736bbb54cb35c766b2f07778d2e5ef70178d6fa23903b7ffef806ad7f41d75afd5971cf94c"
 }
@@ -65,7 +65,7 @@ Perform a `GET` or a `POST`  to `https://snapbundle.tagdynamics.net/v1/oauth2/au
 {
    "urn" : "urn:uuid:d5fc741f-e6a7-48b6-bb40-631a1139c75c",
    "name" : "hostaccount.com Account",
-   "description" : "Your SnapBundle(TM) Account",
+   "description" : "Your SMART COSMOS(TM) Account",
    "activeFlag" : true,
    "encodedPublicKey" : "308201b73082012c06072a8648ce3804013082011f02818100fd7f53811d75122952df4a9c2eece4e7f611b7523cef4400c31e3f80b6512669455d402251fb593d8d58fabfc5f5ba30f6cb9b556cd7813b801d346ff26660b76b9950a5a49f9fe8047b1022c24fbba9d7feb7c61bf83b57e7c6a8a6150f04fb83f6d3c51ec3023554135a169132f675f3ae2b61d72aeff22203199dd14801c70215009760508f15230bccb292b982a2eb840bf0581cf502818100f7e1a085d69b3ddecbbcab5c36b857b97994afbbfa3aea82f9574c0b3d0782675159578ebad4594fe67107108180b449167123e84c281613b7cf09328cc8a6e13c167a8b547c8d28e0a3ae1e2bb3a675916ea37f0bfa213562f1fb627a01243bcca4f1bea8519089a883dfe15ae59f06928b665e807b552564014c3bfecf492a038184000281806d33b405e7a36a443f8b17e11f7f4089ec46437524c15cb4985e163b71bef625959c0ebecb135e76e25b369c31a6cedfcdf8e04dc9d84103b84269a1a0cad59b32a0bece1f8a3a638b51a093065b51c87388ef3a1945962b8bdccf736bbb54cb35c766b2f07778d2e5ef70178d6fa23903b7ffef806ad7f41d75afd5971cf94c"
 }

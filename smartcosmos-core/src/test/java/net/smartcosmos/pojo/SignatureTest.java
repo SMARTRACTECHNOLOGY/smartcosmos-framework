@@ -1,6 +1,8 @@
 /*
- * SnapBundle SDK
- * (C) Copyright 2013-2014 Tag Dynamics, LLC (http://tagdynamics.com/)
+ * SMART COSMOS SDK
+ * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
+ * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
+ * All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
