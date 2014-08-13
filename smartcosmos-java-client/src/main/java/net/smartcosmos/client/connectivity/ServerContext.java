@@ -25,8 +25,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Defines a SMART COSMOS server context consisting of an email address, credentials, and a server location, where the
  * credentials are optional in those situations where a public (non-protected) endpoint is being invoked. Examples of
- * public (non-protected) endpoints include the use of {@link net.smartcosmos.client.registration.IRegistrationClient}
- * and the encode/decode operations defined by {@link net.smartcosmos.client.metadata.IMetadataClient}.
+ * public (non-protected) endpoints include the use of {@link net.smartcosmos.client.common.registration.IRegistrationClient}
+ * and the encode/decode operations defined by {@link net.smartcosmos.client.common.metadata.IMetadataClient}.
  * <p/>
  * The default {@link #getServerUrl()} is <b>https://objects.smartcosmos.net</b>
  */

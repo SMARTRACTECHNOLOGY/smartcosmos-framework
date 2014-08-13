@@ -163,14 +163,20 @@
                         <configuration>
                             <groups>
                                 <group>
-                                    <title>Entity Clients</title>
+                                    <title>SMART COSMOS Connectivity</title>
+                                    <packages>net.smartcosmos.client.connectivity</packages>
+                                </group>
+                                <group>
+                                    <title>SMART COSMOS Common Clients</title>
                                     <packages>
-                                        net.smartcosmos.client.account:net.smartcosmos.client.device:net.smartcosmos.client.event:net.smartcosmos.client.extension:net.smartcosmos.client.file:net.smartcosmos.client.geospatial:net.smartcosmos.client.interaction*:net.smartcosmos.client.metadata:net.smartcosmos.client.object*:net.smartcosmos.client.registration:net.smartcosmos.client.relationship:net.smartcosmos.client.tag:net.smartcosmos.client.timeline:net.smartcosmos.client.user
+                                        net.smartcosmos.client.common.account:net.smartcosmos.client.common.event:net.smartcosmos.client.common.metadata:net.smartcosmos.client.common.registration:net.smartcosmos.client.common.user
                                     </packages>
                                 </group>
                                 <group>
-                                    <title>Connectivity</title>
-                                    <packages>net.smartcosmos.client.connectivity</packages>
+                                    <title>SMART COSMOS Objects Clients</title>
+                                    <packages>
+                                        net.smartcosmos.client.objects.device:net.smartcosmos.client.objects.extension:net.smartcosmos.client.objects.file:net.smartcosmos.client.objects.geospatial:net.smartcosmos.client.objects.interaction*:net.smartcosmos.client.objects.object*:net.smartcosmos.client.objects.relationship:net.smartcosmos.client.objects.tag:net.smartcosmos.client.objects.timeline
+                                    </packages>
                                 </group>
                                 <group>
                                     <title>Private Implementation</title>
