@@ -23,26 +23,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Defines a SnapBundle server context consisting of an email address, credentials, and a server location, where the
+ * Defines a SMART COSMOS server context consisting of an email address, credentials, and a server location, where the
  * credentials are optional in those situations where a public (non-protected) endpoint is being invoked. Examples of
  * public (non-protected) endpoints include the use of {@link net.smartcosmos.client.registration.IRegistrationClient}
  * and the encode/decode operations defined by {@link net.smartcosmos.client.metadata.IMetadataClient}.
  * <p/>
- * The default {@link #getServerUrl()} is <b>https://snapbundle.tagdynamics.net</b>
+ * The default {@link #getServerUrl()} is <b>https://objects.smartcosmos.net</b>
  */
 public final class ServerContext
 {
     final static Logger LOGGER = LoggerFactory.getLogger(ServerContext.class);
 
     // TODO: Update to HTTPS once the cert is installed at the AWS load balancer
-    private String server = "http://snapbundle.tagdynamics.net:8080";
+    private String server = "http://objects.smartcosmos.net:8080";
 
     private String emailAddress;
 
     private String credentials;
 
     /**
-     * Defines a SnapBundle server context using the default SnapBundle server location with no
+     * Defines a SMART COSMOS server context using the default SMART COSMOS server location with no
      * authentication credentials (suitable for accessing public endpoints).
      */
     public ServerContext()
@@ -52,7 +52,7 @@ public final class ServerContext
     }
 
     /**
-     * Defines a SnapBundle server context using the default SnapBundle server location.
+     * Defines a SMART COSMOS server context using the default SMART COSMOS server location.
      *
      * @param emailAddress Email address
      * @param credentials  Credentials
@@ -63,7 +63,7 @@ public final class ServerContext
     }
 
     /**
-     * Defines a SnapBundle server context using a specific SnapBundle server location.
+     * Defines a SMART COSMOS server context using a specific SMART COSMOS server location.
      *
      * @param emailAddress Email address
      * @param credentials  Credentials

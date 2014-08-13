@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.Collection;
 
 /**
- * Type-safe upsert routines for SnapBundle entities either by upserting an explicit strongly typed instance or
+ * Type-safe upsert routines for SMART COSMOS entities either by upserting an explicit strongly typed instance or
  * through a more fluid JSON definition. Upsert is a hybrid operation that checks to see if a specific key already
  * exists in order to choose between either an <b>up</b>date or an in<b>sert</b> operation.
  * <p/>
@@ -44,7 +44,7 @@ import java.util.Collection;
  * method, so generally it isn't necessary to explicitly remember the system-generated URN, which is especially true
  * for upsertable entities.
  *
- * @param <T> One of the upsertable SnapBundle contextual entities.
+ * @param <T> One of the upsertable SMART COSMOS contextual entities.
  * @see net.smartcosmos.model.context.IMetadata
  * @see net.smartcosmos.objects.model.context.IRelationship
  * @see net.smartcosmos.objects.model.context.ITag

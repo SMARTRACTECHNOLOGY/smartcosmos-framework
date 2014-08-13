@@ -23,7 +23,7 @@ import net.smartcosmos.client.connectivity.ServiceException;
 import org.json.JSONObject;
 
 /**
- * Type-safe deletion routines for SnapBundle entities that support permanent removal. Deletion is predicated strictly
+ * Type-safe deletion routines for SMART COSMOS entities that support permanent removal. Deletion is predicated strictly
  * upon providing a valid system-assigned URN; if either a type-safe instance or a JSONObject is provided, only the
  * {@link net.smartcosmos.model.base.IUrnNamespace#getUrn()} method or {@link net.smartcosmos.Field#URN_FIELD} field is
  * utilized by the deletion routines.
@@ -32,7 +32,7 @@ import org.json.JSONObject;
  * {@link net.smartcosmos.objects.model.context.IObject} are explicitly preserved for historical reporting purposes and should be
  * set inactive with the {@link net.smartcosmos.model.base.INamedObject#setActive(boolean)} method.
  *
- * @param <T> One of the deletable SnapBundle contextual entities.
+ * @param <T> One of the deletable SMART COSMOS contextual entities.
  * @see net.smartcosmos.objects.model.context.IFile
  * @see net.smartcosmos.objects.model.extension.IExtension
  * @see net.smartcosmos.model.context.IMetadata

@@ -23,9 +23,9 @@ import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.util.json.ViewType;
 
 /**
- * Locates a single, specific SnapBundle entity by its system-assigned URN.
+ * Locates a single, specific SMART COSMOS entity by its system-assigned URN.
  *
- * @param <T> One of the SnapBundle contextual entities.
+ * @param <T> One of the SMART COSMOS contextual entities.
  * @see net.smartcosmos.objects.model.extension.IExtension
  * @see net.smartcosmos.objects.model.context.IDevice
  * @see net.smartcosmos.objects.model.context.IFile

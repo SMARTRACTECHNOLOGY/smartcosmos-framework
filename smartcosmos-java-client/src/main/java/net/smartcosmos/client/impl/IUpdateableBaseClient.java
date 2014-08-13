@@ -23,7 +23,7 @@ import net.smartcosmos.client.connectivity.ServiceException;
 import org.json.JSONObject;
 
 /**
- * Type-safe update routines for SnapBundle entities either by providing an explicit strongly typed instance or
+ * Type-safe update routines for SMART COSMOS entities either by providing an explicit strongly typed instance or
  * through a more fluid JSON definition. An update operation is predicated strictly upon providing a valid
  * system-assigned URN; if either a type-safe instance or a JSONObject is provided, only the
  * {@link net.smartcosmos.model.base.IUrnNamespace#getUrn()} method or {@link net.smartcosmos.Field#URN_FIELD} field is
@@ -33,7 +33,7 @@ import org.json.JSONObject;
  * <b>NOTE:</b> For details on how to reset an entity's moniker field back to a <code>NULL</code> value after it has been assigned
  * a non-null value, please refer to the class {@link net.smartcosmos.model.base.IMoniker} JavaDocs.
  *
- * @param <T> One of the updateable SnapBundle contextual entities.
+ * @param <T> One of the updateable SMART COSMOS contextual entities.
  * @see net.smartcosmos.objects.model.extension.IExtension
  * @see net.smartcosmos.objects.model.context.IDevice
  * @see net.smartcosmos.objects.model.geo.IGeospatialEntry

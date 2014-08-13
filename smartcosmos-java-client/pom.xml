@@ -61,16 +61,16 @@
     </repositories>
 
     <organization>
-        <name>Tag Dynamics, LLC</name>
-        <url>http://www.tagdynamics.com</url>
+        <name>SMARTRAC, N.V.</name>
+        <url>http://www.smartrac-group.com</url>
     </organization>
 
     <developers>
         <developer>
-            <id>tagd.engineering</id>
-            <name>Tag Dynamics</name>
-            <email>engineering@tagdynamics.net</email>
-            <organization>Tag Dynamics, LLC</organization>
+            <id>cloud.engineering</id>
+            <name>SMARTRAC</name>
+            <email>api@smartrac-group.com</email>
+            <organization>SMARTRAC, N.V.</organization>
             <timezone>-5</timezone>
             <roles>
                 <role>Project Lead</role>
@@ -79,9 +79,9 @@
     </developers>
 
     <scm>
-        <url>scm:git:git@github.com:snapbundle/client.git</url>
-        <connection>scm:git:git@github.com:snapbundle/client.git</connection>
-        <developerConnection>scm:git:git@github.com:snapbundle/client.git</developerConnection>
+        <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/client.git</url>
+        <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/client.git</connection>
+        <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/client.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 

@@ -24,7 +24,7 @@ import net.smartcosmos.pojo.base.ResponseEntity;
 import org.json.JSONObject;
 
 /**
- * Type-safe creation routines for SnapBundle entities either by providing an explicit strongly typed instance or
+ * Type-safe creation routines for SMART COSMOS entities either by providing an explicit strongly typed instance or
  * through a more fluid JSON definition.
  * <p/>
  * Every creatable entity will be assigned a system-generated URN. Most clients provide additional search methods
