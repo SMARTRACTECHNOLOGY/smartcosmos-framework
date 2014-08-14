@@ -21,9 +21,9 @@ package net.smartcosmos.flows.builder;
 
 import com.google.common.base.Preconditions;
 import net.smartcosmos.builder.AbstractBuilder;
-import net.smartcosmos.flows.model.EngineActionType;
-import net.smartcosmos.flows.model.IRule;
-import net.smartcosmos.flows.model.IRuleEngineAction;
+import net.smartcosmos.flows.model.context.EngineActionType;
+import net.smartcosmos.flows.model.context.IRule;
+import net.smartcosmos.flows.model.context.IRuleEngineAction;
 import net.smartcosmos.flows.pojo.context.RuleEngineAction;
 
 public final class RuleEngineActionBuilder extends AbstractBuilder<IRuleEngineAction>
