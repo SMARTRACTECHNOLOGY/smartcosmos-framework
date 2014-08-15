@@ -22,6 +22,8 @@ package net.smartcosmos.catalogs.model.context;
 import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.base.INamedObject;
 
+import java.util.Collection;
+
 public interface IChapterSection extends IAccountDomainResource<IChapterSection>, INamedObject<IChapterSection>
 {
     ILibrary getLibrary();
@@ -39,4 +41,9 @@ public interface IChapterSection extends IAccountDomainResource<IChapterSection>
     IChapter getChapter();
 
     void setChapter(IChapter chapter);
+
+    IChapterSection addPage(IPage page);
+
+    Collection<IPage> getPages();
+
 }

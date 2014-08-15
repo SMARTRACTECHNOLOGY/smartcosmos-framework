@@ -21,6 +21,8 @@ package net.smartcosmos.catalogs.model.context;
 
 import net.smartcosmos.model.base.IAccountDomainResource;
 
+import java.util.Collection;
+
 public interface IPage extends IAccountDomainResource<IPage>
 {
     ILibrary getLibrary();
@@ -46,4 +48,8 @@ public interface IPage extends IAccountDomainResource<IPage>
     int getPageNumber();
 
     void setPageNumber(int pageNumber);
+
+    IPage addPageEntry(IPageEntry pageEntry);
+
+    Collection<IPageEntry> getPageEntries();
 }

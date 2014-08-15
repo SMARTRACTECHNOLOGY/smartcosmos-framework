@@ -20,22 +20,31 @@
 package net.smartcosmos.catalogs.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.base.Preconditions;
 import net.smartcosmos.catalogs.model.context.IBook;
+import net.smartcosmos.catalogs.model.context.IChapter;
 import net.smartcosmos.catalogs.model.context.ILibrary;
 import net.smartcosmos.catalogs.model.context.IShelf;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Book extends AccountTypedNamedObject<IBook> implements IBook
 {
     @JsonView(JsonGenerationView.Minimum.class)
     protected String bookUrn;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected ILibrary library;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IShelf shelf;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    protected Collection<IChapter> chapters = new ArrayList<>();
 
     @Override
     public ILibrary getLibrary()
@@ -71,5 +80,19 @@ public class Book extends AccountTypedNamedObject<IBook> implements IBook
     public void setBookUrn(String bookUrn)
     {
         this.bookUrn = bookUrn;
+    }
+
+    @Override
+    public IBook addChapter(IChapter chapter)
+    {
+        Preconditions.checkNotNull(chapter, "chapter must not be null");
+        chapters.add(chapter);
+        return this;
+    }
+
+    @Override
+    public Collection<IChapter> getChapters()
+    {
+        return Collections.unmodifiableCollection(chapters);
     }
 }

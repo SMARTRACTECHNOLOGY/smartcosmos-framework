@@ -22,6 +22,7 @@ package net.smartcosmos.catalogs.model.context;
 import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.model.base.ITypedObject;
+import net.smartcosmos.objects.model.context.IObject;
 
 /**
  * Use an {@link net.smartcosmos.objects.model.context.IRelationship} to create
@@ -58,4 +59,8 @@ public interface IPageEntry extends IAccountDomainResource<IPageEntry>, INamedOb
     IPage getPage();
 
     void setPage(IPage page);
+
+    IObject getObject();
+
+    void setObject(IObject object);
 }

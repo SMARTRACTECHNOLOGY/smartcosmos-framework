@@ -25,12 +25,18 @@ import net.smartcosmos.catalogs.model.context.IBook;
 import net.smartcosmos.catalogs.model.context.IChapter;
 import net.smartcosmos.catalogs.model.context.IChapterSection;
 import net.smartcosmos.catalogs.model.context.ILibrary;
+import net.smartcosmos.catalogs.model.context.IPage;
 import net.smartcosmos.catalogs.model.context.IShelf;
 import net.smartcosmos.catalogs.pojo.context.ChapterSection;
 import net.smartcosmos.model.context.IAccount;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class ChapterSectionBuilder extends AbstractNamedObjectBuilder<IChapterSection, ChapterSectionBuilder>
 {
+    private Collection<PageBuilder> builders = new ArrayList<>();
+
     public ChapterSectionBuilder()
     {
         super(new ChapterSection());
@@ -43,6 +49,7 @@ public class ChapterSectionBuilder extends AbstractNamedObjectBuilder<IChapterSe
         instance.setShelf(chapter.getShelf());
         instance.setBook(chapter.getBook());
         instance.setChapter(chapter);
+        instance.setAccount(chapter.getAccount());
     }
 
     public ChapterSectionBuilder setLibrary(ILibrary library)
@@ -73,6 +80,33 @@ public class ChapterSectionBuilder extends AbstractNamedObjectBuilder<IChapterSe
     {
         instance.setAccount(account);
         return this;
+    }
+
+    public ChapterSectionBuilder addPage(IPage page)
+    {
+        instance.addPage(page);
+        return this;
+    }
+
+    public ChapterSectionBuilder addPage(PageBuilder builder)
+    {
+        Preconditions.checkNotNull(builder);
+        builders.add(builder);
+        return this;
+    }
+
+    @Override
+    protected void onInject()
+    {
+        for (PageBuilder builder : builders)
+        {
+            builder.setLibrary(instance.getLibrary());
+            builder.setShelf(instance.getShelf());
+            builder.setBook(instance.getBook());
+            builder.setChapter(instance.getChapter());
+            builder.setChapterSection(instance);
+            addPage(builder.build());
+        }
     }
 
     @Override

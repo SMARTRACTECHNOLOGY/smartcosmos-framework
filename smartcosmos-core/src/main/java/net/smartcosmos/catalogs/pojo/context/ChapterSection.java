@@ -20,27 +20,36 @@
 package net.smartcosmos.catalogs.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.base.Preconditions;
 import net.smartcosmos.catalogs.model.context.IBook;
 import net.smartcosmos.catalogs.model.context.IChapter;
 import net.smartcosmos.catalogs.model.context.IChapterSection;
 import net.smartcosmos.catalogs.model.context.ILibrary;
+import net.smartcosmos.catalogs.model.context.IPage;
 import net.smartcosmos.catalogs.model.context.IShelf;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 public class ChapterSection extends AccountTypedNamedObject<IChapterSection> implements IChapterSection
 {
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected ILibrary library;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IShelf shelf;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IBook book;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IChapter chapter;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    protected Collection<IPage> pages = new ArrayList<>();
 
     @Override
     public ILibrary getLibrary()
@@ -88,5 +97,19 @@ public class ChapterSection extends AccountTypedNamedObject<IChapterSection> imp
     public void setChapter(IChapter chapter)
     {
         this.chapter = chapter;
+    }
+
+    @Override
+    public IChapterSection addPage(IPage page)
+    {
+        Preconditions.checkNotNull(page, "page must not be null");
+        pages.add(page);
+        return this;
+    }
+
+    @Override
+    public Collection<IPage> getPages()
+    {
+        return Collections.unmodifiableCollection(pages);
     }
 }

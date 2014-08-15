@@ -27,28 +27,32 @@ import net.smartcosmos.catalogs.model.context.ILibrary;
 import net.smartcosmos.catalogs.model.context.IPage;
 import net.smartcosmos.catalogs.model.context.IPageEntry;
 import net.smartcosmos.catalogs.model.context.IShelf;
+import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
 public class PageEntry extends AccountTypedNamedObject<IPageEntry> implements IPageEntry
 {
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected ILibrary library;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IShelf shelf;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IBook book;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IChapter chapter;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IChapterSection chapterSection;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IPage page;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    protected IObject object;
 
     @Override
     public ILibrary getLibrary()
@@ -120,5 +124,17 @@ public class PageEntry extends AccountTypedNamedObject<IPageEntry> implements IP
     public void setPage(IPage page)
     {
         this.page = page;
+    }
+
+    @Override
+    public IObject getObject()
+    {
+        return object;
+    }
+
+    @Override
+    public void setObject(IObject object)
+    {
+        this.object = object;
     }
 }

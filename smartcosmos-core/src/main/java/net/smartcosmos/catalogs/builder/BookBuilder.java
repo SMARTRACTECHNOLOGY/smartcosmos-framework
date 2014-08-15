@@ -22,13 +22,24 @@ package net.smartcosmos.catalogs.builder;
 import com.google.common.base.Preconditions;
 import net.smartcosmos.builder.AbstractNamedObjectBuilder;
 import net.smartcosmos.catalogs.model.context.IBook;
+import net.smartcosmos.catalogs.model.context.IChapter;
 import net.smartcosmos.catalogs.model.context.ILibrary;
 import net.smartcosmos.catalogs.model.context.IShelf;
 import net.smartcosmos.catalogs.pojo.context.Book;
 import net.smartcosmos.model.context.IAccount;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class BookBuilder extends AbstractNamedObjectBuilder<IBook, BookBuilder>
 {
+    private Collection<ChapterBuilder> builders = new ArrayList<>();
+
+    public BookBuilder()
+    {
+        super(new Book());
+    }
+
     public BookBuilder(String bookUrn)
     {
         super(new Book());
@@ -42,6 +53,7 @@ public class BookBuilder extends AbstractNamedObjectBuilder<IBook, BookBuilder>
         super(new Book());
         instance.setLibrary(shelf.getLibrary());
         instance.setShelf(shelf);
+        instance.setAccount(shelf.getAccount());
     }
 
     public BookBuilder setLibrary(ILibrary library)
@@ -66,6 +78,31 @@ public class BookBuilder extends AbstractNamedObjectBuilder<IBook, BookBuilder>
     {
         instance.setType(type);
         return this;
+    }
+
+    public BookBuilder addChapter(IChapter chapter)
+    {
+        instance.addChapter(chapter);
+        return this;
+    }
+
+    public BookBuilder addChapter(ChapterBuilder builder)
+    {
+        Preconditions.checkNotNull(builder);
+        builders.add(builder);
+        return this;
+    }
+
+    @Override
+    protected void onInject()
+    {
+        for (ChapterBuilder builder : builders)
+        {
+            builder.setLibrary(instance.getLibrary());
+            builder.setShelf(instance.getShelf());
+            builder.setBook(instance);
+            addChapter(builder.build());
+        }
     }
 
     @Override

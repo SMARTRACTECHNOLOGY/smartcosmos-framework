@@ -20,34 +20,43 @@
 package net.smartcosmos.catalogs.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.base.Preconditions;
 import net.smartcosmos.catalogs.model.context.IBook;
 import net.smartcosmos.catalogs.model.context.IChapter;
 import net.smartcosmos.catalogs.model.context.IChapterSection;
 import net.smartcosmos.catalogs.model.context.ILibrary;
 import net.smartcosmos.catalogs.model.context.IPage;
+import net.smartcosmos.catalogs.model.context.IPageEntry;
 import net.smartcosmos.catalogs.model.context.IShelf;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 public class Page extends AccountTypedNamedObject<IPage> implements IPage
 {
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected ILibrary library;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IShelf shelf;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IBook book;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IChapter chapter;
 
-    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonView(JsonGenerationView.Restricted.class)
     protected IChapterSection chapterSection;
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected Integer pageNumber;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    protected Collection<IPageEntry> pageEntries = new ArrayList<>();
 
     @Override
     public ILibrary getLibrary()
@@ -119,5 +128,19 @@ public class Page extends AccountTypedNamedObject<IPage> implements IPage
     public void setPageNumber(int pageNumber)
     {
         this.pageNumber = pageNumber;
+    }
+
+    @Override
+    public IPage addPageEntry(IPageEntry pageEntry)
+    {
+        Preconditions.checkNotNull(pageEntry, "pageEntry must not be null");
+        pageEntries.add(pageEntry);
+        return this;
+    }
+
+    @Override
+    public Collection<IPageEntry> getPageEntries()
+    {
+        return Collections.unmodifiableCollection(pageEntries);
     }
 }

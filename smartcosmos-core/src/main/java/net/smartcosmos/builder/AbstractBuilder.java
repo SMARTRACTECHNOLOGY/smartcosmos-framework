@@ -35,11 +35,17 @@ public class AbstractBuilder<T>
 
     public T build()
     {
+        onInject();
         onValidate();
         return instance;
     }
 
     protected void onValidate()
+    {
+
+    }
+
+    protected void onInject()
     {
 
     }

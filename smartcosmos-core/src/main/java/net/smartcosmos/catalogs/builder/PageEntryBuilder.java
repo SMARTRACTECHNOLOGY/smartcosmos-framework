@@ -30,6 +30,7 @@ import net.smartcosmos.catalogs.model.context.IPageEntry;
 import net.smartcosmos.catalogs.model.context.IShelf;
 import net.smartcosmos.catalogs.pojo.context.PageEntry;
 import net.smartcosmos.model.context.IAccount;
+import net.smartcosmos.objects.model.context.IObject;
 
 public class PageEntryBuilder extends AbstractNamedObjectBuilder<IPageEntry, PageEntryBuilder>
 {
@@ -47,6 +48,7 @@ public class PageEntryBuilder extends AbstractNamedObjectBuilder<IPageEntry, Pag
         instance.setChapter(page.getChapter());
         instance.setChapterSection(page.getChapterSection());
         instance.setPage(page);
+        instance.setAccount(page.getAccount());
     }
 
     public PageEntryBuilder setLibrary(ILibrary library)
@@ -85,6 +87,12 @@ public class PageEntryBuilder extends AbstractNamedObjectBuilder<IPageEntry, Pag
         return this;
     }
 
+    public PageEntryBuilder setObject(IObject object)
+    {
+        instance.setObject(object);
+        return this;
+    }
+
     public PageEntryBuilder setAccount(IAccount account)
     {
         instance.setAccount(account);
@@ -100,6 +108,7 @@ public class PageEntryBuilder extends AbstractNamedObjectBuilder<IPageEntry, Pag
         Preconditions.checkNotNull(instance.getChapter());
         Preconditions.checkNotNull(instance.getChapterSection());
         Preconditions.checkNotNull(instance.getPage());
+        Preconditions.checkNotNull(instance.getObject());
     }
 
 }
