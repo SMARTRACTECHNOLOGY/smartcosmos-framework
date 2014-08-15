@@ -20,31 +20,36 @@
 package net.smartcosmos.catalogs.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Preconditions;
 import net.smartcosmos.catalogs.model.context.IBook;
 import net.smartcosmos.catalogs.model.context.IChapter;
 import net.smartcosmos.catalogs.model.context.IChapterSection;
 import net.smartcosmos.catalogs.model.context.ILibrary;
 import net.smartcosmos.catalogs.model.context.IShelf;
-import net.smartcosmos.pojo.base.AccountTypedNamedObject;
+import net.smartcosmos.pojo.base.AccountNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class Chapter extends AccountTypedNamedObject<IChapter> implements IChapter
+public class Chapter extends AccountNamedObject<IChapter> implements IChapter
 {
     @JsonView(JsonGenerationView.Restricted.class)
+    @JsonDeserialize(as = Library.class)
     protected ILibrary library;
 
     @JsonView(JsonGenerationView.Restricted.class)
+    @JsonDeserialize(as = Shelf.class)
     protected IShelf shelf;
 
     @JsonView(JsonGenerationView.Restricted.class)
+    @JsonDeserialize(as = Book.class)
     protected IBook book;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @JsonDeserialize(contentAs = ChapterSection.class)
     protected Collection<IChapterSection> chapterSections = new ArrayList<>();
 
     @Override

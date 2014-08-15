@@ -87,6 +87,12 @@ public class PageEntryBuilder extends AbstractNamedObjectBuilder<IPageEntry, Pag
         return this;
     }
 
+    public PageEntryBuilder setType(String type)
+    {
+        instance.setType(type);
+        return this;
+    }
+
     public PageEntryBuilder setObject(IObject object)
     {
         instance.setObject(object);
@@ -102,6 +108,8 @@ public class PageEntryBuilder extends AbstractNamedObjectBuilder<IPageEntry, Pag
     @Override
     protected void onValidate()
     {
+        Preconditions.checkNotNull(instance.getType(), "type must not be null");
+
         Preconditions.checkNotNull(instance.getLibrary());
         Preconditions.checkNotNull(instance.getShelf());
         Preconditions.checkNotNull(instance.getBook());

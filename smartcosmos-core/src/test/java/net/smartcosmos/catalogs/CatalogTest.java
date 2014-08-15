@@ -29,6 +29,7 @@ import net.smartcosmos.catalogs.builder.PageBuilder;
 import net.smartcosmos.catalogs.builder.PageEntryBuilder;
 import net.smartcosmos.catalogs.builder.ShelfBuilder;
 import net.smartcosmos.catalogs.model.context.ILibrary;
+import net.smartcosmos.catalogs.pojo.context.Library;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.objects.builder.ObjectBuilder;
 import net.smartcosmos.pojo.context.Account;
@@ -40,6 +41,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertTrue;
 
+@Test(sequential = true, singleThreaded = true)
 public class CatalogTest
 {
     private static ObjectMapper mapper = new ObjectMapper();
@@ -49,8 +51,10 @@ public class CatalogTest
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
     }
 
+    private String json;
+
     @Test
-    public void testLibrary() throws IOException
+    public void testSerialization() throws IOException
     {
         String urn = "net.smartcosmos";
         String name = "Test Account";
@@ -85,6 +89,8 @@ public class CatalogTest
                                                         .setPageNumber(1)
 
                                                         .addPageEntry(new PageEntryBuilder()
+                                                                .setName("foo entry")
+                                                                .setType("foo-type")
                                                                 .setObject(new ObjectBuilder("urn:uuid:abc123")
                                                                         .setType("foo")
                                                                         .build()))))
@@ -110,10 +116,21 @@ public class CatalogTest
                 .build();
 
 
-        String json = JsonUtil.toJson(library, JsonGenerationView.Full.class);
+        json = JsonUtil.toJson(library, JsonGenerationView.Full.class);
         assertTrue(json != null);
 
         System.out.println(json);
+    }
+
+    @Test(dependsOnMethods = "testSerialization")
+    public void testReadLibrary() throws IOException
+    {
+//        URL url = Resources.getResource(CatalogTest.class, "library.json");
+//        String json = Resources.toString(url, Charsets.UTF_8);
+
+        ILibrary library = mapper.readValue(json, Library.class);
+
+        System.out.println(library.getName());
     }
 
 }

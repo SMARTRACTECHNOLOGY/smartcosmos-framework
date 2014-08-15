@@ -20,6 +20,7 @@
 package net.smartcosmos.catalogs.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Preconditions;
 import net.smartcosmos.catalogs.model.context.ILibrary;
 import net.smartcosmos.catalogs.model.context.IShelf;
@@ -33,6 +34,7 @@ import java.util.Collections;
 public class Library extends AccountTypedNamedObject<ILibrary> implements ILibrary
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @JsonDeserialize(contentAs = Shelf.class)
     protected Collection<IShelf> shelves = new ArrayList<>();
 
     @Override
