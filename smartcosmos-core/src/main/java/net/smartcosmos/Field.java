@@ -162,6 +162,26 @@ public final class Field
 
     public static final String STATE_FIELD = "state";
 
+    //
+    // Catalog Fields
+    //
+    public static final String LIBRARY_FIELD = "library";
+
+    public static final String SHELF_FIELD = "shelf";
+
+    public static final String BOOK_FIELD = "book";
+
+    public static final String BOOK_URN_FIELD = "bookUrn";
+
+    public static final String CHAPTER_FIELD = "chapter";
+
+    public static final String CHAPTER_SECTION_FIELD = "chapterSection";
+
+    public static final String PAGE_FIELD = "page";
+
+    public static final String PAGE_ENTRY_FIELD = "pageEntry";
+
+
     private Field()
     {
     }

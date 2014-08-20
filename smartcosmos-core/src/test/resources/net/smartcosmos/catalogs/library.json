@@ -1,0 +1,148 @@
+{
+    "urn": null,
+    "lastModifiedTimestamp": 0,
+    "moniker": null,
+    "name": "Model Year 2015",
+    "description": "Collection of model year 2015 reference guides",
+    "activeFlag": true,
+    "type": "Vehicle",
+    "account": {
+        "urn": "net.smartcosmos",
+        "lastModifiedTimestamp": 0,
+        "moniker": null,
+        "name": "Test Account",
+        "description": "My test Description",
+        "activeFlag": true
+    }, "shelves": [
+    {
+        "urn": null,
+        "lastModifiedTimestamp": 0,
+        "moniker": null,
+        "name": "Truck Models",
+        "description": null,
+        "activeFlag": true,
+        "type": "Truck",
+        "account": null,
+        "books": [
+            {
+                "urn": null,
+                "lastModifiedTimestamp": 0,
+                "moniker": null,
+                "name": "F-150 Service Guide",
+                "description": null,
+                "activeFlag": true,
+                "type": "F-150",
+                "account": null,
+                "bookUrn": null,
+                "chapters": [
+                    {
+                        "urn": null,
+                        "lastModifiedTimestamp": 0,
+                        "moniker": null,
+                        "name": "Engine Service Guide",
+                        "description": null,
+                        "activeFlag": true,
+                        "account": null,
+                        "chapterSections": [
+                            {
+                                "urn": null,
+                                "lastModifiedTimestamp": 0,
+                                "moniker": null,
+                                "name": "Fluids",
+                                "description": null,
+                                "activeFlag": true,
+                                "account": null,
+                                "pages": [
+                                    {
+                                        "urn": null,
+                                        "lastModifiedTimestamp": 0,
+                                        "moniker": null,
+                                        "account": null,
+                                        "pageNumber": 1,
+                                        "pageEntries": [
+                                            {
+                                                "urn": null,
+                                                "lastModifiedTimestamp": 0,
+                                                "moniker": null,
+                                                "name": "foo entry",
+                                                "description": null,
+                                                "activeFlag": true,
+                                                "type": "foo-type",
+                                                "account": null,
+                                                "object": {
+                                                    "urn": null,
+                                                    "lastModifiedTimestamp": 0,
+                                                    "moniker": null,
+                                                    "name": null,
+                                                    "description": null,
+                                                    "activeFlag": true,
+                                                    "type": "foo",
+                                                    "account": null,
+                                                    "objectUrn": "urn:uuid:abc123"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "urn": null,
+                                "lastModifiedTimestamp": 0,
+                                "moniker": null,
+                                "name": "Belts",
+                                "description": null,
+                                "activeFlag": true,
+                                "account": null,
+                                "pages": []
+                            }
+                        ]
+                    },
+                    {
+                        "urn": null,
+                        "lastModifiedTimestamp": 0,
+                        "moniker": null,
+                        "name": "Interior Service Guide",
+                        "description": null,
+                        "activeFlag": true,
+                        "account": null,
+                        "chapterSections": []
+                    },
+                    {
+                        "urn": null,
+                        "lastModifiedTimestamp": 0,
+                        "moniker": null,
+                        "name": "Exterior Service Guide",
+                        "description": null,
+                        "activeFlag": true,
+                        "account": null,
+                        "chapterSections": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "urn": null,
+        "lastModifiedTimestamp": 0,
+        "moniker": null,
+        "name": "Car Models",
+        "description": null,
+        "activeFlag": true,
+        "type": "Car",
+        "account": null,
+        "books": [
+            {
+                "urn": null,
+                "lastModifiedTimestamp": 0,
+                "moniker": null,
+                "name": "Taurus Service Guide",
+                "description": null,
+                "activeFlag": true,
+                "type": "Taurus",
+                "account": null,
+                "bookUrn": null,
+                "chapters": []
+            }
+        ]
+    }
+]}

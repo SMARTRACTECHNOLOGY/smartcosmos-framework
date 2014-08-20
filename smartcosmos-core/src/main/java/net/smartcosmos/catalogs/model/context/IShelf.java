@@ -17,41 +17,21 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.builder;
+package net.smartcosmos.catalogs.model.context;
 
-/**
- * Generic Builder pattern base class that includes a path for validation and minimum creation definition.
- *
- * @param <T>
- */
-public class AbstractBuilder<T>
+import net.smartcosmos.model.base.IAccountDomainResource;
+import net.smartcosmos.model.base.INamedObject;
+import net.smartcosmos.model.base.ITypedObject;
+
+import java.util.Collection;
+
+public interface IShelf extends IAccountDomainResource<IShelf>, INamedObject<IShelf>, ITypedObject
 {
-    protected final T instance;
+    ILibrary getLibrary();
 
-    protected AbstractBuilder(T instance)
-    {
-        this.instance = instance;
-    }
+    void setLibrary(ILibrary library);
 
-    public T build()
-    {
-        onInject();
-        onValidate();
-        return instance;
-    }
+    IShelf addBook(IBook book);
 
-    protected void onValidate()
-    {
-
-    }
-
-    protected void onInject()
-    {
-
-    }
-
-    public boolean meetsCreationMinimum()
-    {
-        return true;
-    }
+    Collection<IBook> getBooks();
 }

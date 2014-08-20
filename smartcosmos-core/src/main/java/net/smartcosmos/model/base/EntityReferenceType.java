@@ -49,5 +49,10 @@ public enum EntityReferenceType
     Metadata,
     Tag,
     Timeline,
-    Georectification
+    Georectification,
+
+    Library,
+    Shelf,
+    Book,
+    PageEntry
 }
