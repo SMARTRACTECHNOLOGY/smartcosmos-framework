@@ -28,6 +28,7 @@ public abstract class AbstractMonikerBuilder<T extends IMoniker, E> extends Abst
         super(instance);
     }
 
+    @SuppressWarnings("unchecked")
     public E setMoniker(String moniker)
     {
         instance.setMoniker(moniker);
