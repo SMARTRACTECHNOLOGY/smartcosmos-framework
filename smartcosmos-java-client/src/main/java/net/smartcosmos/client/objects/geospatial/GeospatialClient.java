@@ -24,9 +24,9 @@ import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractUpdateableBaseClient;
 import net.smartcosmos.client.impl.command.GetCollectionCommand;
 import net.smartcosmos.client.impl.endpoint.GeospatialEndpoints;
-import net.smartcosmos.objects.model.geo.IGeospatialEntry;
-import net.smartcosmos.objects.pojo.geo.GeospatialEntry;
+import net.smartcosmos.model.geo.IGeospatialEntry;
 import net.smartcosmos.pojo.base.ResponseEntity;
+import net.smartcosmos.pojo.geo.GeospatialEntry;
 import net.smartcosmos.util.json.ViewType;
 import org.json.JSONObject;
 

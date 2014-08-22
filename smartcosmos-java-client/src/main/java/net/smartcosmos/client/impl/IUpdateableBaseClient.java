@@ -34,9 +34,9 @@ import org.json.JSONObject;
  * a non-null value, please refer to the class {@link net.smartcosmos.model.base.IMoniker} JavaDocs.
  *
  * @param <T> One of the updateable SMART COSMOS contextual entities.
- * @see net.smartcosmos.objects.model.extension.IExtension
+ * @see net.smartcosmos.platform.api.extension.IExtension
  * @see net.smartcosmos.objects.model.context.IDevice
- * @see net.smartcosmos.objects.model.geo.IGeospatialEntry
+ * @see net.smartcosmos.platform.api.geo.IGeospatialEntry
  * @see net.smartcosmos.objects.model.context.IObject
  * @see net.smartcosmos.objects.model.context.IObjectAddress
  * @see net.smartcosmos.objects.model.context.IObjectInteractionSession

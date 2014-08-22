@@ -21,13 +21,13 @@ package net.smartcosmos.client.objects.geospatial;
 
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.IUpdateableBaseClient;
-import net.smartcosmos.objects.model.geo.IGeospatialEntry;
+import net.smartcosmos.model.geo.IGeospatialEntry;
 import net.smartcosmos.util.json.ViewType;
 
 import java.util.Collection;
 
 /**
- * Defines, updates, or queries for {@link net.smartcosmos.objects.model.geo.IGeospatialEntry} instances.
+ * Defines, updates, or queries for {@link net.smartcosmos.model.geo.IGeospatialEntry} instances.
  */
 public interface IGeospatialClient extends IUpdateableBaseClient<IGeospatialEntry>
 {
