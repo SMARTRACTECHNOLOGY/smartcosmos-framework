@@ -24,7 +24,7 @@ import net.smartcosmos.model.base.ITypedObject;
 
 /**
  * Captures a political address for a specific {@link IObject}. The
- * addresses differ from {@link net.smartcosmos.objects.model.geo.IGeospatialEntry} in that these
+ * addresses differ from {@link net.smartcosmos.model.geo.IGeospatialEntry} in that these
  * addresses are in the context of street, city, state, country and not latitude and longitude.
  */
 public interface IObjectAddress extends IAccountDomainResource<IObjectAddress>, ITypedObject

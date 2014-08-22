@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.objects.model.extension;
+package net.smartcosmos.model.extension;
 
 /**
  * Collection of fine-grained read and write permissions that an extension may choose to

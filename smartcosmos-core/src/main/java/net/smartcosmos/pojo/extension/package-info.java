@@ -17,13 +17,7 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.objects.model.extension;
-
 /**
- * Broad categorization of the type of work an extension provides.
+ * POJOs used for defining an extension (a.k.a plugin).
  */
-public enum ExtensionType
-{
-    General,
-    Workflow
-}
+package net.smartcosmos.pojo.extension;

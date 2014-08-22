@@ -17,13 +17,13 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.objects.pojo.extension;
+package net.smartcosmos.pojo.extension;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.objects.model.extension.ExtensionType;
-import net.smartcosmos.objects.model.extension.IExtension;
+import net.smartcosmos.model.extension.ExtensionType;
+import net.smartcosmos.model.extension.IExtension;
 import net.smartcosmos.pojo.base.NamedObject;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;

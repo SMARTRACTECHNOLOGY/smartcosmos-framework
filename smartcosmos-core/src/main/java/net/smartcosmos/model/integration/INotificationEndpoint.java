@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.objects.model.integration;
+package net.smartcosmos.model.integration;
 
 import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.model.base.IReferentialObject;

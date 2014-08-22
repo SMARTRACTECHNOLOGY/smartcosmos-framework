@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.objects.model.extension;
+package net.smartcosmos.model.extension;
 
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.base.INamedObject;
@@ -26,7 +26,7 @@ import net.smartcosmos.model.context.IAccount;
 /**
  * Primary means of expanding the capabilities of the platform. This is where 3rd party developers hook into the system
  * to provide unique computational capabilities. When combined with the near real-time event delivery mechanisms
- * afforded by {@link net.smartcosmos.objects.model.integration.INotificationEndpoint}, external systems
+ * afforded by {@link net.smartcosmos.model.integration.INotificationEndpoint}, external systems
  * have access to the data flow to maintain state, perform calculations, etc. as data immediately changes in
  * the context store.
  */

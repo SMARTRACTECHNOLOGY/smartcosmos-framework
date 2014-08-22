@@ -17,17 +17,16 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.objects.builder;
+package net.smartcosmos.builder;
 
 import com.google.common.base.Preconditions;
-import net.smartcosmos.builder.AbstractNamedObjectBuilder;
 import net.smartcosmos.geo.GeometricShape;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.objects.model.geo.IGeospatialEntry;
-import net.smartcosmos.objects.pojo.geo.GeospatialEntry;
+import net.smartcosmos.model.geo.IGeospatialEntry;
+import net.smartcosmos.pojo.geo.GeospatialEntry;
 
 /**
- * Convenience Builder pattern class for creating new {@link net.smartcosmos.objects.model.extension.IExtension} instances.
+ * Convenience Builder pattern class for creating new {@link net.smartcosmos.model.extension.IExtension} instances.
  * <p/>
  * The minimum fields required to define a new instance are:
  * <ul>

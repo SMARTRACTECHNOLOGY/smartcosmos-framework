@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.objects.pojo.extension;
+package net.smartcosmos.pojo.extension;
 
 public final class ExtensionCredentials
 {

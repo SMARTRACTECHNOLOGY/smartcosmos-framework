@@ -17,11 +17,11 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.objects.pojo.geo;
+package net.smartcosmos.pojo.geo;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.geo.GeometricShape;
-import net.smartcosmos.objects.model.geo.IGeospatialEntry;
+import net.smartcosmos.model.geo.IGeospatialEntry;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 

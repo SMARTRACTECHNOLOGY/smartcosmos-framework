@@ -18,6 +18,6 @@
  */
 
 /**
- * Provides integration mechanism with external systems via HTTP/S POST.
+ * Geospatial POJO.
  */
-package net.smartcosmos.objects.model.integration;
+package net.smartcosmos.pojo.geo;

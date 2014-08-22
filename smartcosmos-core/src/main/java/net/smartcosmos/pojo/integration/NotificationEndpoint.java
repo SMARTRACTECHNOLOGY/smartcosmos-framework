@@ -22,7 +22,7 @@ package net.smartcosmos.pojo.integration;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.objects.model.integration.INotificationEndpoint;
+import net.smartcosmos.model.integration.INotificationEndpoint;
 import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;

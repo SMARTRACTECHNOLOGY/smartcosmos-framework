@@ -21,4 +21,4 @@
  * Geospatial entity definition.
  * @see net.smartcosmos.geo.GeometricShape
  */
-package net.smartcosmos.objects.model.geo;
+package net.smartcosmos.model.geo;

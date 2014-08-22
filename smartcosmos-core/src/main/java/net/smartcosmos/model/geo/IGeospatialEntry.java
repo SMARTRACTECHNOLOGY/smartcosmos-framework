@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package net.smartcosmos.objects.model.geo;
+package net.smartcosmos.model.geo;
 
 import net.smartcosmos.geo.GeometricShape;
 import net.smartcosmos.model.base.IAccountDomainResource;
