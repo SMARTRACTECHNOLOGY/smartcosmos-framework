@@ -112,7 +112,7 @@ Interactions share the same set of descriptive capabilities found on an Object, 
 
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/interaction.png "Interaction Between 2 Objects")
 
-Check out our [primary data types](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/DATA_TYPES.md "Primary Data Types") to see
+Check out our [primary data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Primary Data Types") to see
 our incredibly intuitive object model.
 
 ### A Contextual Illustration
@@ -1580,7 +1580,7 @@ The platform makes no inferences about this case-sensitive field.
 The following interaction fields may be used to create a new record:
 
 - `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
-[data types](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/DATA_TYPES.md "Data Types")
+[data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
 - `referenceUrn` must point to a pre-existing record of the given `entityReferenceType`
 - `type` is required and constrained to 255 characters
 - `recordedTimestamp` is required an must a valid long since the unix epoch
@@ -1765,11 +1765,11 @@ The platform makes no inferences about this case-sensitive field.
 The following object fields are all required to create a new record:
 
 - `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in
-[data types](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/DATA_TYPES.md "Data Types")
+[data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
 - `referenceUrn` must point to a pre-existing record of the given `entityReferenceType`
 - `type` is required and constrained to 255 characters
 - `relatedEntityReferenceType` is required and constrained to a valid EntityReferenceType value defined in
-[data types](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/DATA_TYPES.md "Data Types")
+[data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
 - `relatedReferenceUrn` must point to a pre-existing record of the given `relatedEntityReferenceType`
 - `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
 
@@ -2056,7 +2056,7 @@ The following fields may be used to create a new record:
 - `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
 - `activeFlag` is optional and may be omitted; defaults to **true**
 - `geometricShape` is required and constrained to a valid GeometricShapeType value defined in 
-[data types](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/DATA_TYPES.md "Data Types")
+[data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
 - `type` is required and constrained to 255 characters
 - `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
 
@@ -2805,7 +2805,7 @@ manipulated in modern operating systems and may not be a truly accurate creation
 of the platform and affects all software.
 
 The combination of `entityReferenceType` and `referenceUrn` links the File to be associated with any
-[primary data types](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/DATA_TYPES.md "Primary Data Types"), including the
+[primary data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Primary Data Types"), including the
 following:
 
    * Device
@@ -2838,7 +2838,7 @@ The following arbitrary examples are intended to illustrate the power of this de
 
 The `url` represents the physical URL of where the file is stored inside of the virtual file system (VFS). For security reasons, this URL isn't directly accessible and is therefore annotated as a Restricted field.
 
-> The toggle of the `pending` flag to false is the only indication to an [Extension](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/EXTENSION_FRAMEWORK.md "Extension Framework") listening in on the Event Stream that the media is available for download. Instead of relying on the `pending` flag, integrators should instead look for the `FileUploaded` event (instead of `FileDefined`) for confirmation that the actual file is available for download.
+> The toggle of the `pending` flag to false is the only indication to an [Extension](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/EXTENSION_FRAMEWORK.md "Extension Framework") listening in on the Event Stream that the media is available for download. Instead of relying on the `pending` flag, integrators should instead look for the `FileUploaded` event (instead of `FileDefined`) for confirmation that the actual file is available for download.
 
 > Developers must use the **PUT** endpoint to first define the File, then use one of the **POST** endpoints to physically
 upload the file to the cloud for storage. The multi-part endpoint expects a multi-part mime type, while the octet
@@ -2865,7 +2865,7 @@ the given File.
 The following file fields may be used to create a new file record:
 
 - `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
-[data types](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/DATA_TYPES.md "Data Types")
+[data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
 - `referenceUrn` must point to a pre-existing record of the given `entityReferenceType`
 - `mimeType` is required and constrained to 100 characters
 - `contentUrl` is optional and may be omitted; defaults to null. Set value to an HTTP or HTTPS URL to define the file *and* associate the physical file content in a singular call
@@ -3199,7 +3199,7 @@ focusing on an **event-driven model** built around **JSON**. The platform suppor
 Integration uses the terminology *notificaiton endpoint* to reflect the fact that the endpoint is being *notified of an event* that
 occurred.
 
-> For a complete list of `EventType` values, please review the [primary data types](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/DATA_TYPES.md "Primary Data Types") documentation.
+> For a complete list of `EventType` values, please review the [primary data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Primary Data Types") documentation.
 
 ### How Integration Works
 Integration is accomplished by registering an endpoint with the platform that receives each individual event via an HTTP POST 
@@ -3430,7 +3430,7 @@ type. If an Extension actually needs to retrieve the media from the SMART COSMOS
 *FileUploaded* event's `source` will contain a JSON representation of the updated File that includes the `urn` that the
 Extension can use to fetch the actual content.
 
-> For a complete list of `EventType` values, please review the [primary data types](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/DATA_TYPES.md "Primary Data Types") documentation.
+> For a complete list of `EventType` values, please review the [primary data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Primary Data Types") documentation.
 
 ## Event Endpoints
 *Please contact us to discuss your needs for such endpoint(s).*
