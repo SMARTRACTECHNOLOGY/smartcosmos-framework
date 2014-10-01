@@ -18,7 +18,7 @@ For the latest stable JavaDoc, please visit [http://SMARTRACTECHNOLOGY.github.io
 ## The SMART COSMOS Objects Hypothesis
 
 - Every app captures context at some level
-- Every app tries to capture metadata, tags, location data, timestamps, files, etc.
+- Every app tries to capture metadata, hash tags, location data, timestamps, files, etc.
 - Every app seemingly designs these same patterns _over, and over and over and over…_
 
 SMART COSMOS Objects was designed as a platform; with minimal effort it can sit atop of other platform services you are already paying 
@@ -418,6 +418,8 @@ The platform offers two endpoints for password self-service, supporting both pas
             }
 
 # Group User Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_User-Label.png "User Endpoint")
+
 ## User Endpoint Security
 SMART COSMOS only permits users with a `roleType` of **Administrator** to set or reset other user account passwords.
 
@@ -653,6 +655,8 @@ the user's password will be changed to that password.
             }
 
 # Group Device Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Device-Label.png "Device Endpoint")
+
 ## Overview
 SMART COSMOS may be used to capture metadata about devices in order to make the association that _this user used this device_.
 The `identification` field is the most important field in this data type, as it represents the unique identifier of the device. 
@@ -895,6 +899,8 @@ Call always returns a JSON array, which may be an empty array if no devices are 
             ]
 
 # Group Object Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Object-Label.png "Object Endpoint")
+
 ## Overview
 The platform supports arbitrarily defined object types. This means that the platform makes no assumptions about the composition of an 
 object identifier, and the platform _never_ attempts to infer any logic from either the Object's `objectUrn` (developer assigned URN) or 
@@ -1135,6 +1141,8 @@ query at this time.
             
             
 # Group Object Address Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Object_Address-Label.png "Object Address Endpoint")
+
 ## Overview
 Every SMART COSMOS `Object` may optionally be linked to a physical address. Addresses are usually broadly defined with the `type` field,
 e.g. _physical_ or _last known_. The difference between object address `type` values is arbitrarily defined by the developer.
@@ -1358,6 +1366,8 @@ the `stateProvince` of the object, only include that field in the request body.
 
 
 # Group Object Interaction Session Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Interaction_Session-Label.png "Object Interaction Session Endpoint")
+
 ## Overview
 The Object Interaction Session is used to logically batch together a collection of Object Interaction records. An Object Interaction 
 Session is, literally, just a logical grouping construct with a `startTimestamp`, `stopTimestampe`, and arbitrary `type` field to
@@ -1541,6 +1551,8 @@ The request body must include a valid `sessionUrn` field.
 + Response 204 
  
 # Group Object Interaction Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Interaction-Label.png "Object Interaction Endpoint")
+
 ## Overview
 The Object Interaction is the major metaphor that the entire platform is effectively designed around. An Object Interaction 
 captures context; _this_ Object did _something_ with _that_ object at _this_ time. The interaction is typically decorated with 
@@ -1725,6 +1737,8 @@ If no `objectUrn` query parameter is included, then all interactions are returne
 + Response 204 
 
 # Group Relationship Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Relationship-Label.png "Relationship Endpoint")
+
 ## Overview
 SMART COSMOS provides a simple, flexible, and incredibly powerful relationship modeling mechanism. The model allows the declaration that
 object *A*, for example, could *follows* object *B*. Or, the relationship could be defined where object *A* is a *neighbor* of object
@@ -2028,6 +2042,9 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 
 
 # Group Geospatial Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Geospatial_Path-Label.png "Geospatial Endpoint")
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Geospatial_Shape-Label.png "Geospatial Shape Endpoint")
+
 ## Overview
 SMART COSMOS™ Objects fully supports the [GeoJSON 1.0 Specification](http://geojson.org/geojson-spec.html). This powerful specification 
 allows develoeprs to _fully_ define georectified shapes for any object managed by the platform.
@@ -2515,6 +2532,8 @@ If no `nameLike` query parameter is included, then all interactions are returned
 + Response 204 
 
 # Group Metadata Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Metadata-Label.png "Metadata Endpoint")
+
 ## Overview
 SMART COSMOS provides an extremely flexible way to capture type-safe key-value pairs in order to capture a complete
 representation of an object. The system uses either a built-in (opaque to the developer) encoding mechanism to ensure
@@ -2785,6 +2804,8 @@ large values should use a file instead of metadata.
             }
 
 # Group File Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_File-Label.png "User Endpoint")
+
 ## Overview
 The SMART COSMOS Objects platform can associate *any* type of file with *any* of the platform's primary entity types. Furthermore,
 there is no physical restriction on how many files may be associated with an object.
@@ -3126,10 +3147,12 @@ Immediately purges both the file definition and the physical file stored in the 
 
             SmartCosmos-Event : FileDeleted
                         
-# Group Tag Endpoints
+# Group Hash Tag Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Hash_Tag-Label.png "Hash Tag Endpoint")
+
 ## Overview
-Tags have grown in popularity across the Web for assigning quick search terms to everything from blog postings to
-Twitter posts. The platform provides a Tag object for this purpose as well. The following data types support a Tag
+Hash Tags have grown in popularity across the Web for assigning quick search terms to everything from blog postings to
+Twitter posts. The platform provides a Tag object for this purpose as well. The following data types support a Hash Tag
 association:
 
    * Device
@@ -3142,7 +3165,7 @@ association:
    * Timeline
    * Relationship
 
-## Tag Fields
+## Hash Tag Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
 urn | String  | true | false | Minimum | Generated
@@ -3153,18 +3176,18 @@ name | String  | true | true | Minimum |
 description | String  | false | true | Standard |
 activeFlag | Boolean  | true | true | Standard  | true
 
-### Defining a Tag
+### Defining a Hash Tag
 Tag definition can occur in two different ways: *explicitly* or *implicitly*. An explicit Tag definition occurs when a
 Tag is defined by providing a name, description, and optional moniker value. The result of an explicit Tag definition
 is a Tag but one that is *not assigned* to any object under the Account. In contrast, an implicit Tag definition occurs
 when a Tag Assignment is made between a referential object, i.e. one of the supported data types listed above, and a
 previously *undefined* tag name.
 
-**NOTE:** Tag names, a.k.a. labels, are case-sensitive and Tag definition idempotent (you can explicitly define the same
+**NOTE:** Hash Tag names, a.k.a. labels, are case-sensitive and Tag definition idempotent (you can explicitly define the same
 Tag name 100 times, but the system will only store the first one).
 
-### Deleting a Tag
-**Deletion of a Tag requires the Administrator role.**
+### Deleting a Hash Tag
+**Deletion of a Hash Tag requires the Administrator role.**
 When a Tag is deleted, any Tag Assignment with a referential object that references that Tag name is automatically
 deleted.
 
@@ -3394,6 +3417,8 @@ that is returned when the notification endpoint is defined.
 
 
 # Group Event Stream Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Event-Label.png "Event Endpoint")
+
 ## Overview
 The SMART COSMOS Objects platform captures and persists every user's activity stream. Creation, updates, reads and deletes are all
 logged in their entirety into the database using a flexible *Event Stream* metaphor. This event stream literally is a
