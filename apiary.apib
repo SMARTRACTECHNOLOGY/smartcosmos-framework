@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: https://objects.smartcosmos.net
 
-# SMART COSMOS™ Objects
+# SMART COSMOS Objects
 ![SMART COSMOS Objects](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/objects.png)
 
 
@@ -271,7 +271,7 @@ confirming the email address associated with the Account registration are the on
 two steps are required before any endpoints that require authentication can be successfully accessed.
 
 ## Understanding Realms
-The SMART COSMOS™ Objects platform is a multi-tenant system by design. Each Account operates within its own _security realm_ in order 
+The SMART COSMOS Objects platform is a multi-tenant system by design. Each Account operates within its own _security realm_ in order 
 to keep one Account's data separate from another Account's data. By default, the security realm is established _based on the 
 Account registration email address' top level domain_. For example, registering for an Account with the email address 
 developer@example.com would result in the automatic assignment of the _example.com_ realm, if it is available. It is
@@ -2046,7 +2046,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Geospatial_Shape-Label.png "Geospatial Shape Endpoint")
 
 ## Overview
-SMART COSMOS™ Objects fully supports the [GeoJSON 1.0 Specification](http://geojson.org/geojson-spec.html). This powerful specification 
+SMART COSMOS Objects fully supports the [GeoJSON 1.0 Specification](http://geojson.org/geojson-spec.html). This powerful specification 
 allows develoeprs to _fully_ define georectified shapes for any object managed by the platform.
 
 The design is similar to popular social media sites that offer check-in capabilities. It is reasonble to define a single 
@@ -2863,7 +2863,7 @@ The following arbitrary examples are intended to illustrate the power of this de
 
 > The delivery of a File is inherently a two-step process.
 
-**First**, the actual database record (File) is defined. **Second**, the associated media file is physically uploaded to the SMART COSMOS™ Objects platform. During the first operation, the File is marked as `pending = true` to indicate that the File record exists, but the actual file hasn't been physically uploaded to the cloud yet. After the file upload completes, the system automatically changes `pending = false` to indicate that the actual media is now available to the platform.
+**First**, the actual database record (File) is defined. **Second**, the associated media file is physically uploaded to the SMART COSMOS Objects platform. During the first operation, the File is marked as `pending = true` to indicate that the File record exists, but the actual file hasn't been physically uploaded to the cloud yet. After the file upload completes, the system automatically changes `pending = false` to indicate that the actual media is now available to the platform.
 
 The `url` represents the physical URL of where the file is stored inside of the virtual file system (VFS). For security reasons, this URL isn't directly accessible and is therefore annotated as a Restricted field.
 
