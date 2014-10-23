@@ -19,6 +19,7 @@
 
 package net.smartcosmos.client.connectivity;
 
+import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,32 +35,21 @@ public final class ServerContext
 {
     final static Logger LOGGER = LoggerFactory.getLogger(ServerContext.class);
 
-    // TODO: Update to HTTPS once the cert is installed at the AWS load balancer
-    private String server = "http://objects.smartcosmos.net:8080";
+    private String server;
 
     private String emailAddress;
 
     private String credentials;
 
     /**
-     * Defines a SMART COSMOS server context using the default SMART COSMOS server location with no
+     * Defines a SMART COSMOS server context using the specified server location with no
      * authentication credentials (suitable for accessing public endpoints).
-     */
-    public ServerContext()
-    {
-        this(null, null, null);
-
-    }
-
-    /**
-     * Defines a SMART COSMOS server context using the default SMART COSMOS server location.
      *
-     * @param emailAddress Email address
-     * @param credentials  Credentials
+     * @param server Server location, e.g. https://objects.example.com
      */
-    public ServerContext(String emailAddress, String credentials)
+    public ServerContext(String server)
     {
-        this(emailAddress, credentials, null);
+        this(null, null, server);
     }
 
     /**
@@ -67,10 +57,13 @@ public final class ServerContext
      *
      * @param emailAddress Email address
      * @param credentials  Credentials
-     * @param server       Custom server location
+     * @param server       Server location, e.g. https://objects.example.com
      */
     public ServerContext(String emailAddress, String credentials, String server)
     {
+        Preconditions.checkNotNull(server, "parameter 'server' must be a valid server location, e.g. https://objects.example.com");
+        LOGGER.info("Server Endpoint: " + this.server);
+
         if (emailAddress == null && credentials == null)
         {
             LOGGER.info("Creating an anonymous client suitable for accessing a public endpoint");
@@ -81,13 +74,7 @@ public final class ServerContext
 
         this.emailAddress = emailAddress;
         this.credentials = credentials;
-
-        if (server != null)
-        {
-            this.server = server;
-        }
-
-        LOGGER.info("Server Endpoint: " + this.server);
+        this.server = server;
     }
 
     public String getEmailAddress()

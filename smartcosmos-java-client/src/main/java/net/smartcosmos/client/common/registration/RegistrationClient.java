@@ -19,11 +19,11 @@
 
 package net.smartcosmos.client.common.registration;
 
+import net.smartcosmos.Field;
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractBaseClient;
 import net.smartcosmos.client.impl.endpoint.RegistrationEndpoints;
-import net.smartcosmos.Field;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.JsonUtil;
@@ -42,9 +42,9 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
 {
     final static Logger LOGGER = LoggerFactory.getLogger(RegistrationClient.class);
 
-    public RegistrationClient()
+    public RegistrationClient(String server)
     {
-        super(new ServerContext());
+        super(new ServerContext(server));
     }
 
     RegistrationClient(ServerContext context)

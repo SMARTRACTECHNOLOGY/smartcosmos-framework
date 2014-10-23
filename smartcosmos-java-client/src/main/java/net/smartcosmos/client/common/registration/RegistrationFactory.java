@@ -33,12 +33,14 @@ public final class RegistrationFactory
     /**
      * Creates a new instance of a registration client.
      *
+     * @param server Server location, e.g. https://objects.example.com
      * @return New registration client instance
      */
-    public static IRegistrationClient createClient()
+    public static IRegistrationClient createClient(String server)
     {
-        return new RegistrationClient();
+        return new RegistrationClient(server);
     }
+
     /**
      * Creates a new instance of a registration client pointing at a specific server instance.
      *

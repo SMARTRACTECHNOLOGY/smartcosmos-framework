@@ -88,6 +88,8 @@ public class LogisticServiceDemo
 
     private static final String MIME_TYPE = "image/jpg";
 
+    private static final String SERVER_URL = "http://localhost:8080";
+
     private final String realm;
 
     private final String emailAddress;
@@ -136,7 +138,7 @@ public class LogisticServiceDemo
 
     private void registerAccount() throws ServiceException, JSONException
     {
-        IRegistrationClient client = RegistrationFactory.createClient();
+        IRegistrationClient client = RegistrationFactory.createClient(SERVER_URL);
 
         System.out.printf("Checking to determine if realm '%s' is available for registration\n", realm);
         boolean isAvailable = client.isRealmAvailable(realm);
@@ -155,7 +157,7 @@ public class LogisticServiceDemo
 
     private void run() throws ServiceException, JSONException
     {
-        ServerContext context = new ServerContext(emailAddress, assignedPassword);
+        ServerContext context = new ServerContext(emailAddress, assignedPassword, SERVER_URL);
 
         startTimestamp = System.currentTimeMillis();
 
