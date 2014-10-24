@@ -180,12 +180,6 @@
                                     </packages>
                                 </group>
                                 <group>
-                                    <title>Extensions (EXPERIMENTAL)</title>
-                                    <packages>
-                                        net.smartcosmos.model.extension:net.smartcosmos.pojo.extension
-                                    </packages>
-                                </group>
-                                <group>
                                     <title>Utilities</title>
                                     <packages>
                                         net.smartcosmos.util*
@@ -194,7 +188,19 @@
                                 <group>
                                     <title>Common Core</title>
                                     <packages>
-                                        net.smartcosmos.model.base:net.smartcosmos.model.context:net.smartcosmos:net.smartcosmos.geo:net.smartcosmos.pojo*
+                                        net.smartcosmos.model.base:net.smartcosmos.model.context:net.smartcosmos:net.smartcosmos.geo:net.smartcosmos.model.geo:net.smartcosmos.pojo*
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Extensions (EXPERIMENTAL)</title>
+                                    <packages>
+                                        net.smartcosmos.model.extension:net.smartcosmos.pojo.extension
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Catalogs (EXPERIMENTAL)</title>
+                                    <packages>
+                                        net.smartcosmos.catalog*
                                     </packages>
                                 </group>
                             </groups>
