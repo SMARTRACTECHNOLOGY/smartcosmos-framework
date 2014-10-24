@@ -1,12 +1,11 @@
 <img src="http://smartractechnology.github.io/smartcosmos-sdk-java/images/smart-cosmos-250px-wide.png"/>
 
-# SMART COSMOS REST Web Services Documentation
-  * Profiles REST documentation: [http://docs.smartcosmosprofiles.apiary.io](http://docs.smartcosmosprofiles.apiary.io "Profiles at apiary").
-  * Objects REST documentation: [http://docs.smartcosmosobjects.apiary.io](http://docs.smartcosmosobjects.apiary.io "Objects at apiary").
-  * Flows REST documentation: [http://docs.smartcosmosflows.apiary.io](http://docs.smartcosmosflows.apiary.io "Flows at apiary").
-
-# SMART COSMOS JavaDoc (stable)
-  * The latest stable model SDK JavaDoc can be found at [http://SMARTRACTECHNOLOGY.github.io/smartcosmos-sdk-java/stable/index.html](http://SMARTRACTECHNOLOGY.github.io/smartcosmos-sdk-java/stable/index.html "Stable JavaDoc URL").
+# Documentation
+  * Profiles REST documentation: [http://docs.smartcosmosprofiles.apiary.io](http://docs.smartcosmosprofiles.apiary.io "Profiles at apiary")
+  * Objects REST documentation: [http://docs.smartcosmosobjects.apiary.io](http://docs.smartcosmosobjects.apiary.io "Objects at apiary")
+  * Flows REST documentation: [http://docs.smartcosmosflows.apiary.io](http://docs.smartcosmosflows.apiary.io "Flows at apiary")
+  * JavaDocs (stable): [http://SMARTRACTECHNOLOGY.github.io/smartcosmos-sdk-java/stable/index.html](http://SMARTRACTECHNOLOGY.github.io/smartcosmos-sdk-java/stable/index.html "Stable JavaDoc URL")
+  * [SMART COSMOS Developer Portal](https://smartractechnology.atlassian.net/wiki/ "Developer Portal)
 
 # Maven
 Java developers that rely on Maven can access the SMART COSMOS Model SDK using the following coordinates:
