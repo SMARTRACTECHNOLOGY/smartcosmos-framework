@@ -1,9 +1,11 @@
-![alt text](images/smartcosmos.png "SMART COSMOS Logo")
+<img src="http://smartractechnology.github.io/smartcosmos-sdk-java/images/smart-cosmos-250px-wide.png"/>
 
-# Platform API Documentation
+# SMART COSMOS REST Web Services Documentation
   * The authoritative Profiles REST documentation can be found at [http://docs.smartcosmosprofiles.apiary.io](http://docs.smartcosmosprofiles.apiary.io "Profiles at apiary").
   * The authoritative Objects REST documentation can be found at [http://docs.smartcosmosobjects.apiary.io](http://docs.smartcosmosobjects.apiary.io "Objects at apiary").
   * The authoritative Flows REST documentation can be found at [http://docs.smartcosmosflows.apiary.io](http://docs.smartcosmosflows.apiary.io "Flows at apiary").
+
+# SMART COSMOS JavaDoc (stable)
   * The latest stable model SDK JavaDoc can be found at [http://SMARTRACTECHNOLOGY.github.io/smartcosmos-sdk-java/stable/index.html](http://SMARTRACTECHNOLOGY.github.io/smartcosmos-sdk-java/stable/index.html "Stable JavaDoc URL").
 
 # Maven
