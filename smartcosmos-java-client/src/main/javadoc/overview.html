@@ -26,7 +26,7 @@
 <BODY>
 <img src="resources/smartcosmos.png" alt="SMART COSMOS Logo"/>
 <br>
-SMART COSMOS&trade; is an RFID-centric platform purposefully built to be an application's contextual data store, and <b>if you are
+SMART COSMOS is an RFID-centric platform purposefully built to be an application's contextual data store, and <b>if you are
     developing a solution that is either not Java based or you'd simply prefer to operate using standard JavaScript
     Object Notation (JSON) and REST web service calls</b>, please refer to the public REST endpoint documentation at
 <a href="http://docs.smartcosmosobjects.apiary.io">http://docs.smartcosmosobjects.apiary.io</a>.
@@ -44,7 +44,7 @@ use <code>ResponseEntity</code> that contains a <code>Result</code> code that ca
 The general pattern is the same for every single SMART COSMOS entity client:
 <pre>
     // Define your server context
-    ServerContext context = new ServerContext(USERNAME, PASSWORD);
+    ServerContext context = new ServerContext(USERNAME, PASSWORD, SERVER_URL);
     // Create an instance of your target entity client
     ISpecificClient client = SpecificClientFactory.createClient(serverContext);
     // Do something with the client
@@ -54,7 +54,7 @@ The following provides a realistic example of using the IObjectClient to locate 
 properties, and then save those changes back to the cloud:
 <pre>
     //Define a server context that will connect to the default platform endpoint with the specified username, password.
-    ServerContext context = new ServerContext(USERNAME, PASSWORD);
+    ServerContext context = new ServerContext(USERNAME, PASSWORD, SERVER_URL);
 
     //Create an instance of an IObject client using the server context
     IObjectClient client = ObjectFactory.createClient(context);

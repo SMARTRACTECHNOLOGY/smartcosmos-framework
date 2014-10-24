@@ -61,16 +61,16 @@
     </repositories>
 
     <organization>
-        <name>SMARTRAC, N.V.</name>
+        <name>SMARTRAC Technology Fletcher, Inc.</name>
         <url>http://www.smartrac-group.com</url>
     </organization>
 
     <developers>
         <developer>
             <id>cloud.engineering</id>
-            <name>SMARTRAC</name>
+            <name>SMARTRAC API Team</name>
             <email>api@smartrac-group.com</email>
-            <organization>SMARTRAC, N.V.</organization>
+            <organization>Smartrac Technology Fletcher, Inc.</organization>
             <timezone>-5</timezone>
             <roles>
                 <role>Project Lead</role>
@@ -79,9 +79,9 @@
     </developers>
 
     <scm>
-        <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/client.git</url>
-        <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/client.git</connection>
-        <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/client.git</developerConnection>
+        <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-client-java</url>
+        <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-client-java.git</connection>
+        <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-client-java.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
