@@ -19,7 +19,7 @@
 
 
 /**
- * <B>SMART COSMOS&trade; Catalogs</B> entity builders (Builder Pattern) used to quickly and efficiently assemble a
+ * <B>SMART COSMOS Catalogs</B> entity builders (Builder Pattern) used to quickly and efficiently assemble a
  * complete and validated entity instance.
  */
 package net.smartcosmos.catalogs.builder;

@@ -18,7 +18,8 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -52,16 +53,17 @@
     </properties>
 
     <organization>
-        <name>Smartrac Technology</name>
+        <name>SMARTRAC Technology Fletcher, Inc.</name>
         <url>http://www.smartrac-group.com</url>
     </organization>
 
     <developers>
         <developer>
             <id>cloud.engineering</id>
-            <name>Smartrac API Team</name>
+            <name>SMARTRAC API Team</name>
+
             <email>api@smartrac-group.com</email>
-            <organization>Smartrac Technology</organization>
+            <organization>Smartrac Technology Fletcher, Inc.</organization>
             <timezone>-5</timezone>
             <roles>
                 <role>Project Lead</role>
@@ -70,9 +72,9 @@
     </developers>
 
     <scm>
-        <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/sdk.git</url>
-        <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/sdk.git</connection>
-        <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/sdk.git</developerConnection>
+        <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java</url>
+        <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</connection>
+        <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -178,7 +180,7 @@
                                     </packages>
                                 </group>
                                 <group>
-                                    <title>Extensions</title>
+                                    <title>Extensions (EXPERIMENTAL)</title>
                                     <packages>
                                         net.smartcosmos.model.extension:net.smartcosmos.pojo.extension
                                     </packages>

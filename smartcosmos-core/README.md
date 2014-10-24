@@ -1,11 +1,13 @@
 ![alt text](images/smartcosmos.png "SMART COSMOS Logo")
 
 # Platform API Documentation
-  * The authoritative REST documentation can be found at [http://docs.snapbundle.apiary.io](http://docs.snapbundle.apiary.io "SnapBundle at apiary").
-  * The latest stable Model SDK JavaDoc can be found at [http://snapbundle.github.io/sdk/stable/index.html](http://snapbundle.github.io/sdk/stable/index.html "SnapBundle Stable Model SDK").
+  * The authoritative Profiles REST documentation can be found at [http://docs.smartcosmosprofiles.apiary.io](http://docs.smartcosmosprofiles.apiary.io "Profiles at apiary").
+  * The authoritative Objects REST documentation can be found at [http://docs.smartcosmosobjects.apiary.io](http://docs.smartcosmosobjects.apiary.io "Objects at apiary").
+  * The authoritative Flows REST documentation can be found at [http://docs.smartcosmosflows.apiary.io](http://docs.smartcosmosflows.apiary.io "Flows at apiary").
+  * The latest stable model SDK JavaDoc can be found at [http://SMARTRACTECHNOLOGY.github.io/smartcosmos-sdk-java/stable/index.html](http://SMARTRACTECHNOLOGY.github.io/smartcosmos-sdk-java/stable/index.html "Stable JavaDoc URL").
 
 # Maven
-Java developers that rely on Maven can access the SMART COSMOS™ Model SDK using the following coordinates:
+Java developers that rely on Maven can access the SMART COSMOS Model SDK using the following coordinates:
 
     <dependency>
       <groupId>net.smartcosmos</groupId>
@@ -13,7 +15,7 @@ Java developers that rely on Maven can access the SMART COSMOS™ Model SDK usin
       <version>2.7</version>
     </dependency>
 
-Likewise, Java developers who want to use the SMART COSMOS™ Client library for easy access to the platform, eliminating
+Likewise, Java developers who want to use the SMART COSMOS Client library for easy access to the platform, eliminating
 the need to deal directly with HTTP, JSON, and REST calls, the Maven coordinates are:
 
     <dependency>
@@ -22,16 +24,13 @@ the need to deal directly with HTTP, JSON, and REST calls, the Maven coordinates
       <version>1.3</version>
     </dependency>
 
-### Extension Architecture
-The SMART COSMOS™ platform was designed from scratch with a plugin model; we call them *extensions*. Remember how we said
-that we aren't an analytical engine? We aren't, but maybe you are. Use any modern language- Python, Ruby, Java, .NET, or
-anything that can talk to us using HTTP and JSON. We built our authorization model around the
-[OAuth 2.0 Specification (RFC 6749)](http://tools.ietf.org/html/rfc6749 "OAuth 2.0 Specification"), and data owners can
-grant you read or write access in a very granular fashion.
+### Extension Architecture (EXPERIMENTAL)
+The SMART COSMOS platform was designed from scratch with a plugin model; we call them *extensions*. Use any modern
+language- Python, Ruby, Java, .NET, or anything that can talk to us using HTTP and JSON. We built our authorization
+model around the [OAuth 2.0 Specification (RFC 6749)](http://tools.ietf.org/html/rfc6749 "OAuth 2.0 Specification"),
+and data owners can grant you read or write access in a very granular fashion.
 
-## Table of Contents
+## Platform Data Types
   * [Primary Data Types](DATA_TYPES.md#primary "Primary Data Type")
   * [Secondary Data Types](DATA_TYPES.md#secondary "Secondary Data Type")
-  * [Extending the Platform](EXTENSION_FRAMEWORK.md "Extension Framework")
-  * [OAuth 2.0 AuthN and AuthZ](OAUTH_GUIDE.md "OAuth 2.0 with Extensions")
- 
+
