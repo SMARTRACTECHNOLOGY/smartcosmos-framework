@@ -11,9 +11,7 @@ HOST: https://objects.smartcosmos.net
 This document is a **work in progress**. It only describes the **public facing API** of the platform, as the platform itself is proprietary. If you
 are building a pure Java solution, please consider using our [SMART COSMOS client library from Maven Central, registered under "net.smartcosmos::client"](http://search.maven.org/#search%7Cga%7C1%7Cnet.smartcosmos "SMART COSMOS Client Library").
 
-<!--
-For the latest stable JavaDoc, please visit [http://SMARTRACTECHNOLOGY.github.io/smartcosmos-java-sdk/stable/index.html](http://snapbundle.github.io/sdk/stable/index.html "Stable JavaDoc URL").
--->
+For the latest stable JavaDoc, please visit [http://developer.smartcosmos.net/smartcosmos-sdk-java/stable/index.html](http://developer.smartcosmos.net/smartcosmos-sdk-java/stable/index.html "Stable JavaDoc URL").
 
 ## The SMART COSMOS Objects Hypothesis
 
@@ -181,7 +179,7 @@ The platform's model is organized around the three foundational entities (*`Obje
 foundational entities rely on supporting entities (*`Users`,`Devices`,`Files`, `Tags`, `Metadata`, and `Geospatial`*) to capture
 additional context.
 
-### URNs as Keys
+#### URNs as Keys
 All SMART COSMOS objects are keyed off of a **UUID**, represented using the standard URN nomenclature for a UUID:
 
 **urn:uuid:<opaque key>**
@@ -192,21 +190,43 @@ e.g. *urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d*
 #### Object URN
 The only URN in the entire model that is arbitrarily defined by the developer is the `objectUrn` field for an Object record.
 
-### Error States
+#### Error States
 The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used.
+In some cases the JSON result message contains a `code` field.
 
-### Date Format
+Code|Description
+-------- | --------
+1|Success
+0|Failure
+-1|Authenticated user is not authorized to make this call
+-2|No such URN
+-3|Unlicensed feature
+-4|Unknown Entity Reference Type
+-5|JSON is missing a required field: <...>
+-6|No device found with identification <...>
+-7|A <...> with matching key <...> already exists
+-8|No matching record with <...> of <...> exists
+-9|Unknown %s entity with urn <...>
+-10|<...> enum does not define type <...>
+-11|session with URN %s was previously closed
+-12|No user associated with email address <...>
+-13|File URN <...> exists but is flagged as pending content upload
+-50|Extensions are not permitted to perform <...>
+-51|Caller lacked the authorization to complete the requested operation
+-500|Internal Server Error
+
+#### Date Format
 SMART COSMOS dates _when represented as a string_ are formatted using **RFC 3339**. All times must be in UTC, e.g.
 
 __2013-07-04T09:00:00-00:00__
 
-#### Use of Unix Time
-SMART COSMOS timestamps are always represented in JSON with a `long` datatype, where the value must be interpretted as a
-[Unix Timestap](http://en.wikipedia.org/wiki/Unix_time "Unix time definiton").
+#### Use of time format
+SMART COSMOS timestamps are always represented in JSON with a `long` datatype, where the value must be interpretted as a 
+[Java Timestamp](http://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html) and defines the number of milliseconds since January 1, 1970, 00:00:00 GMT.
 
 #### Tracking Modification Timestamps
 All SMART COSMOS objects maintain a `lastModifiedTimestamp` field to track when the record was last updated. The purpose of this
-timestamp is to provide a valid eTag for HTTP cache support.
+timestamp is to provide a valid eTag for HTTP cache support. e.g. 1390779082039
 
 ### Moniker: Arbitrary External System Alias
 All SMART COSMOS objects support a `moniker` field that can be used as the developer sees fit. This field is **never**
@@ -292,8 +312,17 @@ recommended you omit the realm, which will automatically register your email add
 + Response 200 (application/json)
 
             {
-                "code": 0,
+                "code": 1,
                 "message" : "foo.com"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "Invalid realm"
             }
 
 ## Account Registration [/registration/register]
@@ -319,6 +348,15 @@ recommended you omit the realm, which will automatically register your email add
                 "lastModifiedTimestamp" : 1382828220349,
                 "emailAddress" : "you@foo.com",
                 "realm" : "foo.com",
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: emailAddress"
             }
 
 # Group Account Management Endpoints
@@ -367,6 +405,8 @@ The platform offers two endpoints for password self-service, supporting both pas
                 "activeFlag" : true
             }
 
++ Response 401
+
 ## Change Your Password [/account/password/change]
 ### Change the authenticated user's password, presuming they know their existing password to change to a new password. [POST]
 
@@ -395,14 +435,29 @@ The platform offers two endpoints for password self-service, supporting both pas
                 "message": "Password successfully changed"
             }
 
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "Password change failed"
+            }
+
++ Response 401
+
 ## Reset Lost Password [/account/password/reset]
 ### Trigger a password reset workflow via email for the specified Account associated with the indicated email address. [POST]
 
-+ Request (application/json)
++ Request (text/plain)
     
-            {
-                "emailAddress" : "you@foo.com"
-            }
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body  
+     
+            "emailAddress" : "you@foo.com"
 
 + Response 200 (application/json)
 
@@ -416,6 +471,17 @@ The platform offers two endpoints for password self-service, supporting both pas
                 "code" : 1,
                 "message": "Password reset email has been sent"
             }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "Invalid email address"
+            }
+
++ Response 401
 
 # Group User Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_User-Label.png "User Endpoint")
@@ -499,6 +565,17 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "message" : "r@nd0mP@ssword!"
             }
 
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: emailAddress"
+            }
+
++ Response 401
+
 + Response 409 (application/json)
 
     + Headers
@@ -512,14 +589,6 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
             }
 
-+ Response 400 (application/json)
-
-    + Body
-
-            {
-                "code" : -5,
-                "message" : "JSON is missing a required field: emailAddress"
-            }
 
 
 ### Update an existing user [POST]
@@ -544,11 +613,6 @@ include that field in the request body.
 
 + Response 204
 
-    + Headers
-
-            SmartCosmos-Event : UserUpdated
-
-
 + Response 400 (application/json)
 
     + Body
@@ -557,6 +621,8 @@ include that field in the request body.
                 "code" : -5,
                 "message" : "JSON is missing a required field: identification"
             }
+
++ Response 401
 
 ## Lookup Specific User by URN [/users/{urn}{?view}]
 ### Lookup a specific user by its system-assigned URN key [GET]
@@ -640,10 +706,6 @@ the user's password will be changed to that password.
             }
 
 + Response 204
-
-    + Headers
-
-            SmartCosmos-Event : UserPasswordReset
 
 + Response 400 (application/json)
 
@@ -779,11 +841,6 @@ request body.
             
 + Response 204
 
-    + Headers
-
-            SmartCosmos-Event : DeviceUpdated    
-
-            
 + Response 400 (application/json)
 
     + Body
@@ -1016,11 +1073,6 @@ include that field in the request body.
             
 + Response 204
 
-    + Headers
-
-            SmartCosmos-Event : ObjectUpdated    
-
-            
 + Response 400 (application/json)
 
     + Body
@@ -1254,11 +1306,6 @@ the `stateProvince` of the object, only include that field in the request body.
             
 + Response 204
 
-    + Headers
-
-            SmartCosmos-Event : ObjectAddressUpdated    
-
-            
 + Response 400 (application/json)
 
     + Body
@@ -1463,11 +1510,6 @@ The request body must include a valid `sessionUrn` field.
             
 + Response 204
 
-    + Headers
-
-            SmartCosmos-Event : InteractionSessionStop
-            SmartCosmos-Session-Start : 2013-04-17T09:15:23-00:00
-            
 + Response 400 (application/json)
 
     + Body
@@ -1603,7 +1645,7 @@ The following interaction fields may be used to create a new record:
 [data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
 - `referenceUrn` must point to a pre-existing record of the given `entityReferenceType`
 - `type` is required and constrained to 255 characters
-- `recordedTimestamp` is required an must a valid long since the unix epoch
+- `recordedTimestamp` is required an must a valid long since the java epoch
 - `objectInteractionSession` is optional and may be omitted; defaults to null. Set value to the system-assigned URN on **PUT** call
 - `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
 
@@ -1782,7 +1824,7 @@ relatedReferenceUrn | String | true | false | Minimum |
 The platform makes no inferences about this case-sensitive field.
 
 ## Relationship Management [/relationships/{entityReferenceType}/{referenceUrn}]
-### Create a new object   [PUT]
+### Create a new relationship   [PUT]
 
 The following object fields are all required to create a new record:
 
@@ -1820,7 +1862,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
                 "relatedReferenceUrn" : "urn:uuid:54321"
             }
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
     + Headers
 
@@ -1833,7 +1875,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
                 "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
             }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
     + Headers
 
@@ -1854,6 +1896,8 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
                 "code" : -8,
                 "message" : "No matching record with Object of urn:uuid:12345 exists"
             }
+
++ Response 401
 
 ## Relationship Management by URN [/relationships/{urn}{?view}]
 ### Lookup a specific relationship by its system-assigned URN key [GET]
@@ -1889,13 +1933,41 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 
 + Response 204
 
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists"
+            }
+
++ Response 401
+
+## Delete Relationship by URN [/relationships/{urn}]
 ### Deletes an existing relationship by its system-assigned URN key [DELETE]
 
-+ Response 204
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+
++ Request
 
     + Headers
 
-            SmartCosmos-Event : RelationshipDeleted
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 204
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists"
+            }
+
++ Response 401
 
 ## Lookup All Relationships Between Entities [/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}{?view}]
 ### Lookup an array of all defined relationships between any two entities [GET]
@@ -1945,8 +2017,10 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
                 "message" : "No matching record with Object of urn:uuid:12345 exists"
             }
 
++ Response 401
+
 ## Lookup Specific Relationship Between Entities [/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}/{type}{?view}]
-### Lookup a specific relationships between any two entities [GET]
+### Lookup a specific relationship between any two entities [GET]
 
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
@@ -1991,6 +2065,8 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
                 "code" : -8,
                 "message" : "No matching record with Object of urn:uuid:12345 exists"
             }
+
++ Response 401
 
 ## Lookup Relationships by Type [/relationships/{entityReferenceType}/{referenceUrn}/{type}{?view,reverse}]
 ### Lookup an array of all defined relationships of the specific type [GET]
@@ -2040,6 +2116,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
                 "message" : "No matching record with Object of urn:uuid:12345 exists"
             }
 
++ Response 401
 
 # Group Geospatial Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Geospatial_Path-Label.png "Geospatial Endpoint")
@@ -2242,11 +2319,6 @@ request body.
             
 + Response 204
 
-    + Headers
-
-            SmartCosmos-Event : GeospatialEntryUpdated    
-
-            
 + Response 400 (application/json)
 
     + Body
@@ -2734,10 +2806,6 @@ large values should use a file instead of metadata.
 
 + Response 204
 
-    + Headers
-
-            SmartCosmos-Event : MetadataDeleted
-
 + Response 400 (application/json)
 
     + Body
@@ -3039,6 +3107,12 @@ By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web 
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
     + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
 
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
 + Response 200 (application/json)
 
     + Headers
@@ -3076,7 +3150,13 @@ accurately reported when defining the file.
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
 
-+ Response 200
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/octet-stream)
 
     + Headers
 
@@ -3105,7 +3185,13 @@ Always returns a JSON array where each member of the array is a file definition 
     + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
     + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
 
-+ Response 200
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
 
     + Headers
 
@@ -3139,14 +3225,17 @@ Always returns a JSON array where each member of the array is a file definition 
 Immediately purges both the file definition and the physical file stored in the cloud.
 
 + Parameters
+    
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
 
-+ Response 204
++ Request
 
     + Headers
 
-            SmartCosmos-Event : FileDeleted
-                        
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 204
+
 # Group Hash Tag Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Hash_Tag-Label.png "Hash Tag Endpoint")
 
@@ -3336,10 +3425,6 @@ that is returned when the notification endpoint is defined.
             2336412f37b6872e6e13dcb.......
 
 + Response 204
-            
-    + Headers
-
-            SmartCosmos-Event : NotificationSubscriptionConfirmed
 
 + Response 400 (application/json)
 
@@ -3366,10 +3451,6 @@ that is returned when the notification endpoint is defined.
             }
 
 + Response 204
-
-    + Headers
-
-            SmartCosmos-Event : NotificationUnsubscribe, NotificationWithdrawn, NotificationDeleted
 
 + Response 400 (application/json)
 
