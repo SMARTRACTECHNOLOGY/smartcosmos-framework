@@ -1016,6 +1016,19 @@ case **no data is merged; existing record is left as-is**
                 "type": "Building",
                 "name": "Paradise Valley Merchant's Mall"
             }
+       
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : UserAccessed
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:building:mall:ParadiseValley"
+            }
             
 + Response 201 (application/json)
 
@@ -1027,20 +1040,7 @@ case **no data is merged; existing record is left as-is**
     
             {
                 "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
-            }
-            
-+ Response 200 (application/json)
-
-    + Headers
-
-            SmartCosmos-Event : UserAccessed
-            
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+                "message" : "urn:building:mall:ParadiseValley"
             }
 
 + Response 400 (application/json)
@@ -1051,6 +1051,8 @@ case **no data is merged; existing record is left as-is**
                 "code" : -5,
                 "message" : "JSON is missing a required field: objectUrn"
             }
+
++ Response 401
 
 ### Update an existing object [POST]
 
@@ -1081,6 +1083,8 @@ include that field in the request body.
                 "code" : -5,
                 "message" : "JSON is missing a required field: objectUrn"
             }   
+            
++ Response 401            
             
 ## Lookup Specific Object by URN [/objects/{urn}{?view}]
 ### Lookup a specific object by its system-assigned URN key [GET]
@@ -1115,6 +1119,17 @@ include that field in the request body.
             }
 
 + Response 204 
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists"
+            }
+            
++ Response 401
  
 ## Lookup Object by Object URN [/objects/object/{objectUrn}{?view,exact}]
 ### Lookup a specific object by their arbitrary developer assigned object URN [GET]
@@ -2276,7 +2291,7 @@ The following fields may be used to create a new record:
                     }
             }
             
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
     + Headers
 
@@ -2297,6 +2312,8 @@ The following fields may be used to create a new record:
                 "code" : -5,
                 "message" : "JSON is missing a required field: type"
             }
+
++ Response 401
 
 ### Update an existing geospatial entry [POST]
 
@@ -2328,6 +2345,7 @@ request body.
                 "message" : "JSON is missing a required field: urn"
             }
             
++ Response 401            
             
 ## Lookup Matching Geospatial Entries [/geospatial{?view,nameLike}]
 ### Lookup an array of matching geospatial entries [GET]
@@ -2468,6 +2486,16 @@ If no `nameLike` query parameter is included, then all interactions are returned
             
 + Response 204 
 
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists"
+            }
+
++ Response 401
 
 ## Lookup Specific Geospatial Entity by URN [/geospatial/{urn}{?view}]
 ### Lookup a specific geospatial entity by its system-assigned URN key [GET]
@@ -2602,6 +2630,17 @@ If no `nameLike` query parameter is included, then all interactions are returned
                 }
 
 + Response 204 
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists"
+            }
+
++ Response 401
 
 # Group Metadata Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Metadata-Label.png "Metadata Endpoint")
@@ -2796,6 +2835,8 @@ large values should use a file instead of metadata.
                 "message" : "No such URN"
             }
 
++ Response 401
+
 ## Metadata Deletion [/metadata/{entityReferenceType}/{referenceUrn}/{key}]
 ### Deletes an existing metadata key by its system-assigned URN key [DELETE]
 
@@ -2803,6 +2844,12 @@ large values should use a file instead of metadata.
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
     + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
     + key (required, string `alpha`) ... Case-sensitive `key` used to index the metadata raw value
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
 
 + Response 204
 
@@ -2814,6 +2861,8 @@ large values should use a file instead of metadata.
                 "code" : -2,
                 "message" : "No such URN"
             }
+
++ Response 401
 
 ## Lookup Associated Metadata [/metadata/{entityReferenceType}/{referenceUrn}{?view,key}]
 ### Lookup all metadata that matches the specified key pattern [GET]
@@ -2870,6 +2919,8 @@ large values should use a file instead of metadata.
                 "code" : -2,
                 "message" : "No such URN"
             }
+
++ Response 401
 
 # Group File Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_File-Label.png "User Endpoint")
@@ -3005,6 +3056,8 @@ The following file fields may be used to create a new file record:
                 "message" : "JSON is missing a required field: mimeType"
             }
 
++ Response 401
+
 ## File Upload - Octet-Stream [/files/{urn}/octet]
 ### Upload actual file bytes to the cloud using an octet-stream [POST]
 
@@ -3042,6 +3095,8 @@ The following file fields may be used to create a new file record:
                 "code" : -2,
                 "message" : "No such URN"
             }
+
++ Response 401
 
 + Response 409 (application/json)
 
@@ -3090,6 +3145,8 @@ By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web 
                 "code" : -2,
                 "message" : "No such URN"
             }
+
++ Response 401
 
 + Response 409 (application/json)
 
@@ -3140,6 +3197,8 @@ By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web 
                 "message" : "No such URN"
             }
             
++ Response 401
+
 ## File Content Retrieval [/files/{urn}/contents]                
 ### Retrieves the actual file content from the cloud [GET]
 
@@ -3175,6 +3234,8 @@ accurately reported when defining the file.
                 "code" : -2,
                 "message" : "No such URN"
             }
+
++ Response 401
 
 ## Related File Definitions Retrieval [/files/{entityReferenceType}/{referenceUrn}{?view}]                
 ### Retrieves the complete collection of file definitions associated with the specified entity [GET]
@@ -3220,6 +3281,8 @@ Always returns a JSON array where each member of the array is a file definition 
                 "message" : "No such URN"
             }
             
++ Response 401            
+            
 ## File Deletion [/files/{urn}]                
 ### Deletes an existing relationship by its system-assigned URN key [DELETE]
 Immediately purges both the file definition and the physical file stored in the cloud.
@@ -3235,6 +3298,8 @@ Immediately purges both the file definition and the physical file stored in the 
             Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
 
 + Response 204
+
++ Response 401
 
 # Group Hash Tag Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Hash_Tag-Label.png "Hash Tag Endpoint")
@@ -3399,6 +3464,17 @@ the confirmation token *and* posts that confirmation token to the /notifications
                 "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
             }
             
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: endpointUrl"
+            }          
+            
++ Response 401            
+            
 ## Endpoint Enrollment Confirmation [/notifications/confirm/{topicArn}]
 ### Confirms the enrollment of an endpoint running a web app that received a `topicArn` [PUT]
 
@@ -3435,6 +3511,8 @@ that is returned when the notification endpoint is defined.
                 "message" : "No such URN"
             }
             
++ Response 401            
+            
 ## Endpoint Withdraw [/notifications/withdraw]
 ### Withdraw or terminate delivery of events to an existing endpoint [PUT]
 
@@ -3461,6 +3539,7 @@ that is returned when the notification endpoint is defined.
                 "message" : "JSON is missing a required field: urn"
             }
 
++ Response 401
 
 ## Lookup Specific Notification Endpoint by URN [/notifications/{urn}{?view}]
 ### Lookup a specific notification endpoint by its system-assigned URN key [GET]
@@ -3496,6 +3575,16 @@ that is returned when the notification endpoint is defined.
 
 + Response 204
 
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists"
+            }
+
++ Response 401
 
 # Group Event Stream Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Event-Label.png "Event Endpoint")
