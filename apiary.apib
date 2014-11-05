@@ -1484,7 +1484,7 @@ The following fields may be used to create a new record:
                 "type": "RFID Scan"
             }
             
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
     + Headers
 
@@ -1506,6 +1506,8 @@ The following fields may be used to create a new record:
                 "code" : -5,
                 "message" : "JSON is missing a required field: type"
             }
+
++ Response 401
 
 ### Stop an existing object interaction session [POST]
 
@@ -1532,7 +1534,9 @@ The request body must include a valid `sessionUrn` field.
             {
                 "code" : -11,
                 "message" : "session was previously closed"
-            }   
+            } 
+            
++ Response 401            
             
 ## Lookup Specific Object Interaction Session by URN [/sessions/{urn}{?view}]
 ### Lookup a specific session by its system-assigned URN key [GET]
@@ -1569,6 +1573,17 @@ The request body must include a valid `sessionUrn` field.
             
 + Response 204 
  
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists"
+            }
+            
++ Response 401
+
 ## Lookup Object Interaction Sessions by Name [/sessions{?view,nameLike}]
 ### Lookup an array of matching sessions [GET]
 
@@ -1607,6 +1622,8 @@ The request body must include a valid `sessionUrn` field.
             
 + Response 204 
  
++ Response 401
+
 # Group Object Interaction Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Interaction-Label.png "Object Interaction Endpoint")
 
@@ -1680,7 +1697,7 @@ The following interaction fields may be used to create a new record:
                 "type" : "Transaction",
             }
             
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
     + Headers
 
@@ -1701,6 +1718,8 @@ The following interaction fields may be used to create a new record:
                 "code" : -5,
                 "message" : "JSON is missing a required field: type"
             }
+
++ Response 401
 
 ## Lookup Matching Interactions [/interactions{?view,objectUrn}]
 ### Lookup an array of matching interactions [GET]
@@ -1749,6 +1768,7 @@ If no `objectUrn` query parameter is included, then all interactions are returne
             
 + Response 204 
 
++ Response 401
 
 ## Lookup Specific Object Interaction by URN [/interactions/{urn}{?view}]
 ### Lookup a specific interaction by its system-assigned URN key [GET]
@@ -1792,6 +1812,17 @@ If no `objectUrn` query parameter is included, then all interactions are returne
             }
             
 + Response 204 
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists"
+            }
+
++ Response 401
 
 # Group Relationship Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Relationship-Label.png "Relationship Endpoint")
@@ -2824,6 +2855,19 @@ large values should use a file instead of metadata.
     + Headers
 
             SmartCosmos-Event : MetadataUpserted
+
+    + Body
+
+            [
+                {
+                    "code" : 1,
+                    "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939eeeee"
+                },
+                {
+                    "code" : 1,
+                    "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939ddddd"
+                }
+            ]
 
 
 + Response 400 (application/json)
