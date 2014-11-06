@@ -31,8 +31,6 @@ AbstractNamedObjectBuilder<IUserCredentials, UserCredentialsBuilder> {
 	protected void onValidate() {
 		Preconditions.checkNotNull(instance.getUsername(),
 				"username must not be null");
-		Preconditions.checkNotNull(instance.getPassword(),
-				"password must not be null");
 	}
 
 }
