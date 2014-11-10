@@ -19,6 +19,9 @@
 
 package net.smartcosmos.model.context;
 
+import java.util.List;
+
+import net.smartcosmos.am.model.context.IGroup;
 import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.objects.model.context.IObject;
 
@@ -49,6 +52,10 @@ public interface IUser extends IAccountDomainResource<IUser>
     void setAssociatedObject(IObject object);
 
     RoleType getRoleType();
+    
+    List<IGroup> getGroups();
+    
+    void setGroups(List<IGroup> groups);
 
     void setRoleType(RoleType role);
 

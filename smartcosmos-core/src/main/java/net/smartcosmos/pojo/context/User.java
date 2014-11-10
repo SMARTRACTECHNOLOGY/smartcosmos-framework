@@ -19,16 +19,23 @@
 
 package net.smartcosmos.pojo.context;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.util.List;
+
+import net.smartcosmos.am.model.context.IGroup;
+import net.smartcosmos.am.pojo.context.Group;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
+import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.objects.pojo.context.ObjectImpl;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonFilter("userFilter")
 public class User extends DomainResource<IUser> implements IUser
 {
     @JsonView(JsonGenerationView.Minimum.class)
@@ -50,6 +57,10 @@ public class User extends DomainResource<IUser> implements IUser
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected RoleType roleType;
+    
+    @JsonView(JsonGenerationView.Full.class)
+    @JsonDeserialize(as = Group.class)
+    protected List<IGroup> groups;
 
     @Override
     public String getEmailAddress()
@@ -154,4 +165,16 @@ public class User extends DomainResource<IUser> implements IUser
         result = 31 * result + roleType.hashCode();
         return result;
     }
+
+	@Override
+	public List<IGroup> getGroups() {
+		return groups;
+	}
+
+	@Override
+	public void setGroups(List<IGroup> groups) {
+		this.groups=groups;
+	}
+
+	
 }

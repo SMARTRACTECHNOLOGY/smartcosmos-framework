@@ -19,11 +19,15 @@
 
 package net.smartcosmos.builder;
 
-import com.google.common.base.Preconditions;
-import net.smartcosmos.objects.model.context.IObject;
+import java.util.List;
+
+import net.smartcosmos.am.model.context.IGroup;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
+import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.pojo.context.User;
+
+import com.google.common.base.Preconditions;
 
 /**
  * Convenience Builder pattern class for creating new {@link net.smartcosmos.model.context.IUser} instances.
@@ -59,6 +63,12 @@ public final class UserBuilder extends AbstractMonikerBuilder<IUser, UserBuilder
     public UserBuilder setRoleType(RoleType roleType)
     {
         instance.setRoleType(roleType);
+        return this;
+    }
+    
+    public UserBuilder setGroups(List<IGroup> groups)
+    {
+        instance.setGroups(groups);
         return this;
     }
 

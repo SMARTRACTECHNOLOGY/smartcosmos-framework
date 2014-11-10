@@ -1,18 +1,17 @@
 package net.smartcosmos.am.pojo.context;
 
 import net.smartcosmos.am.model.context.IGroup;
-import net.smartcosmos.pojo.base.AccountTypedNamedObject;
+import net.smartcosmos.pojo.base.NamedObject;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.stormpath.sdk.group.GroupStatus;
 
 @JsonInclude(value=Include.NON_EMPTY)
-public class Group  extends AccountTypedNamedObject<IGroup> implements IGroup{
+@JsonIgnoreProperties(value={"uniqueId","lastModifiedTimestamp","activeFlag","active"})
+public class Group  extends NamedObject<IGroup> implements IGroup{
 	private String name;
 	private String description;
-	private String href;
-	private GroupStatus status;
 
 	public Group() {
 		// TODO Auto-generated constructor stub
@@ -34,36 +33,9 @@ public class Group  extends AccountTypedNamedObject<IGroup> implements IGroup{
 		this.description = description;
 	}
 
-	public String getHref() {
-		return href;
-	}
-
-	public void setHref(String href) {
-		this.href = href;
-	}
-
-	public GroupStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(GroupStatus status) {
-		this.status = status;
-	}
-	
-	@Override
-	public String getType() {
-		return type;
-	}
-
-	@Override
-	public void setType(String type) {
-		this.type=type;
-	}
-
 	@Override
 	public String toString() {
-		return "Group [name=" + name + ", description=" + description
-				+ ", href=" + href + ", status=" + status + "]";
+		return "Group [name=" + name + ", description=" + description + "]";
 	}	
 	
 }
