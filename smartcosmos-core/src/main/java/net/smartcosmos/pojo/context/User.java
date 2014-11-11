@@ -19,6 +19,7 @@
 
 package net.smartcosmos.pojo.context;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.smartcosmos.am.model.context.IGroup;
@@ -57,9 +58,9 @@ public class User extends DomainResource<IUser> implements IUser
     @JsonView(JsonGenerationView.Minimum.class)
     protected RoleType roleType;
     
-    @JsonView(JsonGenerationView.Full.class)
+    @JsonView(JsonGenerationView.Minimum.class)
     @JsonDeserialize(as = List.class)
-    protected List<IGroup> groups;
+    protected List<IGroup> groups= new ArrayList<>();
 
     @Override
     public String getEmailAddress()
