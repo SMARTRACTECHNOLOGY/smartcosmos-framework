@@ -22,7 +22,6 @@ package net.smartcosmos.pojo.context;
 import java.util.List;
 
 import net.smartcosmos.am.model.context.IGroup;
-import net.smartcosmos.am.pojo.context.Group;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
@@ -59,7 +58,7 @@ public class User extends DomainResource<IUser> implements IUser
     protected RoleType roleType;
     
     @JsonView(JsonGenerationView.Full.class)
-    @JsonDeserialize(as = Group.class)
+    @JsonDeserialize(as = List.class)
     protected List<IGroup> groups;
 
     @Override
