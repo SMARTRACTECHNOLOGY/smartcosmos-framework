@@ -101,7 +101,6 @@
       </snapshotRepository>
     </distributionManagement>
     <!-- commented to manage versions to Nexus
-
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
