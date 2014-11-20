@@ -105,7 +105,6 @@
         </repository>
     </distributionManagement>
 	-->
-
     <dependencies>
 
         <dependency>
