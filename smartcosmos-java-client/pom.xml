@@ -50,7 +50,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <target.version>${target.numberVersion}-${target.kindRepo}</target.version>
         <target.numberVersion>1.0</target.numberVersion>
-        <target.kindRepo>SNAPSHOT</target.kindRepo>
+        <target.kindRepo>RELEASE</target.kindRepo>
         <sdk.version>1.0-${target.kindRepo}</sdk.version>
         <restlet.version>2.2-M3</restlet.version>
     </properties>
