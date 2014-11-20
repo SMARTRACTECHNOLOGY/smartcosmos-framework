@@ -77,4 +77,10 @@ public final class UserBuilder extends AbstractMonikerBuilder<IUser, UserBuilder
         instance.setAssociatedObject(object);
         return this;
     }
+    
+    public UserBuilder setUrn(String urn)
+    {
+        instance.setUrn(urn);
+        return this;
+    }
 }

@@ -21,4 +21,8 @@ AbstractNamedObjectBuilder<IGroup, GroupBuilder> {
 		return this;
 	}	
 
+	public GroupBuilder setUrn(String urn) {
+		instance.setUrn(urn);
+		return this;
+	}	
 }
