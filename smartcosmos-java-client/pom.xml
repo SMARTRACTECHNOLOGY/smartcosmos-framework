@@ -29,7 +29,7 @@
 
     <groupId>net.smartcosmos</groupId>
     <artifactId>java-client</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${target.numberVersion}-${target.kindRepo}</version>
 
     <packaging>jar</packaging>
 
@@ -48,7 +48,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sdk.version>1.0-SNAPSHOT</sdk.version>
+        <target.numberVersion>1.0</target.numberVersion>
+        <target.kindRepo>SNAPSHOT</target.kindRepo>
+        <sdk.version>1.0-${target.kindRepo}</sdk.version>
         <restlet.version>2.2-M3</restlet.version>
     </properties>
 
@@ -86,6 +88,20 @@
     </scm>
 
     <distributionManagement>
+      <repository>
+        <id>deployment</id>
+        <name>Internal Releases</name>
+        <url>https://nexus.smartcosmos.net/nexus/content/repositories/releases/</url>
+      </repository>
+      <snapshotRepository>
+        <id>deployment</id>
+        <name>Internal Releases</name>
+        <url>https://nexus.smartcosmos.net/nexus/content/repositories/snapshots/</url>
+      </snapshotRepository>
+    </distributionManagement>
+    <!-- commented to manage versions
+
+    <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
@@ -95,7 +111,7 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
+-->
     <dependencies>
 
         <dependency>
