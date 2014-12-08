@@ -3390,17 +3390,6 @@ Tag name 100 times, but the system will only store the first one).
 When a Tag is deleted, any Tag Assignment with a referential object that references that Tag name is automatically
 deleted.
 
-** Endpoint Definitions To Be Documented **
-
-Endpoint | Supported HTTP Methods | Events Generated
------------- | ------------- | ------------
-/tags | PUT  | TagUpserted
-/tags/tag/{tagName} | DELETE | TagDeleted, TagRevoked
-/tags/tag/{tagName} | GET | TagAccessed
-/tags/{urn} | GET | TagAccessed
-/tags/{entityReferenceType/{referenceUrn} | PUT | TagAssigned
-/tags [?tagName=Foo&entityReferenceType=Bar&referenceUrn=Baaq] | GET | TagAccessed (for each tag)
-
 **NOTE** The GET query parameters can be combined for flexible searching, like all tags with a name like Foo and of entity reference type Object, for example.
 
 **NOTE** The PUT endpoint at */tags* is idempotent and will respond with a **201- SUCCESS_CREATED ** if the record is new, or a **200 - SUCCESS_OK** if a Tag with the given `name` already existed in the database (no data is merged; existing record is left as-is).
@@ -3418,11 +3407,287 @@ Endpoint | Supported HTTP Methods | Events Generated
 ]
 ````
 
-<!--
-# Group Extension Endpoints
-## Overview
-TO BE DOCUMENTED
--->
+** Endpoint Definitions To Be Documented **
+
+Endpoint | Supported HTTP Methods | Events Generated
+------------ | ------------- | ------------
+/tags | PUT  | TagUpserted
+/tags/tag/{tagName} | DELETE | TagDeleted, TagRevoked
+/tags/tag/{tagName} | GET | TagAccessed
+/tags/{urn} | GET | TagAccessed
+/tags/{entityReferenceType/{referenceUrn} | PUT | TagAssigned
+/tags [?tagName=Foo&entityReferenceType=Bar&referenceUrn=Baaq] | GET | TagAccessed (for each tag)
+
+
+## Tag Definitions [/tags]
+### Create a new tag associated with an arbitrary identification value [PUT]
+
+The following user fields may be used to create a new tag:
+
+- `name` is required and constrained to 1024 characters
+- `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
+- `activeFlag` is optional and may be omitted; defaults to **true**
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+
+#### Idempotent Behavior
+This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result
+
+- **201 SUCCESS_CREATED** if the record is new
+- **200 SUCCESS_OK** if a Tag with the given `name` already existed in the database, in which case **no data is merged; existing record is left as-is**
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "name" : "MyTag"
+            }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: endpointUrl"
+            }          
+            
++ Response 401
+
+
+
+## Lookup Specific Tag by Name [/tags/tag/{tagName}{?view}]
+### Lookup for tag details by tag name [GET]
+
++ Parameters
+    + tagName (required, string, `MyTag`) ... Client defined name at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+   
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+            
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
+
+    + Body
+    
+            {
+                "urn" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "name" : "My tag",
+                "description" : "Description of my tag",
+                "moniker" : "",
+                "activeFlag" : "true",
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: endpointUrl"
+            }          
+            
++ Response 401
+
+
+## Lookup Specific Tag by URN [/tags/{urn}{?view}]
+### Lookup for tag details by tag URN [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "name" : "MyTag"
+            }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: endpointUrl"
+            }          
+            
++ Response 401
+
+
+## Assign hash tags [/tags/{entityReferenceType}/{referenceUrn}]
+### Assign hash tags to objects [PUT]
+
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "name" : "MyTag"
+            }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: endpointUrl"
+            }          
+            
++ Response 401
+
+
+## Lookup list of Tags [/tags %5B?tagName=Foo&entityReferenceType=Bar&referenceUrn=Baaq%5D{?view}]
+### Lookup an array of matching objects [GET]
+
+
++ Parameters
+    + tagName (required, string, `MyTag`) ... Client defined name at creation
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "name" : "MyTag"
+            }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: endpointUrl"
+            }          
+            
++ Response 401
+
+## Delete tag [/tags/tag/{tagName}]
+### Remove tag by URN [DELETE]
+
++ Parameters
+    + tagName (required, string, `MyTag`) ... Client defined name at creation
+   
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "name" : "MyTag"
+            }
+
++ Response 204 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
+   
+            
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: endpointUrl"
+            }          
+            
++ Response 401
+
 
 # Group Notification Endpoints
 ## Overview
