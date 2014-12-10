@@ -29,7 +29,7 @@
 
     <groupId>net.smartcosmos</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>1.29</version>
+    <version>1.30-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
@@ -74,7 +74,7 @@
         <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java</url>
         <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</connection>
         <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</developerConnection>
-        <tag>java-sdk-1.29</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
