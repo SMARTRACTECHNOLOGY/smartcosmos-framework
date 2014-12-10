@@ -30,7 +30,7 @@
 
     <groupId>net.smartcosmos</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>1.0-SNAPSHOT</version>
+		<version>${target.version}</version>
 
     <packaging>jar</packaging>
 
@@ -49,6 +49,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+				<target.version>${target.numberVersion}-${target.kindRepo}</target.version>
+				<target.numberVersion>1.0</target.numberVersion>
+				<target.kindRepo>RELEASE</target.kindRepo>
         <jackson.version>2.3.3</jackson.version>
     </properties>
 
@@ -78,30 +81,30 @@
         <tag>HEAD</tag>
     </scm>
 
+		<distributionManagement>
+			<repository>
+				<id>deployment</id>
+				<name>Internal Releases</name>
+				<url>https://nexus.smartcosmos.net/nexus/content/repositories/releases/</url>
+			</repository>
+			<snapshotRepository>
+				<id>deployment</id>
+				<name>Internal Releases</name>
+				<url>https://nexus.smartcosmos.net/nexus/content/repositories/snapshots/</url>
+			</snapshotRepository>
+		</distributionManagement>
+		<!-- coment to use Nexus
     <distributionManagement>
-        <repository>
-            <id>deployment</id>
-            <name>Internal Releases</name>
-            <url>https://nexus.smartcosmos.net/nexus/content/repositories/releases/</url>
-        </repository>
         <snapshotRepository>
-            <id>deployment</id>
-            <name>Internal Releases</name>
-            <url>https://nexus.smartcosmos.net/nexus/content/repositories/snapshots/</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
-    <!-- coment to use Nexus
-<distributionManagement>
-    <snapshotRepository>
-        <id>ossrh</id>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-        <id>ossrh</id>
-        <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-</distributionManagement>
--->
+	-->
     <dependencies>
 
         <dependency>
@@ -202,6 +205,12 @@
                                     <title>Extensions (EXPERIMENTAL)</title>
                                     <packages>
                                         net.smartcosmos.model.extension:net.smartcosmos.pojo.extension
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Catalogs (EXPERIMENTAL)</title>
+                                    <packages>
+                                        net.smartcosmos.catalog*
                                     </packages>
                                 </group>
                             </groups>
