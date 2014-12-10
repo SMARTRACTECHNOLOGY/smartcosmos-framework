@@ -145,5 +145,13 @@ public enum EventType
     GeospatialEntryAccessed,
     GeospatialEntryDefined,
     GeospatialEntryUpdated,
-    GeospatialEntryDeleted
+    GeospatialEntryDeleted,
+
+    BusinessRuleDefined,
+    BusinessRuleUpdated,
+    BusinessRuleDeleted,
+    BusinessRulesAccessed,
+    BusinessRulesStatusChanged,
+    BusinessRuleTriggered
+
 }
