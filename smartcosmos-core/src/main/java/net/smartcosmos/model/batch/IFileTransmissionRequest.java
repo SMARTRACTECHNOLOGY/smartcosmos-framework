@@ -1,6 +1,8 @@
 package net.smartcosmos.model.batch;
 
-public interface IFileTransmissionRequest
+import net.smartcosmos.model.base.IDomainResource;
+
+public interface IFileTransmissionRequest extends IDomainResource<IFileTransmissionRequest>
 {
     /**
      * Size (in bytes) of the file being transmitted
@@ -51,14 +53,14 @@ public interface IFileTransmissionRequest
      *
      * @return Previously configured routing URN
      */
-    String getRoutingURN();
+    String getRoutingUrn();
 
     /**
      * Identifies an internal, previously configured, routing URN within the server. Routing URNs identify a controller
      * class that has <i>a priori</i> knowledge of how to process and handle the data contained within the file being
      * uploaded.
      *
-     * @param routingURN Previously configured routing URN
+     * @param routingUrn Previously configured routing URN
      */
-    void setRoutingURN(String routingURN);
+    void setRoutingUrn(String routingUrn);
 }
