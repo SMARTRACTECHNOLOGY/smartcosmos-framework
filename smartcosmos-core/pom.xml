@@ -1,74 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ~ SMART COSMOS SDK ~ (C) Copyright 2013-2014, Smartrac Technology Fletcher,
-	Inc. ~ 267 Cane Creek Rd, Fletcher, NC, 28732, USA ~ All Rights Reserved.
-	~ ~ Licensed under the Apache License, Version 2.0 (the "License"); ~ you
-	may not use this file except in compliance with the License. ~ You may obtain
-	a copy of the License at ~ ~ http://www.apache.org/licenses/LICENSE-2.0 ~
-	~ Unless required by applicable law or agreed to in writing, software ~ distributed
-	under the License is distributed on an "AS IS" BASIS, ~ WITHOUT WARRANTIES
-	OR CONDITIONS OF ANY KIND, either express or implied. ~ See the License for
-	the specific language governing permissions and ~ limitations under the License. -->
+<!--
+  ~ SMART COSMOS SDK
+  ~ (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
+  ~ 267 Cane Creek Rd, Fletcher, NC, 28732, USA
+  ~ All Rights Reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
 	<groupId>net.smartcosmos</groupId>
 	<artifactId>java-sdk</artifactId>
 	<version>1.1.0-SNAPSHOT</version>
 
-	<packaging>jar</packaging>
+    <packaging>jar</packaging>
 
-	<name>SMART COSMOS Java SDK</name>
-	<description>Provides an interface driven SDK for working with the SMART COSMOS platform services</description>
+    <name>SMART COSMOS Java SDK</name>
+    <description>Provides an interface driven SDK for working with the SMART COSMOS platform services</description>
 
-	<url>http://www.smart-cosmos.com/</url>
+    <url>http://www.smart-cosmos.com/</url>
 
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jackson.version>2.1.0</jackson.version>
-		<stormpath-sdk.version>0.9.1</stormpath-sdk.version>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jackson.version>2.3.3</jackson.version>
+    </properties>
 
-	<organization>
-		<name>SMARTRAC Technology Fletcher, Inc.</name>
-		<url>http://www.smartrac-group.com</url>
-	</organization>
+    <organization>
+        <name>SMARTRAC Technology Fletcher, Inc.</name>
+        <url>http://www.smartrac-group.com</url>
+    </organization>
 
-	<developers>
-		<developer>
-			<id>cloud.engineering</id>
-			<name>SMARTRAC API Team</name>
+    <developers>
+        <developer>
+            <id>cloud.engineering</id>
+            <name>SMARTRAC API Team</name>
 
-			<email>api@smartrac-group.com</email>
-			<organization>Smartrac Technology Fletcher, Inc.</organization>
-			<timezone>-5</timezone>
-			<roles>
-				<role>Project Lead</role>
-			</roles>
-		</developer>
-	</developers>
+            <email>api@smartrac-group.com</email>
+            <organization>Smartrac Technology Fletcher, Inc.</organization>
+            <timezone>-5</timezone>
+            <roles>
+                <role>Project Lead</role>
+            </roles>
+        </developer>
+    </developers>
 
-	<scm>
-		<url>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java</url>
-		<connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</connection>
-		<developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</developerConnection>
+    <scm>
+        <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java</url>
+        <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</connection>
+        <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</developerConnection>
         <tag>HEAD</tag>
-	</scm>
+    </scm>
 
     <distributionManagement>
         <snapshotRepository>
@@ -83,35 +91,41 @@
 
     <dependencies>
 
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-core</artifactId>
-			<version>1.2.0</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.2.0</version>
+        </dependency>
 
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20090211</version>
-		</dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>15.0</version>
-		</dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20090211</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -126,175 +140,177 @@
 		</dependency>
 	</dependencies>
 
-	<profiles>
-		<profile>
-			<id>release</id>
-			<build>
-				<plugins>
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.9.1</version>
-						<executions>
-							<execution>
-								<id>attach-javadoc</id>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<groups>
-								<group>
-									<title>Builders</title>
-									<packages>
-										net.smartcosmos.builder:net.smartcosmos.objects.builder:net.smartcosmos.profiles.builder:net.smartcosmos.flows.builder
-									</packages>
-								</group>
-								<group>
-									<title>SMART COSMOS Profiles</title>
-									<packages>
-										net.smartcosmos.profiles.model*:net.smartcosmos.profiles.pojo:net.smartcosmos.profiles.pojo*
-									</packages>
-								</group>
-								<group>
-									<title>SMART COSMOS Objects</title>
-									<packages>
-										net.smartcosmos.objects.model*:net.smartcosmos.objects.pojo*
-									</packages>
-								</group>
-								<group>
-									<title>SMART COSMOS Flows</title>
-									<packages>
-										net.smartcosmos.flows.model*:net.smartcosmos.flows.pojo*
-									</packages>
-								</group>
-								<group>
-									<title>Audit and Integration Event Generation</title>
-									<packages>
-										net.smartcosmos.model.integration:net.smartcosmos.pojo.integration:net.smartcosmos.model.event:net.smartcosmos.pojo.event
-									</packages>
-								</group>
-								<group>
-									<title>Utilities</title>
-									<packages>
-										net.smartcosmos.util*
-									</packages>
-								</group>
-								<group>
-									<title>Common Core</title>
-									<packages>
-										net.smartcosmos.model.base:net.smartcosmos.model.context:net.smartcosmos:net.smartcosmos.geo:net.smartcosmos.model.geo:net.smartcosmos.pojo*
-									</packages>
-								</group>
-								<group>
-									<title>Extensions (EXPERIMENTAL)</title>
-									<packages>
-										net.smartcosmos.model.extension:net.smartcosmos.pojo.extension
-									</packages>
-								</group>
-								<group>
-									<title>Catalogs (EXPERIMENTAL)</title>
-									<packages>
-										net.smartcosmos.catalog*
-									</packages>
-								</group>
-							</groups>
-							<show>protected</show>
-							<nohelp>true</nohelp>
-							<docfilessubdirs>true</docfilessubdirs>
-						</configuration>
-					</plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <groups>
+                                <group>
+                                    <title>Builders</title>
+                                    <packages>
+                                        net.smartcosmos.builder:net.smartcosmos.objects.builder:net.smartcosmos.profiles.builder:net.smartcosmos.flows.builder
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>SMART COSMOS Profiles</title>
+                                    <packages>
+                                        net.smartcosmos.profiles.model*:net.smartcosmos.profiles.pojo:net.smartcosmos.profiles.pojo*
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>SMART COSMOS Objects</title>
+                                    <packages>
+                                        net.smartcosmos.objects.model*:net.smartcosmos.objects.pojo*
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>SMART COSMOS Flows</title>
+                                    <packages>
+                                        net.smartcosmos.flows.model*:net.smartcosmos.flows.pojo*
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Audit and Integration Event Generation</title>
+                                    <packages>
+                                        net.smartcosmos.model.integration:net.smartcosmos.pojo.integration:net.smartcosmos.model.event:net.smartcosmos.pojo.event
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Utilities</title>
+                                    <packages>
+                                        net.smartcosmos.util*
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Common Core</title>
+                                    <packages>
+                                        net.smartcosmos.model.base:net.smartcosmos.model.context:net.smartcosmos:net.smartcosmos.geo:net.smartcosmos.model.geo:net.smartcosmos.pojo*
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Extensions (EXPERIMENTAL)</title>
+                                    <packages>
+                                        net.smartcosmos.model.extension:net.smartcosmos.pojo.extension
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Catalogs (EXPERIMENTAL)</title>
+                                    <packages>
+                                        net.smartcosmos.catalog*
+                                    </packages>
+                                </group>
+                            </groups>
+                            <show>protected</show>
+                            <nohelp>true</nohelp>
+                            <docfilessubdirs>true</docfilessubdirs>
+                        </configuration>
+                    </plugin>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-source-plugin</artifactId>
-						<version>2.2.1</version>
-						<executions>
-							<execution>
-								<id>attach-sources</id>
-								<goals>
-									<goal>jar-no-fork</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<configuration>
-							<descriptors>
-								<descriptor>src/assemble/assembly.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/assemble/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </plugin>
 
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
-	<build>
-		<pluginManagement>
-			<plugins>
+    <build>
+        <pluginManagement>
+            <plugins>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-gpg-plugin</artifactId>
-					<version>1.5</version>
-				</plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.5</version>
+                </plugin>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.4</version>
-				</plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
 
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>2.3</version>
-				</plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.3</version>
+                </plugin>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.5.1</version>
-					<configuration>
-						<compilerVersion>1.7</compilerVersion>
-						<source>1.7</source>
-						<target>1.7</target>
-					</configuration>
-				</plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.5.1</version>
+                    <configuration>
+                        <compilerVersion>1.7</compilerVersion>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
 
-				<plugin>
-					<artifactId>maven-release-plugin</artifactId>
-					<version>2.5</version>
-					<configuration>
-						<!-- During release:perform, enable the "release" profile -->
-						<releaseProfiles>release</releaseProfiles>
-						<goals>deploy assembly:single</goals>
-						<mavenExecutorId>forked-path</mavenExecutorId>
-					</configuration>
-				</plugin>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <!--
+                          During release:perform, enable the "release" profile
+                         -->
+                        <releaseProfiles>release</releaseProfiles>
+                        <goals>deploy assembly:single</goals>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                    </configuration>
+                </plugin>
 
-			</plugins>
-		</pluginManagement>
-	</build>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
