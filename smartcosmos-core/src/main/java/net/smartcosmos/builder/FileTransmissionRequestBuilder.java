@@ -1,14 +1,14 @@
 package net.smartcosmos.builder;
 
 import com.google.common.base.Preconditions;
-import net.smartcosmos.model.batch.IFileTransmissionRequest;
-import net.smartcosmos.pojo.batch.FileTransmissionRequest;
+import net.smartcosmos.model.batch.IBatchTransmission;
+import net.smartcosmos.pojo.batch.BatchTransmission;
 
-public class FileTransmissionRequestBuilder extends AbstractBuilder<IFileTransmissionRequest>
+public class FileTransmissionRequestBuilder extends AbstractBuilder<IBatchTransmission>
 {
     public FileTransmissionRequestBuilder(String routingUrn)
     {
-        super(new FileTransmissionRequest());
+        super(new BatchTransmission());
         Preconditions.checkNotNull(routingUrn, "routingUrn must not be null");
         this.instance.setRoutingUrn(routingUrn);
     }

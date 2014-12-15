@@ -1,6 +1,8 @@
 package net.smartcosmos.model.batch;
 
-public interface IFileTransmissionRequest
+import net.smartcosmos.model.base.IDomainResource;
+
+public interface IBatchTransmission extends IDomainResource<IBatchTransmission>
 {
     /**
      * Size (in bytes) of the file being transmitted
@@ -61,4 +63,55 @@ public interface IFileTransmissionRequest
      * @param routingUrn Previously configured routing URN
      */
     void setRoutingUrn(String routingUrn);
+
+    /**
+     * System assigned name that the file must be given during transmission, assuring no name collisions will result if
+     * the same file is transmitted multiple times (intentionally or on accident).
+     *
+     * @return System assigned name that the file must use during transmission
+     */
+    String getTransmissionUrn();
+
+    void setTransmissionUrn(String transmissionUrn);
+
+    /**
+     * Identifies the endpoint <i>where</i> the caller should transmit the actual file content.
+     *
+     * @return Endpoint where the actual file should be sent
+     */
+    String getEndpointUri();
+
+    void setEndpointUri(String endpointUri);
+
+    long getBatchProcessorStartTimestamp();
+
+    void setBatchProcessorStartTimestamp(long batchProcessorStartTimestamp);
+
+    BatchProcessorStatus getBatchProcessorStatus();
+
+    void setBatchProcessorStatus(BatchProcessorStatus batchProcessorStatus);
+
+    int getPercentageComplete();
+
+    void setPercentageComplete(int percentageComplete);
+
+    long getLastPercentageCompleteUpdateTimestamp();
+
+    void setLastPercentageCompleteUpdateTimestamp(long lastPercentageCompleteUpdateTimestamp);
+
+    int getErrorCode();
+
+    void setErrorCode(int errorCode);
+
+    String getErrorMessage();
+
+    void setErrorMessage(String errorMessage);
+
+    long getBatchProcessorStopTimestamp();
+
+    void setBatchProcessorStopTimestamp(long batchProcessorStopTimestamp);
+
+    TransmissionResultType getTransmissionResult();
+
+    void setTransmissionResult(TransmissionResultType transmissionResult);
 }

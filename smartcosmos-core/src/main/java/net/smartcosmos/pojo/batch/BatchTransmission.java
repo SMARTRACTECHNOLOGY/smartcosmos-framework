@@ -2,10 +2,12 @@ package net.smartcosmos.pojo.batch;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.model.batch.BatchProcessorStatus;
-import net.smartcosmos.model.batch.IBatchProcessorReport;
+import net.smartcosmos.model.batch.IBatchTransmission;
+import net.smartcosmos.model.batch.TransmissionResultType;
+import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class BatchProcessorReport extends TransmissionUrnNamespace implements IBatchProcessorReport
+public class BatchTransmission extends DomainResource<IBatchTransmission> implements IBatchTransmission
 {
     @JsonView(JsonGenerationView.Minimum.class)
     private long batchProcessorStartTimestamp;
@@ -27,6 +29,111 @@ public class BatchProcessorReport extends TransmissionUrnNamespace implements IB
 
     @JsonView(JsonGenerationView.Minimum.class)
     private long batchProcessorStopTimestamp;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    private String transmissionUrn;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    private String endpointUri;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    private String md5Checksum;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    private String contentType;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    private String routingUrn;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    private long contentLength;
+
+    @JsonView(JsonGenerationView.Minimum.class)
+    private TransmissionResultType transmissionResult;
+
+    @Override
+    public long getFileContentLength()
+    {
+        return contentLength;
+    }
+
+    @Override
+    public void setFileContentLength(long contentLength)
+    {
+        this.contentLength = contentLength;
+    }
+
+    @Override
+    public String getFileMd5Checksum()
+    {
+        return md5Checksum;
+    }
+
+    @Override
+    public void setFileMd5Checksum(String md5Checksum)
+    {
+        this.md5Checksum = md5Checksum;
+    }
+
+    @Override
+    public String getFileContentType()
+    {
+        return contentType;
+    }
+
+    @Override
+    public void setFileContentType(String contentType)
+    {
+        this.contentType = contentType;
+    }
+
+    @Override
+    public String getRoutingUrn()
+    {
+        return routingUrn;
+    }
+
+    @Override
+    public void setRoutingUrn(String routingUrn)
+    {
+        this.routingUrn = routingUrn;
+    }
+
+    @Override
+    public String getEndpointUri()
+    {
+        return endpointUri;
+    }
+
+    @Override
+    public void setEndpointUri(String endpointUri)
+    {
+        this.endpointUri = endpointUri;
+    }
+
+    @Override
+    public TransmissionResultType getTransmissionResult()
+    {
+        return transmissionResult;
+    }
+
+    @Override
+    public void setTransmissionResult(TransmissionResultType transmissionResult)
+    {
+        this.transmissionResult = transmissionResult;
+    }
+
+    @Override
+    public String getTransmissionUrn()
+    {
+        return transmissionUrn;
+    }
+
+    @Override
+    public void setTransmissionUrn(String transmissionUrn)
+    {
+        this.transmissionUrn = transmissionUrn;
+    }
 
     @Override
     public long getBatchProcessorStartTimestamp()
@@ -110,37 +217,5 @@ public class BatchProcessorReport extends TransmissionUrnNamespace implements IB
     public void setBatchProcessorStatus(BatchProcessorStatus batchProcessorStatus)
     {
         this.batchProcessorStatus = batchProcessorStatus;
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BatchProcessorReport that = (BatchProcessorReport) o;
-
-        if (batchProcessorStartTimestamp != that.batchProcessorStartTimestamp) return false;
-        if (batchProcessorStopTimestamp != that.batchProcessorStopTimestamp) return false;
-        if (errorCode != that.errorCode) return false;
-        if (lastPercentageCompleteUpdateTimestamp != that.lastPercentageCompleteUpdateTimestamp) return false;
-        if (percentageComplete != that.percentageComplete) return false;
-        if (batchProcessorStatus != that.batchProcessorStatus) return false;
-        if (errorMessage != null ? !errorMessage.equals(that.errorMessage) : that.errorMessage != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int result = (int) (batchProcessorStartTimestamp ^ (batchProcessorStartTimestamp >>> 32));
-        result = 31 * result + percentageComplete;
-        result = 31 * result + (int) (lastPercentageCompleteUpdateTimestamp ^ (lastPercentageCompleteUpdateTimestamp >>> 32));
-        result = 31 * result + batchProcessorStatus.hashCode();
-        result = 31 * result + errorCode;
-        result = 31 * result + (errorMessage != null ? errorMessage.hashCode() : 0);
-        result = 31 * result + (int) (batchProcessorStopTimestamp ^ (batchProcessorStopTimestamp >>> 32));
-        return result;
     }
 }
