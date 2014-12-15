@@ -6,9 +6,9 @@ public interface IBatchProcessorReport extends ITransmissionUrnNamespace
 
     void setBatchProcessorStartTimestamp(long batchProcessorStartTimestamp);
 
-    boolean hasProcessingStarted();
+    BatchProcessorStatus getBatchProcessorStatus();
 
-    void setProcessingStarted(boolean flag);
+    void setBatchProcessorStatus(BatchProcessorStatus batchProcessorStatus);
 
     int getPercentageComplete();
 
@@ -17,14 +17,6 @@ public interface IBatchProcessorReport extends ITransmissionUrnNamespace
     long getLastPercentageCompleteUpdateTimestamp();
 
     void setLastPercentageCompleteUpdateTimestamp(long lastPercentageCompleteUpdateTimestamp);
-
-    boolean isProcessingComplete();
-
-    void setProcessingComplete(boolean flag);
-
-    boolean wasProcessingSuccessful();
-
-    void setProcessingSuccessful(boolean flag);
 
     int getErrorCode();
 
