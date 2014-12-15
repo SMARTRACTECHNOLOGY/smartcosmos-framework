@@ -21,22 +21,19 @@ package net.smartcosmos.pojo.base;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
 @JsonPropertyOrder(value = {"uniqueId", "urn", "lastModifiedTimestamp"})
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
-    protected static ObjectMapper mapper = null;
-
     @JsonView(JsonGenerationView.Restricted.class)
     protected long uniqueId;
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected String urn;
 
-    @JsonView(JsonGenerationView.Full.class)
+    @JsonView(JsonGenerationView.Standard.class)
     protected long lastModifiedTimestamp;
 
     @JsonView(JsonGenerationView.Full.class)
