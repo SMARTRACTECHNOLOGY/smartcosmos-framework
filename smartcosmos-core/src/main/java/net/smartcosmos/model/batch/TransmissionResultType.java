@@ -1,6 +1,6 @@
 package net.smartcosmos.model.batch;
 
-public enum TransmissionResult
+public enum TransmissionResultType
 {
     /**
      * File has been successfully transmitted to the S3 bucket.

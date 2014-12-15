@@ -2,7 +2,7 @@ package net.smartcosmos.model.batch;
 
 public interface IFileTransmissionReceipt extends ITransmissionUrnNamespace
 {
-    TransmissionResult getTransmissionResult();
+    TransmissionResultType getTransmissionResult();
 
-    void setTransmissionResult(TransmissionResult transmissionResult);
+    void setTransmissionResult(TransmissionResultType transmissionResult);
 }

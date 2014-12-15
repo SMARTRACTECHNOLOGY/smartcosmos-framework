@@ -1,8 +1,6 @@
 package net.smartcosmos.model.batch;
 
-import net.smartcosmos.model.base.IDomainResource;
-
-public interface IFileTransmissionRequest extends IDomainResource<IFileTransmissionRequest>
+public interface IFileTransmissionRequest
 {
     /**
      * Size (in bytes) of the file being transmitted
