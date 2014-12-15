@@ -1,31 +1,31 @@
 package net.smartcosmos.builder;
 
 import com.google.common.base.Preconditions;
-import net.smartcosmos.model.batch.IBatchTransmission;
-import net.smartcosmos.pojo.batch.BatchTransmission;
+import net.smartcosmos.model.batch.IBatchTransmissionRequest;
+import net.smartcosmos.pojo.batch.BatchTransmissionRequest;
 
-public class FileTransmissionRequestBuilder extends AbstractBuilder<IBatchTransmission>
+public class BatchTransmissionRequestBuilder extends AbstractBuilder<IBatchTransmissionRequest>
 {
-    public FileTransmissionRequestBuilder(String routingUrn)
+    public BatchTransmissionRequestBuilder(String routingUrn)
     {
-        super(new BatchTransmission());
+        super(new BatchTransmissionRequest());
         Preconditions.checkNotNull(routingUrn, "routingUrn must not be null");
         this.instance.setRoutingUrn(routingUrn);
     }
 
-    public FileTransmissionRequestBuilder setFileContentType(String contentType)
+    public BatchTransmissionRequestBuilder setFileContentType(String contentType)
     {
         instance.setFileContentType(contentType);
         return this;
     }
 
-    public FileTransmissionRequestBuilder setFileContentLength(Long contentLength)
+    public BatchTransmissionRequestBuilder setFileContentLength(Long contentLength)
     {
         instance.setFileContentLength(contentLength);
         return this;
     }
 
-    public FileTransmissionRequestBuilder setFileMd5Checksum(String md5Checksum)
+    public BatchTransmissionRequestBuilder setFileMd5Checksum(String md5Checksum)
     {
         instance.setFileMd5Checksum(md5Checksum);
         return this;

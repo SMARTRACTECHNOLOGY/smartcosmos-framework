@@ -1,20 +1,20 @@
 package net.smartcosmos.builder;
 
 import com.google.common.base.Preconditions;
-import net.smartcosmos.model.batch.IBatchTransmission;
+import net.smartcosmos.model.batch.IBatchTransmissionReceipt;
 import net.smartcosmos.model.batch.TransmissionResultType;
-import net.smartcosmos.pojo.batch.BatchTransmission;
+import net.smartcosmos.pojo.batch.BatchTransmissionReceipt;
 
-public final class FileTransmissionReceiptBuilder extends AbstractBuilder<IBatchTransmission>
+public final class BatchTransmissionReceiptBuilder extends AbstractBuilder<IBatchTransmissionReceipt>
 {
-    public FileTransmissionReceiptBuilder(String transmissionUrn)
+    public BatchTransmissionReceiptBuilder(String transmissionUrn)
     {
-        super(new BatchTransmission());
+        super(new BatchTransmissionReceipt());
         Preconditions.checkNotNull(transmissionUrn, "transmissionUrn must not be null");
         this.instance.setTransmissionUrn(transmissionUrn);
     }
 
-    public FileTransmissionReceiptBuilder set(TransmissionResultType transmissionResultType)
+    public BatchTransmissionReceiptBuilder setTransmissionResult(TransmissionResultType transmissionResultType)
     {
         instance.setTransmissionResult(transmissionResultType);
         return this;

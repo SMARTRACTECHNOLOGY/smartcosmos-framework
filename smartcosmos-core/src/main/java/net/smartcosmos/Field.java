@@ -181,6 +181,16 @@ public final class Field
 
     public static final String PAGE_ENTRY_FIELD = "pageEntry";
 
+    //
+    // Batch Transmission Fields
+    //
+    public static final String FILE_MD5_CHECKSUM = "md5Checksum";
+
+    public static final String FILE_CONTENT_TYPE = "contentType";
+
+    public static final String FILE_CONTENT_LENGTH = "contentLength";
+
+    public static final String BATCH_ROUTING_URN = "routingUrn";
 
     private Field()
     {
