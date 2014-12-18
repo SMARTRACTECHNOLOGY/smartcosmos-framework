@@ -192,6 +192,10 @@ public final class Field
 
     public static final String BATCH_ROUTING_URN = "routingUrn";
 
+    public static final String TRANSMISSION_URN = "transmissionUrn";
+
+    public static final String TRANSMISSION_RESULT = "transmissionResultType";
+
     private Field()
     {
     }
