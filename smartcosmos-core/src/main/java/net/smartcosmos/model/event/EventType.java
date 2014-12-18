@@ -145,5 +145,8 @@ public enum EventType
     GeospatialEntryAccessed,
     GeospatialEntryDefined,
     GeospatialEntryUpdated,
-    GeospatialEntryDeleted
+    GeospatialEntryDeleted,
+
+    BatchTransmissionRequest,
+    BatchTransmissionReceipt
 }
