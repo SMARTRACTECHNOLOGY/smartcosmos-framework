@@ -194,7 +194,7 @@ public final class Field
 
     public static final String TRANSMISSION_URN = "transmissionUrn";
 
-    public static final String TRANSMISSION_RESULT = "transmissionResultType";
+    public static final String TRANSMISSION_RESULT = "transmissionResult";
 
     private Field()
     {
