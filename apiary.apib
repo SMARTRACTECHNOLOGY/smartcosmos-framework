@@ -3447,29 +3447,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "name" : "MyTag"
             }
 
-+ Response 200 (application/json)
 
-    + Headers
-
-            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
-
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
-            }
-            
-+ Response 400 (application/json)
-
-    + Body
-
-            {
-                "code" : -5,
-                "message" : "JSON is missing a required field: endpointUrl"
-            }          
-            
-+ Response 401
 
 
 
@@ -3489,32 +3467,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
     + Body
             
 
-+ Response 200 (application/json)
 
-    + Headers
-
-            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
-
-    + Body
-    
-            {
-                "urn" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
-                "name" : "My tag",
-                "description" : "Description of my tag",
-                "moniker" : "",
-                "activeFlag" : "true",
-            }
-            
-+ Response 400 (application/json)
-
-    + Body
-
-            {
-                "code" : -5,
-                "message" : "JSON is missing a required field: endpointUrl"
-            }          
-            
-+ Response 401
 
 
 ## Lookup Specific Tag by URN [/tags/{urn}{?view}]
@@ -3536,29 +3489,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "name" : "MyTag"
             }
 
-+ Response 200 (application/json)
 
-    + Headers
-
-            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
-
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
-            }
-            
-+ Response 400 (application/json)
-
-    + Body
-
-            {
-                "code" : -5,
-                "message" : "JSON is missing a required field: endpointUrl"
-            }          
-            
-+ Response 401
 
 
 ## Assign hash tags [/tags/{entityReferenceType}/{referenceUrn}]
@@ -3581,29 +3512,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "name" : "MyTag"
             }
 
-+ Response 200 (application/json)
 
-    + Headers
-
-            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
-
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
-            }
-            
-+ Response 400 (application/json)
-
-    + Body
-
-            {
-                "code" : -5,
-                "message" : "JSON is missing a required field: endpointUrl"
-            }          
-            
-+ Response 401
 
 
 ## Lookup list of Tags [/tags %5B?tagName=Foo&entityReferenceType=Bar&referenceUrn=Baaq%5D{?view}]
@@ -3628,29 +3537,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "name" : "MyTag"
             }
 
-+ Response 200 (application/json)
 
-    + Headers
-
-            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
-
-    + Body
-    
-            {
-                "code" : 1,
-                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
-            }
-            
-+ Response 400 (application/json)
-
-    + Body
-
-            {
-                "code" : -5,
-                "message" : "JSON is missing a required field: endpointUrl"
-            }          
-            
-+ Response 401
 
 ## Delete tag [/tags/tag/{tagName}]
 ### Remove tag by URN *response is incorrect* [DELETE]
@@ -3670,23 +3557,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "name" : "MyTag"
             }
 
-+ Response 204 (application/json)
 
-    + Headers
-
-            SmartCosmos-Event : NotificationEnroll, NotificationSubscribe, NotificationDefined
-   
-            
-+ Response 400 (application/json)
-
-    + Body
-
-            {
-                "code" : -5,
-                "message" : "JSON is missing a required field: endpointUrl"
-            }          
-            
-+ Response 401
 
 
 # Group Notification Endpoints
