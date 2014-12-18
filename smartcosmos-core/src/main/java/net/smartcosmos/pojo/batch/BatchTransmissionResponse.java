@@ -13,6 +13,9 @@ public class BatchTransmissionResponse extends DomainResource<IBatchTransmission
     @JsonView(JsonGenerationView.Minimum.class)
     private String endpointUri;
 
+    @JsonView(JsonGenerationView.Minimum.class)
+    private String authorizationHeader;
+
     @Override
     public String getTransmissionUrn()
     {
@@ -35,5 +38,17 @@ public class BatchTransmissionResponse extends DomainResource<IBatchTransmission
     public void setEndpointUri(String endpointUri)
     {
         this.endpointUri = endpointUri;
+    }
+
+    @Override
+    public String getAuthorizationHeader()
+    {
+        return authorizationHeader;
+    }
+
+    @Override
+    public void setAuthorizationHeader(String authorizationHeader)
+    {
+        this.authorizationHeader = authorizationHeader;
     }
 }

@@ -22,4 +22,13 @@ public interface IBatchTransmissionResponse extends IDomainResource<IBatchTransm
     String getEndpointUri();
 
     void setEndpointUri(String endpointUri);
+
+    /**
+     * Signed authorization header.
+     *
+     * @return Storage service specific authorization header
+     */
+    String getAuthorizationHeader();
+
+    void setAuthorizationHeader(String authorizationHeader);
 }

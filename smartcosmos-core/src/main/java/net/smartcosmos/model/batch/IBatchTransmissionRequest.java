@@ -37,14 +37,14 @@ public interface IBatchTransmissionRequest extends IDomainResource<IBatchTransmi
      *
      * @return standard MIME type of the file being uploaded
      */
-    String getFileContentType();
+    String getMimeType();
 
     /**
      * MIME type describing the format of the file being uploaded, e.g. {@code text/xml}.
      *
-     * @param contentType standard MIME type of the file being uploaded
+     * @param mimeType standard MIME type of the file being uploaded
      */
-    void setFileContentType(String contentType);
+    void setMimeType(String mimeType);
 
     /**
      * Identifies an internal, previously configured, routing URN within the server. Routing URNs identify a controller

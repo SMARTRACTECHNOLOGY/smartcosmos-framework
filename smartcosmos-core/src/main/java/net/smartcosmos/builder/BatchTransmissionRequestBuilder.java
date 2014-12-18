@@ -15,7 +15,7 @@ public class BatchTransmissionRequestBuilder extends AbstractBuilder<IBatchTrans
 
     public BatchTransmissionRequestBuilder setFileContentType(String contentType)
     {
-        instance.setFileContentType(contentType);
+        instance.setMimeType(contentType);
         return this;
     }
 
@@ -36,7 +36,7 @@ public class BatchTransmissionRequestBuilder extends AbstractBuilder<IBatchTrans
     {
         Preconditions.checkNotNull(instance.getFileContentLength(), "file content length must not be null");
         Preconditions.checkArgument(instance.getFileContentLength() > 0, "file content length must be > 0");
-        Preconditions.checkNotNull(instance.getFileContentType(), "file content type must not be null");
+        Preconditions.checkNotNull(instance.getMimeType(), "file content type must not be null");
         Preconditions.checkNotNull(instance.getFileMd5Checksum(), "MD5 checksum must not be null");
     }
 }

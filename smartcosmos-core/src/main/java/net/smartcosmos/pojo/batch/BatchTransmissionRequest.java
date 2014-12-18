@@ -11,7 +11,7 @@ public class BatchTransmissionRequest extends DomainResource<IBatchTransmissionR
     private String md5Checksum;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    private String contentType;
+    private String mimeType;
 
     @JsonView(JsonGenerationView.Minimum.class)
     private String routingUrn;
@@ -44,15 +44,15 @@ public class BatchTransmissionRequest extends DomainResource<IBatchTransmissionR
     }
 
     @Override
-    public String getFileContentType()
+    public String getMimeType()
     {
-        return contentType;
+        return mimeType;
     }
 
     @Override
-    public void setFileContentType(String contentType)
+    public void setMimeType(String mimeType)
     {
-        this.contentType = contentType;
+        this.mimeType = mimeType;
     }
 
     @Override
