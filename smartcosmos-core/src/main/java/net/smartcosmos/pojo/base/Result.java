@@ -44,6 +44,7 @@ public enum Result
     ERR_NO_FILE_CONTENT(-13, "File URN %s exists but is flagged as pending content upload"),
     ERR_MISSING_AUTHENTICATION_HEADER(-14, "Endpoint requires authentication"),
     ERR_NO_MATCHING_ACTION(-15, "No matching action for field %s with value %s exists"),
+    ERR_DUPLICATE_VALUE(-16, "A matching %s already exists for the value %s"),
 
     ERR_EXTENSION_SECURITY_RESTRICTION(-50, "Extensions are not permitted to perform %s"),
     ERR_EXTENSION_NO_ACCESS(-51, "Caller lacked the authorization to complete the requested operation"),
@@ -107,6 +108,8 @@ public enum Result
                 return ERR_MISSING_AUTHENTICATION_HEADER;
             case -15:
                 return ERR_NO_MATCHING_ACTION;
+            case -16:
+                return ERR_DUPLICATE_VALUE;
             case -50:
                 return ERR_EXTENSION_SECURITY_RESTRICTION;
             case -51:
