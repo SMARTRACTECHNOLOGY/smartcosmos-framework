@@ -20,7 +20,6 @@
 package net.smartcosmos.model.context;
 
 import net.smartcosmos.model.base.IAccountDomainResource;
-import net.smartcosmos.objects.model.context.IObject;
 
 /**
  * System user with login and query privileges. Users are typically
@@ -43,10 +42,6 @@ public interface IUser extends IAccountDomainResource<IUser>
     String getEmailAddress();
 
     void setEmailAddress(String emailAddress);
-
-    IObject getAssociatedObject();
-
-    void setAssociatedObject(IObject object);
 
     RoleType getRoleType();
 

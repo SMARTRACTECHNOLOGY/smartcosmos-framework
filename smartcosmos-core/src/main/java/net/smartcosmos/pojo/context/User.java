@@ -22,10 +22,8 @@ package net.smartcosmos.pojo.context;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
-import net.smartcosmos.objects.pojo.context.ObjectImpl;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
@@ -37,10 +35,6 @@ public class User extends DomainResource<IUser> implements IUser
     @JsonView(JsonGenerationView.Full.class)
     @JsonDeserialize(as = Account.class)
     protected IAccount account;
-
-    @JsonView(JsonGenerationView.Full.class)
-    @JsonDeserialize(as = ObjectImpl.class)
-    protected IObject object;
 
     @JsonView(JsonGenerationView.Full.class)
     private String givenName;
@@ -73,18 +67,6 @@ public class User extends DomainResource<IUser> implements IUser
     public void setAccount(IAccount account)
     {
         this.account = account;
-    }
-
-    @Override
-    public IObject getAssociatedObject()
-    {
-        return object;
-    }
-
-    @Override
-    public void setAssociatedObject(IObject object)
-    {
-        this.object = object;
     }
 
     @Override
@@ -124,6 +106,23 @@ public class User extends DomainResource<IUser> implements IUser
     }
 
     @Override
+    public void copy(IUser target)
+    {
+        this.urn = target.getUrn();
+        this.uniqueId = target.getUniqueId();
+        this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
+        this.moniker = target.getMoniker();
+
+        this.emailAddress = target.getEmailAddress();
+        this.account = target.getAccount();
+
+        this.givenName = target.getGivenName();
+        this.surname = target.getSurname();
+
+        this.roleType = target.getRoleType();
+    }
+
+    @Override
     public boolean equals(Object o)
     {
         if (this == o) return true;
@@ -135,7 +134,6 @@ public class User extends DomainResource<IUser> implements IUser
         if (!account.equals(user.account)) return false;
         if (!emailAddress.equals(user.emailAddress)) return false;
         if (givenName != null ? !givenName.equals(user.givenName) : user.givenName != null) return false;
-        if (object != null ? !object.equals(user.object) : user.object != null) return false;
         if (roleType != user.roleType) return false;
         if (surname != null ? !surname.equals(user.surname) : user.surname != null) return false;
 
@@ -148,7 +146,6 @@ public class User extends DomainResource<IUser> implements IUser
         int result = super.hashCode();
         result = 31 * result + emailAddress.hashCode();
         result = 31 * result + (account != null ? account.hashCode() : 0);
-        result = 31 * result + (object != null ? object.hashCode() : 0);
         result = 31 * result + (givenName != null ? givenName.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + roleType.hashCode();

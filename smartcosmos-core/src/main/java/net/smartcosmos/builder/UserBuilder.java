@@ -20,7 +20,6 @@
 package net.smartcosmos.builder;
 
 import com.google.common.base.Preconditions;
-import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.pojo.context.User;
@@ -59,12 +58,6 @@ public final class UserBuilder extends AbstractMonikerBuilder<IUser, UserBuilder
     public UserBuilder setRoleType(RoleType roleType)
     {
         instance.setRoleType(roleType);
-        return this;
-    }
-
-    public UserBuilder setAssociatedObject(IObject object)
-    {
-        instance.setAssociatedObject(object);
         return this;
     }
 }
