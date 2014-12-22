@@ -3487,7 +3487,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 
 
 ## Lookup Specific Tag by Name [/tags/tag/{tagName}{?view}]
-### Lookup for tag details by tag name *response is incorrect* [GET]
+### Lookup for tag details by tag name [GET]
 
 + Parameters
     + tagName (required, string, `MyTag`) ... Client defined name at creation
@@ -3532,7 +3532,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 
 
 ## Lookup Specific Tag by URN [/tags/{urn}{?view}]
-### Lookup for tag details by tag URN *response is incorrect* [GET]
+### Lookup for tag details by tag URN [GET]
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -3570,7 +3570,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 
 
 ## Assign hash tags [/tags/{entityReferenceType}/{referenceUrn}]
-### Assign hash tags to objects *response is incorrect* [PUT]
+### Assign hash tags to objects [PUT]
 
 
 + Parameters
@@ -3616,7 +3616,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 
 
 ## Lookup list of Tags [/tags %5B?tagName=Foo&entityReferenceType=Bar&referenceUrn=Baaq%5D{?view}]
-### Lookup an array of matching objects *response is incorrect* [GET]
+### Lookup an array of matching objects [GET]
 
 
 + Parameters
@@ -3684,7 +3684,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 + Response 401 
 
 ## Delete tag [/tags/tag/{tagName}]
-### Remove tag by URN *response is incorrect* [DELETE]
+### Remove tag by URN [DELETE]
 
 + Parameters
     + tagName (required, string, `MyTag`) ... Client defined name at creation
