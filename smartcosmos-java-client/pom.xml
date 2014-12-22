@@ -48,7 +48,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sdk.version>1.1-SNAPSHOT</sdk.version>
         <restlet.version>2.2-M3</restlet.version>
     </properties>
 
@@ -100,8 +99,8 @@
 
         <dependency>
             <groupId>net.smartcosmos</groupId>
-            <artifactId>java-sdk</artifactId>
-            <version>${sdk.version}</version>
+            <artifactId>platform-core</artifactId>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
