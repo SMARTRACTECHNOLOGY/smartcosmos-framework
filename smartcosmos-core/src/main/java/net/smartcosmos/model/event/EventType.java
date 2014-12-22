@@ -148,5 +148,7 @@ public enum EventType
     GeospatialEntryDeleted,
 
     BatchTransmissionRequest,
-    BatchTransmissionReceipt
+    BatchTransmissionReceipt,
+    BatchTransmissionQueueSuccess,
+    BatchTransmissionQueueError
 }

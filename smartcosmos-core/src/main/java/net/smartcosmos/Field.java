@@ -124,6 +124,8 @@ public final class Field
 
     public static final String FLAG_FIELD = "flag";
 
+    public static final String QUEUE_URN_FIELD = "queueUrn";
+
     public static final String RECORDED_TIMESTAMP_FIELD = "recordedTimestamp";
 
     public static final String OLD_PASSWORD_FIELD = "oldPassword";

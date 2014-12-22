@@ -34,6 +34,8 @@ public enum EntityReferenceType
 {
     Account,
 
+    BatchTransmission,
+
     Extension,
 
     NotificationEndpoint,
