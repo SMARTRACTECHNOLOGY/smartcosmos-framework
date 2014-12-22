@@ -33,7 +33,7 @@
 
     <packaging>jar</packaging>
 
-    <name>SMART COSMOS Platform Core SDK</name>
+    <name>Platform Core SDK</name>
     <description>Provides an interface driven SDK for working with the SMART COSMOS platform services</description>
 
     <url>http://www.smart-cosmos.com/</url>
