@@ -19,10 +19,10 @@
 package net.smartcosmos.client.impl.command;
 
 import com.google.common.base.Preconditions;
+import net.smartcosmos.Field;
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractBaseClient;
-import net.smartcosmos.Field;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.JsonUtil;
@@ -128,7 +128,10 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                 }
             } else
             {
-                LOGGER.debug(((ResponseEntity) response).getMessage());
+                if (clazz.isAssignableFrom(ResponseEntity.class))
+                {
+                    LOGGER.debug(((ResponseEntity) response).getMessage());
+                }
             }
 
         } catch (JSONException | IOException e)
