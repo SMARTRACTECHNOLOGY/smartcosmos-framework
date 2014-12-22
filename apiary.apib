@@ -3447,7 +3447,42 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "name" : "MyTag"
             }
 
++ Response 200 (application/json)
 
+    + Headers
+
+            SmartCosmos-Event : TagUpserted
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : TagUpserted
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: name"
+            }          
+            
++ Response 401 
 
 
 
@@ -3466,7 +3501,33 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
             
     + Body
             
++ Response 200 (application/json)
 
+    + Headers
+
+            SmartCosmos-Event : TagAccessed
+
+    + Body
+    
+            {
+               "urn": "urn:uuid:6a7107c7-3136-4040-a782-f6a3a29af310",
+               "lastModifiedTimestamp": 1419270063355,
+               "name": "MyTag",
+               "description": null,
+               "activeFlag": true
+            }
+
+        
++ Response 400 (application/json)
+
+    + Body
+
+            {
+               "code": -8,
+               "message": "No matching record with tag name of MyTag1 exists"
+            }          
+            
++ Response 401 
 
 
 
@@ -3484,12 +3545,28 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
             Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
             
     + Body
+            
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : TagAccessed
+
+    + Body
     
             {
-                "name" : "MyTag"
+               "urn": "urn:uuid:6a7107c7-3136-4040-a782-f6a3a29af310",
+               "lastModifiedTimestamp": 1419270063355,
+               "name": "MyTag",
+               "description": null,
+               "activeFlag": true
             }
 
-
++ Response 204 (application/json)
+       
+            
++ Response 401 
 
 
 ## Assign hash tags [/tags/{entityReferenceType}/{referenceUrn}]
@@ -3508,11 +3585,34 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
             
     + Body
     
-            {
+            [{
                 "name" : "MyTag"
-            }
+            }]
 
 
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : TagAccessed
+
+    + Body
+    
+            [{
+               "code": 1,
+               "message": "urn:uuid:b98ce066-c5b5-46a3-bbc0-5a73227dda5b"
+            }]
+
+
+
++ Response 400
+
+        {
+           "code": -8,
+           "message": "No matching record with Object of urn:building:mall:ParadiseValley1 exists"
+        }
+            
++ Response 401 
 
 
 ## Lookup list of Tags [/tags %5B?tagName=Foo&entityReferenceType=Bar&referenceUrn=Baaq%5D{?view}]
@@ -3532,12 +3632,56 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
             Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
             
     + Body
+            
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : TagAccessed (for each tag)
+
+    + Body
     
-            {
-                "name" : "MyTag"
-            }
+            [
+      {
+      "entityReferenceType": "Object",
+      "lastModifiedTimestamp": 1419272746955,
+      "referenceUrn": "urn:building:mall:ParadiseValley",
+      "tag":       {
+         "activeFlag": true,
+         "description": null,
+         "lastModifiedTimestamp": 1419272419344,
+         "name": "MyTag",
+         "urn": "urn:uuid:9f88418d-087c-453f-922f-f68c420a7d32"
+      },
+      "urn": "urn:uuid:b98ce066-c5b5-46a3-bbc0-5a73227dda5b"
+   },
+      {
+      "entityReferenceType": "Object",
+      "lastModifiedTimestamp": 1419272188342,
+      "referenceUrn": "urn:building:mall:ParadiseValley",
+      "tag":       {
+         "activeFlag": true,
+         "description": null,
+         "lastModifiedTimestamp": 1419272188295,
+         "name": "MyTag1",
+         "urn": "urn:uuid:0ada06b7-0880-4177-8a44-bf5a4853db35"
+      },
+      "urn": "urn:uuid:8db15dd7-6735-444a-8277-79a46217d3d5"
+   }
+]
 
 
+       
+
++ Response 400
+
+        {
+           "code": -2,
+           "message": "No such URN"
+        }
+            
++ Response 401 
 
 ## Delete tag [/tags/tag/{tagName}]
 ### Remove tag by URN *response is incorrect* [DELETE]
@@ -3553,10 +3697,24 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
             
     + Body
     
-            {
-                "name" : "MyTag"
-            }
 
++ Response 204 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : TagDeleted, TagRevoked
+
+    
+
++ Response 400 (application/json)
+
+        {
+           "code": -8,
+           "message": "No matching record with tag name of MyTag1 exists"
+        }
+       
+            
++ Response 401 
 
 
 
