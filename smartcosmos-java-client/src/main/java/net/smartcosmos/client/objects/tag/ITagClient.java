@@ -49,7 +49,9 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @return response entity indicating the success (or failure) of each assignment
      * @throws ServiceException
      */
-    Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, Collection<ITag> tags) throws ServiceException;
+    Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType,
+                                      String referenceUrn,
+                                      Collection<ITag> tags) throws ServiceException;
 
     /**
      * Assigns the collection of tags to the specified entity indicated by the entity reference type and reference URN.
@@ -58,50 +60,57 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      *
      * @param entityReferenceType Entity reference type
      * @param referenceUrn        Reference URN
-     * @param jsonArray           Collection of {@link net.smartcosmos.objects.model.context.ITag#getName()} values to assign to
-     *                            the indicated entity
+     * @param jsonArray           Collection of {@link net.smartcosmos.objects.model.context.ITag#getName()} values to
+     *                            assign to the indicated entity
      * @return response entity indicating the success (or failure) of each assignment
      * @throws ServiceException
      */
-    Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, JSONArray jsonArray) throws ServiceException;
+    Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, JSONArray jsonArray)
+            throws ServiceException;
 
     /**
-     * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the tags
-     * assigned to the specified entity indicated by the entity reference type and reference URN.
+     * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
+     * tags assigned to the specified entity indicated by the entity reference type and reference URN.
      * <p/>
      * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
      * <p/>
      * Effectively this method would be used to tell you that, for example,
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} with
-     * {@link net.smartcosmos.objects.model.context.IDevice#getUrn()} of <code>uuid:urn:system-assigned-uuid</code> has the
-     * tags {"Foo", "Bar", "Baaq"} assigned to it.
+     * {@link net.smartcosmos.objects.model.context.IDevice#getUrn()} of <code>uuid:urn:system-assigned-uuid</code> has
+     * the tags {"Foo", "Bar", "Baaq"} assigned to it.
      *
      * @param entityReferenceType Entity reference type
      * @param referenceUrn        Reference URN
-     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches found
+     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
+     * found
      * @throws ServiceException
      */
-    Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException;
+    Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
+                                                                  String referenceUrn) throws ServiceException;
 
     /**
-     * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the tags
-     * assigned to the specified entity indicated by the entity reference type and reference URN.
+     * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
+     * tags assigned to the specified entity indicated by the entity reference type and reference URN.
      * <p/>
-     * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using the specified field verbosity.
+     * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using the specified field
+     * verbosity.
      * <p/>
      * Effectively this method would be used to tell you that, for example,
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} with
-     * {@link net.smartcosmos.objects.model.context.IDevice#getUrn()} of <code>uuid:urn:system-assigned-uuid</code> has the
-     * tags {"Foo", "Bar", "Baaq"} assigned to it.
+     * {@link net.smartcosmos.objects.model.context.IDevice#getUrn()} of <code>uuid:urn:system-assigned-uuid</code> has
+     * the tags {"Foo", "Bar", "Baaq"} assigned to it.
      *
      * @param entityReferenceType Entity reference type
      * @param referenceUrn        Reference URN
      * @param viewType            Field verbosity
-     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches found
+     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
+     * found
      * @throws ServiceException
      */
-    Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType) throws ServiceException;
+    Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
+                                                                  String referenceUrn,
+                                                                  ViewType viewType) throws ServiceException;
 
     /**
      * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
@@ -111,31 +120,36 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
      * <p/>
      * Effectively this method would be used to tell you that, for example, there are 13
-     * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag <code>Foo</code>.
+     * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances assigned the tag <code>Foo</code>.
      *
      * @param entityReferenceType Entity reference type
      * @param tagName             Case-sensitive name of the tag
-     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches found
+     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
      * @throws ServiceException
      */
-    Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName) throws ServiceException;
+    Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName)
+            throws ServiceException;
 
     /**
      * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
      * entities of the specified type that have been assigned such a tag.
      * <p/>
-     * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using the specified field verbosity.
+     * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using the specified field
+     * verbosity.
      * <p/>
      * Effectively this method would be used to tell you that, for example, there are 13
-     * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag <code>Foo</code>.
+     * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag
+     * <code>Foo</code>.
      *
      * @param entityReferenceType Entity reference type
      * @param tagName             Case-sensitive name of the tag
      * @param viewType            Field verbosity
-     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches found
+     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
      * @throws ServiceException
      */
-    Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName, ViewType viewType) throws ServiceException;
+    Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType,
+                                                                String tagName,
+                                                                ViewType viewType) throws ServiceException;
 
     /**
      * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
@@ -145,12 +159,12 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
      * <p/>
      * Effectively this method would be used to tell you that, for example, there are 13
-     * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag <code>Foo</code>,
-     * and 4 {@link net.smartcosmos.objects.model.context.IDevice} instances, and 2
+     * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag
+     * <code>Foo</code>, and 4 {@link net.smartcosmos.objects.model.context.IDevice} instances, and 2
      * {@link net.smartcosmos.objects.model.context.IObjectAddress} instances as well.
      *
      * @param tagName Case-sensitive name of the tag
-     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches found
+     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
      * @throws ServiceException
      */
     Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName) throws ServiceException;
@@ -159,16 +173,17 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
      * entities that have been assigned such a tag.
      * <p/>
-     * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using the specified field verbosity.
+     * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using the specified field
+     * verbosity.
      * <p/>
      * Effectively this method would be used to tell you that, for example, there are 13
-     * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag <code>Foo</code>,
-     * and 4 {@link net.smartcosmos.objects.model.context.IDevice} instances, and 2
+     * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag
+     * <code>Foo</code>, and 4 {@link net.smartcosmos.objects.model.context.IDevice} instances, and 2
      * {@link net.smartcosmos.objects.model.context.IObjectAddress} instances as well.
      *
      * @param tagName  Case-sensitive name of the tag
      * @param viewType Field verbosity
-     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches found
+     * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
      * @throws ServiceException
      */
     Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName, ViewType viewType) throws ServiceException;
@@ -202,5 +217,6 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param referenceUrn        Reference URN
      * @throws ServiceException
      */
-    void revokeAssignment(String tagName, EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException;
+    void revokeAssignment(String tagName, EntityReferenceType entityReferenceType, String referenceUrn)
+            throws ServiceException;
 }

@@ -30,7 +30,8 @@ import net.smartcosmos.util.json.ViewType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class AbstractCreateableBaseClient<T> extends AbstractFindableBaseClient<T> implements ICreateableBaseClient<T>
+public abstract class AbstractCreateableBaseClient<T>
+        extends AbstractFindableBaseClient<T> implements ICreateableBaseClient<T>
 {
     protected AbstractCreateableBaseClient(ServerContext context)
     {

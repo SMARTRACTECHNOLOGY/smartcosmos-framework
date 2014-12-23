@@ -93,31 +93,58 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
     }
 
     @Override
-    public Collection<IRelationship> findAllBetweenTwoEntities(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn, ViewType viewType) throws ServiceException
+    public Collection<IRelationship> findAllBetweenTwoEntities(EntityReferenceType entityReferenceType,
+                                                               String referenceUrn,
+                                                               EntityReferenceType relatedEntityReferenceType,
+                                                               String relatedReferenceUrn,
+                                                               ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<IRelationship> command = new GetCollectionCommand<>(context);
-        return command.call(Relationship.class, RelationshipEndpoints.findAllBetweenTwoEntities(entityReferenceType, referenceUrn, relatedEntityReferenceType, relatedReferenceUrn, viewType));
+        return command.call(Relationship.class, RelationshipEndpoints.findAllBetweenTwoEntities(entityReferenceType,
+                referenceUrn, relatedEntityReferenceType, relatedReferenceUrn, viewType));
     }
 
     @Override
-    public IRelationship findSpecificRelationship(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn, String relationshipType, ViewType viewType) throws ServiceException
+    public IRelationship findSpecificRelationship(EntityReferenceType entityReferenceType,
+                                                  String referenceUrn,
+                                                  EntityReferenceType relatedEntityReferenceType,
+                                                  String relatedReferenceUrn,
+                                                  String relationshipType,
+                                                  ViewType viewType) throws ServiceException
     {
         GetCommand<IRelationship> command = new GetCommand<>(context);
-        return command.call(Relationship.class, RelationshipEndpoints.findSpecificRelationship(entityReferenceType, referenceUrn, relatedEntityReferenceType, relatedReferenceUrn, relationshipType, viewType));
+        return command.call(Relationship.class,
+                RelationshipEndpoints.findSpecificRelationship(entityReferenceType,
+                        referenceUrn,
+                        relatedEntityReferenceType,
+                        relatedReferenceUrn,
+                        relationshipType,
+                        viewType));
     }
 
     @Override
-    public Collection<IRelationship> findRelationships(EntityReferenceType entityReferenceType, String referenceUrn, String relationshipType, ViewType viewType) throws ServiceException
+    public Collection<IRelationship> findRelationships(EntityReferenceType entityReferenceType,
+                                                       String referenceUrn,
+                                                       String relationshipType,
+                                                       ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<IRelationship> command = new GetCollectionCommand<>(context);
-        return command.call(Relationship.class, RelationshipEndpoints.findRelationships(entityReferenceType, referenceUrn, relationshipType, viewType));
+        return command.call(Relationship.class,
+                RelationshipEndpoints.findRelationships(entityReferenceType, referenceUrn, relationshipType, viewType));
     }
 
     @Override
-    public Collection<IRelationship> findReverseRelationships(EntityReferenceType entityReferenceType, String referenceUrn, String relationshipType, ViewType viewType) throws ServiceException
+    public Collection<IRelationship> findReverseRelationships(EntityReferenceType entityReferenceType,
+                                                              String referenceUrn,
+                                                              String relationshipType,
+                                                              ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<IRelationship> command = new GetCollectionCommand<>(context);
-        return command.call(Relationship.class, RelationshipEndpoints.findReverseRelationships(entityReferenceType, referenceUrn, relationshipType, viewType));
+        return command.call(Relationship.class,
+                RelationshipEndpoints.findReverseRelationships(entityReferenceType,
+                        referenceUrn,
+                        relationshipType,
+                        viewType));
     }
 
     @Override
@@ -127,26 +154,46 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
     }
 
     @Override
-    public IRelationship findSpecificRelationship(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn, String relationshipType) throws ServiceException
+    public IRelationship findSpecificRelationship(EntityReferenceType entityReferenceType,
+                                                  String referenceUrn,
+                                                  EntityReferenceType relatedEntityReferenceType,
+                                                  String relatedReferenceUrn,
+                                                  String relationshipType) throws ServiceException
     {
-        return findSpecificRelationship(entityReferenceType, referenceUrn, relatedEntityReferenceType, relatedReferenceUrn, relationshipType, ViewType.Standard);
+        return findSpecificRelationship(entityReferenceType,
+                referenceUrn,
+                relatedEntityReferenceType,
+                relatedReferenceUrn,
+                relationshipType,
+                ViewType.Standard);
     }
 
     @Override
-    public Collection<IRelationship> findRelationships(EntityReferenceType entityReferenceType, String referenceUrn, String relationshipType) throws ServiceException
+    public Collection<IRelationship> findRelationships(EntityReferenceType entityReferenceType,
+                                                       String referenceUrn,
+                                                       String relationshipType) throws ServiceException
     {
         return findRelationships(entityReferenceType, referenceUrn, relationshipType, ViewType.Standard);
     }
 
     @Override
-    public Collection<IRelationship> findReverseRelationships(EntityReferenceType entityReferenceType, String referenceUrn, String relationshipType) throws ServiceException
+    public Collection<IRelationship> findReverseRelationships(EntityReferenceType entityReferenceType,
+                                                              String referenceUrn,
+                                                              String relationshipType) throws ServiceException
     {
         return findReverseRelationships(entityReferenceType, referenceUrn, relationshipType, ViewType.Standard);
     }
 
     @Override
-    public Collection<IRelationship> findAllBetweenTwoEntities(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn) throws ServiceException
+    public Collection<IRelationship> findAllBetweenTwoEntities(EntityReferenceType entityReferenceType,
+                                                               String referenceUrn,
+                                                               EntityReferenceType relatedEntityReferenceType,
+                                                               String relatedReferenceUrn) throws ServiceException
     {
-        return findAllBetweenTwoEntities(entityReferenceType, referenceUrn, relatedEntityReferenceType, relatedReferenceUrn, ViewType.Standard);
+        return findAllBetweenTwoEntities(entityReferenceType,
+                referenceUrn,
+                relatedEntityReferenceType,
+                relatedReferenceUrn,
+                ViewType.Standard);
     }
 }

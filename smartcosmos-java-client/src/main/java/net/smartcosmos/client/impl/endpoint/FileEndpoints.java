@@ -48,7 +48,7 @@ public final class FileEndpoints
     private static final String UPLOAD_FILE_CONTENT__MULTIPART__POST = BASE.concat("/%s/multipart");
 
     /**
-     * application/octet-stream
+     * application/octet-stream.
      */
     private static final String UPLOAD_FILE_CONTENT__OCTET_STREAM__POST = BASE.concat("/%s/octet");
 
@@ -92,7 +92,9 @@ public final class FileEndpoints
         return listFilesOwnedByEntity(entityReferenceType, referenceUrn, ViewType.Standard);
     }
 
-    public static String listFilesOwnedByEntity(EntityReferenceType entityReferenceType, String referenceUrn, ViewType view)
+    public static String listFilesOwnedByEntity(EntityReferenceType entityReferenceType,
+                                                String referenceUrn,
+                                                ViewType view)
     {
         return String.format(LIST_OWNED_BY__GET, entityReferenceType, referenceUrn, view);
     }

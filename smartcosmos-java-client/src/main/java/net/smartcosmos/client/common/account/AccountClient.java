@@ -44,7 +44,7 @@ import java.io.IOException;
 
 class AccountClient extends AbstractFindableBaseClient<IAccount> implements IAccountClient
 {
-    final static Logger LOGGER = LoggerFactory.getLogger(AccountClient.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(AccountClient.class);
 
     AccountClient(ServerContext context)
     {

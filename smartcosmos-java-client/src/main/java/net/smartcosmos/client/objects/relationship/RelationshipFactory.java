@@ -23,7 +23,7 @@ package net.smartcosmos.client.objects.relationship;
 import net.smartcosmos.client.connectivity.ServerContext;
 
 /**
- * Relationship Client Factory
+ * Relationship Client Factory.
  */
 public final class RelationshipFactory
 {

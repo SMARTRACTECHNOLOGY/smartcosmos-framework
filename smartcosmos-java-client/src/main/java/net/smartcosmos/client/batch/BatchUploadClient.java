@@ -44,7 +44,8 @@ public class BatchUploadClient implements IBatchUploadClient
         this.context = context;
     }
 
-    public IBatchTransmissionResponse sendBatchTransmissionRequest(IBatchTransmissionRequest request) throws ServiceException
+    public IBatchTransmissionResponse sendBatchTransmissionRequest(IBatchTransmissionRequest request)
+            throws ServiceException
     {
         Preconditions.checkNotNull(request);
 

@@ -24,13 +24,9 @@ import net.smartcosmos.client.connectivity.ServerContext;
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class AbstractBaseClient
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractBaseClient.class);
-
     protected final ServerContext context;
 
     protected AbstractBaseClient(ServerContext context)

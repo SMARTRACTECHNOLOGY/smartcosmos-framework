@@ -33,7 +33,8 @@ import org.json.JSONObject;
 
 import java.util.Collection;
 
-public abstract class AbstractUpsertableBaseClient<T> extends AbstractFindableBaseClient<T> implements IUpsertableBaseClient<T>
+public abstract class AbstractUpsertableBaseClient<T>
+        extends AbstractFindableBaseClient<T> implements IUpsertableBaseClient<T>
 {
     protected AbstractUpsertableBaseClient(ServerContext context)
     {

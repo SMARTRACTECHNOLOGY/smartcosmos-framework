@@ -41,7 +41,7 @@ import java.io.IOException;
 
 final class RegistrationClient extends AbstractBaseClient implements IRegistrationClient
 {
-    final static Logger LOGGER = LoggerFactory.getLogger(RegistrationClient.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(RegistrationClient.class);
 
     public RegistrationClient(String server)
     {

@@ -25,9 +25,9 @@ import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractFindableBaseClient;
 import net.smartcosmos.client.impl.command.GetCollectionCommand;
 import net.smartcosmos.client.impl.endpoint.EventEndpoints;
-import net.smartcosmos.pojo.event.Event;
 import net.smartcosmos.model.event.EventType;
 import net.smartcosmos.model.event.IEvent;
+import net.smartcosmos.pojo.event.Event;
 import net.smartcosmos.util.json.ViewType;
 
 import java.util.ArrayList;
@@ -69,7 +69,8 @@ class EventClient extends AbstractFindableBaseClient<IEvent> implements IEventCl
     public Collection<IEvent> findSince(long timestamp, ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<DynamicEvent> command = new GetCollectionCommand<>(context);
-        Collection<DynamicEvent> dynamicEvents = command.call(DynamicEvent.class, EventEndpoints.findSince(timestamp, viewType));
+        Collection<DynamicEvent> dynamicEvents
+                = command.call(DynamicEvent.class, EventEndpoints.findSince(timestamp, viewType));
 
         Collection<IEvent> events = new ArrayList<>();
         for (DynamicEvent event : dynamicEvents)

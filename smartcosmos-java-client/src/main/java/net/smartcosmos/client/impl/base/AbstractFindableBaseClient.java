@@ -25,13 +25,9 @@ import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.IFindableBaseClient;
 import net.smartcosmos.client.impl.command.GetCommand;
 import net.smartcosmos.util.json.ViewType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class AbstractFindableBaseClient<T> extends AbstractBaseClient implements IFindableBaseClient<T>
 {
-    final static Logger LOGGER = LoggerFactory.getLogger(AbstractFindableBaseClient.class);
-
     protected AbstractFindableBaseClient(ServerContext context)
     {
         super(context);

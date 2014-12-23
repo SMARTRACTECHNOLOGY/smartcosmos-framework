@@ -30,7 +30,7 @@ public final class TimelineEndpoints
     {
     }
 
-    /**
+    /*
      * {entityReferenceType}/{referenceUrn}
      */
     private static final String BASE = "/timelines";

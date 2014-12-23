@@ -40,7 +40,7 @@ import java.util.Collection;
 
 public class GetCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(GetCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetCommand.class);
 
     public GetCommand(ServerContext context)
     {

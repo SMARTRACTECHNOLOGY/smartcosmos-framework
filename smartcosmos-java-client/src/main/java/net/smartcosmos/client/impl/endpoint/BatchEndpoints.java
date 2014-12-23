@@ -22,7 +22,7 @@ package net.smartcosmos.client.impl.endpoint;
 
 import net.smartcosmos.util.json.ViewType;
 
-public class BatchEndpoints
+public final class BatchEndpoints
 {
     private BatchEndpoints()
     {

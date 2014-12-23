@@ -46,7 +46,7 @@ import static net.smartcosmos.Field.MESSAGE_FIELD;
 
 public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(UpsertCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpsertCommand.class);
 
     public UpsertCommand(ServerContext context)
     {

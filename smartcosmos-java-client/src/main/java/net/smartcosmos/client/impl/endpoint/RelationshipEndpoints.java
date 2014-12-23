@@ -66,44 +66,94 @@ public final class RelationshipEndpoints
         return String.format(FIND_BY_URN__GET, urn, viewType);
     }
 
-    public static String findAllBetweenTwoEntities(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn)
+    public static String findAllBetweenTwoEntities(EntityReferenceType entityReferenceType,
+                                                   String referenceUrn,
+                                                   EntityReferenceType relatedEntityReferenceType,
+                                                   String relatedReferenceUrn)
     {
-        return findAllBetweenTwoEntities(entityReferenceType, referenceUrn, relatedEntityReferenceType, relatedReferenceUrn, ViewType.Standard);
+        return findAllBetweenTwoEntities(entityReferenceType,
+                referenceUrn,
+                relatedEntityReferenceType,
+                relatedReferenceUrn,
+                ViewType.Standard);
     }
 
-    public static String findAllBetweenTwoEntities(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn, ViewType viewType)
+    public static String findAllBetweenTwoEntities(EntityReferenceType entityReferenceType,
+                                                   String referenceUrn,
+                                                   EntityReferenceType relatedEntityReferenceType,
+                                                   String relatedReferenceUrn,
+                                                   ViewType viewType)
     {
-        return String.format(FIND_ALL_BETWEEN_TWO_ENTITIES__GET, entityReferenceType, referenceUrn, relatedEntityReferenceType, relatedReferenceUrn, viewType);
+        return String.format(FIND_ALL_BETWEEN_TWO_ENTITIES__GET,
+                entityReferenceType,
+                referenceUrn,
+                relatedEntityReferenceType,
+                relatedReferenceUrn,
+                viewType);
     }
 
-    public static String findSpecificRelationship(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn, String relationshipType)
+    public static String findSpecificRelationship(EntityReferenceType entityReferenceType,
+                                                  String referenceUrn,
+                                                  EntityReferenceType relatedEntityReferenceType,
+                                                  String relatedReferenceUrn,
+                                                  String relationshipType)
     {
-        return findSpecificRelationship(entityReferenceType, referenceUrn, relatedEntityReferenceType, relatedReferenceUrn, relationshipType, ViewType.Standard);
+        return findSpecificRelationship(entityReferenceType,
+                referenceUrn,
+                relatedEntityReferenceType,
+                relatedReferenceUrn,
+                relationshipType,
+                ViewType.Standard);
     }
 
-    public static String findSpecificRelationship(EntityReferenceType entityReferenceType, String referenceUrn, EntityReferenceType relatedEntityReferenceType, String relatedReferenceUrn, String relationshipType, ViewType viewType)
+    public static String findSpecificRelationship(EntityReferenceType entityReferenceType,
+                                                  String referenceUrn,
+                                                  EntityReferenceType relatedEntityReferenceType,
+                                                  String relatedReferenceUrn,
+                                                  String relationshipType,
+                                                  ViewType viewType)
     {
-        return String.format(FIND_SPECIFIC_RELATIONSHIP__GET, entityReferenceType, referenceUrn, relatedEntityReferenceType, relatedReferenceUrn, relationshipType, viewType);
+        return String.format(FIND_SPECIFIC_RELATIONSHIP__GET,
+                entityReferenceType,
+                referenceUrn,
+                relatedEntityReferenceType,
+                relatedReferenceUrn,
+                relationshipType,
+                viewType);
     }
 
-    public static String findRelationships(EntityReferenceType entityReferenceType, String referenceUrn, String relationshipType)
+    public static String findRelationships(EntityReferenceType entityReferenceType,
+                                           String referenceUrn,
+                                           String relationshipType)
     {
         return findRelationships(entityReferenceType, referenceUrn, relationshipType, ViewType.Standard);
     }
 
-    public static String findRelationships(EntityReferenceType entityReferenceType, String referenceUrn, String relationshipType, ViewType viewType)
+    public static String findRelationships(EntityReferenceType entityReferenceType,
+                                           String referenceUrn,
+                                           String relationshipType,
+                                           ViewType viewType)
     {
         return String.format(FIND_RELATIONSHIPS__GET, entityReferenceType, referenceUrn, relationshipType, viewType);
     }
 
-    public static String findReverseRelationships(EntityReferenceType entityReferenceType, String referenceUrn, String relationshipType)
+    public static String findReverseRelationships(EntityReferenceType entityReferenceType,
+                                                  String referenceUrn,
+                                                  String relationshipType)
     {
         return findReverseRelationships(entityReferenceType, referenceUrn, relationshipType, ViewType.Standard);
     }
 
-    public static String findReverseRelationships(EntityReferenceType entityReferenceType, String referenceUrn, String relationshipType, ViewType viewType)
+    public static String findReverseRelationships(EntityReferenceType entityReferenceType,
+                                                  String referenceUrn,
+                                                  String relationshipType,
+                                                  ViewType viewType)
     {
-        return String.format(FIND_REVERSE_RELATIONSHIPS__GET, entityReferenceType, referenceUrn, relationshipType, viewType);
+        return String.format(FIND_REVERSE_RELATIONSHIPS__GET,
+                entityReferenceType,
+                referenceUrn,
+                relationshipType,
+                viewType);
     }
 
 }

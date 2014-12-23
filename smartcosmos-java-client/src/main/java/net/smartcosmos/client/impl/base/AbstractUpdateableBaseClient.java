@@ -29,7 +29,8 @@ import net.smartcosmos.util.json.ViewType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class AbstractUpdateableBaseClient<T> extends AbstractCreateableBaseClient<T> implements IUpdateableBaseClient<T>
+public abstract class AbstractUpdateableBaseClient<T>
+        extends AbstractCreateableBaseClient<T> implements IUpdateableBaseClient<T>
 {
     protected AbstractUpdateableBaseClient(ServerContext context)
     {

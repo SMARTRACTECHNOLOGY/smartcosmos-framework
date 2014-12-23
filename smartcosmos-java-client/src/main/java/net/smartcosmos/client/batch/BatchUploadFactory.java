@@ -22,7 +22,7 @@ package net.smartcosmos.client.batch;
 
 import net.smartcosmos.client.connectivity.ServerContext;
 
-public class BatchUploadFactory
+public final class BatchUploadFactory
 {
     private BatchUploadFactory()
     {

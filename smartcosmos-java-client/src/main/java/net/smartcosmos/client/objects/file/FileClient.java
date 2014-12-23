@@ -58,7 +58,7 @@ import static net.smartcosmos.Field.URN_FIELD;
 
 class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileClient
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(FileClient.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileClient.class);
 
     FileClient(ServerContext context)
     {
@@ -106,10 +106,13 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
     }
 
     @Override
-    public Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType) throws ServiceException
+    public Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType,
+                                         String referenceUrn,
+                                         ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<IFile> command = new GetCollectionCommand<>(context);
-        return command.call(File.class, FileEndpoints.listFilesOwnedByEntity(entityReferenceType, referenceUrn, viewType));
+        return command.call(File.class,
+                FileEndpoints.listFilesOwnedByEntity(entityReferenceType, referenceUrn, viewType));
     }
 
     @Override
@@ -149,7 +152,8 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
     }
 
     @Override
-    public ResponseEntity uploadOctetStream(String urn, InputStream inputStream, MediaType mediaType) throws ServiceException
+    public ResponseEntity uploadOctetStream(String urn, InputStream inputStream, MediaType mediaType)
+            throws ServiceException
     {
         ResponseEntity response;
 
@@ -168,7 +172,8 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
 
             if (service.getStatus().equals(Status.SUCCESS_OK))
             {
-                LOGGER.info("Successfully uploaded input stream to path {}", FileEndpoints.uploadContentsAsMultipart(urn));
+                LOGGER.info("Successfully uploaded input stream to path {}",
+                        FileEndpoints.uploadContentsAsMultipart(urn));
             } else
             {
                 LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
@@ -185,7 +190,8 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
     }
 
     @Override
-    public ResponseEntity uploadAsMultiPartFormData(String urn, java.io.File file, MediaType mediaType) throws ServiceException
+    public ResponseEntity uploadAsMultiPartFormData(String urn, java.io.File file, MediaType mediaType)
+            throws ServiceException
     {
         ResponseEntity response;
 
@@ -211,7 +217,8 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
 
             if (service.getStatus().equals(Status.SUCCESS_OK))
             {
-                LOGGER.info("Successfully uploaded multipart-form data to path {}", FileEndpoints.uploadContentsAsMultipart(urn));
+                LOGGER.info("Successfully uploaded multipart-form data to path {}",
+                        FileEndpoints.uploadContentsAsMultipart(urn));
             } else
             {
                 LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
@@ -263,7 +270,8 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
     }
 
     @Override
-    public Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException
+    public Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType, String referenceUrn)
+            throws ServiceException
     {
         return listOwnedBy(entityReferenceType, referenceUrn, ViewType.Standard);
     }

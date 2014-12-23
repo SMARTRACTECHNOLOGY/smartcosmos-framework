@@ -46,7 +46,8 @@ public interface IMetadataClient extends IUpsertableBaseClient<IMetadata>, IDele
      * @return Non-null metadata value
      * @throws ServiceException thrown if no such key under the specified entity type and reference URN exists
      */
-    IMetadata findSpecificKey(EntityReferenceType entityReferenceType, String referenceUrn, String key) throws ServiceException;
+    IMetadata findSpecificKey(EntityReferenceType entityReferenceType, String referenceUrn, String key)
+            throws ServiceException;
 
     /**
      * Queries for a specific piece of metadata, by key name, under a specific entity type and reference URN, return the
@@ -59,7 +60,10 @@ public interface IMetadataClient extends IUpsertableBaseClient<IMetadata>, IDele
      * @return Non-null metadata value
      * @throws ServiceException thrown if no such key under the specified entity type and reference URN exists
      */
-    IMetadata findSpecificKey(EntityReferenceType entityReferenceType, String referenceUrn, String key, ViewType viewType) throws ServiceException;
+    IMetadata findSpecificKey(EntityReferenceType entityReferenceType,
+                              String referenceUrn,
+                              String key,
+                              ViewType viewType) throws ServiceException;
 
     /**
      * Queries for all metadata keys under a specific entity type and reference URN, returned using
@@ -82,7 +86,9 @@ public interface IMetadataClient extends IUpsertableBaseClient<IMetadata>, IDele
      * @return Non-null (but possibly empty) collection of metadata definitions
      * @throws ServiceException thrown if no such key under the specified entity type and reference URN exists
      */
-    Collection<IMetadata> findAll(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType) throws ServiceException;
+    Collection<IMetadata> findAll(EntityReferenceType entityReferenceType,
+                                  String referenceUrn,
+                                  ViewType viewType) throws ServiceException;
 
     /**
      * Takes a type-safe object instance and submits it to the platform where an opaque encoding is applied and
@@ -96,7 +102,8 @@ public interface IMetadataClient extends IUpsertableBaseClient<IMetadata>, IDele
      *                         {@link net.smartcosmos.model.context.MetadataDataType#XMLType} and
      *                         {@link net.smartcosmos.model.context.MetadataDataType#JSONType}
      * @param <T>              Instance that matches the data type defined by the metadataDataType enum
-     * @return Encoded representation in JSON of the data provided, accessible via the {@link net.smartcosmos.Field#RAW_VALUE_FIELD}
+     * @return Encoded representation in JSON of the data provided,
+     * accessible via the {@link net.smartcosmos.Field#RAW_VALUE_FIELD}
      * @throws ServiceException
      */
     <T> String encodeMetadata(MetadataDataType metadataDataType, T instance) throws ServiceException;

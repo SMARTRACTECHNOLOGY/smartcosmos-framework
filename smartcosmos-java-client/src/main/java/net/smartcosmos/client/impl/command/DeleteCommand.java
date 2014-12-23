@@ -40,7 +40,7 @@ import java.util.Collection;
 
 public class DeleteCommand extends AbstractBaseClient implements ICommand<Object, Object>
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(DeleteCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DeleteCommand.class);
 
     public DeleteCommand(ServerContext context)
     {

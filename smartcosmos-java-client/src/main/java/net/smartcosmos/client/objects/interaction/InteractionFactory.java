@@ -29,7 +29,8 @@ public final class InteractionFactory
     }
 
     /**
-     * Creates a new instance of an object interaction client that will work with objects at the specified server context.
+     * Creates a new instance of an object interaction client that will work with objects at the specified server
+     * context.
      *
      * @param context Server connection information
      * @return New relationship client instance

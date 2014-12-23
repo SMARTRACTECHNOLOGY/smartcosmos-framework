@@ -44,7 +44,7 @@ import static net.smartcosmos.Field.URN_FIELD;
 
 public class PostCommand extends AbstractBaseClient implements ICommand<Object, Object>
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(PostCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostCommand.class);
 
     public PostCommand(ServerContext context)
     {

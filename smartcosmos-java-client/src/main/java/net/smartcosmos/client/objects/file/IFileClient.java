@@ -35,13 +35,14 @@ import java.io.InputStream;
 import java.util.Collection;
 
 /**
- * Defines, deletes, or queries for {@link net.smartcosmos.objects.model.context.IFile} instances and the actual file contents.
+ * Defines, deletes, or queries for {@link net.smartcosmos.objects.model.context.IFile} instances and the actual
+ * file contents.
  */
 public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBaseClient<IFile>
 {
     /**
-     * Lists all {@link net.smartcosmos.objects.model.context.IFile} instances owned by the referential entity identified by
-     * entityReferenceType and referenceUrn, returning all matches using a
+     * Lists all {@link net.smartcosmos.objects.model.context.IFile} instances owned by the referential entity
+     * identified by entityReferenceType and referenceUrn, returning all matches using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
      *
      * @param entityReferenceType Entity reference type
@@ -52,8 +53,8 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
     Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException;
 
     /**
-     * Lists all {@link net.smartcosmos.objects.model.context.IFile} instances owned by the referential entity identified by
-     * entityReferenceType and referenceUrn, returning all matches the specified field verbosity.
+     * Lists all {@link net.smartcosmos.objects.model.context.IFile} instances owned by the referential entity
+     * identified by entityReferenceType and referenceUrn, returning all matches the specified field verbosity.
      *
      * @param entityReferenceType Entity reference type
      * @param referenceUrn        System-assigned reference URN
@@ -61,14 +62,16 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      * @return Non-null (but possibly empty) collection of files owned by the referential entity
      * @throws ServiceException
      */
-    Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType) throws ServiceException;
+    Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType,
+                                  String referenceUrn,
+                                  ViewType viewType) throws ServiceException;
 
     /**
      * Uploads a specific local file as an application/octet-stream. This is the preferred method for uploading a file's
      * actual contents to the platform.
      *
-     * @param urn       System-assigned {@link net.smartcosmos.objects.model.context.IFile#getUrn()} with which this file content
-     *                  is associated with
+     * @param urn       System-assigned {@link net.smartcosmos.objects.model.context.IFile#getUrn()} with which this
+     *                  file content is associated with
      * @param file      File to upload
      * @param mediaType Media type of the file being uploaded (must not be null)
      * @return Response entity indicating the success or failure of the operation
@@ -80,8 +83,8 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      * Uploads a specific local file as an application/octet-stream. This is the preferred method for uploading a file's
      * actual contents to the platform.
      *
-     * @param urn         System-assigned {@link net.smartcosmos.objects.model.context.IFile#getUrn()} with which this file content
-     *                    is associated with
+     * @param urn         System-assigned {@link net.smartcosmos.objects.model.context.IFile#getUrn()} with which this
+     *                    file content is associated with
      * @param inputStream Input stream to upload
      * @param mediaType   Media type of the file being uploaded (must not be null)
      * @return Response entity indicating the success or failure of the operation
@@ -94,24 +97,25 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      * forms within a browser; it's inclusion in the API is for completeness. The recommended approach for uploading
      * a file's content from Java is {@link #uploadOctetStream(String, java.io.File, org.restlet.data.MediaType)}.
      *
-     * @param urn       System-assigned {@link net.smartcosmos.objects.model.context.IFile#getUrn()} with which this file content
-     *                  is associated with
+     * @param urn       System-assigned {@link net.smartcosmos.objects.model.context.IFile#getUrn()} with which this
+     *                  file content lis associated with
      * @param file      File to upload
      * @param mediaType Media type of the file being uploaded (must not be null)
      * @return Response entity indicating the success or failure of the operation
      * @throws ServiceException
      */
-    ResponseEntity uploadAsMultiPartFormData(String urn, java.io.File file, MediaType mediaType) throws ServiceException;
+    ResponseEntity uploadAsMultiPartFormData(String urn, java.io.File file, MediaType mediaType)
+            throws ServiceException;
 
     /**
      * Retrieves the actual file contents associated with the file's system-assigned URN as an InputStream.
      *
-     * @param urn System-assigned {@link net.smartcosmos.objects.model.context.IFile#getUrn()} with which this file content
-     *            is associated with
+     * @param urn System-assigned {@link net.smartcosmos.objects.model.context.IFile#getUrn()} with which this file
+     *            content is associated with
      * @return Non-null input stream
      * @throws IOException
-     * @throws net.smartcosmos.client.connectivity.ServiceException to indicate if the file has no content or the URN specified
-     *                                                             cannot be located
+     * @throws net.smartcosmos.client.connectivity.ServiceException to indicate if the file has no content or the URN
+     *                                                              specified cannot be located
      */
     InputStream getFileContents(String urn) throws ServiceException, IOException;
 }

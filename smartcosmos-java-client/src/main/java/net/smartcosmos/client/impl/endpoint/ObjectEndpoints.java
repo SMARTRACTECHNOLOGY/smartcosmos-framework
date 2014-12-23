@@ -37,11 +37,14 @@ public final class ObjectEndpoints
 
     private static final String UPDATE__POST = BASE;
 
-    private static final String QUERY_TYPE_AGNOSTIC__GET = BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&objectUrnLike=%s&view=%s");
+    private static final String QUERY_TYPE_AGNOSTIC__GET
+            = BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&objectUrnLike=%s&view=%s");
 
-    private static final String QUERY_TYPE_SPECIFIC__GET = BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&objectUrnLike=%s&objectType=%s&view=%s");
+    private static final String QUERY_TYPE_SPECIFIC__GET
+            = BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&objectUrnLike=%s&objectType=%s&view=%s");
 
-    private static final String FIND_BY_OBJECT_URN__GET = BASE.concat("/object/%s?exact=%s&view=%s");
+    private static final String FIND_BY_OBJECT_URN__GET
+            = BASE.concat("/object/%s?exact=%s&view=%s");
 
     public static String create()
     {
@@ -142,10 +145,21 @@ public final class ObjectEndpoints
         {
             if (objectType == null)
             {
-                return String.format(QUERY_TYPE_AGNOSTIC__GET, modifiedAfter, monikerLike, nameLike, objectUrnLike, view);
+                return String.format(QUERY_TYPE_AGNOSTIC__GET,
+                        modifiedAfter,
+                        monikerLike,
+                        nameLike,
+                        objectUrnLike,
+                        view);
             } else
             {
-                return String.format(QUERY_TYPE_SPECIFIC__GET, modifiedAfter, monikerLike, nameLike, objectUrnLike, objectType, view);
+                return String.format(QUERY_TYPE_SPECIFIC__GET,
+                        modifiedAfter,
+                        monikerLike,
+                        nameLike,
+                        objectUrnLike,
+                        objectType,
+                        view);
             }
         }
     }

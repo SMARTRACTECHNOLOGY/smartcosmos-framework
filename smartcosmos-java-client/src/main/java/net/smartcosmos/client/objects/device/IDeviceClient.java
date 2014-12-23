@@ -54,8 +54,8 @@ public interface IDeviceClient extends IUpdateableBaseClient<IDevice>
     Collection<IDevice> findByNameLike(String nameLike, ViewType viewType) throws ServiceException;
 
     /**
-     * Locates a specific {@link net.smartcosmos.objects.model.context.IDevice} that has an exact case-sensitive match to the
-     * specified natural key using a {@link net.smartcosmos.util.json.ViewType#Standard} view.
+     * Locates a specific {@link net.smartcosmos.objects.model.context.IDevice} that has an exact case-sensitive match
+     * to thespecified natural key using a {@link net.smartcosmos.util.json.ViewType#Standard} view.
      *
      * @param identification Case-sensitive device identification
      * @return Matching device
@@ -64,8 +64,8 @@ public interface IDeviceClient extends IUpdateableBaseClient<IDevice>
     IDevice findByDeviceIdentification(String identification) throws ServiceException;
 
     /**
-     * Locates a specific {@link net.smartcosmos.objects.model.context.IDevice} that has an exact case-sensitive match to the
-     * specified natural key using a the specified field verbosity.
+     * Locates a specific {@link net.smartcosmos.objects.model.context.IDevice} that has an exact case-sensitive match
+     * to thespecified natural key using a the specified field verbosity.
      *
      * @param identification Case-sensitive device identification
      * @param viewType       Field verbosity

@@ -30,8 +30,8 @@ import org.json.JSONObject;
  * utilized by the deletion routines.
  * <p/>
  * Not every creatable entity supports deletion by design. Some entities, like
- * {@link net.smartcosmos.objects.model.context.IObject} are explicitly preserved for historical reporting purposes and should be
- * set inactive with the {@link net.smartcosmos.model.base.INamedObject#setActive(boolean)} method.
+ * {@link net.smartcosmos.objects.model.context.IObject} are explicitly preserved for historical reporting purposes and
+ * should be set inactive with the {@link net.smartcosmos.model.base.INamedObject#setActive(boolean)} method.
  *
  * @param <T> One of the deletable SMART COSMOS contextual entities.
  * @see net.smartcosmos.objects.model.context.IFile

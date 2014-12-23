@@ -82,7 +82,10 @@ public final class MetadataEndpoints
         return findSpecificKey(entityReferenceType, referenceUrn, key, ViewType.Standard);
     }
 
-    public static String findSpecificKey(EntityReferenceType entityReferenceType, String referenceUrn, String key, ViewType view)
+    public static String findSpecificKey(EntityReferenceType entityReferenceType,
+                                         String referenceUrn,
+                                         String key,
+                                         ViewType view)
     {
         return String.format(FIND_SPECIFIC_KEY__GET, entityReferenceType, referenceUrn, key, view);
     }

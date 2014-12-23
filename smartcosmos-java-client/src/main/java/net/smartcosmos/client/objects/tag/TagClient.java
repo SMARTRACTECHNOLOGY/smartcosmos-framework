@@ -21,6 +21,7 @@ package net.smartcosmos.client.objects.tag;
  */
 
 import com.google.common.base.Preconditions;
+import net.smartcosmos.Field;
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractUpsertableBaseClient;
@@ -29,7 +30,6 @@ import net.smartcosmos.client.impl.command.GetCollectionCommand;
 import net.smartcosmos.client.impl.command.GetCommand;
 import net.smartcosmos.client.impl.command.PutCommand;
 import net.smartcosmos.client.impl.endpoint.TagEndpoints;
-import net.smartcosmos.Field;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.objects.model.context.ITag;
 import net.smartcosmos.objects.model.context.ITagAssignment;
@@ -92,7 +92,9 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, Collection<ITag> tags) throws ServiceException
+    public Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType,
+                                             String referenceUrn,
+                                             Collection<ITag> tags) throws ServiceException
     {
         JSONArray array = new JSONArray();
 
@@ -114,7 +116,9 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, JSONArray jsonArray) throws ServiceException
+    public Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType,
+                                             String referenceUrn,
+                                             JSONArray jsonArray) throws ServiceException
     {
         // PUT
         PutCommand<ResponseEntity> command = new PutCommand<>(context);
@@ -122,21 +126,28 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType) throws ServiceException
+    public Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
+                                                                         String referenceUrn,
+                                                                         ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context);
-        return command.call(TagAssignment.class, TagEndpoints.findEntitiesByTagsAssignedToEntity(entityReferenceType, referenceUrn, viewType));
+        return command.call(TagAssignment.class,
+                TagEndpoints.findEntitiesByTagsAssignedToEntity(entityReferenceType, referenceUrn, viewType));
     }
 
     @Override
-    public Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName, ViewType viewType) throws ServiceException
+    public Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType,
+                                                                       String tagName,
+                                                                       ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context);
-        return command.call(TagAssignment.class, TagEndpoints.findEntitiesByTagsAssignedToType(entityReferenceType, tagName, viewType));
+        return command.call(TagAssignment.class,
+                TagEndpoints.findEntitiesByTagsAssignedToType(entityReferenceType, tagName, viewType));
     }
 
     @Override
-    public Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName, ViewType viewType) throws ServiceException
+    public Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName, ViewType viewType)
+            throws ServiceException
     {
         GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context);
         return command.call(TagAssignment.class, TagEndpoints.findEntitiesByTagNameLike(tagName, viewType));
@@ -150,14 +161,16 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public void revokeAssignment(String tagName, EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException
+    public void revokeAssignment(String tagName, EntityReferenceType entityReferenceType, String referenceUrn)
+            throws ServiceException
     {
         DeleteCommand command = new DeleteCommand(context);
         command.call(Object.class, TagEndpoints.revokeAssignment(entityReferenceType, referenceUrn, tagName));
     }
 
     @Override
-    public Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName) throws ServiceException
+    public Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType,
+                                                                       String tagName) throws ServiceException
     {
         return findEntitiesByTagsAssignedToType(entityReferenceType, tagName, ViewType.Standard);
     }
@@ -176,7 +189,8 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
 
 
     @Override
-    public Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException
+    public Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
+                                                                         String referenceUrn) throws ServiceException
     {
         return findEntitiesByTagsAssignedToEntity(entityReferenceType, referenceUrn, ViewType.Standard);
     }

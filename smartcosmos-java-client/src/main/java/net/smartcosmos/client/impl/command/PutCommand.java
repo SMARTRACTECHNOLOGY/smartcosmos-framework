@@ -48,7 +48,7 @@ import static net.smartcosmos.Field.MESSAGE_FIELD;
 
 public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(PutCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PutCommand.class);
 
     public PutCommand(ServerContext context)
     {
@@ -87,7 +87,9 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                 {
                     ResponseEntity entity = new ResponseEntity.Builder(
                             Result.ERR_ALREADY_EXISTS.getCode(),
-                            String.format(Result.ERR_ALREADY_EXISTS.getFormattedMessage(), "user", inputJson.getString(Field.EMAIL_ADDRESS_FIELD)))
+                            String.format(Result.ERR_ALREADY_EXISTS.getFormattedMessage(),
+                                    "user",
+                                    inputJson.getString(Field.EMAIL_ADDRESS_FIELD)))
                             .build();
 
                     throw new ServiceException(entity);
@@ -95,7 +97,8 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                 {
                     ResponseEntity entity = new ResponseEntity.Builder(
                             Result.ERR_FAILURE.getCode(),
-                            String.format(Result.ERR_FAILURE.getFormattedMessage(), "Bad Request - if this was an interaction, was your session already closed?"))
+                            String.format(Result.ERR_FAILURE.getFormattedMessage(),
+                                    "Bad Request - if this was an interaction, was your session already closed?"))
                             .build();
 
                     throw new ServiceException(entity);

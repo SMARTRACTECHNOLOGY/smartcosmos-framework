@@ -41,7 +41,7 @@ import java.util.Collection;
 
 public class GetCollectionCommand<T> extends AbstractBaseClient implements ICommand<Collection<T>, T>
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(GetCollectionCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetCollectionCommand.class);
 
     public GetCollectionCommand(ServerContext context)
     {
@@ -60,6 +60,7 @@ public class GetCollectionCommand<T> extends AbstractBaseClient implements IComm
         throw new UnsupportedOperationException("GET command doesn't accept input as a JSONArray");
     }
 
+    @SuppressWarnings("checkstyle:emptyblock")
     @Override
     public Collection<T> call(Class<? extends T> clazz, String path) throws ServiceException
     {
@@ -74,7 +75,9 @@ public class GetCollectionCommand<T> extends AbstractBaseClient implements IComm
 
             if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
             {
+
                 // No content - just let an empty array list be
+
             } else if (service.getStatus().equals(Status.SUCCESS_OK))
             {
                 JSONArray jsonArray = jsonRepresentation.getJsonArray();

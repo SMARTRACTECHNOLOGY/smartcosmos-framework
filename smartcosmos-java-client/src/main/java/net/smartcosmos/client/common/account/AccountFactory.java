@@ -24,6 +24,10 @@ import net.smartcosmos.client.connectivity.ServerContext;
 
 public final class AccountFactory
 {
+    private AccountFactory()
+    {
+    }
+
     /**
      * Creates a new instance of a registration client.
      *
