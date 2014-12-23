@@ -1,6 +1,5 @@
 package net.smartcosmos.example;
 
-import com.amazonaws.util.Base64;
 import com.google.common.base.Charsets;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
@@ -15,6 +14,7 @@ import net.smartcosmos.model.batch.IBatchTransmissionReceipt;
 import net.smartcosmos.model.batch.IBatchTransmissionRequest;
 import net.smartcosmos.model.batch.IBatchTransmissionResponse;
 import net.smartcosmos.model.batch.TransmissionResultType;
+import org.apache.shiro.codec.Base64;
 
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -63,7 +63,7 @@ public class BatchUploadDemo
         //
         IBatchTransmissionRequest request = new BatchTransmissionRequestBuilder("urn:uuid:12345")
                 .setFileContentLength(SAMPLE_FILE_CONTENT.length())
-                .setFileMd5Checksum(Base64.encodeAsString(hc.asBytes()))
+                .setFileMd5Checksum(Base64.encodeToString(hc.asBytes()))
                 .setFileContentType(TEXT_PLAIN)
                 .build();
 
@@ -95,7 +95,7 @@ public class BatchUploadDemo
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", TEXT_PLAIN);
-            connection.setRequestProperty("Content-MD5", Base64.encodeAsString(hc.asBytes()));
+            connection.setRequestProperty("Content-MD5", Base64.encodeToString(hc.asBytes()));
             connection.setRequestMethod("PUT");
             OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
             out.write(SAMPLE_FILE_CONTENT);
