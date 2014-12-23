@@ -1,5 +1,3 @@
-
-
 /**
  * Collection of SMART COSMOS Catalogs context modeling artifacts.
  */

@@ -1,5 +1,3 @@
-
-
 /**
  * Collection of platform wide helper classes.
  */

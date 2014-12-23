@@ -1,5 +1,3 @@
-
-
 /**
  * JSON specific helper utilities.
  */

@@ -1,5 +1,3 @@
-
-
 /**
  * Geospatial entity definition.
  * @see net.smartcosmos.geo.GeometricShape

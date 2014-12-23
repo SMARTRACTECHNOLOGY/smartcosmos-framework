@@ -1,5 +1,3 @@
-
-
 /**
  * Collection of POJOs that represent the platform service's contextual model.
  */

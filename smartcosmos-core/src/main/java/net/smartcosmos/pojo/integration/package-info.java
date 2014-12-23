@@ -1,5 +1,3 @@
-
-
 /**
  * Integration endpoint definitions.
  */

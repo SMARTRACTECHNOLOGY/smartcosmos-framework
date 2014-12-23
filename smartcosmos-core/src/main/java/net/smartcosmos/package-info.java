@@ -1,5 +1,3 @@
-
-
 /**
  * Constant values, eg {@link net.smartcosmos.Field}.
  */

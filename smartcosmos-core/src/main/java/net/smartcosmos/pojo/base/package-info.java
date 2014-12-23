@@ -1,5 +1,3 @@
-
-
 /**
  * Abstract objects from which the platform's object model is constructed.
  */

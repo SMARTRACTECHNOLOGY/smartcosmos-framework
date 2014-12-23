@@ -1,5 +1,3 @@
-
-
 /**
  * Collection of SMART COSMOS Flows context modeling artifacts.
  */

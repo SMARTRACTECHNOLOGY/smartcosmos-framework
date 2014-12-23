@@ -1,5 +1,3 @@
-
-
 /**
  * SMART COSMOS batch processing capabilities.
  *
