@@ -149,8 +149,12 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
         if (recordedTimestamp != that.recordedTimestamp) return false;
         if (!account.equals(that.account)) return false;
         if (!object.equals(that.object)) return false;
-        if (objectInteractionSession != null ? !objectInteractionSession.equals(that.objectInteractionSession) : that.objectInteractionSession != null)
+        if (objectInteractionSession != null
+                ? !objectInteractionSession.equals(that.objectInteractionSession)
+                : that.objectInteractionSession != null)
+        {
             return false;
+        }
 
         return true;
     }

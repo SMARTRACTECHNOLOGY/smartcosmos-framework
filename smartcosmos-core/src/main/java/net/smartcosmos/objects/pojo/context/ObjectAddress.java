@@ -197,8 +197,12 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
         if (timestamp != that.timestamp) return false;
         if (!type.equals(that.type)) return false;
         if (city != null ? !city.equals(that.city) : that.city != null) return false;
-        if (countryAbbreviation != null ? !countryAbbreviation.equals(that.countryAbbreviation) : that.countryAbbreviation != null)
+        if (countryAbbreviation != null
+                ? !countryAbbreviation.equals(that.countryAbbreviation)
+                : that.countryAbbreviation != null)
+        {
             return false;
+        }
         if (line1 != null ? !line1.equals(that.line1) : that.line1 != null) return false;
         if (line2 != null ? !line2.equals(that.line2) : that.line2 != null) return false;
         if (!object.equals(that.object)) return false;

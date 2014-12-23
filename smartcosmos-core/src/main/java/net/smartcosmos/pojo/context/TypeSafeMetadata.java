@@ -77,6 +77,8 @@ public class TypeSafeMetadata<T> implements IMetadata
             case BooleanType:
                 mapper = (IMetadataValueMapper<T>) new BooleanMapper();
                 break;
+            default:
+                throw new IllegalStateException("Unrecognized type");
         }
     }
 

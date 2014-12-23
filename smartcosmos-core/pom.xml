@@ -50,6 +50,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>2.3.3</jackson.version>
+        <checkstyle.config.location>${basedir}/src/checkstyle/checkstyle.xml</checkstyle.config.location>
     </properties>
 
     <organization>
@@ -319,9 +320,12 @@
 
                     <inceptionYear>2013</inceptionYear>
 
-                    <processStartTag>*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*</processStartTag>
-                    <sectionDelimiter>===============================================================================</sectionDelimiter>
-                    <processEndTag>#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#</processEndTag>
+                    <processStartTag>*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+                    </processStartTag>
+                    <sectionDelimiter>===============================================================================
+                    </sectionDelimiter>
+                    <processEndTag>#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+                    </processEndTag>
 
                 </configuration>
                 <executions>
@@ -343,6 +347,26 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.13</version>
+                <executions>
+                    <execution>
+                        <id>verify-style</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <consoleOutput>true</consoleOutput>
+                    <logViolationsToConsole>true</logViolationsToConsole>
+                </configuration>
+            </plugin>
+
         </plugins>
 
     </build>

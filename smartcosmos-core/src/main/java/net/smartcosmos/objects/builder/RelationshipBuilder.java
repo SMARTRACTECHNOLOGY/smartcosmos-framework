@@ -20,14 +20,16 @@ package net.smartcosmos.objects.builder;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import com.google.common.base.Preconditions;
 import net.smartcosmos.builder.AbstractMonikerBuilder;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.objects.model.context.IRelationship;
 import net.smartcosmos.objects.pojo.context.Relationship;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
- * Convenience Builder pattern class for creating new {@link net.smartcosmos.objects.model.context.IRelationship} instances.
+ * Convenience Builder pattern class for creating new {@link net.smartcosmos.objects.model.context.IRelationship}
+ * instances.
  * <p/>
  * The minimum fields required to define a new instance are:
  * <ul>
@@ -55,14 +57,14 @@ public final class RelationshipBuilder extends AbstractMonikerBuilder<IRelations
 
     public RelationshipBuilder setRelatedReferenceUrn(String urn)
     {
-        Preconditions.checkNotNull(urn);
+        checkNotNull(urn);
         instance.setRelatedReferenceUrn(urn);
         return this;
     }
 
     public RelationshipBuilder setRelatedEntityReferenceType(EntityReferenceType entityReferenceType)
     {
-        Preconditions.checkNotNull(entityReferenceType);
+        checkNotNull(entityReferenceType);
         instance.setRelatedEntityReferenceType(entityReferenceType);
         return this;
     }
@@ -70,10 +72,10 @@ public final class RelationshipBuilder extends AbstractMonikerBuilder<IRelations
     @Override
     protected void onValidate()
     {
-        Preconditions.checkNotNull(instance.getType(), "type must not be null");
-        Preconditions.checkNotNull(instance.getReferenceUrn(), "reference urn must not be null");
-        Preconditions.checkNotNull(instance.getRelatedReferenceUrn(), "related reference urn must not be null");
-        Preconditions.checkNotNull(instance.getEntityReferenceType(), "entity reference type must not be null");
-        Preconditions.checkNotNull(instance.getRelatedEntityReferenceType(), "related entity reference type must not be null");
+        checkNotNull(instance.getType(), "type must not be null");
+        checkNotNull(instance.getReferenceUrn(), "reference urn must not be null");
+        checkNotNull(instance.getRelatedReferenceUrn(), "related reference urn must not be null");
+        checkNotNull(instance.getEntityReferenceType(), "entity reference type must not be null");
+        checkNotNull(instance.getRelatedEntityReferenceType(), "related entity reference type must not be null");
     }
 }

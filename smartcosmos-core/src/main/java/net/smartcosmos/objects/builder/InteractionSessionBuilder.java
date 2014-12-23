@@ -26,7 +26,8 @@ import net.smartcosmos.objects.model.context.IObjectInteractionSession;
 import net.smartcosmos.objects.pojo.context.ObjectInteractionSession;
 
 /**
- * Convenience Builder pattern class for creating new {@link net.smartcosmos.objects.model.context.IObjectInteractionSession}
+ * Convenience Builder pattern class for creating new
+ * {@link net.smartcosmos.objects.model.context.IObjectInteractionSession}
  * instances.
  * <p/>
  * The minimum fields required to define a new instance are:
@@ -36,7 +37,8 @@ import net.smartcosmos.objects.pojo.context.ObjectInteractionSession;
  * <li>{@link net.smartcosmos.Field#START_TIMESTAMP_FIELD}</li>
  * </ul>
  */
-public class InteractionSessionBuilder extends AbstractNamedObjectBuilder<IObjectInteractionSession, InteractionSessionBuilder>
+public class InteractionSessionBuilder
+        extends AbstractNamedObjectBuilder<IObjectInteractionSession, InteractionSessionBuilder>
 {
     public InteractionSessionBuilder(long startTimestamp)
     {

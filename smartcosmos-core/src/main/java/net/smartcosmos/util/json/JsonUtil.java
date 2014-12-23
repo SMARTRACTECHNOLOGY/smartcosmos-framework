@@ -42,7 +42,7 @@ public final class JsonUtil
 {
     private static final Logger LOG = LoggerFactory.getLogger(JsonUtil.class);
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private JsonUtil()
     {
@@ -50,7 +50,7 @@ public final class JsonUtil
 
     static
     {
-        mapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false);
+        MAPPER.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false);
 
     }
 
@@ -65,7 +65,7 @@ public final class JsonUtil
 
         try
         {
-            instance = mapper.readValue(json, entityClass);
+            instance = MAPPER.readValue(json, entityClass);
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -138,7 +138,7 @@ public final class JsonUtil
 
         try
         {
-            json = mapper.writerWithView(viewClass).writeValueAsString(object);
+            json = MAPPER.writerWithView(viewClass).writeValueAsString(object);
         } catch (JsonProcessingException e)
         {
             if (LOG.isDebugEnabled())
@@ -174,4 +174,3 @@ public final class JsonUtil
         return json;
     }
 }
-

@@ -27,7 +27,8 @@ import net.smartcosmos.objects.model.context.IObjectAddress;
 import net.smartcosmos.objects.pojo.context.ObjectAddress;
 
 /**
- * Convenience Builder pattern class for creating new {@link net.smartcosmos.objects.model.context.IObjectAddress} instances.
+ * Convenience Builder pattern class for creating new {@link net.smartcosmos.objects.model.context.IObjectAddress}
+ * instances.
  * <p/>
  * The minimum fields required to define a new instance are:
  * <ul>

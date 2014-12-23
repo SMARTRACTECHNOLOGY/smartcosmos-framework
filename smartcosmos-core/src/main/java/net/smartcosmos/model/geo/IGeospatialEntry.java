@@ -57,7 +57,8 @@ import net.smartcosmos.model.base.ITypedObject;
  * identified in only general terms by the postal address defined in the
  * {@link net.smartcosmos.objects.model.context.IObjectAddress} record.
  */
-public interface IGeospatialEntry extends IAccountDomainResource<IGeospatialEntry>, INamedObject<IGeospatialEntry>, ITypedObject
+public interface IGeospatialEntry
+        extends IAccountDomainResource<IGeospatialEntry>, INamedObject<IGeospatialEntry>, ITypedObject
 {
     GeometricShape getGeometricShape();
 

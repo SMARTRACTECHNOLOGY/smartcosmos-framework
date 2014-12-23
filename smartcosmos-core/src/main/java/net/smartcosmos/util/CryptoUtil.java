@@ -37,8 +37,12 @@ import java.util.Arrays;
 /**
  * Collection of AES-family cipher utilities.
  */
-public class CryptoUtil
+public final class CryptoUtil
 {
+    private CryptoUtil()
+    {
+    }
+
     /**
      * @param ivBytes        Must be exactly 16 bytes. Can be openly shared.
      * @param keyBytes       Should be "UTF-8" bytes.

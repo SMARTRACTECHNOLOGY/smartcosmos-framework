@@ -25,14 +25,14 @@ import net.smartcosmos.model.base.IDomainResource;
 public interface IBatchTransmissionRequest extends IDomainResource<IBatchTransmissionRequest>
 {
     /**
-     * Size (in bytes) of the file being transmitted
+     * Size (in bytes) of the file being transmitted.
      *
      * @return file size, in bytes
      */
     int getFileContentLength();
 
     /**
-     * Size (in bytes) of the file being transmitted
+     * Size (in bytes) of the file being transmitted.
      *
      * @param fileContentLength file size, in bytes
      */

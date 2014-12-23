@@ -25,6 +25,8 @@ import net.smartcosmos.builder.AbstractBuilder;
 import net.smartcosmos.profiles.model.context.ITagProperties;
 import net.smartcosmos.profiles.pojo.context.TagProperties;
 
+import static com.google.common.base.Preconditions.checkState;
+
 public class TagPropertiesBuilder extends AbstractBuilder<ITagProperties>
 {
     public TagPropertiesBuilder()
@@ -56,8 +58,8 @@ public class TagPropertiesBuilder extends AbstractBuilder<ITagProperties>
     @Override
     protected void onValidate()
     {
-        Preconditions.checkState(instance.getTagIdentifiers().size() > 0, "at least 1 tag identified must be defined");
-        Preconditions.checkState(instance.getVerificationTypes().size() > 0, "at least 1 verification type must be defined");
-        Preconditions.checkState(instance.getPropertyNames().size() > 0, "at least 1 property name must be defined");
+        checkState(instance.getTagIdentifiers().size() > 0, "at least 1 tag identified must be defined");
+        checkState(instance.getVerificationTypes().size() > 0, "at least 1 verification type must be defined");
+        checkState(instance.getPropertyNames().size() > 0, "at least 1 property name must be defined");
     }
 }

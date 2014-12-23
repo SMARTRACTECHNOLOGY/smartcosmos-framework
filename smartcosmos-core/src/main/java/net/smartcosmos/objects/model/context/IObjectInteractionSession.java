@@ -31,7 +31,8 @@ import net.smartcosmos.model.base.ITypedObject;
  * The duration of an interaction session is arbitrary; it may be seconds, hours, days, or any
  * time period defined by the application data being captured.
  */
-public interface IObjectInteractionSession extends IAccountDomainResource<IObjectInteractionSession>, INamedObject<IObjectInteractionSession>, ITypedObject
+public interface IObjectInteractionSession
+        extends IAccountDomainResource<IObjectInteractionSession>, INamedObject<IObjectInteractionSession>, ITypedObject
 {
     /**
      * System-assigned timestamp established when the session is opened.

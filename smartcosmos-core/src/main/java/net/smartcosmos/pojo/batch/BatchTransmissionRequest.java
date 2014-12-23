@@ -25,7 +25,8 @@ import net.smartcosmos.model.batch.IBatchTransmissionRequest;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class BatchTransmissionRequest extends DomainResource<IBatchTransmissionRequest> implements IBatchTransmissionRequest
+public class BatchTransmissionRequest
+        extends DomainResource<IBatchTransmissionRequest> implements IBatchTransmissionRequest
 {
     @JsonView(JsonGenerationView.Minimum.class)
     private String md5Checksum;

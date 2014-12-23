@@ -190,8 +190,13 @@ public class Extension extends NamedObject<IExtension> implements IExtension
         if (!clientId.equals(extension.clientId)) return false;
         if (!clientSecret.equals(extension.clientSecret)) return false;
         if (extensionType != extension.extensionType) return false;
-        if (longDescription != null ? !longDescription.equals(extension.longDescription) : extension.longDescription != null)
+        if (longDescription != null
+                ? !longDescription.equals(extension.longDescription)
+                : extension.longDescription != null)
+        {
             return false;
+        }
+
         if (!redirectUrl.equals(extension.redirectUrl)) return false;
         if (supportEmail != null ? !supportEmail.equals(extension.supportEmail) : extension.supportEmail != null)
             return false;

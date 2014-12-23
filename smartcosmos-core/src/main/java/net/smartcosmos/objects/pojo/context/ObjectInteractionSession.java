@@ -25,7 +25,8 @@ import net.smartcosmos.objects.model.context.IObjectInteractionSession;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class ObjectInteractionSession extends AccountTypedNamedObject<IObjectInteractionSession> implements IObjectInteractionSession
+public class ObjectInteractionSession
+        extends AccountTypedNamedObject<IObjectInteractionSession> implements IObjectInteractionSession
 {
     @JsonView(JsonGenerationView.Minimum.class)
     protected long startTimestamp;

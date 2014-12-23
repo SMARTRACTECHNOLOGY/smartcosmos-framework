@@ -38,7 +38,8 @@ import net.smartcosmos.model.base.IReferentialObject;
  * effectively hides the timeline forever unless a specific update is issued against the
  * that timeline entry to re-activate it.
  */
-public interface ITimelineEntry extends IAccountDomainResource<ITimelineEntry>, INamedObject<ITimelineEntry>, IReferentialObject
+public interface ITimelineEntry
+        extends IAccountDomainResource<ITimelineEntry>, INamedObject<ITimelineEntry>, IReferentialObject
 {
     long getRecordedTimestamp();
 

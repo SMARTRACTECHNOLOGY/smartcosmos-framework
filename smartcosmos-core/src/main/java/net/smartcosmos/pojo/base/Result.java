@@ -21,8 +21,8 @@ package net.smartcosmos.pojo.base;
  */
 
 /**
- * Collection of standardized {@link ResponseEntity#getCode()} values returned from the SMART COSMOS Objects platform. Each code
- * is mapped to a substitution string used to create consistently worded error messages.
+ * Collection of standardized {@link ResponseEntity#getCode()} values returned from the SMART COSMOS Objects platform.
+ * Each code is mapped to a substitution string used to create consistently worded error messages.
  * <p/>
  * Effectively, any {@link ResponseEntity#getCode()} value less than zero is an error condition.
  */
@@ -43,7 +43,7 @@ public enum Result
     ERR_SESSION_ALREADY_CLOSED(-11, "session with URN %s was previously closed"),
     ERR_NO_SUCH_EMAIL(-12, "No user associated with email address %s"),
     ERR_NO_FILE_CONTENT(-13, "File URN %s exists but is flagged as pending content upload"),
-    ERR_MISSING_AUTHENTICATION_HEADER (-14, "Endpoint requires authentication"),
+    ERR_MISSING_AUTHENTICATION_HEADER(-14, "Endpoint requires authentication"),
 
     ERR_EXTENSION_SECURITY_RESTRICTION(-50, "Extensions are not permitted to perform %s"),
     ERR_EXTENSION_NO_ACCESS(-51, "Caller lacked the authorization to complete the requested operation"),

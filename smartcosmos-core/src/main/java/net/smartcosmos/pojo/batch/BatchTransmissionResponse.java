@@ -25,7 +25,8 @@ import net.smartcosmos.model.batch.IBatchTransmissionResponse;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class BatchTransmissionResponse extends DomainResource<IBatchTransmissionResponse> implements IBatchTransmissionResponse
+public class BatchTransmissionResponse
+        extends DomainResource<IBatchTransmissionResponse> implements IBatchTransmissionResponse
 {
     @JsonView(JsonGenerationView.Minimum.class)
     private String transmissionUrn;

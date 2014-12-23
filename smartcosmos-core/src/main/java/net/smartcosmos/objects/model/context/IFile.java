@@ -82,18 +82,20 @@ public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
      * <p/>
      * <code>{<br/>
      * "algorithm": "SHA-256",<br/>
-     * "description": "The contentsSignature is of the file contents exclusively. The root signature is of the signedBody exclusively",<br/>
+     * "description": "The contentsSignature is of the file contents exclusively. The root signature is of the
+     * signedBody exclusively",<br/>
      * "iterations": 1,<br/>
      * "library": "Apache Shiro (Java)",<br/>
      * "signature": "8ae65ce110ab15fbea8df6e61adedaf9ca36dc02ebcd5d451da0f7d18a790abe",<br/>
      * "signedBody":<br/>
      * &nbsp;&nbsp;{<br/>
      * &nbsp;&nbsp;&nbsp;&nbsp;"accountUrn": "urn:uuid:9728d95e-9ae5-482f-84a7-b8f1fce80389",<br/>
-     * &nbsp;&nbsp;&nbsp;&nbsp;"contentsSignature": "8F866F53645218F77957675EC197678F2F9D3155455A01FF6F4E6FF68C5696C7",<br/>
+     * &nbsp;&nbsp;&nbsp;&nbsp;"contentsSignature": "8F866F53645218F77957675EC197678F2F9D3155455A01FF6F4E6FF68C5696C7",
+     * <br/>
      * &nbsp;&nbsp;&nbsp;&nbsp;"entityReferenceType": "ObjectInteraction",<br/>
      * &nbsp;&nbsp;&nbsp;&nbsp;"fileUrn": "urn:uuid:5655cf2d-a843-4d7b-941d-c3abe70a007b",<br/>
      * &nbsp;&nbsp;&nbsp;&nbsp;"referenceUrn": "urn:uuid:6889da4e-7fed-49b5-821b-b5a9f06740d4",<br/>
-     * &nbsp;&nbsp;&nbsp;&nbsp;"url": "https://net.smartcosmos.objects.stage.s3.amazonaws.blahblahblahblah/file.mp4"<br/>
+     * &nbsp;&nbsp;&nbsp;&nbsp;"url": "https://net.smartcosmos.objects.stage.s3.amazonaws.blahblahblahbah/file.mp4"<br/>
      * &nbsp;&nbsp;}<br/>
      * }</code><br/>
      *

@@ -62,7 +62,8 @@ public final class HashUtil
                 .put("algorithm", "SHA-256")
                 .put("iterations", 1)
                 .put("library", "Apache Shiro (Java)")
-                .put("description", "The contentsSignature is of the file contents exclusively. The root signature is of the signedBody exclusively");
+                .put("description", "The contentsSignature is of the file contents exclusively. " +
+                        "The root signature is of the signedBody exclusively");
     }
 
     public static String createHash(char[] chars, InputStream saltStream)
