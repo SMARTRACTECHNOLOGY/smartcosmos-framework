@@ -3,7 +3,6 @@ package net.smartcosmos.pojo.queue;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Maps;
 import net.smartcosmos.model.base.EntityReferenceType;
-import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.queue.IQueueRequest;
 import net.smartcosmos.util.json.JsonGenerationView;
 
@@ -36,21 +35,9 @@ public class QueueRequest implements IQueueRequest
     }
 
     @Override
-    public void setEntityReferenceType(EntityReferenceType entityReferenceType)
-    {
-        this.entityReferenceType = entityReferenceType;
-    }
-
-    @Override
     public String getReferenceUrn()
     {
         return referenceUrn;
-    }
-
-    @Override
-    public void setReferenceUrn(String urn)
-    {
-        this.referenceUrn = urn;
     }
 
     @Override
@@ -102,14 +89,14 @@ public class QueueRequest implements IQueueRequest
     }
 
     @Override
-    public IAccount getAccount()
+    public void setReferenceUrn(String urn)
     {
-        throw new UnsupportedOperationException("Account is not supported on a queue request");
+        this.referenceUrn = urn;
     }
 
     @Override
-    public void setAccount(IAccount account)
+    public void setEntityReferenceType(EntityReferenceType entityReferenceType)
     {
-        throw new UnsupportedOperationException("Account is not supported on a queue request");
+        this.entityReferenceType = entityReferenceType;
     }
 }

@@ -17,16 +17,16 @@ public class BatchTransmissionRequest extends DomainResource<IBatchTransmissionR
     private String routingUrn;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    private long contentLength;
+    private int contentLength;
 
     @Override
-    public long getFileContentLength()
+    public int getFileContentLength()
     {
         return contentLength;
     }
 
     @Override
-    public void setFileContentLength(long contentLength)
+    public void setFileContentLength(int contentLength)
     {
         this.contentLength = contentLength;
     }

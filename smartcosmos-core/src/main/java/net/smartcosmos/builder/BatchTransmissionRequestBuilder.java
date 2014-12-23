@@ -19,7 +19,7 @@ public class BatchTransmissionRequestBuilder extends AbstractBuilder<IBatchTrans
         return this;
     }
 
-    public BatchTransmissionRequestBuilder setFileContentLength(Long contentLength)
+    public BatchTransmissionRequestBuilder setFileContentLength(int contentLength)
     {
         instance.setFileContentLength(contentLength);
         return this;

@@ -25,13 +25,9 @@ package net.smartcosmos.model.base;
  * based on the combination of the {@link EntityReferenceType}
  * and the system-assigned URN, the "reference urn."
  */
-public interface IReferentialObject extends IAccountContext
+public interface IReferentialObject extends IMinimalReferentialObject, IAccountContext
 {
-    String getReferenceUrn();
-
     void setReferenceUrn(String urn);
-
-    EntityReferenceType getEntityReferenceType();
 
     void setEntityReferenceType(EntityReferenceType entityReferenceType);
 }

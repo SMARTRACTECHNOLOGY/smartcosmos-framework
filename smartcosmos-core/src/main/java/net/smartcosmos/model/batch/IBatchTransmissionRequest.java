@@ -9,14 +9,14 @@ public interface IBatchTransmissionRequest extends IDomainResource<IBatchTransmi
      *
      * @return file size, in bytes
      */
-    long getFileContentLength();
+    int getFileContentLength();
 
     /**
      * Size (in bytes) of the file being transmitted
      *
      * @param fileContentLength file size, in bytes
      */
-    void setFileContentLength(long fileContentLength);
+    void setFileContentLength(int fileContentLength);
 
     /**
      * Base64 encoded, 128-bit MD5 digest of the file per RFC1864.
