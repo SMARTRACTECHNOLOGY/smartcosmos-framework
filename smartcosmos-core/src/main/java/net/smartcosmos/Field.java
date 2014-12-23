@@ -194,11 +194,19 @@ public final class Field
 
     public static final String BATCH_ENDPOINT_URI = "endpointUri";
 
-    public static final String BATCH_AUTHORIZATION_HEADER = "authorizationHeader";
+    public static final String UPLOAD_BUCKET = "uploadBucketName";
+
+    public static final String UPLOAD_OBJECT_KEY = "uploadObjectKey";
+
+    public static final String UPLOAD_PROTOCOL = "uploadProtocol";
 
     public static final String TRANSMISSION_URN = "transmissionUrn";
 
     public static final String TRANSMISSION_RESULT = "transmissionResult";
+
+    public static final String CONFIG_APP_NAME = "configAppName";
+
+    public static final String CONFIG_APP_INSTANCE_NAME = "configAppInstanceName";
 
     private Field()
     {
