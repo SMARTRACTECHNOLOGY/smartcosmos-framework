@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.profiles.builder;
 
 import com.google.common.base.Preconditions;

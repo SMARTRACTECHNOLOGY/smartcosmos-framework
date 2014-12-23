@@ -1,4 +1,3 @@
-
 package net.smartcosmos;
 
 public final class Field

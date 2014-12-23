@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.util.mapper;
 
 import java.nio.charset.Charset;

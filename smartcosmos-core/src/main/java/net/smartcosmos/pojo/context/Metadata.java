@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;

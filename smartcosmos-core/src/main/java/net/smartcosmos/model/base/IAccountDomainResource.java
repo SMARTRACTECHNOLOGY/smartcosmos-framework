@@ -1,4 +1,3 @@
-
 package net.smartcosmos.model.base;
 
 /**

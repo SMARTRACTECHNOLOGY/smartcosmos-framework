@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.geo;
 
 public enum GeometricType

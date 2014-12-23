@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.model.geo;
 
 import net.smartcosmos.geo.GeometricShape;

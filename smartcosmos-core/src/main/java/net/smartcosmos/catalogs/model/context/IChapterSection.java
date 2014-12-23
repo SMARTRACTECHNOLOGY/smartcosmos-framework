@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.catalogs.model.context;
 
 import net.smartcosmos.model.base.IAccountDomainResource;

@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.pojo.base;
 
 /**

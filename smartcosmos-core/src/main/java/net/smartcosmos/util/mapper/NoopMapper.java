@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.util.mapper;
 
 public class NoopMapper implements IMetadataValueMapper<byte[]>

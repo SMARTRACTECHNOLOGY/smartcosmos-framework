@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.pojo.geo;
 
 import com.fasterxml.jackson.annotation.JsonView;

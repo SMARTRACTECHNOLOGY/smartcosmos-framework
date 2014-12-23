@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.catalogs.builder;
 
 import com.google.common.base.Preconditions;

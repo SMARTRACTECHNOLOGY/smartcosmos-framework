@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.model.extension;
 
 import net.smartcosmos.model.base.IDomainResource;

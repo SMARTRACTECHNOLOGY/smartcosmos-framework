@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.profiles.model.context;
 
 import java.util.Collection;

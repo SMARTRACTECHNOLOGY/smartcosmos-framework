@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.builder;
 
 import net.smartcosmos.model.base.IMoniker;

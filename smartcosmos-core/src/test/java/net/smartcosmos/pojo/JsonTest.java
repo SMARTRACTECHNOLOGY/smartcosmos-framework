@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.pojo;
 
 import net.smartcosmos.model.base.EntityReferenceType;

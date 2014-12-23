@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.objects.pojo.context;
 
 import net.smartcosmos.objects.model.context.ITag;

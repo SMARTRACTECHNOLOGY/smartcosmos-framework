@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.objects.builder;
 
 import net.smartcosmos.builder.AbstractReferentialBuilder;

@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.catalogs;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;

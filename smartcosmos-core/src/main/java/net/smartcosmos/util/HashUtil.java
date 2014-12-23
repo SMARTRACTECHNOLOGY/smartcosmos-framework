@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.util;
 
 import net.smartcosmos.objects.model.context.IFile;

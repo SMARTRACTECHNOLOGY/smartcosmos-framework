@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.geo;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;

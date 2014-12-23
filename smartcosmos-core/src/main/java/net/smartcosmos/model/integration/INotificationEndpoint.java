@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.model.integration;
 
 import net.smartcosmos.model.base.INamedObject;

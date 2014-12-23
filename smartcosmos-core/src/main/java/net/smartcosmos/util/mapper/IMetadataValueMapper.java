@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.util.mapper;
 
 public interface IMetadataValueMapper<T>

@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.pojo.extension;
 
 public final class ExtensionCredentials

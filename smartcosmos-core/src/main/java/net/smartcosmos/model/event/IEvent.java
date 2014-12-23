@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.model.event;
 
 import net.smartcosmos.model.base.IDomainResource;

@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.util.json;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;

@@ -1,5 +1,3 @@
-
-
 package net.smartcosmos.model.base;
 
 import net.smartcosmos.model.context.IAccount;
