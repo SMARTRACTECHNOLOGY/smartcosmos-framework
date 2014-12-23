@@ -7,6 +7,12 @@ import net.smartcosmos.pojo.queue.QueueRequest;
 
 public class QueueRequestBuilder extends AbstractReferentialBuilder<IQueueRequest, QueueRequestBuilder>
 {
+    public QueueRequestBuilder()
+    {
+        super(new QueueRequest());
+        instance.setQueueName(IQueueRequest.DEFAULT_QUEUE_NAME);
+    }
+
     public QueueRequestBuilder(String queueName)
     {
         super(new QueueRequest());

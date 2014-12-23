@@ -8,6 +8,8 @@ import java.util.Map;
 
 public interface IQueueRequest extends IMinimalReferentialObject, IMoniker
 {
+    String DEFAULT_QUEUE_NAME = "**DEFAULT**";
+
     String getQueueName();
 
     void setQueueName(String queueName);
