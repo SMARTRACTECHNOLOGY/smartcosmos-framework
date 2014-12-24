@@ -183,9 +183,6 @@
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
 
-        <!--
-            Disabled because IDE generated hash calculations are full of magic numbers (31)
-        -->
         <module name="MagicNumber">
             <property name="ignoreNumbers" value="-1, 0, 1, 31"/>
         </module>
