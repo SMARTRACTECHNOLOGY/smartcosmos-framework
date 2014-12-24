@@ -320,6 +320,7 @@
                 <configuration>
                     <consoleOutput>true</consoleOutput>
                     <logViolationsToConsole>true</logViolationsToConsole>
+                    <excludes>**/package-info.java</excludes>
                 </configuration>
             </plugin>
 
