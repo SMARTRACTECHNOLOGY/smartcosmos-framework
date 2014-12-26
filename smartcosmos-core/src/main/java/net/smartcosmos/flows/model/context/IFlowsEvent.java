@@ -22,26 +22,6 @@ package net.smartcosmos.flows.model.context;
 import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.base.INamedObject;
 
-public interface IRule extends IAccountDomainResource<IRule>, INamedObject<IRule>
+public interface IFlowsEvent extends IAccountDomainResource<IFlowsEvent>, INamedObject<IFlowsEvent>
 {
-
-	/**
-	 * @return Running status
-	 */
-	Integer getStatus();
-
-	/**
-	 * @param Running status
-	 */
-	void setStatus(Integer status);
-
-	/**
-	 * @return Start run mode
-	 */
-	Integer getRun();
-
-	/**
-	 * @param Start run mode
-	 */
-	void setRun(Integer run);
 }

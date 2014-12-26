@@ -152,6 +152,15 @@ public enum EventType
     BusinessRuleDeleted,
     BusinessRulesAccessed,
     BusinessRulesStatusChanged,
-    BusinessRuleTriggered
+    BusinessRuleTriggered,
+
+    FlowsEventDefined,
+    FlowsEventUpdated,
+    FlowsDeviceDefined,
+    FlowsDeviceUpdated,
+
+    EmailProvidersAccessed,
+    EmailSent,
+    DatabaseTypesAccessed
 
 }
