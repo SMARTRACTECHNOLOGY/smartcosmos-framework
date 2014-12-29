@@ -28,13 +28,24 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.KeyFactory;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
 import java.security.spec.AlgorithmParameterSpec;
+import java.security.spec.KeySpec;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 
 /**
@@ -42,6 +53,19 @@ import java.util.Arrays;
  */
 public final class CryptoUtil
 {
+    public static enum KeyFormat
+    {
+        /**
+         * Public Keys.
+         */
+        X509,
+
+        /**
+         * Private Keys.
+         */
+        PKCS8
+    }
+
     private CryptoUtil()
     {
     }
@@ -161,6 +185,80 @@ public final class CryptoUtil
     public static byte[] getInitVector() throws UnsupportedEncodingException
     {
         return "*GdY1@|f36,!fKL#".getBytes("UTF-8");
+    }
+
+    public static boolean verifySHA256withRSASignature(KeySpec publicKeySpec, byte[] utf8Bytes, String encodedSignature)
+            throws CryptoException
+    {
+        try
+        {
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            PublicKey publicKey = keyFactory.generatePublic(publicKeySpec);
+
+            Signature signature = Signature.getInstance("SHA256withRSA");
+            signature.initVerify(publicKey);
+
+            signature.update(utf8Bytes);
+
+            return signature.verify(BaseEncoding.base64().decode(encodedSignature));
+        } catch (Exception e)
+        {
+            throw new CryptoException(e);
+        }
+    }
+
+    public static String computeSHA256withRSASignature(KeySpec privateKeySpec, byte[] utf8Bytes) throws CryptoException
+    {
+        try
+        {
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            PrivateKey privateKey = keyFactory.generatePrivate(privateKeySpec);
+
+            Signature signature = Signature.getInstance("SHA256withRSA");
+            signature.initSign(privateKey);
+
+            signature.update(utf8Bytes);
+
+            byte[] signatureBytes = signature.sign();
+            return BaseEncoding.base64().encode(signatureBytes);
+
+        } catch (Exception e)
+        {
+            throw new CryptoException(e);
+        }
+    }
+
+    public static KeySpec loadKey(InputStream inputStream, KeyFormat keyFormat) throws IOException
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        int b;
+        while ((b = inputStream.read()) != -1)
+        {
+            baos.write(b);
+        }
+        inputStream.close();
+
+        final byte[] keyBytes = baos.toByteArray();
+        baos.close();
+
+        KeySpec keySpec;
+
+        if (keyFormat == KeyFormat.X509)
+        {
+            keySpec = new X509EncodedKeySpec(keyBytes);
+        } else
+        {
+            keySpec = new PKCS8EncodedKeySpec(keyBytes);
+        }
+
+        return keySpec;
+    }
+
+    public static KeySpec loadKey(String filePath, KeyFormat keyFormat) throws IOException
+    {
+        FileInputStream fis = new FileInputStream(new File(filePath));
+        return loadKey(fis, keyFormat);
     }
 }
 
