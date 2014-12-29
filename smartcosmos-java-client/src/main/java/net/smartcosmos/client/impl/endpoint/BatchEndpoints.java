@@ -1,4 +1,4 @@
-package net.smartcosmos.client.objects.object.address;
+package net.smartcosmos.client.impl.endpoint;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -20,22 +20,39 @@ package net.smartcosmos.client.objects.object.address;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.client.connectivity.ServerContext;
+import net.smartcosmos.util.json.ViewType;
 
-public final class ObjectAddressFactory
+public final class BatchEndpoints
 {
-    private ObjectAddressFactory()
+    private BatchEndpoints()
     {
     }
 
-    /**
-     * Creates a new instance of an object address client that will work with objects at the specified server context.
-     *
-     * @param context Server connection information
-     * @return New relationship client instance
-     */
-    public static IObjectAddressClient createClient(ServerContext context)
+    private static final String BASE = "/batch";
+
+    private static final String CREATE__PUT = BASE;
+
+    private static final String UPDATE__POST = BASE;
+
+    private static final String FIND_BY_TRANSMISSION_URN__GET = BASE.concat("/%s?view=%s");
+
+    public static String fileTransmissionRequest()
     {
-        return new ObjectAddressClient(context);
+        return CREATE__PUT;
+    }
+
+    public static String fileTransmissionReceipt()
+    {
+        return UPDATE__POST;
+    }
+
+    public static String transmissionStatus(String urn)
+    {
+        return transmissionStatus(urn, ViewType.Standard);
+    }
+
+    public static String transmissionStatus(String urn, ViewType viewType)
+    {
+        return String.format(FIND_BY_TRANSMISSION_URN__GET, urn, viewType);
     }
 }

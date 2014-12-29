@@ -1,24 +1,27 @@
+package net.smartcosmos.client.common.metadata;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Client
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-package net.smartcosmos.client.common.metadata;
 
 import com.google.common.base.Preconditions;
+import net.smartcosmos.Field;
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractUpsertableBaseClient;
@@ -26,7 +29,6 @@ import net.smartcosmos.client.impl.command.DeleteCommand;
 import net.smartcosmos.client.impl.command.GetCollectionCommand;
 import net.smartcosmos.client.impl.command.GetCommand;
 import net.smartcosmos.client.impl.endpoint.MetadataEndpoints;
-import net.smartcosmos.Field;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.model.context.MetadataDataType;
@@ -54,7 +56,7 @@ import static net.smartcosmos.Field.REFERENCE_URN_FIELD;
 
 class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements IMetadataClient
 {
-    final static Logger LOGGER = LoggerFactory.getLogger(MetadataClient.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(MetadataClient.class);
 
     MetadataClient(ServerContext context)
     {
@@ -78,11 +80,13 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
             EntityReferenceType ert = EntityReferenceType.valueOf(instance.getString(ENTITY_REFERENCE_TYPE));
             JSONArray jsonArray = new JSONArray().put(instance);
 
-            Collection<ResponseEntity> response = upsert(jsonArray, MetadataEndpoints.upsert(ert, instance.getString(REFERENCE_URN_FIELD)));
+            Collection<ResponseEntity> response = upsert(jsonArray,
+                    MetadataEndpoints.upsert(ert, instance.getString(REFERENCE_URN_FIELD)));
 
             if (response.size() != 1)
             {
-                throw new ServiceException(new IllegalStateException("Response from server should have contained at least one ResponseEntry"));
+                throw new ServiceException(
+                        new IllegalStateException("Response from server must contain at least one ResponseEntry"));
             }
             return response.iterator().next();
 
@@ -127,14 +131,20 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
     }
 
     @Override
-    public IMetadata findSpecificKey(EntityReferenceType entityReferenceType, String referenceUrn, String key, ViewType viewType) throws ServiceException
+    public IMetadata findSpecificKey(EntityReferenceType entityReferenceType,
+                                     String referenceUrn,
+                                     String key,
+                                     ViewType viewType) throws ServiceException
     {
         GetCommand<IMetadata> command = new GetCommand<>(context);
-        return command.call(Metadata.class, MetadataEndpoints.findSpecificKey(entityReferenceType, referenceUrn, key, viewType));
+        return command.call(Metadata.class,
+                MetadataEndpoints.findSpecificKey(entityReferenceType, referenceUrn, key, viewType));
     }
 
     @Override
-    public Collection<IMetadata> findAll(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType) throws ServiceException
+    public Collection<IMetadata> findAll(EntityReferenceType entityReferenceType,
+                                         String referenceUrn,
+                                         ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<IMetadata> command = new GetCollectionCommand<>(context);
         return command.call(Metadata.class, MetadataEndpoints.findAll(entityReferenceType, referenceUrn, viewType));
@@ -202,13 +212,16 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
     }
 
     @Override
-    public Collection<IMetadata> findAll(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException
+    public Collection<IMetadata> findAll(EntityReferenceType entityReferenceType,
+                                         String referenceUrn) throws ServiceException
     {
         return findAll(entityReferenceType, referenceUrn, ViewType.Standard);
     }
 
     @Override
-    public IMetadata findSpecificKey(EntityReferenceType entityReferenceType, String referenceUrn, String key) throws ServiceException
+    public IMetadata findSpecificKey(EntityReferenceType entityReferenceType,
+                                     String referenceUrn,
+                                     String key) throws ServiceException
     {
         return findSpecificKey(entityReferenceType, referenceUrn, key, ViewType.Standard);
     }

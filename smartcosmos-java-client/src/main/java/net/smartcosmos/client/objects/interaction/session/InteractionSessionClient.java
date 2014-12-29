@@ -1,29 +1,30 @@
+package net.smartcosmos.client.objects.interaction.session;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Client
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-
-package net.smartcosmos.client.objects.interaction.session;
 
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
-import net.smartcosmos.client.impl.endpoint.ObjectInteractionSessionEndpoints;
 import net.smartcosmos.client.impl.base.AbstractUpdateableBaseClient;
 import net.smartcosmos.client.impl.command.GetCollectionCommand;
+import net.smartcosmos.client.impl.endpoint.ObjectInteractionSessionEndpoints;
 import net.smartcosmos.objects.model.context.IObjectInteractionSession;
 import net.smartcosmos.objects.pojo.context.ObjectInteractionSession;
 import net.smartcosmos.pojo.base.ResponseEntity;
@@ -32,7 +33,8 @@ import org.json.JSONObject;
 
 import java.util.Collection;
 
-class InteractionSessionClient extends AbstractUpdateableBaseClient<IObjectInteractionSession> implements IInteractionSessionClient
+class InteractionSessionClient
+        extends AbstractUpdateableBaseClient<IObjectInteractionSession> implements IInteractionSessionClient
 {
     InteractionSessionClient(ServerContext context)
     {
@@ -40,10 +42,12 @@ class InteractionSessionClient extends AbstractUpdateableBaseClient<IObjectInter
     }
 
     @Override
-    public Collection<IObjectInteractionSession> findByNameLike(String nameLike, ViewType viewType) throws ServiceException
+    public Collection<IObjectInteractionSession> findByNameLike(String nameLike, ViewType viewType)
+            throws ServiceException
     {
         GetCollectionCommand<IObjectInteractionSession> command = new GetCollectionCommand<>(context);
-        return command.call(ObjectInteractionSession.class, ObjectInteractionSessionEndpoints.findByNameLike(nameLike, viewType));
+        return command.call(ObjectInteractionSession.class,
+                ObjectInteractionSessionEndpoints.findByNameLike(nameLike, viewType));
     }
 
     @Override
@@ -61,7 +65,8 @@ class InteractionSessionClient extends AbstractUpdateableBaseClient<IObjectInter
     @Override
     public IObjectInteractionSession findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, ObjectInteractionSessionEndpoints.findByUrn(urn, viewType), ObjectInteractionSession.class);
+        return findByUrn(urn, ObjectInteractionSessionEndpoints.findByUrn(urn, viewType),
+                ObjectInteractionSession.class);
     }
 
     @Override

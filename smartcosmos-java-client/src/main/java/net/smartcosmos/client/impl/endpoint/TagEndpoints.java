@@ -1,22 +1,24 @@
+package net.smartcosmos.client.impl.endpoint;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Client
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-package net.smartcosmos.client.impl.endpoint;
 
 
 import net.smartcosmos.model.base.EntityReferenceType;
@@ -43,11 +45,14 @@ public final class TagEndpoints
 
     private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
 
-    private static final String FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_ENTITY__GET = BASE.concat("?entityReferenceType=%s&referenceUrn=%s&view=%s");
+    private static final String FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_ENTITY__GET
+            = BASE.concat("?entityReferenceType=%s&referenceUrn=%s&view=%s");
 
-    private static final String FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_TYPE__GET = BASE.concat("?entityReferenceType=%s&tagName=%s&view=%s");
+    private static final String FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_TYPE__GET
+            = BASE.concat("?entityReferenceType=%s&tagName=%s&view=%s");
 
-    private static final String FIND_ENTITIES_BY_TAGS_NAMED_LIKE__GET = BASE.concat("?tagName=%s&view=%s");
+    private static final String FIND_ENTITIES_BY_TAGS_NAMED_LIKE__GET
+            = BASE.concat("?tagName=%s&view=%s");
 
     private static final String FIND_SPECIFIC_TAG__GET = BASE.concat("/tag/%s?view=%s");
 
@@ -110,14 +115,20 @@ public final class TagEndpoints
         return String.format(FIND_SPECIFIC_TAG__GET, encodedTagName, viewType);
     }
 
-    public static String findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn)
+    public static String findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
+                                                            String referenceUrn)
     {
         return findEntitiesByTagsAssignedToEntity(entityReferenceType, referenceUrn, ViewType.Standard);
     }
 
-    public static String findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType)
+    public static String findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
+                                                            String referenceUrn,
+                                                            ViewType viewType)
     {
-        return String.format(FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_ENTITY__GET, entityReferenceType, referenceUrn, viewType);
+        return String.format(FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_ENTITY__GET,
+                entityReferenceType,
+                referenceUrn,
+                viewType);
     }
 
     public static String findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName)
@@ -125,7 +136,9 @@ public final class TagEndpoints
         return findEntitiesByTagsAssignedToType(entityReferenceType, tagName, ViewType.Standard);
     }
 
-    public static String findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName, ViewType viewType)
+    public static String findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType,
+                                                          String tagName,
+                                                          ViewType viewType)
     {
         return String.format(FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_TYPE__GET, entityReferenceType, tagName, viewType);
     }

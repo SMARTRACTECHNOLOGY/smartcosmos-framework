@@ -1,25 +1,27 @@
+package net.smartcosmos.client.objects.tag;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Client
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-package net.smartcosmos.client.objects.tag;
-
 import com.google.common.base.Preconditions;
+import net.smartcosmos.Field;
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractUpsertableBaseClient;
@@ -28,7 +30,6 @@ import net.smartcosmos.client.impl.command.GetCollectionCommand;
 import net.smartcosmos.client.impl.command.GetCommand;
 import net.smartcosmos.client.impl.command.PutCommand;
 import net.smartcosmos.client.impl.endpoint.TagEndpoints;
-import net.smartcosmos.Field;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.objects.model.context.ITag;
 import net.smartcosmos.objects.model.context.ITagAssignment;
@@ -91,7 +92,9 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, Collection<ITag> tags) throws ServiceException
+    public Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType,
+                                             String referenceUrn,
+                                             Collection<ITag> tags) throws ServiceException
     {
         JSONArray array = new JSONArray();
 
@@ -113,7 +116,9 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, JSONArray jsonArray) throws ServiceException
+    public Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType,
+                                             String referenceUrn,
+                                             JSONArray jsonArray) throws ServiceException
     {
         // PUT
         PutCommand<ResponseEntity> command = new PutCommand<>(context);
@@ -121,21 +126,28 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType) throws ServiceException
+    public Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
+                                                                         String referenceUrn,
+                                                                         ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context);
-        return command.call(TagAssignment.class, TagEndpoints.findEntitiesByTagsAssignedToEntity(entityReferenceType, referenceUrn, viewType));
+        return command.call(TagAssignment.class,
+                TagEndpoints.findEntitiesByTagsAssignedToEntity(entityReferenceType, referenceUrn, viewType));
     }
 
     @Override
-    public Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName, ViewType viewType) throws ServiceException
+    public Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType,
+                                                                       String tagName,
+                                                                       ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context);
-        return command.call(TagAssignment.class, TagEndpoints.findEntitiesByTagsAssignedToType(entityReferenceType, tagName, viewType));
+        return command.call(TagAssignment.class,
+                TagEndpoints.findEntitiesByTagsAssignedToType(entityReferenceType, tagName, viewType));
     }
 
     @Override
-    public Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName, ViewType viewType) throws ServiceException
+    public Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName, ViewType viewType)
+            throws ServiceException
     {
         GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context);
         return command.call(TagAssignment.class, TagEndpoints.findEntitiesByTagNameLike(tagName, viewType));
@@ -149,14 +161,16 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     }
 
     @Override
-    public void revokeAssignment(String tagName, EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException
+    public void revokeAssignment(String tagName, EntityReferenceType entityReferenceType, String referenceUrn)
+            throws ServiceException
     {
         DeleteCommand command = new DeleteCommand(context);
         command.call(Object.class, TagEndpoints.revokeAssignment(entityReferenceType, referenceUrn, tagName));
     }
 
     @Override
-    public Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName) throws ServiceException
+    public Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType,
+                                                                       String tagName) throws ServiceException
     {
         return findEntitiesByTagsAssignedToType(entityReferenceType, tagName, ViewType.Standard);
     }
@@ -175,7 +189,8 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
 
 
     @Override
-    public Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException
+    public Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
+                                                                         String referenceUrn) throws ServiceException
     {
         return findEntitiesByTagsAssignedToEntity(entityReferenceType, referenceUrn, ViewType.Standard);
     }

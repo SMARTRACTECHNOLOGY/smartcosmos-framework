@@ -1,4 +1,4 @@
-package net.smartcosmos.client.objects.object.address;
+package net.smartcosmos.client.batch;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -20,22 +20,16 @@ package net.smartcosmos.client.objects.object.address;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.client.connectivity.ServerContext;
+import net.smartcosmos.client.connectivity.ServiceException;
+import net.smartcosmos.model.batch.IBatchTransmissionReceipt;
+import net.smartcosmos.model.batch.IBatchTransmissionRequest;
+import net.smartcosmos.model.batch.IBatchTransmissionResponse;
 
-public final class ObjectAddressFactory
+public interface IBatchUploadClient
 {
-    private ObjectAddressFactory()
-    {
-    }
+    IBatchTransmissionResponse sendBatchTransmissionRequest(IBatchTransmissionRequest request) throws ServiceException;
 
-    /**
-     * Creates a new instance of an object address client that will work with objects at the specified server context.
-     *
-     * @param context Server connection information
-     * @return New relationship client instance
-     */
-    public static IObjectAddressClient createClient(ServerContext context)
-    {
-        return new ObjectAddressClient(context);
-    }
+    void sendBatchTransmissionReceipt(IBatchTransmissionReceipt receipt) throws ServiceException;
+
+
 }

@@ -1,43 +1,41 @@
+package net.smartcosmos.client.objects.object;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Client
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-package net.smartcosmos.client.objects.object;
 
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
-import net.smartcosmos.client.impl.endpoint.ObjectEndpoints;
 import net.smartcosmos.client.impl.base.AbstractUpdateableBaseClient;
 import net.smartcosmos.client.impl.command.GetCollectionCommand;
 import net.smartcosmos.client.impl.command.GetCommand;
+import net.smartcosmos.client.impl.endpoint.ObjectEndpoints;
 import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.objects.pojo.context.ObjectImpl;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.util.json.ViewType;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 
 class ObjectClient extends AbstractUpdateableBaseClient<IObject> implements IObjectClient
 {
-    final static Logger LOGGER = LoggerFactory.getLogger(ObjectClient.class);
-
     ObjectClient(ServerContext context)
     {
         super(context);

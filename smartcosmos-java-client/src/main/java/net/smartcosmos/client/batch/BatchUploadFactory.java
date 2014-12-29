@@ -1,4 +1,4 @@
-package net.smartcosmos.client.objects.object.address;
+package net.smartcosmos.client.batch;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -22,20 +22,20 @@ package net.smartcosmos.client.objects.object.address;
 
 import net.smartcosmos.client.connectivity.ServerContext;
 
-public final class ObjectAddressFactory
+public final class BatchUploadFactory
 {
-    private ObjectAddressFactory()
+    private BatchUploadFactory()
     {
     }
 
     /**
-     * Creates a new instance of an object address client that will work with objects at the specified server context.
+     * Creates a new instance of a batch upload client that will work with the specified server context.
      *
      * @param context Server connection information
-     * @return New relationship client instance
+     * @return New batch upload client instance
      */
-    public static IObjectAddressClient createClient(ServerContext context)
+    public static IBatchUploadClient createClient(ServerContext context)
     {
-        return new ObjectAddressClient(context);
+        return new BatchUploadClient(context);
     }
 }

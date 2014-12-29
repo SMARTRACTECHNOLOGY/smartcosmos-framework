@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ SMART COSMOS SDK
-  ~ (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
-  ~ 267 Cane Creek Rd, Fletcher, NC, 28732, USA
-  ~ All Rights Reserved.
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -29,11 +12,11 @@
 
     <groupId>net.smartcosmos</groupId>
     <artifactId>java-client</artifactId>
-    <version>${target.version}</version>
+    <version>1.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
-    <name>SMART COSMOS Java Client</name>
+    <name>Platform Client</name>
     <description>Provides a thin client wrapper for accessing the SMART COSMOS platform web services</description>
 
     <url>http://tagdynamices.com/</url>
@@ -48,11 +31,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <target.version>${target.numberVersion}-${target.kindRepo}</target.version>
-        <target.numberVersion>1.0</target.numberVersion>
-        <target.kindRepo>RELEASE</target.kindRepo>
-        <sdk.version>1.0-${target.kindRepo}</sdk.version>
         <restlet.version>2.2-M3</restlet.version>
+        <checkstyle.config.location>${basedir}/src/checkstyle/checkstyle.xml</checkstyle.config.location>
     </properties>
 
     <repositories>
@@ -89,19 +69,6 @@
     </scm>
 
     <distributionManagement>
-      <repository>
-        <id>deployment</id>
-        <name>Internal Releases</name>
-        <url>https://nexus.smartcosmos.net/nexus/content/repositories/releases/</url>
-      </repository>
-      <snapshotRepository>
-        <id>deployment</id>
-        <name>Internal Releases</name>
-        <url>https://nexus.smartcosmos.net/nexus/content/repositories/snapshots/</url>
-      </snapshotRepository>
-    </distributionManagement>
-    <!-- commented to manage versions to Nexus
-    <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
@@ -111,13 +78,13 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
--->
+
     <dependencies>
 
         <dependency>
             <groupId>net.smartcosmos</groupId>
-            <artifactId>java-sdk</artifactId>
-            <version>${sdk.version}</version>
+            <artifactId>platform-core</artifactId>
+            <version>1.2-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -295,6 +262,69 @@
 
             </plugins>
         </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.8</version>
+                <configuration>
+                    <licenseName>apache_v2</licenseName>
+
+                    <projectName>SMART COSMOS Platform Client</projectName>
+
+                    <inceptionYear>2013</inceptionYear>
+
+                    <processStartTag>*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+                    </processStartTag>
+                    <sectionDelimiter>===============================================================================
+                    </sectionDelimiter>
+                    <processEndTag>#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+                    </processEndTag>
+
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/package-info.java</exclude>
+                            </excludes>
+                            <roots>
+                                <root>src/assemble</root>
+                                <root>src/main/java</root>
+                                <root>src/test/java</root>
+                            </roots>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.13</version>
+                <executions>
+                    <execution>
+                        <id>verify-style</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <consoleOutput>true</consoleOutput>
+                    <logViolationsToConsole>true</logViolationsToConsole>
+                    <excludes>**/package-info.java</excludes>
+                </configuration>
+            </plugin>
+
+        </plugins>
     </build>
 
 </project>

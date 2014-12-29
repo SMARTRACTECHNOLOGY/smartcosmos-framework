@@ -1,28 +1,30 @@
+package net.smartcosmos.client.impl.command;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Client
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-package net.smartcosmos.client.impl.command;
 
 import com.google.common.base.Preconditions;
+import net.smartcosmos.Field;
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractBaseClient;
-import net.smartcosmos.Field;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.JsonUtil;
@@ -46,7 +48,7 @@ import static net.smartcosmos.Field.MESSAGE_FIELD;
 
 public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 {
-    private final static Logger LOGGER = LoggerFactory.getLogger(PutCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PutCommand.class);
 
     public PutCommand(ServerContext context)
     {
@@ -85,7 +87,9 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                 {
                     ResponseEntity entity = new ResponseEntity.Builder(
                             Result.ERR_ALREADY_EXISTS.getCode(),
-                            String.format(Result.ERR_ALREADY_EXISTS.getFormattedMessage(), "user", inputJson.getString(Field.EMAIL_ADDRESS_FIELD)))
+                            String.format(Result.ERR_ALREADY_EXISTS.getFormattedMessage(),
+                                    "user",
+                                    inputJson.getString(Field.EMAIL_ADDRESS_FIELD)))
                             .build();
 
                     throw new ServiceException(entity);
@@ -93,7 +97,8 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                 {
                     ResponseEntity entity = new ResponseEntity.Builder(
                             Result.ERR_FAILURE.getCode(),
-                            String.format(Result.ERR_FAILURE.getFormattedMessage(), "Bad Request - if this was an interaction, was your session already closed?"))
+                            String.format(Result.ERR_FAILURE.getFormattedMessage(),
+                                    "Bad Request - if this was an interaction, was your session already closed?"))
                             .build();
 
                     throw new ServiceException(entity);
@@ -128,7 +133,10 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                 }
             } else
             {
-                LOGGER.debug(((ResponseEntity) response).getMessage());
+                if (clazz.isAssignableFrom(ResponseEntity.class))
+                {
+                    LOGGER.debug(((ResponseEntity) response).getMessage());
+                }
             }
 
         } catch (JSONException | IOException e)

@@ -1,31 +1,33 @@
+package net.smartcosmos.client.common.event;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Client
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-package net.smartcosmos.client.common.event;
 
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractFindableBaseClient;
 import net.smartcosmos.client.impl.command.GetCollectionCommand;
 import net.smartcosmos.client.impl.endpoint.EventEndpoints;
-import net.smartcosmos.pojo.event.Event;
 import net.smartcosmos.model.event.EventType;
 import net.smartcosmos.model.event.IEvent;
+import net.smartcosmos.pojo.event.Event;
 import net.smartcosmos.util.json.ViewType;
 
 import java.util.ArrayList;
@@ -67,7 +69,8 @@ class EventClient extends AbstractFindableBaseClient<IEvent> implements IEventCl
     public Collection<IEvent> findSince(long timestamp, ViewType viewType) throws ServiceException
     {
         GetCollectionCommand<DynamicEvent> command = new GetCollectionCommand<>(context);
-        Collection<DynamicEvent> dynamicEvents = command.call(DynamicEvent.class, EventEndpoints.findSince(timestamp, viewType));
+        Collection<DynamicEvent> dynamicEvents
+                = command.call(DynamicEvent.class, EventEndpoints.findSince(timestamp, viewType));
 
         Collection<IEvent> events = new ArrayList<>();
         for (DynamicEvent event : dynamicEvents)
