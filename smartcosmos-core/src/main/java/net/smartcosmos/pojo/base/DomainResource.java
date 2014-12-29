@@ -1,42 +1,40 @@
+package net.smartcosmos.pojo.base;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Core SDK
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-
-package net.smartcosmos.pojo.base;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-@JsonPropertyOrder(value = {"uniqueId", "urn", "lastModifiedTimestamp"})
+@JsonPropertyOrder(value = {"uniqueId", "urn", "lastModifiedTimestamp" })
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
-    protected static ObjectMapper mapper = null;
-
     @JsonView(JsonGenerationView.Restricted.class)
     protected long uniqueId;
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected String urn;
 
-    @JsonView(JsonGenerationView.Full.class)
+    @JsonView(JsonGenerationView.Standard.class)
     protected long lastModifiedTimestamp;
 
     @JsonView(JsonGenerationView.Full.class)

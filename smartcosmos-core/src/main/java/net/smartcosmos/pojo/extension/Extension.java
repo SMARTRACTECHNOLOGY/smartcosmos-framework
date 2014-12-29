@@ -1,23 +1,24 @@
+package net.smartcosmos.pojo.extension;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Core SDK
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-
-package net.smartcosmos.pojo.extension;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -189,8 +190,13 @@ public class Extension extends NamedObject<IExtension> implements IExtension
         if (!clientId.equals(extension.clientId)) return false;
         if (!clientSecret.equals(extension.clientSecret)) return false;
         if (extensionType != extension.extensionType) return false;
-        if (longDescription != null ? !longDescription.equals(extension.longDescription) : extension.longDescription != null)
+        if (longDescription != null
+                ? !longDescription.equals(extension.longDescription)
+                : extension.longDescription != null)
+        {
             return false;
+        }
+
         if (!redirectUrl.equals(extension.redirectUrl)) return false;
         if (supportEmail != null ? !supportEmail.equals(extension.supportEmail) : extension.supportEmail != null)
             return false;
