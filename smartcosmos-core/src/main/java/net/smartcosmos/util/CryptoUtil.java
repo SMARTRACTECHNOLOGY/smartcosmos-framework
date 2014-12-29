@@ -20,6 +20,8 @@ package net.smartcosmos.util;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import com.google.common.io.BaseEncoding;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -30,6 +32,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Arrays;
@@ -41,6 +44,39 @@ public final class CryptoUtil
 {
     private CryptoUtil()
     {
+    }
+
+    public static String digestThenEncodePasswordForLDAP(String algorithm, String credentials)
+    {
+        String hashedCredentials = credentials;
+
+        if ((credentials != null) && (credentials.length() > 0))
+        {
+            boolean isMD5Hash = algorithm.equalsIgnoreCase("MD5");
+            boolean isSHAHash = algorithm.equalsIgnoreCase("SHA")
+                    || algorithm.equalsIgnoreCase("SHA1")
+                    || algorithm.equalsIgnoreCase("SHA-1");
+
+            if (isSHAHash || isMD5Hash)
+            {
+                String hashAlgorithm = "MD5";
+                if (isSHAHash)
+                {
+                    hashAlgorithm = "SHA";
+                }
+                try
+                {
+                    MessageDigest md = MessageDigest.getInstance(hashAlgorithm);
+                    md.update(credentials.getBytes("UTF-8"));
+                    hashedCredentials = "{" + hashAlgorithm + "}" + BaseEncoding.base64().encode(md.digest());
+                } catch (Exception e)
+                {
+                    hashedCredentials = null;
+                }
+            }
+        }
+
+        return hashedCredentials;
     }
 
     /**
