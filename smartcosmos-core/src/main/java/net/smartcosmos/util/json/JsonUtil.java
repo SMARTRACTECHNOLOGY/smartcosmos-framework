@@ -1,23 +1,24 @@
+package net.smartcosmos.util.json;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Core SDK
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-
-package net.smartcosmos.util.json;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -41,7 +42,7 @@ public final class JsonUtil
 {
     private static final Logger LOG = LoggerFactory.getLogger(JsonUtil.class);
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private JsonUtil()
     {
@@ -49,7 +50,7 @@ public final class JsonUtil
 
     static
     {
-        mapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false);
+        MAPPER.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false);
 
     }
 
@@ -64,7 +65,7 @@ public final class JsonUtil
 
         try
         {
-            instance = mapper.readValue(json, entityClass);
+            instance = MAPPER.readValue(json, entityClass);
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -137,7 +138,7 @@ public final class JsonUtil
 
         try
         {
-            json = mapper.writerWithView(viewClass).writeValueAsString(object);
+            json = MAPPER.writerWithView(viewClass).writeValueAsString(object);
         } catch (JsonProcessingException e)
         {
             if (LOG.isDebugEnabled())
@@ -173,4 +174,3 @@ public final class JsonUtil
         return json;
     }
 }
-
