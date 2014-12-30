@@ -1,22 +1,24 @@
+package net.smartcosmos;
+
 /*
- * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Core SDK
+ * ===============================================================================
+ * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-package net.smartcosmos;
 
 public final class Field
 {
@@ -124,6 +126,8 @@ public final class Field
 
     public static final String FLAG_FIELD = "flag";
 
+    public static final String QUEUE_URN_FIELD = "queueUrn";
+
     public static final String RECORDED_TIMESTAMP_FIELD = "recordedTimestamp";
 
     public static final String OLD_PASSWORD_FIELD = "oldPassword";
@@ -181,6 +185,30 @@ public final class Field
 
     public static final String PAGE_ENTRY_FIELD = "pageEntry";
 
+    //
+    // Batch Transmission Fields
+    //
+    public static final String FILE_MD5_CHECKSUM = "md5Checksum";
+
+    public static final String FILE_CONTENT_LENGTH = "contentLength";
+
+    public static final String BATCH_ROUTING_URN = "routingUrn";
+
+    public static final String BATCH_ENDPOINT_URI = "endpointUri";
+
+    public static final String UPLOAD_BUCKET = "uploadBucketName";
+
+    public static final String UPLOAD_OBJECT_KEY = "uploadObjectKey";
+
+    public static final String UPLOAD_PROTOCOL = "uploadProtocol";
+
+    public static final String TRANSMISSION_URN = "transmissionUrn";
+
+    public static final String TRANSMISSION_RESULT = "transmissionResult";
+
+    public static final String CONFIG_APP_NAME = "configAppName";
+
+    public static final String CONFIG_APP_INSTANCE_NAME = "configAppInstanceName";
 
     private Field()
     {
