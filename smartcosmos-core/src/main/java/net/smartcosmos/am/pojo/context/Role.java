@@ -1,4 +1,4 @@
-package net.smartcosmos.am.builder;
+package net.smartcosmos.am.pojo.context;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -20,33 +20,48 @@ package net.smartcosmos.am.builder;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.am.model.context.IGroup;
-import net.smartcosmos.am.pojo.context.Group;
-import net.smartcosmos.builder.AbstractNamedObjectBuilder;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import net.smartcosmos.am.model.context.IRole;
+import net.smartcosmos.pojo.base.NamedObject;
 
-public class GroupBuilder extends AbstractNamedObjectBuilder<IGroup, GroupBuilder>
+@JsonInclude(value = Include.NON_EMPTY)
+@JsonIgnoreProperties(value = {"uniqueId", "lastModifiedTimestamp", "activeFlag", "active" })
+public class Role extends NamedObject< IRole > implements IRole
 {
+    private String name;
+    private String description;
 
-    public GroupBuilder()
+    public Role()
     {
-        super(new Group());
+        // TODO Auto-generated constructor stub
     }
 
-    public GroupBuilder setName(String name)
+    public String getName()
     {
-        instance.setName(name);
-        return this;
+        return name;
     }
 
-    public GroupBuilder setDescription(String description)
+    public void setName(String name)
     {
-        instance.setDescription(description);
-        return this;
+        this.name = name;
     }
 
-    public GroupBuilder setUrn(String urn)
+    public String getDescription()
     {
-        instance.setUrn(urn);
-        return this;
+        return description;
     }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Role [name=" + name + ", description=" + description + "]";
+    }
+
 }

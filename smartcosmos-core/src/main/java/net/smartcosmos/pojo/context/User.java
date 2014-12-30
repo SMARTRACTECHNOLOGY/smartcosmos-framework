@@ -23,7 +23,7 @@ package net.smartcosmos.pojo.context;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import net.smartcosmos.am.model.context.IGroup;
+import net.smartcosmos.am.model.context.IRole;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
@@ -43,7 +43,7 @@ public class User extends DomainResource< IUser > implements IUser
     protected RoleType roleType;
     @JsonView(JsonGenerationView.Minimum.class)
     @JsonDeserialize(as = List.class)
-    protected List< IGroup > groups = new ArrayList<>();
+    protected List< IRole > roles = new ArrayList<IRole>();
     @JsonView(JsonGenerationView.Minimum.class)
     private String emailAddress;
     @JsonView(JsonGenerationView.Full.class)
@@ -159,16 +159,14 @@ public class User extends DomainResource< IUser > implements IUser
     }
 
     @Override
-    public List< IGroup > getGroups()
+    public List<IRole> getRoles()
     {
-        return groups;
+        return this.roles;
     }
 
     @Override
-    public void setGroups(List< IGroup > groups)
+    public void setRoles(List<IRole> roles) 
     {
-        this.groups = groups;
+        this.roles = roles;
     }
-
-
 }

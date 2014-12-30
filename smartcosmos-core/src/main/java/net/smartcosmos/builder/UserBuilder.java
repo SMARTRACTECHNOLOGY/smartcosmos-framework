@@ -22,7 +22,7 @@
 package net.smartcosmos.builder;
 
 import com.google.common.base.Preconditions;
-import net.smartcosmos.am.model.context.IGroup;
+import net.smartcosmos.am.model.context.IRole;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.pojo.context.User;
@@ -66,9 +66,9 @@ public final class UserBuilder extends AbstractMonikerBuilder< IUser, UserBuilde
         return this;
     }
 
-    public UserBuilder setGroups(List< IGroup > groups)
+    public UserBuilder setRoles(List< IRole > roles)
     {
-        instance.setGroups(groups);
+        instance.setRoles(roles);
         return this;
     }
 
