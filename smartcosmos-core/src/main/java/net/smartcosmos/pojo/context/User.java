@@ -50,6 +50,8 @@ public class User extends DomainResource< IUser > implements IUser
     private String givenName;
     @JsonView(JsonGenerationView.Full.class)
     private String surname;
+    @JsonView(JsonGenerationView.Full.class)
+    private Boolean enable;
 
     @Override
     public String getEmailAddress()
@@ -126,6 +128,18 @@ public class User extends DomainResource< IUser > implements IUser
         this.surname = target.getSurname();
 
         this.roleType = target.getRoleType();
+    }
+
+    @Override
+    public void setEnable(Boolean enable)
+    {
+        this.enable = enable;
+    }
+
+    @Override
+    public Boolean isEnable()
+    {
+        return enable;
     }
 
     @Override

@@ -56,4 +56,9 @@ public interface IUser extends IAccountDomainResource<IUser>
     void setRoleType(RoleType role);
 
     void copy(IUser user);
+
+    void setEnable(Boolean enable);
+
+    Boolean isEnable();
+
 }
