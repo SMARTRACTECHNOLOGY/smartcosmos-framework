@@ -1,5 +1,3 @@
-package net.smartcosmos.pojo.context;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
@@ -20,31 +18,38 @@ package net.smartcosmos.pojo.context;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+package net.smartcosmos.pojo.context;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import net.smartcosmos.am.model.context.IGroup;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class User extends DomainResource<IUser> implements IUser
-{
-    @JsonView(JsonGenerationView.Minimum.class)
-    private String emailAddress;
+import java.util.ArrayList;
+import java.util.List;
 
+@JsonFilter("userFilter")
+public class User extends DomainResource< IUser > implements IUser
+{
     @JsonView(JsonGenerationView.Full.class)
     @JsonDeserialize(as = Account.class)
     protected IAccount account;
-
-    @JsonView(JsonGenerationView.Full.class)
-    private String givenName;
-
-    @JsonView(JsonGenerationView.Full.class)
-    private String surname;
-
     @JsonView(JsonGenerationView.Minimum.class)
     protected RoleType roleType;
+    @JsonView(JsonGenerationView.Minimum.class)
+    @JsonDeserialize(as = List.class)
+    protected List< IGroup > groups = new ArrayList<>();
+    @JsonView(JsonGenerationView.Minimum.class)
+    private String emailAddress;
+    @JsonView(JsonGenerationView.Full.class)
+    private String givenName;
+    @JsonView(JsonGenerationView.Full.class)
+    private String surname;
 
     @Override
     public String getEmailAddress()
@@ -152,4 +157,18 @@ public class User extends DomainResource<IUser> implements IUser
         result = 31 * result + roleType.hashCode();
         return result;
     }
+
+    @Override
+    public List< IGroup > getGroups()
+    {
+        return groups;
+    }
+
+    @Override
+    public void setGroups(List< IGroup > groups)
+    {
+        this.groups = groups;
+    }
+
+
 }

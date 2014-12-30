@@ -1,3 +1,5 @@
+package net.smartcosmos.am.builder;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
@@ -18,42 +20,33 @@
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-package net.smartcosmos.model.context;
-
-import java.util.List;
-
 import net.smartcosmos.am.model.context.IGroup;
-import net.smartcosmos.model.base.IAccountDomainResource;
+import net.smartcosmos.am.pojo.context.Group;
+import net.smartcosmos.builder.AbstractNamedObjectBuilder;
 
-/**
- * System user with login and query privileges. Users are typically
- * not considered part of the contextual model captured by the system.
- * <p/>
- * SMART COSMOS Objects is <i>not a directory services</i> platform, so the constituent
- * parts of a user are relatively simplistic. Directory services are instead
- * a delegated operation based on the configuration of the platform as a whole.
- */
-public interface IUser extends IAccountDomainResource<IUser>
+public class GroupBuilder extends AbstractNamedObjectBuilder<IGroup, GroupBuilder>
 {
-    String getGivenName();
 
-    void setGivenName(String givenName);
+    public GroupBuilder()
+    {
+        super(new Group());
+    }
 
-    String getSurname();
+    public GroupBuilder setName(String name)
+    {
+        instance.setName(name);
+        return this;
+    }
 
-    void setSurname(String surname);
+    public GroupBuilder setDescription(String description)
+    {
+        instance.setDescription(description);
+        return this;
+    }
 
-    String getEmailAddress();
-
-    void setEmailAddress(String emailAddress);
-
-    RoleType getRoleType();
-    
-    List<IGroup> getGroups();
-    
-    void setGroups(List<IGroup> groups);
-
-    void setRoleType(RoleType role);
-
-    void copy(IUser user);
+    public GroupBuilder setUrn(String urn)
+    {
+        instance.setUrn(urn);
+        return this;
+    }
 }

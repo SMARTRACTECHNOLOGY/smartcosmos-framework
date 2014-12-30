@@ -1,5 +1,3 @@
-package net.smartcosmos.model.event;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
@@ -19,6 +17,8 @@ package net.smartcosmos.model.event;
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
+
+package net.smartcosmos.model.event;
 
 /**
  * Collection of SMART COSMOS events that capture virtually all interactions between a user and the platform. In
@@ -151,5 +151,22 @@ public enum EventType
     BatchTransmissionRequest,
     BatchTransmissionReceipt,
     BatchTransmissionQueueSuccess,
-    BatchTransmissionQueueError
+    BatchTransmissionQueueError,
+
+    BusinessRuleDefined,
+    BusinessRuleUpdated,
+    BusinessRuleDeleted,
+    BusinessRulesAccessed,
+    BusinessRulesStatusChanged,
+    BusinessRuleTriggered,
+
+    FlowsEventDefined,
+    FlowsEventUpdated,
+    FlowsDeviceDefined,
+    FlowsDeviceUpdated,
+
+    EmailProvidersAccessed,
+    EmailSent,
+    DatabaseTypesAccessed
+
 }

@@ -1,5 +1,3 @@
-package net.smartcosmos.builder;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
@@ -20,10 +18,16 @@ package net.smartcosmos.builder;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+
+package net.smartcosmos.builder;
+
 import com.google.common.base.Preconditions;
+import net.smartcosmos.am.model.context.IGroup;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.pojo.context.User;
+
+import java.util.List;
 
 /**
  * Convenience Builder pattern class for creating new {@link net.smartcosmos.model.context.IUser} instances.
@@ -33,7 +37,7 @@ import net.smartcosmos.pojo.context.User;
  * <li>{@link net.smartcosmos.Field#EMAIL_ADDRESS_FIELD}</li>
  * </ul>
  */
-public final class UserBuilder extends AbstractMonikerBuilder<IUser, UserBuilder>
+public final class UserBuilder extends AbstractMonikerBuilder< IUser, UserBuilder >
 {
     public UserBuilder(String emailAddress)
     {
@@ -59,6 +63,18 @@ public final class UserBuilder extends AbstractMonikerBuilder<IUser, UserBuilder
     public UserBuilder setRoleType(RoleType roleType)
     {
         instance.setRoleType(roleType);
+        return this;
+    }
+
+    public UserBuilder setGroups(List< IGroup > groups)
+    {
+        instance.setGroups(groups);
+        return this;
+    }
+
+    public UserBuilder setUrn(String urn)
+    {
+        instance.setUrn(urn);
         return this;
     }
 }

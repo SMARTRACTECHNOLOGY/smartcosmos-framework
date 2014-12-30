@@ -1,4 +1,3 @@
-package net.smartcosmos.pojo.base;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -26,6 +25,8 @@ package net.smartcosmos.pojo.base;
  * <p/>
  * Effectively, any {@link ResponseEntity#getCode()} value less than zero is an error condition.
  */
+package net.smartcosmos.pojo.base;
+
 public enum Result
 {
     OK(1, "%s"),
@@ -44,6 +45,9 @@ public enum Result
     ERR_NO_SUCH_EMAIL(-12, "No user associated with email address %s"),
     ERR_NO_FILE_CONTENT(-13, "File URN %s exists but is flagged as pending content upload"),
     ERR_MISSING_AUTHENTICATION_HEADER(-14, "Endpoint requires authentication"),
+    ERR_NO_MATCHING_ACTION(-15, "No matching action for field %s with value %s exists"),
+    ERR_DUPLICATE_VALUE(-16, "A matching %s already exists for the value %s"),
+    ERR_EVENT_PARAMETERS_MISMATCH_VALUE(-17, "The parameters for the event %s does not match"),
 
     ERR_EXTENSION_SECURITY_RESTRICTION(-50, "Extensions are not permitted to perform %s"),
     ERR_EXTENSION_NO_ACCESS(-51, "Caller lacked the authorization to complete the requested operation"),
@@ -103,6 +107,14 @@ public enum Result
                 return ERR_NO_SUCH_EMAIL;
             case -13:
                 return ERR_NO_FILE_CONTENT;
+            case -14:
+                return ERR_MISSING_AUTHENTICATION_HEADER;
+            case -15:
+                return ERR_NO_MATCHING_ACTION;
+            case -16:
+                return ERR_DUPLICATE_VALUE;
+            case -17:
+                return ERR_EVENT_PARAMETERS_MISMATCH_VALUE;
             case -50:
                 return ERR_EXTENSION_SECURITY_RESTRICTION;
             case -51:

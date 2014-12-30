@@ -18,7 +18,8 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -27,10 +28,10 @@
         <version>7</version>
     </parent>
 
+
     <groupId>net.smartcosmos</groupId>
     <artifactId>platform-core</artifactId>
     <version>1.2-SNAPSHOT</version>
-
     <packaging>jar</packaging>
 
     <name>Platform Core SDK</name>
@@ -127,13 +128,18 @@
             <version>17.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.1.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.1.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+	</dependencies>
 
     <profiles>
         <profile>
@@ -162,9 +168,21 @@
                                     </packages>
                                 </group>
                                 <group>
+                                    <title>SMART COSMOS Profiles</title>
+                                    <packages>
+                                        net.smartcosmos.profiles.model*:net.smartcosmos.profiles.pojo:net.smartcosmos.profiles.pojo*
+                                    </packages>
+                                </group>
+                                <group>
                                     <title>SMART COSMOS Objects</title>
                                     <packages>
                                         net.smartcosmos.objects.model*:net.smartcosmos.objects.pojo*
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>SMART COSMOS Flows</title>
+                                    <packages>
+                                        net.smartcosmos.flows.model*:net.smartcosmos.flows.pojo*
                                     </packages>
                                 </group>
                                 <group>
