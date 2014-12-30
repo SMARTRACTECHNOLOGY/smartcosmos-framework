@@ -1,4 +1,4 @@
-package net.smartcosmos.am.model.context;
+package net.smartcosmos.am.builder;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -20,23 +20,33 @@ package net.smartcosmos.am.model.context;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import net.smartcosmos.am.pojo.context.Group;
-import net.smartcosmos.model.base.INamedObject;
+import net.smartcosmos.am.model.context.IRole;
+import net.smartcosmos.am.pojo.context.Role;
+import net.smartcosmos.builder.AbstractNamedObjectBuilder;
 
-
-@JsonDeserialize(as = Group.class)
-@JsonSerialize(as = Group.class)
-public interface IGroup extends
-        INamedObject<IGroup>
+public class RoleBuilder extends AbstractNamedObjectBuilder<IRole, RoleBuilder>
 {
-    String getName();
 
-    void setName(String name);
+    public RoleBuilder()
+    {
+        super(new Role());
+    }
 
-    String getDescription();
+    public RoleBuilder setName(String name)
+    {
+        instance.setName(name);
+        return this;
+    }
 
-    void setDescription(String description);
+    public RoleBuilder setDescription(String description)
+    {
+        instance.setDescription(description);
+        return this;
+    }
 
+    public RoleBuilder setUrn(String urn)
+    {
+        instance.setUrn(urn);
+        return this;
+    }
 }
