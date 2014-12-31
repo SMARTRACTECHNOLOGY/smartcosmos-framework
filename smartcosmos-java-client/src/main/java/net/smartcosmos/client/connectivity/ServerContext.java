@@ -26,23 +26,28 @@ import org.slf4j.LoggerFactory;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Defines a SMART COSMOS server context consisting of an email address, credentials, and a server location, where the
- * credentials are optional in those situations where a public (non-protected) endpoint is being invoked. Examples of
- * public (non-protected) endpoints include the use of
- * {@link net.smartcosmos.client.common.registration.IRegistrationClient}
- * and the encode/decode operations defined by {@link net.smartcosmos.client.common.metadata.IMetadataClient}.
+ * Defines a SMART COSMOS server context consisting of an email address, credentials, server location, and the
+ * context path, where the credentials are optional in those situations where a public (non-protected) endpoint is
+ * being invoked. Examples of public (non-protected) endpoints include the use of
+ * {@link net.smartcosmos.client.common.registration.IRegistrationClient} and the encode/decode operations defined by
+ * {@link net.smartcosmos.client.common.metadata.IMetadataClient}.
  * <p/>
  * The default {@link #getServerUrl()} is <b>https://objects.smartcosmos.net</b>
+ * The default {@link #getContextPath()} is <b>/rest</b>
  */
 public final class ServerContext
 {
     static final Logger LOGGER = LoggerFactory.getLogger(ServerContext.class);
 
-    private String server;
+    public static final String DEFAULT_CONTEXT_PATH = "/rest";
 
-    private String emailAddress;
+    private final String server;
 
-    private String credentials;
+    private final String emailAddress;
+
+    private final String credentials;
+
+    private final String contextPath;
 
     /**
      * Defines a SMART COSMOS server context using the specified server location with no
@@ -56,7 +61,8 @@ public final class ServerContext
     }
 
     /**
-     * Defines a SMART COSMOS server context using a specific SMART COSMOS server location.
+     * Defines a SMART COSMOS server context using a specific SMART COSMOS server location and the default context
+     * path of /rest.
      *
      * @param emailAddress Email address
      * @param credentials  Credentials
@@ -64,8 +70,23 @@ public final class ServerContext
      */
     public ServerContext(String emailAddress, String credentials, String server)
     {
+        this(emailAddress, credentials, server, DEFAULT_CONTEXT_PATH);
+    }
+
+    /**
+     * Defines a SMART COSMOS server context using a specific SMART COSMOS server location and a specific context
+     * path prepended in front of the well-known client endpoints.
+     *
+     * @param emailAddress Email address
+     * @param credentials  Credentials
+     * @param server       Server location, e.g. https://objects.example.com
+     * @param contextPath  Prepended context path in front of all client endpoints, e.g. /rest
+     */
+    public ServerContext(String emailAddress, String credentials, String server, String contextPath)
+    {
         checkNotNull(server, "parameter 'server' must be a valid server location, e.g. https://objects.example.com");
-        LOGGER.info("Server Endpoint: " + this.server);
+        checkNotNull(contextPath, "parameter 'contextPath' must be a valid context path, e.g. /rest");
+
 
         if (emailAddress == null && credentials == null)
         {
@@ -78,6 +99,10 @@ public final class ServerContext
         this.emailAddress = emailAddress;
         this.credentials = credentials;
         this.server = server;
+        this.contextPath = contextPath;
+
+        LOGGER.info("Server Endpoint: " + this.server);
+        LOGGER.info("Context Path Prefix: " + this.contextPath);
     }
 
     public String getEmailAddress()
@@ -93,5 +118,10 @@ public final class ServerContext
     public String getServerUrl()
     {
         return server;
+    }
+
+    public String getContextPath()
+    {
+        return contextPath;
     }
 }

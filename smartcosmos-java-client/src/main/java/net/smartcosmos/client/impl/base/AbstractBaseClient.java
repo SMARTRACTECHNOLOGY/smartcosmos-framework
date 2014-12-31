@@ -24,9 +24,13 @@ import net.smartcosmos.client.connectivity.ServerContext;
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractBaseClient
 {
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractBaseClient.class);
+
     protected final ServerContext context;
 
     protected AbstractBaseClient(ServerContext context)
@@ -36,7 +40,10 @@ public abstract class AbstractBaseClient
 
     protected ClientResource createClient(String path)
     {
-        ClientResource service = new ClientResource(assembleEndpoint(path));
+        String assembledPath = assembleEndpoint(path);
+        LOG.debug("Endpoint URL: " + assembledPath);
+
+        ClientResource service = new ClientResource(assembledPath);
 
         if (context.getEmailAddress() != null)
         {
@@ -54,6 +61,9 @@ public abstract class AbstractBaseClient
 
     private String assembleEndpoint(String path)
     {
-        return context.getServerUrl().concat(path);
+        return context
+                .getServerUrl()
+                .concat(context.getContextPath())
+                .concat(path);
     }
 }
