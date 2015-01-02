@@ -20,8 +20,11 @@ package net.smartcosmos.am.model.context;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import net.smartcosmos.am.pojo.context.Role;
 import net.smartcosmos.model.base.INamedObject;
 
@@ -29,7 +32,7 @@ import net.smartcosmos.model.base.INamedObject;
 @JsonDeserialize(as = Role.class)
 @JsonSerialize(as = Role.class)
 public interface IRole extends
-        INamedObject<IRole>
+        INamedObject<IRole>, Serializable
 {
     String getName();
 
