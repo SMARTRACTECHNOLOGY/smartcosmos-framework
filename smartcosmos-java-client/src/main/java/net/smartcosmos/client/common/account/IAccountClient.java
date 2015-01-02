@@ -63,5 +63,5 @@ public interface IAccountClient
      * @param emailAddress email address of the user account to initiate a password reset workflow
      * @throws ServiceException
      */
-    void resetPassword(String emailAddress) throws ServiceException;
+    void sendPasswordResetEmail(String emailAddress) throws ServiceException;
 }

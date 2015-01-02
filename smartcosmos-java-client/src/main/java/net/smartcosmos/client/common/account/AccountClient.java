@@ -20,11 +20,11 @@ package net.smartcosmos.client.common.account;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import net.smartcosmos.Field;
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractFindableBaseClient;
 import net.smartcosmos.client.impl.endpoint.AccountEndpoints;
-import net.smartcosmos.Field;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
@@ -33,9 +33,11 @@ import net.smartcosmos.util.json.JsonUtil;
 import net.smartcosmos.util.json.ViewType;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.data.MediaType;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
+import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,9 +130,30 @@ class AccountClient extends AbstractFindableBaseClient<IAccount> implements IAcc
     }
 
     @Override
-    public void resetPassword(String emailAddress) throws ServiceException
+    public void sendPasswordResetEmail(String emailAddress) throws ServiceException
     {
-        // TODO: reset password routine
+        ClientResource service = createClient(AccountEndpoints.resetMyPassword());
+        try
+        {
+            Representation result = service.post(new StringRepresentation(emailAddress, MediaType.TEXT_PLAIN), MediaType.APPLICATION_JSON);
+            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
+            JSONObject jsonResult = jsonRepresentation.getJsonObject();
+            ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+
+            if (!service.getStatus().equals(Status.SUCCESS_OK))
+            {
+                LOGGER.error("Unexpected HTTP status code returned: " + service.getStatus().getCode());
+                throw new ServiceException(responseEntity);
+            } else
+            {
+                LOGGER.debug(responseEntity.getMessage());
+            }
+
+        } catch (JSONException | IOException e)
+        {
+            LOGGER.error("Unexpected exception", e);
+            throw new ServiceException(e);
+        }
     }
 
     @Override
