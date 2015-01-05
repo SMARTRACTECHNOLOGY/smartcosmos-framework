@@ -151,5 +151,6 @@ public enum EventType
     BatchTransmissionRequest,
     BatchTransmissionReceipt,
     BatchTransmissionQueueSuccess,
-    BatchTransmissionQueueError
+    BatchTransmissionQueueError,
+    BatchStatusReportAccessed
 }
