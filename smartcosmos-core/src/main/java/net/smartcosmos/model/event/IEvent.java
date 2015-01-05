@@ -48,4 +48,8 @@ public interface IEvent extends IDomainResource<IEvent>
     String getSource();
 
     void setSource(String source);
+
+    boolean suppressBroadcast();
+
+    void setSuppressBroadcast(boolean flag);
 }
