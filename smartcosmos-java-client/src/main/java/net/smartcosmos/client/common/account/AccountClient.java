@@ -135,7 +135,8 @@ class AccountClient extends AbstractFindableBaseClient<IAccount> implements IAcc
         ClientResource service = createClient(AccountEndpoints.resetMyPassword());
         try
         {
-            Representation result = service.post(new StringRepresentation(emailAddress, MediaType.TEXT_PLAIN), MediaType.APPLICATION_JSON);
+            Representation result = service
+                    .post(new StringRepresentation(emailAddress, MediaType.TEXT_PLAIN), MediaType.APPLICATION_JSON);
             JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
             JSONObject jsonResult = jsonRepresentation.getJsonObject();
             ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
