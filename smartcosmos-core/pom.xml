@@ -191,12 +191,6 @@
                                         net.smartcosmos.model.extension:net.smartcosmos.pojo.extension
                                     </packages>
                                 </group>
-                                <group>
-                                    <title>Catalogs (EXPERIMENTAL)</title>
-                                    <packages>
-                                        net.smartcosmos.catalog*
-                                    </packages>
-                                </group>
                             </groups>
                             <show>protected</show>
                             <nohelp>true</nohelp>
