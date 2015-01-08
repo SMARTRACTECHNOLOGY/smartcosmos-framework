@@ -75,7 +75,6 @@
         <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java</url>
         <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</connection>
         <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</developerConnection>
-        <tag>platform-core-1.0</tag>
     </scm>
 
     <distributionManagement>
