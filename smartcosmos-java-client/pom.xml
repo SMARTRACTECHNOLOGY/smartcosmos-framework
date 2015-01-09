@@ -11,7 +11,7 @@
 
     <groupId>net.smartcosmos</groupId>
     <artifactId>java-client</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <packaging>jar</packaging>
 
@@ -64,6 +64,7 @@
         <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-client-java</url>
         <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-client-java.git</connection>
         <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-client-java.git</developerConnection>
+    <tag>java-client-1.0</tag>
   </scm>
 
     <distributionManagement>
