@@ -35,7 +35,7 @@ import org.json.JSONObject;
  *
  * @param <T> One of the deletable SMART COSMOS contextual entities.
  * @see net.smartcosmos.objects.model.context.IFile
- * @see net.smartcosmos.platform.api.extension.IExtension
+ * @see net.smartcosmos.model.extension.IExtension
  * @see net.smartcosmos.model.context.IMetadata
  * @see net.smartcosmos.objects.model.context.IRelationship
  * @see net.smartcosmos.objects.model.context.ITag

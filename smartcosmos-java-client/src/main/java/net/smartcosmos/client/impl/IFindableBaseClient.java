@@ -27,10 +27,10 @@ import net.smartcosmos.util.json.ViewType;
  * Locates a single, specific SMART COSMOS entity by its system-assigned URN.
  *
  * @param <T> One of the SMART COSMOS contextual entities.
- * @see net.smartcosmos.platform.api.extension.IExtension
+ * @see net.smartcosmos.model.extension.IExtension
  * @see net.smartcosmos.objects.model.context.IDevice
  * @see net.smartcosmos.objects.model.context.IFile
- * @see net.smartcosmos.platform.api.geo.IGeospatialEntry
+ * @see net.smartcosmos.model.geo.IGeospatialEntry
  * @see net.smartcosmos.model.context.IMetadata
  * @see net.smartcosmos.objects.model.context.IRelationship
  * @see net.smartcosmos.objects.model.context.ITag
