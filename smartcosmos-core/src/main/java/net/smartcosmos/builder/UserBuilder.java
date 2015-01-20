@@ -77,4 +77,10 @@ public final class UserBuilder extends AbstractMonikerBuilder< IUser, UserBuilde
         instance.setUrn(urn);
         return this;
     }
+    
+    public UserBuilder setEnable(Boolean enable)
+    {
+        instance.setEnable(enable);
+        return this;
+    }
 }
