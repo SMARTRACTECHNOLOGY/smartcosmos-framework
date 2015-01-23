@@ -152,5 +152,17 @@ public enum EventType
     BatchTransmissionReceipt,
     BatchTransmissionQueueSuccess,
     BatchTransmissionQueueError,
-    BatchStatusReportAccessed
+    BatchStatusReportAccessed,
+
+    LibraryElementDefined,
+    LibraryElementUpdated,
+    LibraryElementAccessed,
+    LibraryElementDeleted,
+    LibraryElementParentAccessed,
+    LibraryElementChildrenAccessed,
+    LibraryAttachmentDefined,
+    LibraryAttachmentDetached,
+    LibraryAttachmentAccessed
+
+
 }

@@ -185,6 +185,10 @@ public final class Field
 
     public static final String PAGE_ENTRY_FIELD = "pageEntry";
 
+    public static final String LIBRARY_ELEMENT_TYPE_FIELD = "libraryElementType";
+
+    public static final String LIBRARY_ELEMENT_PARENT_FIELD = "parent";
+
     //
     // Batch Transmission Fields
     //
