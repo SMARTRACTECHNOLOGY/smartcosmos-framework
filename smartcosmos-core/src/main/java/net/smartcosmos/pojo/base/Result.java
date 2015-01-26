@@ -53,6 +53,7 @@ public enum Result
     // "URN urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e is of library element type library, and has no parent"
     // "Library element urn:uuid:9478f2b8-34d1-4583-99fe-61f556ba2b4a is of type PageEntry, and can have no children"
     // "Library element urn:uuid:da84a82d-73fe-4ce0-8f66-... is not of type PageEntry, and can have no attachments"
+    ERR_LIBRARY_PARENT_NOT_FOUND(-70, "There is no library element matching the specified parent."),
     ERR_LIBRARY_NO_SUCH_ELEMENT_TYPE(-70, "There is no library element type called %s"),
     ERR_LIBRARY_WRONG_PARENT_TYPE(-71, "Library element type %s cannot be the parent to a library element of type %s");
 
