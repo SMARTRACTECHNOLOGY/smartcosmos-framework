@@ -20,9 +20,9 @@
 
 package net.smartcosmos.pojo.context;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.smartcosmos.am.model.context.IRole;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
@@ -30,10 +30,9 @@ import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@JsonFilter("userFilter")
 public class User extends DomainResource< IUser > implements IUser
 {
     @JsonView(JsonGenerationView.Full.class)
