@@ -54,8 +54,10 @@ public enum Result
     // "Library element urn:uuid:9478f2b8-34d1-4583-99fe-61f556ba2b4a is of type PageEntry, and can have no children"
     // "Library element urn:uuid:da84a82d-73fe-4ce0-8f66-... is not of type PageEntry, and can have no attachments"
     ERR_LIBRARY_PARENT_NOT_FOUND(-70, "There is no library element matching the specified parent."),
-    ERR_LIBRARY_NO_SUCH_ELEMENT_TYPE(-70, "There is no library element type called %s"),
-    ERR_LIBRARY_WRONG_PARENT_TYPE(-71, "Library element type %s cannot be the parent to a library element of type %s");
+    ERR_LIBRARY_NO_SUCH_ELEMENT_TYPE(-71, "There is no library element type called %s"),
+    ERR_LIBRARY_WRONG_PARENT_TYPE(-72, "Library element type %s cannot be the parent to a library element of type %s"),
+    ERR_LIBRARY_DUPLICATE_NAME_FOR_PARENT(-73, "Parent element %s already has a child named %s"),
+    ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_CHILDREN(-73, "Library element %s has children and cannot be deleted");
 
     private final String formattedMessage;
 
