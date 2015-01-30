@@ -56,6 +56,7 @@ public enum EntityReferenceType
     Georectification,
 
     LibraryElement
+
 //    Library,
 //    Shelf,
 //    Book,

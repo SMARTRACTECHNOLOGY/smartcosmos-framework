@@ -134,6 +134,7 @@ public final class Field
 
     public static final String NEW_PASSWORD_FIELD = "newPassword";
 
+    public static final String RETURN_VALUE_TYPE_FIELD = "returnValueType";
     //
     // Timeline Specific Fields
     //
