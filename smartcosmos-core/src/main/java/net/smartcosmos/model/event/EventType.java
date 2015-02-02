@@ -158,11 +158,6 @@ public enum EventType
     LibraryElementUpdated,
     LibraryElementAccessed,
     LibraryElementDeleted,
-    LibraryElementChildrenAccessed,
-    LibraryLinkDefined,
-    LibraryLinkUpdated,
-    LibraryLinkAccessed,
-    LibraryLinkDeleted
-
+    LibraryElementChildrenAccessed
 
 }
