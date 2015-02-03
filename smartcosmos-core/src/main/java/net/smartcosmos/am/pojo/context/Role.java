@@ -24,15 +24,18 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import net.smartcosmos.am.model.context.IRole;
 import net.smartcosmos.pojo.base.NamedObject;
+import net.smartcosmos.util.json.JsonGenerationView;
 
 @JsonInclude(value = Include.NON_EMPTY)
 @JsonIgnoreProperties(value = {"uniqueId", "lastModifiedTimestamp", "activeFlag", "active" })
 public class Role extends NamedObject< IRole > implements IRole, Serializable
 { 
+    @JsonView(JsonGenerationView.Full.class)
     private String name;
     private String description;
     private static final long serialVersionUID = 6049307445281143467L;
