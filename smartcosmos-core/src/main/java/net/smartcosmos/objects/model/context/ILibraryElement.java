@@ -33,7 +33,9 @@ import net.smartcosmos.model.base.ITypedObject;
  * can be assigned.
  * <p/>
  * The library element type is distinct from other {@link net.smartcosmos.model.base.INamedObject}
- * types in that the Type field is always set to "LibraryElement", and cannot be changed.
+ * types in that the Type field is always set to "LibraryElement", and cannot be changed. The
+ * field "LibraryElementType" is specific to LibraryElements, and is set to one of the values
+ * specified in the LibraryHierarchy section of objects.yml.
  *
  */
 public interface ILibraryElement extends IAccountDomainResource<ILibraryElement>, INamedObject<ILibraryElement>,
