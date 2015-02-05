@@ -25,16 +25,15 @@ import net.smartcosmos.objects.model.context.ILibraryElement;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class LibraryElementImpl extends AccountTypedNamedObject<ILibraryElement> implements ILibraryElement
+import static net.smartcosmos.Field.LIBRARY_ELEMENT_TYPE_NAME;
+
+public class LibraryElement extends AccountTypedNamedObject<ILibraryElement> implements ILibraryElement
 {
     @JsonView(JsonGenerationView.Minimum.class)
-    protected String libraryElementType;
+    private String libraryElementType;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected String name;
-
-    @JsonView(JsonGenerationView.Minimum.class)
-    protected String parent;
+    private String parentUrn;
 
     public String getLibraryElementType()
     {
@@ -46,39 +45,33 @@ public class LibraryElementImpl extends AccountTypedNamedObject<ILibraryElement>
         this.libraryElementType = libraryElementType;
     }
 
-    public String name()
+    @Override
+    public String getParentUrn()
     {
-        return name;
-    }
-
-    public void name(String libraryElementType)
-    {
-        this.name = name;
+        return parentUrn;
     }
 
     @Override
-    public String getParent()
+    public void setParentUrn(String parent)
     {
-        return parent;
+        this.parentUrn = parent;
     }
 
     @Override
-    public void setParent(String parent)
+    public void setType(String type)
     {
-        this.parent = parent;
+        this.type = LIBRARY_ELEMENT_TYPE_NAME;
     }
 
-    public boolean equals(LibraryElementImpl o)
+    public boolean equals(LibraryElement libraryElement)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == libraryElement) return true;
+        if (libraryElement == null || getClass() != libraryElement.getClass()) return false;
+        if (!super.equals(libraryElement)) return false;
 
-        LibraryElementImpl object = (LibraryElementImpl) o;
-
-        if (!libraryElementType.equals(object.libraryElementType)) return false;
-        if (!name.equals(object.name)) return false;
-        if (!parent.equals(object.parent)) return false;
+        if (!libraryElementType.equals(libraryElement.libraryElementType)) return false;
+        if (!name.equals(libraryElement.name)) return false;
+        if (!parentUrn.equals(libraryElement.parentUrn)) return false;
 
         return true;
     }

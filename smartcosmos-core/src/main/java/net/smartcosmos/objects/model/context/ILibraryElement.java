@@ -32,19 +32,20 @@ import net.smartcosmos.model.base.ITypedObject;
  * that a human-readable {@link net.smartcosmos.model.base.INamedObject#getName()}
  * can be assigned.
  * <p/>
+ * The library element type is distinct from other {@link net.smartcosmos.model.base.INamedObject}
+ * types in that the Type field is always set to "LibraryElement", and cannot be changed.
+ *
  */
 public interface ILibraryElement extends IAccountDomainResource<ILibraryElement>, INamedObject<ILibraryElement>,
         ITypedObject
 {
-    String getName();
-
     void setName(String name);
 
     String getLibraryElementType();
 
     void setLibraryElementType(String libraryElementType);
 
-    String getParent();
+    String getParentUrn();
 
-    void setParent(String parent);
+    void setParentUrn(String parentUrn);
 }
