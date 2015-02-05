@@ -40,10 +40,13 @@ public interface ILibraryElement extends IAccountDomainResource<ILibraryElement>
 
     void setName(String name);
 
+    // JRW: Need to document why we have a "type" from ITypedObject and this type element - what is the difference?
+    // How do they relate?
     String getLibraryElementType();
 
     void setLibraryElementType(String libraryElementType);
 
+    // JRW: What are referencing? Is it a URN? Then it should be getParentUrn()
     String getParent();
 
     void setParent(String parent);

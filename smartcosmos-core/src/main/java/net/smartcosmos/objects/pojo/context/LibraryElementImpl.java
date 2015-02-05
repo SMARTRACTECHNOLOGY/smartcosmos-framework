@@ -25,11 +25,14 @@ import net.smartcosmos.objects.model.context.ILibraryElement;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+
+// JRW: No need for the Impl extension
 public class LibraryElementImpl extends AccountTypedNamedObject<ILibraryElement> implements ILibraryElement
 {
     @JsonView(JsonGenerationView.Minimum.class)
     protected String libraryElementType;
 
+    // JRW: Why do we need this when it exists in the base class already?
     @JsonView(JsonGenerationView.Minimum.class)
     protected String name;
 
