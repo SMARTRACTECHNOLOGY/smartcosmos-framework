@@ -3986,3 +3986,507 @@ Extension can use to fetch the actual content.
 ## Event Endpoints
 *Please contact us to discuss your needs for such endpoint(s).*
 
+
+# Group Library Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Event-Label.png "Event Endpoint")
+
+## Overview
+
+
+SMART COSMOS Objects allows you to impose a hierarchy on your stored objects
+(which includes users, devices, files, metadata, etc.) by linking them to
+library elements, and linking library elements to each other. In the example
+below (which matches the example in the initial version of the Objects
+configuration file, objects.yml, and may be everything you need), a Shelf
+can only be the child of a Library, a Book can only be the child of a Shelf,
+and so on. Library elements do not have to have parents, i.e., a Shelf can
+have Books and those Books can have Chapters and so on,without the Shelf
+having to have a parent Library. However, the Shelf can have at most one
+parent Library (a Library can of course have an arbitrary number of Shelves),
+and so on down the hierarchy. You can have as many Libraries as you want,
+and move Shelves from one to another, and similarly for the rest of the hierarchy.
+
+The highest level element in the hierarchy (Library, in this example)
+cannot have a parent. The lowest level element in the hierarchy (PageEntry,
+in this example) cannot have children. There are no restrictions on the
+number of levels in the hierarcy, but every level must have a distinct name.
+Think your hierarchy through carefully in advance of starting to use it;
+reorganizing your data from one hierarchy schema to another will in most
+cases be non-trivial and best done in collaboration with a SMARTRAC
+support engineer.
+
+The "Link Flags" element in objects.yml declares which kinds of library elements
+can have objects (again, to include users, devices, files, metadata, etc.) linked
+to them. In this example, the "normal" case holds, in which objects can only be
+linked to the lowest level of the hierarchy tree, i.e., PageEntry. If you wanted
+to allow objects to be linked also to a Shelf, you would change the second-to-last
+entry to "true", and if you wanted to allow objects to be attached to library
+elements at eny level of the tree, you would change them all to "true".
+
+A library link is implemented with the normal SMART COSMOS Relationship, and
+using the normal Relationship REST endpoints. The only additional constraint
+in play is this: if the entityReferenceType in the relationship is a LibraryElement,
+the Type field of the relationship will be set immutably to LibraryLink.
+
+Note that as with any relationship in SMART COSMOS, deleting a relationship (i.e.,
+a library link) has no effect on either the library element or the linked object.
+  
+## Library Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+----- | --------- | -------- | ---------- | ------------------- | -------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | fase | Full | Generated
+lastModifiedTimestamp | long   | true | false | Standard | Generated
+name | String | true | true | Standard | none
+moniker | String  | false | true | Full | null
+description | String  | false | true | Standard | null 
+activeFlag | Boolean  | true | true | Standard  | true
+libraryElementType | one of "Library", "Shelf", ... (see "Library Hierarchy" below) | true | false | Standard | defaultLibrary, defaultShelf... 
+parent | see "Library Hierarchy" below | false | true | Standard | null
+referenceUrn (only for PageEntry) | String | true | false | Minimum | the urn of the libraryElement itself
+relatedReferenceUrn (only for PageEntry) | String | true | false | Minimum | the urn of the thing being linked to the libraryElement
+relatedEntityReferenceType (only for PageEntry) | EntityReferenceType | true | false | Minimum | the type (Object, Device, Metadata, ...) of the thing being linked to the library element
+
+### Field Notes
+- The `libraryElementType` field defines the position of the library element in the hierarchy of library elements, and thus constrains its
+attachments to its parent and children. A (for example) shelf is not required to have a parent, and will be created without one if an already
+existing parent is not specified at creation time. In this case the shelf can later be attached to any already existing library.
+- The `parent` field defines this element's attachment in the library hierarchy. Every library element (except for libraryElementType library)
+must have a parent of the appropriate library element type, if it has a parent at all.
+- An object which is not a library element can only be attached to a Page Entry element. The relatedEntityReferenceType, RelatedReferenceUrn
+and deleteFromLibrary fields must be unset for every library element which is not a Page Entry.
+- The `name` field is required, and must be HTML-compliant (i.e., no special characters, no space characters...). Unique naming in a library hierarchy is enforced: a shelf cannot have two books with the same name, for example.
+  On the other hand, two books with the same name can be attached to two distinct shelves, not that we would recommend this.
+
+### The Default Library Hierarchy
+
+Name | Type | Parent Type | Children Type
+-----| ---- | ----------- | -------------
+Library | Library | none | Shelf
+Shelf | Shelf | Library | Book
+Book | Book | Shelf | Chapter
+Chapter | Chapter | Book | ChapterSection
+Chapter Section | ChapterSection | Chapter | Page
+Page | Page | ChapterSection | PageEntry
+Page Entry | PageEntry | Page | none (relatedEntityReferenceType and relatedReferenceUrn link to an arbitrary object)
+
+## Linking Objects to Library Elements
+
+To link an Object (including User, File, Metadata, Device, Geospatial, and so on) to a Library Element, use the Relationship
+endpoint, with the following caveats:
+
+Unless you have specified in your server configuration that a particular LibraryElementType (PageEntry, in all of the examples
+here) can accept links, attempts to link the Object to the Library Element will be rejected.
+
+When the entityReferenceType of a link is "LibraryElement", the Type field of the Relationship itself will be set immutably
+to LibraryLink.
+
+There is a detailed discussion of Library functionality in objects.yml, the server's configuration file. Please read that
+section carefully and discuss any questions with your SMARTRAC support engineer before implementing a Library hierarchy.
+
+
+## Library Management [/library]
+### Create a new library element   [PUT]
+
+The following library fields may be used to create a new record:
+
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+- `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
+- `activeFlag` is optional and may be omitted; defaults to **true**
+- `libraryElementType` is required, and must be one of "Library", "Shelf", "Book", "Chapter", "ChapterSection", "Page", or "PageEntry"
+- `parent` is optional, but when used must be the urn of an already existing library element at one level in the hierarchy higher
+   than the element being submitted (a Page when submitting a Page Entry, a Shelf when submitting a book, and so on). Note that the
+   parent field MUST BE the system-assigned URN. To de-parent a library element, set parent to "".
+- `name` is a required field.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "name": "Ford F150 Manuals 2006-2015",
+                "libraryElementType": "Shelf",
+                "parent": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+       
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : LibraryElementDefined
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: name"
+            }
+
++ Response 401
+
+### Update a Library Element [POST]
+
+The request body must include a valid `urn` field. Only those fields being updated need to 
+be included in the JSON body. For example, if you only want to update the `name` of the object, only 
+include that field in the request body. This is also the endpoint to use for reorganizing a library,
+by updating a library element's parent field.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
+                "name": "Ford F150 Manuals 2011-2015"
+            }
+            
++ Response 201 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : LibraryElementUpdated
+            
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -8,
+                "message" : "No matching record with LibraryElement of urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43 exists"
+            }   
+            
++ Response 401
+
+### Delete a specific library element by its system-assigned URN key [DELETE]
+This method will only work on library elements which have no children, or in the case of PageEntries, which have no links.
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
+                "name": "Ford F150 Manuals 2011-2015"
+            }
+            
++ Response 204 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : LibraryElementDeleted
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "No matching record with LibraryElement of urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43 exists"
+            }
+
++ Response 401
+
+## Look up a Specific Library Element by URN [/library/{urn}{?view}]
+### Look up a specific library element by its system-assigned URN key [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : LibraryElementAccessed
+            SmartCosmos-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
+                "LibraryElementType": "Shelf",
+                "name": "Ford F150 Manuals 2011-2015",
+                "parent": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "description" : null,
+                "activeFlag" : true,
+                "lastModifiedTimestamp" : 1390607277299
+            }
+
++ Response 204 
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with LibraryElement of urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43 exists"
+            }
+            
++ Response 401
+
+
+
+
+
+## Look up Library Elements with Name Pattern [/library?{nameLike,eltType,view}]
+### Look up library elements matching a name pattern, with or without LibraryElementType [GET]
+
++ Parameters
+    + nameLike (required, String, `urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43`) ... String to match against all library element names
+    + eltType (optional, String, `Library | Shelf | Book| and so on`) ... Restrict results to this library element type
+    + view (optional, String, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : LibraryElementAccessed
+            SmartCosmos-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
+                "LibraryElementType": "Shelf",
+                "name": "Ford F150 Manuals 2011-2015",
+                "parent": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "description" : null,
+                "activeFlag" : true,
+                "lastModifiedTimestamp" : 1390607277299
+            }
+
++ Response 204 
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with LibraryElement of urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43 exists"
+            }
+            
++ Response 401
+
+## Look up Specific Library Element by Name and LibraryElementType [/library/{libraryElementType}/{name}/{?view}]
+### Look up a specific library element by its name and LibraryElementType [GET]
+
++ Parameters
+    + libraryElementType (required, string, `Library | Shelf | Book | and so on`)
+    + name (required, string, `Ford F150 Manuals 2011-2015`)
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : LibraryElementAccessed
+            SmartCosmos-View : Standard
+            
+    + Body
+    
+                [
+                    {
+                        "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
+                        "LibraryElementType": "Shelf",
+                        "name": "Ford F150 Manuals 2011-2015",
+                        "parent": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                        "description" : null,
+                        "activeFlag" : true,
+                        "lastModifiedTimestamp" : 1390607277299
+                    }
+                ]
+
++ Response 204 
+
++ Response 401
+            
+## Get Default Library Element by LibraryElementType [/library/{libraryElementType}/default/{?view}]
+### Get the default library element of the specified LibraryElementType [GET]
+
++ Parameters
+    + libraryElementType (required, string, `Library | Shelf | Book | and so on`)
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : LibraryElementAccessed
+            SmartCosmos-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
+                "LibraryElementType": "ChapterSection",
+                "name": "Default ChapterSection",
+                "parent": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "description" : null,
+                "activeFlag" : true,
+                "lastModifiedTimestamp" : 1390607277299
+            }
+
++ Response 204 
+                                                                                                                                                                           
++ Response 401
+            
+## Look up Parent of a Library Element by URN [/library/parent/{urn}{?view}]
+### Look up parent of a specific library element with the book's system-assigned URN key, returning an error if element specifed by URN is of type Library [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : LibraryElementParentAccessed
+            SmartCosmos-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e",
+                "libraryType": "Library",
+                "name": "Ford Manuals",
+                "description" : null,
+                "activeFlag" : true,
+                "lastModifiedTimestamp" : 1390607277299
+            }
+
++ Response 204 
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "URN urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e is of library element type library, and has no parent"
+            }
+            
++ Response 401
+
+## Look up Children of a Specific Library Element by the Library Element's URN [/library/children/{urn}{?view}]
+### Look up children specific library element with the element's system-assigned URN key, returning an error if the library element type is PageEntry and thus by definition has no children. [GET]
+
++ Parameters
+    + urn (required, string, `urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : LibraryElementChildrenAccessed
+            SmartCosmos-View : Standard
+            
+    + Body
+     
+            [    
+                {
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                    "libraryElementType": "Shelf",
+                    "name": "Ford F150 Manuals 2011-2015",
+                    "description" : null,
+                    "activeFlag" : true,
+                    "lastModifiedTimestamp" : 1390607277299
+                },
+                {
+                    "urn": "urn:uuid:d7bfe05d-cc63-4979-b42c-6a584f473809",
+                    "libraryElementType": "Shelf",
+                    "name": "Ford F150 Manuals 2006-2010",
+                    "description" : null,
+                    "activeFlag" : true,
+                    "lastModifiedTimestamp" : 1390607277299
+                },
+                {
+                    "urn": "urn:uuid:9478f2b8-34d1-4583-99fe-61f556ba2b4a",
+                    "libraryElementType": "Shelf",
+                    "name": "Ford F150 Manuals 2001-2005",
+                    "description" : null,
+                    "activeFlag" : true,
+                    "lastModifiedTimestamp" : 1390607277299
+                }
+            ]
+        
++ Response 204 
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "Library element urn:uuid:9478f2b8-34d1-4583-99fe-61f556ba2b4a is of type PageEntry, and can have no children"
+            }
+            
++ Response 401
+
