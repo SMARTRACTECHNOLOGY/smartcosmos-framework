@@ -999,6 +999,8 @@ The following object fields may be used to create a new record:
 - `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
 - `activeFlag` is optional and may be omitted; defaults to **true**
 - `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+- `returnValueType` is optional. If it is set to "urn" the response message will contain the system URN in the message field.
+If set to anything else or unset the message field will contain the objectUrn. 
 
 #### Idempotent Behavior
 This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result 
