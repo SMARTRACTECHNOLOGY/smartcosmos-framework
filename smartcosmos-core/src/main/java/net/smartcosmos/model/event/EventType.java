@@ -169,6 +169,12 @@ public enum EventType
 
     EmailProvidersAccessed,
     EmailSent,
-    DatabaseTypesAccessed
+    DatabaseTypesAccessed,
 
+    LibraryElementDefined,
+    LibraryElementUpdated,
+    LibraryElementAccessed,
+    LibraryElementDeleted,
+    LibraryElementChildrenAccessed
+    
 }
