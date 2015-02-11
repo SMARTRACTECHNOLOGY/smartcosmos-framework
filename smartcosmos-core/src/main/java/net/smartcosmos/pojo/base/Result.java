@@ -1,3 +1,4 @@
+package net.smartcosmos.pojo.base;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -25,8 +26,6 @@
  * <p/>
  * Effectively, any {@link ResponseEntity#getCode()} value less than zero is an error condition.
  */
-package net.smartcosmos.pojo.base;
-
 public enum Result
 {
     OK(1, "%s"),
@@ -45,13 +44,21 @@ public enum Result
     ERR_NO_SUCH_EMAIL(-12, "No user associated with email address %s"),
     ERR_NO_FILE_CONTENT(-13, "File URN %s exists but is flagged as pending content upload"),
     ERR_MISSING_AUTHENTICATION_HEADER(-14, "Endpoint requires authentication"),
-    ERR_NO_MATCHING_ACTION(-15, "No matching action for field %s with value %s exists"),
-    ERR_DUPLICATE_VALUE(-16, "A matching %s already exists for the value %s"),
-    ERR_EVENT_PARAMETERS_MISMATCH_VALUE(-17, "The parameters for the event %s does not match"),
 
     ERR_EXTENSION_SECURITY_RESTRICTION(-50, "Extensions are not permitted to perform %s"),
     ERR_EXTENSION_NO_ACCESS(-51, "Caller lacked the authorization to complete the requested operation"),
-    ERR_INTERNAL(-500, "Internal Server Error");
+    ERR_INTERNAL(-500, "Internal Server Error"),
+
+    // Library-specific error messages
+    // "URN urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e is of library element type library, and has no parent"
+    // "Library element urn:uuid:9478f2b8-34d1-4583-99fe-61f556ba2b4a is of type PageEntry, and can have no children"
+    // "Library element urn:uuid:da84a82d-73fe-4ce0-8f66-... is not of type PageEntry, and can have no attachments"
+    ERR_LIBRARY_PARENT_NOT_FOUND(-70, "There is no library element matching the specified parent."),
+    ERR_LIBRARY_NO_SUCH_ELEMENT_TYPE(-71, "There is no library element type called %s"),
+    ERR_LIBRARY_WRONG_PARENT_TYPE(-72, "Library element type %s cannot be the parent to a library element of type %s"),
+    ERR_LIBRARY_DUPLICATE_NAME_FOR_PARENT(-73, "Parent element %s already has a child named %s"),
+    ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_CHILDREN(-74, "Library element %s has children and cannot be deleted"),
+    ERR_LIBRARY_CANNOT_LINK_TO_LIBRARY_ELEMENT_TYPE(-75, "Library element type %s cannot accept links");
 
     private final String formattedMessage;
 
@@ -107,14 +114,6 @@ public enum Result
                 return ERR_NO_SUCH_EMAIL;
             case -13:
                 return ERR_NO_FILE_CONTENT;
-            case -14:
-                return ERR_MISSING_AUTHENTICATION_HEADER;
-            case -15:
-                return ERR_NO_MATCHING_ACTION;
-            case -16:
-                return ERR_DUPLICATE_VALUE;
-            case -17:
-                return ERR_EVENT_PARAMETERS_MISMATCH_VALUE;
             case -50:
                 return ERR_EXTENSION_SECURITY_RESTRICTION;
             case -51:

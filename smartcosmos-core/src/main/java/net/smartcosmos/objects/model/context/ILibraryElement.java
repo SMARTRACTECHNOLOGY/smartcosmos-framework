@@ -1,4 +1,4 @@
-package net.smartcosmos.catalogs.model.context;
+package net.smartcosmos.objects.model.context;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -24,23 +24,30 @@ import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.model.base.ITypedObject;
 
-import java.util.Collection;
-
-public interface IBook extends IAccountDomainResource<IBook>, INamedObject<IBook>, ITypedObject
+/**
+ * Foundational artifact within the SMART COSMOS Objects platform used to represent
+ * nouns, e.g. people, bank accounts, vehicles, parks, buildings, etc.
+ * <p/>
+ * All objects are {@link net.smartcosmos.model.base.INamedObject} instances so
+ * that a human-readable {@link net.smartcosmos.model.base.INamedObject#getName()}
+ * can be assigned.
+ * <p/>
+ * The library element type is distinct from other {@link net.smartcosmos.model.base.INamedObject}
+ * types in that the Type field is always set to "LibraryElement", and cannot be changed. The
+ * field "LibraryElementType" is specific to LibraryElements, and is set to one of the values
+ * specified in the LibraryHierarchy section of objects.yml.
+ *
+ */
+public interface ILibraryElement extends IAccountDomainResource<ILibraryElement>, INamedObject<ILibraryElement>,
+        ITypedObject
 {
-    ILibrary getLibrary();
+    void setName(String name);
 
-    void setLibrary(ILibrary library);
+    String getLibraryElementType();
 
-    IShelf getShelf();
+    void setLibraryElementType(String libraryElementType);
 
-    void setShelf(IShelf shelf);
+    String getParentUrn();
 
-    String getBookUrn();
-
-    void setBookUrn(String bookUrn);
-
-    IBook addChapter(IChapter chapter);
-
-    Collection<IChapter> getChapters();
+    void setParentUrn(String parentUrn);
 }

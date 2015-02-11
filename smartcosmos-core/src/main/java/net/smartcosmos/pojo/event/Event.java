@@ -47,6 +47,21 @@ public class Event extends DomainResource<IEvent> implements IEvent
     @JsonView(JsonGenerationView.Minimum.class)
     protected String source;
 
+    @JsonView(JsonGenerationView.Minimum.class)
+    protected boolean suppressBroadcast;
+
+    @Override
+    public boolean suppressBroadcast()
+    {
+        return suppressBroadcast;
+    }
+
+    @Override
+    public void setSuppressBroadcast(boolean suppressBroadcast)
+    {
+        this.suppressBroadcast = suppressBroadcast;
+    }
+
     @Override
     public IUser getUser()
     {

@@ -1,10 +1,10 @@
-package net.smartcosmos.catalogs.model.context;
+package net.smartcosmos.model.batch;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
  * ===============================================================================
- * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 SMARTRAC Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,31 +20,33 @@ package net.smartcosmos.catalogs.model.context;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.base.IAccountDomainResource;
-import net.smartcosmos.model.base.INamedObject;
-
-import java.util.Collection;
-
-public interface IChapterSection extends IAccountDomainResource<IChapterSection>, INamedObject<IChapterSection>
+public interface IBatchStatusReport
 {
-    ILibrary getLibrary();
+    long getBatchProcessorStartTimestamp();
 
-    void setLibrary(ILibrary library);
+    BatchProcessorStatus getBatchProcessorStatus();
 
-    IShelf getShelf();
+    int getPercentageComplete();
 
-    void setShelf(IShelf shelf);
+    long getLastPercentageCompleteUpdateTimestamp();
 
-    IBook getBook();
+    long getBatchProcessorStopTimestamp();
 
-    void setBook(IBook book);
+    String getErrorMessage();
 
-    IChapter getChapter();
+    int getErrorCode();
 
-    void setChapter(IChapter chapter);
+    void setBatchProcessorStartTimestamp(long batchProcessorStartTimestamp);
 
-    IChapterSection addPage(IPage page);
+    void setBatchProcessorStatus(BatchProcessorStatus batchProcessorStatus);
 
-    Collection<IPage> getPages();
+    void setPercentageComplete(int percentageComplete);
 
+    void setLastPercentageCompleteUpdateTimestamp(long lastPercentageCompleteUpdateTimestamp);
+
+    void setBatchProcessorStopTimestamp(long batchProcessorStopTimestamp);
+
+    void setErrorMessage(String errorMessage);
+
+    void setErrorCode(int errorCode);
 }

@@ -17,17 +17,15 @@
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-
 package net.smartcosmos.pojo.context;
-
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class User extends DomainResource< IUser > implements IUser
 {
@@ -42,9 +40,6 @@ public class User extends DomainResource< IUser > implements IUser
     private String givenName;
     @JsonView(JsonGenerationView.Full.class)
     private String surname;
-    @JsonView(JsonGenerationView.Full.class)
-    private Boolean enable;
-
     @Override
     public String getEmailAddress()
     {
@@ -120,18 +115,6 @@ public class User extends DomainResource< IUser > implements IUser
         this.surname = target.getSurname();
 
         this.roleType = target.getRoleType();
-    }
-
-    @Override
-    public void setEnable(Boolean enable)
-    {
-        this.enable = enable;
-    }
-
-    @Override
-    public Boolean isEnable()
-    {
-        return enable;
     }
 
     @Override

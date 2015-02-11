@@ -19,7 +19,6 @@
  */
 
 package net.smartcosmos.model.context;
-
 import net.smartcosmos.model.base.IAccountDomainResource;
 
 /**
@@ -49,9 +48,4 @@ public interface IUser extends IAccountDomainResource<IUser>
     void setRoleType(RoleType role);
 
     void copy(IUser user);
-
-    void setEnable(Boolean enable);
-
-    Boolean isEnable();
-
 }

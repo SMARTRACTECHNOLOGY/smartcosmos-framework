@@ -152,6 +152,7 @@ public enum EventType
     BatchTransmissionReceipt,
     BatchTransmissionQueueSuccess,
     BatchTransmissionQueueError,
+    BatchStatusReportAccessed,
 
     BusinessRuleDefined,
     BusinessRuleUpdated,
