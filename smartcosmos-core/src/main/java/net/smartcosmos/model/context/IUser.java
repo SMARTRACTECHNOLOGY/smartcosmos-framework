@@ -20,9 +20,6 @@
 
 package net.smartcosmos.model.context;
 
-import java.util.List;
-
-import net.smartcosmos.am.model.context.IRole;
 import net.smartcosmos.model.base.IAccountDomainResource;
 
 /**
@@ -48,10 +45,6 @@ public interface IUser extends IAccountDomainResource<IUser>
     void setEmailAddress(String emailAddress);
 
     RoleType getRoleType();
-    
-    List<IRole> getRoles();
-    
-    void setRoles(List<IRole> roles);
 
     void setRoleType(RoleType role);
 

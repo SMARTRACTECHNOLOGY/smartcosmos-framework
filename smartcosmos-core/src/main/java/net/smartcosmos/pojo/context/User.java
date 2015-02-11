@@ -20,10 +20,6 @@
 
 package net.smartcosmos.pojo.context;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.smartcosmos.am.model.context.IRole;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
@@ -40,9 +36,6 @@ public class User extends DomainResource< IUser > implements IUser
     protected IAccount account;
     @JsonView(JsonGenerationView.Minimum.class)
     protected RoleType roleType;
-    @JsonView(JsonGenerationView.Minimum.class)
-    @JsonDeserialize(as = List.class)
-    protected List< IRole > roles = new ArrayList<IRole>();
     @JsonView(JsonGenerationView.Minimum.class)
     private String emailAddress;
     @JsonView(JsonGenerationView.Full.class)
@@ -171,15 +164,4 @@ public class User extends DomainResource< IUser > implements IUser
         return result;
     }
 
-    @Override
-    public List<IRole> getRoles()
-    {
-        return this.roles;
-    }
-
-    @Override
-    public void setRoles(List<IRole> roles) 
-    {
-        this.roles = roles;
-    }
 }
