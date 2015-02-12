@@ -88,7 +88,7 @@ public class LogisticServiceDemo
 
     private static final String MIME_TYPE = "image/jpg";
 
-    private static final String SERVER_URL = "http://localhost:8080";
+    private static final String SERVER_URL = "http://localhost:8080/rest";
 
     private final String realm;
 
