@@ -210,6 +210,29 @@ public final class Field
 
     public static final String CONFIG_APP_INSTANCE_NAME = "configAppInstanceName";
 
+    //
+    // Reporting
+    //
+    public static final String STATS = "stats";
+
+    public static final String STATS_RELATIONSHIPS = "relationships";
+
+    public static final String STATS_ADDRESSES = "addresses";
+
+    public static final String STATS_FILES = "files";
+
+    public static final String STATS_TIMELINES = "timelines";
+
+    public static final String STATS_GEOSPATIAL = "geospatial";
+
+    public static final String STATS_METADATA = "metadata";
+
+    public static final String STATS_TAGS = "tags";
+
+    public static final String STATS_INTERACTIONS = "interactions";
+
+    public static final String STATS_LIBRARIES = "libraries";
+
     private Field()
     {
     }
