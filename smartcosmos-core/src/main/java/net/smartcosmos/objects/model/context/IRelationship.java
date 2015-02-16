@@ -42,4 +42,6 @@ public interface IRelationship extends IAccountDomainResource<IRelationship>, IR
     EntityReferenceType getRelatedEntityReferenceType();
 
     void setRelatedEntityReferenceType(EntityReferenceType entityReferenceType);
+
+    boolean isReciprocal();
 }

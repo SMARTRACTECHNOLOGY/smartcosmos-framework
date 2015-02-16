@@ -134,6 +134,8 @@ public final class Field
 
     public static final String NEW_PASSWORD_FIELD = "newPassword";
 
+    public static final String RECIPROCAL_RELATIONSHIP = "reciprocal";
+
     //
     // Timeline Specific Fields
     //
@@ -232,6 +234,7 @@ public final class Field
     public static final String STATS_INTERACTIONS = "interactions";
 
     public static final String STATS_LIBRARIES = "libraries";
+
 
     private Field()
     {

@@ -38,6 +38,9 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
     @JsonView(JsonGenerationView.Minimum.class)
     protected String type;
 
+    @JsonView(JsonGenerationView.Full.class)
+    protected boolean reciprocal = false;
+
     @Override
     public String getType()
     {
@@ -75,6 +78,11 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
         this.relatedEntityReferenceType = entityReferenceType;
     }
 
+    public boolean isReciprocal()
+    {
+        return reciprocal;
+    }
+
     @Override
     public boolean equals(Object o)
     {
@@ -86,6 +94,7 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
 
         if (relatedEntityReferenceType != that.relatedEntityReferenceType) return false;
         if (!relatedReferenceUrn.equals(that.relatedReferenceUrn)) return false;
+        if (reciprocal != that.reciprocal) return false;
         if (!type.equals(that.type)) return false;
 
         return true;
@@ -98,6 +107,7 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
         result = 31 * result + relatedEntityReferenceType.hashCode();
         result = 31 * result + relatedReferenceUrn.hashCode();
         result = 31 * result + type.hashCode();
+        result = 31 * result + Boolean.valueOf(reciprocal).hashCode();
         return result;
     }
 }
