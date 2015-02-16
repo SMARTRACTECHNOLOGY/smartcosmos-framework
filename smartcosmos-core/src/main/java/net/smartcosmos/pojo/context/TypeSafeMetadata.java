@@ -189,6 +189,12 @@ public class TypeSafeMetadata<T> implements IMetadata
     }
 
     @Override
+    public String getDecodedValue()
+    {
+        return metadataObject.getDecodedValue();
+    }
+
+    @Override
     public String getMoniker()
     {
         return metadataObject.getMoniker();
