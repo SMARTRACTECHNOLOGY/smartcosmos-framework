@@ -21,37 +21,57 @@ package net.smartcosmos.objects.pojo.context;
  */
 
 import com.fasterxml.jackson.annotation.JsonView;
-import net.smartcosmos.objects.model.context.IObject;
+import net.smartcosmos.objects.model.context.ILibraryElement;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class ObjectImpl extends AccountTypedNamedObject<IObject> implements IObject
+import static net.smartcosmos.Field.LIBRARY_ELEMENT_TYPE_NAME;
+
+public class LibraryElement extends AccountTypedNamedObject<ILibraryElement> implements ILibraryElement
 {
     @JsonView(JsonGenerationView.Minimum.class)
-    protected String objectUrn;
+    private String libraryElementType;
 
-    @Override
-    public String getObjectUrn()
+    @JsonView(JsonGenerationView.Minimum.class)
+    private String parentUrn;
+
+    public String getLibraryElementType()
     {
-        return objectUrn;
+        return libraryElementType;
+    }
+
+    public void setLibraryElementType(String libraryElementType)
+    {
+        this.libraryElementType = libraryElementType;
     }
 
     @Override
-    public void setObjectUrn(String objectUrn)
+    public String getParentUrn()
     {
-        this.objectUrn = objectUrn;
+        return parentUrn;
     }
 
     @Override
-    public boolean equals(Object o)
+    public void setParentUrn(String parent)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        this.parentUrn = parent;
+    }
 
-        ObjectImpl object = (ObjectImpl) o;
+    @Override
+    public void setType(String type)
+    {
+        this.type = LIBRARY_ELEMENT_TYPE_NAME;
+    }
 
-        if (!objectUrn.equals(object.objectUrn)) return false;
+    public boolean equals(LibraryElement libraryElement)
+    {
+        if (this == libraryElement) return true;
+        if (libraryElement == null || getClass() != libraryElement.getClass()) return false;
+        if (!super.equals(libraryElement)) return false;
+
+        if (!libraryElementType.equals(libraryElement.libraryElementType)) return false;
+        if (!name.equals(libraryElement.name)) return false;
+        if (!parentUrn.equals(libraryElement.parentUrn)) return false;
 
         return true;
     }
@@ -60,7 +80,7 @@ public class ObjectImpl extends AccountTypedNamedObject<IObject> implements IObj
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + objectUrn.hashCode();
+        result = 31 * result + name.hashCode() + libraryElementType.hashCode() + urn.hashCode();
         return result;
     }
 }

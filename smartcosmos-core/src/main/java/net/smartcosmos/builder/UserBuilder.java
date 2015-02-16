@@ -1,10 +1,8 @@
-package net.smartcosmos.builder;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
  * ===============================================================================
- * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 SMARTRAC Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +18,9 @@ package net.smartcosmos.builder;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+
+package net.smartcosmos.builder;
+
 import com.google.common.base.Preconditions;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
@@ -33,7 +34,7 @@ import net.smartcosmos.pojo.context.User;
  * <li>{@link net.smartcosmos.Field#EMAIL_ADDRESS_FIELD}</li>
  * </ul>
  */
-public final class UserBuilder extends AbstractMonikerBuilder<IUser, UserBuilder>
+public final class UserBuilder extends AbstractMonikerBuilder< IUser, UserBuilder >
 {
     public UserBuilder(String emailAddress)
     {
@@ -61,4 +62,11 @@ public final class UserBuilder extends AbstractMonikerBuilder<IUser, UserBuilder
         instance.setRoleType(roleType);
         return this;
     }
+
+    public UserBuilder setUrn(String urn)
+    {
+        instance.setUrn(urn);
+        return this;
+    }
+    
 }
