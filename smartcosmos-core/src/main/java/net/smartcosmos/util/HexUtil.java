@@ -4,7 +4,7 @@ package net.smartcosmos.util;
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
  * ===============================================================================
- * Copyright (C) 2013-2015 SMARTRAC Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 SMARTRAC Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
