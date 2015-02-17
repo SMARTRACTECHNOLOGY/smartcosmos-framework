@@ -307,7 +307,7 @@ it is strongly recommended that you register using a unique, custom realm. This 
 email, e.g. you@yahoo.com, even though a realm like yahoo.com is prohibited. If you are an Enterprise, it is strongly 
 recommended you omit the realm, which will automatically register your email address domain as your realm.
 
-## Realm Availability [/registration/realm/{realm}]
+## Realm Availability [/rest/registration/realm/{realm}]
 ### Check to see if the named realm is available for registration [GET]
 
 + Parameters
@@ -329,7 +329,7 @@ recommended you omit the realm, which will automatically register your email add
                 "message" : "Invalid realm"
             }
 
-## Account Registration [/registration/register]
+## Account Registration [/rest/registration/register]
 ### Register for a new SMART COSMOS account [POST]
 
 + Request (application/json)
@@ -380,7 +380,7 @@ activeFlag | Boolean  | true | false | Standard  |
 ## Password Self-Service
 The platform offers two endpoints for password self-service, supporting both password change and password reset.
 
-## Account Details [/account{?view}]
+## Account Details [/rest/account{?view}]
 ### Lookup my account details [GET]
 
 + Parameters
@@ -411,7 +411,7 @@ The platform offers two endpoints for password self-service, supporting both pas
 
 + Response 401
 
-## Change Your Password [/account/password/change]
+## Change Your Password [/rest/account/password/change]
 ### Change the authenticated user's password, presuming they know their existing password to change to a new password. [POST]
 
 + Request (application/json)
@@ -450,7 +450,7 @@ The platform offers two endpoints for password self-service, supporting both pas
 
 + Response 401
 
-## Reset Lost Password [/account/password/reset]
+## Reset Lost Password [/rest/account/password/reset]
 ### Trigger a password reset workflow via email for the specified Account associated with the indicated email address. [POST]
 
 + Request (text/plain)
@@ -526,7 +526,7 @@ roleType | RoleType  | true  | true | Minimum | User
 - The `roleType` field is used as a security filter that may restrict the user from certain sensitive operations
 *in future API versions*. The only supported values at this time are *Administrator* and *User*.
 
-## User Management [/users]
+## User Management [/rest/users]
 ### Create a new user associated with the specified email address   [PUT]
 
 The following user fields may be used to create a new record:
@@ -628,7 +628,7 @@ include that field in the request body.
 
 + Response 401
 
-## Lookup Specific User by URN [/users/{urn}{?view}]
+## Lookup Specific User by URN [/rest/users/{urn}{?view}]
 ### Lookup a specific user by its system-assigned URN key [GET]
 
 + Parameters
@@ -661,7 +661,7 @@ include that field in the request body.
 + Response 204
 
 
-## Lookup Specific User by Email Address [/users/user/{emailAddress}{?view}]
+## Lookup Specific User by Email Address [/rest/users/user/{emailAddress}{?view}]
 ### Lookup a specific user by their email address [GET]
 
 + Parameters
@@ -690,7 +690,7 @@ include that field in the request body.
                 "roleType" : "User"
             }
 
-## Change or Reset User Password [/users/user]
+## Change or Reset User Password [/rest/users/user]
 ### Initiate a reset password workflow or specifically define the user's password [POST]
 
 The request body must include a valid `emailAddress` field. If the body only includes an `emailAddress` then
@@ -751,7 +751,7 @@ identical values is explicitly _not_ supported.
 - The `type` field is available to create an ontology or high level categories that can be used to group related devices. 
 The platform makes no inferences about this case-sensitive field.
 
-## Device Definitions [/devices]
+## Device Definitions [/rest/devices]
 ### Create a new device associated with an arbitrary identification value [PUT]
 
 The following device attributes are used to create a new record:
@@ -854,7 +854,7 @@ request body.
                 "message" : "JSON is missing a required field: identification"
             }
             
-## Lookup Specific Device by URN [/devices/{urn}{?view}]
+## Lookup Specific Device by URN [/rest/devices/{urn}{?view}]
 ### Lookup a specific device by its system-assigned URN key [GET]
 
 + Parameters
@@ -888,7 +888,7 @@ request body.
 
 + Response 204 
  
-## Lookup Specific Device by Identification [/devices/device/{identification}{?view}]
+## Lookup Specific Device by Identification [/rest/devices/device/{identification}{?view}]
 ### Lookup a specific device by its system-assigned URN key [GET]
 
 + Parameters
@@ -922,7 +922,7 @@ request body.
             }
 
 
-## Lookup Devices with Name Pattern [/devices{?nameLike,view}]
+## Lookup Devices with Name Pattern [/rest/devices{?nameLike,view}]
 ### Lookup an array of matching devices [GET]
 
 Call always returns a JSON array, which may be an empty array if no devices are found that match the `nameLike` query parameter.
@@ -988,7 +988,7 @@ The `objectUrn` field must be unique across object records in your account.
 The platform makes no inferences about this case-sensitive field.
 
 
-## Object Management [/objects]
+## Object Management [/rest/objects]
 ### Create a new object   [PUT]
 
 The following object fields may be used to create a new record:
@@ -1092,7 +1092,7 @@ include that field in the request body.
             
 + Response 401            
             
-## Lookup Specific Object by URN [/objects/{urn}{?view}]
+## Lookup Specific Object by URN [/rest/objects/{urn}{?view}]
 ### Lookup a specific object by its system-assigned URN key [GET]
 
 + Parameters
@@ -1137,7 +1137,7 @@ include that field in the request body.
             
 + Response 401
  
-## Lookup Object by Object URN [/objects/object/{objectUrn}{?view,exact}]
+## Lookup Object by Object URN [/rest/objects/object/{objectUrn}{?view,exact}]
 ### Lookup a specific object by their arbitrary developer assigned object URN [GET]
 
 + Parameters
@@ -1172,7 +1172,7 @@ include that field in the request body.
             
 + Response 204 
             
-## Query Objects [/objects{?view,modifiedAfter,monikerLike,nameLike,objectUrnLike,type}]
+## Query Objects [/rest/objects{?view,modifiedAfter,monikerLike,nameLike,objectUrnLike,type}]
 ### Lookup an array of matching objects [GET]
 
 ####Additive Nature
@@ -1250,7 +1250,7 @@ timestamp | long | false | true | Standard | 0
 - The `type` field is available to create an ontology or high level categories that can be used to group related addresses. 
 The platform makes no inferences about this case-sensitive field.
 
-## Object Address Management [/objects/object/{objectUrn}/address]
+## Object Address Management [/rest/objects/object/{objectUrn}/address]
 ### Create a new object address   [PUT]
 
 The following object fields may be used to create a new record:
@@ -1305,7 +1305,7 @@ the internationally recognized standard for country codes.
                 "message" : "JSON is missing a required field: type"
             }
 
-## Update Specific Object Address [/objects/object/{objectUrn}/address/{urn}]
+## Update Specific Object Address /rest/objects/object/{objectUrn}/address/{urn}]
 ### Update an existing object address [POST]
 
 The request body only needs to include those fields being updated. For example, if you only want to update 
@@ -1338,7 +1338,7 @@ the `stateProvince` of the object, only include that field in the request body.
                 "message" : "No such URN"
             }   
                         
-## Lookup Specific Object Address by URN [/objects/object/{objectUrn}/address/{urn}{?view}]
+## Lookup Specific Object Address by URN [/rest/objects/object/{objectUrn}/address/{urn}{?view}]
 ### Lookup a specific object address by its system-assigned URN key [GET]
 
 + Parameters
@@ -1385,7 +1385,7 @@ the `stateProvince` of the object, only include that field in the request body.
 
 + Response 204 
              
-## Lookup Matching Object Addresses by URN [/objects/object/{objectUrn}/address{?view,count}]
+## Lookup Matching Object Addresses by URN [/rest/objects/object/{objectUrn}/address{?view,count}]
 ### Lookup an array of matching object addresses [GET]
 
 + Parameters
@@ -1468,7 +1468,7 @@ type | String | true | true | Minimum |
 - The `type` field is available to create an ontology or high level categories that can be used to group related objects. 
 The platform makes no inferences about this case-sensitive field.
 
-## Session Management [/sessions]
+## Session Management [/rest/sessions]
 ### Start a new object interaction session   [PUT]
 
 The following fields may be used to create a new record:
@@ -1546,7 +1546,7 @@ The request body must include a valid `sessionUrn` field.
             
 + Response 401            
             
-## Lookup Specific Object Interaction Session by URN [/sessions/{urn}{?view}]
+## Lookup Specific Object Interaction Session by URN [/rest/sessions/{urn}{?view}]
 ### Lookup a specific session by its system-assigned URN key [GET]
 
 + Parameters
@@ -1592,7 +1592,7 @@ The request body must include a valid `sessionUrn` field.
             
 + Response 401
 
-## Lookup Object Interaction Sessions by Name [/sessions{?view,nameLike}]
+## Lookup Object Interaction Sessions by Name [/rest/sessions{?view,nameLike}]
 ### Lookup an array of matching sessions [GET]
 
 + Parameters
@@ -1676,7 +1676,7 @@ The platform makes no inferences about this case-sensitive field.
 - The `object` must be defined using the developer-assigned `objectUrn` when issuing a **PUT** call to capture the interaction.
 
 
-## Interaction Management [/interactions]
+## Interaction Management [/rest/interactions]
 ### Capture a specific interaction [PUT]
 
 The following interaction fields may be used to create a new record:
@@ -1729,7 +1729,7 @@ The following interaction fields may be used to create a new record:
 
 + Response 401
 
-## Lookup Matching Interactions [/interactions{?view,objectUrn}]
+## Lookup Matching Interactions [/rest/interactions{?view,objectUrn}]
 ### Lookup an array of matching interactions [GET]
 
 If no `objectUrn` query parameter is included, then all interactions are returned.
@@ -1778,7 +1778,7 @@ If no `objectUrn` query parameter is included, then all interactions are returne
 
 + Response 401
 
-## Lookup Specific Object Interaction by URN [/interactions/{urn}{?view}]
+## Lookup Specific Object Interaction by URN [/rest/interactions/{urn}{?view}]
 ### Lookup a specific interaction by its system-assigned URN key [GET]
 
 + Parameters
@@ -1877,7 +1877,7 @@ relatedReferenceUrn | String | true | false | Minimum |
 - The `type` field is available to create an ontology or high level categories that can be used to group related relationships.
 The platform makes no inferences about this case-sensitive field.
 
-## Relationship Management [/relationships/{entityReferenceType}/{referenceUrn}]
+## Relationship Management [/rest/relationships/{entityReferenceType}/{referenceUrn}]
 ### Create a new relationship   [PUT]
 
 The following object fields are all required to create a new record:
@@ -1953,7 +1953,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 
 + Response 401
 
-## Relationship Management by URN [/relationships/{urn}{?view}]
+## Relationship Management by URN [/rest/relationships/{urn}{?view}]
 ### Lookup a specific relationship by its system-assigned URN key [GET]
 
 + Parameters
@@ -1998,7 +1998,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 
 + Response 401
 
-## Delete Relationship by URN [/relationships/{urn}]
+## Delete Relationship by URN [/rest/relationships/{urn}]
 ### Deletes an existing relationship by its system-assigned URN key [DELETE]
 
 + Parameters
@@ -2023,7 +2023,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 
 + Response 401
 
-## Lookup All Relationships Between Entities [/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}{?view}]
+## Lookup All Relationships Between Entities [/rest/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}{?view}]
 ### Lookup an array of all defined relationships between any two entities [GET]
 
 + Parameters
@@ -2073,7 +2073,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 
 + Response 401
 
-## Lookup Specific Relationship Between Entities [/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}/{type}{?view}]
+## Lookup Specific Relationship Between Entities [/rest/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}/{type}{?view}]
 ### Lookup a specific relationship between any two entities [GET]
 
 + Parameters
@@ -2122,7 +2122,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 
 + Response 401
 
-## Lookup Relationships by Type [/relationships/{entityReferenceType}/{referenceUrn}/{type}{?view,reverse}]
+## Lookup Relationships by Type [/rest/relationships/{entityReferenceType}/{referenceUrn}/{type}{?view,reverse}]
 ### Lookup an array of all defined relationships of the specific type [GET]
 
 + Parameters
@@ -2203,7 +2203,7 @@ type | String | true | true | Minimum |
 - The `type` field is available to create an ontology or high level categories that can be used to group related interactions. 
 The platform makes no inferences about this case-sensitive field.
 
-## Geospatial Management [/geospatial]
+## Geospatial Management [/rest/geospatial]
 ### Define a geospatial entry [PUT]
 
 The following fields may be used to create a new record:
@@ -2386,7 +2386,7 @@ request body.
             
 + Response 401            
             
-## Lookup Matching Geospatial Entries [/geospatial{?view,nameLike}]
+## Lookup Matching Geospatial Entries [/rest/geospatial{?view,nameLike}]
 ### Lookup an array of matching geospatial entries [GET]
 
 If no `nameLike` query parameter is included, then all interactions are returned.
@@ -2536,7 +2536,7 @@ If no `nameLike` query parameter is included, then all interactions are returned
 
 + Response 401
 
-## Lookup Specific Geospatial Entity by URN [/geospatial/{urn}{?view}]
+## Lookup Specific Geospatial Entity by URN [/rest/geospatial/{urn}{?view}]
 ### Lookup a specific geospatial entity by its system-assigned URN key [GET]
 
 + Parameters
@@ -2747,7 +2747,7 @@ rawValue | String  | true | true | Minimum  | Opaque Base64 encoded value when u
 `dataType` value is assigned. 
 
 
-## Type-Safe Encoding [/metadata/mapper/encode/{metadataDataType}]
+## Type-Safe Encoding [/rest/metadata/mapper/encode/{metadataDataType}]
 ### Encodes a strongly typed value using the platform's built-in encoder [POST]
  
 *The built-in encoder algorithm is opaque to the developer.* The body of the HTTP POST must contain a valid String representation of the specified `metadataDataType` specified. 
@@ -2781,7 +2781,7 @@ encoded
                 "message" : "Unsupported MetadataType: foo"
             }
 
-## Type-Safe Decoding [/metadata/mapper/decode/{metadataDataType}]
+## Type-Safe Decoding [/rest/metadata/mapper/decode/{metadataDataType}]
 ### Decodes a strongly typed value previously encoded using the platform's built-in encoder [POST]
 
 *The built-in encoder algorithm is opaque to the developer.* The body of the HTTP POST must contain a valid `rawValue` representation of a platform encoded value of the type
@@ -2819,7 +2819,7 @@ decoded
                 "message" : "Unsupported MetadataType: foo"
             }
 
-## Metadata Upsertion [/metadata/{entityReferenceType}/{referenceUrn}]
+## Metadata Upsertion [/rest/metadata/{entityReferenceType}/{referenceUrn}]
 ### Inserts a new key-value or updates an existing key value related to the specified entity [PUT]
 
 This endpoint uses an **upsert** algorithm, inserting the metadata record(s) if the named key doesn't already exist, or
@@ -2889,7 +2889,7 @@ large values should use a file instead of metadata.
 
 + Response 401
 
-## Metadata Deletion [/metadata/{entityReferenceType}/{referenceUrn}/{key}]
+## Metadata Deletion [/rest/metadata/{entityReferenceType}/{referenceUrn}/{key}]
 ### Deletes an existing metadata key by its system-assigned URN key [DELETE]
 
 + Parameters
@@ -2916,7 +2916,7 @@ large values should use a file instead of metadata.
 
 + Response 401
 
-## Lookup Associated Metadata [/metadata/{entityReferenceType}/{referenceUrn}{?view,key}]
+## Lookup Associated Metadata [/rest/metadata/{entityReferenceType}/{referenceUrn}{?view,key}]
 ### Lookup all metadata that matches the specified key pattern [GET]
 
 + Parameters
@@ -3059,7 +3059,7 @@ JSON array, detailing the set of File definitions associated with the referenced
 GET request represents the URN assigned to a specific File definition, returning the single JSON object defining
 the given File.
 
-## File Definition [/files]
+## File Definition [/rest/files]
 ### Define the metadata of a file in preparation of an actual file upload [PUT]
 
 The following file fields may be used to create a new file record:
@@ -3110,7 +3110,7 @@ The following file fields may be used to create a new file record:
 
 + Response 401
 
-## File Upload - Octet-Stream [/files/{urn}/octet]
+## File Upload - Octet-Stream [/rest/files/{urn}/octet]
 ### Upload actual file bytes to the cloud using an octet-stream [POST]
 
 + Parameters
@@ -3159,7 +3159,7 @@ The following file fields may be used to create a new file record:
                 "message" : "File with URN urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8 exists and already has had content uploaded"
             }
 
-## File Upload - Multi-Part Form Data [/files/{urn}/multipart]
+## File Upload - Multi-Part Form Data [/rest/files/{urn}/multipart]
 ### Upload actual file bytes to the cloud using an multi-part form data submission from a web form [POST]
 By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web form to be used to upload a file to the cloud.
 
@@ -3209,7 +3209,7 @@ By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web 
                 "message" : "File with URN urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8 exists and already has had content uploaded"
             }
 
-## Specific File Definition Retrieval [/files/{urn}{?view}]                
+## Specific File Definition Retrieval [/rest/files/{urn}{?view}]                
 ### Retrieves the file definition [GET]
 
 + Parameters
@@ -3251,7 +3251,7 @@ By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web 
             
 + Response 401
 
-## File Content Retrieval [/files/{urn}/contents]                
+## File Content Retrieval [/rest/files/{urn}/contents]                
 ### Retrieves the actual file content from the cloud [GET]
 
 > The actual MIME type of the response *is the MIME type from the file definition*. For this reason it is critical that the MIME type is 
@@ -3289,7 +3289,7 @@ accurately reported when defining the file.
 
 + Response 401
 
-## Related File Definitions Retrieval [/files/{entityReferenceType}/{referenceUrn}{?view}]                
+## Related File Definitions Retrieval [/rest/files/{entityReferenceType}/{referenceUrn}{?view}]                
 ### Retrieves the complete collection of file definitions associated with the specified entity [GET]
 Always returns a JSON array where each member of the array is a file definition associated with the specified entity.
 
@@ -3335,7 +3335,7 @@ Always returns a JSON array where each member of the array is a file definition 
             
 + Response 401            
             
-## File Deletion [/files/{urn}]                
+## File Deletion [/rest/files/{urn}]                
 ### Deletes an existing relationship by its system-assigned URN key [DELETE]
 Immediately purges both the file definition and the physical file stored in the cloud.
 
@@ -3426,7 +3426,7 @@ Endpoint | Supported HTTP Methods | Events Generated
 /tags [?tagName=Foo&entityReferenceType=Bar&referenceUrn=Baaq] | GET | TagAccessed (for each tag)
 
 
-## Tag Definitions [/tags]
+## Tag Definitions [/rest/tags]
 ### Create a new tag associated with an arbitrary identification value *response is incorrect* [PUT]
 
 The following user fields may be used to create a new tag:
@@ -3493,7 +3493,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 
 
 
-## Lookup Specific Tag by Name [/tags/tag/{tagName}{?view}]
+## Lookup Specific Tag by Name [/rest/tags/tag/{tagName}{?view}]
 ### Lookup for tag details by tag name [GET]
 
 + Parameters
@@ -3538,7 +3538,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 
 
 
-## Lookup Specific Tag by URN [/tags/{urn}{?view}]
+## Lookup Specific Tag by URN [/rest/tags/{urn}{?view}]
 ### Lookup for tag details by tag URN [GET]
 
 + Parameters
@@ -3576,7 +3576,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 + Response 401 
 
 
-## Assign hash tags [/tags/{entityReferenceType}/{referenceUrn}]
+## Assign hash tags [/rest/tags/{entityReferenceType}/{referenceUrn}]
 ### Assign hash tags to objects [PUT]
 
 
@@ -3622,7 +3622,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 + Response 401 
 
 
-## Lookup list of Tags [/tags %5B?tagName=Foo&entityReferenceType=Bar&referenceUrn=Baaq%5D{?view}]
+## Lookup list of Tags [/rest/tags %5B?tagName=Foo&entityReferenceType=Bar&referenceUrn=Baaq%5D{?view}]
 ### Lookup an array of matching objects [GET]
 
 
@@ -3690,7 +3690,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
             
 + Response 401 
 
-## Delete tag [/tags/tag/{tagName}]
+## Delete tag [/rest/tags/tag/{tagName}]
 ### Remove tag by URN [DELETE]
 
 + Parameters
@@ -3772,7 +3772,7 @@ name | String  | true | true | Minimum |
 description | String  | false | true | Standard |
 activeFlag | Boolean  | true | false | Standard  | true
 
-## Endpoint Enrollment [/notifications/enroll]
+## Endpoint Enrollment [/rest/notifications/enroll]
 ### Enroll an existing endpoint running a web app ready to confirm a subscription and receive events [PUT]
 
 An additional `referenceUrn` field must be included **if the endpoint enrollment is being requested by an extension** on behalf of another account. 
@@ -3821,7 +3821,7 @@ the confirmation token *and* posts that confirmation token to the /notifications
             
 + Response 401            
             
-## Endpoint Enrollment Confirmation [/notifications/confirm/{topicArn}]
+## Endpoint Enrollment Confirmation [/rest/notifications/confirm/{topicArn}]
 ### Confirms the enrollment of an endpoint running a web app that received a `topicArn` [PUT]
 
 Definition of an endpoint results in an endpoint that is *pending* confirmation. Until the actual web application at the defined endpoint receives 
@@ -3859,7 +3859,7 @@ that is returned when the notification endpoint is defined.
             
 + Response 401            
             
-## Endpoint Withdraw [/notifications/withdraw]
+## Endpoint Withdraw [/rest/notifications/withdraw]
 ### Withdraw or terminate delivery of events to an existing endpoint [PUT]
 
 + Request (application/json)
@@ -3887,7 +3887,7 @@ that is returned when the notification endpoint is defined.
 
 + Response 401
 
-## Lookup Specific Notification Endpoint by URN [/notifications/{urn}{?view}]
+## Lookup Specific Notification Endpoint by URN [/rest/notifications/{urn}{?view}]
 ### Lookup a specific notification endpoint by its system-assigned URN key [GET]
 
 + Parameters
@@ -4088,7 +4088,7 @@ There is a detailed discussion of Library functionality in objects.yml, the serv
 section carefully and discuss any questions with your SMARTRAC support engineer before implementing a Library hierarchy.
 
 
-## Library Management [/library]
+## Library Management [/rest/library]
 ### Create a new library element   [PUT]
 
 The following library fields may be used to create a new record:
@@ -4217,7 +4217,7 @@ This method will only work on library elements which have no children, or in the
 
 + Response 401
 
-## Look up a Specific Library Element by URN [/library/{urn}{?view}]
+## Look up a Specific Library Element by URN [/rest/library/{urn}{?view}]
 ### Look up a specific library element by its system-assigned URN key [GET]
 
 + Parameters
@@ -4266,7 +4266,7 @@ This method will only work on library elements which have no children, or in the
 
 
 
-## Look up Library Elements with Name Pattern [/library?{nameLike,eltType,view}]
+## Look up Library Elements with Name Pattern [/rest/library?{nameLike,eltType,view}]
 ### Look up library elements matching a name pattern, with or without LibraryElementType [GET]
 
 + Parameters
@@ -4312,7 +4312,7 @@ This method will only work on library elements which have no children, or in the
             
 + Response 401
 
-## Look up Specific Library Element by Name and LibraryElementType [/library/{libraryElementType}/{name}/{?view}]
+## Look up Specific Library Element by Name and LibraryElementType [/rest/library/{libraryElementType}/{name}/{?view}]
 ### Look up a specific library element by its name and LibraryElementType [GET]
 
 + Parameters
@@ -4352,7 +4352,7 @@ This method will only work on library elements which have no children, or in the
 + Response 401
             
 
-## Look up Parent of a Library Element by URN [/library/parent/{urn}{?view}]
+## Look up Parent of a Library Element by URN [/rest/library/parent/{urn}{?view}]
 ### Look up parent of a specific library element with the book's system-assigned URN key, returning an error if element specifed by URN is of type Library [GET]
 
 + Parameters
@@ -4396,7 +4396,7 @@ This method will only work on library elements which have no children, or in the
             
 + Response 401
 
-## Look up Children of a Specific Library Element by the Library Element's URN [/library/children/{urn}{?view}]
+## Look up Children of a Specific Library Element by the Library Element's URN [/rest/library/children/{urn}{?view}]
 ### Look up children specific library element with the element's system-assigned URN key, returning an error if the library element type is PageEntry and thus by definition has no children. [GET]
 
 + Parameters
