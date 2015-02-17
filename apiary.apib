@@ -4351,42 +4351,7 @@ This method will only work on library elements which have no children, or in the
 
 + Response 401
             
-## Get Default Library Element by LibraryElementType [/library/{libraryElementType}/default/{?view}]
-### Get the default library element of the specified LibraryElementType [GET]
 
-+ Parameters
-    + libraryElementType (required, string, `Library | Shelf | Book | and so on`)
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-
-+ Request
-    
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-+ Response 200 (application/json)
-
-    + Headers
-
-            SmartCosmos-Event : LibraryElementAccessed
-            SmartCosmos-View : Standard
-            
-    + Body
-    
-            {
-                "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
-                "LibraryElementType": "ChapterSection",
-                "name": "Default ChapterSection",
-                "parent": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
-                "description" : null,
-                "activeFlag" : true,
-                "lastModifiedTimestamp" : 1390607277299
-            }
-
-+ Response 204 
-                                                                                                                                                                           
-+ Response 401
-            
 ## Look up Parent of a Library Element by URN [/library/parent/{urn}{?view}]
 ### Look up parent of a specific library element with the book's system-assigned URN key, returning an error if element specifed by URN is of type Library [GET]
 
