@@ -47,7 +47,7 @@ public interface ILibraryElement extends IAccountDomainResource<ILibraryElement>
 
     void setLibraryElementType(String libraryElementType);
 
-    String getParentUrn();
+    String getParent();
 
-    void setParentUrn(String parentUrn);
+    void setParent(String parent);
 }

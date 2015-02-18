@@ -33,7 +33,7 @@ public class LibraryElement extends AccountTypedNamedObject<ILibraryElement> imp
     private String libraryElementType;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    private String parentUrn;
+    private String parent;
 
     public String getLibraryElementType()
     {
@@ -46,15 +46,15 @@ public class LibraryElement extends AccountTypedNamedObject<ILibraryElement> imp
     }
 
     @Override
-    public String getParentUrn()
+    public String getParent()
     {
-        return parentUrn;
+        return parent;
     }
 
     @Override
-    public void setParentUrn(String parent)
+    public void setParent(String parent)
     {
-        this.parentUrn = parent;
+        this.parent = parent;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class LibraryElement extends AccountTypedNamedObject<ILibraryElement> imp
 
         if (!libraryElementType.equals(libraryElement.libraryElementType)) return false;
         if (!name.equals(libraryElement.name)) return false;
-        if (!parentUrn.equals(libraryElement.parentUrn)) return false;
+        if (!parent.equals(libraryElement.parent)) return false;
 
         return true;
     }
