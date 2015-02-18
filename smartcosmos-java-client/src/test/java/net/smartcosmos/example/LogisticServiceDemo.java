@@ -29,6 +29,8 @@ import net.smartcosmos.client.objects.interaction.IInteractionClient;
 import net.smartcosmos.client.objects.interaction.InteractionFactory;
 import net.smartcosmos.client.common.metadata.IMetadataClient;
 import net.smartcosmos.client.common.metadata.MetadataFactory;
+import net.smartcosmos.client.objects.library.ILibraryElementClient;
+import net.smartcosmos.client.objects.library.LibraryElementFactory;
 import net.smartcosmos.client.objects.object.IObjectClient;
 import net.smartcosmos.client.objects.object.ObjectFactory;
 import net.smartcosmos.client.objects.object.address.IObjectAddressClient;
@@ -52,11 +54,13 @@ import net.smartcosmos.objects.builder.ObjectBuilder;
 import net.smartcosmos.objects.builder.RelationshipBuilder;
 import net.smartcosmos.objects.builder.TagCollectionBuilder;
 import net.smartcosmos.objects.model.context.IFile;
+import net.smartcosmos.objects.model.context.ILibraryElement;
 import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.objects.model.context.IObjectAddress;
 import net.smartcosmos.objects.model.context.IObjectInteraction;
 import net.smartcosmos.objects.model.context.IRelationship;
 import net.smartcosmos.objects.model.context.ITag;
+import net.smartcosmos.objects.pojo.context.LibraryElement;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.ViewType;
@@ -167,7 +171,23 @@ public class LogisticServiceDemo
         createPackage(context);
         createDelivery(context);
         showEventStream(context);
+        createVehicleShelf(context);
+    }
 
+    private void createVehicleShelf(ServerContext context) throws ServiceException{
+
+        ILibraryElementClient client = LibraryElementFactory.createClient(context);
+        ILibraryElement shelf = new LibraryElement();
+        shelf.setLibraryElementType("Shelf");
+        shelf.setName("first shelf");
+        ResponseEntity shelfResponse = client.create(shelf);
+
+        ILibraryElement book = new LibraryElement();
+        book.setLibraryElementType("Book");
+        book.setName("first book");
+        book.setParent(shelfResponse.getMessage());
+        client.create(book);
+        // client.update(book);
     }
 
     private void showEventStream(ServerContext context) throws ServiceException
