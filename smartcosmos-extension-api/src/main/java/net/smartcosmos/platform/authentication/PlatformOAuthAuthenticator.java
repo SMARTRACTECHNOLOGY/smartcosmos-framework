@@ -34,7 +34,7 @@ import net.smartcosmos.platform.api.dao.ICosmosDAOFactory;
 import net.smartcosmos.platform.api.oauth.IOAuthTokenTransaction;
 import net.smartcosmos.platform.api.oauth.OAuthStatusType;
 import net.smartcosmos.platform.api.service.IEventService;
-import net.smartcosmos.platform.pojo.config.AuthenticatedUser;
+import net.smartcosmos.platform.pojo.authentication.AuthenticatedUser;
 import net.smartcosmos.platform.util.OAuthTokenUtil;
 import net.smartcosmos.pojo.context.User;
 import org.slf4j.Logger;

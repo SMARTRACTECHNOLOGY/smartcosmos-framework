@@ -1,4 +1,4 @@
-package net.smartcosmos.platform.api.config;
+package net.smartcosmos.platform.api;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*

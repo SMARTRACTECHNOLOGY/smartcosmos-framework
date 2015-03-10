@@ -1,4 +1,4 @@
-package net.smartcosmos.platform.pojo.config;
+package net.smartcosmos.platform.pojo.authentication;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*

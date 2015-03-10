@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
-import net.smartcosmos.platform.api.config.ICosmosConfiguration;
+import net.smartcosmos.platform.api.ICosmosConfiguration;
 import net.smartcosmos.platform.authentication.OAuth2Factory;
 import org.hibernate.validator.constraints.NotEmpty;
 

@@ -21,7 +21,6 @@ package net.smartcosmos.platform.api;
  */
 
 import io.dropwizard.setup.Environment;
-import net.smartcosmos.platform.api.config.ICosmosConfiguration;
 import net.smartcosmos.platform.api.dao.ICosmosDAOFactory;
 import net.smartcosmos.platform.api.service.ICosmosServiceFactory;
 import org.apache.http.client.HttpClient;

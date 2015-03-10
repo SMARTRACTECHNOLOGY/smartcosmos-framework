@@ -24,7 +24,7 @@ import com.google.common.annotations.VisibleForTesting;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.setup.Environment;
 import net.smartcosmos.platform.api.ICosmosContextBootstrap;
-import net.smartcosmos.platform.api.config.ICosmosConfiguration;
+import net.smartcosmos.platform.api.ICosmosConfiguration;
 import net.smartcosmos.platform.api.dao.ICosmosDAOFactory;
 import net.smartcosmos.platform.api.service.ICosmosServiceFactory;
 import net.smartcosmos.platform.bundle.quartz.IQuartzJobDefinition;
