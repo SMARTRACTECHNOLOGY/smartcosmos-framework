@@ -17,7 +17,7 @@
     <groupId>net.smartcosmos</groupId>
     <artifactId>server-api</artifactId>
     <packaging>jar</packaging>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>Server API</name>
     <description>Set of common server-side interfaces used across all SMART COSMOS platform services</description>
 
@@ -259,7 +259,7 @@
                             </execution>
                         </executions>
                     </plugin>
-
+<!--
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
@@ -268,12 +268,12 @@
                                 <id>sign-artifacts</id>
                                 <phase>verify</phase>
                                 <goals>
-                                    <goal>sign</goal>
+                                    <goal>sign</goal>mvn release:cl
                                 </goals>
                             </execution>
                         </executions>
                     </plugin>
-
+-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
