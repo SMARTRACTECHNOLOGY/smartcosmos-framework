@@ -11,14 +11,13 @@
   ~ you entered into with Smartrac Technology Fletcher, Inc........
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.smartcosmos</groupId>
     <artifactId>server-api</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Server API</name>
     <description>Set of common server-side interfaces used across all SMART COSMOS platform services</description>
 
@@ -51,7 +50,7 @@
         <url>https://github.com/SMARTRACTECHNOLOGY/smartcosmos-server-api</url>
         <connection>scm:git:git://github.com/SMARTRACTECHNOLOGY/smartcosmos-server-api.git</connection>
         <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-server-api.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>server-api-1.0</tag>
     </scm>
 
     <distributionManagement>
