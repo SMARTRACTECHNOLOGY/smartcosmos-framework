@@ -330,7 +330,7 @@
                           During release:perform, enable the "release" profile
                          -->
                         <releaseProfiles>release</releaseProfiles>
-                        <goals>deploy assembly:single</goals>
+                        <goals>deploy</goals>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
                 </plugin>
@@ -398,8 +398,21 @@
                     <excludes>**/package-info.java</excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.5</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>nexus</serverId>
+                    <nexusUrl>https://nexus.smartcosmos.net/nexus</nexusUrl>
+                    <stagingProfileId>c0d04f5594b11</stagingProfileId>
+                    <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+                </configuration>
+            </plugin>
 
         </plugins>
+
     </build>
 
 </project>
