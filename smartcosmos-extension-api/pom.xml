@@ -19,7 +19,6 @@
     <artifactId>server-api</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-
     <name>Server API</name>
     <description>Set of common server-side interfaces used across all SMART COSMOS platform services</description>
 
