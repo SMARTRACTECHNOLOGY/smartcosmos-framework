@@ -8,7 +8,7 @@
   ~ Smartrac Technology Fletcher, Inc. ("Confidential Information").
   ~ You shall not disclose such Confidential Information and shall
   ~ use it only in accordance with the terms of the license agreement
-  ~ you entered into with Smartrac Technology Fletcher, Inc........
+  ~ you entered into with Smartrac Technology Fletcher, Inc.
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -408,6 +408,18 @@
                     <nexusUrl>https://nexus.smartcosmos.net/nexus</nexusUrl>
                     <stagingProfileId>c0d04f5594b11</stagingProfileId>
                     <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <!--
+                    During release:perform, enable the "release" profile
+                  -->
+                    <releaseProfiles>release</releaseProfiles>
+                    <goals>deploy assembly:single</goals>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
                 </configuration>
             </plugin>
 
