@@ -175,6 +175,9 @@ public enum EventType
     LibraryElementUpdated,
     LibraryElementAccessed,
     LibraryElementDeleted,
-    LibraryElementChildrenAccessed
-    
+    LibraryElementChildrenAccessed,
+
+    TransactionStart,
+    TransactionCommit,
+    TransactionRollback
 }
