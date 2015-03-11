@@ -245,22 +245,6 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         return object;
     }
 
-//    @Override
-//    public S lookupByUrn(Class<?> clazz, String urn)
-//    {
-//        S object = null;
-//
-//        String entityName = clazz.getName();
-//
-//        Query query = currentSession()
-//                .createQuery("select e from " + entityName + " e where e.urn = :urn")
-//                .setParameter("urn", urn);
-//
-//        object = (S) query.uniqueResult();
-//
-//        return object;
-//    }
-
     @Override
     @SuppressWarnings("unchecked")
     public Collection<S> findByAccount(Class<?> clazz, IAccount account)

@@ -45,6 +45,14 @@ public abstract class AbstractCosmosApplication<S extends AbstractCosmosConfigur
 
     protected U serviceFactory;
 
+    protected abstract void extendedInitialization(T context);
+
+    protected abstract U createServiceFactory();
+
+    protected abstract T createContext(S configuration, Environment environment);
+
+    protected abstract void defineHealthChecks(T context);
+
     @Override
     public void run(S configuration, Environment environment)
     {
@@ -84,18 +92,10 @@ public abstract class AbstractCosmosApplication<S extends AbstractCosmosConfigur
         }
     }
 
-    protected abstract void extendedInitialization(T context);
-
-    protected abstract U createServiceFactory();
-
     protected void preContextCreation(S configuration, Environment environment)
     {
 
     }
-
-    protected abstract T createContext(S configuration, Environment environment);
-
-    protected abstract void defineHealthChecks(T context);
 
     protected void registerAuthProvider(T context)
     {
