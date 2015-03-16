@@ -1,10 +1,8 @@
-package net.smartcosmos.pojo.context;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
  * ===============================================================================
- * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 SMARTRAC Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +17,7 @@ package net.smartcosmos.pojo.context;
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-
+package net.smartcosmos.pojo.context;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
@@ -28,24 +26,20 @@ import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class User extends DomainResource<IUser> implements IUser
-{
-    @JsonView(JsonGenerationView.Minimum.class)
-    private String emailAddress;
 
+public class User extends DomainResource< IUser > implements IUser
+{
     @JsonView(JsonGenerationView.Full.class)
     @JsonDeserialize(as = Account.class)
     protected IAccount account;
-
-    @JsonView(JsonGenerationView.Full.class)
-    private String givenName;
-
-    @JsonView(JsonGenerationView.Full.class)
-    private String surname;
-
     @JsonView(JsonGenerationView.Minimum.class)
     protected RoleType roleType;
-
+    @JsonView(JsonGenerationView.Minimum.class)
+    private String emailAddress;
+    @JsonView(JsonGenerationView.Full.class)
+    private String givenName;
+    @JsonView(JsonGenerationView.Full.class)
+    private String surname;
     @Override
     public String getEmailAddress()
     {
@@ -152,4 +146,5 @@ public class User extends DomainResource<IUser> implements IUser
         result = 31 * result + roleType.hashCode();
         return result;
     }
+
 }

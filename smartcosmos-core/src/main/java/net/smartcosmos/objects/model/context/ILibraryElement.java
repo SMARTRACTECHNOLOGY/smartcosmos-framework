@@ -32,15 +32,22 @@ import net.smartcosmos.model.base.ITypedObject;
  * that a human-readable {@link net.smartcosmos.model.base.INamedObject#getName()}
  * can be assigned.
  * <p/>
- * This is the only class within the SMART COSMOS Objects platform that replaces the
- * system-assigned URN with an arbitrary developer-defined
- * {@link #getObjectUrn()}. This <code>objectUrn</code> must be unique within
- * the account context. It is up to the developer to devise a URN strategy that
- * meets this requirement.
+ * The library element type is distinct from other {@link net.smartcosmos.model.base.INamedObject}
+ * types in that the Type field is always set to "LibraryElement", and cannot be changed. The
+ * field "LibraryElementType" is specific to LibraryElements, and is set to one of the values
+ * specified in the LibraryHierarchy section of objects.yml.
+ *
  */
-public interface IObject extends IAccountDomainResource<IObject>, INamedObject<IObject>, ITypedObject
+public interface ILibraryElement extends IAccountDomainResource<ILibraryElement>, INamedObject<ILibraryElement>,
+        ITypedObject
 {
-    String getObjectUrn();
+    void setName(String name);
 
-    void setObjectUrn(String urn);
+    String getLibraryElementType();
+
+    void setLibraryElementType(String libraryElementType);
+
+    String getParent();
+
+    void setParent(String parent);
 }

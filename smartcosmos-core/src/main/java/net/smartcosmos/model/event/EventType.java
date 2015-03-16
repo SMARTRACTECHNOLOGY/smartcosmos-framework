@@ -1,10 +1,8 @@
-package net.smartcosmos.model.event;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
  * ===============================================================================
- * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 SMARTRAC Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +17,8 @@ package net.smartcosmos.model.event;
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
+
+package net.smartcosmos.model.event;
 
 /**
  * Collection of SMART COSMOS events that capture virtually all interactions between a user and the platform. In
@@ -152,5 +152,29 @@ public enum EventType
     BatchTransmissionReceipt,
     BatchTransmissionQueueSuccess,
     BatchTransmissionQueueError,
-    BatchStatusReportAccessed
+    BatchStatusReportAccessed,
+
+    BusinessRuleDefined,
+    BusinessRuleUpdated,
+    BusinessRuleDeleted,
+    BusinessRulesAccessed,
+    BusinessRulesStatusChanged,
+    BusinessRuleTriggered,
+    BusinessRulesExported,
+
+    FlowsEventDefined,
+    FlowsEventUpdated,
+    FlowsDeviceDefined,
+    FlowsDeviceUpdated,
+
+    EmailProvidersAccessed,
+    EmailSent,
+    DatabaseTypesAccessed,
+
+    LibraryElementDefined,
+    LibraryElementUpdated,
+    LibraryElementAccessed,
+    LibraryElementDeleted,
+    LibraryElementChildrenAccessed
+    
 }
