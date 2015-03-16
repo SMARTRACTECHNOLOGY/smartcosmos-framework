@@ -30,6 +30,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<<<<<<< HEAD
+=======
+        <sdk.version>1.1-SNAPSHOT</sdk.version>
+>>>>>>> library-epic
         <restlet.version>2.2-M3</restlet.version>
         <checkstyle.config.location>${basedir}/src/checkstyle/checkstyle.xml</checkstyle.config.location>
     </properties>
@@ -83,7 +87,11 @@
         <dependency>
             <groupId>net.smartcosmos</groupId>
             <artifactId>platform-core</artifactId>
+<<<<<<< HEAD
             <version>1.0</version>
+=======
+            <version>${sdk.version}</version>
+>>>>>>> library-epic
         </dependency>
 
         <dependency>
