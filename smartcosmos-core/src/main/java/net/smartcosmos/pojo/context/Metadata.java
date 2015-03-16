@@ -186,6 +186,9 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
     @JsonView(JsonGenerationView.Minimum.class)
     protected byte[] rawValue;
 
+    @JsonView(JsonGenerationView.Full.class)
+    protected String decodedValue = null;
+
     @Override
     public MetadataDataType getDataType()
     {
@@ -223,6 +226,12 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
     }
 
     @Override
+    public String getDecodedValue()
+    {
+        return decodedValue;
+    }
+
+    @Override
     public boolean equals(Object o)
     {
         if (this == o) return true;
@@ -232,6 +241,8 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         Metadata metadata = (Metadata) o;
 
         if (dataType != metadata.dataType) return false;
+        if (decodedValue != null ? !decodedValue.equals(metadata.decodedValue) : metadata.decodedValue != null)
+            return false;
         if (!key.equals(metadata.key)) return false;
         if (!Arrays.equals(rawValue, metadata.rawValue)) return false;
 
@@ -244,7 +255,8 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         int result = super.hashCode();
         result = 31 * result + dataType.hashCode();
         result = 31 * result + key.hashCode();
-        result = 31 * result + Arrays.hashCode(rawValue);
+        result = 31 * result + (rawValue != null ? Arrays.hashCode(rawValue) : 0);
+        result = 31 * result + (decodedValue != null ? decodedValue.hashCode() : 0);
         return result;
     }
 }
