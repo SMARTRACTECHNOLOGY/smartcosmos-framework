@@ -168,8 +168,7 @@
 
         </dependency>
 
-</dependencies>
->>>>>>> libraryTweaksForClient
+    </dependencies>
 
     <profiles>
         <profile>
