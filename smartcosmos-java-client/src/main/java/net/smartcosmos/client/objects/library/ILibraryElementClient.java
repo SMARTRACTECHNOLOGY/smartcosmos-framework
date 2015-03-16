@@ -19,12 +19,31 @@
 
 package net.smartcosmos.client.objects.library;
 
+/*
+ * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+ * SMART COSMOS Platform Client
+ * ===============================================================================
+ * Copyright (C) 2013 - 2015 SMARTRAC Technology Fletcher, Inc.
+ * ===============================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+ */
+
+
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.IUpdateableBaseClient;
 import net.smartcosmos.client.impl.endpoint.LibraryEndpoints;
-import net.smartcosmos.client.impl.endpoint.ObjectEndpoints;
 import net.smartcosmos.objects.model.context.ILibraryElement;
-import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.util.json.ViewType;
 
 import java.util.Collection;
@@ -44,7 +63,7 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
     Collection<ILibraryElement> query(LibraryEndpoints.Builder builder) throws ServiceException;
 
     /**
-     * Simple query for parent libraryElement of a libraryElement
+     * Simple query for parent libraryElement of a libraryElement.
      *
      * @param libraryElementUrn
      * @return null if libraryElement has no parent, otherwise the Urn of the parent libraryElement
@@ -52,7 +71,7 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
     ILibraryElement getParent(String libraryElementUrn) throws ServiceException;
 
     /**
-     * Simple query for parent libraryElement of a libraryElement
+     * Simple query for parent libraryElement of a libraryElement.
      *
      * @param libraryElementUrn
      * @param viewType optional viewType
@@ -61,7 +80,7 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
     ILibraryElement getParent(String libraryElementUrn, ViewType viewType) throws ServiceException;
 
     /**
-     * Simple query for children libraryElements of a libraryElement
+     * Simple query for children libraryElements of a libraryElement.
      *
      * @param libraryElementUrn
      * @return empty Collection<ILibraryElement> if libraryElement has no children, otherwise
@@ -70,7 +89,7 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
     Collection<ILibraryElement> getChildren(String libraryElementUrn) throws ServiceException;
 
     /**
-     * Simple query for children libraryElements of a libraryElement
+     * Simple query for children libraryElements of a libraryElement.
      *
      * @param libraryElementUrn
      * @param viewType optional viewType
