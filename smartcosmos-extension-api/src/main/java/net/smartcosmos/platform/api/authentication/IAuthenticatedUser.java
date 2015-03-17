@@ -28,9 +28,25 @@ import net.smartcosmos.model.context.IUser;
  */
 public interface IAuthenticatedUser extends IUser
 {
+    /**
+     * Flag to easily identify if the user was authorized to make this call using OAuth 2.0.
+     *
+     * @return true, if the user's authorization originated via an OAuth 2. bearer access token
+     */
     boolean isOAuthAuthenticated();
 
+    /**
+     * Flag to easily identify if the user was authorized to make this call using HTTP BASIC authentication.
+     *
+     * @return true, if the user's authorization originated via an HTTP BASIC authorization header
+     */
     boolean isBasicAuthenticated();
 
+    /**
+     * Extension user is the <i>actual account</i> making the call when {@link #isOAuthAuthenticated()} is
+     * <code>true</code>.
+     *
+     * @return null when {@link #isOAuthAuthenticated()} is <code>false</code>, or the <i>actual</i> user when true
+     */
     IUser getExtensionUser();
 }

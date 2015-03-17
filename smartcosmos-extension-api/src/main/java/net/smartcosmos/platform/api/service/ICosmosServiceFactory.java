@@ -28,24 +28,54 @@ import org.quartz.Scheduler;
 
 public interface ICosmosServiceFactory<T extends ICosmosContext> extends IService<T>
 {
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
     String DIRECTORY_SERVICE = "directoryService";
 
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
     String NOTIFICATION_SERVICE = "notificationService";
 
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
     String EMAIL_SERVICE = "emailService";
 
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
     String DOWNLOAD_SERVICE = "downloadService";
 
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
     String STORAGE_SERVICE = "storageService";
 
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
     String QUEUE_SERVICE = "queueService";
 
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
     String EXCEPTION_SERVICE = "exceptionService";
 
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
     String TEMPLATE_SERVICE = "templateService";
 
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
     String EVENT_BROADCAST_NOTIFICATION_SERVICE = "eventBroadcastNotificationService";
 
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
     String EVENT_SERVICE = "eventService";
 
     //

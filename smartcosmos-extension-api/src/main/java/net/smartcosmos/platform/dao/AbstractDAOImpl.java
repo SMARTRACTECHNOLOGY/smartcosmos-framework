@@ -22,10 +22,8 @@ package net.smartcosmos.platform.dao;
 
 import com.google.common.base.Preconditions;
 import io.dropwizard.hibernate.AbstractDAO;
-import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.platform.api.ISearchAssembly;
 import net.smartcosmos.platform.api.dao.IBaseDAO;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -38,7 +36,7 @@ import java.util.Collection;
 public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         extends AbstractDAO<T> implements IBaseDAO<S>
 {
-    private static Logger logger = LoggerFactory.getLogger(AbstractDAOImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractDAOImpl.class);
 
     protected final boolean canDelete;
 
@@ -60,8 +58,6 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
     @Override
     public S upsert(S object)
     {
-        T instance = null;
-
         if (null == object)
         {
             throw new IllegalArgumentException("Parameter must not be null");
@@ -101,7 +97,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
 
         } catch (InstantiationException e)
         {
-            logger.warn("Unable to instantiate object of type " + classInstance.getName());
+            LOG.warn("Unable to instantiate object of type " + classInstance.getName());
             e.printStackTrace();
         } catch (IllegalAccessException e)
         {
@@ -122,7 +118,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
     {
         if (!canDelete)
         {
-            logger.warn("Attempt to delete an immutable object detected");
+            LOG.warn("Attempt to delete an immutable object detected");
             throw new UnsupportedOperationException("Type does not support deletion");
         } else
         {
@@ -134,7 +130,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
                 currentSession().delete(instance);
             } else
             {
-                logger.warn("Unable to locate object of type " + classInstance.getName() +
+                LOG.warn("Unable to locate object of type " + classInstance.getName() +
                         " with unique ID " + object.getUniqueId());
             }
         }
@@ -144,7 +140,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
     @SuppressWarnings("unchecked")
     public void update(S object)
     {
-        T instance = null;
+        T instance;
 
         try
         {
@@ -155,7 +151,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
 
         } catch (InstantiationException e)
         {
-            logger.warn("Unable to instantiate object of type " + classInstance.getName());
+            LOG.warn("Unable to instantiate object of type " + classInstance.getName());
             e.printStackTrace();
         } catch (IllegalAccessException e)
         {
@@ -163,59 +159,21 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         }
     }
 
-    protected EntityReferenceType getEntityReferenceType()
-    {
-        throw new UnsupportedOperationException("Base class doesn't provide a default entity reference type");
-    }
-
-    public String generateHql(Class<?> clazz, ISearchAssembly assembly)
-    {
-        String entityName = clazz.getName();
-        String hql = "select m from " + entityName + " m ";
-
-        String joinClause = "";
-        if (assembly.hasJoin())
-        {
-            switch (assembly.getJoin())
-            {
-                case Tag:
-                    hql += ", tag t, tag_assignment ta ";
-                    joinClause = " and ta.entityReferenceType = '" + getEntityReferenceType() +
-                            "' and ta.referenceUrn = m.urn and t.urn = ta.tag.urn ";
-                    break;
-                case File:
-                    hql += ", file f ";
-                    joinClause = " and f.entityReferenceType = '" + getEntityReferenceType() +
-                            "' and f.referenceUrn = m.urn ";
-                    break;
-                case Metadata:
-                    hql += ", metadata meta ";
-                    joinClause = " and meta.entityReferenceType = '" + getEntityReferenceType() +
-                            "' and meta.referenceUrn = m.urn ";
-                    break;
-                default:
-                    throw new IllegalStateException("Unrecognized join clause: " + assembly.getJoin().toString());
-            }
-        }
-
-        String parametricWhereClause = assembly.getWhereClause();
-        hql += "where m.account.uniqueId = :uniqueId " +
-                joinClause +
-                ((parametricWhereClause != null)
-                        ? " and " + parametricWhereClause
-                        : "");
-
-        return hql;
-    }
-
     @Override
     @SuppressWarnings("unchecked")
     public S findById(Class<?> clazz, long id)
     {
-        S object = null;
+        S object;
 
         String entityName = clazz.getName();
 
+        /*
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
+         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
+         * identifier.
+         *
+         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
+         */
         Query query = currentSession()
                 .createQuery("select e from " + entityName + " e where e.uniqueId = :uniqueId")
                 .setParameter("uniqueId", id);
@@ -234,6 +192,13 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
 
         String entityName = clazz.getName();
 
+        /*
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
+         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
+         * identifier.
+         *
+         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
+         */
         Query query = currentSession()
                 .createQuery("select e from " + entityName +
                         " e where e.account.uniqueId = :accountId and e.urn = :urn")
@@ -253,6 +218,13 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
 
         String entityName = clazz.getName();
 
+        /*
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
+         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
+         * identifier.
+         *
+         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
+         */
         Query listQuery = currentSession().createQuery("select m from " + entityName + " m where m.account.urn = :urn")
                 .setParameter("urn", account.getUrn());
 
@@ -271,6 +243,13 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
 
         String entityName = clazz.getName();
 
+        /*
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
+         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
+         * identifier.
+         *
+         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
+         */
         Query listQuery = currentSession().createQuery("select m from " + entityName +
                 " m where m.account.uniqueId = :uniqueId and m.moniker = :moniker")
                 .setParameter("uniqueId", account.getUniqueId())
@@ -291,6 +270,13 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
 
         String entityName = clazz.getName();
 
+        /*
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
+         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
+         * identifier.
+         *
+         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
+         */
         Query listQuery = currentSession().createQuery("select m from " + entityName +
                 " m where m.account.uniqueId = :uniqueId and m.moniker like :moniker")
                 .setParameter("uniqueId", account.getUniqueId())

@@ -20,7 +20,18 @@ package net.smartcosmos.platform.api.service;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+/**
+ * Event runners are thread-safe handlers for an {@link net.smartcosmos.model.event.IEvent} processing algorithm. The
+ * default algorithm is simple database persistence of the event, but other event handlers include analytics, back
+ * office integration, and even composite event handlers that can execute multiple event runners in parallel.
+ */
 public interface IEventRunner extends Runnable
 {
+    /**
+     * Notification flag from the {@link io.dropwizard.lifecycle.Managed}
+     * {@link net.smartcosmos.platform.api.service.IEventService} that the server is shutting down and the event
+     * runner must immediately terminate its thread, presuming it is operating using some type of a blocking
+     * queue that was just interrupted.
+     */
     void setTerminateFlag();
 }

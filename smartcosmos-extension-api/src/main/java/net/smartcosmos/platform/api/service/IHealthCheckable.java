@@ -39,7 +39,16 @@ package net.smartcosmos.platform.api.service;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+/**
+ * Integrated support for verification of the requisite YML configuration parameters, automatically displayed on the
+ * admin port of the server for quick and easy verification that a service has been properly configured.
+ */
 public interface IHealthCheckable
 {
+    /**
+     * Identifies if the service is healthy and properly configured.
+     *
+     * @return true, if the service is properly configured and healthy
+     */
     boolean isHealthy();
 }

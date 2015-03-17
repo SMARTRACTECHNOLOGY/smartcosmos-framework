@@ -50,6 +50,13 @@ public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U>
 
         String entityName = clazz.getName();
 
+        /*
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
+         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
+         * identifier.
+         *
+         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
+         */
         Query listQuery = currentSession().createQuery("select m from " + entityName +
                 " m where m.account.uniqueId = :uniqueId and m.name like :name")
                 .setParameter("uniqueId", account.getUniqueId())

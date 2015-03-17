@@ -32,7 +32,7 @@ import net.smartcosmos.platform.api.IService;
 public interface IEventService<T extends ICosmosContext> extends IService<T>
 {
     /**
-     * Records the event to a persistent data source.
+     * Records the event to a persistent data source, possibly analyzing or manipulating the content along the way.
      *
      * @param eventType Event type
      * @param account   Account (if available)
