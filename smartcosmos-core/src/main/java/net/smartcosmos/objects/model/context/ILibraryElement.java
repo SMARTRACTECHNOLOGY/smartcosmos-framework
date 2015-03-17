@@ -36,13 +36,10 @@ import net.smartcosmos.model.base.ITypedObject;
  * types in that the Type field is always set to "LibraryElement", and cannot be changed. The
  * field "LibraryElementType" is specific to LibraryElements, and is set to one of the values
  * specified in the LibraryHierarchy section of objects.yml.
- *
  */
 public interface ILibraryElement extends IAccountDomainResource<ILibraryElement>, INamedObject<ILibraryElement>,
         ITypedObject
 {
-    void setName(String name);
-
     String getLibraryElementType();
 
     void setLibraryElementType(String libraryElementType);
