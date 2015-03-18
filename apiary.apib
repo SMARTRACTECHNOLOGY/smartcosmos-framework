@@ -308,7 +308,9 @@ email, e.g. you@yahoo.com, even though a realm like yahoo.com is prohibited. If 
 recommended you omit the realm, which will automatically register your email address domain as your realm.
 
 ## Realm Availability [/rest/registration/realm/{realm}]
-### Check to see if the named realm is available for registration [GET]
+### Check realm availability [GET]
+
+Check to see if the named realm is available for registration.
 
 + Parameters
     + realm (required, string, `foo.com`) ... Check to see if the named realm is available for registration
@@ -412,7 +414,9 @@ The platform offers two endpoints for password self-service, supporting both pas
 + Response 401
 
 ## Change Your Password [/rest/account/password/change]
-### Change the authenticated user's password, presuming they know their existing password to change to a new password. [POST]
+### Change the password for the authenticated user [POST]
+
+Change the authenticated user's password, presuming they know their existing password to change to a new password.
 
 + Request (application/json)
 
@@ -451,7 +455,9 @@ The platform offers two endpoints for password self-service, supporting both pas
 + Response 401
 
 ## Reset Lost Password [/rest/account/password/reset]
-### Trigger a password reset workflow via email for the specified Account associated with the indicated email address. [POST]
+### Trigger a password reset for a specified account [POST]
+
+Trigger a password reset workflow via email for the specified account associated with the indicated email address.
 
 + Request (text/plain)
     
@@ -514,8 +520,8 @@ SMART COSMOS Account Management self-service endpoints.
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
 urn | String  | true | false | Minimum | Generated
-account | IAccount  | true | fase | Full | Generated
-lastModifiedTimestamp | long   | true | false | Standard | Generated
+account | IAccount  | true | false | Full | Generated
+lastModifiedTimestamp | long | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 emailAddress | String  | true | false | Minimum |
 givenName | String | false | true | Full | null
@@ -527,9 +533,9 @@ roleType | RoleType  | true  | true | Minimum | User
 *in future API versions*. The only supported values at this time are *Administrator* and *User*.
 
 ## User Management [/rest/users]
-### Create a new user associated with the specified email address   [PUT]
+### Create a new user [PUT]
 
-The following user fields may be used to create a new record:
+Create a new user associated with the specified email address. The following user fields may be used to create a new record:
 
 - `emailAddress` is required and constrained to 128 characters
 - `roleType` is required and constrained to the case-sensitive values of **Administrator** or **User**
@@ -553,7 +559,10 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 
             {
                 "emailAddress": "coworker@foo.com",
-                "roleType": "User"
+                "roleType": "User",
+                "givenName" : "John",
+                "surname" : "Doe",
+                "moniker" : "xyz:123"
             }
 
 + Response 201 (application/json)
@@ -612,7 +621,8 @@ include that field in the request body.
             {
                 "emailAddress": "coworker@foo.com",
                 "givenName": "Homeslice",
-                "surname": "Simpson"
+                "surname": "Simpson",
+                "moniker" : "xyz:123"                
             }
 
 + Response 204
@@ -629,7 +639,9 @@ include that field in the request body.
 + Response 401
 
 ## Lookup Specific User by URN [/rest/users/{urn}{?view}]
-### Lookup a specific user by its system-assigned URN key [GET]
+### Lookup a specific user by its system URN [GET]
+
+Lookup a specific user by its system-assigned URN key
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -691,9 +703,9 @@ include that field in the request body.
             }
 
 ## Change or Reset User Password [/rest/users/user]
-### Initiate a reset password workflow or specifically define the user's password [POST]
+### Initiate a password reset workflow [POST]
 
-The request body must include a valid `emailAddress` field. If the body only includes an `emailAddress` then
+Initiate a reset password workflow or specifically define the user's password. The request body must include a valid `emailAddress` field. If the body only includes an `emailAddress` then
 the password reset workflow will be initiated. However, if the body also includes a `newPassword` field, then
 the user's password will be changed to that password.
 
@@ -752,9 +764,9 @@ identical values is explicitly _not_ supported.
 The platform makes no inferences about this case-sensitive field.
 
 ## Device Definitions [/rest/devices]
-### Create a new device associated with an arbitrary identification value [PUT]
+### Create a new device [PUT]
 
-The following device attributes are used to create a new record:
+Create a new device associated with an arbitrary identification value. The following device attributes are used to create a new record:
 
 - `identification` is required and constrained to 255 characters. It is arbitrarily defined by the developer, but a 
 consistent approach should be utilized. For example, the device's phone number or IMEI could be used consistently to 
@@ -785,7 +797,9 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
             {
                 "identification": "gqorighfawpftjqevznxclmndaawetha",
                 "name": "Jason's Phone",
-                "type": "Android"
+                "type": "Android",
+                "activeFlag" : true,
+                "description" : "My device"
             }
             
 + Response 201 (application/json)
@@ -855,7 +869,9 @@ request body.
             }
             
 ## Lookup Specific Device by URN [/rest/devices/{urn}{?view}]
-### Lookup a specific device by its system-assigned URN key [GET]
+### Lookup a specific device by its system URN [GET]
+
+Lookup a specific device by its system-assigned URN key.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -889,7 +905,9 @@ request body.
 + Response 204 
  
 ## Lookup Specific Device by Identification [/rest/devices/device/{identification}{?view}]
-### Lookup a specific device by its system-assigned URN key [GET]
+### Lookup a specific device by its system URN [GET]
+
+Lookup a specific device by its system-assigned URN key.
 
 + Parameters
     + identification (required, string, `gqorighfawpftjqevznxclmndaawetha`) ... Exact case-sensitive identification value to 
@@ -972,7 +990,7 @@ or even a place (optionally complimented by a geospatial definition to precisely
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
 urn | String  | true | false | Minimum | Generated
-account | IAccount  | true | fase | Full | Generated
+account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 name | String  | true | true | Minimum | 
@@ -989,7 +1007,7 @@ The platform makes no inferences about this case-sensitive field.
 
 
 ## Object Management [/rest/objects]
-### Create a new object   [PUT]
+### Create a new object [PUT]
 
 The following object fields may be used to create a new record:
 
@@ -1020,7 +1038,10 @@ case **no data is merged; existing record is left as-is**
             {
                 "objectUrn": "urn:building:mall:ParadiseValley",
                 "type": "Building",
-                "name": "Paradise Valley Merchant's Mall"
+                "name": "Paradise Valley Merchant's Mall",
+                "description": "test",
+                "activeFlag": true,
+                "moniker": "xyz:123"
             }
        
 + Response 200 (application/json)
@@ -1076,7 +1097,10 @@ include that field in the request body.
     
             {
                 "objectUrn": "urn:building:mall:ParadiseValley",
-                "name": "Paradise Valley Mercantile Mall"
+                "name": "Paradise Valley Mercantile Mall",
+                "description": "test",
+                "activeFlag": true,
+                "moniker": "xyz:123"                
             }
             
 + Response 204
@@ -1091,9 +1115,11 @@ include that field in the request body.
             }   
             
 + Response 401            
-            
+
 ## Lookup Specific Object by URN [/rest/objects/{urn}{?view}]
-### Lookup a specific object by its system-assigned URN key [GET]
+### Lookup a specific object by its system URN [GET]
+
+Lookup a specific object by its system-assigned URN key.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -1138,7 +1164,9 @@ include that field in the request body.
 + Response 401
  
 ## Lookup Object by Object URN [/rest/objects/object/{objectUrn}{?view,exact}]
-### Lookup a specific object by their arbitrary developer assigned object URN [GET]
+### Lookup specifc object by object URN [GET]
+
+Lookup a specific object by their arbitrary developer assigned object URN key.
 
 + Parameters
     + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN to locate
@@ -1175,7 +1203,7 @@ include that field in the request body.
 ## Query Objects [/rest/objects{?view,modifiedAfter,monikerLike,nameLike,objectUrnLike,type}]
 ### Lookup an array of matching objects [GET]
 
-####Additive Nature
+#### Additive Nature
 Each query string parameter is **AND**ed with other parameters. It is not possible to define a parenthetical or mixed Boolean logic
 query at this time.
 
@@ -1251,7 +1279,7 @@ timestamp | long | false | true | Standard | 0
 The platform makes no inferences about this case-sensitive field.
 
 ## Object Address Management [/rest/objects/object/{objectUrn}/address]
-### Create a new object address   [PUT]
+### Create a new object address [PUT]
 
 The following object fields may be used to create a new record:
 
@@ -1279,8 +1307,11 @@ the internationally recognized standard for country codes.
             {
                 "type": "Mailing Address",
                 "line1": "123 Street",
+                "line2": "xyz",
                 "stateProvince" : "CA",
-                "countryAbbreviation" : "US"
+                "countryAbbreviation" : "US",
+                "city": "Boston",
+                "postalCode": "12345"
             }
             
 + Response 201 (application/json)
@@ -1324,7 +1355,13 @@ the `stateProvince` of the object, only include that field in the request body.
     + Body
     
             {
-                "stateProvince": "TX"
+                "type": "Mailing Address",
+                "line1": "123 Street",
+                "line2": "xyz",
+                "stateProvince" : "TX",
+                "countryAbbreviation" : "US",
+                "city": "my city",
+                "postalCode": "12345"
             }
             
 + Response 204
@@ -1339,7 +1376,9 @@ the `stateProvince` of the object, only include that field in the request body.
             }   
                         
 ## Lookup Specific Object Address by URN [/rest/objects/object/{objectUrn}/address/{urn}{?view}]
-### Lookup a specific object address by its system-assigned URN key [GET]
+### Lookup a specific object address by its system URN [GET]
+
+Lookup a specific object address by its system-assigned URN key.
 
 + Parameters
     + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
@@ -1451,7 +1490,7 @@ around the concept of reading numerous UHF RFID tags with a specialized RFID sca
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
 urn | String  | true | false | Minimum | Generated
-account | IAccount  | true | fase | Full | Generated
+account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 name | String  | true | true | Minimum | 
@@ -1469,7 +1508,7 @@ type | String | true | true | Minimum |
 The platform makes no inferences about this case-sensitive field.
 
 ## Session Management [/rest/sessions]
-### Start a new object interaction session   [PUT]
+### Start a new object interaction session [PUT]
 
 The following fields may be used to create a new record:
 
@@ -1489,7 +1528,8 @@ The following fields may be used to create a new record:
     
             {
                 "name": "Daily Tag Scan",
-                "type": "RFID Scan"
+                "type": "RFID Scan",
+                "description": "RFID action"
             }
             
 + Response 201 (application/json)
@@ -1547,7 +1587,9 @@ The request body must include a valid `sessionUrn` field.
 + Response 401            
             
 ## Lookup Specific Object Interaction Session by URN [/rest/sessions/{urn}{?view}]
-### Lookup a specific session by its system-assigned URN key [GET]
+### Lookup a specific session by its system URN [GET]
+
+Lookup a specific session by its system-assigned URN key.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -1656,7 +1698,7 @@ difference of minutes, hours, or perhaps days in those instances where the devic
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
 urn | String  | true | false | Minimum | Generated
-account | IAccount  | true | fase | Full | Generated
+account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 entityReferenceType | EntityReferenceType | true | false | Minimum |
@@ -1779,7 +1821,9 @@ If no `objectUrn` query parameter is included, then all interactions are returne
 + Response 401
 
 ## Lookup Specific Object Interaction by URN [/rest/interactions/{urn}{?view}]
-### Lookup a specific interaction by its system-assigned URN key [GET]
+### Lookup a specific interaction by its system URN [GET]
+
+Lookup a specific interaction by its system-assigned URN key.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -1862,7 +1906,7 @@ referenced objects. The platform makes no inferences from any relationships defi
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
 urn | String  | true | false | Minimum | Generated
-account | IAccount  | true | fase | Full | Generated
+account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 entityReferenceType | EntityReferenceType | true | false | Minimum |
@@ -1878,7 +1922,7 @@ relatedReferenceUrn | String | true | false | Minimum |
 The platform makes no inferences about this case-sensitive field.
 
 ## Relationship Management [/rest/relationships/{entityReferenceType}/{referenceUrn}]
-### Create a new relationship   [PUT]
+### Create a new relationship [PUT]
 
 The following object fields are all required to create a new record:
 
@@ -1954,7 +1998,9 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 + Response 401
 
 ## Relationship Management by URN [/rest/relationships/{urn}{?view}]
-### Lookup a specific relationship by its system-assigned URN key [GET]
+### Lookup a specific relationship by its system URN [GET]
+
+Lookup a specific relationship by its system-assigned URN key.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -1999,7 +2045,9 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 + Response 401
 
 ## Delete Relationship by URN [/rest/relationships/{urn}]
-### Deletes an existing relationship by its system-assigned URN key [DELETE]
+### Deletes an relationship by system URN [DELETE]
+
+Deletes an existing relationship by its system-assigned URN key.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -2024,7 +2072,9 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 + Response 401
 
 ## Lookup All Relationships Between Entities [/rest/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}{?view}]
-### Lookup an array of all defined relationships between any two entities [GET]
+### Lookup an array of relationships [GET]
+
+Lookup an array of all defined relationships between any two entities.
 
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
@@ -2074,7 +2124,9 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 + Response 401
 
 ## Lookup Specific Relationship Between Entities [/rest/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}/{type}{?view}]
-### Lookup a specific relationship between any two entities [GET]
+### Lookup a specific relationship [GET]
+
+Lookup a specific relationship between any two entities.
 
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
@@ -2123,7 +2175,9 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 + Response 401
 
 ## Lookup Relationships by Type [/rest/relationships/{entityReferenceType}/{referenceUrn}/{type}{?view,reverse}]
-### Lookup an array of all defined relationships of the specific type [GET]
+### Lookup all defined relationships by type [GET]
+
+Lookup an array of all defined relationships of the specific type.
 
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
@@ -2190,7 +2244,7 @@ Field | Data Type | Required | Can Update | Serialization Level | Default Value
 urn | String  | true | false | Minimum | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
-account | IAccount  | true | fase | Full | Generated
+account | IAccount  | true | false | Full | Generated
 name | String  | true | true | Minimum |
 description | String  | false | true | Standard |
 activeFlag | Boolean  | true | false | Standard  |
@@ -2537,7 +2591,9 @@ If no `nameLike` query parameter is included, then all interactions are returned
 + Response 401
 
 ## Lookup Specific Geospatial Entity by URN [/rest/geospatial/{urn}{?view}]
-### Lookup a specific geospatial entity by its system-assigned URN key [GET]
+### Lookup a specific geospatial entity by URN [GET]
+
+Lookup a specific geospatial entity by its system-assigned URN key.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -2748,9 +2804,9 @@ rawValue | String  | true | true | Minimum  | Opaque Base64 encoded value when u
 
 
 ## Type-Safe Encoding [/rest/metadata/mapper/encode/{metadataDataType}]
-### Encodes a strongly typed value using the platform's built-in encoder [POST]
- 
-*The built-in encoder algorithm is opaque to the developer.* The body of the HTTP POST must contain a valid String representation of the specified `metadataDataType` specified. 
+### Encode a strongly typed value [POST]
+
+Encodes a strongly typed value using the platform's built-in encoder. *The built-in encoder algorithm is opaque to the developer.* The body of the HTTP POST must contain a valid String representation of the specified `metadataDataType` specified. 
 
 - **200 SUCCESS_OK** the value was within the range of the specified `metadataDataType` and has been successfully
 encoded
@@ -2782,9 +2838,9 @@ encoded
             }
 
 ## Type-Safe Decoding [/rest/metadata/mapper/decode/{metadataDataType}]
-### Decodes a strongly typed value previously encoded using the platform's built-in encoder [POST]
+### Decode a strongly typed value [POST]
 
-*The built-in encoder algorithm is opaque to the developer.* The body of the HTTP POST must contain a valid `rawValue` representation of a platform encoded value of the type
+Decodes a strongly typed value previously encoded using the platform's built-in encoder. *The built-in encoder algorithm is opaque to the developer.* The body of the HTTP POST must contain a valid `rawValue` representation of a platform encoded value of the type
 `metadataDataType` specified.
 
 > Generally, most developers will just take the entire metadata JSON record and POST it for value decoding, although only
@@ -2820,9 +2876,9 @@ decoded
             }
 
 ## Metadata Upsertion [/rest/metadata/{entityReferenceType}/{referenceUrn}]
-### Inserts a new key-value or updates an existing key value related to the specified entity [PUT]
+### Insert or update metadata for a specific entity [PUT]
 
-This endpoint uses an **upsert** algorithm, inserting the metadata record(s) if the named key doesn't already exist, or
+Inserts a new key-value or updates an existing key value related to the specified entity. This endpoint uses an **upsert** algorithm, inserting the metadata record(s) if the named key doesn't already exist, or
 updating the value (and only the value) of the metadata record if the key already exists.
 
 This endpoint expects the submission of a JSON array. The design allows for the rapid definition of multiple metadata
@@ -2890,7 +2946,9 @@ large values should use a file instead of metadata.
 + Response 401
 
 ## Metadata Deletion [/rest/metadata/{entityReferenceType}/{referenceUrn}/{key}]
-### Deletes an existing metadata key by its system-assigned URN key [DELETE]
+### Delete an metadata key by system URN [DELETE]
+
+Deletes an existing metadata key by its system-assigned URN key.
 
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
@@ -2917,7 +2975,9 @@ large values should use a file instead of metadata.
 + Response 401
 
 ## Lookup Associated Metadata [/rest/metadata/{entityReferenceType}/{referenceUrn}{?view,key}]
-### Lookup all metadata that matches the specified key pattern [GET]
+### Lookup metadata by specified key pattern [GET]
+
+Lookup all metadata that matches the specified key pattern.
 
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
@@ -3060,9 +3120,9 @@ GET request represents the URN assigned to a specific File definition, returning
 the given File.
 
 ## File Definition [/rest/files]
-### Define the metadata of a file in preparation of an actual file upload [PUT]
+### Define the metadata of a file [PUT]
 
-The following file fields may be used to create a new file record:
+Define the metadata of a file in preparation of an actual file upload. The following file fields may be used to create a new file record:
 
 - `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
 [data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
@@ -3111,7 +3171,9 @@ The following file fields may be used to create a new file record:
 + Response 401
 
 ## File Upload - Octet-Stream [/rest/files/{urn}/octet]
-### Upload actual file bytes to the cloud using an octet-stream [POST]
+### Upload a file as octet-stream [POST]
+
+Upload actual file bytes to the cloud using an octet-stream.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
@@ -3160,8 +3222,9 @@ The following file fields may be used to create a new file record:
             }
 
 ## File Upload - Multi-Part Form Data [/rest/files/{urn}/multipart]
-### Upload actual file bytes to the cloud using an multi-part form data submission from a web form [POST]
-By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web form to be used to upload a file to the cloud.
+### Upload a file as multi-part form data [POST]
+
+Upload actual file bytes to the cloud using an multi-part form data submission from a web form. By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web form to be used to upload a file to the cloud.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
@@ -3252,7 +3315,7 @@ By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web 
 + Response 401
 
 ## File Content Retrieval [/rest/files/{urn}/contents]                
-### Retrieves the actual file content from the cloud [GET]
+### Retrieves the actual file content [GET]
 
 > The actual MIME type of the response *is the MIME type from the file definition*. For this reason it is critical that the MIME type is 
 accurately reported when defining the file.
@@ -3290,8 +3353,9 @@ accurately reported when defining the file.
 + Response 401
 
 ## Related File Definitions Retrieval [/rest/files/{entityReferenceType}/{referenceUrn}{?view}]                
-### Retrieves the complete collection of file definitions associated with the specified entity [GET]
-Always returns a JSON array where each member of the array is a file definition associated with the specified entity.
+### Retrieves all file definitions of a entity [GET]
+
+Retrieves the complete collection of file definitions associated with the specified entity. Always returns a JSON array where each member of the array is a file definition associated with the specified entity.
 
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
@@ -3336,8 +3400,9 @@ Always returns a JSON array where each member of the array is a file definition 
 + Response 401            
             
 ## File Deletion [/rest/files/{urn}]                
-### Deletes an existing relationship by its system-assigned URN key [DELETE]
-Immediately purges both the file definition and the physical file stored in the cloud.
+### Delete a relationship by its system URN [DELETE]
+
+Deletes an existing relationship by its system-assigned URN key. Immediately purges both the file definition and the physical file stored in the cloud.
 
 + Parameters
     
@@ -3427,9 +3492,9 @@ Endpoint | Supported HTTP Methods | Events Generated
 
 
 ## Tag Definitions [/rest/tags]
-### Create a new tag associated with an arbitrary identification value *response is incorrect* [PUT]
+### Create a tag [PUT]
 
-The following user fields may be used to create a new tag:
+Create a new tag associated with an arbitrary identification value *response is incorrect*. The following user fields may be used to create a new tag:
 
 - `name` is required and constrained to 1024 characters
 - `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
@@ -3579,7 +3644,6 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 ## Assign hash tags [/rest/tags/{entityReferenceType}/{referenceUrn}]
 ### Assign hash tags to objects [PUT]
 
-
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
     + referenceUrn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -3691,7 +3755,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 + Response 401 
 
 ## Delete tag [/rest/tags/tag/{tagName}]
-### Remove tag by URN [DELETE]
+### Remove tag by tag name [DELETE]
 
 + Parameters
     + tagName (required, string, `MyTag`) ... Client defined name at creation
@@ -3760,7 +3824,7 @@ in near real-time.
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
 urn | String  | true | false | Minimum | Generated
-account | IAccount  | true | fase | Full | Generated
+account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 entityReferenceType | EntityReferenceType | true | false | Minimum |
@@ -3773,7 +3837,9 @@ description | String  | false | true | Standard |
 activeFlag | Boolean  | true | false | Standard  | true
 
 ## Endpoint Enrollment [/rest/notifications/enroll]
-### Enroll an existing endpoint running a web app ready to confirm a subscription and receive events [PUT]
+### Enroll an existing endpoint for event handling [PUT]
+
+Enroll an existing endpoint running a web app ready to confirm a subscription and receive events. 
 
 An additional `referenceUrn` field must be included **if the endpoint enrollment is being requested by an extension** on behalf of another account. 
 In this case, the Authorization header would *not* be Basic but, but a standard OAuth 2 Bearer token header.
@@ -3822,7 +3888,9 @@ the confirmation token *and* posts that confirmation token to the /notifications
 + Response 401            
             
 ## Endpoint Enrollment Confirmation [/rest/notifications/confirm/{topicArn}]
-### Confirms the enrollment of an endpoint running a web app that received a `topicArn` [PUT]
+### Confirms the enrollment of an endpoint [PUT]
+
+Confirms the enrollment of an endpoint running a web app that received a `topicArn`.
 
 Definition of an endpoint results in an endpoint that is *pending* confirmation. Until the actual web application at the defined endpoint receives 
 the confirmation token *and* posts that confirmation token to the /notifications/confirm/{topicArn} endpoint *no events will be delivered to the endpoint*.
@@ -3860,7 +3928,9 @@ that is returned when the notification endpoint is defined.
 + Response 401            
             
 ## Endpoint Withdraw [/rest/notifications/withdraw]
-### Withdraw or terminate delivery of events to an existing endpoint [PUT]
+### Cancel delivery of events to an existing endpoint [PUT]
+
+Withdraw or terminate delivery of events to an existing endpoint.
 
 + Request (application/json)
 
@@ -3888,7 +3958,9 @@ that is returned when the notification endpoint is defined.
 + Response 401
 
 ## Lookup Specific Notification Endpoint by URN [/rest/notifications/{urn}{?view}]
-### Lookup a specific notification endpoint by its system-assigned URN key [GET]
+### Lookup a notification endpoint by system URN [GET]
+
+Lookup a specific notification endpoint by its system-assigned URN key.
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -4038,7 +4110,7 @@ a library link) has no effect on either the library element or the linked object
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ----- | --------- | -------- | ---------- | ------------------- | -------------
 urn | String  | true | false | Minimum | Generated
-account | IAccount  | true | fase | Full | Generated
+account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 name | String | true | true | Standard | none
 moniker | String  | false | true | Full | null
@@ -4089,7 +4161,7 @@ section carefully and discuss any questions with your SMARTRAC support engineer 
 
 
 ## Library Management [/rest/library]
-### Create a new library element   [PUT]
+### Create a new library element [PUT]
 
 The following library fields may be used to create a new record:
 
@@ -4184,7 +4256,9 @@ by updating a library element's parent field.
             
 + Response 401
 
-### Delete a specific library element by its system-assigned URN key [DELETE]
+### Delete a specific library element by system URN [DELETE]
+
+Delete a specific library element by its system-assigned URN key.
 This method will only work on library elements which have no children, or in the case of PageEntries, which have no links.
 
 + Request
@@ -4217,8 +4291,10 @@ This method will only work on library elements which have no children, or in the
 
 + Response 401
 
-## Look up a Specific Library Element by URN [/rest/library/{urn}{?view}]
-### Look up a specific library element by its system-assigned URN key [GET]
+## Lookup a Specific Library Element by URN [/rest/library/{urn}{?view}]
+### Lookup a specific library element by system URN [GET]
+
+Lookup a specific library element by its system-assigned URN key.
 
 + Parameters
     + urn (required, string, `urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43`) ... System-assigned URN assigned at creation
@@ -4266,8 +4342,10 @@ This method will only work on library elements which have no children, or in the
 
 
 
-## Look up Library Elements with Name Pattern [/rest/library{?nameLike,eltType,view}]
-### Look up library elements matching a name pattern, with or without LibraryElementType [GET]
+## Lookup Library Elements with Name Pattern [/rest/library{?nameLike,eltType,view}]
+### Lookup library elements matching a name pattern [GET]
+
+Lookup library elements matching a name pattern, with or without LibraryElementType.
 
 + Parameters
     + nameLike (required, String, `urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43`) ... String to match against all library element names
@@ -4312,8 +4390,10 @@ This method will only work on library elements which have no children, or in the
             
 + Response 401
 
-## Look up Specific Library Element by Name and LibraryElementType [/rest/library/{libraryElementType}/{name}/{?view}]
-### Look up a specific library element by its name and LibraryElementType [GET]
+## Lookup Specific Library Element by Name and LibraryElementType [/rest/library/{libraryElementType}/{name}/{?view}]
+### Lookup a library element by name and type [GET]
+
+Lookup a specific library element by its name and LibraryElementType.
 
 + Parameters
     + libraryElementType (required, string, `Library | Shelf | Book | and so on`)
@@ -4352,8 +4432,10 @@ This method will only work on library elements which have no children, or in the
 + Response 401
             
 
-## Look up Parent of a Library Element by URN [/rest/library/parent/{urn}{?view}]
-### Look up parent of a specific library element with the book's system-assigned URN key, returning an error if element specifed by URN is of type Library [GET]
+## Lookup Parent of a Library Element by URN [/rest/library/parent/{urn}{?view}]
+### Lookup parent of a library element by URN [GET]
+
+Lookup parent of a specific library element with the book's system-assigned URN key, returning an error if element specifed by URN is of type Library
 
 + Parameters
     + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
@@ -4396,8 +4478,10 @@ This method will only work on library elements which have no children, or in the
             
 + Response 401
 
-## Look up Children of a Specific Library Element by the Library Element's URN [/rest/library/children/{urn}{?view}]
-### Look up children specific library element with the element's system-assigned URN key, returning an error if the library element type is PageEntry and thus by definition has no children. [GET]
+## Lookup Children of a Specific Library Element by the Library Element's URN [/rest/library/children/{urn}{?view}]
+### Lookup children of a library element by URN [GET]
+
+Lookup children specific library element with the element's system-assigned URN key, returning an error if the library element type is PageEntry and thus by definition has no children.
 
 + Parameters
     + urn (required, string, `urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e`) ... System-assigned URN assigned at creation
