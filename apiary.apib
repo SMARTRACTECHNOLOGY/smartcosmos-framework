@@ -414,7 +414,7 @@ The platform offers two endpoints for password self-service, supporting both pas
 + Response 401
 
 ## Change Your Password [/rest/account/password/change]
-### Change password for the authenticated user [POST]
+### Change password for authenticated user [POST]
 
 Change the authenticated user's password, presuming they know their existing password to change to a new password.
 
@@ -455,7 +455,7 @@ Change the authenticated user's password, presuming they know their existing pas
 + Response 401
 
 ## Reset Lost Password [/rest/account/password/reset]
-### Trigger password reset for specified account [POST]
+### Reset lost password for specified account [POST]
 
 Trigger a password reset workflow via email for the specified account associated with the indicated email address.
 
@@ -1376,7 +1376,7 @@ the `stateProvince` of the object, only include that field in the request body.
             }   
                         
 ## Lookup Specific Object Address by URN [/rest/objects/object/{objectUrn}/address/{urn}{?view}]
-### Lookup a specific object address by system URN [GET]
+### Lookup a specific object address by URN [GET]
 
 Lookup a specific object address by its system-assigned URN key.
 
@@ -1425,7 +1425,7 @@ Lookup a specific object address by its system-assigned URN key.
 + Response 204 
              
 ## Lookup Matching Object Addresses by URN [/rest/objects/object/{objectUrn}/address{?view,count}]
-### Lookup an array of matching object addresses [GET]
+### Lookup matching object addresses [GET]
 
 + Parameters
     + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
@@ -1821,7 +1821,7 @@ If no `objectUrn` query parameter is included, then all interactions are returne
 + Response 401
 
 ## Lookup Specific Object Interaction by URN [/rest/interactions/{urn}{?view}]
-### Lookup a specific interaction by its system URN [GET]
+### Lookup specific interaction by URN [GET]
 
 Lookup a specific interaction by its system-assigned URN key.
 
@@ -3687,7 +3687,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 
 
 ## Lookup list of Tags [/rest/tags %5B?tagName=Foo&entityReferenceType=Bar&referenceUrn=Baaq%5D{?view}]
-### Lookup an array of matching objects [GET]
+### Lookup tags [GET]
 
 
 + Parameters
@@ -4433,7 +4433,7 @@ Lookup a specific library element by its name and LibraryElementType.
             
 
 ## Lookup Parent of a Library Element by URN [/rest/library/parent/{urn}{?view}]
-### Lookup parent of a library element by URN [GET]
+### Lookup parent of library element by URN [GET]
 
 Lookup parent of a specific library element with the book's system-assigned URN key, returning an error if element specifed by URN is of type Library
 
@@ -4479,8 +4479,8 @@ Lookup parent of a specific library element with the book's system-assigned URN 
 + Response 401
 
 ## Lookup Children of a Specific Library Element by the Library Element's URN [/rest/library/children/{urn}{?view}]
-### Lookup children of a library element by URN [GET]
-
+### Lookup children for library element by URN [GET]
+    
 Lookup children specific library element with the element's system-assigned URN key, returning an error if the library element type is PageEntry and thus by definition has no children.
 
 + Parameters
