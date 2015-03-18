@@ -1997,8 +1997,8 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 
 + Response 401
 
-## Relationship Management by URN [/rest/relationships/{urn}{?view}]
-### Lookup specific relationship by system URN [GET]
+## Relationship Management by system URN [/rest/relationships/{urn}{?view}]
+### Lookup specific relationship by URN [GET]
 
 Lookup a specific relationship by its system-assigned URN key.
 
@@ -3837,7 +3837,7 @@ description | String  | false | true | Standard |
 activeFlag | Boolean  | true | false | Standard  | true
 
 ## Endpoint Enrollment [/rest/notifications/enroll]
-### Enroll existing endpoint for event handling [PUT]
+### Enroll endpoint for event handling [PUT]
 
 Enroll an existing endpoint running a web app ready to confirm a subscription and receive events. 
 
