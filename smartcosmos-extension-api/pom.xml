@@ -61,12 +61,20 @@
         </snapshotRepository>
     </distributionManagement>
 
+    <repositories>
+        <repository>
+            <id>oss-releases</id>
+            <name>OSS Sonatype</name>
+            <url>https://oss.sonatype.org/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
 
         <dependency>
             <groupId>net.smartcosmos</groupId>
             <artifactId>platform-core</artifactId>
-            <version>1.1</version>
+            <version>1.2</version>
             <scope>provided</scope>
         </dependency>
 
