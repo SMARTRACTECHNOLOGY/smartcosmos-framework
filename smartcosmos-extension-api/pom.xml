@@ -17,7 +17,7 @@
     <groupId>net.smartcosmos</groupId>
     <artifactId>server-api</artifactId>
     <packaging>jar</packaging>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
     <name>Server API</name>
     <description>Set of common server-side interfaces used across all SMART COSMOS platform services</description>
 
@@ -50,7 +50,7 @@
         <url>https://github.com/SMARTRACTECHNOLOGY/smartcosmos-server-api</url>
         <connection>scm:git:git://github.com/SMARTRACTECHNOLOGY/smartcosmos-server-api.git</connection>
         <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-server-api.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>server-api-1.2</tag>
     </scm>
 
     <distributionManagement>
