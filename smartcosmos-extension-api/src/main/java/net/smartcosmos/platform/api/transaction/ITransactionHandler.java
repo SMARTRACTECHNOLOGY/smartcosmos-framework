@@ -22,6 +22,8 @@ package net.smartcosmos.platform.api.transaction;
 
 import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
+import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
+import net.smartcosmos.platform.pojo.authentication.AuthenticatedUser;
 
 /**
  * Transaction handlers are a simple and effective way to process "fat JSON files" in order to reduce the number of
@@ -41,5 +43,5 @@ public interface ITransactionHandler<T extends ICosmosContext> extends IService<
      *
      * @param fatJson raw JSON document submitted by the caller
      */
-    void run(String fatJson);
+    void run(String fatJson, IAuthenticatedUser authenticatedUser);
 }
