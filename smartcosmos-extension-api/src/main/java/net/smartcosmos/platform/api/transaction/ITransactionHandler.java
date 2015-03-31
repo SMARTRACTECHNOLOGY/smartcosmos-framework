@@ -23,7 +23,6 @@ package net.smartcosmos.platform.api.transaction;
 import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
-import net.smartcosmos.platform.pojo.authentication.AuthenticatedUser;
 
 /**
  * Transaction handlers are a simple and effective way to process "fat JSON files" in order to reduce the number of
