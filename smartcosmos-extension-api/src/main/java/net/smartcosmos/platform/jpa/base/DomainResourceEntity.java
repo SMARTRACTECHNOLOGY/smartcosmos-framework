@@ -27,7 +27,6 @@ import net.smartcosmos.platform.jpa.integrator.IPostLoadHandler;
 import net.smartcosmos.platform.jpa.integrator.IPrePersistHandler;
 import net.smartcosmos.platform.jpa.integrator.IPreUpdateHandler;
 import net.smartcosmos.util.json.JsonGenerationView;
-import org.hibernate.annotations.Index;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
