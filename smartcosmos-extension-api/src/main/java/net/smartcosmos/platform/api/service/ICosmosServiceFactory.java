@@ -117,7 +117,7 @@ public interface ICosmosServiceFactory<T extends ICosmosContext> extends IServic
 
     boolean hasExtension(String key);
 
-    <E> E lookupExtension(String key, Class<E> extensionClassType) throws IllegalArgumentException;
+    <E> E lookupExtension(String key, Class<E> extensionClassType);
 
-    void registerExtension(String key, Object extensionInstance) throws IllegalArgumentException;
+    void registerExtension(String key, Object extensionInstance);
 }

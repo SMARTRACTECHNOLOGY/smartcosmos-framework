@@ -247,7 +247,7 @@ public abstract class AbstractCosmosServiceFactory<T extends ICosmosContext>
     }
 
     @Override
-    public <E> E lookupExtension(String key, Class<E> extensionClassType) throws IllegalArgumentException
+    public <E> E lookupExtension(String key, Class<E> extensionClassType)
     {
         E instance;
 
@@ -263,7 +263,7 @@ public abstract class AbstractCosmosServiceFactory<T extends ICosmosContext>
     }
 
     @Override
-    public synchronized void registerExtension(String key, Object extensionInstance) throws IllegalArgumentException
+    public synchronized void registerExtension(String key, Object extensionInstance)
     {
         if (!hasExtension(key))
         {
