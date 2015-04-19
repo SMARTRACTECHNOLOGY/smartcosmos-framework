@@ -263,11 +263,27 @@ public abstract class AbstractCosmosServiceFactory<T extends ICosmosContext>
     }
 
     @Override
-    public synchronized void registerExtension(String key, Object extensionInstance)
+    public void registerExtension(String key, Object extensionInstance)
     {
+        registerExtension(key, extensionInstance, null);
+    }
+
+    @Override
+    public synchronized void registerExtension(String key, Object extensionInstance, String briefDescription)
+    {
+        Preconditions.checkNotNull(key, "key must not be null");
+        Preconditions.checkNotNull(extensionInstance, "extensionInstance must not be null");
+
         if (!hasExtension(key))
         {
             extensions.put(key, extensionInstance);
+
+            LOG.info("**************************************************************************");
+            LOG.info("** Objects Server Extension Registration                                **");
+            LOG.info("**                                                                      **");
+            LOG.info("** Key: " + key);
+            LOG.info("** Description: " + briefDescription);
+            LOG.info("**************************************************************************");
 
         } else
         {

@@ -120,4 +120,6 @@ public interface ICosmosServiceFactory<T extends ICosmosContext> extends IServic
     <E> E lookupExtension(String key, Class<E> extensionClassType);
 
     void registerExtension(String key, Object extensionInstance);
+
+    void registerExtension(String key, Object extensionInstance, String briefDescription);
 }
