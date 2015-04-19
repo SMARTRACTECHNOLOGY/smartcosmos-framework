@@ -114,4 +114,10 @@ public interface ICosmosServiceFactory<T extends ICosmosContext> extends IServic
      * @return Default Quartz scheduler
      */
     Scheduler getQuartzScheduler();
+
+    boolean hasExtension(String key);
+
+    <E> E lookupExtension(String key, Class<E> extensionClassType) throws IllegalArgumentException;
+
+    void registerExtension(String key, Object extensionInstance) throws IllegalArgumentException;
 }

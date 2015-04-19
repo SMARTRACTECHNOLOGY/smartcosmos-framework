@@ -40,11 +40,13 @@ package net.smartcosmos.platform.base;
  */
 
 import com.google.common.base.Preconditions;
+import com.sun.jersey.client.impl.CopyOnWriteHashMap;
 import io.dropwizard.lifecycle.Managed;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
+import net.smartcosmos.platform.api.service.ICosmosServiceFactory;
 import net.smartcosmos.platform.api.service.IDirectoryService;
 import net.smartcosmos.platform.api.service.IDownloadService;
 import net.smartcosmos.platform.api.service.IEmailService;
@@ -52,7 +54,6 @@ import net.smartcosmos.platform.api.service.IEventBroadcastNotificationService;
 import net.smartcosmos.platform.api.service.IEventService;
 import net.smartcosmos.platform.api.service.IExceptionService;
 import net.smartcosmos.platform.api.service.INotificationService;
-import net.smartcosmos.platform.api.service.ICosmosServiceFactory;
 import net.smartcosmos.platform.api.service.IQueueService;
 import net.smartcosmos.platform.api.service.IStorageService;
 import net.smartcosmos.platform.api.service.ITemplateService;
@@ -60,6 +61,8 @@ import net.smartcosmos.platform.util.ClassUtil;
 import org.quartz.Scheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Map;
 
 public abstract class AbstractCosmosServiceFactory<T extends ICosmosContext>
         extends AbstractService<T> implements ICosmosServiceFactory<T>
@@ -85,6 +88,8 @@ public abstract class AbstractCosmosServiceFactory<T extends ICosmosContext>
     private IEventBroadcastNotificationService<T> eventBroadcastNotificationService;
 
     private IEventService<T> eventService;
+
+    private Map<String, Object> extensions = new CopyOnWriteHashMap<>();
 
     protected AbstractCosmosServiceFactory(String serviceId, String name)
     {
@@ -233,6 +238,41 @@ public abstract class AbstractCosmosServiceFactory<T extends ICosmosContext>
     public Scheduler getQuartzScheduler()
     {
         return context.getScheduler();
+    }
+
+    @Override
+    public boolean hasExtension(String key)
+    {
+        return extensions.containsKey(key);
+    }
+
+    @Override
+    public <E> E lookupExtension(String key, Class<E> extensionClassType) throws IllegalArgumentException
+    {
+        E instance;
+
+        if (!hasExtension(key))
+        {
+            throw new IllegalArgumentException("No extensions is registered under the assigned key of " + key);
+        } else
+        {
+            instance = extensionClassType.cast(extensions.get(key));
+        }
+
+        return instance;
+    }
+
+    @Override
+    public synchronized void registerExtension(String key, Object extensionInstance) throws IllegalArgumentException
+    {
+        if (!hasExtension(key))
+        {
+            extensions.put(key, extensionInstance);
+
+        } else
+        {
+            throw new IllegalArgumentException("Extension already registered under key " + key);
+        }
     }
 }
 
