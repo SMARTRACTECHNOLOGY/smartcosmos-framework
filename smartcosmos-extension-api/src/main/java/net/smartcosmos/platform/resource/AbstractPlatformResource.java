@@ -28,6 +28,7 @@ import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IRequestHandler;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
+import net.smartcosmos.platform.util.TransactionException;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.ViewType;
@@ -57,6 +58,14 @@ public abstract class AbstractPlatformResource<U extends ICosmosContext>
     protected <T> Response dispatchRequest(T inputValue, IRequestHandler<T> handler)
     {
         return dispatchRequest(inputValue, handler, null);
+    }
+
+    protected <T> Response dispatchTransactionalRequest(T inputValue,
+                                           IRequestHandler<T> handler,
+                                           IAuthenticatedUser authenticatedUser)
+            throws TransactionException
+    {
+        return dispatchTransactionalRequest(inputValue, ViewType.Standard, handler, authenticatedUser);
     }
 
     protected <T> Response dispatchRequest(T inputValue,
@@ -184,6 +193,61 @@ public abstract class AbstractPlatformResource<U extends ICosmosContext>
                     .status(Response.Status.UNAUTHORIZED)
                     .entity(ResponseEntity.toJson(Result.ERR_UNAUTHORIZED))
                     .build();
+
+        } catch (Exception e)
+        {
+            LOG.error(e.getMessage(), e);
+
+            response = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(ResponseEntity.toJson(Result.ERR_INTERNAL, e.getMessage()))
+                    .build();
+        }
+
+        return response;
+    }
+    protected <T> Response dispatchTransactionalRequest(T inputValue,
+                                           ViewType view,
+                                           IRequestHandler<T> handler,
+                                           IAuthenticatedUser authenticatedUser)
+            throws TransactionException
+    {
+        Response response;
+
+        Preconditions.checkNotNull(handler, "Request handler must not be null");
+        try
+        {
+            handler.increment();
+
+            if (authenticatedUser != null)
+            {
+                handler.isAuthorized(authenticatedUser);
+
+                checkRole(authenticatedUser.getRoleType());
+            }
+
+            response = handler.handle(inputValue, view, authenticatedUser);
+        } catch (JsonProcessingException e)
+        {
+            LOG.warn(e.getMessage(), e);
+
+            response = Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(ResponseEntity.toJson(Result.ERR_FAILURE, e.getMessage()))
+                    .build();
+
+        } catch (UnauthorizedException e)
+        {
+            LOG.warn("Unauthorized operation attempt {}", e.getMessage());
+
+            response = Response
+                    .status(Response.Status.UNAUTHORIZED)
+                    .entity(ResponseEntity.toJson(Result.ERR_UNAUTHORIZED))
+                    .build();
+
+        } catch (TransactionException e)
+        {
+            throw e;
 
         } catch (Exception e)
         {
