@@ -40,6 +40,11 @@ public class TransactionException extends JSONException
     public TransactionException(String msg)
     {
         super(msg);
-        LOG.error("transactionException instantiated with msg: " + msg);
+        LOG.error("transactionException: " + msg);
+    }
+    public TransactionException(String msg, String objectType, int rootCount, int elementCount)
+    {
+        super(msg);
+        LOG.error("transactionException: " + msg + " at block " + rootCount + ", " + objectType + " " + elementCount);
     }
 }
