@@ -32,11 +32,6 @@ public class TransactionException extends JSONException
 
     private static final Logger LOG = LoggerFactory.getLogger(TransactionException.class);
 
-//    public TransactionException()
-//    {
-//
-//    }
-
     public TransactionException(String msg)
     {
         super(msg);
@@ -44,7 +39,7 @@ public class TransactionException extends JSONException
     }
     public TransactionException(String msg, String objectType, int rootCount, int elementCount)
     {
-        super(msg);
+        super("transactionException: " + msg + " at block " + rootCount + ", " + objectType + " " + elementCount);
         LOG.error("transactionException: " + msg + " at block " + rootCount + ", " + objectType + " " + elementCount);
     }
 }
