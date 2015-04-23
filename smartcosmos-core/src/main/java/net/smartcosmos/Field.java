@@ -122,6 +122,8 @@ public final class Field
 
     public static final String DECODED_VALUE_FIELD = "decodedValue";
 
+    public static final String VALUE_FIELD = "value";
+
     public static final String DATA_TYPE_FIELD = "dataType";
 
     public static final String FLAG_FIELD = "flag";
