@@ -2757,25 +2757,25 @@ representation of an object. The system uses either a built-in (opaque to the de
 type-safety, or alternatively a developer defined encoding mechanism (opaque to the platform) encoding
 mechanism. The primitive data types supported by the built-in (opaque to the developer) encoding include:
 
-   * **String**
-   * **Date**
-   * **Integer**
-   * **Long**
-   * **Boolean**
-   * **Float**
-   * **Double**
+   * **String** (dataType string in JSON: "StringType")
+   * **Date** (dataType string in JSON: "DateType")
+   * **Integer** (dataType string in JSON: "IntegerType")
+   * **Long** (dataType string in JSON: "LongType")
+   * **Boolean** (dataType string in JSON: "BooleanType")
+   * **Float** (dataType string in JSON: "FloatType")
+   * **Double** (dataType string in JSON: "DoubleType")
 
 Each of these primitive data types guarantee a precision described by the Java Language Specification. In addition to
 these primitives, the following two complex data types are also supported by the built-in (opaque to the developer)
 encoding:
 
-   * **JSON**
-   * **XML**
+   * **JSON** (dataType string in JSON: "JSONType")
+   * **XML** (dataType string in JSON: "XMLType")
 
 Internally, these are stored as Strings but the declaration of the more formal type may provide a more convenient client
 binding mechanism.
 
-Finally, the platform also supports a **Custom** encoding (opaque to the platform) where the developer assumes full
+Finally, the platform also supports a **Custom**  (dataType string in JSON: "Custom")encoding (opaque to the platform) where the developer assumes full
 responsibility for the serialization and deserialization of a type-safe value for the key.
 
 > Built-in platform encoding must be treated as an opaque encoding. It presently relies on a 3rd party open-source
