@@ -1294,7 +1294,7 @@ The platform makes no inferences about this case-sensitive field.
 
 The following object fields may be used to create a new record:
 
-- `objectUrn` is required and constrained to 1024 characters 
+- `objectUrn` is required and constrained to 767 characters 
 - `type` is required and constrained to 255 characters
 - `timestamp` is optional and its context is arbitrarily defined by the developer
 - `line1` and `line2` are optional and constrained to 1024 characters
@@ -3507,7 +3507,7 @@ Endpoint | Supported HTTP Methods | Events Generated
 
 Create a new tag associated with an arbitrary identification value *response is incorrect*. The following user fields may be used to create a new tag:
 
-- `name` is required and constrained to 1024 characters
+- `name` is required and constrained to 255 characters
 - `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
 - `activeFlag` is optional and may be omitted; defaults to **true**
 - `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
