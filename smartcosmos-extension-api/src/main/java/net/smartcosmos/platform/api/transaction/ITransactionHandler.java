@@ -43,5 +43,5 @@ public interface ITransactionHandler<T extends ICosmosContext> extends IService<
      *
      * @param fatJson raw JSON document submitted by the caller
      */
-    void run(String fatJson, IAuthenticatedUser authenticatedUser) throws TransactionException;
+    void run(String fatJson, IAuthenticatedUser authenticatedUser, String txUuid) throws TransactionException;
 }

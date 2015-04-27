@@ -37,9 +37,11 @@ public class TransactionException extends JSONException
         super(msg);
         LOG.error("transactionException: " + msg);
     }
-    public TransactionException(String msg, String objectType, int rootCount, int elementCount)
+    public TransactionException(String msg, String objectType, int rootCount, int elementCount, String txUuid)
     {
-        super("transactionException: " + msg + " at block " + rootCount + ", " + objectType + " " + elementCount);
-        LOG.error("transactionException: " + msg + " at block " + rootCount + ", " + objectType + " " + elementCount);
+        super("In transaction " + txUuid + " transactionException: " + msg + " at block " + rootCount +
+                ", " + objectType + " " + elementCount);
+        LOG.error("In transaction " + txUuid + " transactionException: " + msg + " at block " + rootCount +
+                ", " + objectType + " " + elementCount);
     }
 }
