@@ -24,10 +24,11 @@ import com.google.common.annotations.VisibleForTesting;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.setup.Environment;
 import net.smartcosmos.platform.api.ICosmosContextBootstrap;
-import net.smartcosmos.platform.api.ICosmosConfiguration;
-import net.smartcosmos.platform.api.dao.ICosmosDAOFactory;
-import net.smartcosmos.platform.api.service.ICosmosServiceFactory;
+import net.smartcosmos.platform.api.dao.IObjectsDAOFactory;
+import net.smartcosmos.platform.api.ext.IObjectsServerExtension;
+import net.smartcosmos.platform.api.service.IObjectsServiceFactory;
 import net.smartcosmos.platform.bundle.quartz.IQuartzJobDefinition;
+import net.smartcosmos.platform.configuration.ObjectsConfiguration;
 import org.apache.http.client.HttpClient;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,19 +41,19 @@ import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 import static org.quartz.impl.matchers.EverythingMatcher.allJobs;
 
-public class AbstractCosmosContext<S extends ICosmosConfiguration,
-        T extends ICosmosDAOFactory,
-        U extends ICosmosServiceFactory> implements ICosmosContextBootstrap<S, T, U>
+public class AbstractCosmosContext implements ICosmosContextBootstrap
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractCosmosContext.class);
 
-    private S configuration;
+    private ObjectsConfiguration configuration;
 
-    private T daoFactory;
+    private IObjectsDAOFactory daoFactory;
 
-    private U serviceFactory;
+    private IObjectsServiceFactory serviceFactory;
 
     private SessionFactory sessionFactory;
 
@@ -62,20 +63,22 @@ public class AbstractCosmosContext<S extends ICosmosConfiguration,
 
     private HttpClient httpClient;
 
+    private List<IObjectsServerExtension> extensions;
+
     @Override
-    public S getConfiguration()
+    public ObjectsConfiguration getConfiguration()
     {
         return configuration;
     }
 
     @Override
-    public T getDAOFactory()
+    public IObjectsDAOFactory getDAOFactory()
     {
         return daoFactory;
     }
 
     @Override
-    public U getServiceFactory()
+    public IObjectsServiceFactory getServiceFactory()
     {
         return serviceFactory;
     }
@@ -240,19 +243,19 @@ public class AbstractCosmosContext<S extends ICosmosConfiguration,
     }
 
     @Override
-    public void setConfiguration(S configuration)
+    public void setConfiguration(ObjectsConfiguration configuration)
     {
         this.configuration = configuration;
     }
 
     @Override
-    public void setDAOFactory(T daoFactory)
+    public void setDAOFactory(IObjectsDAOFactory daoFactory)
     {
         this.daoFactory = daoFactory;
     }
 
     @Override
-    public void setServiceFactory(U serviceFactory)
+    public void setServiceFactory(IObjectsServiceFactory serviceFactory)
     {
         this.serviceFactory = serviceFactory;
     }
@@ -276,5 +279,45 @@ public class AbstractCosmosContext<S extends ICosmosConfiguration,
             LOG.warn("Unable to add job listener to scheduler: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setExtensions(List<IObjectsServerExtension> extensions)
+    {
+        this.extensions = extensions;
+    }
+
+    @Override
+    public boolean hasExtensions(String extensionId)
+    {
+        boolean match = false;
+
+        for (IObjectsServerExtension extension : extensions)
+        {
+            if (extension.getExtensionId().equals(extensionId))
+            {
+                match = true;
+                break;
+            }
+        }
+
+        return match;
+    }
+
+    @Override
+    public IObjectsServerExtension lookupExtension(String extensionId)
+    {
+        IObjectsServerExtension extension = null;
+
+        for (IObjectsServerExtension curExtension : extensions)
+        {
+            if (curExtension.getExtensionId().equals(extensionId))
+            {
+                extension = curExtension;
+                break;
+            }
+        }
+
+        return extension;
     }
 }

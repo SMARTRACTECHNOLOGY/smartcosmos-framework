@@ -20,7 +20,6 @@ package net.smartcosmos.platform.bundle.quartz;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.base.AbstractService;
 import org.quartz.Job;
 import org.quartz.JobDetail;
@@ -36,8 +35,8 @@ import static org.quartz.JobBuilder.newJob;
  *
  * @param <T> {@link org.quartz.Job} class type
  */
-public abstract class AbstractQuartzJobDefinition<T extends Job, U extends ICosmosContext>
-        extends AbstractService<U> implements IQuartzJobDefinition<U>
+public abstract class AbstractQuartzJobDefinition<T extends Job>
+        extends AbstractService implements IQuartzJobDefinition
 {
     private final String group;
 

@@ -1,4 +1,4 @@
-package net.smartcosmos.platform.api;
+package net.smartcosmos.platform.bundle.quartz;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -20,54 +20,33 @@ package net.smartcosmos.platform.api;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import io.dropwizard.db.DataSourceFactory;
-import net.smartcosmos.platform.authentication.OAuth2Factory;
+import io.dropwizard.lifecycle.Managed;
+import org.quartz.Scheduler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Map;
-
-/**
- * Base configuration for every SMART COSMOS platform service.
- */
-public interface ICosmosConfiguration
+public class QuartzManager implements Managed
 {
-    DataSourceFactory getDataSourceFactory();
+    private static final Logger LOG = LoggerFactory.getLogger(QuartzManager.class);
 
-    //
-    // Service Classes
-    //
-    Map<String, String> getServiceClasses();
+    private final Scheduler scheduler;
 
-    Map<String, String> getServiceParameters();
+    public QuartzManager(Scheduler scheduler)
+    {
+        this.scheduler = scheduler;
+    }
 
-    //
-    // Resource Registrars
-    //
-    Map<String, String> getResourceRegistrarClasses();
+    @Override
+    public void start() throws Exception
+    {
+        LOG.info("Starting Quartz scheduler...");
+        scheduler.start();
+    }
 
-    String getAppName();
-
-    String getAppInstanceName();
-
-    String getUrlPattern();
-
-    String getEnterpriseKeySignature();
-
-    String getEnterpriseKey();
-
-    //
-    // Email From Address used by IEmailService
-    //
-
-    String getAdminEmailAddress();
-
-    //
-    // HTTP Header Paging Metadata
-    //
-
-    String getServerRoot();
-
-    //
-    // OAuth 2.0 Functionality
-    //
-    OAuth2Factory getOAuth2Factory();
+    @Override
+    public void stop() throws Exception
+    {
+        LOG.info("Shutting down Quartz scheduler (waiting for running jobs to complete)...");
+        scheduler.shutdown(true);
+    }
 }

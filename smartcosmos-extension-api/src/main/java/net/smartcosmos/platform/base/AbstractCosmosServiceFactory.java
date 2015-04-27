@@ -44,9 +44,8 @@ import com.sun.jersey.client.impl.CopyOnWriteHashMap;
 import io.dropwizard.lifecycle.Managed;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
-import net.smartcosmos.platform.api.service.ICosmosServiceFactory;
+import net.smartcosmos.platform.api.batch.IBatchUploadService;
 import net.smartcosmos.platform.api.service.IDirectoryService;
 import net.smartcosmos.platform.api.service.IDownloadService;
 import net.smartcosmos.platform.api.service.IEmailService;
@@ -54,6 +53,7 @@ import net.smartcosmos.platform.api.service.IEventBroadcastNotificationService;
 import net.smartcosmos.platform.api.service.IEventService;
 import net.smartcosmos.platform.api.service.IExceptionService;
 import net.smartcosmos.platform.api.service.INotificationService;
+import net.smartcosmos.platform.api.service.IObjectsServiceFactory;
 import net.smartcosmos.platform.api.service.IQueueService;
 import net.smartcosmos.platform.api.service.IStorageService;
 import net.smartcosmos.platform.api.service.ITemplateService;
@@ -64,39 +64,40 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-public abstract class AbstractCosmosServiceFactory<T extends ICosmosContext>
-        extends AbstractService<T> implements ICosmosServiceFactory<T>
+public abstract class AbstractCosmosServiceFactory extends AbstractService implements IObjectsServiceFactory
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractCosmosServiceFactory.class);
 
-    private IDirectoryService<T> directoryService;
+    private IDirectoryService directoryService;
 
-    private INotificationService<T> notificationService;
+    private INotificationService notificationService;
 
-    private IEmailService<T> emailService;
+    private IEmailService emailService;
 
-    private IDownloadService<T> downloadService;
+    private IDownloadService downloadService;
 
-    private IStorageService<T> storageService;
+    private IStorageService storageService;
 
-    private IExceptionService<T> exceptionService;
+    private IExceptionService exceptionService;
 
-    private ITemplateService<T> templateService;
+    private ITemplateService templateService;
 
-    private IQueueService<T> queueService;
+    private IQueueService queueService;
 
-    private IEventBroadcastNotificationService<T> eventBroadcastNotificationService;
+    private IEventBroadcastNotificationService eventBroadcastNotificationService;
 
-    private IEventService<T> eventService;
+    private IEventService eventService;
 
     private Map<String, Object> extensions = new CopyOnWriteHashMap<>();
+
+    private IBatchUploadService uploadService;
 
     protected AbstractCosmosServiceFactory(String serviceId, String name)
     {
         super(serviceId, name);
     }
 
-    private void doInjections(IService<T> service)
+    private void doInjections(IService service)
     {
         service.setContext(context);
         service.initialize();
@@ -152,6 +153,11 @@ public abstract class AbstractCosmosServiceFactory<T extends ICosmosContext>
         templateService = ClassUtil.create(ITemplateService.class, templateServiceClazz);
         doInjections(templateService);
 
+        String uploadServiceClazz = context.getConfiguration().getBatchFactory().getUploadService();
+        LOG.info("Initializing Batch Upload Services class ({})", uploadServiceClazz);
+        this.uploadService = ClassUtil.create(IBatchUploadService.class, uploadServiceClazz);
+        this.uploadService.setContext(context);
+
         String eventBroadcastNotificationServiceClazz = context.getConfiguration()
                 .getServiceClasses()
                 .get(EVENT_BROADCAST_NOTIFICATION_SERVICE);
@@ -168,68 +174,68 @@ public abstract class AbstractCosmosServiceFactory<T extends ICosmosContext>
     }
 
     @Override
-    public IEventService<T> getEventService(IUser user)
+    public IEventService getEventService(IUser user)
     {
         Preconditions.checkNotNull(user, "user cannot be null");
         return getEventService(user.getAccount());
     }
 
     @Override
-    public IEventService<T> getEventService(IAccount account)
+    public IEventService getEventService(IAccount account)
     {
         return eventService;
     }
 
     @Override
-    public IEventBroadcastNotificationService<T> getEventBroadcastNotificationService()
+    public IEventBroadcastNotificationService getEventBroadcastNotificationService()
     {
         return eventBroadcastNotificationService;
     }
 
     @Override
-    public IExceptionService<T> getExceptionService()
+    public IExceptionService getExceptionService()
     {
         return exceptionService;
     }
 
     @Override
-    public INotificationService<T> getNotificationService()
+    public INotificationService getNotificationService()
     {
         return notificationService;
     }
 
     @Override
-    public IDirectoryService<T> getDirectoryService()
+    public IDirectoryService getDirectoryService()
     {
         return directoryService;
     }
 
     @Override
-    public IEmailService<T> getEmailService()
+    public IEmailService getEmailService()
     {
         return emailService;
     }
 
     @Override
-    public IDownloadService<T> getDownloadService()
+    public IDownloadService getDownloadService()
     {
         return downloadService;
     }
 
     @Override
-    public ITemplateService<T> getTemplateService()
+    public ITemplateService getTemplateService()
     {
         return templateService;
     }
 
     @Override
-    public IStorageService<T> getStorageService()
+    public IStorageService getStorageService()
     {
         return storageService;
     }
 
     @Override
-    public IQueueService<T> getQueueService()
+    public IQueueService getQueueService()
     {
         return queueService;
     }
@@ -238,6 +244,12 @@ public abstract class AbstractCosmosServiceFactory<T extends ICosmosContext>
     public Scheduler getQuartzScheduler()
     {
         return context.getScheduler();
+    }
+
+    @Override
+    public IBatchUploadService getUploadService()
+    {
+        return uploadService;
     }
 
     @Override

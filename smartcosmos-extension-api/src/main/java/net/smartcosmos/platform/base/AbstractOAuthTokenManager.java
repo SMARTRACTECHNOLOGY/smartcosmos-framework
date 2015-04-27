@@ -20,7 +20,7 @@ package net.smartcosmos.platform.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ICosmosContext;
+import net.smartcosmos.platform.api.IObjectsContext;
 import net.smartcosmos.platform.api.oauth.IExternalOAuthTokenManager;
 import net.smartcosmos.platform.api.oauth.IOAuthTokenRegistry;
 
@@ -30,7 +30,7 @@ public abstract class AbstractOAuthTokenManager implements IExternalOAuthTokenMa
 
     protected IOAuthTokenRegistry registry;
 
-    protected ICosmosContext context;
+    protected IObjectsContext context;
 
     protected AbstractOAuthTokenManager(String name)
     {
@@ -38,7 +38,7 @@ public abstract class AbstractOAuthTokenManager implements IExternalOAuthTokenMa
     }
 
     @Override
-    public void setContext(ICosmosContext context)
+    public void setContext(IObjectsContext context)
     {
         this.context = context;
     }

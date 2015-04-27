@@ -21,10 +21,9 @@ package net.smartcosmos.platform.api.service;
  */
 
 import net.smartcosmos.model.integration.INotificationEndpoint;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 
-public interface INotificationService<T extends ICosmosContext> extends IService<T>, IHealthCheckable
+public interface INotificationService extends IService, IHealthCheckable
 {
     String createTopic(INotificationEndpoint notificationEndpoint);
 

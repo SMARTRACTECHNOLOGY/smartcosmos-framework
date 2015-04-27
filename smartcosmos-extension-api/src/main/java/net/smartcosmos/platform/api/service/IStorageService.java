@@ -21,7 +21,6 @@ package net.smartcosmos.platform.api.service;
  */
 
 import net.smartcosmos.objects.model.context.IFile;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 import net.smartcosmos.platform.pojo.service.StorageRequest;
 import net.smartcosmos.platform.pojo.service.StorageResponse;
@@ -33,7 +32,7 @@ import java.io.InputStream;
  * Provides an abstraction layer for a remote storage service, e.g. AWS S3, Box.com, DropBox, or any other type of
  * storage system.
  */
-public interface IStorageService<T extends ICosmosContext> extends IService<T>, IHealthCheckable
+public interface IStorageService extends IService, IHealthCheckable
 {
     /**
      * Store the content represented by the storage request at the remote location.

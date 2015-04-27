@@ -20,7 +20,7 @@ package net.smartcosmos.platform.util;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ICosmosContext;
+import net.smartcosmos.platform.api.IObjectsContext;
 import net.smartcosmos.platform.api.oauth.IOAuthToken;
 import net.smartcosmos.platform.pojo.oauth.OAuthToken;
 
@@ -64,7 +64,7 @@ public final class OAuth2TokenManager
         return generate(20);
     }
 
-    public IOAuthToken generateToken(ICosmosContext context)
+    public IOAuthToken generateToken(IObjectsContext context)
     {
         return new OAuthToken("bearer",
                 generate(40),

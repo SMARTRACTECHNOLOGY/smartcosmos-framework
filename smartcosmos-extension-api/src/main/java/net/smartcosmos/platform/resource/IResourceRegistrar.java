@@ -20,9 +20,9 @@ package net.smartcosmos.platform.resource;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ICosmosContext;
+import net.smartcosmos.platform.api.IObjectsContext;
 
-public interface IResourceRegistrar<T extends ICosmosContext>
+public interface IResourceRegistrar
 {
-    void registerResources(T context);
+    void registerResources(IObjectsContext context);
 }

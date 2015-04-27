@@ -22,39 +22,43 @@ package net.smartcosmos.platform.base;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
-import net.smartcosmos.platform.api.ICosmosContext;
-import net.smartcosmos.platform.api.service.ICosmosServiceFactory;
+import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.ext.IObjectsServerExtension;
+import net.smartcosmos.platform.api.service.IObjectsServiceFactory;
 import net.smartcosmos.platform.authentication.DelegatingAuthProvider;
 import net.smartcosmos.platform.authentication.PlatformBasicAuthenticator;
 import net.smartcosmos.platform.authentication.PlatformOAuthAuthenticator;
+import net.smartcosmos.platform.configuration.ObjectsConfiguration;
 import net.smartcosmos.platform.resource.IResourceRegistrar;
 import net.smartcosmos.platform.util.ClassUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class AbstractCosmosApplication<S extends AbstractCosmosConfiguration,
-        T extends ICosmosContext,
-        U extends ICosmosServiceFactory<T>> extends Application<S>
+public abstract class AbstractCosmosApplication extends Application<ObjectsConfiguration>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractCosmosApplication.class);
 
-    public static final int PLATFORM_RELEASE_REVISION = 1;
+    public static final int PLATFORM_RELEASE_REVISION = 2;
 
-    protected U serviceFactory;
+    protected IObjectsServiceFactory serviceFactory;
 
-    protected abstract void extendedInitialization(T context);
+    protected final List<IObjectsServerExtension> extensions = new ArrayList<>();
 
-    protected abstract U createServiceFactory();
+    protected abstract void extendedInitialization(IObjectsContext context);
 
-    protected abstract T createContext(S configuration, Environment environment);
+    protected abstract IObjectsServiceFactory createServiceFactory();
 
-    protected abstract void defineHealthChecks(T context);
+    protected abstract IObjectsContext createContext(ObjectsConfiguration configuration, Environment environment);
+
+    protected abstract void defineHealthChecks(IObjectsContext context);
 
     @Override
-    public void run(S configuration, Environment environment)
+    public void run(ObjectsConfiguration configuration, Environment environment)
     {
         try
         {
@@ -64,7 +68,7 @@ public abstract class AbstractCosmosApplication<S extends AbstractCosmosConfigur
             preContextCreation(configuration, environment);
 
             LOG.info("Creating platform context...");
-            T context = createContext(configuration, environment);
+            IObjectsContext context = createContext(configuration, environment);
 
             serviceFactory.setContext(context);
             serviceFactory.initialize();
@@ -92,29 +96,29 @@ public abstract class AbstractCosmosApplication<S extends AbstractCosmosConfigur
         }
     }
 
-    protected void preContextCreation(S configuration, Environment environment)
+    protected void preContextCreation(ObjectsConfiguration configuration, Environment environment)
     {
 
     }
 
-    protected void registerAuthProvider(T context)
+    protected void registerAuthProvider(IObjectsContext context)
     {
         //
         // AuthN and AuthZ
         //
         context.getEnvironment().jersey().register(new DelegatingAuthProvider<>(
-                new PlatformBasicAuthenticator<>(context),
-                new PlatformOAuthAuthenticator<>(context),
+                new PlatformBasicAuthenticator(context),
+                new PlatformOAuthAuthenticator(context),
                 context.getConfiguration().getAppName()));
     }
 
-    protected void postContextCreation(T context)
+    protected void postContextCreation(IObjectsContext context)
     {
 
     }
 
     @SuppressWarnings("unchecked")
-    protected void defineResources(T context)
+    protected void defineResources(IObjectsContext context)
     {
         Set<Map.Entry<String, String>> entrySet = context.getConfiguration().getResourceRegistrarClasses().entrySet();
 
@@ -122,7 +126,7 @@ public abstract class AbstractCosmosApplication<S extends AbstractCosmosConfigur
         {
             LOG.info("Defining resources from registrar " + entry.getKey());
 
-            IResourceRegistrar<T> registrar = ClassUtil.create(IResourceRegistrar.class, entry.getValue());
+            IResourceRegistrar registrar = ClassUtil.create(IResourceRegistrar.class, entry.getValue());
             registrar.registerResources(context);
         }
     }

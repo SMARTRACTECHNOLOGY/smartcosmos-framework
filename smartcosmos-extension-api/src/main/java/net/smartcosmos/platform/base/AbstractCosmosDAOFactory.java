@@ -22,15 +22,16 @@ package net.smartcosmos.platform.base;
 
 import net.smartcosmos.platform.api.dao.IAccountDAO;
 import net.smartcosmos.platform.api.dao.IAccountDirectoryDAO;
+import net.smartcosmos.platform.api.dao.IBatchTransmissionDAO;
 import net.smartcosmos.platform.api.dao.IOAuthTokenPermissionDAO;
 import net.smartcosmos.platform.api.dao.IOAuthTokenRegistryDAO;
 import net.smartcosmos.platform.api.dao.IOAuthTokenTransactionDAO;
-import net.smartcosmos.platform.api.dao.ICosmosDAOFactory;
+import net.smartcosmos.platform.api.dao.IObjectsDAOFactory;
 import net.smartcosmos.platform.api.dao.IRegistrationDAO;
 import net.smartcosmos.platform.api.dao.IUserDAO;
 import org.hibernate.SessionFactory;
 
-public abstract class AbstractCosmosDAOFactory implements ICosmosDAOFactory
+public abstract class AbstractCosmosDAOFactory implements IObjectsDAOFactory
 {
     protected final SessionFactory sessionFactory;
 
@@ -48,6 +49,8 @@ public abstract class AbstractCosmosDAOFactory implements ICosmosDAOFactory
 
     private final IOAuthTokenRegistryDAO oAuthTokenRegistryDAO;
 
+    private final IBatchTransmissionDAO batchTransmissionDAO;
+
     protected AbstractCosmosDAOFactory(PlatformDAOFactoryBuilder builder)
     {
         this.sessionFactory = builder.sessionFactory;
@@ -58,6 +61,7 @@ public abstract class AbstractCosmosDAOFactory implements ICosmosDAOFactory
         this.oAuthTokenTransactionDAO = builder.oAuthTokenTransactionDAO;
         this.oAuthTokenPermissionDAO = builder.oAuthTokenPermissionDAO;
         this.oAuthTokenRegistryDAO = builder.oAuthTokenRegistryDAO;
+        this.batchTransmissionDAO = builder.batchTransmissionDAO;
     }
 
     protected static class PlatformDAOFactoryBuilder
@@ -78,6 +82,8 @@ public abstract class AbstractCosmosDAOFactory implements ICosmosDAOFactory
 
         private IOAuthTokenRegistryDAO oAuthTokenRegistryDAO;
 
+        private IBatchTransmissionDAO batchTransmissionDAO;
+
         public PlatformDAOFactoryBuilder(SessionFactory sessionFactory)
         {
             this.sessionFactory = sessionFactory;
@@ -86,6 +92,12 @@ public abstract class AbstractCosmosDAOFactory implements ICosmosDAOFactory
         public PlatformDAOFactoryBuilder setOAuthTokenTransactionDAO(IOAuthTokenTransactionDAO dao)
         {
             this.oAuthTokenTransactionDAO = dao;
+            return this;
+        }
+
+        public PlatformDAOFactoryBuilder setBatchTransmissionDAO(IBatchTransmissionDAO batchTransmissionDAO)
+        {
+            this.batchTransmissionDAO = batchTransmissionDAO;
             return this;
         }
 
@@ -168,4 +180,9 @@ public abstract class AbstractCosmosDAOFactory implements ICosmosDAOFactory
         return oAuthTokenPermissionDAO;
     }
 
+    @Override
+    public IBatchTransmissionDAO getBatchTransmissionDAO()
+    {
+        return batchTransmissionDAO;
+    }
 }

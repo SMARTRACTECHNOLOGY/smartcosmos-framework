@@ -23,9 +23,9 @@ package net.smartcosmos.platform.api.kb;
 
 import freemarker.template.Template;
 import net.smartcosmos.platform.api.HttpMethodType;
-import net.smartcosmos.platform.api.ICosmosContext;
+import net.smartcosmos.platform.api.IObjectsContext;
 
-public interface IKnowledgeBaseArticle<T extends ICosmosContext> extends Comparable<IKnowledgeBaseArticle>
+public interface IKnowledgeBaseArticle<T extends IObjectsContext> extends Comparable<IKnowledgeBaseArticle>
 {
     boolean isApplicable(Exception e, HttpMethodType methodType, String data);
 

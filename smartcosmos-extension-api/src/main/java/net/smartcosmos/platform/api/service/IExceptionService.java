@@ -21,11 +21,10 @@ package net.smartcosmos.platform.api.service;
  */
 
 import net.smartcosmos.platform.api.HttpMethodType;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 import net.smartcosmos.platform.api.kb.KnowledgeBaseFactory;
 
-public interface IExceptionService<T extends ICosmosContext> extends IService<T>
+public interface IExceptionService extends IService
 {
     void trackException(Class<?> resource, String uri, HttpMethodType httpMethod, Exception e, String data);
 
