@@ -74,7 +74,7 @@
         <dependency>
             <groupId>net.smartcosmos</groupId>
             <artifactId>platform-core</artifactId>
-            <version>1.3-SNAPSHOT</version>
+            <version>1.3</version>
             <scope>provided</scope>
         </dependency>
 
