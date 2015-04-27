@@ -1,10 +1,10 @@
-package net.smartcosmos.platform.authentication;
+package net.smartcosmos.platform.bundle.batch;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Common Server Framework
+ * SMART COSMOS Batch Processing Framework
  * ===============================================================================
- * Copyright (C) 2013 - 2014 Smartrac Technology Fletcher, Inc.
+ * Copyright (C) 2014 SMARTRAC Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,50 +21,64 @@ package net.smartcosmos.platform.authentication;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.Maps;
 import io.dropwizard.util.Duration;
+import net.smartcosmos.platform.api.ProtocolType;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.Map;
 
-public final class OAuth2Factory
+public class BatchFactory
 {
+    @JsonProperty
+    private Boolean enabled = true;
+
+    @JsonProperty
+    private Boolean authenticationRequired = true;
+
+    @JsonProperty
+    @NotNull
+    private String uploadBucketName;
+
+    @JsonProperty
+    @NotNull
+    private String uploadService;
+
+    @JsonProperty
+    @NotNull
+    private ProtocolType uploadProtocol = ProtocolType.HTTPS;
+
     @Valid
     @NotNull
     @JsonProperty
-    private Duration maxRefreshTokenLife = Duration.days(14);
+    private Duration signedUrlLife = Duration.minutes(30);
 
-    @Valid
-    @NotNull
-    @JsonProperty
-    private Duration maxAuthenticationCodeLife = Duration.seconds(30);
-
-    @Valid
-    @NotNull
-    @JsonProperty
-    private Duration maxBearerTokenLife = Duration.minutes(60);
-
-    @NotNull
-    private Map<String, String> oauthTokenManagers = Maps.newLinkedHashMap();
-
-    public Map<String, String> getOAuthTokenManagers()
+    public ProtocolType getUploadProtocol()
     {
-        return oauthTokenManagers;
+        return uploadProtocol;
     }
 
-    public long getMaxAuthenticationCodeLifeMillis()
+    public Boolean isEnabled()
     {
-        return maxAuthenticationCodeLife.toMilliseconds();
+        return enabled;
     }
 
-    public long getMaxBearerTokenLifeMillis()
+    public Boolean isAuthenticationRequired()
     {
-        return maxBearerTokenLife.toMilliseconds();
+        return authenticationRequired;
     }
 
-    public long getMaxRefreshTokenLifeMillis()
+    public String getUploadBucketName()
     {
-        return maxRefreshTokenLife.toMilliseconds();
+        return uploadBucketName;
+    }
+
+    public String getUploadService()
+    {
+        return uploadService;
+    }
+
+    public long getSignedUrlLifeInMillis()
+    {
+        return signedUrlLife.toMilliseconds();
     }
 }

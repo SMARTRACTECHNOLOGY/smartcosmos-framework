@@ -21,14 +21,13 @@ package net.smartcosmos.platform.api.service;
  */
 
 import net.smartcosmos.model.event.IEvent;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 
 /**
  * Foundational integration service that broadcasts all reads and writes to any and all platform service endpoints to
  * a 3rd party external system.
  */
-public interface IEventBroadcastNotificationService<T extends ICosmosContext> extends IService<T>
+public interface IEventBroadcastNotificationService extends IService
 {
     /**
      * Broadcasts the persisted event to all registered notification listener endpoints.

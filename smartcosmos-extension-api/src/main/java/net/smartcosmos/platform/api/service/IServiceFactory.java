@@ -1,10 +1,22 @@
+/*
+ * Copyright (C> 2013 - 2015, Smartrac Technology Fletcher, Inc.
+ * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
+ * All Rights Reserved.
+ *
+ * This software is the confidential and proprietary information of
+ * Smartrac Technology Fletcher, Inc. ("Confidential Information").
+ * You shall not disclose such Confidential Information and shall
+ * use it only in accordance with the terms of the license agreement
+ * you entered into with Smartrac Technology Fletcher, Inc.
+ */
+
 package net.smartcosmos.platform.api.service;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Common Server Framework
+ * SMART COSMOS Platform Client
  * ===============================================================================
- * Copyright (C) 2013 - 2014 Smartrac Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +32,15 @@ package net.smartcosmos.platform.api.service;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
+import net.smartcosmos.platform.api.batch.IBatchUploadService;
+import net.smartcosmos.platform.api.ext.IExtendable;
 import org.quartz.Scheduler;
 
-public interface ICosmosServiceFactory<T extends ICosmosContext> extends IService<T>
+public interface IServiceFactory extends IService, IExtendable
 {
     /**
      * Case-sensitive name of the service's implementation class in the platform service's YML file.
@@ -82,31 +96,33 @@ public interface ICosmosServiceFactory<T extends ICosmosContext> extends IServic
     // Pluggable Platform Specific Services
     //
 
-    IDownloadService<T> getDownloadService();
+    IDownloadService getDownloadService();
 
     IDirectoryService getDirectoryService();
 
-    IStorageService<T> getStorageService();
+    IStorageService getStorageService();
 
-    INotificationService<T> getNotificationService();
+    INotificationService getNotificationService();
 
-    IEmailService<T> getEmailService();
+    IEmailService getEmailService();
 
-    ITemplateService<T> getTemplateService();
+    ITemplateService getTemplateService();
 
-    IExceptionService<T> getExceptionService();
+    IExceptionService getExceptionService();
 
-    IEventBroadcastNotificationService<T> getEventBroadcastNotificationService();
+    IEventBroadcastNotificationService getEventBroadcastNotificationService();
 
-    IQueueService<T> getQueueService();
+    IQueueService getQueueService();
+
+    IBatchUploadService getUploadService();
 
     //
     // Event service feeds for notifications and full audit, including reads, of domain resources
     //
 
-    IEventService<T> getEventService(IAccount account);
+    IEventService getEventService(IAccount account);
 
-    IEventService<T> getEventService(IUser user);
+    IEventService getEventService(IUser user);
 
     /**
      * Obtains the default Quartz scheduler.
@@ -114,4 +130,13 @@ public interface ICosmosServiceFactory<T extends ICosmosContext> extends IServic
      * @return Default Quartz scheduler
      */
     Scheduler getQuartzScheduler();
+
+    boolean has(String key);
+
+    <E> E lookup(String key, Class<E> extensionClassType);
+
+    void register(String key, Object extensionInstance);
+
+    void register(String key, Object extensionInstance, String briefDescription);
+
 }

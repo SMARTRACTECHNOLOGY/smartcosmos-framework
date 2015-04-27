@@ -27,8 +27,8 @@ import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.base.IMoniker;
 import net.smartcosmos.model.context.IUser;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.IRequestHandler;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
@@ -51,13 +51,13 @@ import java.util.concurrent.atomic.AtomicLong;
 import static net.smartcosmos.Field.MONIKER_FIELD;
 import static net.smartcosmos.Field.NULL_MONIKER;
 
-public abstract class AbstractRequestHandler<T, U extends ICosmosContext> implements IRequestHandler<T>
+public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 {
     protected static final DateTimeFormatter ISO8601 = ISODateTimeFormat.dateTime();
 
     private final AtomicLong counter;
 
-    protected final U context;
+    protected final IContext context;
 
     protected static final List<EntityReferenceType> BINDABLE_ENTITIES = Arrays.asList(
             EntityReferenceType.Object,
@@ -69,7 +69,7 @@ public abstract class AbstractRequestHandler<T, U extends ICosmosContext> implem
             EntityReferenceType.File,
             EntityReferenceType.Timeline);
 
-    protected AbstractRequestHandler(U context)
+    protected AbstractRequestHandler(IContext context)
     {
         counter = new AtomicLong();
         this.context = context;

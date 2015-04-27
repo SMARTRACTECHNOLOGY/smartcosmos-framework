@@ -20,10 +20,9 @@ package net.smartcosmos.platform.api.service;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 
-public interface IEmailService<T extends ICosmosContext> extends IService<T>, IHealthCheckable
+public interface IEmailService extends IService, IHealthCheckable
 {
     void sendEmail(String to, String subject, String plainMessage, String htmlMessage);
 }

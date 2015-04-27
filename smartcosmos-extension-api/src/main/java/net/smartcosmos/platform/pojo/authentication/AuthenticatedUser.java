@@ -70,7 +70,7 @@ public final class AuthenticatedUser extends User implements IAuthenticatedUser
     }
 
     @Override
-    public IUser getExtensionUser()
+    public IUser getExtendedUser()
     {
         return extensionUser;
     }

@@ -25,7 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.base.Preconditions;
 import io.dropwizard.views.View;
 import net.smartcosmos.model.context.RoleType;
-import net.smartcosmos.platform.api.ICosmosContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.IRequestHandler;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.pojo.base.ResponseEntity;
@@ -41,15 +41,15 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public abstract class AbstractPlatformResource<U extends ICosmosContext>
+public abstract class AbstractPlatformResource
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractPlatformResource.class);
 
     protected static final DateTimeFormatter RFC3339 = ISODateTimeFormat.dateTimeParser();
 
-    protected final U context;
+    protected final IContext context;
 
-    protected AbstractPlatformResource(U context)
+    protected AbstractPlatformResource(IContext context)
     {
         this.context = context;
     }

@@ -1,4 +1,4 @@
-package net.smartcosmos.platform.api;
+package net.smartcosmos.platform.bundle.transformation;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -20,54 +20,31 @@ package net.smartcosmos.platform.api;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import io.dropwizard.db.DataSourceFactory;
-import net.smartcosmos.platform.authentication.OAuth2Factory;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Map;
-
-/**
- * Base configuration for every SMART COSMOS platform service.
- */
-public interface ICosmosConfiguration
+public class TransformationsFactory
 {
-    DataSourceFactory getDataSourceFactory();
+    @JsonProperty
+    private Boolean enabled = true;
 
-    //
-    // Service Classes
-    //
-    Map<String, String> getServiceClasses();
+    @JsonProperty
+    private Boolean prettyPrintJSON = true;
 
-    Map<String, String> getServiceParameters();
+    @JsonProperty
+    private Boolean toSimpleXml = true;
 
-    //
-    // Resource Registrars
-    //
-    Map<String, String> getResourceRegistrarClasses();
+    public Boolean isEnabled()
+    {
+        return enabled;
+    }
 
-    String getAppName();
+    public Boolean getPrettyPrintJSON()
+    {
+        return prettyPrintJSON;
+    }
 
-    String getAppInstanceName();
-
-    String getUrlPattern();
-
-    String getEnterpriseKeySignature();
-
-    String getEnterpriseKey();
-
-    //
-    // Email From Address used by IEmailService
-    //
-
-    String getAdminEmailAddress();
-
-    //
-    // HTTP Header Paging Metadata
-    //
-
-    String getServerRoot();
-
-    //
-    // OAuth 2.0 Functionality
-    //
-    OAuth2Factory getOAuth2Factory();
+    public Boolean getToSimpleXml()
+    {
+        return toSimpleXml;
+    }
 }

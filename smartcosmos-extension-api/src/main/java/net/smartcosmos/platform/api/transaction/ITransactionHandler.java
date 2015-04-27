@@ -20,7 +20,6 @@ package net.smartcosmos.platform.api.transaction;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 
 /**
@@ -32,7 +31,7 @@ import net.smartcosmos.platform.api.IService;
  *
  * @param <T> Platform Context type
  */
-public interface ITransactionHandler<T extends ICosmosContext> extends IService<T>
+public interface ITransactionHandler extends IService
 {
     /**
      * Processes the "fat JSON" that was submitted, automatically wrapped inside of a single unit-of-work.

@@ -1,10 +1,10 @@
-package net.smartcosmos.platform.api;
+package net.smartcosmos.platform.api.batch;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Common Server Framework
+ * SMART COSMOS Batch Processing Framework
  * ===============================================================================
- * Copyright (C) 2013 - 2014 Smartrac Technology Fletcher, Inc.
+ * Copyright (C) 2014 SMARTRAC Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,25 +20,9 @@ package net.smartcosmos.platform.api;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import io.dropwizard.setup.Environment;
-import net.smartcosmos.platform.api.dao.ICosmosDAOFactory;
-import net.smartcosmos.platform.api.service.ICosmosServiceFactory;
-import org.apache.http.client.HttpClient;
-import org.quartz.Scheduler;
+import net.smartcosmos.platform.api.IService;
 
-public interface ICosmosContextBootstrap<S extends ICosmosConfiguration,
-        T extends ICosmosDAOFactory,
-        U extends ICosmosServiceFactory> extends ICosmosContext<S, T, U>
+public interface IBatchUploadService extends IService
 {
-    void setEnvironment(Environment environment);
-
-    void setConfiguration(S configuration);
-
-    void setDAOFactory(T daoFactory);
-
-    void setServiceFactory(U serviceFactory);
-
-    void setScheduler(Scheduler scheduler);
-
-    void setHttpClient(HttpClient httpClient);
+    IPreSignedUrlResponse generateSignedUploadRequest(IPreSignedUrlRequest request);
 }

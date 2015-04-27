@@ -23,13 +23,12 @@ package net.smartcosmos.platform.api.service;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.event.EventType;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 
 /**
  * Foundational integration service that captures all reads and writes to any and all platform service endpoints.
  */
-public interface IEventService<T extends ICosmosContext> extends IService<T>
+public interface IEventService extends IService
 {
     /**
      * Records the event to a persistent data source, possibly analyzing or manipulating the content along the way.

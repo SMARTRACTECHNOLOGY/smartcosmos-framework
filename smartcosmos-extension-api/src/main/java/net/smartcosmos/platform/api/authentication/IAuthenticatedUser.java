@@ -43,10 +43,10 @@ public interface IAuthenticatedUser extends IUser
     boolean isBasicAuthenticated();
 
     /**
-     * Extension user is the <i>actual account</i> making the call when {@link #isOAuthAuthenticated()} is
+     * Extended user is the <i>actual account</i> making the call when {@link #isOAuthAuthenticated()} is
      * <code>true</code>.
      *
      * @return null when {@link #isOAuthAuthenticated()} is <code>false</code>, or the <i>actual</i> user when true
      */
-    IUser getExtensionUser();
+    IUser getExtendedUser();
 }

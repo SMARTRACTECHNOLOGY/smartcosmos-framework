@@ -27,7 +27,7 @@ import io.dropwizard.auth.basic.BasicCredentials;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.event.EventType;
-import net.smartcosmos.platform.api.ICosmosContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.dao.IUserDAO;
 import net.smartcosmos.platform.api.service.IEventService;
@@ -40,14 +40,14 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public class PlatformBasicAuthenticator<T extends ICosmosContext>
+public class BasicAuthenticator
         implements Authenticator<BasicCredentials, IAuthenticatedUser>
 {
-    private static final Logger LOG = LoggerFactory.getLogger(PlatformBasicAuthenticator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BasicAuthenticator.class);
 
-    private final T context;
+    private final IContext context;
 
-    public PlatformBasicAuthenticator(T context)
+    public BasicAuthenticator(IContext context)
     {
         this.context = context;
     }
@@ -69,7 +69,7 @@ public class PlatformBasicAuthenticator<T extends ICosmosContext>
             IAuthenticatedUser authenticatedUser = context
                     .getServiceFactory()
                     .getDirectoryService()
-                    .authenticate(new PlatformCredentials(credentials));
+                    .authenticate(new SmartCosmosCredentials(credentials));
 
             //
             // EVENT: Login Success

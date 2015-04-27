@@ -24,7 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import net.smartcosmos.Field;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.event.EventType;
-import net.smartcosmos.platform.api.ICosmosContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.dao.INamedObjectSearchDAO;
 import net.smartcosmos.platform.api.service.IEventService;
@@ -40,8 +40,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
 
-public abstract class AbstractNameSearchRequestHandler<T extends IDomainResource, U extends ICosmosContext>
-        extends AbstractRequestHandler<String, U>
+public abstract class AbstractNameSearchRequestHandler<T extends IDomainResource>
+        extends AbstractRequestHandler<String>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractNameSearchRequestHandler.class);
 
@@ -53,7 +53,7 @@ public abstract class AbstractNameSearchRequestHandler<T extends IDomainResource
 
     private INamedObjectSearchDAO<T> dao;
 
-    protected AbstractNameSearchRequestHandler(U context,
+    protected AbstractNameSearchRequestHandler(IContext context,
                                                INamedObjectSearchDAO<T> dao,
                                                Class<T> targetClass,
                                                Class<?> entity,

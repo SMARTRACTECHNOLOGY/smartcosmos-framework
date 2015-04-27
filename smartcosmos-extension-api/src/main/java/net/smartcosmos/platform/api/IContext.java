@@ -1,10 +1,22 @@
+/*
+ * Copyright (C> 2013 - 2015, Smartrac Technology Fletcher, Inc.
+ * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
+ * All Rights Reserved.
+ *
+ * This software is the confidential and proprietary information of
+ * Smartrac Technology Fletcher, Inc. ("Confidential Information").
+ * You shall not disclose such Confidential Information and shall
+ * use it only in accordance with the terms of the license agreement
+ * you entered into with Smartrac Technology Fletcher, Inc.
+ */
+
 package net.smartcosmos.platform.api;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Common Server Framework
+ * SMART COSMOS Platform Client
  * ===============================================================================
- * Copyright (C) 2013 - 2014 Smartrac Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,44 +33,37 @@ package net.smartcosmos.platform.api;
  */
 
 import io.dropwizard.setup.Environment;
-import net.smartcosmos.platform.api.dao.ICosmosDAOFactory;
-import net.smartcosmos.platform.api.service.ICosmosServiceFactory;
+import net.smartcosmos.platform.api.dao.IDAOFactory;
+import net.smartcosmos.platform.api.ext.ISmartCosmosExtension;
+import net.smartcosmos.platform.api.service.IServiceFactory;
+import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
 import org.apache.http.client.HttpClient;
 import org.hibernate.SessionFactory;
 import org.quartz.JobListener;
 import org.quartz.Scheduler;
 
-/**
- * Contextual runtime environment of every SMART COSMOS platform service.
- *
- * @param <S> Platform-specific configuration interface
- * @param <T> Platform-specific DAO factory
- * @param <U> Platform-specific service factory
- */
-public interface ICosmosContext<S extends ICosmosConfiguration,
-        T extends ICosmosDAOFactory,
-        U extends ICosmosServiceFactory> extends JobListener
+public interface IContext extends JobListener
 {
     /**
      * Collection of platform-specific configuration values as defined in the platform's .yml file.
      *
      * @return Platform-specific configuration
      */
-    S getConfiguration();
+    SmartCosmosConfiguration getConfiguration();
 
     /**
      * Collection of platform-specific DAO factories.
      *
      * @return Platform-specific DAO factory
      */
-    T getDAOFactory();
+    IDAOFactory getDAOFactory();
 
     /**
      * Collection of pluggable platform-specific services as defined in the platform's .yml file.
      *
      * @return Platform-specific pluggable service factory
      */
-    U getServiceFactory();
+    IServiceFactory getServiceFactory();
 
     SessionFactory getSessionFactory();
 
@@ -67,4 +72,8 @@ public interface ICosmosContext<S extends ICosmosConfiguration,
     Scheduler getScheduler();
 
     HttpClient getHttpClient();
+
+    boolean hasExtensions(String extensionId);
+
+    ISmartCosmosExtension lookupExtension(String extensionId);
 }

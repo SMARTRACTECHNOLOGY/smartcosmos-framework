@@ -20,7 +20,7 @@ package net.smartcosmos.platform.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ICosmosContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.service.IEventRunner;
 import net.smartcosmos.platform.pojo.service.RecordableEvent;
 
@@ -28,13 +28,13 @@ import java.util.concurrent.BlockingQueue;
 
 public abstract class AbstractEventRunner extends Thread implements IEventRunner
 {
-    protected final ICosmosContext context;
+    protected final IContext context;
 
     protected final BlockingQueue<RecordableEvent> blockingQueue;
 
     protected boolean terminateFlag = false;
 
-    protected AbstractEventRunner(ICosmosContext context, BlockingQueue<RecordableEvent> blockingQueue)
+    protected AbstractEventRunner(IContext context, BlockingQueue<RecordableEvent> blockingQueue)
     {
         this.context = context;
         this.blockingQueue = blockingQueue;

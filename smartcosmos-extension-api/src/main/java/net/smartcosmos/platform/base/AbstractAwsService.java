@@ -20,7 +20,6 @@ package net.smartcosmos.platform.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ICosmosContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +28,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
-public abstract class AbstractAwsService<T extends ICosmosContext, U> extends AbstractService<T>
+public abstract class AbstractAwsService<U> extends AbstractService
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractAwsService.class);
 

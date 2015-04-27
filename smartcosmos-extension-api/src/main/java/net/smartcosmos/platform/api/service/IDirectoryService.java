@@ -23,7 +23,6 @@ package net.smartcosmos.platform.api.service;
 import io.dropwizard.lifecycle.Managed;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.authentication.ICredentials;
@@ -36,7 +35,7 @@ import net.smartcosmos.platform.api.authentication.IRegistration;
  * The enabled (or disabled) status of a user is <b>not</b> managed by SMART COSMOS - it is by design managed by the
  * directory service itself.
  */
-public interface IDirectoryService<T extends ICosmosContext> extends IService<T>, IHealthCheckable, Managed
+public interface IDirectoryService extends IService, IHealthCheckable, Managed
 {
     /**
      * Defines a new directory based on a registration request. Registration services may be optionally disabled in
@@ -129,7 +128,7 @@ public interface IDirectoryService<T extends ICosmosContext> extends IService<T>
      * @return Authorizing user
      * @throws java.lang.RuntimeException defined by the concrete class if the exchange fails or OAuth is not supported.
      * @see net.smartcosmos.platform.api.authentication.IAuthenticatedUser#isOAuthAuthenticated()
-     * @see net.smartcosmos.platform.api.authentication.IAuthenticatedUser#getExtensionUser()
+     * @see net.smartcosmos.platform.api.authentication.IAuthenticatedUser#getExtendedUser()
      */
     IAuthenticatedUser exchangeToken(String bearerAccessToken);
 }

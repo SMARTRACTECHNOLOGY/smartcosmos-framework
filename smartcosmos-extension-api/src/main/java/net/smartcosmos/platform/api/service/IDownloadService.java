@@ -20,7 +20,6 @@ package net.smartcosmos.platform.api.service;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IRemoteContent;
 import net.smartcosmos.platform.api.IService;
 
@@ -36,7 +35,7 @@ import java.io.IOException;
  * it and install it. Instead of eating up bandwidth both downloading and uploading the content, only a URL needs to be
  * sent to the server!
  */
-public interface IDownloadService<T extends ICosmosContext> extends IService<T>
+public interface IDownloadService extends IService
 {
     IRemoteContent getRemoteContent(String contentUrl) throws IOException;
 }

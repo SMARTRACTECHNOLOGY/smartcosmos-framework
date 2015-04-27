@@ -20,7 +20,6 @@ package net.smartcosmos.platform.bundle.quartz;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 import org.quartz.SchedulerException;
 
@@ -32,7 +31,7 @@ import org.quartz.SchedulerException;
  *
  * @see {@link AbstractQuartzJobDefinition}
  */
-public interface IQuartzJobDefinition<T extends ICosmosContext> extends IService<T>
+public interface IQuartzJobDefinition extends IService
 {
     /**
      * Key to access the SMART COSMOS context within the Quartz {@link org.quartz.JobExecutionContext}.

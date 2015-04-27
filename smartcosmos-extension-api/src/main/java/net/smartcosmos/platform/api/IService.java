@@ -27,13 +27,13 @@ package net.smartcosmos.platform.api;
  * Each platform service is accessed via the {@link net.smartcosmos.platform.api.service.ICosmosServiceFactory}.
  * The specific concrete implementation of the service is defined within the server's .yml file.
  */
-public interface IService<T extends ICosmosContext>
+public interface IService
 {
     String getServiceId();
 
     String getName();
 
-    void setContext(T context);
+    void setContext(IContext context);
 
     void initialize();
 }

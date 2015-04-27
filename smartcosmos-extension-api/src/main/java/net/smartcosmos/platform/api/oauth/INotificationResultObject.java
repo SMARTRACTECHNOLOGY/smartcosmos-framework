@@ -20,8 +20,8 @@ package net.smartcosmos.platform.api.oauth;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.base.EntityReferenceType;
+import net.smartcosmos.model.base.IDomainResource;
 
 public interface INotificationResultObject<T extends IDomainResource> extends IDomainResource<INotificationResultObject>
 {

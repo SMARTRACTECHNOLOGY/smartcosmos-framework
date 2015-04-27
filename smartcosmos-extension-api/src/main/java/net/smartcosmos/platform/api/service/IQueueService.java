@@ -21,10 +21,9 @@ package net.smartcosmos.platform.api.service;
  */
 
 import net.smartcosmos.model.queue.IQueueRequest;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 
-public interface IQueueService<T extends ICosmosContext> extends IService<T>, IHealthCheckable
+public interface IQueueService extends IService, IHealthCheckable
 {
     void create();
 

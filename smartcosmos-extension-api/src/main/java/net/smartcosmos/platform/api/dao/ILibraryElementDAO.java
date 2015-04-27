@@ -1,6 +1,6 @@
 /*
  * SMART COSMOS SDK
- * (C) Copyright 2013-2014, Smartrac Technology Fletcher, Inc.
+ * Copyright (C> 2013 - 2015, Smartrac Technology Fletcher, Inc.
  * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
  * All Rights Reserved.
  *
@@ -21,9 +21,9 @@ package net.smartcosmos.platform.api.dao;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Common Server Framework
+ * SMART COSMOS Platform Client
  * ===============================================================================
- * Copyright (C) 2013 - 2014 Smartrac Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,23 +39,13 @@ package net.smartcosmos.platform.api.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-public interface ICosmosDAOFactory
+import net.smartcosmos.model.context.IAccount;
+import net.smartcosmos.objects.model.context.ILibraryElement;
+
+import java.util.Collection;
+
+public interface ILibraryElementDAO extends IBaseDAO<ILibraryElement>, INamedObjectSearchDAO<ILibraryElement>
 {
-    IAccountDAO getAccountDAO();
-
-    IAccountDirectoryDAO getAccountDirectoryDAO();
-
-    IOAuthTokenTransactionDAO getOAuthTokenTransactionDAO();
-
-    IOAuthTokenPermissionDAO getOAuthTokenPermissionDAO();
-
-    IOAuthTokenRegistryDAO getOAuthTokenRegistryDAO();
-
-    IRegistrationDAO getRegistrationDAO();
-
-    IUserDAO getUserDAO();
-
-    IEventDAO getEventDAO();
-
-    INotificationEndpointDAO getNotificationEndpointDAO();
+    Collection<ILibraryElement> findChildren(String urn, IAccount account);
 }
+

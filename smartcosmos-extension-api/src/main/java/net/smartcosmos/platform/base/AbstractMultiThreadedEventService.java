@@ -21,7 +21,6 @@ package net.smartcosmos.platform.base;
  */
 
 import io.dropwizard.lifecycle.Managed;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.service.IEventService;
 import net.smartcosmos.platform.pojo.service.RecordableEvent;
 import org.slf4j.Logger;
@@ -32,9 +31,7 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public abstract class AbstractMultiThreadedEventService<T extends ICosmosContext>
-        extends AbstractService<T>
-        implements IEventService<T>, Managed
+public abstract class AbstractMultiThreadedEventService extends AbstractService implements IEventService, Managed
 {
     private static final int DEFAULT_THREAD_POOL_SIZE = 3;
 

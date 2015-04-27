@@ -23,7 +23,7 @@ package net.smartcosmos.platform.resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.event.EventType;
-import net.smartcosmos.platform.api.ICosmosContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.dao.IBaseDAO;
 import net.smartcosmos.platform.api.service.IEventService;
@@ -38,8 +38,8 @@ import javax.ws.rs.core.Response;
 
 import static net.smartcosmos.Field.HTTP_HEADER_EVENT;
 
-public abstract class AbstractFindByUrnRequestHandler<T extends IDomainResource, U extends ICosmosContext>
-        extends AbstractRequestHandler<String, U>
+public abstract class AbstractFindByUrnRequestHandler<T extends IDomainResource>
+        extends AbstractRequestHandler<String>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractFindByUrnRequestHandler.class);
 
@@ -49,7 +49,10 @@ public abstract class AbstractFindByUrnRequestHandler<T extends IDomainResource,
 
     private IBaseDAO<T> dao;
 
-    protected AbstractFindByUrnRequestHandler(U context, IBaseDAO<T> dao, Class<?> entity, EventType accessedEventType)
+    protected AbstractFindByUrnRequestHandler(IContext context,
+                                              IBaseDAO<T> dao,
+                                              Class<?> entity,
+                                              EventType accessedEventType)
     {
         super(context);
         this.dao = dao;

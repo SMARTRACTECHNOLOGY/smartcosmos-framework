@@ -22,13 +22,12 @@ package net.smartcosmos.platform.api.service;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import net.smartcosmos.platform.api.ICosmosContext;
 import net.smartcosmos.platform.api.IService;
 
 import java.io.Writer;
 import java.util.Map;
 
-public interface ITemplateService<T extends ICosmosContext> extends IService<T>
+public interface ITemplateService extends IService
 {
     String FTL_TEMPLATE_DIRECTORY = "ftlTemplateDirectory";
 
