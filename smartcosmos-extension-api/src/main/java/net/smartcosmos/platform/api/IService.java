@@ -33,7 +33,7 @@ public interface IService
 
     String getName();
 
-    void setContext(IObjectsContext context);
+    void setContext(IContext context);
 
     void initialize();
 }

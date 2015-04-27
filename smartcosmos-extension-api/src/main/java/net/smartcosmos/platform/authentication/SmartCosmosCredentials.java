@@ -42,14 +42,14 @@ package net.smartcosmos.platform.authentication;
 import io.dropwizard.auth.basic.BasicCredentials;
 import net.smartcosmos.platform.api.authentication.ICredentials;
 
-public class PlatformCredentials extends BasicCredentials implements ICredentials
+public class SmartCosmosCredentials extends BasicCredentials implements ICredentials
 {
     /**
      * Creates a new BasicCredentials with the given username and password.
      *
      * @param credentials instance of BasicCredentials to wrap
      */
-    public PlatformCredentials(BasicCredentials credentials)
+    public SmartCosmosCredentials(BasicCredentials credentials)
     {
         super(credentials.getUsername(), credentials.getPassword());
     }
@@ -60,7 +60,7 @@ public class PlatformCredentials extends BasicCredentials implements ICredential
      * @param username the username
      * @param password the password
      */
-    public PlatformCredentials(String username, String password)
+    public SmartCosmosCredentials(String username, String password)
     {
         super(username, password);
     }

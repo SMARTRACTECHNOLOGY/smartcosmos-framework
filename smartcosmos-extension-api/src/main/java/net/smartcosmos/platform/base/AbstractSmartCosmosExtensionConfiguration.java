@@ -1,10 +1,10 @@
-package net.smartcosmos.platform.bundle.quartz;
+package net.smartcosmos.platform.base;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Common Server Framework
+ * SMART COSMOS Platform Client
  * ===============================================================================
- * Copyright (C) 2013 - 2014 Smartrac Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,33 +20,25 @@ package net.smartcosmos.platform.bundle.quartz;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import io.dropwizard.lifecycle.Managed;
-import org.quartz.Scheduler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotEmpty;
 
-public class QuartzManager implements Managed
+public class AbstractSmartCosmosExtensionConfiguration
 {
-    private static final Logger LOG = LoggerFactory.getLogger(QuartzManager.class);
+    @JsonProperty
+    private boolean enabled = true;
 
-    private final Scheduler scheduler;
+    @NotEmpty
+    @JsonProperty
+    private String extensionName;
 
-    public QuartzManager(Scheduler scheduler)
+    public boolean isEnabled()
     {
-        this.scheduler = scheduler;
+        return enabled;
     }
 
-    @Override
-    public void start() throws Exception
+    public String getExtensionName()
     {
-        LOG.info("Starting Quartz scheduler...");
-        scheduler.start();
-    }
-
-    @Override
-    public void stop() throws Exception
-    {
-        LOG.info("Shutting down Quartz scheduler (waiting for running jobs to complete)...");
-        scheduler.shutdown(true);
+        return extensionName;
     }
 }

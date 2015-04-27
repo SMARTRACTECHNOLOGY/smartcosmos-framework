@@ -20,7 +20,7 @@ package net.smartcosmos.platform.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.IService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public abstract class AbstractService implements IService
 
     private final String name;
 
-    protected IObjectsContext context;
+    protected IContext context;
 
     protected AbstractService(String serviceId, String name)
     {
@@ -54,7 +54,7 @@ public abstract class AbstractService implements IService
     }
 
     @Override
-    public void setContext(IObjectsContext context)
+    public void setContext(IContext context)
     {
         this.context = context;
     }

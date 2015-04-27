@@ -22,10 +22,10 @@ package net.smartcosmos.platform.base;
 
 import com.google.common.base.Preconditions;
 import freemarker.template.Template;
-import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.kb.IKnowledgeBaseArticle;
 
-public abstract class AbstractKnowledgeBaseArticle<T extends IObjectsContext> implements IKnowledgeBaseArticle<T>
+public abstract class AbstractKnowledgeBaseArticle<T extends IContext> implements IKnowledgeBaseArticle<T>
 {
     private String id;
 

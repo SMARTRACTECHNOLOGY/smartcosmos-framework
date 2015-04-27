@@ -21,28 +21,28 @@ package net.smartcosmos.platform.api;
  */
 
 import io.dropwizard.setup.Environment;
-import net.smartcosmos.platform.api.dao.IObjectsDAOFactory;
-import net.smartcosmos.platform.api.ext.IObjectsServerExtension;
-import net.smartcosmos.platform.api.service.IObjectsServiceFactory;
-import net.smartcosmos.platform.configuration.ObjectsConfiguration;
+import net.smartcosmos.platform.api.dao.IDAOFactory;
+import net.smartcosmos.platform.api.ext.ISmartCosmosExtension;
+import net.smartcosmos.platform.api.service.IServiceFactory;
+import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
 import org.apache.http.client.HttpClient;
 import org.quartz.Scheduler;
 
 import java.util.List;
 
-public interface ICosmosContextBootstrap extends IObjectsContext
+public interface IContextBootstrap extends IContext
 {
     void setEnvironment(Environment environment);
 
-    void setConfiguration(ObjectsConfiguration configuration);
+    void setConfiguration(SmartCosmosConfiguration configuration);
 
-    void setDAOFactory(IObjectsDAOFactory daoFactory);
+    void setDAOFactory(IDAOFactory daoFactory);
 
-    void setServiceFactory(IObjectsServiceFactory serviceFactory);
+    void setServiceFactory(IServiceFactory serviceFactory);
 
     void setScheduler(Scheduler scheduler);
 
     void setHttpClient(HttpClient httpClient);
 
-    void setExtensions(List<IObjectsServerExtension> extensions);
+    void setExtensions(List<ISmartCosmosExtension> extensions);
 }

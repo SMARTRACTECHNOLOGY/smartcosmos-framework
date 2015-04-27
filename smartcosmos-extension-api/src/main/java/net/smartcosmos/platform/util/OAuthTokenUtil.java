@@ -20,7 +20,7 @@ package net.smartcosmos.platform.util;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.oauth.IOAuthTokenTransaction;
 
 public final class OAuthTokenUtil
@@ -29,26 +29,26 @@ public final class OAuthTokenUtil
     {
     }
 
-    public static long calculateBearerTokenExpirationTimestamp(IObjectsContext context,
+    public static long calculateBearerTokenExpirationTimestamp(IContext context,
                                                                IOAuthTokenTransaction transaction)
     {
         return (transaction.getTokenExchangeTimestamp() +
                 context.getConfiguration().getOAuth2Factory().getMaxBearerTokenLifeMillis());
     }
 
-    public static long calculateRefreshTokenExpirationTimestamp(IObjectsContext context,
+    public static long calculateRefreshTokenExpirationTimestamp(IContext context,
                                                                 IOAuthTokenTransaction transaction)
     {
         return (transaction.getTokenRefreshTimestamp() +
                 context.getConfiguration().getOAuth2Factory().getMaxRefreshTokenLifeMillis());
     }
 
-    public static boolean isBearerTokenExpired(IObjectsContext context, IOAuthTokenTransaction transaction)
+    public static boolean isBearerTokenExpired(IContext context, IOAuthTokenTransaction transaction)
     {
         return (System.currentTimeMillis() > calculateBearerTokenExpirationTimestamp(context, transaction));
     }
 
-    public static boolean isRefreshTokenExpired(IObjectsContext context, IOAuthTokenTransaction transaction)
+    public static boolean isRefreshTokenExpired(IContext context, IOAuthTokenTransaction transaction)
     {
         return (System.currentTimeMillis() > calculateRefreshTokenExpirationTimestamp(context, transaction));
     }

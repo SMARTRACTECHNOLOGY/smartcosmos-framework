@@ -21,7 +21,7 @@ package net.smartcosmos.platform.base;
  */
 
 
-import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.batch.IBatchProcessor;
 import net.smartcosmos.platform.api.batch.IProcessorDelegate;
 
@@ -29,10 +29,10 @@ public abstract class AbstractBatchProcessor implements IBatchProcessor
 {
     protected IProcessorDelegate processorManager;
 
-    protected IObjectsContext context;
+    protected IContext context;
 
     @Override
-    public void setContext(IObjectsContext context)
+    public void setContext(IContext context)
     {
         this.context = context;
     }

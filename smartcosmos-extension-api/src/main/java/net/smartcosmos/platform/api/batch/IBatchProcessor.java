@@ -20,11 +20,11 @@ package net.smartcosmos.platform.api.batch;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.IContext;
 
 public interface IBatchProcessor extends Runnable
 {
-    void setContext(IObjectsContext context);
+    void setContext(IContext context);
 
     void setProcessorDelegate(IProcessorDelegate processorManager);
 }

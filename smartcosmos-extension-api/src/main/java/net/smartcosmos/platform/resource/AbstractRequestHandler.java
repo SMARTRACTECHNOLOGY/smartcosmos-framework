@@ -27,7 +27,7 @@ import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.base.IMoniker;
 import net.smartcosmos.model.context.IUser;
-import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.IRequestHandler;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.pojo.base.ResponseEntity;
@@ -57,7 +57,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 
     private final AtomicLong counter;
 
-    protected final IObjectsContext context;
+    protected final IContext context;
 
     protected static final List<EntityReferenceType> BINDABLE_ENTITIES = Arrays.asList(
             EntityReferenceType.Object,
@@ -69,7 +69,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             EntityReferenceType.File,
             EntityReferenceType.Timeline);
 
-    protected AbstractRequestHandler(IObjectsContext context)
+    protected AbstractRequestHandler(IContext context)
     {
         counter = new AtomicLong();
         this.context = context;

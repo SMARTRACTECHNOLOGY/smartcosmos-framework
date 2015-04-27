@@ -20,7 +20,7 @@ package net.smartcosmos.platform.api.oauth;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.IContext;
 
 /**
  * Provides 3rd party (e.g. DropBox, Box, etc.) OAuth 2.0 bearer and refresh token management services. Each token
@@ -42,7 +42,7 @@ public interface IExternalOAuthTokenManager
      *
      * @param context runtime context
      */
-    void setContext(IObjectsContext context);
+    void setContext(IContext context);
 
     /**
      * OAuth Token Registry represents the single OAuth 2.0 record that either needs to be refreshed or revoked.

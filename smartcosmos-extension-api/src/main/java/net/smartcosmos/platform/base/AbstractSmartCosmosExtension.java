@@ -24,19 +24,19 @@ import io.dropwizard.configuration.ConfigurationFactory;
 import io.dropwizard.configuration.DefaultConfigurationFactoryFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import net.smartcosmos.platform.api.IObjectsContext;
-import net.smartcosmos.platform.api.ext.IObjectsServerExtension;
-import net.smartcosmos.platform.configuration.ObjectsConfiguration;
+import net.smartcosmos.platform.api.IContext;
+import net.smartcosmos.platform.api.ext.ISmartCosmosExtension;
+import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractObjectsServerExtension<T extends AbstractObjectsServerExtensionConfiguration>
-        implements IObjectsServerExtension<T>
+public abstract class AbstractSmartCosmosExtension<T extends AbstractSmartCosmosExtensionConfiguration>
+        implements ISmartCosmosExtension<T>
 {
-    private static final Logger LOG = LoggerFactory.getLogger(AbstractObjectsServerExtension.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractSmartCosmosExtension.class);
 
     protected final String extensionId;
 
@@ -48,11 +48,11 @@ public abstract class AbstractObjectsServerExtension<T extends AbstractObjectsSe
 
     private final Class<T> extensionConfigurationClass;
 
-    protected ObjectsConfiguration objectsConfiguration;
+    protected SmartCosmosConfiguration smartCosmosConfiguration;
 
-    protected IObjectsContext objectsContext;
+    protected IContext objectsContext;
 
-    protected AbstractObjectsServerExtension(String extensionId, String name, Class<T> extensionConfigurationClass)
+    protected AbstractSmartCosmosExtension(String extensionId, String name, Class<T> extensionConfigurationClass)
     {
         this.extensionId = extensionId;
         this.name = name;
@@ -121,13 +121,13 @@ public abstract class AbstractObjectsServerExtension<T extends AbstractObjectsSe
     }
 
     @Override
-    public void run(ObjectsConfiguration configuration, Environment environment) throws Exception
+    public void run(SmartCosmosConfiguration configuration, Environment environment) throws Exception
     {
-        this.objectsConfiguration = configuration;
+        this.smartCosmosConfiguration = configuration;
     }
 
     @Override
-    public void registerResources(IObjectsContext context)
+    public void registerResources(IContext context)
     {
         this.objectsContext = context;
     }

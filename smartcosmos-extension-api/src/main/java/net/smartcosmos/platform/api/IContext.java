@@ -10,7 +10,7 @@
  * you entered into with Smartrac Technology Fletcher, Inc.
  */
 
-package net.smartcosmos.platform.api.dao;
+package net.smartcosmos.platform.api;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -32,59 +32,48 @@ package net.smartcosmos.platform.api.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.base.EntityReferenceType;
+import io.dropwizard.setup.Environment;
+import net.smartcosmos.platform.api.dao.IDAOFactory;
+import net.smartcosmos.platform.api.ext.ISmartCosmosExtension;
+import net.smartcosmos.platform.api.service.IServiceFactory;
+import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
+import org.apache.http.client.HttpClient;
+import org.hibernate.SessionFactory;
+import org.quartz.JobListener;
+import org.quartz.Scheduler;
 
-public interface IObjectsDAOFactory
+public interface IContext extends JobListener
 {
-    IMonikerSearchDAO getMonikerSearchDAO(EntityReferenceType entityReferenceType);
+    /**
+     * Collection of platform-specific configuration values as defined in the platform's .yml file.
+     *
+     * @return Platform-specific configuration
+     */
+    SmartCosmosConfiguration getConfiguration();
 
-    INamedObjectSearchDAO getNamedObjectSearchDAO(EntityReferenceType entityReferenceType);
+    /**
+     * Collection of platform-specific DAO factories.
+     *
+     * @return Platform-specific DAO factory
+     */
+    IDAOFactory getDAOFactory();
 
-    IDeviceDAO getDeviceDAO();
+    /**
+     * Collection of pluggable platform-specific services as defined in the platform's .yml file.
+     *
+     * @return Platform-specific pluggable service factory
+     */
+    IServiceFactory getServiceFactory();
 
-    IGeospatialDAO getGeospatialDAO();
+    SessionFactory getSessionFactory();
 
-    IObjectDAO getObjectDAO();
+    Environment getEnvironment();
 
-    IObjectInteractionDAO getObjectInteractionDAO();
+    Scheduler getScheduler();
 
-    ITimelineDAO getTimelineDAO();
+    HttpClient getHttpClient();
 
-    IFileDAO getFileDAO();
+    boolean hasExtensions(String extensionId);
 
-    IMetadataDAO getMetadataDAO();
-
-    ITagDAO getTagDAO();
-
-    ITagAssignmentDAO getTagAssignmentDAO();
-
-    IObjectAddressDAO getObjectAddressDAO();
-
-    IObjectInteractionSessionDAO getObjectInteractiveSessionDAO();
-
-    IExtensionDAO getExtensionDAO();
-
-    IRelationshipDAO getRelationshipDAO();
-
-    ILibraryElementDAO getLibraryElementDAO();
-
-    IAccountDAO getAccountDAO();
-
-    IAccountDirectoryDAO getAccountDirectoryDAO();
-
-    IOAuthTokenTransactionDAO getOAuthTokenTransactionDAO();
-
-    IOAuthTokenPermissionDAO getOAuthTokenPermissionDAO();
-
-    IOAuthTokenRegistryDAO getOAuthTokenRegistryDAO();
-
-    IRegistrationDAO getRegistrationDAO();
-
-    IUserDAO getUserDAO();
-
-    IEventDAO getEventDAO();
-
-    INotificationEndpointDAO getNotificationEndpointDAO();
-
-    IBatchTransmissionDAO getBatchTransmissionDAO();
+    ISmartCosmosExtension lookupExtension(String extensionId);
 }

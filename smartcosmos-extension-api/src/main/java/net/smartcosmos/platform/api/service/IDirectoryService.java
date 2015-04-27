@@ -128,7 +128,7 @@ public interface IDirectoryService extends IService, IHealthCheckable, Managed
      * @return Authorizing user
      * @throws java.lang.RuntimeException defined by the concrete class if the exchange fails or OAuth is not supported.
      * @see net.smartcosmos.platform.api.authentication.IAuthenticatedUser#isOAuthAuthenticated()
-     * @see net.smartcosmos.platform.api.authentication.IAuthenticatedUser#getExtensionUser()
+     * @see net.smartcosmos.platform.api.authentication.IAuthenticatedUser#getExtendedUser()
      */
     IAuthenticatedUser exchangeToken(String bearerAccessToken);
 }

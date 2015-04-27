@@ -25,7 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.base.Preconditions;
 import io.dropwizard.views.View;
 import net.smartcosmos.model.context.RoleType;
-import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.IRequestHandler;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.pojo.base.ResponseEntity;
@@ -47,9 +47,9 @@ public abstract class AbstractPlatformResource
 
     protected static final DateTimeFormatter RFC3339 = ISODateTimeFormat.dateTimeParser();
 
-    protected final IObjectsContext context;
+    protected final IContext context;
 
-    protected AbstractPlatformResource(IObjectsContext context)
+    protected AbstractPlatformResource(IContext context)
     {
         this.context = context;
     }

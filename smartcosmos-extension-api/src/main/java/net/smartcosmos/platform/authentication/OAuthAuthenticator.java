@@ -27,10 +27,10 @@ import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.event.EventType;
 import net.smartcosmos.model.extension.IExtension;
-import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.dao.IOAuthTokenTransactionDAO;
-import net.smartcosmos.platform.api.dao.IObjectsDAOFactory;
+import net.smartcosmos.platform.api.dao.IDAOFactory;
 import net.smartcosmos.platform.api.oauth.IOAuthTokenTransaction;
 import net.smartcosmos.platform.api.oauth.OAuthStatusType;
 import net.smartcosmos.platform.api.service.IEventService;
@@ -40,11 +40,11 @@ import net.smartcosmos.pojo.context.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PlatformOAuthAuthenticator implements Authenticator<String, IAuthenticatedUser>
+public class OAuthAuthenticator implements Authenticator<String, IAuthenticatedUser>
 {
-    private static final Logger LOG = LoggerFactory.getLogger(PlatformOAuthAuthenticator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OAuthAuthenticator.class);
 
-    private final IObjectsContext context;
+    private final IContext context;
 
     public final class ExpiredTokenAccessAttempt
     {
@@ -153,7 +153,7 @@ public class PlatformOAuthAuthenticator implements Authenticator<String, IAuthen
         }
     }
 
-    public PlatformOAuthAuthenticator(IObjectsContext context)
+    public OAuthAuthenticator(IContext context)
     {
         this.context = context;
     }
@@ -163,7 +163,7 @@ public class PlatformOAuthAuthenticator implements Authenticator<String, IAuthen
     {
         LOG.info("Attempting validate bearer access token {}", bearerAccessToken);
 
-        IObjectsDAOFactory daoFactory = context.getDAOFactory();
+        IDAOFactory daoFactory = context.getDAOFactory();
         IOAuthTokenTransactionDAO oAuthTokenTransactionDAO = daoFactory.getOAuthTokenTransactionDAO();
 
         IOAuthTokenTransaction oauthTx = oAuthTokenTransactionDAO.findByBearerToken(bearerAccessToken);
@@ -310,7 +310,7 @@ public class PlatformOAuthAuthenticator implements Authenticator<String, IAuthen
         }
     }
 
-    private Optional<IAuthenticatedUser> logExpiredTokenAccessAttempt(IObjectsContext context,
+    private Optional<IAuthenticatedUser> logExpiredTokenAccessAttempt(IContext context,
                                                                       ExpiredTokenAccessAttempt attempt)
     {
         LOG.warn("bearer access token {} EXPIRED or REFRESHED and cannot be used", attempt.getBearerAccessToken());

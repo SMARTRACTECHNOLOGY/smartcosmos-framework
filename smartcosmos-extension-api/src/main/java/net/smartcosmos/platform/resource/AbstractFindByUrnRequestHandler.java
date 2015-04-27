@@ -23,7 +23,7 @@ package net.smartcosmos.platform.resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.event.EventType;
-import net.smartcosmos.platform.api.IObjectsContext;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.dao.IBaseDAO;
 import net.smartcosmos.platform.api.service.IEventService;
@@ -49,7 +49,7 @@ public abstract class AbstractFindByUrnRequestHandler<T extends IDomainResource>
 
     private IBaseDAO<T> dao;
 
-    protected AbstractFindByUrnRequestHandler(IObjectsContext context,
+    protected AbstractFindByUrnRequestHandler(IContext context,
                                               IBaseDAO<T> dao,
                                               Class<?> entity,
                                               EventType accessedEventType)

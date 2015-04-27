@@ -37,9 +37,10 @@ import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.platform.api.IService;
 import net.smartcosmos.platform.api.batch.IBatchUploadService;
+import net.smartcosmos.platform.api.ext.IExtendable;
 import org.quartz.Scheduler;
 
-public interface IObjectsServiceFactory extends IService
+public interface IServiceFactory extends IService, IExtendable
 {
     /**
      * Case-sensitive name of the service's implementation class in the platform service's YML file.
@@ -130,12 +131,12 @@ public interface IObjectsServiceFactory extends IService
      */
     Scheduler getQuartzScheduler();
 
-    boolean hasExtension(String key);
+    boolean has(String key);
 
-    <E> E lookupExtension(String key, Class<E> extensionClassType);
+    <E> E lookup(String key, Class<E> extensionClassType);
 
-    void registerExtension(String key, Object extensionInstance);
+    void register(String key, Object extensionInstance);
 
-    void registerExtension(String key, Object extensionInstance, String briefDescription);
+    void register(String key, Object extensionInstance, String briefDescription);
 
 }

@@ -1,4 +1,4 @@
-package net.smartcosmos.platform.base;
+package net.smartcosmos.platform.api.ext;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -20,25 +20,13 @@ package net.smartcosmos.platform.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.NotEmpty;
-
-public class AbstractObjectsServerExtensionConfiguration
+public interface IExtendable
 {
-    @JsonProperty
-    private boolean enabled = true;
+    boolean has(String key);
 
-    @NotEmpty
-    @JsonProperty
-    private String extensionName;
+    <E> E lookup(String key, Class<E> classType);
 
-    public boolean isEnabled()
-    {
-        return enabled;
-    }
+    void register(String key, Object instance);
 
-    public String getExtensionName()
-    {
-        return extensionName;
-    }
+    void register(String key, Object instance, String briefDescription);
 }

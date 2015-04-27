@@ -22,19 +22,19 @@ package net.smartcosmos.platform.api.ext;
 
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.lifecycle.Managed;
-import net.smartcosmos.platform.base.AbstractObjectsServerExtensionConfiguration;
-import net.smartcosmos.platform.configuration.ObjectsConfiguration;
+import net.smartcosmos.platform.base.AbstractSmartCosmosExtensionConfiguration;
+import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
 import net.smartcosmos.platform.resource.IResourceRegistrar;
 
 import java.util.List;
 
 /**
- * Mandatory interface required by all Objects server extensions.
+ * Mandatory interface required by all SMART COSMOS server extensions.
  *
- * @param <T>
+ * @param <T> Extension-specific configuration
  */
-public interface IObjectsServerExtension<T extends AbstractObjectsServerExtensionConfiguration>
-        extends ConfiguredBundle<ObjectsConfiguration>, IResourceRegistrar, Managed
+public interface ISmartCosmosExtension<T extends AbstractSmartCosmosExtensionConfiguration>
+        extends ConfiguredBundle<SmartCosmosConfiguration>, IResourceRegistrar, Managed
 {
     String getExtensionId();
 
@@ -45,6 +45,4 @@ public interface IObjectsServerExtension<T extends AbstractObjectsServerExtensio
     void setServerExtensionConfigurationPath(String extensionConfigurationPath);
 
     List<Class<?>> getEntities();
-
-//    DataSourceFactory getDataSourceFactory(T configuration);
 }
