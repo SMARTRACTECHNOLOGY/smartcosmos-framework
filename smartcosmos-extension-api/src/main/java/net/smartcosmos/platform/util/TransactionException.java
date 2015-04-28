@@ -1,8 +1,8 @@
-package net.smartcosmos.platform.api.dao;
+package net.smartcosmos.platform.util;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Server API
+ * SMART COSMOS Platform Client
  * ===============================================================================
  * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
@@ -20,13 +20,28 @@ package net.smartcosmos.platform.api.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.base.IDomainResource;
-import net.smartcosmos.model.context.IAccount;
+import org.json.JSONException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
-
-public interface INamedObjectSearchDAO<T extends IDomainResource>
+/**
+ * Created by tcross on 20/04/15.
+ */
+public class TransactionException extends JSONException
 {
-    Collection<T> findByNameLike(Class<?> clazz, String nameLike, IAccount account);
-    Collection<T> findByNameExact(Class<?> clazz, String nameLike, IAccount account);
+
+    private static final Logger LOG = LoggerFactory.getLogger(TransactionException.class);
+
+    public TransactionException(String msg)
+    {
+        super(msg);
+        LOG.error("transactionException: " + msg);
+    }
+    public TransactionException(String msg, String objectType, int rootCount, int elementCount, String txUuid)
+    {
+        super("In transaction " + txUuid + " transactionException: " + msg + " at block " + rootCount +
+                ", " + objectType + " " + elementCount);
+        LOG.error("In transaction " + txUuid + " transactionException: " + msg + " at block " + rootCount +
+                ", " + objectType + " " + elementCount);
+    }
 }
