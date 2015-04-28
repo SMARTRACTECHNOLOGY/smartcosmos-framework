@@ -130,13 +130,4 @@ public interface IServiceFactory extends IService, IExtendable
      * @return Default Quartz scheduler
      */
     Scheduler getQuartzScheduler();
-
-    boolean has(String key);
-
-    <E> E lookup(String key, Class<E> extensionClassType);
-
-    void register(String key, Object extensionInstance);
-
-    void register(String key, Object extensionInstance, String briefDescription);
-
 }

@@ -29,20 +29,57 @@ import net.smartcosmos.platform.resource.IResourceRegistrar;
 import java.util.List;
 
 /**
- * Mandatory interface required by all SMART COSMOS server extensions.
+ * Entry point interface required by all SMART COSMOS server extensions.
  *
  * @param <T> Extension-specific configuration
+ * @see AbstractSmartCosmosExtensionConfiguration
+ * @see net.smartcosmos.platform.base.AbstractSmartCosmosExtension
  */
 public interface ISmartCosmosExtension<T extends AbstractSmartCosmosExtensionConfiguration>
         extends ConfiguredBundle<SmartCosmosConfiguration>, IResourceRegistrar, Managed
 {
+    /**
+     * Every SMART COSMOS Extension must provide a UUID that unqiuely identifies this extension within the global
+     * SMART COSMOS space.
+     *
+     * @return UUID uniquely assigned to this specific extension
+     */
     String getExtensionId();
 
+    /**
+     * Logical, human readable name that describes the extension.
+     *
+     * @return Extension name
+     */
     String getName();
 
+    /**
+     * Access to the type-safe extension specific configuration file separate from the standard
+     * {@link SmartCosmosConfiguration} YML file.
+     *
+     * @return non-null, type-safe extension configuration
+     */
     T getExtensionConfiguration();
 
+    /**
+     * Server extensions are defined in the server's main YML file in two parts. First, the YML defines the fully
+     * qualified name of the class that implements this interface. Second, using the same key, the extension specific
+     * YML configuration file path is defined. At bootstrap time, the path to the YML file is dynamically injected into
+     * the base class {@link net.smartcosmos.platform.base.AbstractSmartCosmosExtension} for proper processing and
+     * loading.
+     * <p/>
+     * <b>NOTE:</b> Rarely should the developer ever have to do anything with this method when relying on the
+     * base class.
+     *
+     * @param extensionConfigurationPath Path to the extension's specific YML file
+     */
     void setServerExtensionConfigurationPath(String extensionConfigurationPath);
 
+    /**
+     * Collection of Hibernate annotated classes that should be dynamically added to the Dropwizard Hibernate bundle
+     * for processing at startup time.
+     *
+     * @return Non-null, but possibly empty, list of Hibernate annotated classes to register during server bootstrap
+     */
     List<Class<?>> getEntities();
 }
