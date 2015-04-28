@@ -2,7 +2,7 @@ package net.smartcosmos.platform.api.ext;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Client
+ * SMART COSMOS Platform Server API
  * ===============================================================================
  * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================

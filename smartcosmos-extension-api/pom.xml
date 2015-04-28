@@ -231,30 +231,32 @@
                         <configuration>
                             <groups>
                                 <group>
-                                    <title>SMART COSMOS Connectivity</title>
-                                    <packages>net.smartcosmos.client.connectivity</packages>
+                                    <title>SMART COSMOS Platform API</title>
+                                    <packages>net.smartcosmos.platform.api</packages>
                                 </group>
                                 <group>
-                                    <title>SMART COSMOS Common Clients</title>
+                                    <title>SMART COSMOS Base Classes</title>
                                     <packages>
-                                        net.smartcosmos.client.common.account:net.smartcosmos.client.common.event:net.smartcosmos.client.common.metadata:net.smartcosmos.client.common.registration:net.smartcosmos.client.common.user
+                                        net.smartcosmos.platform.base:net.smartcosmos.platform.pojo:net.smartcosmos.platform.resource
                                     </packages>
                                 </group>
                                 <group>
-                                    <title>SMART COSMOS Objects Client Factories</title>
+                                    <title>SMART COSMOS Bundles</title>
                                     <packages>
-                                        net.smartcosmos.client.objects.device:net.smartcosmos.client.objects.extension:net.smartcosmos.client.objects.file:net.smartcosmos.client.objects.geospatial:net.smartcosmos.client.objects.interaction*:net.smartcosmos.client.objects.object*:net.smartcosmos.client.objects.relationship:net.smartcosmos.client.objects.tag:net.smartcosmos.client.objects.timeline
+                                        net.smartcosmos.platform.bundle:net.smartcosmos.platform.configuration
                                     </packages>
                                 </group>
                                 <group>
-                                    <title>SMART COSMOS Batch</title>
+                                    <title>SMART COSMOS Data Access Objects</title>
                                     <packages>
-                                        net.smartcosmos.client.batch
+                                        net.smartcosmos.platform.dao
                                     </packages>
                                 </group>
                                 <group>
-                                    <title>Private Implementation</title>
-                                    <packages>net.smartcosmos.client.impl*</packages>
+                                    <title>SMART COSMOS Utilities</title>
+                                    <packages>
+                                        net.smartcosmos.platform.util
+                                    </packages>
                                 </group>
                             </groups>
                             <show>protected</show>
@@ -362,7 +364,7 @@
                 <configuration>
                     <licenseName>apache_v2</licenseName>
 
-                    <projectName>SMART COSMOS Platform Client</projectName>
+                    <projectName>SMART COSMOS Platform Server API</projectName>
 
                     <inceptionYear>2013</inceptionYear>
 

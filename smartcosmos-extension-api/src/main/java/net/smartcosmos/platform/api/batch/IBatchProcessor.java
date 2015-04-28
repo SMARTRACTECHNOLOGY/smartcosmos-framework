@@ -2,7 +2,7 @@ package net.smartcosmos.platform.api.batch;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Batch Processing Framework
+ * SMART COSMOS Platform Server API
  * ===============================================================================
  * Copyright (C) 2014 SMARTRAC Technology Fletcher, Inc.
  * ===============================================================================
