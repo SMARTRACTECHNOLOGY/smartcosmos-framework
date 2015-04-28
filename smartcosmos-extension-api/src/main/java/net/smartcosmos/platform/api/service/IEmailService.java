@@ -22,6 +22,9 @@ package net.smartcosmos.platform.api.service;
 
 import net.smartcosmos.platform.api.IService;
 
+/**
+ * Delivers email messages in dual format (plain text and HTML).
+ */
 public interface IEmailService extends IService, IHealthCheckable
 {
     void sendEmail(String to, String subject, String plainMessage, String htmlMessage);
