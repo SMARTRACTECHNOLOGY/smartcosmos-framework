@@ -231,25 +231,21 @@
                         <configuration>
                             <groups>
                                 <group>
-                                    <title>SMART COSMOS Platform API</title>
-                                    <packages>net.smartcosmos.platform.api</packages>
+                                    <title>Platform API</title>
+                                    <packages>
+                                        net.smartcosmos.platform.api:net.smartcosmos.platform.api.authentication:net.smartcosmos.platform.api.batch:net.smartcosmos.platform.api.dao:net.smartcosmos.platform.api.directory:net.smartcosmos.platform.api.ext:net.smartcosmos.platform.api.kb:net.smartcosmos.platform.api.oauth:net.smartcosmos.platform.api.service:net.smartcosmos.platform.api.transaction:net.smartcosmos.platform.authentication
+                                    </packages>
                                 </group>
                                 <group>
-                                    <title>SMART COSMOS Base Classes</title>
+                                    <title>Base Classes</title>
                                     <packages>
-                                        net.smartcosmos.platform.base:net.smartcosmos.platform.pojo:net.smartcosmos.platform.resource
+                                        net.smartcosmos.platform.base:net.smartcosmos.platform.dao:net.smartcosmos.platform.jpa.base:net.smartcosmos.platform.jpa.integrator:net.smartcosmos.platform.jpa:net.smartcosmos.platform.pojo.authentication:net.smartcosmos.platform.pojo.directory:net.smartcosmos.platform.pojo.oauth:net.smartcosmos.platform.pojo.service:net.smartcosmos.platform.resource
                                     </packages>
                                 </group>
                                 <group>
                                     <title>SMART COSMOS Bundles</title>
                                     <packages>
-                                        net.smartcosmos.platform.bundle:net.smartcosmos.platform.configuration
-                                    </packages>
-                                </group>
-                                <group>
-                                    <title>SMART COSMOS Data Access Objects</title>
-                                    <packages>
-                                        net.smartcosmos.platform.dao
+                                        net.smartcosmos.platform.bundle.batch:net.smartcosmos.platform.bundle.quartz:net.smartcosmos.platform.bundle.transformation:net.smartcosmos.platform.configuration
                                     </packages>
                                 </group>
                                 <group>
@@ -262,6 +258,7 @@
                             <show>protected</show>
                             <nohelp>true</nohelp>
                             <docfilessubdirs>true</docfilessubdirs>
+                            <excludePackageNames>net.smartcosmos.objects.resource.secure.libraries</excludePackageNames>
                         </configuration>
                     </plugin>
 
