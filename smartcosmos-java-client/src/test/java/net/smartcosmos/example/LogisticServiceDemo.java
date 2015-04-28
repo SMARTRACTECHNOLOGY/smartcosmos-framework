@@ -322,7 +322,7 @@ public class LogisticServiceDemo
                 .setName("F-250")
                 .setDescription("TX 234-A76")
                 .setType(VEHICLE_TYPE)
-                .setMoniker("327146")   // System of Record Employee ID
+                .setMoniker("327146")   // VIN of the truck
                 .build();
 
         vehicleUrn = extractUrn(client.create(entity));
