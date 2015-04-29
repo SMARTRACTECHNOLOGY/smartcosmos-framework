@@ -1,5 +1,20 @@
 <img src="http://smartractechnology.github.io/smartcosmos-sdk-java/images/smart-cosmos-250px-wide.png"/>
 
+# Release Notes
+
+## 1.4
+  * TBD
+  
+## 1.3
+  * mvn pom.xml dependency scrub - no API changes whatsoever
+  
+## 1.2
+  * Introduced the Library metaphor
+  
+## 1.1
+  * Effectively the initial release of the SDK
+
+
 # Documentation
   * [Profiles REST documentation](http://docs.smartcosmosprofiles.apiary.io "Profiles at apiary")
   * [Objects REST documentation](http://docs.smartcosmosobjects.apiary.io "Objects at apiary")
