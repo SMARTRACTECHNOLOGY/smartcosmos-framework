@@ -1734,9 +1734,10 @@ The platform makes no inferences about this case-sensitive field.
 
 The following interaction fields may be used to create a new record:
 
+- `objectUrn` must point to a pre-existing record (element 1)
 - `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
 [data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
-- `referenceUrn` must point to a pre-existing record of the given `entityReferenceType`
+- `referenceUrn` must point to a pre-existing record of the given `entityReferenceType` (element 2)
 - `type` is required and constrained to 255 characters
 - `recordedTimestamp` is required an must a valid long since the java epoch
 - `objectInteractionSession` is optional and may be omitted; defaults to null. Set value to the system-assigned URN on **PUT** call
