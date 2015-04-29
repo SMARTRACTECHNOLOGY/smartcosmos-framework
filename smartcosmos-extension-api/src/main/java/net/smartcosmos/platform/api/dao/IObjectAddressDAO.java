@@ -33,6 +33,7 @@ package net.smartcosmos.platform.api.dao;
  */
 
 import net.smartcosmos.model.context.IAccount;
+import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.objects.model.context.IObjectAddress;
 
 import java.util.Collection;
@@ -44,5 +45,9 @@ public interface IObjectAddressDAO extends IBaseDAO<IObjectAddress>
     Collection<IObjectAddress> findAllAfter(long timestampStart, IAccount account);
 
     Collection<IObjectAddress> findByRange(long timestampStart, long timestampEnd, IAccount account);
+
+    IObjectAddress findByObjectUrnAndType(String objectUrn, IAccount account, String type);
+
+    IObjectAddress upsert(IObjectAddress objectAddress, IObject object);
 }
 
