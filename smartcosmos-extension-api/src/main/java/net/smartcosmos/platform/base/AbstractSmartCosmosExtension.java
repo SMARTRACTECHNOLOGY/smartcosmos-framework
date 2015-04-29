@@ -50,7 +50,7 @@ public abstract class AbstractSmartCosmosExtension<T extends AbstractSmartCosmos
 
     protected SmartCosmosConfiguration smartCosmosConfiguration;
 
-    protected IContext objectsContext;
+    protected IContext context;
 
     protected AbstractSmartCosmosExtension(String extensionId, String name, Class<T> extensionConfigurationClass)
     {
@@ -129,7 +129,7 @@ public abstract class AbstractSmartCosmosExtension<T extends AbstractSmartCosmos
     @Override
     public void registerResources(IContext context)
     {
-        this.objectsContext = context;
+        this.context = context;
     }
 
     @Override

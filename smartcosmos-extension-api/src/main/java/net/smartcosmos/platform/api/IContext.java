@@ -76,4 +76,6 @@ public interface IContext extends JobListener
     boolean hasExtensions(String extensionId);
 
     ISmartCosmosExtension lookupExtension(String extensionId);
+
+    boolean isDeveloperEdition();
 }
