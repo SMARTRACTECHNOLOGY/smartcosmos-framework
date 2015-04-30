@@ -1940,11 +1940,11 @@ The following object fields are all required to create a new record:
 
 - `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in
 [data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
-- `referenceUrn` must point to a pre-existing record of the given `entityReferenceType`
+- `referenceUrn` must point to a pre-existing object URN of the given `entityReferenceType`
 - `type` is required and constrained to 255 characters
 - `relatedEntityReferenceType` is required and constrained to a valid EntityReferenceType value defined in
 [data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
-- `relatedReferenceUrn` must point to a pre-existing record of the given `relatedEntityReferenceType`
+- `relatedReferenceUrn` must point to a pre-existing object URN of the given `relatedEntityReferenceType`
 - `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
 
 #### Idempotent Behavior
@@ -1956,7 +1956,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + referenceUrn (required, string, `urn:building:mall:123`) ... Case-sensitive `object urn` of an existing entity of type `entityReferenceType`
 
 + Request (application/json)
 
@@ -1967,9 +1967,9 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
     + Body
 
             {
-                "type": "Owns",
+                "type": "Contains",
                 "relatedEntityReferenceType": "Object",
-                "relatedReferenceUrn" : "urn:uuid:54321"
+                "relatedReferenceUrn" : "urn:building:shop:456"
             }
 
 + Response 200 (application/json)
@@ -2004,7 +2004,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 
             {
                 "code" : -8,
-                "message" : "No matching record with Object of urn:uuid:12345 exists"
+                "message" : "No matching record with Object of urn:building:shop:456 exists"
             }
 
 + Response 401
