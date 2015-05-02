@@ -258,7 +258,7 @@
                             <show>protected</show>
                             <nohelp>true</nohelp>
                             <docfilessubdirs>true</docfilessubdirs>
-                            <excludePackageNames>net.smartcosmos.objects.resource.secure.libraries</excludePackageNames>
+                            <excludePackageNames>net.smartcosmos.objects.resource.secure.libraries:net.smartcosmos.market</excludePackageNames>
                         </configuration>
                     </plugin>
 
