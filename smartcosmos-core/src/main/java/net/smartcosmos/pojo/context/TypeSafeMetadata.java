@@ -165,13 +165,13 @@ public class TypeSafeMetadata<T> implements IMetadata
     }
 
     @Override
-    public long getUniqueId()
+    public String getUniqueId()
     {
         return metadataObject.getUniqueId();
     }
 
     @Override
-    public void setUniqueId(long uniqueId)
+    public void setUniqueId(String uniqueId)
     {
         metadataObject.setUniqueId(uniqueId);
     }
