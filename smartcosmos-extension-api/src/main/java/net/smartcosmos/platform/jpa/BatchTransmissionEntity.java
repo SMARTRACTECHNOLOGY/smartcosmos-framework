@@ -52,7 +52,7 @@ public class BatchTransmissionEntity extends DomainResourceEntity<IBatchTransmis
     protected String md5Checksum;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 1024, nullable = false, updatable = false)
+    @Column(length = 767, nullable = false, updatable = false)
     protected String routingUrn;
 
     @JsonView(JsonGenerationView.Standard.class)
@@ -64,19 +64,19 @@ public class BatchTransmissionEntity extends DomainResourceEntity<IBatchTransmis
     protected ProtocolType uploadProtocol;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 1024, nullable = false, updatable = false)
+    @Column(length = 767, nullable = false, updatable = false)
     protected String transmissionUrn;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 1024, nullable = false, updatable = false)
+    @Column(length = 767, nullable = false, updatable = false)
     protected String endpointUri;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 1024, nullable = false, updatable = false)
+    @Column(length = 767, nullable = false, updatable = false)
     protected String bucketName;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 1024, nullable = false, updatable = false)
+    @Column(length = 767, nullable = false, updatable = false)
     protected String objectKey;
 
     @JsonView(JsonGenerationView.Full.class)
