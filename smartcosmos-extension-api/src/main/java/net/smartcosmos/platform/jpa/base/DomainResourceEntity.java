@@ -31,8 +31,6 @@ import org.hibernate.annotations.Index;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.util.UUID;
@@ -102,6 +100,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     {
         lastModifiedTimestamp = System.currentTimeMillis();
         setUrn("urn:uuid:" + UUID.randomUUID().toString());
+        setUniqueId(UUID.randomUUID().toString());
 
         if (null != moniker && moniker.equals(Field.NULL_MONIKER))
         {
@@ -155,7 +154,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     @Override
     public int hashCode()
     {
-        int result = (int) (uniqueId ^ (uniqueId >>> 32));
+        int result = (int) (uniqueId.hashCode());
         result = 31 * result + urn.hashCode();
         return result;
     }
