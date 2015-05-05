@@ -43,8 +43,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
 {
     @JsonView(JsonGenerationView.Restricted.class)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    protected long uniqueId;
+    protected String uniqueId;
 
     @JsonView(JsonGenerationView.Minimum.class)
     @Column(length = 767, nullable = false, updatable = false)
@@ -60,13 +59,13 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     protected String moniker;
 
     @Override
-    public long getUniqueId()
+    public String getUniqueId()
     {
         return uniqueId;
     }
 
     @Override
-    public void setUniqueId(long uniqueId)
+    public void setUniqueId(String uniqueId)
     {
         this.uniqueId = uniqueId;
     }
