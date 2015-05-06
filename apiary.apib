@@ -4554,3 +4554,187 @@ Lookup children specific library element with the element's system-assigned URN 
             
 + Response 401
 
+# Group Timeline Endpoints
+![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Timeline-Label.png "Timeline Endpoint")
+
+## Overview
+
+## Timeline Fields
+Field | Data Type | Required | Can Update | Serialization Level | Default Value
+------------ | ------------- | ------------ | ------------ | ------------ | ------------
+urn | String  | true | false | Minimum | Generated
+account | IAccount  | true | false | Full | Generated
+entityReferenceType | EntityReferenceType  | true | false | Minimum | 
+referenceUrn | String  | true | false | Minimum | 
+recordedTimestamp | long   | true | true | Standard | 0
+moniker | String  | false | true | Full | null
+name | String  | true | true | Minimum | 
+description | String  | false | true | Standard | 
+activeFlag | Boolean  | true | true | Standard  | true
+highlight | Boolean | true | true | Minimum | true
+visible | Boolean | true | true | Minimum | true
+
+### Field Notes
+
+## Timeline Definitions [/rest/timelines/{entityReferenceType}/{referenceUrn}]
+### Create a new timeline [PUT]
+
+Create a new timeline associated with an arbitrary object entry value. The following Timeline attributes are used to create a new record:
+
+- `entityReferenceType` is required and constrained to a valid EntityReferenceType value
+- `referenceUrn` must point to a pre-existing record 
+- `name` is required and constrained to 255 characters
+- `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
+- `activeFlag` is optional and may be omitted; defaults to **true**
+- `highlight` is optional and may be omitted; defaults to **true**
+- `visible` is optional and may be omitted; defaults to **true**
+- `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
+
+#### Idempotent Behavior
+This endpoint is idempotent and will respond with an appropriate HTTP status code to indicate the actual result 
+
+- **201 SUCCESS_CREATED** if the record is new
+- **200 SUCCESS_OK** if a timeline with the given `identification` already existed in the database, in which case 
+**no data is merged; existing record is left as-is**
+
++ Parameters
+    + referenceUrn (required, string, `urn:building:mall:Quick Test 4`) ... user defined URN
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... 
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "name":"my timeline",
+                "description":"test",
+                "activeFlag":true,
+                "visible":true,
+                "highlight":true,
+                "recordedTimestamp":1414064324,
+                "moniker":"..."
+            }
+            
++ Response 201 (application/json)
+
+    + Body
+    
+            {
+                "code" : 1,
+                "message" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: name"
+            }
+            
+
+### Update an existing timeline [POST]
+
+The request body must include a value the `urn` field. Only those fields being updated need to be included in the JSON body. For example, if you only want to update the `name` of the timeline, only include that field in the request body.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "urn":"urn:uuid:1bd3a9db-3832-4395-ab42-f46819a6ad29",
+                "name": "my new timeline"
+            }
+            
++ Response 204
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -5,
+                "message" : "JSON is missing a required field: urn"
+            }
+            
+## Lookup Specific timeline by URN [/rest/timelines/{urn}{?view}]
+### Lookup specific timeline by system URN [GET]
+
+Lookup a specific timeline by its system-assigned URN key.
+
++ Parameters
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-View : Standard
+            
+    + Body
+    
+            {
+                "urn": "urn:uuid:77765351-bc40-4deb-8d33-087d53700e3d",
+                "lastModifiedTimestamp": 1430911319542,
+                "name": "my timeline",
+                "description": "test",
+                "activeFlag": true,
+                "highlightFlag": true,
+                "visibleFlag": true,
+                "entityReferenceType": "Object",
+                "referenceUrn": "urn:building:mall:Quick Test 4",
+                "recordedTimestamp": 1414064324
+            }
+
++ Response 204 
+ 
+## Lookup timelines with Name Pattern [/rest/Timelines{?nameLike,view}]
+### Lookup an array of matching timelines [GET]
+
+Call always returns a JSON array, which may be an empty array if no timelines are found that match the `nameLike` query parameter.
+
++ Parameters
+    + nameLike (optional, string, `Jaso`) ... A case-sensitive *starts with* string pattern to match against. If omitted, 
+    then all records will be returned.
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "urn": "urn:uuid:77765351-bc40-4deb-8d33-087d53700e3d",
+                    "lastModifiedTimestamp": 1430911319542,
+                    "name": "my timeline",
+                    "description": "test",
+                    "activeFlag": true,
+                    "highlightFlag": true,
+                    "visibleFlag": true,
+                    "entityReferenceType": "Object",
+                    "referenceUrn": "urn:building:mall:Quick Test 4",
+                    "recordedTimestamp": 1414064324
+                }
+            ]
