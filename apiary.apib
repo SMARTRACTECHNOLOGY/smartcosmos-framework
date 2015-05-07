@@ -296,6 +296,34 @@ Please contact us to get a test account!
 ## Support
 The fastest way to obtain support is by emailing <api@smartrac-group.com>.
 
+# Group Platform Availability Endpoints
+Provides a interface to check if the availability of the platform
+
+## Ping [/admin/ping]
+### Check platform availability [GET]
+
+Resource for checking the platform availability. 
+
+### HTTP result codes
+This endpoint will respond with an appropriate HTTP status code to indicate the actual result
+
+- **200 AVAILABLE** platform is available
+- **400 BAD_REQUEST** problem occurred, check message parameter for detailed information
+- **503 SERVICE_UNAVAILABLE** service is temporary unavailable (e.g. scheduled Platform Maintenance). Try again later.
+
++ Response 200 (text/plain)
+
+        pong
+
++ Response 400 (application/json)
+
+        {
+            "code" : 1,
+            "message" : "..."
+        }
+
++ Response 503
+
 # Group Registration Endpoints
 Every SMART COSMOS Account belongs to a _security realm_. By default, the registration endpoint will extract the domain name
 from your email address. However, if you are using a popular email service like GMail or Yahoo, you **must** provide a custom 
