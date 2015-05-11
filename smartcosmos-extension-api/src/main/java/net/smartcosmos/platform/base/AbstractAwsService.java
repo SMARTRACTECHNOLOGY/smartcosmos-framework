@@ -23,53 +23,53 @@ package net.smartcosmos.platform.base;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Properties;
 
-public abstract class AbstractAwsService<U> extends AbstractService
+/**
+ * Base class for all AWS powered services. Instead of forming an explicit dependency on the AWS SDK, generics are used
+ * for a "late" binding with the AWS SDK.
+ *
+ * @param <U> As this is explicitly tied to AWS access and secret keys, this is expected, but not enforced to be
+ *            <code>AWSCredentials</code>.
+ */
+public abstract class AbstractAwsService<U> extends AbstractCloudService<U>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractAwsService.class);
 
-    protected U credentials;
+    protected static final String AWS_CREDENTIALS_SERVICE_KEY = "awsApiKeys";
+
+    protected static final String ACCESS_KEY = "accessKey";
+
+    protected static final String SECRET_KEY = "secretKey";
 
     protected AbstractAwsService(String serviceId, String name)
     {
-        super(serviceId, name);
+        super(AWS_CREDENTIALS_SERVICE_KEY, serviceId, name);
     }
 
+    /**
+     * Automatically extracts the {@link #ACCESS_KEY} and {@link #SECRET_KEY} from the Properties file and triggers
+     * {@link #createCloudCredentials(String, String)} for final <code>AWSCredentials</code> instance creation.
+     *
+     * @param properties Cloud-specific credentials Property file
+     * @return Expected to be an instance of <code>AWSCredentials</code>
+     */
     @Override
-    public void initialize()
+    protected U createCloudCredentials(Properties properties)
     {
-        super.initialize();
+        String accessKey = properties.getProperty(ACCESS_KEY);
+        String secretAccessKey = properties.getProperty(SECRET_KEY);
 
-        Properties p = new Properties();
-
-        String apiKeysPath = context.getConfiguration().getServiceParameters().get("awsApiKeys");
-
-        File apiKeysFile = new File(apiKeysPath);
-
-        if (apiKeysFile.exists())
-        {
-            try
-            {
-                InputStream is = new FileInputStream(apiKeysFile);
-                p.load(is);
-                String accessKey = p.getProperty("accessKey");
-                String secretAccessKey = p.getProperty("secretKey");
-
-                credentials = createCloudCredentials(accessKey, secretAccessKey);
-
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        } else
-        {
-            LOG.error("Unable to locate the AWS API keys at path found in configuration file: {}", apiKeysPath);
-        }
+        return createCloudCredentials(accessKey, secretAccessKey);
     }
 
+    /**
+     * Final assembly of an <code>AWSCredentials</code> class, which is hidden behind generics in order to eliminate
+     * a Cloud-specific SDK binding (AWS SDK) on the Server API framework.
+     *
+     * @param accessKey       AWS Access Key
+     * @param secretAccessKey AWS Secret Access Key
+     * @return Instance of an <code>AWSCredentials</code>
+     */
     protected abstract U createCloudCredentials(String accessKey, String secretAccessKey);
 }

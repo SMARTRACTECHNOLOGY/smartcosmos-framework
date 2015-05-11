@@ -27,4 +27,11 @@ public interface ISellerProfile extends IProfile
     String getSellerWebSiteUrl();
 
     String getSupportEmailAddress();
+
+    /**
+     * Base64 encoded public key used to verify any digitally signed data.
+     *
+     * @return Base64 encoded public key
+     */
+    String getBase64EncodedPublicKey();
 }

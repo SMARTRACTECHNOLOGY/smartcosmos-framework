@@ -20,6 +20,8 @@ package net.smartcosmos.market;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import net.smartcosmos.platform.api.ext.IServerExtension;
+
 import java.util.List;
 
 public interface IExtensionProfile extends IProfile
@@ -37,16 +39,6 @@ public interface IExtensionProfile extends IProfile
      * @return Core service type
      */
     ServiceType getServiceType();
-
-    /**
-     * Links to either a {@link net.smartcosmos.platform.api.IService#getServiceId()},
-     * {@link net.smartcosmos.model.extension.IExtension#getUrn()}, or
-     * {@link net.smartcosmos.platform.api.ext.ISmartCosmosExtension#getExtensionId()} depending on the values of
-     * {@link #getExtensionType()} and {@link #getServiceType()}.
-     *
-     * @return Unique identifier of the related extension
-     */
-    String getLinkedId();
 
     String getAboutExtension();
 

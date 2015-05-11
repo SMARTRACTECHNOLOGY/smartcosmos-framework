@@ -20,14 +20,16 @@ package net.smartcosmos.market;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import net.smartcosmos.platform.api.ext.IServerExtension;
+
 public enum ExtensionType
 {
     /**
      * Server-side SMART COSMOS extension bundle.
      *
-     * @see net.smartcosmos.platform.api.ext.ISmartCosmosExtension
+     * @see IServerExtension
      */
-    SmartCosmosExtension,
+    ServerExtension,
 
     /**
      * External OAuth 2 authorized extension.

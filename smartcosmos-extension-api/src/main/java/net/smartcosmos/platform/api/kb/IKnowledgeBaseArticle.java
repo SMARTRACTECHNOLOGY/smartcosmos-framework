@@ -37,7 +37,7 @@ public interface IKnowledgeBaseArticle<T extends IContext> extends Comparable<IK
 
     String getBody();
 
-    boolean hasEmailTemplate();
+    boolean hasTemplate();
 
     Template getTemplate();
 }

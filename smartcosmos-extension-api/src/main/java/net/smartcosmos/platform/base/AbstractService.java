@@ -25,6 +25,9 @@ import net.smartcosmos.platform.api.IService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Base class for all service implementations.
+ */
 public abstract class AbstractService implements IService
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractService.class);
@@ -41,18 +44,27 @@ public abstract class AbstractService implements IService
         this.name = name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getServiceId()
     {
         return serviceId;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName()
     {
         return name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setContext(IContext context)
     {
@@ -60,7 +72,7 @@ public abstract class AbstractService implements IService
     }
 
     /**
-     * Empty initialization routine.
+     * No-op initialization routine.
      */
     @Override
     public void initialize()

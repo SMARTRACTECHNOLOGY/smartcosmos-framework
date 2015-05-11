@@ -58,7 +58,7 @@ public abstract class AbstractKnowledgeBaseArticle<T extends IContext> implement
     }
 
     @Override
-    public boolean hasEmailTemplate()
+    public boolean hasTemplate()
     {
         return (emailTemplatePath != null);
     }
@@ -95,7 +95,7 @@ public abstract class AbstractKnowledgeBaseArticle<T extends IContext> implement
         return "AbstractKnowledgeBaseArticle{" +
                 "id='" + id + '\'' +
                 "title='" + getTitle() + '\'' +
-                "hasEmailTemplate='" + hasEmailTemplate() + '\'' +
+                "hasEmailTemplate='" + hasTemplate() + '\'' +
                 '}';
     }
 

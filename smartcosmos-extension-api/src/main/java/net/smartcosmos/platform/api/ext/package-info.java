@@ -1,7 +1,7 @@
 /**
  * SMART COSMOS server-side extensions are specialized Dropwizard bundles that provide additional wiring so that they
  * seamlessly integrate into the SMART COSMOS platform. There are two critical abstract classes that developers must
- * use when defining a platform extension: {@link net.smartcosmos.platform.base.AbstractSmartCosmosExtension} must be
+ * use when defining a platform extension: {@link net.smartcosmos.platform.base.AbstractServerExtension} must be
  * the base class for all SMART COSMOS bundled extensions, and the configuration for the extension must extend
  * {@link net.smartcosmos.platform.base.AbstractSmartCosmosExtensionConfiguration}.
  * <p/>
@@ -40,12 +40,12 @@
  * <b>NOTE:</b> All extensions <b>must</b> honor the mandatory enablement check defined by the enabled property
  * in the YML! During the
  * {@link
- * net.smartcosmos.platform.base.AbstractSmartCosmosExtension#registerResources(net.smartcosmos.platform.api.IContext)}
+ * net.smartcosmos.platform.base.AbstractServerExtension#registerResources(net.smartcosmos.platform.api.IContext)}
  * call, developer must check extensionConfiguration.isEnabled() and smartly decide if the extension specific endpoints
  * should be registered or not. Similarly, if background services are required by the extension, the isEnabled()
  * check should also occur in the start() method to avoid starting any background services unnecessarily.
  *
- * @see net.smartcosmos.platform.base.AbstractSmartCosmosExtension
+ * @see net.smartcosmos.platform.base.AbstractServerExtension
  * @see net.smartcosmos.platform.base.AbstractSmartCosmosExtensionConfiguration
  */
 package net.smartcosmos.platform.api.ext;

@@ -25,7 +25,7 @@ import io.dropwizard.configuration.DefaultConfigurationFactoryFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import net.smartcosmos.platform.api.IContext;
-import net.smartcosmos.platform.api.ext.ISmartCosmosExtension;
+import net.smartcosmos.platform.api.ext.IServerExtension;
 import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,10 +33,10 @@ import org.slf4j.LoggerFactory;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractSmartCosmosExtension<T extends AbstractSmartCosmosExtensionConfiguration>
-        implements ISmartCosmosExtension<T>
+public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExtensionConfiguration>
+        implements IServerExtension<T>
 {
-    private static final Logger LOG = LoggerFactory.getLogger(AbstractSmartCosmosExtension.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractServerExtension.class);
 
     protected final String extensionId;
 
@@ -52,7 +52,7 @@ public abstract class AbstractSmartCosmosExtension<T extends AbstractSmartCosmos
 
     protected IContext context;
 
-    protected AbstractSmartCosmosExtension(String extensionId, String name, Class<T> extensionConfigurationClass)
+    protected AbstractServerExtension(String extensionId, String name, Class<T> extensionConfigurationClass)
     {
         this.extensionId = extensionId;
         this.name = name;

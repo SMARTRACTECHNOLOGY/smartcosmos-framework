@@ -32,5 +32,6 @@ public enum ServiceType
     Queue,
     Template,
     ExceptionHandler,
-    BatchUpload
+    BatchUpload,
+    Custom
 }
