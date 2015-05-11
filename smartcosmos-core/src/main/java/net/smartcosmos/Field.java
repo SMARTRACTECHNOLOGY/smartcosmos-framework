@@ -151,7 +151,7 @@ public final class Field
     public static final String GEOMETRIC_SHAPE_FIELD = "geometricShape";
 
     //
-    // Extension Fields
+    // ExternalExtension Fields
     //
     public static final String APP_CATALOG_URL_FIELD = "appCatalogUrl";
 

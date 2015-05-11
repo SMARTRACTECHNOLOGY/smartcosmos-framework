@@ -22,11 +22,11 @@ package net.smartcosmos.builder;
 
 import com.google.common.base.Preconditions;
 import net.smartcosmos.model.extension.ExtensionType;
-import net.smartcosmos.model.extension.IExtension;
-import net.smartcosmos.pojo.extension.Extension;
+import net.smartcosmos.model.extension.IExternalExtension;
+import net.smartcosmos.pojo.extension.ExternalExtension;
 
 /**
- * Convenience Builder pattern class for creating new {@link net.smartcosmos.model.extension.IExtension} instances.
+ * Convenience Builder pattern class for creating new {@link IExternalExtension} instances.
  * <p/>
  * The minimum fields required to define a new instance are:
  * <ul>
@@ -39,11 +39,11 @@ import net.smartcosmos.pojo.extension.Extension;
  * <li>{@link net.smartcosmos.Field#WEB_SITE_FIELD}</li>
  * </ul>
  */
-public final class ExtensionBuilder extends AbstractNamedObjectBuilder<IExtension, ExtensionBuilder>
+public final class ExtensionBuilder extends AbstractNamedObjectBuilder<IExternalExtension, ExtensionBuilder>
 {
     public ExtensionBuilder(String name)
     {
-        super(new Extension());
+        super(new ExternalExtension());
         this.instance.setName(name);
     }
 

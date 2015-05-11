@@ -24,12 +24,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.extension.ExtensionType;
-import net.smartcosmos.model.extension.IExtension;
+import net.smartcosmos.model.extension.IExternalExtension;
 import net.smartcosmos.pojo.base.NamedObject;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class Extension extends NamedObject<IExtension> implements IExtension
+public class ExternalExtension extends NamedObject<IExternalExtension> implements IExternalExtension
 {
     @JsonView(JsonGenerationView.Restricted.class)
     @JsonDeserialize(as = Account.class)
@@ -180,7 +180,7 @@ public class Extension extends NamedObject<IExtension> implements IExtension
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        Extension extension = (Extension) o;
+        ExternalExtension extension = (ExternalExtension) o;
 
         if (registrationTimestamp != extension.registrationTimestamp) return false;
         if (version != extension.version) return false;

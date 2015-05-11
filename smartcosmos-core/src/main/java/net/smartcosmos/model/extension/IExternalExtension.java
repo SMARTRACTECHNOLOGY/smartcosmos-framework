@@ -31,7 +31,7 @@ import net.smartcosmos.model.context.IAccount;
  * have access to the data flow to maintain state, perform calculations, etc. as data immediately changes in
  * the context store.
  */
-public interface IExtension extends IDomainResource<IExtension>, INamedObject<IExtension>
+public interface IExternalExtension extends IDomainResource<IExternalExtension>, INamedObject<IExternalExtension>
 {
     int getVersion();
 

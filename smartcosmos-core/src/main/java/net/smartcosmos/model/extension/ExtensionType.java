@@ -25,6 +25,8 @@ package net.smartcosmos.model.extension;
  */
 public enum ExtensionType
 {
+    Analytical,
     General,
+    Reporting,
     Workflow
 }
