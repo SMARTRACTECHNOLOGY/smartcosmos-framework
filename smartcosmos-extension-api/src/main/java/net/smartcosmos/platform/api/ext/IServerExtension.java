@@ -22,7 +22,6 @@ package net.smartcosmos.platform.api.ext;
 
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.lifecycle.Managed;
-import net.smartcosmos.platform.base.AbstractServerExtension;
 import net.smartcosmos.platform.base.AbstractSmartCosmosExtensionConfiguration;
 import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
 import net.smartcosmos.platform.resource.IResourceRegistrar;
@@ -34,7 +33,7 @@ import java.util.List;
  *
  * @param <T> Extension-specific configuration
  * @see AbstractSmartCosmosExtensionConfiguration
- * @see AbstractServerExtension
+ * @see net.smartcosmos.platform.base.AbstractServerExtension
  */
 public interface IServerExtension<T extends AbstractSmartCosmosExtensionConfiguration>
         extends ConfiguredBundle<SmartCosmosConfiguration>, IResourceRegistrar, Managed
@@ -66,7 +65,7 @@ public interface IServerExtension<T extends AbstractSmartCosmosExtensionConfigur
      * Server extensions are defined in the server's main YML file in two parts. First, the YML defines the fully
      * qualified name of the class that implements this interface. Second, using the same key, the extension specific
      * YML configuration file path is defined. At bootstrap time, the path to the YML file is dynamically injected into
-     * the base class {@link AbstractServerExtension} for proper processing and
+     * the base class {@link net.smartcosmos.platform.base.AbstractServerExtension} for proper processing and
      * loading.
      * <p/>
      * <b>NOTE:</b> Rarely should the developer ever have to do anything with this method when relying on the

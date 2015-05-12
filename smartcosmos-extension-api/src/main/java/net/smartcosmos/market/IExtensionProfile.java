@@ -20,8 +20,6 @@ package net.smartcosmos.market;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.platform.api.ext.IServerExtension;
-
 import java.util.List;
 
 public interface IExtensionProfile extends IProfile
