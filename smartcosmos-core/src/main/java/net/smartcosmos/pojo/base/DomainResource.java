@@ -29,7 +29,7 @@ import net.smartcosmos.util.json.JsonGenerationView;
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
     @JsonView(JsonGenerationView.Restricted.class)
-    protected long uniqueId;
+    protected String uniqueId;
 
     @JsonView(JsonGenerationView.Minimum.class)
     protected String urn;
@@ -41,13 +41,13 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     protected String moniker;
 
     @Override
-    public long getUniqueId()
+    public String getUniqueId()
     {
         return uniqueId;
     }
 
     @Override
-    public void setUniqueId(long uniqueId)
+    public void setUniqueId(String uniqueId)
     {
         this.uniqueId = uniqueId;
     }
