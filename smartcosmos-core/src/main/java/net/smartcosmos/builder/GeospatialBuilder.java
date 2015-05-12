@@ -23,7 +23,6 @@ package net.smartcosmos.builder;
 import com.google.common.base.Preconditions;
 import net.smartcosmos.geo.GeometricShape;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.model.extension.IExternalExtension;
 import net.smartcosmos.model.geo.IGeospatialEntry;
 import net.smartcosmos.pojo.geo.GeospatialEntry;
 
