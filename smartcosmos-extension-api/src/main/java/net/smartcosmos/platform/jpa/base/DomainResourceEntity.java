@@ -31,8 +31,6 @@ import org.hibernate.annotations.Index;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.util.UUID;
@@ -43,8 +41,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
 {
     @JsonView(JsonGenerationView.Restricted.class)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    protected long uniqueId;
+    protected String uniqueId;
 
     @JsonView(JsonGenerationView.Minimum.class)
     @Column(length = 767, nullable = false, updatable = false)
@@ -60,13 +57,13 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     protected String moniker;
 
     @Override
-    public long getUniqueId()
+    public String getUniqueId()
     {
         return uniqueId;
     }
 
     @Override
-    public void setUniqueId(long uniqueId)
+    public void setUniqueId(String uniqueId)
     {
         this.uniqueId = uniqueId;
     }
@@ -103,6 +100,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     {
         lastModifiedTimestamp = System.currentTimeMillis();
         setUrn("urn:uuid:" + UUID.randomUUID().toString());
+        setUniqueId(UUID.randomUUID().toString());
 
         if (null != moniker && moniker.equals(Field.NULL_MONIKER))
         {
@@ -156,7 +154,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     @Override
     public int hashCode()
     {
-        int result = (int) (uniqueId ^ (uniqueId >>> 32));
+        int result = (int) (uniqueId.hashCode());
         result = 31 * result + urn.hashCode();
         return result;
     }
