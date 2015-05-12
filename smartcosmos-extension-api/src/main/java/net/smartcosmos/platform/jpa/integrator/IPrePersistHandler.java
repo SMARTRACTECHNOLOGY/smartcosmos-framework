@@ -22,7 +22,7 @@ package net.smartcosmos.platform.jpa.integrator;
 
 public interface IPrePersistHandler
 {
-    String getUniqueId();
+    long getUniqueId();
 
     void onPrePersist();
 }

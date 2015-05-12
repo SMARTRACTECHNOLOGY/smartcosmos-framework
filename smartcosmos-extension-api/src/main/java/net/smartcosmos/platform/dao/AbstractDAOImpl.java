@@ -161,7 +161,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
 
     @Override
     @SuppressWarnings("unchecked")
-    public S findById(Class<?> clazz, String id)
+    public S findById(Class<?> clazz, long id)
     {
         S object;
 

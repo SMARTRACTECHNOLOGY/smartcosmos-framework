@@ -32,7 +32,7 @@ import java.util.Collection;
  */
 public interface IBaseDAO<T extends IDomainResource> extends IMonikerSearchDAO
 {
-    T findById(Class<?> clazz, String id);
+    T findById(Class<?> clazz, long id);
 
     T findByUrn(Class<?> clazz, String urn, IAccount account);
 
