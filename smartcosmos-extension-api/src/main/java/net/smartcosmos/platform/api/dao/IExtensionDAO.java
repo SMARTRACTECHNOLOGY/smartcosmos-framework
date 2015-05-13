@@ -33,24 +33,24 @@ package net.smartcosmos.platform.api.dao;
  */
 
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.model.extension.IExtension;
+import net.smartcosmos.model.extension.IExternalExtension;
 
 import java.util.Collection;
 
-public interface IExtensionDAO extends IBaseDAO<IExtension>, INamedObjectSearchDAO<IExtension>
+public interface IExtensionDAO extends IBaseDAO<IExternalExtension>, INamedObjectSearchDAO<IExternalExtension>
 {
-    IExtension findPublished(String urn);
+    IExternalExtension findPublished(String urn);
 
-    IExtension lookupByClientId(String clientId);
+    IExternalExtension lookupByClientId(String clientId);
 
-    IExtension findByClientId(String clientId, IAccount account);
+    IExternalExtension findByClientId(String clientId, IAccount account);
 
-    IExtension lookupExtension(String clientId, String clientSecret);
+    IExternalExtension lookupExtension(String clientId, String clientSecret);
 
-    IExtension lookupNotificationEndpointExtension(String referenceUrn);
+    IExternalExtension lookupNotificationEndpointExtension(String referenceUrn);
 
-    IExtension findByClientIdClientSecret(String clientId, String clientSecret);
+    IExternalExtension findByClientIdClientSecret(String clientId, String clientSecret);
 
-    Collection<IExtension> listActive();
+    Collection<IExternalExtension> listActive();
 }
 

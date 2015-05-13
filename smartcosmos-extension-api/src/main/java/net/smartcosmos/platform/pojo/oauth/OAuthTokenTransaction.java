@@ -21,7 +21,7 @@ package net.smartcosmos.platform.pojo.oauth;
  */
 
 import net.smartcosmos.model.context.IUser;
-import net.smartcosmos.model.extension.IExtension;
+import net.smartcosmos.model.extension.IExternalExtension;
 import net.smartcosmos.platform.api.oauth.IOAuthTokenTransaction;
 import net.smartcosmos.platform.api.oauth.OAuthStatusType;
 import net.smartcosmos.pojo.base.DomainResource;
@@ -59,7 +59,7 @@ public final class OAuthTokenTransaction extends DomainResource<IOAuthTokenTrans
 
     private int extensionVersion;
 
-    private IExtension extension;
+    private IExternalExtension extension;
 
 
     @Override
@@ -129,13 +129,13 @@ public final class OAuthTokenTransaction extends DomainResource<IOAuthTokenTrans
     }
 
     @Override
-    public void setExtension(IExtension extension)
+    public void setExtension(IExternalExtension extension)
     {
         this.extension = extension;
     }
 
     @Override
-    public IExtension getExtension()
+    public IExternalExtension getExtension()
     {
         return extension;
     }

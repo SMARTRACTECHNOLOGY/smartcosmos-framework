@@ -26,11 +26,11 @@ import io.dropwizard.auth.Authenticator;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.event.EventType;
-import net.smartcosmos.model.extension.IExtension;
+import net.smartcosmos.model.extension.IExternalExtension;
 import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
-import net.smartcosmos.platform.api.dao.IOAuthTokenTransactionDAO;
 import net.smartcosmos.platform.api.dao.IDAOFactory;
+import net.smartcosmos.platform.api.dao.IOAuthTokenTransactionDAO;
 import net.smartcosmos.platform.api.oauth.IOAuthTokenTransaction;
 import net.smartcosmos.platform.api.oauth.OAuthStatusType;
 import net.smartcosmos.platform.api.service.IEventService;
@@ -48,7 +48,7 @@ public class OAuthAuthenticator implements Authenticator<String, IAuthenticatedU
 
     public final class ExpiredTokenAccessAttempt
     {
-        private IExtension extension;
+        private IExternalExtension extension;
 
         private String bearerAccessToken;
 
@@ -64,12 +64,12 @@ public class OAuthAuthenticator implements Authenticator<String, IAuthenticatedU
 
         private IOAuthTokenTransactionDAO oAuthTokenTxDAO;
 
-        public IExtension getExtension()
+        public IExternalExtension getExtension()
         {
             return extension;
         }
 
-        public ExpiredTokenAccessAttempt setExtension(IExtension extension)
+        public ExpiredTokenAccessAttempt setExtension(IExternalExtension extension)
         {
             this.extension = extension;
             return this;
@@ -174,7 +174,7 @@ public class OAuthAuthenticator implements Authenticator<String, IAuthenticatedU
             // Token was found.
             //
 
-            IExtension extension = oauthTx.getExtension();
+            IExternalExtension extension = oauthTx.getExtension();
 
             IUser extensionUser = new User();
             extensionUser.setGivenName(extension.getName());

@@ -21,13 +21,13 @@ package net.smartcosmos.platform.api.oauth;
  */
 
 import net.smartcosmos.model.context.IUser;
-import net.smartcosmos.model.extension.IExtension;
+import net.smartcosmos.model.extension.IExternalExtension;
 
 public interface IOAuthTokenTransaction extends IOAuthTokenFields<IOAuthTokenTransaction>
 {
-    IExtension getExtension();
+    IExternalExtension getExtension();
 
-    void setExtension(IExtension extension);
+    void setExtension(IExternalExtension extension);
 
     int getExtensionVersion();
 

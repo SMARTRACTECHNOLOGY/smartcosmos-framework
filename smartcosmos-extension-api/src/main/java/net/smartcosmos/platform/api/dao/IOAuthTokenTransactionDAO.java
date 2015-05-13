@@ -20,7 +20,7 @@ package net.smartcosmos.platform.api.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.extension.IExtension;
+import net.smartcosmos.model.extension.IExternalExtension;
 import net.smartcosmos.platform.api.oauth.IOAuthTokenTransaction;
 
 import java.util.Collection;
@@ -41,7 +41,7 @@ public interface IOAuthTokenTransactionDAO extends IBaseDAO<IOAuthTokenTransacti
      * @param extension
      * @return
      */
-    Collection<IOAuthTokenTransaction> revokeActiveTokens(IExtension extension);
+    Collection<IOAuthTokenTransaction> revokeActiveTokens(IExternalExtension extension);
 }
 
 
