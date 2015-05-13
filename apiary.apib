@@ -2266,6 +2266,58 @@ Lookup an array of all defined relationships of the specific type.
 
 + Response 401
 
+## Lookup All Relationships [/rest/relationships/{entityReferenceType}/{referenceUrn}{?view,reverse,checkReciprocal}]
+### Lookup all defined relationships of an specific entity [GET]
+
+Lookup an array of all defined relationships of the specific type.
+
++ Parameters
+    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
+    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + reverse (optional, boolean, `false`) ... Flips the query around, finding those relationships where the `entityReferenceType` and `referenceUrn` are in the related fields(defalts to false)
+    + checkReciprocal (optional, boolean, `false`) ... 
+  
++ Request
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+
++ Response 200 (application/json)
+
+    + Headers
+
+            SmartCosmos-Event : RelationshipAccessed
+            SmartCosmos-View : Standard
+
+    + Body
+
+            [
+                {
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                    "entityReferenceType": "Object",
+                    "referenceUrn" : "urn:uuid:12345",
+                    "type" : "Owns",
+                    "relatedEntityReferenceType": "Object",
+                    "relatedReferenceUrn" : "urn:uuid:54321",
+                    "lastModifiedTimestamp" : 1390607277299,
+                }
+            ]
+
++ Response 204
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:12345 exists"
+            }
+
++ Response 401
+
 # Group Geospatial Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Geospatial_Path-Label.png "Geospatial Endpoint")
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Geospatial_Shape-Label.png "Geospatial Shape Endpoint")
