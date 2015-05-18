@@ -2077,10 +2077,10 @@ Lookup a specific relationship by its system-assigned URN key.
             {
                 "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "entityReferenceType": "Object",
-                "referenceUrn" : "urn:uuid:12345",
+                "referenceUrn" : "urn:building:shop:123",
                 "type" : "Owns",
                 "relatedEntityReferenceType": "Object",
-                "relatedReferenceUrn" : "urn:uuid:54321",
+                "relatedReferenceUrn" : "urn:building:shop:456",
                 "lastModifiedTimestamp" : 1390607277299,
             }
 
@@ -2131,9 +2131,9 @@ Lookup an array of all defined relationships between any two entities.
 
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + referenceUrn (required, string, `urn:building:shop:123`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
     + relatedEntityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + relatedReferenceUrn (required, string, `urn:uuid:54321`) ... Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
+    + relatedReferenceUrn (required, string, `urn:building:shop:456`) ... Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
     + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
 
 + Request
@@ -2155,10 +2155,10 @@ Lookup an array of all defined relationships between any two entities.
                 {
                     "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                     "entityReferenceType": "Object",
-                    "referenceUrn" : "urn:uuid:12345",
+                    "referenceUrn" : "urn:building:shop:123",
                     "type" : "Owns",
                     "relatedEntityReferenceType": "Object",
-                    "relatedReferenceUrn" : "urn:uuid:54321",
+                    "relatedReferenceUrn" : "urn:building:shop:456",
                     "lastModifiedTimestamp" : 1390607277299,
                 }
             ]
@@ -2183,9 +2183,9 @@ Lookup a specific relationship between any two entities.
 
 + Parameters
     + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + referenceUrn (required, string, `urn:building:shop:123`) ... Case-sensitive `urn` of an existing object URN of type `entityReferenceType`
     + relatedEntityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + relatedReferenceUrn (required, string, `urn:uuid:54321`) ... Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
+    + relatedReferenceUrn (required, string, `urn:building:shop:456`) ... Case-sensitive `urn` of an existing object URN of type `relatedEntityReferenceType`
     + type (required, string `Owns`) ... Case-sensitive `type` of relationship to look for
     + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
 
@@ -2207,10 +2207,10 @@ Lookup a specific relationship between any two entities.
             {
                 "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "entityReferenceType": "Object",
-                "referenceUrn" : "urn:uuid:12345",
+                "referenceUrn" : "urn:building:shop:123",
                 "type" : "Owns",
                 "relatedEntityReferenceType": "Object",
-                "relatedReferenceUrn" : "urn:uuid:54321",
+                "relatedReferenceUrn" : "urn:building:shop:456",
                 "lastModifiedTimestamp" : 1390607277299,
             }
 
@@ -2222,7 +2222,7 @@ Lookup a specific relationship between any two entities.
 
             {
                 "code" : -8,
-                "message" : "No matching record with Object of urn:uuid:12345 exists"
+                "message" : "No matching record with Object of urn:building:shop:456 exists"
             }
 
 + Response 401
@@ -2258,10 +2258,10 @@ Lookup an array of all defined relationships of the specific type.
                 {
                     "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                     "entityReferenceType": "Object",
-                    "referenceUrn" : "urn:uuid:12345",
+                    "referenceUrn" : "urn:building:shop:123",
                     "type" : "Owns",
                     "relatedEntityReferenceType": "Object",
-                    "relatedReferenceUrn" : "urn:uuid:54321",
+                    "relatedReferenceUrn" : "urn:building:shop:456",
                     "lastModifiedTimestamp" : 1390607277299,
                 }
             ]
@@ -2274,7 +2274,7 @@ Lookup an array of all defined relationships of the specific type.
 
             {
                 "code" : -8,
-                "message" : "No matching record with Object of urn:uuid:12345 exists"
+                "message" : "No matching record with Object of urn:building:shop:456 exists"
             }
 
 + Response 401
@@ -2310,10 +2310,10 @@ Lookup an array of all defined relationships of the specific type.
                 {
                     "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                     "entityReferenceType": "Object",
-                    "referenceUrn" : "urn:uuid:12345",
+                    "referenceUrn" : "urn:building:shop:123",
                     "type" : "Owns",
                     "relatedEntityReferenceType": "Object",
-                    "relatedReferenceUrn" : "urn:uuid:54321",
+                    "relatedReferenceUrn" : "urn:building:shop:456",
                     "lastModifiedTimestamp" : 1390607277299,
                 }
             ]
@@ -2326,7 +2326,7 @@ Lookup an array of all defined relationships of the specific type.
 
             {
                 "code" : -8,
-                "message" : "No matching record with Object of urn:uuid:12345 exists"
+                "message" : "No matching record with Object of urn:building:shop:456 exists"
             }
 
 + Response 401
