@@ -4807,6 +4807,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                 "message" : "JSON is missing a required field: name"
             }
             
++ Response 401             
 
 ### Update an existing timeline [POST]
 
@@ -4835,6 +4836,8 @@ The request body must include a value the `urn` field. Only those fields being u
                 "code" : -5,
                 "message" : "JSON is missing a required field: urn"
             }
+            
++ Response 401            
             
 ## Lookup Specific timeline by URN [/rest/timelines/{urn}{?view}]
 ### Lookup specific timeline by system URN [GET]
@@ -4873,7 +4876,18 @@ Lookup a specific timeline by its system-assigned URN key.
             }
 
 + Response 204 
- 
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "..."
+            }
+
++ Response 401
+
 ## Lookup timelines with Name Pattern [/rest/Timelines{?nameLike,view}]
 ### Lookup an array of matching timelines [GET]
 
@@ -4908,3 +4922,101 @@ Call always returns a JSON array, which may be an empty array if no timelines ar
                     "recordedTimestamp": 1414064324
                 }
             ]
+
++ Response 204
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "..."
+            }
+
++ Response 401
+
+# Group Admin Endpoints
+
+Disclaimer: This functionality is only available for selected customers with activated `admin extension`.
+
+## Lookup Object Dump [/rest/admin/dump/Object/{objectUrn}{?view}]
+### Lookup a Full Object Dump [POST]
+
+*DRAFT VERSION* 
+
+- Do not use in production!
+
+To lookup a full dump of an Object’s graph based on the assembled objectUrn from a discovered TID.
+The POST body will be a JSON file that contains an array field of {entityReferenceTypes} to include in the dump file. The following example shows what the POST JSON body would look like to retrieve all of the known Metadata and Tag associations with the specified object
+
++ Parameters
+    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN to assign the address to
+    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
+    + Body
+    
+            {
+                "entityReferenceTypes": [
+                    {
+                        "metadata": true
+                    },
+                    {
+                        "tag": true
+                    }
+                ]
+            }
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "metadata": [
+                   {
+                      "dataType": "BooleanType",
+                      "entityReferenceType": "Object",
+                      "key": "alpha",
+                      "lastModifiedTimestamp": 1393328943191,
+                      "rawValue": "AQ==",
+                      "referenceUrn": "urn:FooBar:dae58c07-f92e-43ff-91aa-90a62e75b3ba",
+                      "urn": "urn:uuid:47fe5a7d-1d0d-4c12-b256-96b970698623"
+                   },
+                   {
+                      "dataType": "Custom",
+                      "entityReferenceType": "Object",
+                      "key": "foo",
+                      "lastModifiedTimestamp": 1393328943205,
+                      "rawValue": "KioqKioqKioqKioqKg==",
+                      "referenceUrn": "urn:FooBar:dae58c07-f92e-43ff-91aa-90a62e75b3ba",
+                      "urn": "urn:uuid:5365e9f5-3eb4-492e-b2e0-95d57bc0662b"
+                   }
+                ]
+                "tag" : [
+                    {
+                       "urn": "urn:uuid:6a7107c7-3136-4040-a782-f6a3a29af310",
+                       "lastModifiedTimestamp": 1419270063355,
+                       "name": "MyTag",
+                       "description": null,
+                       "activeFlag": true
+                    }
+                ]
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with Object of urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists"
+            }
+
++ Response 401
+
