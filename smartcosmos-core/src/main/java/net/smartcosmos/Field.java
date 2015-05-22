@@ -130,6 +130,8 @@ public final class Field
 
     public static final String RECORDED_TIMESTAMP_FIELD = "recordedTimestamp";
 
+    public static final String TIMESTAMP_FIELD = "timestamp";
+
     public static final String OLD_PASSWORD_FIELD = "oldPassword";
 
     public static final String NEW_PASSWORD_FIELD = "newPassword";
