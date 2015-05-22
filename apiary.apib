@@ -1525,6 +1525,31 @@ Lookup a specific object address by its system-assigned URN key.
 
 + Response 204 
 
+## Delete Specific Object Address by URN [/rest/objects/object/{objectUrn}/address/{urn}]
+### Delete a specific object address by URN [DELETE]
+
+Delete a specific object address by its system-assigned URN key.
+
++ Parameters
+    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 204
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
 
 # Group Object Interaction Session Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Interaction_Session-Label.png "Object Interaction Session Endpoint")
