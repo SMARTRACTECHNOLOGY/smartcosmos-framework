@@ -1,4 +1,4 @@
-package net.smartcosmos.platform.api;
+package net.smartcosmos.platform.api.visitor;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -21,37 +21,16 @@ package net.smartcosmos.platform.api;
  */
 
 /**
- * Minimum definition of a service plugin, represented by a UUID service ID and a human-readable name. The
- * platform's context will be injected into the instance.
- * <p/>
- * Each platform service is accessed via the {@link net.smartcosmos.platform.api.service.IServiceFactory}.
- * The specific concrete implementation of the service is defined within the server's YML file.
+ * Generic visitor design pattern.
+ *
+ * @param <T> Type of object to visit
  */
-public interface IService
+public interface IVisitor<T>
 {
     /**
-     * UUID that identifies this unique service.
+     * Visit the object.
      *
-     * @return Service UUID
+     * @param type Type of object to visit
      */
-    String getServiceId();
-
-    /**
-     * Human readable name of the given service.
-     *
-     * @return service name
-     */
-    String getName();
-
-    /**
-     * Injected runtime context which the service operates within.
-     *
-     * @param context runtime context
-     */
-    void setContext(IContext context);
-
-    /**
-     * Perform any initialization or configuration steps required before the service is made available.
-     */
-    void initialize();
+    void visit(T type);
 }

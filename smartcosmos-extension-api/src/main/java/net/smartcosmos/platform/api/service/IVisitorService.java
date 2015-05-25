@@ -1,4 +1,4 @@
-package net.smartcosmos.platform.api;
+package net.smartcosmos.platform.api.service;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -20,38 +20,26 @@ package net.smartcosmos.platform.api;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import io.dropwizard.lifecycle.Managed;
+import net.smartcosmos.model.base.EntityReferenceType;
+import net.smartcosmos.platform.api.IService;
+import net.smartcosmos.platform.api.visitor.IVisitor;
+
+import java.util.Collection;
+
 /**
- * Minimum definition of a service plugin, represented by a UUID service ID and a human-readable name. The
- * platform's context will be injected into the instance.
- * <p/>
- * Each platform service is accessed via the {@link net.smartcosmos.platform.api.service.IServiceFactory}.
- * The specific concrete implementation of the service is defined within the server's YML file.
+ * Global Visitor design pattern hook for implementing server-side triggers.
  */
-public interface IService
+public interface IVisitorService extends IService, Managed
 {
-    /**
-     * UUID that identifies this unique service.
-     *
-     * @return Service UUID
-     */
-    String getServiceId();
+    EntityReferenceType getEntityReferenceType();
 
     /**
-     * Human readable name of the given service.
+     * Get the list of visitors for the specific type of class.
      *
-     * @return service name
+     * @param typeOf Visitor class type
+     * @param <T>    Type of class that the visitor will visit, e.g. <code>IEvent</code>
+     * @return
      */
-    String getName();
-
-    /**
-     * Injected runtime context which the service operates within.
-     *
-     * @param context runtime context
-     */
-    void setContext(IContext context);
-
-    /**
-     * Perform any initialization or configuration steps required before the service is made available.
-     */
-    void initialize();
+    <T> Collection<IVisitor<T>> getVisitors(Class<T> typeOf);
 }

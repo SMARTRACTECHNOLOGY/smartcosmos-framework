@@ -33,6 +33,7 @@ package net.smartcosmos.platform.api.service;
  */
 
 
+import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.platform.api.IService;
@@ -92,6 +93,11 @@ public interface IServiceFactory extends IService, IExtendable
      */
     String EVENT_SERVICE = "eventService";
 
+    /**
+     * Case-sensitive name of the service's implementation class in the platform service's YML file.
+     */
+    String VISITOR_SERVICE = "visitorService";
+
     //
     // Pluggable Platform Specific Services
     //
@@ -123,6 +129,14 @@ public interface IServiceFactory extends IService, IExtendable
     IEventService getEventService(IAccount account);
 
     IEventService getEventService(IUser user);
+
+    /**
+     * Visitors.
+     *
+     * @param entityReferenceType type of visitor service to retrieve
+     * @return Visitor service linked to the given EntityReferenceType, or null if none were registered
+     */
+    IVisitorService getVisitorService(EntityReferenceType entityReferenceType);
 
     /**
      * Obtains the default Quartz scheduler.

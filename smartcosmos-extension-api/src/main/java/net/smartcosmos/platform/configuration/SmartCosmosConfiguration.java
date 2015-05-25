@@ -84,6 +84,9 @@ public class SmartCosmosConfiguration extends Configuration
     private Map<String, String> serviceClasses = Maps.newLinkedHashMap();
 
     @NotNull
+    private Map<String, String> visitors = Maps.newLinkedHashMap();
+
+    @NotNull
     private Map<String, String> resourceRegistrarClasses = Maps.newLinkedHashMap();
 
     @NotNull
@@ -156,7 +159,7 @@ public class SmartCosmosConfiguration extends Configuration
         return transactionHandlerClasses;
     }
 
-    
+
     @JsonProperty("endpoints")
     public EndpointsFactory getEndpointsFactory()
     {
@@ -169,7 +172,7 @@ public class SmartCosmosConfiguration extends Configuration
         this.endpointsFactory = endpointsFactory;
     }
 
-    
+
     public Map<String, String> getServerExtensionConfigurationPaths()
     {
         return serverExtensionConfigurationPaths;
@@ -317,6 +320,11 @@ public class SmartCosmosConfiguration extends Configuration
     public Map<String, String> getServiceClasses()
     {
         return serviceClasses;
+    }
+
+    public Map<String, String> getVisitors()
+    {
+        return visitors;
     }
 
     public Map<String, String> getResourceRegistrarClasses()
