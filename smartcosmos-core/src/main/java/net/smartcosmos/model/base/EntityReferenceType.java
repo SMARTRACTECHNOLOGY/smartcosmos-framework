@@ -55,10 +55,7 @@ public enum EntityReferenceType
     Timeline,
     Georectification,
 
-    LibraryElement
+    LibraryElement,
 
-//    Library,
-//    Shelf,
-//    Book,
-//    PageEntry
+    Event
 }
