@@ -29,6 +29,7 @@ public enum EventType
 {
     RegistrationRequest,
 
+    RealmCheck,
     RealmDefined,
 
     AccountDefined,
