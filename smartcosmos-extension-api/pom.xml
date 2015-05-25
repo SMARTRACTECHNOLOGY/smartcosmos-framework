@@ -32,7 +32,7 @@
     </licenses>
 
     <properties>
-        <smartcosmos.platform-core.version>1.4</smartcosmos.platform-core.version>
+        <smartcosmos.platform-core.version>1.5</smartcosmos.platform-core.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>2.3.3</jackson.version>
         <dropwizard.version>0.7.1</dropwizard.version>
