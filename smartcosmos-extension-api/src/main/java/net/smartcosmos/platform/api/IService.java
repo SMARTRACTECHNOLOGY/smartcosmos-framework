@@ -24,8 +24,8 @@ package net.smartcosmos.platform.api;
  * Minimum definition of a service plugin, represented by a UUID service ID and a human-readable name. The
  * platform's context will be injected into the instance.
  * <p/>
- * Each platform service is accessed via the {@link net.smartcosmos.platform.api.service.ICosmosServiceFactory}.
- * The specific concrete implementation of the service is defined within the server's .yml file.
+ * Each platform service is accessed via the {@link net.smartcosmos.platform.api.service.IServiceFactory}.
+ * The specific concrete implementation of the service is defined within the server's YML file.
  */
 public interface IService
 {
