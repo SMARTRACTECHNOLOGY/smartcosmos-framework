@@ -62,7 +62,7 @@ public @interface EndpointMethodControl
      *
      * @return no default defined
      */
-    RoleType[] authorizedRoles() default {};
+    RoleType[] authorizedRoles() default { };
 
     /**
      * HTTP Status code to return  when the associated HTTP Method is either disabled or the authenticated user does not
