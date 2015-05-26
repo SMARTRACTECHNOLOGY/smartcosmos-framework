@@ -84,7 +84,7 @@ public class SmartCosmosConfiguration extends Configuration
     private Map<String, String> serviceClasses = Maps.newLinkedHashMap();
 
     @NotNull
-    private Map<String, String> permissions = Maps.newLinkedHashMap();
+    private Map<String, String> endpointMethodControl = Maps.newLinkedHashMap();
 
     @NotNull
     private Map<String, String> visitors = Maps.newLinkedHashMap();
@@ -325,9 +325,9 @@ public class SmartCosmosConfiguration extends Configuration
         return serviceClasses;
     }
 
-    public Map<String, String> getPermissions()
+    public Map<String, String> getEndpointMethodControl()
     {
-        return permissions;
+        return endpointMethodControl;
     }
 
     public Map<String, String> getVisitors()
