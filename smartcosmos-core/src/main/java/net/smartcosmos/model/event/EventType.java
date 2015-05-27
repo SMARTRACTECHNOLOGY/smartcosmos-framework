@@ -54,6 +54,8 @@ public enum EventType
 
     ObjectInteraction,
 
+    EventRecorded,
+
     FileDefined,
     FileUploaded,
     FileAccessed,
@@ -92,7 +94,6 @@ public enum EventType
     NotificationDeleted,
 
     NotificationAccessed,
-
     NotificationBroadcast,
 
     SetDeveloperLicense,
@@ -109,6 +110,7 @@ public enum EventType
     TagRevoked,
     TagAccessed,
 
+    RelationshipAccessed,
     RelationshipDefined,
     RelationshipDeleted,
 
@@ -131,6 +133,7 @@ public enum EventType
     OAuthTokenRefreshed,
     TokenRevocation,
 
+    TimelineEntryAccessed,
     TimelineEntryDefined,
     TimelineEntryUpdated,
     TimelineEntryDeleted,
@@ -141,8 +144,7 @@ public enum EventType
     ObjectAddressAccessed,
     ObjectInteractionAccessed,
     ObjectInteractionSessionAccessed,
-    RelationshipAccessed,
-    TimelineEntryAccessed,
+
 
     GeospatialEntryAccessed,
     GeospatialEntryDefined,
