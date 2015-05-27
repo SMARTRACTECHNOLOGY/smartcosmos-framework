@@ -20,8 +20,7 @@ package net.smartcosmos.model.event;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.base.IDomainResource;
-import net.smartcosmos.model.context.IAccount;
+import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.context.IUser;
 
 /**
@@ -31,15 +30,11 @@ import net.smartcosmos.model.context.IUser;
  * contain the {@link net.smartcosmos.util.json.JsonGenerationView.Standard} serialization of
  * the {@link net.smartcosmos.objects.model.context.IObject} that was accessed.
  */
-public interface IEvent extends IDomainResource<IEvent>
+public interface IEvent extends IAccountDomainResource<IEvent>
 {
     EventType getEventType();
 
     void setEventType(EventType eventType);
-
-    IAccount getAccount();
-
-    void setAccount(IAccount account);
 
     IUser getUser();
 
