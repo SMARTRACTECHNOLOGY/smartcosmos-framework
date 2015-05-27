@@ -86,7 +86,6 @@ public class SmartCosmosConfiguration extends Configuration
     @NotNull
     private Map<String, String> endpointMethodControl = Maps.newLinkedHashMap();
 
-    @NotNull
     private Map<String, String> visitors = Maps.newLinkedHashMap();
 
     @NotNull

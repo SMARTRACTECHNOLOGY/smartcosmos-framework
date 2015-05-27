@@ -20,62 +20,51 @@ package net.smartcosmos.platform.api.visitor;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.context.IUser;
+import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.event.EventType;
-import net.smartcosmos.model.event.IEvent;
+import net.smartcosmos.objects.model.context.ITag;
+import net.smartcosmos.objects.model.context.ITagAssignment;
 
-public class VisitableEvent extends AbstractVisitable<IEvent> implements IEvent
+public class VisitableTagAssignment extends AbstractVisitable<ITagAssignment> implements ITagAssignment
 {
-    public VisitableEvent(EventType eventType, IEvent instance)
+    public VisitableTagAssignment(EventType eventType, ITagAssignment instance)
     {
         super(eventType, instance);
     }
 
     @Override
-    public EventType getEventType()
+    public ITag getTag()
     {
-        return instance.getEventType();
+        return instance.getTag();
     }
 
     @Override
-    public void setEventType(EventType eventType)
+    public void setTag(ITag tag)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
 
     @Override
-    public IUser getUser()
-    {
-        return instance.getUser();
-    }
-
-    @Override
-    public void setUser(IUser user)
+    public void setReferenceUrn(String urn)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
 
     @Override
-    public String getSource()
-    {
-        return instance.getSource();
-    }
-
-    @Override
-    public void setSource(String source)
+    public void setEntityReferenceType(EntityReferenceType entityReferenceType)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
 
     @Override
-    public boolean suppressBroadcast()
+    public String getReferenceUrn()
     {
-        return instance.suppressBroadcast();
+        return instance.getReferenceUrn();
     }
 
     @Override
-    public void setSuppressBroadcast(boolean flag)
+    public EntityReferenceType getEntityReferenceType()
     {
-        throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
+        return instance.getEntityReferenceType();
     }
 }

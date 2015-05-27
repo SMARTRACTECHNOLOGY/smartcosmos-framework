@@ -39,7 +39,10 @@ import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.platform.api.IService;
 import net.smartcosmos.platform.api.batch.IBatchUploadService;
 import net.smartcosmos.platform.api.ext.IExtendable;
+import net.smartcosmos.platform.api.visitor.IVisitor;
 import org.quartz.Scheduler;
+
+import java.util.SortedSet;
 
 public interface IServiceFactory extends IService, IExtendable
 {
@@ -133,10 +136,10 @@ public interface IServiceFactory extends IService, IExtendable
     /**
      * Visitors.
      *
-     * @param entityReferenceType type of visitor service to retrieve
-     * @return Visitor service linked to the given EntityReferenceType, or null if none were registered
+     * @param entityReferenceType type of visitor collections to retrieve
+     * @return Sorted set of visitors arranged by their self-declared priorities
      */
-    IVisitorService getVisitorService(EntityReferenceType entityReferenceType);
+    SortedSet<IVisitor> getVisitorsForType(EntityReferenceType entityReferenceType);
 
     /**
      * Obtains the default Quartz scheduler.

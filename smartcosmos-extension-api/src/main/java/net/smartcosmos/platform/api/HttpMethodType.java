@@ -22,5 +22,5 @@ package net.smartcosmos.platform.api;
 
 public enum HttpMethodType
 {
-    GET, POST, PUT, DELETE, HEAD;
+    GET, POST, PUT, DELETE, HEAD, PATCH;
 }

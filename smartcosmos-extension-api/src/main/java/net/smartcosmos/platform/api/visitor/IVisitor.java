@@ -20,17 +20,47 @@ package net.smartcosmos.platform.api.visitor;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import io.dropwizard.lifecycle.Managed;
+import net.smartcosmos.model.base.EntityReferenceType;
+import net.smartcosmos.platform.api.IService;
+
 /**
  * Generic visitor design pattern.
  *
  * @param <T> Type of object to visit
  */
-public interface IVisitor<T>
+public interface IVisitor<T> extends IService, Managed, Comparable<IVisitor>
 {
+    int FIRST_PRIORITY = 1;
+
+    int HIGH_PRIORITY = 25;
+
+    int MEDIUM_PRIORITY = 50;
+
+    int LOW_PRIORITY = 75;
+
+    int LAST_PRIORITY = 100;
+
+    int DEFAULT_PRIORITY = MEDIUM_PRIORITY;
+
+    /**
+     * Prioritizes this visitor in relationship to other registered visitors.
+     *
+     * @return a priority value between 1 and 100 where 1 is more important than 100
+     */
+    int getPriority();
+
+    /**
+     * Declares the entity reference type this visitor can work against.
+     *
+     * @return entity reference type
+     */
+    EntityReferenceType getEntityReferenceType();
+
     /**
      * Visit the object.
      *
-     * @param type Type of object to visit
+     * @param instance instance to visit
      */
-    void visit(T type);
+    void visit(T instance);
 }

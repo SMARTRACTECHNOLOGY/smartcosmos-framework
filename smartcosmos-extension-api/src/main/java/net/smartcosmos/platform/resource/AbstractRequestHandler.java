@@ -22,6 +22,7 @@ package net.smartcosmos.platform.resource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Preconditions;
 import io.dropwizard.views.View;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.base.IDomainResource;
@@ -30,6 +31,8 @@ import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.IRequestHandler;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
+import net.smartcosmos.platform.api.visitor.IVisitable;
+import net.smartcosmos.platform.api.visitor.IVisitor;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.ViewType;
@@ -45,6 +48,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
+import java.util.SortedSet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -172,6 +176,20 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
                 .getSimpleName()
                 .concat("-" + domainResource.getUrn())
                 .concat("-" + ISO8601.print(domainResource.getLastModifiedTimestamp())));
+    }
+
+    @SuppressWarnings("unchecked")
+    protected void processVisitors(EntityReferenceType entityReferenceType, IVisitable instance)
+    {
+        Preconditions.checkNotNull(instance, "instance must not be null");
+        Preconditions.checkNotNull(entityReferenceType, "entityReferenceType must not be null");
+
+        SortedSet<IVisitor> visitors = context.getServiceFactory().getVisitorsForType(entityReferenceType);
+
+        for (IVisitor visitor : visitors)
+        {
+            visitor.visit(instance);
+        }
     }
 
     protected CacheControl createStandardCacheControl()

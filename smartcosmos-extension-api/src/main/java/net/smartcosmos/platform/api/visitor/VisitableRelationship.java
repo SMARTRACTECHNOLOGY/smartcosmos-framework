@@ -20,61 +20,79 @@ package net.smartcosmos.platform.api.visitor;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.context.IUser;
+import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.event.EventType;
-import net.smartcosmos.model.event.IEvent;
+import net.smartcosmos.objects.model.context.IRelationship;
 
-public class VisitableEvent extends AbstractVisitable<IEvent> implements IEvent
+public class VisitableRelationship extends AbstractVisitable<IRelationship> implements IRelationship
 {
-    public VisitableEvent(EventType eventType, IEvent instance)
+    public VisitableRelationship(EventType eventType, IRelationship instance)
     {
         super(eventType, instance);
     }
 
     @Override
-    public EventType getEventType()
+    public String getRelatedReferenceUrn()
     {
-        return instance.getEventType();
+        return instance.getReferenceUrn();
     }
 
     @Override
-    public void setEventType(EventType eventType)
-    {
-        throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
-    }
-
-    @Override
-    public IUser getUser()
-    {
-        return instance.getUser();
-    }
-
-    @Override
-    public void setUser(IUser user)
+    public void setRelatedReferenceUrn(String urn)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
 
     @Override
-    public String getSource()
+    public EntityReferenceType getRelatedEntityReferenceType()
     {
-        return instance.getSource();
+        return instance.getEntityReferenceType();
     }
 
     @Override
-    public void setSource(String source)
+    public void setRelatedEntityReferenceType(EntityReferenceType entityReferenceType)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
 
     @Override
-    public boolean suppressBroadcast()
+    public boolean isReciprocal()
     {
-        return instance.suppressBroadcast();
+        return instance.isReciprocal();
     }
 
     @Override
-    public void setSuppressBroadcast(boolean flag)
+    public void setReferenceUrn(String urn)
+    {
+        throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
+    }
+
+    @Override
+    public void setEntityReferenceType(EntityReferenceType entityReferenceType)
+    {
+        throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
+    }
+
+    @Override
+    public String getReferenceUrn()
+    {
+        return instance.getReferenceUrn();
+    }
+
+    @Override
+    public EntityReferenceType getEntityReferenceType()
+    {
+        return instance.getEntityReferenceType();
+    }
+
+    @Override
+    public String getType()
+    {
+        return instance.getType();
+    }
+
+    @Override
+    public void setType(String type)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }

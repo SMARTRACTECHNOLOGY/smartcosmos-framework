@@ -20,62 +20,81 @@ package net.smartcosmos.platform.api.visitor;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.context.IUser;
+import net.smartcosmos.model.base.EntityReferenceType;
+import net.smartcosmos.model.context.IMetadata;
+import net.smartcosmos.model.context.MetadataDataType;
 import net.smartcosmos.model.event.EventType;
-import net.smartcosmos.model.event.IEvent;
 
-public class VisitableEvent extends AbstractVisitable<IEvent> implements IEvent
+public class VisitableMetadata extends AbstractVisitable<IMetadata> implements IMetadata
 {
-    public VisitableEvent(EventType eventType, IEvent instance)
+    public VisitableMetadata(EventType eventType, IMetadata instance)
     {
         super(eventType, instance);
     }
 
     @Override
-    public EventType getEventType()
+    public MetadataDataType getDataType()
     {
-        return instance.getEventType();
+        return instance.getDataType();
     }
 
     @Override
-    public void setEventType(EventType eventType)
+    public void setDataType(MetadataDataType type)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
 
     @Override
-    public IUser getUser()
+    public String getKey()
     {
-        return instance.getUser();
+        return instance.getKey();
     }
 
     @Override
-    public void setUser(IUser user)
+    public void setKey(String key)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
 
     @Override
-    public String getSource()
+    public byte[] getRawValue()
     {
-        return instance.getSource();
+        return instance.getRawValue();
     }
 
     @Override
-    public void setSource(String source)
+    public void setRawValue(byte[] value)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
 
     @Override
-    public boolean suppressBroadcast()
+    public String getDecodedValue()
     {
-        return instance.suppressBroadcast();
+        return instance.getDecodedValue();
     }
 
     @Override
-    public void setSuppressBroadcast(boolean flag)
+    public void setReferenceUrn(String urn)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
+    }
+
+    @Override
+    public void setEntityReferenceType(EntityReferenceType entityReferenceType)
+    {
+        throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
+    }
+
+    @Override
+    public String getReferenceUrn()
+    {
+        return instance.getReferenceUrn();
+    }
+
+    @Override
+    public EntityReferenceType getEntityReferenceType()
+    {
+        return instance.getEntityReferenceType();
     }
 }

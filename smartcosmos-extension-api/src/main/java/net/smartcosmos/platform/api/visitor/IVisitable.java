@@ -20,12 +20,34 @@ package net.smartcosmos.platform.api.visitor;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import net.smartcosmos.model.event.EventType;
+
 /**
  * Generic visitor design pattern, where any class that wishes to accept visitors of a specific type
  * should implement this interface.
  */
 public interface IVisitable<T>
 {
+    /**
+     * Event types help visitors understand the context of their visit, e.g. is it a creation, an update, or a delete
+     * event that triggered their visit.
+     *
+     * @return Event type
+     * @see VisitableEvent
+     * @see VisitableDevice
+     * @see VisitableFile
+     * @see VisitableGeospatialEntry
+     * @see VisitableMetadata
+     * @see VisitableObject
+     * @see VisitableObjectAddress
+     * @see VisitableObjectInteraction
+     * @see VisitableObjectInteractionSession
+     * @see VisitableRelationship
+     * @see VisitableTagAssignment
+     * @see VisitableTimelineEntry
+     */
+    EventType getEventType();
+
     /**
      * Accepts a strongly typed visitor.
      *

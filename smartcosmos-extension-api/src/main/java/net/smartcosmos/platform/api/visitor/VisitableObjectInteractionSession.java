@@ -20,61 +20,85 @@ package net.smartcosmos.platform.api.visitor;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.event.EventType;
-import net.smartcosmos.model.event.IEvent;
+import net.smartcosmos.objects.model.context.IObjectInteractionSession;
 
-public class VisitableEvent extends AbstractVisitable<IEvent> implements IEvent
+public class VisitableObjectInteractionSession extends AbstractVisitable<IObjectInteractionSession>
+        implements IObjectInteractionSession
 {
-    public VisitableEvent(EventType eventType, IEvent instance)
+    public VisitableObjectInteractionSession(EventType eventType, IObjectInteractionSession instance)
     {
         super(eventType, instance);
     }
 
     @Override
-    public EventType getEventType()
+    public long getStartTimestamp()
     {
-        return instance.getEventType();
+        return instance.getStartTimestamp();
     }
 
     @Override
-    public void setEventType(EventType eventType)
-    {
-        throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
-    }
-
-    @Override
-    public IUser getUser()
-    {
-        return instance.getUser();
-    }
-
-    @Override
-    public void setUser(IUser user)
+    public void setStartTimestamp(long timestamp)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
 
     @Override
-    public String getSource()
+    public long getStopTimestamp()
     {
-        return instance.getSource();
+        return instance.getStopTimestamp();
     }
 
     @Override
-    public void setSource(String source)
+    public void setStopTimestamp(long timestamp)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
 
     @Override
-    public boolean suppressBroadcast()
+    public String getName()
     {
-        return instance.suppressBroadcast();
+        return instance.getName();
     }
 
     @Override
-    public void setSuppressBroadcast(boolean flag)
+    public void setName(String name)
+    {
+        throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return instance.getDescription();
+    }
+
+    @Override
+    public void setDescription(String description)
+    {
+        throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
+    }
+
+    @Override
+    public boolean isActive()
+    {
+        return instance.isActive();
+    }
+
+    @Override
+    public void setActive(boolean flag)
+    {
+        throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
+    }
+
+    @Override
+    public String getType()
+    {
+        return instance.getType();
+    }
+
+    @Override
+    public void setType(String type)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
     }
