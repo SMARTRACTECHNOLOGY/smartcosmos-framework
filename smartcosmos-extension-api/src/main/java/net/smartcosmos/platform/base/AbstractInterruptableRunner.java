@@ -1,4 +1,4 @@
-package net.smartcosmos.platform.api.service;
+package net.smartcosmos.platform.base;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -20,18 +20,27 @@ package net.smartcosmos.platform.api.service;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-/**
- * Event runners are thread-safe handlers for an {@link net.smartcosmos.model.event.IEvent} processing algorithm. The
- * default algorithm is simple database persistence of the event, but other event handlers include analytics, back
- * office integration, and even composite event handlers that can execute multiple event runners in parallel.
- */
-public interface IEventRunner extends Runnable
+import net.smartcosmos.platform.api.IContext;
+import net.smartcosmos.platform.api.service.IInterruptableRunner;
+
+import java.util.concurrent.BlockingQueue;
+
+public abstract class AbstractInterruptableRunner<T> extends Thread implements IInterruptableRunner
 {
-    /**
-     * Notification flag from the {@link io.dropwizard.lifecycle.Managed}
-     * {@link net.smartcosmos.platform.api.service.IEventService} that the server is shutting down and the event
-     * runner must immediately terminate its thread, presuming it is operating using some type of a blocking
-     * queue that was just interrupted.
-     */
-    void setTerminateFlag();
+    protected final IContext context;
+
+    protected final BlockingQueue<T> blockingQueue;
+
+    protected boolean terminateFlag = false;
+
+    protected AbstractInterruptableRunner(IContext context, BlockingQueue<T> blockingQueue)
+    {
+        this.context = context;
+        this.blockingQueue = blockingQueue;
+    }
+
+    public void setTerminateFlag()
+    {
+        terminateFlag = true;
+    }
 }

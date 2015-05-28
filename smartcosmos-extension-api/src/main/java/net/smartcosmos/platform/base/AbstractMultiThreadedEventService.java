@@ -20,83 +20,20 @@ package net.smartcosmos.platform.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import io.dropwizard.lifecycle.Managed;
 import net.smartcosmos.platform.api.service.IEventService;
 import net.smartcosmos.platform.pojo.service.RecordableEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-
-public abstract class AbstractMultiThreadedEventService extends AbstractService implements IEventService, Managed
+public abstract class AbstractMultiThreadedEventService extends AbstractBlockingQueueService<RecordableEvent>
+        implements IEventService
 {
-    private static final int DEFAULT_THREAD_POOL_SIZE = 3;
-
-    public static final String EVENT_THREAD_POOL_SIZE = "eventThreadPoolSize";
+    public static final String EVENT_THREAD_POOL_KEY = "eventThreadPoolSize";
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractMultiThreadedEventService.class);
 
-    private List<AbstractEventRunner> activeThreads = new ArrayList<>();
-
-    protected BlockingQueue<RecordableEvent> blockingQueue;
-
     protected AbstractMultiThreadedEventService(String serviceId, String name)
     {
-        super(serviceId, name);
-    }
-
-    @Override
-    public void initialize()
-    {
-        blockingQueue = new LinkedBlockingQueue<>();
-
-        int fixedThreadPoolSize = DEFAULT_THREAD_POOL_SIZE;
-        if (context.getConfiguration().getServiceParameters().containsKey(EVENT_THREAD_POOL_SIZE))
-        {
-            try
-            {
-                fixedThreadPoolSize = Integer.parseInt(context.getConfiguration()
-                        .getServiceParameters()
-                        .get(EVENT_THREAD_POOL_SIZE));
-
-            } catch (NumberFormatException e)
-            {
-                LOG.warn("Cannot parse eventThreadPoolSize in YML file: {}",
-                        context.getConfiguration().getServiceParameters().get(EVENT_THREAD_POOL_SIZE));
-            }
-        }
-
-        for (int i = 0; i < fixedThreadPoolSize; i++)
-        {
-            AbstractEventRunner runner = createEventRunner();
-            runner.setName("Persisted Event Service - Thread " + (i + 1));
-            activeThreads.add(runner);
-            runner.start();
-
-            LOG.info("Spawned Event Service Thread #" + (i + 1));
-        }
-    }
-
-    protected abstract AbstractEventRunner createEventRunner();
-
-    @Override
-    public void start() throws Exception
-    {
-
-    }
-
-    @Override
-    public void stop() throws Exception
-    {
-        //
-        // Ensure we properly shutdown our threads
-        for (AbstractEventRunner runner : activeThreads)
-        {
-            runner.setTerminateFlag();
-            runner.interrupt();
-        }
+        super(serviceId, name, EVENT_THREAD_POOL_KEY);
     }
 }
