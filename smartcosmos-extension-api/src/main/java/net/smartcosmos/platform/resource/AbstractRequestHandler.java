@@ -40,6 +40,8 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.CacheControl;
@@ -57,6 +59,8 @@ import static net.smartcosmos.Field.NULL_MONIKER;
 
 public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 {
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractRequestHandler.class);
+
     protected static final DateTimeFormatter ISO8601 = ISODateTimeFormat.dateTime();
 
     private final AtomicLong counter;
@@ -188,7 +192,18 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 
         for (IVisitor visitor : visitors)
         {
-            visitor.visit(instance);
+            try
+            {
+                visitor.visit(instance);
+            } catch (Exception e)
+            {
+                LOG.warn("Visitor {} (serviceId {}) threw an uncaught exception {}",
+                        new Object[]{
+                                visitor.getName(),
+                                visitor.getServiceId(),
+                                e.getMessage()});
+                e.printStackTrace();
+            }
         }
     }
 
