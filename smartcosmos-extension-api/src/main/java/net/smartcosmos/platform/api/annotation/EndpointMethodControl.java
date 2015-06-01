@@ -70,7 +70,7 @@ public @interface EndpointMethodControl
      *
      * @return defaults to <b>UNAUTHORIZED</b>
      */
-    Response.Status httpStatusCode() default Response.Status.UNAUTHORIZED;
+    Response.Status httpStatusCode() default Response.Status.FORBIDDEN;
 
     /**
      * Error code returned when the associated HTTP Method is either disabled or the authenticated user does not

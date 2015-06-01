@@ -5,8 +5,16 @@
 *.war
 *.ear
 
-*.ipr
-*.iml
 target/
 
 *.log
+
+# Exclude output folders
+bin/
+gen/
+target/
+
+# Exclude local IntelliJ settings
+*.iml
+*.ipr
+.idea
