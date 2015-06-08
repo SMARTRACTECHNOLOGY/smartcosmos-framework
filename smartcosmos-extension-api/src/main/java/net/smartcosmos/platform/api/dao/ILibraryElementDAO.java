@@ -47,7 +47,7 @@ import java.util.Collection;
 public interface ILibraryElementDAO extends IBaseDAO<ILibraryElement>, INamedObjectSearchDAO<ILibraryElement>
 {
     Collection<ILibraryElement> findChildren(String urn, IAccount account);
-    ILibraryElement findByNameAndType(String name, String libraryElementType, IAccount account);
+    Collection<ILibraryElement> findByNameAndType(String name, String libraryElementType, IAccount account);
     ILibraryElement findParent(String urn, IAccount account);
 }
 
