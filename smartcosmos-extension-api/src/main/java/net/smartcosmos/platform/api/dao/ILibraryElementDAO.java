@@ -41,7 +41,6 @@ package net.smartcosmos.platform.api.dao;
 
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.objects.model.context.ILibraryElement;
-import net.smartcosmos.objects.pojo.context.LibraryElement;
 
 import java.util.Collection;
 
