@@ -27,7 +27,6 @@ import net.smartcosmos.platform.jpa.integrator.IPostLoadHandler;
 import net.smartcosmos.platform.jpa.integrator.IPrePersistHandler;
 import net.smartcosmos.platform.jpa.integrator.IPreUpdateHandler;
 import net.smartcosmos.util.json.JsonGenerationView;
-import org.hibernate.annotations.Index;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -40,12 +39,13 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
         implements IDomainResource<T>, IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler
 {
     @JsonView(JsonGenerationView.Restricted.class)
+    @Column(length = 38, nullable = false, updatable = false, unique = true)
     @Id
     protected String uniqueId;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 767, nullable = false, updatable = false)
-    @Index(name = "urn_idx")
+    @Column(length = 48, nullable = false, updatable = false, unique = true)
+    //@Index(name = "urn_idx")
     protected String urn;
 
     @JsonView(JsonGenerationView.Standard.class)
