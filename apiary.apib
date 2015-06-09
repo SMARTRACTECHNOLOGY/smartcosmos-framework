@@ -1388,7 +1388,7 @@ the internationally recognized standard for country codes.
                 "message" : "JSON is missing a required field: type"
             }
 
-## Update Specific Object Address [/rest/objects/object/{objectUrn}/address/{urn}]
+## Object Address Management [/rest/objects/object/{objectUrn}/address/{urn}]
 ### Update an existing object address [POST]
 
 The request body only needs to include those fields being updated. For example, if you only want to update 
@@ -1426,7 +1426,33 @@ the `stateProvince` of the object, only include that field in the request body.
                 "code" : -2,
                 "message" : "No such URN"
             }   
-                        
+
+### Delete a specific object address by URN [DELETE]
+
+Delete a specific object address by its system-assigned URN key.
+
++ Parameters
+    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
+    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+
++ Request
+    
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 204
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "code" : -2,
+                "message" : "No such URN"
+            }
+
+                    
 ## Lookup Specific Object Address by URN [/rest/objects/object/{objectUrn}/address/{urn}{?view}]
 ### Lookup a specific object address by URN [GET]
 
@@ -1525,31 +1551,6 @@ Lookup a specific object address by its system-assigned URN key.
 
 + Response 204 
 
-## Delete Specific Object Address by URN [/rest/objects/object/{objectUrn}/address/{urn}]
-### Delete a specific object address by URN [DELETE]
-
-Delete a specific object address by its system-assigned URN key.
-
-+ Parameters
-    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-
-+ Request
-    
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-+ Response 204
-
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "code" : -2,
-                "message" : "No such URN"
-            }
 
 # Group Object Interaction Session Endpoints
 ![alt text](https://raw.githubusercontent.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/master/images/endpoints/Endpoint_Interaction_Session-Label.png "Object Interaction Session Endpoint")
@@ -4282,7 +4283,7 @@ below (which matches the example in the initial version of the Objects
 configuration file, objects.yml, and may be everything you need), a Shelf
 can only be the child of a Library, a Book can only be the child of a Shelf,
 and so on. Library elements do not have to have parents, i.e., a Shelf can
-have Books and those Books can have Chapters and so on,without the Shelf
+have Books and those Books can have Chapters and so on, without the Shelf
 having to have a parent Library. However, the Shelf can have at most one
 parent Library (a Library can of course have an arbitrary number of Shelves),
 and so on down the hierarchy. You can have as many Libraries as you want,
@@ -4334,7 +4335,7 @@ relatedEntityReferenceType (only for PageEntry) | EntityReferenceType | true | f
 attachments to its parent and children. A (for example) shelf is not required to have a parent, and will be created without one if an already
 existing parent is not specified at creation time. In this case the shelf can later be attached to any already existing library.
 - The `parent` field defines this element's attachment in the library hierarchy. Every library element (except for libraryElementType library)
-must have a parent of the appropriate library element type, if it has a parent at all.
+can have a parent of the appropriate library element type, if it has a parent at all.
 - An object which is not a library element can only be attached to a Page Entry element. The relatedEntityReferenceType, RelatedReferenceUrn
 and deleteFromLibrary fields must be unset for every library element which is not a Page Entry.
 - The `name` field is required, and must be HTML-compliant (i.e., no special characters, no space characters...). Unique naming in a library hierarchy is enforced: a shelf cannot have two books with the same name, for example.
