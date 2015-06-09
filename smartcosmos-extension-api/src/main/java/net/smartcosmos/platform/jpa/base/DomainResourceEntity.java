@@ -41,7 +41,6 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     @JsonView(JsonGenerationView.Minimum.class)
     @Column(length = 48, nullable = false, updatable = false, unique = true)
     @Id
-    //@Index(name = "urn_idx")
     protected String urn;
 
     @JsonView(JsonGenerationView.Standard.class)
