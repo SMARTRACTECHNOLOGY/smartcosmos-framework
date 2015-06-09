@@ -21,7 +21,9 @@ package net.smartcosmos.model.base;
  */
 
 /**
+ *
  * Sole means of uniquely identifying a specific object in the SMART COSMOS platform.
+ *
  * */
 public interface IUrnNamespace
 {
