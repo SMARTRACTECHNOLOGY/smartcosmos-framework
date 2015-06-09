@@ -43,7 +43,6 @@ public final class AuthenticatedUser extends User implements IAuthenticatedUser
         this.oauthFlag = (null != extensionUser);
         this.extensionUser = extensionUser;
 
-        this.setUniqueId(actualUser.getUniqueId());
         this.setUrn(actualUser.getUrn());
 
         this.setMoniker(actualUser.getMoniker());

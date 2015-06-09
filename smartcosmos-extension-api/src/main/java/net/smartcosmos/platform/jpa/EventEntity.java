@@ -56,7 +56,7 @@ public class EventEntity extends DomainResourceEntity<IEvent> implements IEvent
     @JsonView(JsonGenerationView.Restricted.class)
     @JsonDeserialize(as = Account.class)
     @ManyToOne(targetEntity = AccountEntity.class, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "accountId", updatable = false, referencedColumnName = "uniqueId", nullable = true)
+    @JoinColumn(name = "accountUrn", updatable = false, referencedColumnName = "urn", nullable = true)
     protected IAccount account;
 
     @JsonView(JsonGenerationView.Minimum.class)

@@ -38,13 +38,9 @@ import java.util.UUID;
 public abstract class DomainResourceEntity<T extends IDomainResource>
         implements IDomainResource<T>, IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler
 {
-    @JsonView(JsonGenerationView.Restricted.class)
-    @Column(length = 38, nullable = false, updatable = false, unique = true)
-    @Id
-    protected String uniqueId;
-
     @JsonView(JsonGenerationView.Minimum.class)
     @Column(length = 48, nullable = false, updatable = false, unique = true)
+    @Id
     //@Index(name = "urn_idx")
     protected String urn;
 
@@ -55,18 +51,6 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     @JsonView(JsonGenerationView.Full.class)
     @Column(length = 2048, nullable = true, updatable = true)
     protected String moniker;
-
-    @Override
-    public String getUniqueId()
-    {
-        return uniqueId;
-    }
-
-    @Override
-    public void setUniqueId(String uniqueId)
-    {
-        this.uniqueId = uniqueId;
-    }
 
     @Override
     public String getUrn()
@@ -84,7 +68,6 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     public void copy(T target)
     {
         this.urn = target.getUrn();
-        this.uniqueId = target.getUniqueId();
         this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
         this.moniker = target.getMoniker();
     }
@@ -100,7 +83,6 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     {
         lastModifiedTimestamp = System.currentTimeMillis();
         setUrn("urn:uuid:" + UUID.randomUUID().toString());
-        setUniqueId(UUID.randomUUID().toString());
 
         if (null != moniker && moniker.equals(Field.NULL_MONIKER))
         {
@@ -145,7 +127,6 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
 
         DomainResourceEntity that = (DomainResourceEntity) o;
 
-        if (uniqueId != that.uniqueId) return false;
         if (!urn.equals(that.urn)) return false;
 
         return true;
@@ -154,8 +135,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     @Override
     public int hashCode()
     {
-        int result = (int) uniqueId.hashCode();
-        result = 31 * result + urn.hashCode();
+        int result = urn.hashCode();
         return result;
     }
 }

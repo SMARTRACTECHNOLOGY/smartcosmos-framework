@@ -105,7 +105,6 @@ public class UserEntity extends DomainResourceAccountEntity<IUser> implements IU
     public void copy(IUser target)
     {
         this.urn = target.getUrn();
-        this.uniqueId = target.getUniqueId();
         this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
         this.moniker = target.getMoniker();
 
