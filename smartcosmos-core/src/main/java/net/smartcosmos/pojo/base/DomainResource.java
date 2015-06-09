@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-@JsonPropertyOrder(value = {"uniqueId", "urn", "lastModifiedTimestamp" })
+@JsonPropertyOrder(value = {"urn", "lastModifiedTimestamp" })
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
     @JsonView(JsonGenerationView.Minimum.class)
