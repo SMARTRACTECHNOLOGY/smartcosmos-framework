@@ -104,7 +104,6 @@ public class User extends DomainResource< IUser > implements IUser
     public void copy(IUser target)
     {
         this.urn = target.getUrn();
-        this.uniqueId = target.getUniqueId();
         this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
         this.moniker = target.getMoniker();
 

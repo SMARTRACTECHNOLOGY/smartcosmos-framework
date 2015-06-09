@@ -28,9 +28,6 @@ import net.smartcosmos.util.json.JsonGenerationView;
 @JsonPropertyOrder(value = {"uniqueId", "urn", "lastModifiedTimestamp" })
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
-    @JsonView(JsonGenerationView.Restricted.class)
-    protected String uniqueId;
-
     @JsonView(JsonGenerationView.Minimum.class)
     protected String urn;
 
@@ -40,19 +37,7 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     @JsonView(JsonGenerationView.Full.class)
     protected String moniker;
 
-    @Override
-    public String getUniqueId()
-    {
-        return uniqueId;
-    }
-
-    @Override
-    public void setUniqueId(String uniqueId)
-    {
-        this.uniqueId = uniqueId;
-    }
-
-    @Override
+     @Override
     public void setUrn(String urn)
     {
         this.urn = urn;
@@ -116,7 +101,6 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     public String toString()
     {
         return "DomainResource{" +
-                "uniqueId=" + uniqueId +
                 ", urn='" + urn + '\'' +
                 ", lastModifiedTimestamp=" + lastModifiedTimestamp +
                 ", moniker='" + moniker + '\'' +
