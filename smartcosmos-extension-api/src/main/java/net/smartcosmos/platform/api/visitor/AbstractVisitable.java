@@ -48,18 +48,6 @@ abstract class AbstractVisitable<T extends IAccountDomainResource>
     }
 
     @Override
-    public String getUniqueId()
-    {
-        throw new UnsupportedOperationException("Unique ID is opaque and not supported in an IVisitable reference");
-    }
-
-    @Override
-    public void setUniqueId(String s)
-    {
-        throw new UnsupportedOperationException("Unique ID is opaque and not supported in an IVisitable reference");
-    }
-
-    @Override
     public void copy(T target)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
