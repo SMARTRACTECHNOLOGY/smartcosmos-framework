@@ -76,7 +76,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             EntityReferenceType.Device,
             EntityReferenceType.File,
             EntityReferenceType.Timeline,
-			EntityReferenceType.LibraryElement);
+            EntityReferenceType.LibraryElement);
 
     protected AbstractRequestHandler(IContext context)
     {
