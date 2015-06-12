@@ -104,7 +104,7 @@ public class UserEntity extends DomainResourceAccountEntity<IUser> implements IU
     @Override
     public void copy(IUser target)
     {
-        this.urn = target.getUrn();
+        this.setUrn(target.getUrn());
         this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
         this.moniker = target.getMoniker();
 
