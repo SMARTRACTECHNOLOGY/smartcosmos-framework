@@ -134,7 +134,6 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     @Override
     public int hashCode()
     {
-        int result = urn.hashCode();
-        return result;
+        return urn.hashCode();
     }
 }
