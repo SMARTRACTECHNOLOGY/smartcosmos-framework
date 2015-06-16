@@ -22,20 +22,25 @@ package net.smartcosmos.platform.dao;
 
 import com.google.common.base.Preconditions;
 import io.dropwizard.hibernate.AbstractDAO;
-import net.smartcosmos.model.base.IDomainResource;
-import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.platform.api.dao.IBaseDAO;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import net.smartcosmos.model.base.IDomainResource;
+import net.smartcosmos.model.context.IAccount;
+import net.smartcosmos.platform.api.dao.IBaseDAO;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.UUID;
 
-public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
-        extends AbstractDAO<T> implements IBaseDAO<S>
+public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> extends AbstractDAO<T> implements
+        IBaseDAO<S>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractDAOImpl.class);
 
@@ -55,7 +60,6 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         this.classInstance = classInstance;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public S upsert(S object)
     {
@@ -98,11 +102,11 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
 
         } catch (InstantiationException e)
         {
-            LOG.warn("Unable to instantiate object of type " + classInstance.getName());
-            e.printStackTrace();
+            LOG.warn("Unable to instantiate object of type {}", classInstance.getName());
+            LOG.debug(e.getMessage(), e);
         } catch (IllegalAccessException e)
         {
-            e.printStackTrace();
+            LOG.debug(e.getMessage(), e);
         }
 
         return (S) instance;
@@ -131,8 +135,8 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
                 currentSession().delete(instance);
             } else
             {
-                LOG.warn("Unable to locate object of type " + classInstance.getName() +
-                        " with system urn " + object.getUrn());
+                LOG.warn("Unable to locate object of type {} with unique ID {}", classInstance.getName(),
+                        object.getUrn());
             }
         }
     }
@@ -152,11 +156,11 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
 
         } catch (InstantiationException e)
         {
-            LOG.warn("Unable to instantiate object of type " + classInstance.getName());
-            e.printStackTrace();
+            LOG.warn("Unable to instantiate object of type {}", classInstance.getName());
+            LOG.debug(e.getMessage(), e);
         } catch (IllegalAccessException e)
         {
-            e.printStackTrace();
+            LOG.debug(e.getMessage(), e);
         }
     }
 
@@ -167,22 +171,10 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         Preconditions.checkNotNull(account, "Parameter 'account' must not be null");
         S object = null;
 
-        String entityName = clazz.getName();
-
-        /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
-         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
-         * identifier.
-         *
-         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
-         */
-        Query query = currentSession()
-                .createQuery("select e from " + entityName +
-                        " e where e.account.urn = :accountUrn and e.urn = :urn")
-                .setParameter("accountUrn", UUID.fromString(account.getUrn()))
-                .setParameter("urn", UUID.fromString(urn));
-
-        object = (S) query.uniqueResult();
+        Criteria criteria = criteria();
+        criteria.add(Restrictions.eq("urn", UUID.fromString(urn)));
+        criteria.add(Restrictions.eq("accountUrn", UUID.fromString(account.getUrn())));
+        object = (S) criteria.uniqueResult();
 
         return object;
     }
@@ -196,15 +188,12 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         String entityName = clazz.getName();
 
         /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
-         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
-         * identifier.
-         *
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8, which
+         * restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class identifier.
+         * 
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
-        Query query = currentSession()
-                .createQuery("select e from " + entityName +
-                        " e where e.urn = :urn")
+        Query query = currentSession().createQuery("select e from " + entityName + " e where e.urn = :urn")
                 .setParameter("urn", UUID.fromString(urn));
 
         object = (S) query.uniqueResult();
@@ -221,10 +210,9 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         String entityName = clazz.getName();
 
         /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
-         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
-         * identifier.
-         *
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8, which
+         * restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class identifier.
+         * 
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
         Query listQuery = currentSession().createQuery("select m from " + entityName + " m where m.account.urn = :urn")
@@ -246,16 +234,14 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         String entityName = clazz.getName();
 
         /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
-         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
-         * identifier.
-         *
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8, which
+         * restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class identifier.
+         * 
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
-        Query listQuery = currentSession().createQuery("select m from " + entityName +
-                " m where m.account.urn = :urn and m.moniker = :moniker")
-                .setParameter("urn", UUID.fromString(account.getUrn()))
-                .setParameter("moniker", monikerEquals);
+        Query listQuery = currentSession()
+                .createQuery("select m from " + entityName + " m where m.account.urn = :urn and m.moniker = :moniker")
+                .setParameter("urn", UUID.fromString(account.getUrn())).setParameter("moniker", monikerEquals);
 
         for (Object o : listQuery.list())
         {
@@ -273,16 +259,15 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         String entityName = clazz.getName();
 
         /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
-         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
-         * identifier.
-         *
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8, which
+         * restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class identifier.
+         * 
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
-        Query listQuery = currentSession().createQuery("select m from " + entityName +
-                " m where m.account.urn = :urn and m.moniker like :moniker")
-                .setParameter("urn", UUID.fromString(account.getUrn()))
-                .setParameter("moniker", monikerLike + "%");
+        Query listQuery = currentSession()
+                .createQuery(
+                        "select m from " + entityName + " m where m.account.urn = :urn and m.moniker like :moniker")
+                .setParameter("urn", UUID.fromString(account.getUrn())).setParameter("moniker", monikerLike + "%");
 
         for (Object o : listQuery.list())
         {
@@ -292,4 +277,3 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         return list;
     }
 }
-
