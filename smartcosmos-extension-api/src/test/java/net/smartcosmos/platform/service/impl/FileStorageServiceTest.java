@@ -38,6 +38,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.google.common.net.MediaType;
+
 /**
  * It's kind of hard to really test this class, since technically you're not supposed to hit the outside file system
  * during a functional test. I'm bending the rules, since it creates a temporary filestore.
@@ -110,7 +112,7 @@ public class FileStorageServiceTest
         String mockJson = IOUtils.toString(getClass().getResourceAsStream("/mock-json.json"));
 
         StorageRequest request = new StorageRequest(IOUtils.toInputStream(mockJson, "UTF-8"));
-        request.setContentType(StorageRequest.APPLICATION_JSON);
+        request.setContentType(MediaType.JSON_UTF_8.toString());
         request.setFileName(filename);
         StorageResponse response = service.store(request);
 
@@ -127,7 +129,7 @@ public class FileStorageServiceTest
         String mockJson = IOUtils.toString(getClass().getResourceAsStream("/mock-json.json"));
 
         StorageRequest request = new StorageRequest(IOUtils.toInputStream(mockJson, "UTF-8"));
-        request.setContentType(StorageRequest.APPLICATION_JSON);
+        request.setContentType(MediaType.JSON_UTF_8.toString());
         request.setFileName(filename);
         StorageResponse response = service.store(request);
 
@@ -150,7 +152,7 @@ public class FileStorageServiceTest
         String mockJson = IOUtils.toString(getClass().getResourceAsStream("/mock-json.json"));
 
         StorageRequest request = new StorageRequest(IOUtils.toInputStream(mockJson, "UTF-8"));
-        request.setContentType(StorageRequest.APPLICATION_JSON);
+        request.setContentType(MediaType.JSON_UTF_8.toString());
         request.setFileName(filename);
         StorageResponse response = service.store(request);
 

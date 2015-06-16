@@ -27,11 +27,6 @@ import java.io.InputStream;
 
 public final class StorageRequest
 {
-    /*
-     * Just puts some commonly used content types here.
-     */
-    public static final String APPLICATION_JSON = "application/json";
-
     private InputStream inputStream;
 
     private IFile file;
