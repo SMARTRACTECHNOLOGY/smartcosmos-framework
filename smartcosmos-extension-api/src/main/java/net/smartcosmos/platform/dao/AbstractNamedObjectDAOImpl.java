@@ -27,6 +27,7 @@ import java.util.UUID;
 import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.platform.api.dao.INamedObjectSearchDAO;
+import net.smartcosmos.platform.api.dao.IPageProvider;
 import net.smartcosmos.platform.api.dao.domain.IPage;
 import net.smartcosmos.platform.dao.domain.PageEntry;
 
@@ -36,7 +37,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
 public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U> extends AbstractDAOImpl<U, V> implements
-        INamedObjectSearchDAO<U>
+        INamedObjectSearchDAO<U>, IPageProvider<U>
 {
     protected AbstractNamedObjectDAOImpl(Class<V> classInstance, SessionFactory sessionFactory)
     {
@@ -74,6 +75,10 @@ public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U> ext
         return list;
     }
 
+    /* (non-Javadoc)
+     * @see net.smartcosmos.platform.dao.IPageProvider#count()
+     */
+    @Override
     public Long count()
     {
         final Criteria criteriaCount = criteria();
@@ -89,6 +94,10 @@ public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U> ext
         }
     }
 
+    /* (non-Javadoc)
+     * @see net.smartcosmos.platform.dao.IPageProvider#page(int, int)
+     */
+    @Override
     @SuppressWarnings("unchecked")
     public IPage<U> page(int page, int pageSize)
     {
