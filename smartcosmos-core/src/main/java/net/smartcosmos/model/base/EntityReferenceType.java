@@ -57,5 +57,17 @@ public enum EntityReferenceType
 
     LibraryElement,
 
-    Event
+    Event;
+    
+    public static final boolean isValid(String referenceType)
+    {
+        try
+        {
+            valueOf(referenceType);
+            return true;
+        } catch (IllegalArgumentException e)
+        {
+            return false;
+        }
+    }
 }
