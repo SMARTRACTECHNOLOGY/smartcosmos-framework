@@ -37,7 +37,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
 public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U> extends AbstractDAOImpl<U, V> implements
-        INamedObjectSearchDAO<U>, IPageProvider<U>
+        INamedObjectSearchDAO<U>
 {
     protected AbstractNamedObjectDAOImpl(Class<V> classInstance, SessionFactory sessionFactory)
     {
@@ -73,52 +73,6 @@ public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U> ext
         }
 
         return list;
-    }
-
-    /* (non-Javadoc)
-     * @see net.smartcosmos.platform.dao.IPageProvider#count()
-     */
-    @Override
-    public Long count()
-    {
-        final Criteria criteriaCount = criteria();
-        criteriaCount.setProjection(Projections.rowCount());
-
-        Object result = criteriaCount.uniqueResult();
-        if (result == null)
-        {
-            return 0L;
-        } else
-        {
-            return (Long) criteriaCount.uniqueResult();
-        }
-    }
-
-    /* (non-Javadoc)
-     * @see net.smartcosmos.platform.dao.IPageProvider#page(int, int)
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public IPage<U> page(int page, int pageSize)
-    {
-        Collection<U> list = new ArrayList<U>();
-
-        final int totalSize = count().intValue();
-        final int totalPages = totalSize / pageSize;
-        final int currentPage = pageSize * page;
-
-        Criteria criteria = criteria();
-        criteria.setFirstResult(page * pageSize);
-        criteria.setMaxResults(pageSize);
-
-        for (Object o : criteria.list())
-        {
-            list.add((U) o);
-        }
-
-        IPage<U> pagination = new PageEntry<U>(list, totalPages, totalSize, currentPage, pageSize);
-
-        return pagination;
     }
 
     @Override

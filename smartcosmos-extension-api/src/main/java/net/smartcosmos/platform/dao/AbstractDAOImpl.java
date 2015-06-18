@@ -29,10 +29,14 @@ import java.util.Collection;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.platform.api.dao.IBaseDAO;
+import net.smartcosmos.platform.api.dao.IPageProvider;
+import net.smartcosmos.platform.api.dao.domain.IPage;
+import net.smartcosmos.platform.dao.domain.PageEntry;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +44,7 @@ import org.slf4j.LoggerFactory;
 import java.util.UUID;
 
 public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> extends AbstractDAO<T> implements
-        IBaseDAO<S>
+        IBaseDAO<S>, IPageProvider<S>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractDAOImpl.class);
 
@@ -81,6 +85,56 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
             // INSERT
             return insert(object);
         }
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see net.smartcosmos.platform.dao.IPageProvider#count()
+     */
+    @Override
+    public Long count()
+    {
+        final Criteria criteriaCount = criteria();
+        criteriaCount.setProjection(Projections.rowCount());
+
+        Object result = criteriaCount.uniqueResult();
+        if (result == null)
+        {
+            return 0L;
+        } else
+        {
+            return (Long) criteriaCount.uniqueResult();
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see net.smartcosmos.platform.dao.IPageProvider#page(int, int)
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public IPage<S> page(int page, int pageSize)
+    {
+        Collection<S> list = new ArrayList<S>();
+
+        final int totalSize = count().intValue();
+        final int totalPages = totalSize / pageSize;
+        final int currentPage = pageSize * page;
+
+        Criteria criteria = criteria();
+        criteria.setFirstResult(page * pageSize);
+        criteria.setMaxResults(pageSize);
+
+        for (Object o : criteria.list())
+        {
+            list.add((S) o);
+        }
+
+        IPage<S> pagination = new PageEntry<S>(list, totalPages, totalSize, currentPage, pageSize);
+
+        return pagination;
     }
 
     @SuppressWarnings("unchecked")
