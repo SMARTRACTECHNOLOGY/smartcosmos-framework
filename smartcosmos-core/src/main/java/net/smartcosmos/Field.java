@@ -54,6 +54,8 @@ public final class Field
 
     public static final String MESSAGE_FIELD = "message";
 
+    public static final String TRANSACTION_ID_FIELD = "transactionId";
+
     public static final String URN_FIELD = "urn";
 
     public static final String MONIKER_FIELD = "moniker";
