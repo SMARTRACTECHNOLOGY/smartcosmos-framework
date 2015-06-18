@@ -27,14 +27,9 @@ import java.util.UUID;
 import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.platform.api.dao.INamedObjectSearchDAO;
-import net.smartcosmos.platform.api.dao.IPageProvider;
-import net.smartcosmos.platform.api.dao.domain.IPage;
-import net.smartcosmos.platform.dao.domain.PageEntry;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
 
 public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U> extends AbstractDAOImpl<U, V> implements
         INamedObjectSearchDAO<U>
