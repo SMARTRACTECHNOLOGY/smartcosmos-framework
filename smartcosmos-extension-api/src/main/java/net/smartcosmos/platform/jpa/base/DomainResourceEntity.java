@@ -27,6 +27,7 @@ import net.smartcosmos.platform.jpa.integrator.IPostLoadHandler;
 import net.smartcosmos.platform.jpa.integrator.IPrePersistHandler;
 import net.smartcosmos.platform.jpa.integrator.IPreUpdateHandler;
 import net.smartcosmos.util.json.JsonGenerationView;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -39,9 +40,10 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
         implements IDomainResource<T>, IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler
 {
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 48, nullable = false, updatable = false, unique = true)
+    @Column(length = 16, nullable = false, updatable = false, unique = true)
+    @Type(type = "uuid-binary")
     @Id
-     String urn;
+    UUID urn;
 
     @JsonView(JsonGenerationView.Standard.class)
     @Basic
@@ -54,19 +56,35 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     @Override
     public String getUrn()
     {
-        return urn;
+        if (urn == null)
+        {
+            return null;
+        }
+        return urn.toString();
     }
 
     @Override
     public void setUrn(String urn)
     {
-        this.urn = urn;
+        if (urn == null)
+        {
+            this.urn = null;
+        } else
+        {
+            this.urn = UUID.fromString(urn);
+        }
     }
 
     @Override
     public void copy(T target)
     {
-        this.urn = target.getUrn();
+        if (target.getUrn() == null)
+        {
+            this.urn = null;
+        } else
+        {
+            this.urn = UUID.fromString(target.getUrn());
+        }
         this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
         this.moniker = target.getMoniker();
     }
@@ -81,7 +99,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     public void onPrePersist()
     {
         lastModifiedTimestamp = System.currentTimeMillis();
-        setUrn("urn:uuid:" + UUID.randomUUID().toString());
+        setUrn(UUID.randomUUID().toString());
 
         if (null != moniker && moniker.equals(Field.NULL_MONIKER))
         {

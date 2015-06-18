@@ -28,6 +28,7 @@ import org.hibernate.SessionFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U>
         extends AbstractDAOImpl<U, V> implements INamedObjectSearchDAO<U>
@@ -59,7 +60,7 @@ public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U>
          */
         Query listQuery = currentSession().createQuery("select m from " + entityName +
                 " m where m.account.urn = :urn and m.name like :name")
-                .setParameter("urn", account.getUrn())
+                .setParameter("urn", UUID.fromString(account.getUrn()))
                 .setParameter("name", nameLike + "%");
 
         for (Object o : listQuery.list())
