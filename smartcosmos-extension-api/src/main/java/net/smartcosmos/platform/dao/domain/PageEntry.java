@@ -23,19 +23,22 @@ package net.smartcosmos.platform.dao.domain;
 import java.util.Collection;
 import java.util.Iterator;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import net.smartcosmos.platform.api.dao.domain.IPage;
+import net.smartcosmos.util.json.JsonGenerationView;
 
 public class PageEntry<T> implements IPage<T>
 {
-
+    @JsonView(JsonGenerationView.Standard.class)
     private final int totalPages;
-
+    @JsonView(JsonGenerationView.Standard.class)
     private final int totalSize;
-
+    @JsonView(JsonGenerationView.Standard.class)
     private final int currentPage;
-
+    @JsonView(JsonGenerationView.Standard.class)
     private final int pageSize;
-
+    @JsonView(JsonGenerationView.Standard.class)
     private Collection<T> contents;
 
     public PageEntry(Collection<T> contents, int totalPages, int totalSize, int currentPage, int pageSize)
