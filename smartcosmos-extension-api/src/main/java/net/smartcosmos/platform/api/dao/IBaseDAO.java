@@ -46,5 +46,5 @@ public interface IBaseDAO<T extends IDomainResource> extends IMonikerSearchDAO
 
     void delete(T object);
 
-    void update(T object);
+    T update(T object);
 }

@@ -197,16 +197,16 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
 
     @Override
     @SuppressWarnings("unchecked")
-    public void update(S object)
+    public S update(S object)
     {
-        T instance;
+        T instance = null;
 
         try
         {
             instance = classInstance.newInstance();
             instance.copy(object);
 
-            currentSession().merge(instance);
+            instance = (T) currentSession().merge(instance);
 
         } catch (InstantiationException e)
         {
@@ -216,6 +216,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         {
             LOG.debug(e.getMessage(), e);
         }
+        return (S) instance;
     }
 
     @Override
