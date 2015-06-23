@@ -26,6 +26,7 @@ import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.platform.jpa.integrator.IPostLoadHandler;
 import net.smartcosmos.platform.jpa.integrator.IPrePersistHandler;
 import net.smartcosmos.platform.jpa.integrator.IPreUpdateHandler;
+import net.smartcosmos.platform.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
 import org.hibernate.annotations.Type;
 
@@ -99,7 +100,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     public void onPrePersist()
     {
         lastModifiedTimestamp = System.currentTimeMillis();
-        setUrn(UUID.randomUUID().toString());
+        setUrn(UuidUtil.getUuidAsString());
 
         if (null != moniker && moniker.equals(Field.NULL_MONIKER))
         {

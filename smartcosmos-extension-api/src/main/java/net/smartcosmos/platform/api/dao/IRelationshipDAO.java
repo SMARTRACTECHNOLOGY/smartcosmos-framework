@@ -124,7 +124,6 @@ public interface IRelationshipDAO extends IBaseDAO<IRelationship>
                                                     EntityReferenceType relatedEntityReferenceType,
                                                     IAccount account);
 
-
     // Don't know if you've got a system urn or an object urn? This will return a system urn if
     // the object has already been persisted, and a null otherwise
     UUID getSystemUrn(String referenceUrn, EntityReferenceType entityReferenceType, IAccount account);
