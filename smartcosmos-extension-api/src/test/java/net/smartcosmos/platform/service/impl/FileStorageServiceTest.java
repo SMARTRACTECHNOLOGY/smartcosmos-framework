@@ -21,13 +21,19 @@ package net.smartcosmos.platform.service.impl;
  */
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.io.IOException;
+import java.util.UUID;
 
+import net.smartcosmos.model.base.EntityReferenceType;
+import net.smartcosmos.model.context.IAccount;
+import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.objects.model.context.IFile;
 import net.smartcosmos.objects.pojo.context.File;
 import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.pojo.service.StorageRequest;
+import net.smartcosmos.platform.pojo.service.StorageRequest.StorageRequestBuilder;
 import net.smartcosmos.platform.pojo.service.StorageResponse;
 
 import org.apache.commons.io.IOUtils;
@@ -55,10 +61,24 @@ public class FileStorageServiceTest
 
     @Mock
     IContext context;
+    @Mock
+    IUser user;
+
+    @Mock
+    IAccount account;
+
+    @Mock
+    IFile file;
 
     @Before
     public void setUp() throws Exception
     {
+
+        when(user.getAccount()).thenReturn(account);
+        when(file.getEntityReferenceType()).thenReturn(EntityReferenceType.Account);
+        when(file.getReferenceUrn()).thenReturn(UUID.randomUUID().toString());
+        when(account.getUrn()).thenReturn(UUID.randomUUID().toString());
+        when(file.getTimestamp()).thenReturn(System.currentTimeMillis());
 
         service = new FileStorageService();
 
@@ -111,9 +131,9 @@ public class FileStorageServiceTest
         //
         String mockJson = IOUtils.toString(getClass().getResourceAsStream("/mock-json.json"));
 
-        StorageRequest request = new StorageRequest(IOUtils.toInputStream(mockJson, "UTF-8"));
-        request.setContentType(MediaType.JSON_UTF_8.toString());
-        request.setFileName(filename);
+        StorageRequest request = new StorageRequestBuilder(IOUtils.toInputStream(mockJson, "UTF-8"))
+                .setContentType(MediaType.JSON_UTF_8.toString()).setFileName(filename).setFile(file).setUser(user)
+                .build();
         StorageResponse response = service.store(request);
 
         // I just hashed the file with md5sum, that's where this came from.
@@ -128,9 +148,9 @@ public class FileStorageServiceTest
         //
         String mockJson = IOUtils.toString(getClass().getResourceAsStream("/mock-json.json"));
 
-        StorageRequest request = new StorageRequest(IOUtils.toInputStream(mockJson, "UTF-8"));
-        request.setContentType(MediaType.JSON_UTF_8.toString());
-        request.setFileName(filename);
+        StorageRequest request = new StorageRequestBuilder(IOUtils.toInputStream(mockJson, "UTF-8"))
+                .setContentType(MediaType.JSON_UTF_8.toString()).setFileName(filename).setFile(file).setUser(user)
+                .build();
         StorageResponse response = service.store(request);
 
         // I just hashed the file with md5sum, that's where this came from.
@@ -151,9 +171,9 @@ public class FileStorageServiceTest
         //
         String mockJson = IOUtils.toString(getClass().getResourceAsStream("/mock-json.json"));
 
-        StorageRequest request = new StorageRequest(IOUtils.toInputStream(mockJson, "UTF-8"));
-        request.setContentType(MediaType.JSON_UTF_8.toString());
-        request.setFileName(filename);
+        StorageRequest request = new StorageRequestBuilder(IOUtils.toInputStream(mockJson, "UTF-8"))
+                .setContentType(MediaType.JSON_UTF_8.toString()).setFileName(filename).setFile(file).setUser(user)
+                .build();
         StorageResponse response = service.store(request);
 
         // I just hashed the file with md5sum, that's where this came from.

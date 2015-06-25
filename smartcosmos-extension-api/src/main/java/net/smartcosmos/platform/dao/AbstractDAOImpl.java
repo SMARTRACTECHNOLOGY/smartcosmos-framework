@@ -72,7 +72,12 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
             throw new IllegalArgumentException("Parameter must not be null");
         }
 
-        S findResult = findByUrn(classInstance, object.getUrn());
+        S findResult = null;
+
+        if (null != object.getUrn())
+        {
+            findResult = findByUrn(classInstance, object.getUrn());
+        }
 
         if (null != findResult)
         {
@@ -238,6 +243,11 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
     @SuppressWarnings("unchecked")
     public S findByUrn(Class<?> clazz, String urn)
     {
+        if (urn == null)
+        {
+            return null;
+        }
+
         S object = null;
 
         String entityName = clazz.getName();
