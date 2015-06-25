@@ -39,7 +39,6 @@ import net.smartcosmos.objects.model.context.IRelationship;
 import net.smartcosmos.platform.api.service.IEventService;
 
 import java.util.Collection;
-import java.util.UUID;
 
 public interface IRelationshipDAO extends IBaseDAO<IRelationship>
 {
@@ -126,7 +125,7 @@ public interface IRelationshipDAO extends IBaseDAO<IRelationship>
 
     // Don't know if you've got a system urn or an object urn? This will return a system urn if
     // the object has already been persisted, and a null otherwise
-    UUID getSystemUrn(String referenceUrn, EntityReferenceType entityReferenceType, IAccount account);
+    // UUID getSystemUrn(String referenceUrn, EntityReferenceType entityReferenceType, IAccount account);
 
     // getter is extraneous
     IObjectDAO getObjectDAO();

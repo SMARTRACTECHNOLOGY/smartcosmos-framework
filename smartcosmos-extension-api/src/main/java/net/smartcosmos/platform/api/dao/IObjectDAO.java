@@ -32,15 +32,23 @@ package net.smartcosmos.platform.api.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.objects.model.context.IObject;
 
 import java.util.Collection;
+import java.util.UUID;
 
 public interface IObjectDAO extends IBaseDAO<IObject>, INamedObjectSearchDAO<IObject>
 {
     IObject findByObjectUrn(String objectUrn, IAccount account);
 
     Collection<IObject> findByObjectUrnLike(String objectUrnLike, IAccount account);
+
+    // Don't know if you've got a system urn or an object urn? This will return a system urn if
+    // the object has already been persisted, and a null otherwise
+    UUID getSystemUrnFromObjectUrn(String referenceUrn, IAccount account);
+    String getSystemUrnFromObjectUrnAsString(String referenceUrn, IAccount account);
+    String getSystemUrnFromObjectUrnAsString(String referenceUrn, EntityReferenceType ert, IAccount account);
 }
 
