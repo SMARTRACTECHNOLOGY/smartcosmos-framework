@@ -37,10 +37,20 @@ import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IMetadata;
 
 import java.util.Collection;
+import java.util.ArrayList;
 
 public interface IMetadataDAO extends IBaseDAO<IMetadata>
 {
     IMetadata findSpecific(EntityReferenceType entityReferenceType, String referenceUrn, String key, IAccount account);
 
     Collection<IMetadata> findByType(EntityReferenceType entityReferenceType, String referenceUrn, IAccount account);
+
+    Collection<String> findSearch(
+            EntityReferenceType entityReferenceType,
+            boolean includeMatches,
+            int maxMatchesToInclude,
+            ArrayList<String> listKeys,
+            ArrayList<byte[]> listRawValues,
+            IAccount account
+    );
 }
