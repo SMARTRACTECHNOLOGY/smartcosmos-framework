@@ -28,9 +28,5 @@ package net.smartcosmos.model.base;
  */
 public interface IDomainResource<T> extends IUrnNamespace, IMoniker
 {
-    String getUniqueId();
-
-    void setUniqueId(String uniqueId);
-
     void copy(T object);
 }

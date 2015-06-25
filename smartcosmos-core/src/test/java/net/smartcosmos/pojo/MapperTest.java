@@ -41,6 +41,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.UUID;
 
 public class MapperTest
 {
@@ -143,7 +144,7 @@ public class MapperTest
         metadata.setKey("foo");
         metadata.setRawValue(bytes);
         metadata.setEntityReferenceType(EntityReferenceType.Device);
-        metadata.setReferenceUrn("foo:bar");
+        metadata.setReferenceUrn(UUID.randomUUID().toString());
 
         String json = JsonUtil.toJson(metadata, JsonGenerationView.Minimum.class);
         System.out.println(json);

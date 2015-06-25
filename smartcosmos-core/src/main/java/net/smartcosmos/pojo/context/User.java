@@ -26,6 +26,8 @@ import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import java.util.UUID;
+
 
 public class User extends DomainResource< IUser > implements IUser
 {
@@ -103,8 +105,13 @@ public class User extends DomainResource< IUser > implements IUser
     @Override
     public void copy(IUser target)
     {
-        this.urn = target.getUrn();
-        this.uniqueId = target.getUniqueId();
+        if (target.getUrn() == null)
+        {
+            this.urn = null;
+        } else
+        {
+            this.urn = UUID.fromString(target.getUrn());
+        }
         this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
         this.moniker = target.getMoniker();
 

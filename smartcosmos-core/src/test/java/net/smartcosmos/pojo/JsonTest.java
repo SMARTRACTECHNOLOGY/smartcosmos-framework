@@ -35,6 +35,7 @@ import org.json.JSONObject;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import static org.testng.Assert.assertTrue;
 
@@ -44,12 +45,12 @@ public class JsonTest
     @Test
     public void testAccount() throws IOException
     {
-        String urn = "net.smartcosmos";
+        UUID urn = UUID.randomUUID();
         String name = "Test Account";
         String description = "My test Description";
 
         IAccount testAccount = new Account();
-        testAccount.setUrn(urn);
+        testAccount.setUrn(urn.toString());
         testAccount.setName(name);
         testAccount.setDescription(description);
         testAccount.setActive(true);
@@ -63,7 +64,7 @@ public class JsonTest
 
         assertTrue(jsonAccount.getName().equals(name));
         assertTrue(jsonAccount.getDescription().equals(description));
-        assertTrue(jsonAccount.getUrn().equals(urn));
+        assertTrue(jsonAccount.getUrn().equals(urn.toString()));
     }
 
     @Test
@@ -73,7 +74,7 @@ public class JsonTest
 
         IMetadata metadataObject = new Metadata.MetadataObjectBuilder(MetadataDataType.StringType)
                 .setEntityReferenceType(EntityReferenceType.Device)
-                .setReferenceUrn("urn:uuid:12345")
+                .setReferenceUrn(UUID.randomUUID().toString())
                 .setKey("foo")
                 .setStringValue(MESSAGE)
                 .build();
@@ -97,7 +98,7 @@ public class JsonTest
 
         IMetadata metadataObject = new Metadata.MetadataObjectBuilder(MetadataDataType.JSONType)
                 .setEntityReferenceType(EntityReferenceType.Device)
-                .setReferenceUrn("urn:uuid:12345")
+                .setReferenceUrn(UUID.randomUUID().toString())
                 .setKey("foo")
                 .setJsonValue(jsonObject)
                 .build();

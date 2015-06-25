@@ -33,6 +33,7 @@ import org.testng.annotations.Test;
 import java.io.ByteArrayInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 public class SignatureTest
 {
@@ -40,13 +41,13 @@ public class SignatureTest
     public void testSignature() throws NoSuchAlgorithmException, JSONException
     {
         IAccount mockAccount = new Account();
-        mockAccount.setUrn("1234-456-7890");
+        mockAccount.setUrn(UUID.randomUUID().toString());
 
         IFile mockFile = new File();
         mockFile.setAccount(mockAccount);
-        mockFile.setUrn("0987-654-321");
+        mockFile.setUrn(UUID.randomUUID().toString());
         mockFile.setEntityReferenceType(EntityReferenceType.Object);
-        mockFile.setReferenceUrn("urn:uuid:123123123123");
+        mockFile.setReferenceUrn(UUID.randomUUID().toString());
         mockFile.setUrl("http://localhost:8080/foo/bar");
 
         final String MESSAGE = "The quick brown fox jumps over the lazy dog";

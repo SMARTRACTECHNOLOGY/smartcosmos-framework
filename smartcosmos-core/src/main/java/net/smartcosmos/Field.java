@@ -54,8 +54,6 @@ public final class Field
 
     public static final String MESSAGE_FIELD = "message";
 
-    public static final String UNIQUE_ID_FIELD = "uniqueId";
-
     public static final String URN_FIELD = "urn";
 
     public static final String MONIKER_FIELD = "moniker";

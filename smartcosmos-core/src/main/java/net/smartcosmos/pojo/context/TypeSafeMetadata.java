@@ -165,18 +165,6 @@ public class TypeSafeMetadata<T> implements IMetadata
     }
 
     @Override
-    public String getUniqueId()
-    {
-        return metadataObject.getUniqueId();
-    }
-
-    @Override
-    public void setUniqueId(String uniqueId)
-    {
-        metadataObject.setUniqueId(uniqueId);
-    }
-
-    @Override
     public long getLastModifiedTimestamp()
     {
         return metadataObject.getLastModifiedTimestamp();
