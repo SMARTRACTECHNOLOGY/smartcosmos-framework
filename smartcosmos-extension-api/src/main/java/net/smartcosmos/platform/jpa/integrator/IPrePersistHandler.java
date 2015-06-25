@@ -22,7 +22,8 @@ package net.smartcosmos.platform.jpa.integrator;
 
 public interface IPrePersistHandler
 {
-    String getUniqueId();
-
     void onPrePersist();
+
+    String getUrn();
+
 }

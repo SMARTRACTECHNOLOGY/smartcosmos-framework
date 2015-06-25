@@ -36,7 +36,7 @@ public abstract class DomainResourceAccountEntity<T extends IDomainResource> ext
 {
     @JsonView(JsonGenerationView.Full.class)
     @ManyToOne(targetEntity = AccountEntity.class, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "accountId", updatable = false, referencedColumnName = "uniqueId", nullable = false)
+    @JoinColumn(name = "accountUrn", updatable = false, referencedColumnName = "urn", nullable = false)
     protected IAccount account;
 
     public IAccount getAccount()

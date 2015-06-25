@@ -26,8 +26,9 @@ import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.platform.jpa.integrator.IPostLoadHandler;
 import net.smartcosmos.platform.jpa.integrator.IPrePersistHandler;
 import net.smartcosmos.platform.jpa.integrator.IPreUpdateHandler;
+import net.smartcosmos.platform.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
-import org.hibernate.annotations.Index;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -39,14 +40,11 @@ import java.util.UUID;
 public abstract class DomainResourceEntity<T extends IDomainResource>
         implements IDomainResource<T>, IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler
 {
-    @JsonView(JsonGenerationView.Restricted.class)
-    @Id
-    protected String uniqueId;
-
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 767, nullable = false, updatable = false)
-    @Index(name = "urn_idx")
-    protected String urn;
+    @Column(length = 16, nullable = false, updatable = false, unique = true)
+    @Type(type = "uuid-binary")
+    @Id
+    UUID urn;
 
     @JsonView(JsonGenerationView.Standard.class)
     @Basic
@@ -57,34 +55,37 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     protected String moniker;
 
     @Override
-    public String getUniqueId()
-    {
-        return uniqueId;
-    }
-
-    @Override
-    public void setUniqueId(String uniqueId)
-    {
-        this.uniqueId = uniqueId;
-    }
-
-    @Override
     public String getUrn()
     {
-        return urn;
+        if (urn == null)
+        {
+            return null;
+        }
+        return urn.toString();
     }
 
     @Override
     public void setUrn(String urn)
     {
-        this.urn = urn;
+        if (urn == null)
+        {
+            this.urn = null;
+        } else
+        {
+            this.urn = UUID.fromString(urn);
+        }
     }
 
     @Override
     public void copy(T target)
     {
-        this.urn = target.getUrn();
-        this.uniqueId = target.getUniqueId();
+        if (target.getUrn() == null)
+        {
+            this.urn = null;
+        } else
+        {
+            this.urn = UUID.fromString(target.getUrn());
+        }
         this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
         this.moniker = target.getMoniker();
     }
@@ -99,8 +100,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     public void onPrePersist()
     {
         lastModifiedTimestamp = System.currentTimeMillis();
-        setUrn("urn:uuid:" + UUID.randomUUID().toString());
-        setUniqueId(UUID.randomUUID().toString());
+        setUrn(UuidUtil.getUuidAsString());
 
         if (null != moniker && moniker.equals(Field.NULL_MONIKER))
         {
@@ -145,7 +145,6 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
 
         DomainResourceEntity that = (DomainResourceEntity) o;
 
-        if (uniqueId != that.uniqueId) return false;
         if (!urn.equals(that.urn)) return false;
 
         return true;
@@ -154,8 +153,6 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     @Override
     public int hashCode()
     {
-        int result = (int) uniqueId.hashCode();
-        result = 31 * result + urn.hashCode();
-        return result;
+        return urn.hashCode();
     }
 }

@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         extends AbstractDAO<T> implements IBaseDAO<S>
@@ -63,7 +64,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
             throw new IllegalArgumentException("Parameter must not be null");
         }
 
-        S findResult = findById(classInstance, object.getUniqueId());
+        S findResult = findByUrn(classInstance, object.getUrn());
 
         if (null != findResult)
         {
@@ -123,7 +124,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
         } else
         {
 
-            S instance = findById(classInstance, object.getUniqueId());
+            S instance = findByUrn(classInstance, object.getUrn());
 
             if (null != instance)
             {
@@ -131,7 +132,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
             } else
             {
                 LOG.warn("Unable to locate object of type " + classInstance.getName() +
-                        " with unique ID " + object.getUniqueId());
+                        " with system urn " + object.getUrn());
             }
         }
     }
@@ -161,30 +162,6 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
 
     @Override
     @SuppressWarnings("unchecked")
-    public S findById(Class<?> clazz, String id)
-    {
-        S object;
-
-        String entityName = clazz.getName();
-
-        /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
-         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
-         * identifier.
-         *
-         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
-         */
-        Query query = currentSession()
-                .createQuery("select e from " + entityName + " e where e.uniqueId = :uniqueId")
-                .setParameter("uniqueId", id);
-
-        object = (S) query.uniqueResult();
-
-        return object;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
     public S findByUrn(Class<?> clazz, String urn, IAccount account)
     {
         Preconditions.checkNotNull(account, "Parameter 'account' must not be null");
@@ -201,9 +178,34 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
          */
         Query query = currentSession()
                 .createQuery("select e from " + entityName +
-                        " e where e.account.uniqueId = :accountId and e.urn = :urn")
-                .setParameter("accountId", account.getUniqueId())
-                .setParameter("urn", urn);
+                        " e where e.account.urn = :accountUrn and e.urn = :urn")
+                .setParameter("accountUrn", UUID.fromString(account.getUrn()))
+                .setParameter("urn", UUID.fromString(urn));
+
+        object = (S) query.uniqueResult();
+
+        return object;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public S findByUrn(Class<?> clazz, String urn)
+    {
+        S object = null;
+
+        String entityName = clazz.getName();
+
+        /*
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
+         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
+         * identifier.
+         *
+         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
+         */
+        Query query = currentSession()
+                .createQuery("select e from " + entityName +
+                        " e where e.urn = :urn")
+                .setParameter("urn", UUID.fromString(urn));
 
         object = (S) query.uniqueResult();
 
@@ -226,7 +228,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
         Query listQuery = currentSession().createQuery("select m from " + entityName + " m where m.account.urn = :urn")
-                .setParameter("urn", account.getUrn());
+                .setParameter("urn", UUID.fromString(account.getUrn()));
 
         for (Object o : listQuery.list())
         {
@@ -251,8 +253,8 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
         Query listQuery = currentSession().createQuery("select m from " + entityName +
-                " m where m.account.uniqueId = :uniqueId and m.moniker = :moniker")
-                .setParameter("uniqueId", account.getUniqueId())
+                " m where m.account.urn = :urn and m.moniker = :moniker")
+                .setParameter("urn", UUID.fromString(account.getUrn()))
                 .setParameter("moniker", monikerEquals);
 
         for (Object o : listQuery.list())
@@ -278,8 +280,8 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S>
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
         Query listQuery = currentSession().createQuery("select m from " + entityName +
-                " m where m.account.uniqueId = :uniqueId and m.moniker like :moniker")
-                .setParameter("uniqueId", account.getUniqueId())
+                " m where m.account.urn = :urn and m.moniker like :moniker")
+                .setParameter("urn", UUID.fromString(account.getUrn()))
                 .setParameter("moniker", monikerLike + "%");
 
         for (Object o : listQuery.list())
