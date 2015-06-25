@@ -97,13 +97,8 @@ public class FileStorageService extends AbstractService implements IStorageServi
 
         HashCode hc = Files.hash(storingFile, Hashing.md5());
 
-        StorageResponse response = new StorageResponse();
-
         // Awwww yesh, Java URLs.
-        response.setUrl(storingFile.toURI().toURL().toString());
-        response.setContentHash(hc.toString());
-
-        return response;
+        return new StorageResponse(request.getFile(), storingFile.toURI().toURL().toString(), hc.toString());
     }
 
     @Override

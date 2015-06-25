@@ -1,5 +1,7 @@
 package net.smartcosmos.platform.pojo.service;
 
+import net.smartcosmos.objects.model.context.IFile;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -22,27 +24,44 @@ package net.smartcosmos.platform.pojo.service;
 
 public final class StorageResponse
 {
-    private String url;
+    private final String url;
 
-    private String contentHash;
+    private final String contentHash;
 
-    public void setUrl(String url)
+    private final IFile file;
+
+    public StorageResponse(final IFile file, final String url, final String contentHash)
     {
+        super();
+        this.file = file;
         this.url = url;
-    }
-
-    public void setContentHash(String contentHash)
-    {
         this.contentHash = contentHash;
     }
 
-    public String getUrl()
+    /**
+     * @return the contentHash
+     */
+    public String getContentHash()
     {
-        return url;
+        return this.contentHash;
     }
 
     public String getDigitalSignature()
     {
-        return contentHash;
+        return this.contentHash;
     }
+
+    /**
+     * @return the file
+     */
+    public IFile getFile()
+    {
+        return this.file;
+    }
+
+    public String getUrl()
+    {
+        return this.url;
+    }
+
 }
