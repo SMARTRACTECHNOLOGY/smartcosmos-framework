@@ -3184,9 +3184,11 @@ dataType | String  | false | StringType | StringType
 value | String  | true | | orange
 
 + Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + includeMatches (optional, bool, `true`) ... A valid JSON Serialization View name (case-sensitive)
-    + maxMatchesToInclude (optional, long, `100`) ... A valid, case-sensitive *startsWith* key name pattern. If omitted, then all key-values are returned.
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + includeMatches: `true` (bool, optional) - A valid JSON Serialization View name (case-sensitive) 
+        + Default: `true`    
+    + maxMatchesToInclude: `100` (long, optional) - A valid, case-sensitive *startsWith* key name pattern. If omitted, then all key-values are returned.
+        + Default: `20`
 
 + Request
 
