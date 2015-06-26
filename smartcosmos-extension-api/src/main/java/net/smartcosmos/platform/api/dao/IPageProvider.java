@@ -25,8 +25,22 @@ import net.smartcosmos.platform.api.dao.domain.IPage;
 public interface IPageProvider<U>
 {
 
+    /**
+     * 
+     * @return the number of total objects in this DAO, regardless of account association.
+     */
     Long count();
 
+    /**
+     * Retrieves a page of results, unfiltered and containing all data (regardless of account association).
+     * 
+     * @param page
+     *            The page. Must be positive, and always starts at 1.
+     * @param pageSize
+     *            Number of entries per page. Must be positive, must be at least 1.
+     * @return A page object populated with the page provided and at MOST the number of entries provided (unless less
+     *         entries exist for this page).
+     */
     IPage<U> page(int page, int pageSize);
 
 }

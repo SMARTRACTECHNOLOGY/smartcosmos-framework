@@ -21,6 +21,7 @@ package net.smartcosmos.platform.dao;
  */
 
 import com.google.common.base.Preconditions;
+
 import io.dropwizard.hibernate.AbstractDAO;
 
 import java.util.ArrayList;
@@ -122,14 +123,24 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
     @SuppressWarnings("unchecked")
     public IPage<S> page(int page, int pageSize)
     {
+        if (page < 1)
+        {
+            throw new IllegalArgumentException("Pages start at 1.");
+        }
+
+        if (pageSize < 1)
+        {
+            throw new IllegalArgumentException("Page must contain at least 1 entry.");
+        }
+
         Collection<S> list = new ArrayList<S>();
 
         final int totalSize = count().intValue();
-        final int totalPages = totalSize / pageSize;
-        final int currentPage = pageSize * page;
+        final int totalPages = Double.valueOf(Math.ceil(Double.valueOf(totalSize) / Double.valueOf(pageSize)))
+                .intValue();
 
         Criteria criteria = criteria();
-        criteria.setFirstResult(page * pageSize);
+        criteria.setFirstResult((page - 1) * pageSize);
         criteria.setMaxResults(pageSize);
 
         for (Object o : criteria.list())
@@ -137,7 +148,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
             list.add((S) o);
         }
 
-        IPage<S> pagination = new PageEntry<S>(list, totalPages, totalSize, currentPage, pageSize);
+        IPage<S> pagination = new PageEntry<S>(list, totalPages, totalSize, page, pageSize);
 
         return pagination;
     }
