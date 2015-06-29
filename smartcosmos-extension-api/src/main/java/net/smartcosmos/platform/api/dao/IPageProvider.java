@@ -1,6 +1,4 @@
-package net.smartcosmos.platform.pojo.service;
-
-import net.smartcosmos.objects.model.context.IFile;
+package net.smartcosmos.platform.api.dao;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -22,46 +20,27 @@ import net.smartcosmos.objects.model.context.IFile;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-public final class StorageResponse
+import net.smartcosmos.platform.api.dao.domain.IPage;
+
+public interface IPageProvider<U>
 {
-    private final String url;
-
-    private final String contentHash;
-
-    private final IFile file;
-
-    public StorageResponse(final IFile file, final String url, final String contentHash)
-    {
-        super();
-        this.file = file;
-        this.url = url;
-        this.contentHash = contentHash;
-    }
 
     /**
-     * @return the contentHash
+     * 
+     * @return the number of total objects in this DAO, regardless of account association.
      */
-    public String getContentHash()
-    {
-        return this.contentHash;
-    }
-
-    public String getDigitalSignature()
-    {
-        return this.contentHash;
-    }
+    Long count();
 
     /**
-     * @return the file
+     * Retrieves a page of results, unfiltered and containing all data (regardless of account association).
+     * 
+     * @param page
+     *            The page. Must be positive, and always starts at 1.
+     * @param pageSize
+     *            Number of entries per page. Must be positive, must be at least 1.
+     * @return A page object populated with the page provided and at MOST the number of entries provided (unless less
+     *         entries exist for this page).
      */
-    public IFile getFile()
-    {
-        return this.file;
-    }
-
-    public String getUrl()
-    {
-        return this.url;
-    }
+    IPage<U> page(int page, int pageSize);
 
 }

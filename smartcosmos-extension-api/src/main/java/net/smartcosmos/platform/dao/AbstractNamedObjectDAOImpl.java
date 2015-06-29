@@ -20,18 +20,19 @@ package net.smartcosmos.platform.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.base.INamedObject;
-import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.platform.api.dao.INamedObjectSearchDAO;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U>
-        extends AbstractDAOImpl<U, V> implements INamedObjectSearchDAO<U>
+import net.smartcosmos.model.base.INamedObject;
+import net.smartcosmos.model.context.IAccount;
+import net.smartcosmos.platform.api.dao.INamedObjectSearchDAO;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+
+public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U> extends AbstractDAOImpl<U, V> implements
+        INamedObjectSearchDAO<U>
 {
     protected AbstractNamedObjectDAOImpl(Class<V> classInstance, SessionFactory sessionFactory)
     {
@@ -52,16 +53,14 @@ public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U>
         String entityName = clazz.getName();
 
         /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
-         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
-         * identifier.
-         *
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8, which
+         * restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class identifier.
+         * 
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
-        Query listQuery = currentSession().createQuery("select m from " + entityName +
-                " m where m.account.urn = :urn and m.name like :name")
-                .setParameter("urn", UUID.fromString(account.getUrn()))
-                .setParameter("name", nameLike + "%");
+        Query listQuery = currentSession()
+                .createQuery("select m from " + entityName + " m where m.account.urn = :urn and m.name like :name")
+                .setParameter("urn", UUID.fromString(account.getUrn())).setParameter("name", nameLike + "%");
 
         for (Object o : listQuery.list())
         {
@@ -80,10 +79,9 @@ public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U>
         String entityName = clazz.getName();
 
         /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
-         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
-         * identifier.
-         *
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8, which
+         * restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class identifier.
+         * 
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
         Query listQuery = currentSession().createQuery("select m from " + entityName + " m where m.name = :name")

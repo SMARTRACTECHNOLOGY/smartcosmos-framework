@@ -21,6 +21,7 @@ package net.smartcosmos.platform.jpa.base;
  */
 
 import com.fasterxml.jackson.annotation.JsonView;
+
 import net.smartcosmos.Field;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.platform.jpa.integrator.IPostLoadHandler;
@@ -28,17 +29,19 @@ import net.smartcosmos.platform.jpa.integrator.IPrePersistHandler;
 import net.smartcosmos.platform.jpa.integrator.IPreUpdateHandler;
 import net.smartcosmos.platform.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
+
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class DomainResourceEntity<T extends IDomainResource>
-        implements IDomainResource<T>, IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler
+public abstract class DomainResourceEntity<T extends IDomainResource> implements IDomainResource<T>,
+        IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler
 {
     @JsonView(JsonGenerationView.Minimum.class)
     @Column(length = 16, nullable = false, updatable = false, unique = true)
@@ -137,22 +140,51 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
         this.moniker = moniker;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
-    public boolean equals(Object o)
+    public boolean equals(Object obj)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        DomainResourceEntity that = (DomainResourceEntity) o;
-
-        if (!urn.equals(that.urn)) return false;
-
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DomainResourceEntity other = (DomainResourceEntity) obj;
+        if (lastModifiedTimestamp != other.lastModifiedTimestamp)
+            return false;
+        if (moniker == null)
+        {
+            if (other.moniker != null)
+                return false;
+        } else if (!moniker.equals(other.moniker))
+            return false;
+        if (urn == null)
+        {
+            if (other.urn != null)
+                return false;
+        } else if (!urn.equals(other.urn))
+            return false;
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode()
     {
-        return urn.hashCode();
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (lastModifiedTimestamp ^ (lastModifiedTimestamp >>> 32));
+        result = prime * result + ((moniker == null) ? 0 : moniker.hashCode());
+        result = prime * result + ((urn == null) ? 0 : urn.hashCode());
+        return result;
     }
 }
