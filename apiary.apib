@@ -337,8 +337,8 @@ This endpoint will respond with an appropriate HTTP status code to indicate the 
 
 + Response 503
 
-## Lookup Version [/rest/admin/version]
-### Lookup Version [GET]
+## Lookup Module Version [/rest/admin/version]
+### Lookup Module Version [GET]
 
 *DRAFT VERSION* 
 
@@ -357,9 +357,11 @@ Check the version of the SMART COSMOS service and all available extensions of th
     + Body
     
             {
-                "name": "SMART COSMOS Objects Developer Edition",
-                "version": "2.9",
-                "extensions": [
+                "modules": [
+                    {
+                        "name": "SMART COSMOS Objects Developer Edition",
+                        "version": "2.9"
+                    },
                     {
                         "name": "Admin Bundle",
                         "version": "1.0"
