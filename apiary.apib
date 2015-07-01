@@ -337,6 +337,42 @@ This endpoint will respond with an appropriate HTTP status code to indicate the 
 
 + Response 503
 
+## Lookup Version [/rest/admin/version]
+### Lookup Version [GET]
+
+*DRAFT VERSION* 
+
+- Do not use in production!
+
+Check the version of the SMART COSMOS service and all available extensions of the current instance.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "name": "SMART COSMOS Objects Developer Edition",
+                "version": "2.9",
+                "extensions": [
+                    {
+                        "name": "Admin Bundle",
+                        "version": "1.0"
+                    },
+                    {
+                        "name": "xyz Bundle",
+                        "version": "1.2"
+                    }
+                ]
+            }
+
++ Response 401
+
 # Group Registration Endpoints
 Every SMART COSMOS Account belongs to a _security realm_. By default, the registration endpoint will extract the domain name
 from your email address. However, if you are using a popular email service like GMail or Yahoo, you **must** provide a custom 
@@ -5057,37 +5093,3 @@ The POST body will be a JSON file that contains an array field of {entityReferen
             }
 
 + Response 401
-
-## Lookup Objects Version [/rest/admin/version]
-### Lookup Object Version [GET]
-
-*DRAFT VERSION* 
-
-- Do not use in production!
-
-Check the version of OBJECTS and all available extensions of the current instance.
-
-+ Request (application/json)
-
-    + Headers
-
-            Authorization: Basic eW91QGZvby5jb20gOiBOM3dzM2NyM3Q/
-            
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-                "version": "2.9",
-                "extensions": [
-                    {
-                        "name": "Admin Bundle",
-                        "version": "1.0"
-                    },
-                    {
-                        "name": "Profiles Bundle",
-                        "version": "1.0"
-                    }
-                ]
-            }
-
