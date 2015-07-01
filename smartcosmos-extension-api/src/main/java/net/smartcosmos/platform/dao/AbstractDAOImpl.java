@@ -21,27 +21,22 @@ package net.smartcosmos.platform.dao;
  */
 
 import com.google.common.base.Preconditions;
-
 import io.dropwizard.hibernate.AbstractDAO;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.platform.api.dao.IBaseDAO;
 import net.smartcosmos.platform.api.dao.IPageProvider;
 import net.smartcosmos.platform.api.dao.domain.IPage;
 import net.smartcosmos.platform.dao.domain.PageEntry;
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.UUID;
 
 public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> extends AbstractDAO<T> implements
@@ -242,10 +237,22 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         Preconditions.checkNotNull(account, "Parameter 'account' must not be null");
         S object = null;
 
-        Criteria criteria = criteria();
-        criteria.add(Restrictions.eq("urn", UUID.fromString(urn)));
-        criteria.add(Restrictions.eq("accountUrn", UUID.fromString(account.getUrn())));
-        object = (S) criteria.uniqueResult();
+        String entityName = clazz.getName();
+
+        /*
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
+         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
+         * identifier.
+         *
+         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
+         */
+        Query query = currentSession()
+                .createQuery("select e from " + entityName +
+                        " e where e.account.urn = :accountUrn and e.urn = :urn")
+                .setParameter("accountUrn", UUID.fromString(account.getUrn()))
+                .setParameter("urn", UUID.fromString(urn));
+
+        object = (S) query.uniqueResult();
 
         return object;
     }
