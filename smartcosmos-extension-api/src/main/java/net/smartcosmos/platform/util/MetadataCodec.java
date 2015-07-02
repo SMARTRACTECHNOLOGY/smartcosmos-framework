@@ -32,6 +32,7 @@ package net.smartcosmos.platform.util;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import net.smartcosmos.Field;
 import net.smartcosmos.model.context.MetadataDataType;
 import net.smartcosmos.util.mapper.BooleanMapper;
 import net.smartcosmos.util.mapper.DateMapper;
@@ -47,18 +48,20 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.UnknownFormatConversionException;
 
 /**
  *
- * Encoder for metadata value objects, factored out of
+ * Encoder and decoder for metadata value objects, factored out of
  * net.smartcosmos.objects.resource.pub.MetaEncoderResource
- * to make it accessible to transactions. The actual decoding part of
- * net.smartcosmos.objects.resource.pub.MetaEncoderResource may also eventually land here.
+ * to make it accessible to transactions.
  *
  */
 public final class MetadataCodec
 {
+
+    public static final String RFC_3339_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX";
 
     protected static final DateTimeFormatter RFC3339 = ISODateTimeFormat.dateTimeParser();
 
@@ -126,5 +129,62 @@ public final class MetadataCodec
                 throw new IllegalArgumentException("Unsupported data type: " + dataType);
         }
         return bytes;
+    }
+
+    /**
+     *
+     * @param dataType an enum from net.smartcosmos.model.context.MetadataDataType
+     * @param dataToDecode
+     * @return JSONObject containing decoded metadata
+     * @throws JSONException
+     * @throws IllegalArgumentException
+     */
+    public static JSONObject decodeMetadata(MetadataDataType dataType, byte[] dataToDecode)
+            throws JSONException
+    {
+        JSONObject outputJson = new JSONObject();
+
+        try
+        {
+
+            switch (dataType)
+            {
+                case StringType:
+                case XMLType:
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new StringMapper().fromBytes(dataToDecode));
+                    break;
+                case JSONType:
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new JsonMapper().fromBytes(dataToDecode));
+                    break;
+                case IntegerType:
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new IntegerMapper().fromBytes(dataToDecode));
+                    break;
+                case LongType:
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new LongMapper().fromBytes(dataToDecode));
+                    break;
+                case FloatType:
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new FloatMapper().fromBytes(dataToDecode));
+                    break;
+                case DoubleType:
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new DoubleMapper().fromBytes(dataToDecode));
+                    break;
+                case BooleanType:
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new BooleanMapper().fromBytes(dataToDecode));
+                    break;
+                case DateType:
+                    // SimpleDateFormat is NOT thread safe and must be instantiated locally like this!
+                    SimpleDateFormat dateFormat = new SimpleDateFormat(RFC_3339_FORMAT);
+                    outputJson.put(Field.DECODED_VALUE_FIELD, dateFormat
+                            .format(new DateMapper().fromBytes(dataToDecode)));
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unsupported data type: " + dataType);
+            }
+            return outputJson;
+
+        } catch (JSONException e)
+        {
+            throw e;
+        }
     }
 }
