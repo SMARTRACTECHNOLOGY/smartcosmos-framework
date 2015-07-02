@@ -22,6 +22,7 @@ package net.smartcosmos.model.context;
 
 import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.base.IReferentialObject;
+import org.json.JSONException;
 
 /**
  * Specific instance of a type-safe key-value pair linked to a singular
@@ -69,5 +70,5 @@ public interface IMetadata extends IAccountDomainResource<IMetadata>, IReferenti
      *
      * @return decoded raw value as a string
      */
-    String getDecodedValue();
+    String getDecodedValue() throws JSONException;
 }
