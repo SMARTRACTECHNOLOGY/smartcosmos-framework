@@ -5016,18 +5016,20 @@ Call always returns a JSON array, which may be an empty array if no timelines ar
 
 Disclaimer: This functionality is only available for selected customers with activated `admin extension`.
 
-## Lookup Object Dump [/rest/admin/dump/Object/{objectUrn}{?view}]
-### Lookup a Full Object Dump [POST]
+## Lookup Entity Dump [/rest/admin/dump/{entityReferenceType}/{urn}{?view}]
+### Lookup a Full Entity Dump [POST]
 
 *DRAFT VERSION* 
 
 - Do not use in production!
+- Currently for {entityReferenceType} only 'Object' is supported!
 
-To lookup a full dump of an Object’s graph based on the assembled objectUrn from a discovered TID.
+To lookup a full dump of an Object’s graph based on the assembled urn from a discovered TID.
 The POST body will be a JSON file that contains an array field of {entityReferenceTypes} to include in the dump file. The following example shows what the POST JSON body would look like to retrieve all of the known Metadata and Tag associations with the specified object
 
 + Parameters
-    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN to assign the address to
+    + entityReferenceType (required, string, `Object`) ... The entity type of the item whose properties should be dumped
+    + urn (required, string, `11111111-2222-3333-44444444444444444`) ... Case-sensitive object URN to assign the address to
     + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
     
 + Request (application/json)
