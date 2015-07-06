@@ -34,6 +34,7 @@ import net.smartcosmos.util.mapper.JsonMapper;
 import net.smartcosmos.util.mapper.LongMapper;
 import net.smartcosmos.util.mapper.NoopMapper;
 import net.smartcosmos.util.mapper.StringMapper;
+import org.json.JSONException;
 
 public class TypeSafeMetadata<T> implements IMetadata
 {
@@ -177,7 +178,7 @@ public class TypeSafeMetadata<T> implements IMetadata
     }
 
     @Override
-    public String getDecodedValue()
+    public String getDecodedValue() throws JSONException
     {
         return metadataObject.getDecodedValue();
     }
