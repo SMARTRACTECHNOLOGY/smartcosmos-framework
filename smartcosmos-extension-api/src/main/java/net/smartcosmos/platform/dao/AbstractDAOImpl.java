@@ -246,14 +246,20 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
          *
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
-        Query query = currentSession()
-                .createQuery("select e from " + entityName +
-                        " e where e.account.urn = :accountUrn and e.urn = :urn")
-                .setParameter("accountUrn", UUID.fromString(account.getUrn()))
-                .setParameter("urn", UUID.fromString(urn));
+        try
+        {
+            Query query = currentSession()
+                    .createQuery("select e from " + entityName +
+                                 " e where e.account.urn = :accountUrn and e.urn = :urn")
+                    .setParameter("accountUrn", UUID.fromString(account.getUrn()))
+                    .setParameter("urn", UUID.fromString(urn));
 
-        object = (S) query.uniqueResult();
-
+            object = (S) query.uniqueResult();
+        } catch (IllegalArgumentException iae)
+        {
+            iae.printStackTrace();
+            return null;
+        }
         return object;
     }
 
