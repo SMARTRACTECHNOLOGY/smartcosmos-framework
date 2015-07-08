@@ -76,7 +76,6 @@ class EventClient extends AbstractFindableBaseClient<IEvent> implements IEventCl
         for (DynamicEvent event : dynamicEvents)
         {
             IEvent newEvent = new Event();
-            newEvent.setUniqueId(event.getUniqueId());
             newEvent.setUrn(event.getUrn());
             newEvent.setMoniker(event.getMoniker());
             if (event.getAccount() != null)
