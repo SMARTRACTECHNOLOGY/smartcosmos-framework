@@ -181,6 +181,8 @@ public final class Field
     //
     // Batch Transmission Fields
     //
+    public static final String TRANSACTION_ID_FIELD = "transactionId";
+
     public static final String FILE_MD5_CHECKSUM = "md5Checksum";
 
     public static final String FILE_CONTENT_LENGTH = "contentLength";
