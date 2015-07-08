@@ -257,7 +257,8 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
             object = (S) query.uniqueResult();
         } catch (IllegalArgumentException iae)
         {
-            iae.printStackTrace();
+            // no need to print stack trace; bad urn will be reported further up the chain
+            // iae.printStackTrace();
             return null;
         }
         return object;
@@ -267,25 +268,34 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
     @SuppressWarnings("unchecked")
     public S findByUrn(Class<?> clazz, String urn)
     {
-        if (urn == null)
-        {
-            return null;
-        }
-
         S object = null;
+        try
+        {
+            if (urn == null)
+            {
+                return null;
+            }
 
-        String entityName = clazz.getName();
+            object = null;
+
+            String entityName = clazz.getName();
 
         /*
          * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8, which
          * restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class identifier.
-         * 
+         *
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
-        Query query = currentSession().createQuery("select e from " + entityName + " e where e.urn = :urn")
-                .setParameter("urn", UUID.fromString(urn));
+            Query query = currentSession().createQuery("select e from " + entityName + " e where e.urn = :urn")
+                    .setParameter("urn", UUID.fromString(urn));
 
-        object = (S) query.uniqueResult();
+            object = (S) query.uniqueResult();
+        } catch (IllegalArgumentException iae)
+        {
+            // no need to print stack trace; bad urn will be reported further up the chain
+            // iae.printStackTrace();
+            return null;
+        }
 
         return object;
     }
