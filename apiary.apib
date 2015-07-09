@@ -5074,10 +5074,16 @@ Disclaimer: This functionality is only available for selected customers with act
 *DRAFT VERSION* 
 
 - Do not use in production!
-- Currently for {entityReferenceType} only 'Object' is supported!
 
-To lookup a full dump of an Object’s graph based on the assembled urn from a discovered TID.
-The POST body will be a JSON file that contains an array field of {entityReferenceTypes} to include in the dump file. The following example shows what the POST JSON body would look like to retrieve all of the known Metadata and Tag associations with the specified object
+To lookup a full dump of an Object’s graph based on the system urn from a discovered TID.
+The POST body will be a JSON file that contains an array field of {entityReferenceTypes} to include in the dump file. The following example shows what the POST JSON body would look like to retrieve all of the known Metadata and Tag associations with the specified entity
+
+In the request body it is possible to select dumping of related metadata, hash tags or both.
+
+The response depends on the data available for dumping:
+- If the queried entity exists and contains metadata or tags, the response status will be 200
+- If the queried entity exists but does not contain metadata or tags, the response status will be 204
+- If the queried entity does not exist, the response status will be 400 with "code" set to -8
 
 + Parameters
     + entityReferenceType: `Object` (required, string) - The entity type of the item whose properties should be dumped
