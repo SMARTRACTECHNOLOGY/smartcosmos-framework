@@ -476,7 +476,8 @@ The platform offers two endpoints for password self-service, supporting both pas
 ### Lookup my account details [GET]
 
 + Parameters
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+       + Default: `Standard`
 
 + Request
 
@@ -734,8 +735,9 @@ include that field in the request body.
 Lookup a specific user by its system-assigned URN key
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -767,8 +769,9 @@ Lookup a specific user by its system-assigned URN key
 ### Lookup specific user by email address [GET]
 
 + Parameters
-    + emailAddress (required, string, `coworker@foo.com`) ... Exact case-sensitive email address to locate
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + emailAddress: `coworker@foo.com` (required, string) - Exact case-sensitive email address to locate
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+       + Default: `Standard`
 
 + Request
 
@@ -964,8 +967,9 @@ request body.
 Lookup a specific device by its system-assigned URN key.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -1000,9 +1004,10 @@ Lookup a specific device by its system-assigned URN key.
 Lookup a specific device by its system-assigned URN key.
 
 + Parameters
-    + identification (required, string, `gqorighfawpftjqevznxclmndaawetha`) ... Exact case-sensitive identification value to 
+    + identification: `gqorighfawpftjqevznxclmndaawetha` (required, string) - Exact case-sensitive identification value to 
     locate
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -1036,9 +1041,10 @@ Lookup a specific device by its system-assigned URN key.
 Call always returns a JSON array, which may be an empty array if no devices are found that match the `nameLike` query parameter.
 
 + Parameters
-    + nameLike (optional, string, `Jaso`) ... A case-sensitive *starts with* string pattern to match against. If omitted, 
-    then all records will be returned.
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + nameLike: `Jaso` (optional, string) - A case-sensitive *starts with* string pattern to match against. If omitted, then all records will be returned.
+         + Default: `%`
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -1212,8 +1218,9 @@ include that field in the request body.
 Lookup a specific object by its system-assigned URN key.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -1259,9 +1266,11 @@ Lookup a specific object by its system-assigned URN key.
 Lookup a specific object by their arbitrary developer assigned object URN key.
 
 + Parameters
-    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN to locate
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-    + exact (optional, boolean, `true`) ... Defaults to true; when false, a starts-with search is performed 
+    + objectUrn: `urn:building:mall:ParadiseValley` (required, string) - Case-sensitive object URN to locate
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
+    + exact: `true` (optional, boolean) - Defaults to true; when false, a starts-with search is performed 
+        + Default: `true`
 
 + Request
 
@@ -1298,12 +1307,18 @@ Each query string parameter is **AND**ed with other parameters. It is not possib
 query at this time.
 
 + Parameters
-    + objectUrnLike (optional, string, `urn:building:mall`) ... Case-sensitive `objectUrn` *starts with* pattern to locate
-    + type (optional, string, `Building`) ... Case-sensitive `type` *starts with* pattern to locate
-    + nameLike (optional, string, `Paradise`) ... Case-sensitive `name` *starts with* pattern to locate
-    + monikerLike (optional, string, `urn:uuid:123`) ... Case-sensitive `moniker` *starts with* pattern to locate
-    + modifiedAfter (optional, long, `1390607270000`) ... Locate `lastModifiedTimestamp` values equal to or greater than this
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + objectUrnLike: `urn:building:mall` (optional, string) - Case-sensitive `objectUrn` *starts with* pattern to locate
+        + Default: `*`
+    + type: `Building` (optional, string) - Case-sensitive `type` *starts with* pattern to locate
+        + Default: empty
+    + nameLike: `Paradise` (optional, string) - Case-sensitive `name` *starts with* pattern to locate
+        + Default: `*`
+    + monikerLike: `urn:uuid:123` (optional, string) - Case-sensitive `moniker` *starts with* pattern to locate
+        + Default: `*`
+    + modifiedAfter: `1390607270000` (optional, long) - Locate `lastModifiedTimestamp` values equal to or greater than this
+        + Default: `0`
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -1470,8 +1485,8 @@ the `stateProvince` of the object, only include that field in the request body.
 Delete a specific object address by its system-assigned URN key.
 
 + Parameters
-    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + objectUrn: `urn:building:mall:ParadiseValley` (required, string) - Case-sensitive object URN that owns the address to update
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
 
 + Request
     
@@ -1497,9 +1512,10 @@ Delete a specific object address by its system-assigned URN key.
 Lookup a specific object address by its system-assigned URN key.
 
 + Parameters
-    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + objectUrn: `urn:building:mall:ParadiseValley` (required, string) - Case-sensitive object URN that owns the address to update
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -1544,9 +1560,11 @@ Lookup a specific object address by its system-assigned URN key.
 ### Lookup matching object addresses [GET]
 
 + Parameters
-    + objectUrn (required, string, `urn:building:mall:ParadiseValley`) ... Case-sensitive object URN that owns the address to update
-    + count (optional, integer, `1`) ... Maximum number of address records to return; defaults to 1
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + objectUrn: `urn:building:mall:ParadiseValley` (required, string) - Case-sensitive object URN that owns the address to update
+    + count: `1` (optional, integer) - Maximum number of address records to return; defaults to 1
+        + Default: `1`
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -1708,8 +1726,9 @@ Stop an existing object interaction session. The request body must include a val
 Lookup a specific session by its system-assigned URN key.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -1754,9 +1773,11 @@ Lookup a specific session by its system-assigned URN key.
 ### Lookup an array of matching sessions [GET]
 
 + Parameters
-    + nameLike (optional, string, `RFID`) ... A case-sensitive *starts with* string pattern to match against. If omitted, 
+    + nameLike: `RFID` (optional, string) - A case-sensitive *starts with* string pattern to match against. If omitted, 
     then all records will be returned.
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+        + Default: `%`
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -1894,8 +1915,10 @@ The following interaction fields may be used to create a new record:
 If no `objectUrn` query parameter is included, then all interactions are returned.
 
 + Parameters
-    + objectUrn (optional, string, `urn:instagram:FooBar:ec3819a1-bc9b-4550-afda-4bd8cbb1dd16`) ... Developer-assigned `objectUrn` to search for
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + objectUrn: `urn:instagram:FooBar:ec3819a1-bc9b-4550-afda-4bd8cbb1dd16` (optional, string) - Developer-assigned `objectUrn` to search for
+        + Default: empty, all interactions are returned
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -1943,8 +1966,9 @@ If no `objectUrn` query parameter is included, then all interactions are returne
 Lookup a specific interaction by its system-assigned URN key.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -2120,8 +2144,9 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 Lookup a specific relationship by its system-assigned URN key.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -2167,7 +2192,7 @@ Lookup a specific relationship by its system-assigned URN key.
 Deletes an existing relationship by its system-assigned URN key.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
 
 + Request
 
@@ -2194,11 +2219,12 @@ Deletes an existing relationship by its system-assigned URN key.
 Lookup an array of all defined relationships between any two entities.
 
 + Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:building:shop:123`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
-    + relatedEntityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + relatedReferenceUrn (required, string, `urn:building:shop:456`) ... Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + referenceUrn: `urn:building:shop:123` (required, string) - Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + relatedEntityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + relatedReferenceUrn: `urn:building:shop:456` (required, string) - Case-sensitive `urn` of an existing entity of type `relatedEntityReferenceType`
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -2246,12 +2272,13 @@ Lookup an array of all defined relationships between any two entities.
 Lookup a specific relationship between any two entities.
 
 + Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:building:shop:123`) ... Case-sensitive `urn` of an existing object URN of type `entityReferenceType`
-    + relatedEntityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + relatedReferenceUrn (required, string, `urn:building:shop:456`) ... Case-sensitive `urn` of an existing object URN of type `relatedEntityReferenceType`
-    + type (required, string `Owns`) ... Case-sensitive `type` of relationship to look for
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + referenceUrn: `urn:building:shop:123` (required, string) - Case-sensitive `urn` of an existing object URN of type `entityReferenceType`
+    + relatedEntityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + relatedReferenceUrn: `urn:building:shop:456` (required, string) - Case-sensitive `urn` of an existing object URN of type `relatedEntityReferenceType`
+    + type: `Owns` (required, string) - Case-sensitive `type` of relationship to look for
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -2297,11 +2324,13 @@ Lookup a specific relationship between any two entities.
 Lookup an array of all defined relationships of the specific type.
 
 + Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
-    + type (required, string `Owns`) ... Case-sensitive `type` of relationship to look for
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-    + reverse (optional, boolean, `false`) ... Flips the query around, finding those relationships where the `entityReferenceType` and `referenceUrn` are in the related fields(defalts to false)
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + referenceUrn: `urn:uuid:12345` (required, string) - Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + type: `Owns` (required, string) - Case-sensitive `type` of relationship to look for
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
+    + reverse: `false` (optional, boolean) - Flips the query around, finding those relationships where the `entityReferenceType` and `referenceUrn` are in the related fields(defalts to false)
+         + Default: `false`
 
 + Request
 
@@ -2349,11 +2378,14 @@ Lookup an array of all defined relationships of the specific type.
 Lookup an array of all defined relationships of the specific type.
 
 + Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-    + reverse (optional, boolean, `false`) ... Flips the query around, finding those relationships where the `entityReferenceType` and `referenceUrn` are in the related fields(defalts to false)
-    + checkReciprocal (optional, boolean, `false`) ... 
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + referenceUrn: `urn:uuid:12345` (required, string) - Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
+    + reverse: `false` (optional, boolean) - Flips the query around, finding those relationships where the `entityReferenceType` and `referenceUrn` are in the related fields
+        + Default: `false`
+    + checkReciprocal: `false` (optional, boolean) - 
+        + Default: `false`
   
 + Request
 
@@ -2615,9 +2647,11 @@ request body.
 If no `nameLike` query parameter is included, then all interactions are returned.
 
 + Parameters
-    + nameLike (optional, string, `Campus`) ... A case-sensitive *starts with* string pattern to match against. If omitted, 
+    + nameLike: `Campus` (optional, string) - A case-sensitive *starts with* string pattern to match against. If omitted, 
     then all records will be returned.
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+        + Default: `%`
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -2765,8 +2799,9 @@ If no `nameLike` query parameter is included, then all interactions are returned
 Lookup a specific geospatial entity by its system-assigned URN key.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -2981,7 +3016,7 @@ Encodes a strongly typed value using the platform's built-in encoder. *The built
 encoded
 
 + Parameters
-    + metadataDataType (required, MetadataDataType, `BooleanType`) ... Valid MetadataDataType enum value
+    + metadataDataType: `BooleanType` (required, MetadataDataType) - Valid MetadataDataType enum value
 
 + Request (text/plain)
 
@@ -3059,8 +3094,8 @@ encoded `rawValue` field.
 large values should use a file instead of metadata.
 
 + Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + referenceUrn: `urn:uuid:12345` (required, string) - Case-sensitive `urn` of an existing entity of type `entityReferenceType`
 
 + Request (application/json)
 
@@ -3120,9 +3155,9 @@ large values should use a file instead of metadata.
 Deletes an existing metadata key by its system-assigned URN key.
 
 + Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
-    + key (required, string `alpha`) ... Case-sensitive `key` used to index the metadata raw value
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + referenceUrn: `urn:uuid:12345` (required, string) - Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + key: `alpha` (required, string) - Case-sensitive `key` used to index the metadata raw value
 
 + Request
 
@@ -3149,10 +3184,12 @@ Deletes an existing metadata key by its system-assigned URN key.
 Lookup all metadata that matches the specified key pattern.
 
 + Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
-    + key (optional, string, `alpha`) ... A valid, case-sensitive *startsWith* key name pattern. If omitted, then all key-values are returned.
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + referenceUrn: `urn:uuid:12345` (required, string) - Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
+    + key: `alpha` (optional, string) - A valid, case-sensitive *startsWith* key name pattern. If omitted, then all key-values are returned.
+        + Default: empty, lookup all metadata defined for this entity
 
 + Request
 
@@ -3434,7 +3471,7 @@ Define the metadata of a file in preparation of an actual file upload. The follo
 Upload actual file bytes to the cloud using an octet-stream.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
 
 + Request (application/octet-stream)
 
@@ -3485,7 +3522,7 @@ Upload actual file bytes to the cloud using an octet-stream.
 Upload actual file bytes to the cloud using an multi-part form data submission from a web form. By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web form to be used to upload a file to the cloud.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
 
 + Request (multipart/form-data)
 
@@ -3534,8 +3571,9 @@ Upload actual file bytes to the cloud using an multi-part form data submission f
 ### Retrieves the file definition [GET]
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -3580,7 +3618,7 @@ accurately reported when defining the file.
 
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
 
 + Request
 
@@ -3616,9 +3654,10 @@ accurately reported when defining the file.
 Retrieves the complete collection of file definitions associated with the specified entity. Always returns a JSON array where each member of the array is a file definition associated with the specified entity.
 
 + Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:12345`) ... Case-sensitive `urn` of an existing entity of type `entityReferenceType`
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + referenceUrn: `urn:uuid:12345` (required, string) - Case-sensitive `urn` of an existing entity of type `entityReferenceType`
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -3664,7 +3703,7 @@ Deletes an existing relationship by its system-assigned URN key. Immediately pur
 
 + Parameters
     
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation of file definition
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
 
 + Request
 
@@ -3820,8 +3859,9 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 ### Lookup for tag details by tag name [GET]
 
 + Parameters
-    + tagName (required, string, `MyTag`) ... Client defined name at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + tagName: `MyTag` (required, string) - Client defined name at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
    
 + Request (application/json)
 
@@ -3865,8 +3905,9 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 ### Lookup for tag details by tag URN [GET]
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request (application/json)
 
@@ -3903,8 +3944,8 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 ### Assign hash tags to objects [PUT]
 
 + Parameters
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + referenceUrn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
 
 + Request (application/json)
 
@@ -3949,10 +3990,11 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 
 
 + Parameters
-    + tagName (required, string, `MyTag`) ... Client defined name at creation
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... Valid EntityReferenceType enum value
-    + referenceUrn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + tagName: `MyTag` (required, string) - Client defined name at creation
+    + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
+    + referenceUrn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request (application/json)
 
@@ -4016,7 +4058,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 ### Remove tag by tag name [DELETE]
 
 + Parameters
-    + tagName (required, string, `MyTag`) ... Client defined name at creation
+    + tagName: `MyTag` (required, string) - Client defined name at creation
    
 + Request (application/json)
 
@@ -4160,7 +4202,7 @@ Part of this enrollment message will be the `topicArn` defined by the notifcatio
 that is returned when the notification endpoint is defined.
 
 + Parameters
-    + topicArn (required, String, `arn:aws:sns:us-east-1:1234567890:Foo`) ... Randomly generated topicArn posted to the endpoint along with the confirmation token
+    + topicArn: `arn:aws:sns:us-east-1:1234567890:Foo` (required, String) - Randomly generated topicArn posted to the endpoint along with the confirmation token
 
 + Request (application/json)
 
@@ -4221,8 +4263,9 @@ Withdraw or terminate delivery of events to an existing endpoint.
 Lookup a specific notification endpoint by its system-assigned URN key.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -4555,8 +4598,9 @@ This method will only work on library elements which have no children, or in the
 Lookup a specific library element by its system-assigned URN key.
 
 + Parameters
-    + urn (required, string, `urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -4606,9 +4650,11 @@ Lookup a specific library element by its system-assigned URN key.
 Lookup library elements matching a name pattern, with or without LibraryElementType.
 
 + Parameters
-    + nameLike (required, String, `urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43`) ... String to match against all library element names
-    + eltType (optional, String, `Library | Shelf | Book| and so on`) ... Restrict results to this library element type
-    + view (optional, String, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + nameLike: `urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43` (required, String) - String to match against all library element names
+    + eltType: `Library | Shelf | Book| and so on` (optional, String) - Restrict results to this library element type
+        + Default: empty
+    + view: `Standard` (optional, String) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -4654,9 +4700,10 @@ Lookup library elements matching a name pattern, with or without LibraryElementT
 Lookup a specific library element by its name and LibraryElementType.
 
 + Parameters
-    + libraryElementType (required, string, `Library | Shelf | Book | and so on`)
-    + name (required, string, `Ford F150 Manuals 2011-2015`)
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + libraryElementType: `Library | Shelf | Book | and so on` (required, string)
+    + name: `Ford F150 Manuals 2011-2015` (required, string)
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -4696,8 +4743,9 @@ Lookup a specific library element by its name and LibraryElementType.
 Lookup parent of a specific library element with the book's system-assigned URN key, returning an error if element specifed by URN is of type Library
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -4742,8 +4790,9 @@ Lookup parent of a specific library element with the book's system-assigned URN 
 Lookup children specific library element with the element's system-assigned URN key, returning an error if the library element type is PageEntry and thus by definition has no children.
 
 + Parameters
-    + urn (required, string, `urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -4844,8 +4893,8 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 **no data is merged; existing record is left as-is**
 
 + Parameters
-    + referenceUrn (required, string, `urn:building:mall:Quick Test 4`) ... user defined URN
-    + entityReferenceType (required, EntityReferenceType, `Object`) ... 
+    + referenceUrn: `urn:building:mall:Quick Test 4` (required, string) - user defined URN
+    + entityReferenceType: `Object` (required, EntityReferenceType) - 
 
 + Request (application/json)
 
@@ -4921,8 +4970,9 @@ The request body must include a value the `urn` field. Only those fields being u
 Lookup a specific timeline by its system-assigned URN key.
 
 + Parameters
-    + urn (required, string, `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d`) ... System-assigned URN assigned at creation
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
     
@@ -4970,9 +5020,11 @@ Lookup a specific timeline by its system-assigned URN key.
 Call always returns a JSON array, which may be an empty array if no timelines are found that match the `nameLike` query parameter.
 
 + Parameters
-    + nameLike (optional, string, `Jaso`) ... A case-sensitive *starts with* string pattern to match against. If omitted, 
+    + nameLike: `Jaso` (optional, string) - A case-sensitive *starts with* string pattern to match against. If omitted, 
     then all records will be returned.
-    + view (optional, string, `Standard`) ... A valid JSON Serialization View name (case-sensitive)
+        + Default: `%`
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
+        + Default: `Standard`
 
 + Request
 
@@ -5034,9 +5086,9 @@ The response depends on the data available for dumping:
 - If the queried entity does not exist, the response status will be 400 with "code" set to -8
 
 + Parameters
-    + entityReferenceType (required, string, `Object`) ... The entity type of the item whose properties should be dumped
-    + urn (required, string, `11111111-2222-3333-44444444444444444`) ... Case-sensitive object URN to assign the address to
-    + view: `Standard` (string, optional) - A valid JSON Serialization View name (case-sensitive)
+    + entityReferenceType: `Object` (required, string) - The entity type of the item whose properties should be dumped
+    + urn: `11111111-2222-3333-44444444444444444` (required, string) - Case-sensitive object URN to assign the address to
+    + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
     
 + Request (application/json)
