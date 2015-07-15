@@ -2189,12 +2189,12 @@ Lookup a specific relationship by its system-assigned URN key.
 + Response 401
 
 ## Delete Relationship by URN [/rest/relationships/{urn}]
-### Deletes an relationship by system-assigned URN (UUID) or objectURN [DELETE]
+### Deletes an relationship by system-assigned URN or objectURN [DELETE]
 
 Deletes an existing relationship by its system-assigned URN key.
 
 + Parameters
-    + urn: `a903a905-6923-4ba7-8db3-b138a241c954` (required, string) - System-assigned URN assigned at creation
+    + urn: `a903a905-6923-4ba7-8db3-b138a241c954` (required, string) - System-assigned URN assigned at creation, or objectUrn
 
 + Request
 
@@ -2214,6 +2214,7 @@ Deletes an existing relationship by its system-assigned URN key.
             }
 
 + Response 401
+
 
 ## Look Up All Relationships Between Entities [/rest/relationships/{entityReferenceType}/{referenceUrn}/{relatedEntityReferenceType}/{relatedReferenceUrn}{?view}]
 ### Look up an array of relationships [GET]
