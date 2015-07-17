@@ -29,7 +29,7 @@
 
     <groupId>net.smartcosmos</groupId>
     <artifactId>platform-core</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.7-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
