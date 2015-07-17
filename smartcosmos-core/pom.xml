@@ -29,7 +29,7 @@
 
     <groupId>net.smartcosmos</groupId>
     <artifactId>platform-core</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8</version>
 
     <packaging>jar</packaging>
 
@@ -75,7 +75,7 @@
         <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java</url>
         <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</connection>
         <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-sdk-java.git</developerConnection>
-    <tag>platform-core-1.7</tag>
+    <tag>platform-core-1.8</tag>
   </scm>
 
     <distributionManagement>
