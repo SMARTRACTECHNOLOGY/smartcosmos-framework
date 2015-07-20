@@ -2469,8 +2469,7 @@ The following fields may be used to create a new record:
 - `name` is required and constrained to 255 characters
 - `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
 - `activeFlag` is optional and may be omitted; defaults to **true**
-- `geometricShape` is required and constrained to a valid GeometricShapeType value defined in 
-[data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
+- `geometricShape` is required and must conform to the [GeoJSON 1.0 Specification](http://geojson.org/geojson-spec.html)
 - `type` is required and constrained to 255 characters
 - `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
 
