@@ -143,7 +143,7 @@ public enum EventType
     ObjectAccessed,
     ObjectAddressAccessed,
     ObjectInteractionAccessed,
-    ObjectInteractionSessionAccessed,
+    InteractionSessionAccessed,
 
 
     GeospatialEntryAccessed,
