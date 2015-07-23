@@ -28,9 +28,9 @@ import net.smartcosmos.client.impl.command.DeleteCommand;
 import net.smartcosmos.client.impl.command.GetCollectionCommand;
 import net.smartcosmos.client.impl.command.GetCommand;
 import net.smartcosmos.client.impl.endpoint.ExtensionEndpoints;
-import net.smartcosmos.model.extension.IExtension;
+import net.smartcosmos.model.extension.IExternalExtension;
 import net.smartcosmos.pojo.base.ResponseEntity;
-import net.smartcosmos.pojo.extension.Extension;
+import net.smartcosmos.pojo.extension.ExternalExtension;
 import net.smartcosmos.util.json.JsonUtil;
 import net.smartcosmos.util.json.ViewType;
 import org.json.JSONException;
@@ -40,7 +40,7 @@ import java.util.Collection;
 
 import static net.smartcosmos.Field.URN_FIELD;
 
-class ExtensionClient extends AbstractUpdateableBaseClient<IExtension> implements IExtensionClient
+class ExtensionClient extends AbstractUpdateableBaseClient<IExternalExtension> implements IExtensionClient
 {
     ExtensionClient(ServerContext context)
     {
@@ -48,9 +48,9 @@ class ExtensionClient extends AbstractUpdateableBaseClient<IExtension> implement
     }
 
     @Override
-    public IExtension findByUrn(String urn, ViewType viewType) throws ServiceException
+    public IExternalExtension findByUrn(String urn, ViewType viewType) throws ServiceException
     {
-        return findByUrn(urn, ExtensionEndpoints.findByUrn(urn, viewType), Extension.class);
+        return findByUrn(urn, ExtensionEndpoints.findByUrn(urn, viewType), ExternalExtension.class);
     }
 
     @Override
@@ -81,7 +81,7 @@ class ExtensionClient extends AbstractUpdateableBaseClient<IExtension> implement
     }
 
     @Override
-    public void delete(IExtension instance) throws ServiceException
+    public void delete(IExternalExtension instance) throws ServiceException
     {
         try
         {
@@ -94,28 +94,28 @@ class ExtensionClient extends AbstractUpdateableBaseClient<IExtension> implement
     }
 
     @Override
-    public Collection<IExtension> findByNameLike(String nameLike, ViewType viewType) throws ServiceException
+    public Collection<IExternalExtension> findByNameLike(String nameLike, ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IExtension> command = new GetCollectionCommand<>(context);
-        return command.call(Extension.class, ExtensionEndpoints.findByNameLike(nameLike, viewType));
+        GetCollectionCommand<IExternalExtension> command = new GetCollectionCommand<>(context);
+        return command.call(ExternalExtension.class, ExtensionEndpoints.findByNameLike(nameLike, viewType));
     }
 
     @Override
-    public Collection<IExtension> catalog() throws ServiceException
+    public Collection<IExternalExtension> catalog() throws ServiceException
     {
-        GetCollectionCommand<IExtension> command = new GetCollectionCommand<>(context);
-        return command.call(Extension.class, ExtensionEndpoints.catalog());
+        GetCollectionCommand<IExternalExtension> command = new GetCollectionCommand<>(context);
+        return command.call(ExternalExtension.class, ExtensionEndpoints.catalog());
     }
 
     @Override
-    public IExtension getPublishedExtension(String urn) throws ServiceException
+    public IExternalExtension getPublishedExtension(String urn) throws ServiceException
     {
-        GetCommand<IExtension> command = new GetCommand<>(context);
-        return command.call(Extension.class, ExtensionEndpoints.publishedExtension(urn));
+        GetCommand<IExternalExtension> command = new GetCommand<>(context);
+        return command.call(ExternalExtension.class, ExtensionEndpoints.publishedExtension(urn));
     }
 
     @Override
-    public Collection<IExtension> findByNameLike(String nameLike) throws ServiceException
+    public Collection<IExternalExtension> findByNameLike(String nameLike) throws ServiceException
     {
         return findByNameLike(nameLike, ViewType.Standard);
     }

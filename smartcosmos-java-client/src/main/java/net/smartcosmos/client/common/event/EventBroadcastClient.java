@@ -4,7 +4,7 @@ package net.smartcosmos.client.common.event;
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Client
  * ===============================================================================
- * Copyright (C) 2013 - 2014 SMARTRAC Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 SMARTRAC Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,54 +20,70 @@ package net.smartcosmos.client.common.event;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.json.JSONObject;
+
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
-import net.smartcosmos.client.impl.base.AbstractFindableBaseClient;
+import net.smartcosmos.client.impl.base.AbstractUpdateableBaseClient;
 import net.smartcosmos.client.impl.command.GetCollectionCommand;
 import net.smartcosmos.client.impl.endpoint.EventEndpoints;
 import net.smartcosmos.model.event.EventType;
 import net.smartcosmos.model.event.IEvent;
+import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.event.Event;
 import net.smartcosmos.util.json.ViewType;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-class EventClient extends AbstractFindableBaseClient<IEvent> implements IEventClient
+public class EventBroadcastClient extends AbstractUpdateableBaseClient<IEvent> implements IEventBroadcastClient
 {
-    EventClient(ServerContext context)
-    {
-        super(context);
-    }
+   EventBroadcastClient(ServerContext context) 
+   {
+      super(context);
+   }
+   
+   @Override
+   public IEvent findByUrn(String urn, ViewType viewType) throws ServiceException 
+   {
+      return findByUrn(urn, EventEndpoints.findByUrn(urn, viewType), Event.class);
+   }
 
-    @Override
-    public IEvent findByUrn(String urn, ViewType viewType) throws ServiceException
-    {
-        return findByUrn(urn, EventEndpoints.findByUrn(urn, viewType), Event.class);
-    }
+   @Override
+   public void update(JSONObject instance) throws ServiceException 
+   {
+      throw new UnsupportedOperationException("Method not available as part of the SDK");
+   }
 
-    @Override
-    public Collection<IEvent> findByEventType(EventType eventType) throws ServiceException
-    {
-        return findByEventType(eventType, ViewType.Standard);
-    }
+   @Override
+   public ResponseEntity create(JSONObject instance) throws ServiceException 
+   {
+      ResponseEntity response = create(instance, EventEndpoints.create());
+      return response;
+   }
 
-    @Override
-    public Collection<IEvent> findByEventType(EventType eventType, ViewType viewType) throws ServiceException
-    {
+   @Override
+   public Collection<IEvent> findByEventType(EventType eventType) throws ServiceException 
+   {
+      return findByEventType(eventType, ViewType.Standard);   
+   }
+
+   @Override
+   public Collection<IEvent> findByEventType(EventType eventType, ViewType viewType) throws ServiceException 
+   {
         GetCollectionCommand<IEvent> command = new GetCollectionCommand<>(context);
         return command.call(Event.class, EventEndpoints.findByEventType(eventType, viewType));
-    }
+   }
 
-    @Override
-    public Collection<IEvent> findSince(long timestamp) throws ServiceException
-    {
-        return findSince(timestamp, ViewType.Standard);
-    }
+   @Override
+   public Collection<IEvent> findSince(long timestamp) throws ServiceException 
+   {
+      return findSince(timestamp, ViewType.Standard);   
+   }
 
-    @Override
-    public Collection<IEvent> findSince(long timestamp, ViewType viewType) throws ServiceException
-    {
+   @Override
+   public Collection<IEvent> findSince(long timestamp, ViewType viewType) throws ServiceException 
+   {
         GetCollectionCommand<DynamicEvent> command = new GetCollectionCommand<>(context);
         Collection<DynamicEvent> dynamicEvents
                 = command.call(DynamicEvent.class, EventEndpoints.findSince(timestamp, viewType));
@@ -95,5 +111,7 @@ class EventClient extends AbstractFindableBaseClient<IEvent> implements IEventCl
         }
 
         return events;
-    }
+   }
+
+
 }

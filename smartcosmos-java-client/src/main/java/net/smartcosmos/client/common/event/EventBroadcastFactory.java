@@ -1,4 +1,4 @@
-package net.smartcosmos.client.objects.extension;
+package net.smartcosmos.client.common.event;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -20,23 +20,22 @@ package net.smartcosmos.client.objects.extension;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.client.connectivity.ServiceException;
-import net.smartcosmos.client.impl.IDeleteableBaseClient;
-import net.smartcosmos.client.impl.IUpdateableBaseClient;
-import net.smartcosmos.model.extension.IExternalExtension;
-import net.smartcosmos.util.json.ViewType;
+import net.smartcosmos.client.connectivity.ServerContext;
 
-import java.util.Collection;
-
-public interface IExtensionClient extends IUpdateableBaseClient<IExternalExtension>,
-                                          IDeleteableBaseClient<IExternalExtension>
+public final class EventBroadcastFactory
 {
-    Collection<IExternalExtension> findByNameLike(String nameLike) throws ServiceException;
+    private EventBroadcastFactory()
+    {
+    }
 
-    Collection<IExternalExtension> findByNameLike(String nameLike, ViewType viewType) throws ServiceException;
-
-    Collection<IExternalExtension> catalog() throws ServiceException;
-
-    IExternalExtension getPublishedExtension(String urn) throws ServiceException;
-
+    /**
+     * Creates a new instance of an event client that will work with objects at the specified server context.
+     *
+     * @param context Server connection information
+     * @return New relationship client instance
+     */
+    public static IEventBroadcastClient createClient(ServerContext context)
+    {
+        return new EventBroadcastClient(context);
+    }
 }

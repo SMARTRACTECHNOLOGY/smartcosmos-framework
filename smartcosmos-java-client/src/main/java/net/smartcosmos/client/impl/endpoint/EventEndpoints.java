@@ -32,6 +32,8 @@ public final class EventEndpoints
 
     private static final String BASE = "/events";
 
+    private static final String CREATE__PUT = BASE;
+    
     private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
 
     private static final String FIND_BY_EVENT_TYPE__GET = BASE.concat("?eventType=%s&view=%s");
@@ -66,6 +68,11 @@ public final class EventEndpoints
     public static String findByEventType(EventType eventType, ViewType viewType)
     {
         return String.format(FIND_BY_EVENT_TYPE__GET, eventType, viewType);
+    }
+    
+    public static String create()
+    {
+        return CREATE__PUT;
     }
 }
 

@@ -1,4 +1,4 @@
-package net.smartcosmos.client.objects.extension;
+package net.smartcosmos.client.common.event;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -21,22 +21,22 @@ package net.smartcosmos.client.objects.extension;
  */
 
 import net.smartcosmos.client.connectivity.ServiceException;
-import net.smartcosmos.client.impl.IDeleteableBaseClient;
 import net.smartcosmos.client.impl.IUpdateableBaseClient;
-import net.smartcosmos.model.extension.IExternalExtension;
+import net.smartcosmos.model.event.EventType;
+import net.smartcosmos.model.event.IEvent;
 import net.smartcosmos.util.json.ViewType;
 
 import java.util.Collection;
 
-public interface IExtensionClient extends IUpdateableBaseClient<IExternalExtension>,
-                                          IDeleteableBaseClient<IExternalExtension>
+public interface IEventBroadcastClient extends IUpdateableBaseClient<IEvent>
 {
-    Collection<IExternalExtension> findByNameLike(String nameLike) throws ServiceException;
+    Collection<IEvent> findByEventType(EventType eventType) throws ServiceException;
 
-    Collection<IExternalExtension> findByNameLike(String nameLike, ViewType viewType) throws ServiceException;
+    Collection<IEvent> findByEventType(EventType eventType, ViewType viewType) throws ServiceException;
 
-    Collection<IExternalExtension> catalog() throws ServiceException;
+    Collection<IEvent> findSince(long timestamp) throws ServiceException;
 
-    IExternalExtension getPublishedExtension(String urn) throws ServiceException;
-
+    Collection<IEvent> findSince(long timestamp, ViewType viewType) throws ServiceException;
+    
+    
 }
