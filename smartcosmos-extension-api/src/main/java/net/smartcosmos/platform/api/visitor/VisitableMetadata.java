@@ -24,7 +24,6 @@ import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.model.context.MetadataDataType;
 import net.smartcosmos.model.event.EventType;
-import org.json.JSONException;
 
 public class VisitableMetadata extends AbstractVisitable<IMetadata> implements IMetadata
 {
@@ -58,21 +57,15 @@ public class VisitableMetadata extends AbstractVisitable<IMetadata> implements I
     }
 
     @Override
-    public byte[] getRawValue()
+    public String getValue()
     {
-        return instance.getRawValue();
+        return instance.getValue();
     }
 
     @Override
-    public void setRawValue(byte[] value)
+    public void setValue(String value)
     {
         throw new UnsupportedOperationException("operation is not supported in an IVisitable reference");
-    }
-
-    @Override
-    public String getDecodedValue() throws JSONException
-    {
-        return instance.getDecodedValue();
     }
 
     @Override
