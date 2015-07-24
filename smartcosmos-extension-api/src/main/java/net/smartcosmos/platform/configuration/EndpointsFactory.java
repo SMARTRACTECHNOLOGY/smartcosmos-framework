@@ -63,6 +63,27 @@ public class EndpointsFactory
     @JsonProperty
     private Boolean libraryEndpoints = true;
 
+    @JsonProperty
+    private Boolean registrationEndpoints = true;
+
+    @JsonProperty
+    private Boolean accountEndpoints = true;
+
+    @JsonProperty
+    private Boolean fileEndpoints = true;
+
+    @JsonProperty
+    private Boolean notificationEndpoints = true;
+
+    @JsonProperty
+    private Boolean sessionEndpoints = true;
+
+    @JsonProperty
+    private Boolean userEndpoints = true;
+
+    @JsonProperty
+    private Boolean batchEndpoints = true;
+
     public Boolean getTransactionEndpoints()
     {
         return transactionEndpoints;
@@ -126,5 +147,40 @@ public class EndpointsFactory
     public Boolean getLibraryEndpoints()
     {
         return libraryEndpoints;
+    }
+
+    public Boolean getRegistrationEndpoints()
+    {
+        return registrationEndpoints;
+    }
+
+    public Boolean getAccountEndpoints()
+    {
+        return accountEndpoints;
+    }
+
+    public Boolean getFileEndpoints()
+    {
+        return fileEndpoints;
+    }
+
+    public Boolean getNotificationEndpoints()
+    {
+        return notificationEndpoints;
+    }
+
+    public Boolean getSessionsEndpoints()
+    {
+        return sessionEndpoints;
+    }
+
+    public Boolean getUserEndpoints()
+    {
+        return userEndpoints;
+    }
+
+    public Boolean getBatchEndpoints()
+    {
+        return batchEndpoints;
     }
 }
