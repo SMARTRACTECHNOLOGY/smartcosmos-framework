@@ -77,7 +77,7 @@ public final class MetadataCodec
      * @param dataToEncode
      * @return byte[] of encoded data
      */
-    public static byte [] encodeMetadata(MetadataDataType dataType, String dataToEncode)
+    public static byte [] noopEncodeMetadata(MetadataDataType dataType, String dataToEncode)
     {
 
         byte[] bytes;
@@ -139,7 +139,7 @@ public final class MetadataCodec
      * @throws JSONException
      * @throws IllegalArgumentException
      */
-    public static JSONObject decodeMetadata(MetadataDataType dataType, byte[] dataToDecode)
+    public static JSONObject noopDecodeMetadata(MetadataDataType dataType, byte[] dataToDecode)
             throws JSONException
     {
         JSONObject outputJson = new JSONObject();
