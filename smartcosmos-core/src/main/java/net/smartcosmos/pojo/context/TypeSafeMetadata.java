@@ -34,10 +34,12 @@ import net.smartcosmos.util.mapper.JsonMapper;
 import net.smartcosmos.util.mapper.LongMapper;
 import net.smartcosmos.util.mapper.NoopMapper;
 import net.smartcosmos.util.mapper.StringMapper;
-import org.json.JSONException;
+
 
 public class TypeSafeMetadata<T> implements IMetadata
 {
+
+
     private final IMetadata metadataObject;
 
     private IMetadataValueMapper<T> mapper;
@@ -144,25 +146,25 @@ public class TypeSafeMetadata<T> implements IMetadata
     }
 
     @Override
-    public byte[] getRawValue()
+    public String getValue()
     {
-        return metadataObject.getRawValue();
+        return metadataObject.getValue();
     }
 
-    public T getValue()
-    {
-        return mapper.fromBytes(metadataObject.getRawValue());
-    }
+//    public T getValue()
+//    {
+//        return mapper.fromBytes(metadataObject.getValue());
+//    }
 
-    public void setValue(T value)
-    {
-        metadataObject.setRawValue(mapper.toBytes(value));
-    }
+//    public void setValue(T value)
+//    {
+//        metadataObject.setRawValue(mapper.toBytes(value));
+//    }
 
     @Override
-    public void setRawValue(byte[] value)
+    public void setValue(String value)
     {
-        metadataObject.setRawValue(value);
+        metadataObject.setValue(value);
     }
 
     @Override
@@ -177,11 +179,11 @@ public class TypeSafeMetadata<T> implements IMetadata
         throw new UnsupportedOperationException("POJO doesn't support copy operation");
     }
 
-    @Override
-    public String getDecodedValue() throws JSONException
-    {
-        return metadataObject.getDecodedValue();
-    }
+//    @Override
+//    public String getDecodedValue() throws JSONException
+//    {
+//        return metadataObject.getDecodedValue();
+//    }
 
     @Override
     public String getMoniker()

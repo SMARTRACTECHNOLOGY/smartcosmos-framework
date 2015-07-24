@@ -129,35 +129,35 @@ public class MapperTest
         Assert.assertEquals(value, output);
     }
 
-    @Test
-    public void testBinaryEncodeDecode() throws JSONException, IOException
-    {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("foo", "bar");
-        jsonObject.put("now", true);
-
-        JsonMapper mapper = new JsonMapper();
-        byte[] bytes = mapper.toBytes(jsonObject);
-
-        IMetadata metadata = new Metadata();
-        metadata.setDataType(MetadataDataType.JSONType);
-        metadata.setKey("foo");
-        metadata.setRawValue(bytes);
-        metadata.setEntityReferenceType(EntityReferenceType.Device);
-        metadata.setReferenceUrn(UUID.randomUUID().toString());
-
-        String json = JsonUtil.toJson(metadata, JsonGenerationView.Minimum.class);
-        System.out.println(json);
-
-        IMetadata reconstitute = JsonUtil.fromJson(json, Metadata.class);
-        byte[] rawBytes = reconstitute.getRawValue();
-
-        JsonMapper mapper1 = new JsonMapper();
-        JSONObject reconstructedJson = mapper1.fromBytes(rawBytes);
-
-        Assert.assertEquals(jsonObject.getString("foo"), reconstructedJson.getString("foo"));
-
-    }
+//    @Test
+//    public void testBinaryEncodeDecode() throws JSONException, IOException
+//    {
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("foo", "bar");
+//        jsonObject.put("now", true);
+//
+//        JsonMapper mapper = new JsonMapper();
+//        byte[] bytes = mapper.toBytes(jsonObject);
+//
+//        IMetadata metadata = new Metadata();
+//        metadata.setDataType(MetadataDataType.JSONType);
+//        metadata.setKey("foo");
+//        metadata.setRawValue(bytes);
+//        metadata.setEntityReferenceType(EntityReferenceType.Device);
+//        metadata.setReferenceUrn(UUID.randomUUID().toString());
+//
+//        String json = JsonUtil.toJson(metadata, JsonGenerationView.Minimum.class);
+//        System.out.println(json);
+//
+//        IMetadata reconstitute = JsonUtil.fromJson(json, Metadata.class);
+//        byte[] rawBytes = reconstitute.getRawValue();
+//
+//        JsonMapper mapper1 = new JsonMapper();
+//        JSONObject reconstructedJson = mapper1.fromBytes(rawBytes);
+//
+//        Assert.assertEquals(jsonObject.getString("foo"), reconstructedJson.getString("foo"));
+//
+//    }
 
     @Test
     public void testJsonMapper() throws JSONException
