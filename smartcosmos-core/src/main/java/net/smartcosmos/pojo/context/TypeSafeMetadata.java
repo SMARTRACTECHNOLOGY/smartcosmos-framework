@@ -24,65 +24,17 @@ import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.model.context.MetadataDataType;
-import net.smartcosmos.util.mapper.BooleanMapper;
-import net.smartcosmos.util.mapper.DateMapper;
-import net.smartcosmos.util.mapper.DoubleMapper;
-import net.smartcosmos.util.mapper.FloatMapper;
-import net.smartcosmos.util.mapper.IMetadataValueMapper;
-import net.smartcosmos.util.mapper.IntegerMapper;
-import net.smartcosmos.util.mapper.JsonMapper;
-import net.smartcosmos.util.mapper.LongMapper;
-import net.smartcosmos.util.mapper.NoopMapper;
-import net.smartcosmos.util.mapper.StringMapper;
 
 
 public class TypeSafeMetadata<T> implements IMetadata
 {
 
-
     private final IMetadata metadataObject;
-
-    private IMetadataValueMapper<T> mapper;
 
     public TypeSafeMetadata(IMetadata metadataObject)
     {
         this.metadataObject = metadataObject;
 
-        switch (metadataObject.getDataType())
-        {
-            case Custom:
-                mapper = (IMetadataValueMapper<T>) new NoopMapper();
-                break;
-            case StringType:
-                mapper = (IMetadataValueMapper<T>) new StringMapper();
-                break;
-            case DateType:
-                mapper = (IMetadataValueMapper<T>) new DateMapper();
-                break;
-            case JSONType:
-                mapper = (IMetadataValueMapper<T>) new JsonMapper();
-                break;
-            case XMLType:
-                mapper = (IMetadataValueMapper<T>) new StringMapper();
-                break;
-            case IntegerType:
-                mapper = (IMetadataValueMapper<T>) new IntegerMapper();
-                break;
-            case LongType:
-                mapper = (IMetadataValueMapper<T>) new LongMapper();
-                break;
-            case FloatType:
-                mapper = (IMetadataValueMapper<T>) new FloatMapper();
-                break;
-            case DoubleType:
-                mapper = (IMetadataValueMapper<T>) new DoubleMapper();
-                break;
-            case BooleanType:
-                mapper = (IMetadataValueMapper<T>) new BooleanMapper();
-                break;
-            default:
-                throw new IllegalStateException("Unrecognized type");
-        }
     }
 
     @Override
@@ -150,16 +102,6 @@ public class TypeSafeMetadata<T> implements IMetadata
     {
         return metadataObject.getValue();
     }
-
-//    public T getValue()
-//    {
-//        return mapper.fromBytes(metadataObject.getValue());
-//    }
-
-//    public void setValue(T value)
-//    {
-//        metadataObject.setRawValue(mapper.toBytes(value));
-//    }
 
     @Override
     public void setValue(String value)

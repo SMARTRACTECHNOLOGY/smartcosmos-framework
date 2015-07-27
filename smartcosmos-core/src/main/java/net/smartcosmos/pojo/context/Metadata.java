@@ -28,7 +28,6 @@ import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.model.context.MetadataDataType;
 import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.util.json.JsonGenerationView;
-import net.smartcosmos.util.mapper.StringMapper;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -148,7 +147,6 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         public MetadataObjectBuilder setJsonValue(JSONObject inputValue)
         {
             Preconditions.checkArgument(MetadataDataType.JSONType == type, "Data type mismatch");
-            StringMapper mapper = new StringMapper();
             value = inputValue.toString();
             return this;
         }
