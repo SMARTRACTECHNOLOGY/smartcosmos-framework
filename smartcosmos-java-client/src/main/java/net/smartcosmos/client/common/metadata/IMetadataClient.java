@@ -25,7 +25,9 @@ import net.smartcosmos.client.impl.IDeleteableBaseClient;
 import net.smartcosmos.client.impl.IUpsertableBaseClient;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IMetadata;
+import net.smartcosmos.model.context.MetadataDataType;
 import net.smartcosmos.util.json.ViewType;
+import org.json.JSONObject;
 
 import java.util.Collection;
 
@@ -88,4 +90,34 @@ public interface IMetadataClient extends IUpsertableBaseClient<IMetadata>, IDele
                                   String referenceUrn,
                                   ViewType viewType) throws ServiceException;
 
+    /**
+     * Takes a type-safe object instance and submits it to the platform where an opaque encoding is applied and
+     * returned, suitable for inclusion as the {@link net.smartcosmos.Field#RAW_VALUE_FIELD} when
+     * upserting metadata.
+     * <p/>
+     * <B>NOTE:</B> Publicly accessible method call that does not require authentication
+     *
+     * @param metadataDataType Declared data type of the instance being submitted for encoding
+     * @param instance         Instance that is of the same data type as the enum; use String for
+     *                         {@link net.smartcosmos.model.context.MetadataDataType#XMLType} and
+     *                         {@link net.smartcosmos.model.context.MetadataDataType#JSONType}
+     * @param <T>              Instance that matches the data type defined by the metadataDataType enum
+     * @return Encoded representation in JSON of the data provided,
+     * accessible via the {@link net.smartcosmos.Field#RAW_VALUE_FIELD}
+     * @throws ServiceException
+     */
+    <T> String encodeMetadata(MetadataDataType metadataDataType, T instance) throws ServiceException;
+
+    /**
+     * Takes a raw value byte array previously encoded by
+     * {@link #encodeMetadata(net.smartcosmos.model.context.MetadataDataType, Object)} and decodes the value in a
+     * type-safe manner.
+     *
+     * @param metadataDataType Declared data type of the {@link net.smartcosmos.Field#RAW_VALUE_FIELD} being submitted
+     *                         for decoding
+     * @param jsonObject       JSON object that contains the {@link net.smartcosmos.Field#RAW_VALUE_FIELD}
+     * @return Type-safe decoded value extracted form the JSON object
+     * @throws ServiceException
+     */
+    JSONObject decodeMetadata(MetadataDataType metadataDataType, JSONObject jsonObject) throws ServiceException;
 }
