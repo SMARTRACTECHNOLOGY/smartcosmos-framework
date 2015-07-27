@@ -50,7 +50,7 @@ public interface IMetadataDAO extends IBaseDAO<IMetadata>
             boolean includeMatches,
             int maxMatchesToInclude,
             ArrayList<String> listKeys,
-            ArrayList<byte[]> listRawValues,
+            ArrayList<String> listValues,
             IAccount account
     );
 }
