@@ -253,11 +253,11 @@ public class LogisticServiceDemo
         Calendar calendar = Calendar.getInstance();
         calendar.set(1980, 1, 1, 0, 0, 0);
 
-        String encoded = client.encodeMetadata(MetadataDataType.LongType, calendar.getTimeInMillis());
+        String calendarAsString = Long.toString(calendar.getTimeInMillis());
 
         IMetadata metadata = new MetadataBuilder(MetadataDataType.LongType)
                 .setKey(KEY_DATE_OF_BIRTH)
-                .setRawValue(encoded.getBytes())
+                .setValue(calendarAsString)
                 .setEntityReferenceType(EntityReferenceType.Object)
                 .setReferenceUrn(operatorUrn)
                 .build();
