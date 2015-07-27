@@ -21,7 +21,6 @@ package net.smartcosmos.client.common.metadata;
  */
 
 import com.google.common.base.Preconditions;
-import net.smartcosmos.Field;
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractUpsertableBaseClient;
@@ -31,7 +30,6 @@ import net.smartcosmos.client.impl.command.GetCommand;
 import net.smartcosmos.client.impl.endpoint.MetadataEndpoints;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IMetadata;
-import net.smartcosmos.model.context.MetadataDataType;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.context.Metadata;
 import net.smartcosmos.util.json.JsonUtil;
@@ -39,15 +37,9 @@ import net.smartcosmos.util.json.ViewType;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.restlet.data.Status;
-import org.restlet.ext.json.JsonRepresentation;
-import org.restlet.representation.Representation;
-import org.restlet.representation.StringRepresentation;
-import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import static net.smartcosmos.Field.ENTITY_REFERENCE_TYPE;
@@ -148,67 +140,6 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
     {
         GetCollectionCommand<IMetadata> command = new GetCollectionCommand<>(context);
         return command.call(Metadata.class, MetadataEndpoints.findAll(entityReferenceType, referenceUrn, viewType));
-    }
-
-    @Override
-    public <T> String encodeMetadata(MetadataDataType metadataDataType, T instance) throws ServiceException
-    {
-        String encodedRawValue;
-
-        ClientResource service = createClient(MetadataEndpoints.encodeMetadata(metadataDataType));
-
-        try
-        {
-            Representation result = service.post(new StringRepresentation(instance.toString()));
-            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
-            JSONObject jsonResult = jsonRepresentation.getJsonObject();
-
-            if (service.getStatus().equals(Status.SUCCESS_OK))
-            {
-                encodedRawValue = jsonResult.getString(Field.RAW_VALUE_FIELD);
-            } else
-            {
-                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
-                ResponseEntity response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-                throw new ServiceException(response);
-            }
-
-        } catch (JSONException | IOException e)
-        {
-            LOGGER.error("Unexpected Exception", e);
-            throw new ServiceException(e);
-        }
-
-        return encodedRawValue;
-    }
-
-    @Override
-    public JSONObject decodeMetadata(MetadataDataType metadataDataType, JSONObject jsonObject) throws ServiceException
-    {
-        JSONObject jsonResult;
-        ClientResource service = createClient(MetadataEndpoints.decodeMetadata(metadataDataType));
-
-        try
-        {
-            Representation result = service.post(new JsonRepresentation(jsonObject));
-            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
-            jsonResult = jsonRepresentation.getJsonObject();
-
-            if (service.getStatus().equals(Status.SUCCESS_OK))
-            {
-                return jsonResult;
-            } else
-            {
-                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
-                ResponseEntity response = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-                throw new ServiceException(response);
-            }
-
-        } catch (JSONException | IOException e)
-        {
-            LOGGER.error("Unexpected Exception", e);
-            throw new ServiceException(e);
-        }
     }
 
     @Override
