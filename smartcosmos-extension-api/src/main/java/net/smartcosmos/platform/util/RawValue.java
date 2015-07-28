@@ -32,7 +32,7 @@ import static net.smartcosmos.Field.RAW_VALUE_FIELD;
 
 public final class RawValue
 {
-    private byte[] rawValue;
+    private String rawValue;
 
     public static RawValue fromJson(JSONObject json) throws JSONException, IOException
     {
@@ -50,13 +50,13 @@ public final class RawValue
         return mapper.writeValueAsString(this);
     }
 
-    public byte[] getRawValue()
+    public String getRawValue()
     {
-        return rawValue.clone();
+        return rawValue;
     }
 
-    public void setRawValue(byte[] rawValue)
+    public void setRawValue(String rawValue)
     {
-        this.rawValue = rawValue.clone();
+        this.rawValue = rawValue;
     }
 }

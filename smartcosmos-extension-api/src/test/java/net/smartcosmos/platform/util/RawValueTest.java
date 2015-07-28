@@ -35,12 +35,12 @@ public class RawValueTest
     public void testExtraction() throws JSONException, IOException
     {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(Field.RAW_VALUE_FIELD, "ewogICAiZm9vIjogImJhciIsCiAgICJub3ciOiB0cnVlCn0=");
+        jsonObject.put(Field.RAW_VALUE_FIELD, "{ \"foo\" : \"bar\" }");
 
         RawValue rv = RawValue.fromJson(jsonObject);
 
         JsonMapper mapper = new JsonMapper();
-        JSONObject reconstituted = mapper.fromBytes(rv.getRawValue());
+        JSONObject reconstituted = mapper.fromString(rv.getRawValue());
 
         Assert.assertEquals(reconstituted.getString("foo"), "bar");
     }

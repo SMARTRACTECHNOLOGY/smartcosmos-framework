@@ -77,15 +77,15 @@ public final class MetadataCodec
      * @param dataToEncode
      * @return byte[] of encoded data
      */
-    public static byte [] noopEncodeMetadata(MetadataDataType dataType, String dataToEncode)
+    public static String noopEncodeMetadata(MetadataDataType dataType, String dataToEncode)
     {
 
-        byte[] bytes;
+        String resultString;
         switch (dataType)
         {
             case StringType:
             case XMLType:
-                bytes = new StringMapper().toBytes(dataToEncode);
+                resultString = new StringMapper().toString(dataToEncode);
                 break;
             case JSONType:
                 JSONObject jsonObject;
@@ -93,32 +93,32 @@ public final class MetadataCodec
                 try
                 {
                     jsonObject = new JSONObject(dataToEncode);
-                    bytes = new JsonMapper().toBytes(jsonObject);
+                    resultString = new JsonMapper().toString(jsonObject);
                 } catch (JSONException e)
                 {
-                    bytes = new byte[]{};
+                    resultString = new String();
                 }
                 break;
             case IntegerType:
-                bytes = new IntegerMapper().toBytes(Integer.valueOf(dataToEncode));
+                resultString = new IntegerMapper().toString(Integer.valueOf(dataToEncode));
                 break;
             case LongType:
-                bytes = new LongMapper().toBytes(Long.valueOf(dataToEncode));
+                resultString = new LongMapper().toString(Long.valueOf(dataToEncode));
                 break;
             case FloatType:
-                bytes = new FloatMapper().toBytes(Float.valueOf(dataToEncode));
+                resultString = new FloatMapper().toString(Float.valueOf(dataToEncode));
                 break;
             case DoubleType:
-                bytes = new DoubleMapper().toBytes(Double.valueOf(dataToEncode));
+                resultString = new DoubleMapper().toString(Double.valueOf(dataToEncode));
                 break;
             case BooleanType:
-                bytes = new BooleanMapper().toBytes(Boolean.valueOf(dataToEncode));
+                resultString = new BooleanMapper().toString(Boolean.valueOf(dataToEncode));
                 break;
             case DateType:
                 try
                 {
                     DateTime convertedDateTime = RFC3339.parseDateTime(dataToEncode);
-                    bytes = new DateMapper().toBytes(convertedDateTime.toDate());
+                    resultString = new DateMapper().toString(convertedDateTime.toDate());
                     break;
                 } catch (IllegalArgumentException invalidDateTimeException)
                 {
@@ -128,7 +128,7 @@ public final class MetadataCodec
             default:
                 throw new IllegalArgumentException("Unsupported data type: " + dataType);
         }
-        return bytes;
+        return resultString;
     }
 
     /**
@@ -139,7 +139,7 @@ public final class MetadataCodec
      * @throws JSONException
      * @throws IllegalArgumentException
      */
-    public static JSONObject noopDecodeMetadata(MetadataDataType dataType, byte[] dataToDecode)
+    public static JSONObject noopDecodeMetadata(MetadataDataType dataType, String dataToDecode)
             throws JSONException
     {
         JSONObject outputJson = new JSONObject();
@@ -151,31 +151,31 @@ public final class MetadataCodec
             {
                 case StringType:
                 case XMLType:
-                    outputJson.put(Field.DECODED_VALUE_FIELD, new StringMapper().fromBytes(dataToDecode));
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new StringMapper().fromString(dataToDecode));
                     break;
                 case JSONType:
-                    outputJson.put(Field.DECODED_VALUE_FIELD, new JsonMapper().fromBytes(dataToDecode));
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new JsonMapper().fromString(dataToDecode));
                     break;
                 case IntegerType:
-                    outputJson.put(Field.DECODED_VALUE_FIELD, new IntegerMapper().fromBytes(dataToDecode));
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new IntegerMapper().fromString(dataToDecode));
                     break;
                 case LongType:
-                    outputJson.put(Field.DECODED_VALUE_FIELD, new LongMapper().fromBytes(dataToDecode));
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new LongMapper().fromString(dataToDecode));
                     break;
                 case FloatType:
-                    outputJson.put(Field.DECODED_VALUE_FIELD, new FloatMapper().fromBytes(dataToDecode));
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new FloatMapper().fromString(dataToDecode));
                     break;
                 case DoubleType:
-                    outputJson.put(Field.DECODED_VALUE_FIELD, new DoubleMapper().fromBytes(dataToDecode));
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new DoubleMapper().fromString(dataToDecode));
                     break;
                 case BooleanType:
-                    outputJson.put(Field.DECODED_VALUE_FIELD, new BooleanMapper().fromBytes(dataToDecode));
-                    break;
+                    outputJson.put(Field.DECODED_VALUE_FIELD, new BooleanMapper().fromString(dataToDecode));
+
                 case DateType:
                     // SimpleDateFormat is NOT thread safe and must be instantiated locally like this!
                     SimpleDateFormat dateFormat = new SimpleDateFormat(RFC_3339_FORMAT);
                     outputJson.put(Field.DECODED_VALUE_FIELD, dateFormat
-                            .format(new DateMapper().fromBytes(dataToDecode)));
+                            .format(new DateMapper().fromString(dataToDecode)));
                     break;
                 default:
                     throw new IllegalArgumentException("Unsupported data type: " + dataType);
