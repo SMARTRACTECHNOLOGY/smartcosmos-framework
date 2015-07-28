@@ -50,7 +50,7 @@ public final class MetadataBuilder extends AbstractReferentialBuilder<IMetadata,
 
     public MetadataBuilder setValue(String value)
     {
-        instance.setValue(value);
+        instance.setRawValue(value);
         return this;
     }
 
@@ -58,6 +58,6 @@ public final class MetadataBuilder extends AbstractReferentialBuilder<IMetadata,
     protected void onValidate()
     {
         Preconditions.checkNotNull(instance.getKey(), "key must not be null");
-        Preconditions.checkNotNull(instance.getValue(), "value must not be null");
+        Preconditions.checkNotNull(instance.getRawValue(), "value must not be null");
     }
 }

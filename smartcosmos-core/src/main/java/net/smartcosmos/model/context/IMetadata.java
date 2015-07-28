@@ -22,6 +22,7 @@ package net.smartcosmos.model.context;
 
 import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.base.IReferentialObject;
+import org.json.JSONException;
 
 /**
  * Specific instance of a type-safe key-value pair linked to a singular
@@ -57,10 +58,17 @@ public interface IMetadata extends IAccountDomainResource<IMetadata>, IReferenti
      * the serialization format must be treated as an opaque value that is encapsualted
      * by the platform.
      *
-     * @return value
+     * @return raw value
      */
-    String getValue();
+    String getRawValue();
 
-    void setValue(String value);
+    void setRawValue(String value);
 
+    /**
+     * Only included when <code>decoded=true</code> is added as a query string, in which case the decoded value is
+     * automatically represented only as a String.
+     *
+     * @return decoded raw value as a string
+     */
+    String getDecodedValue() throws JSONException;
 }
