@@ -20,8 +20,6 @@ package net.smartcosmos.util.mapper;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 public class BooleanMapper implements IMetadataValueMapper<Boolean>
 {
     @Override
@@ -39,7 +37,7 @@ public class BooleanMapper implements IMetadataValueMapper<Boolean>
     @Override
     public Boolean fromString(String rawValue)
     {
-        if(rawValue.equalsIgnoreCase("true"))
+        if (rawValue.equalsIgnoreCase("true"))
         {
             return true;
         }

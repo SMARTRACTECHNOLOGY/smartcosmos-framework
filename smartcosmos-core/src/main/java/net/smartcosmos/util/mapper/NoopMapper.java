@@ -23,13 +23,13 @@ package net.smartcosmos.util.mapper;
 public class NoopMapper implements IMetadataValueMapper<String>
 {
     @Override
-    public String toString (String value)
+    public String toString(String value)
     {
         return value;
     }
 
     @Override
-    public String fromString (String rawValue)
+    public String fromString(String rawValue)
     {
         return rawValue;
     }

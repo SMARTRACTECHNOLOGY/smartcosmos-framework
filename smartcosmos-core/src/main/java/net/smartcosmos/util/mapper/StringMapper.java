@@ -20,8 +20,6 @@ package net.smartcosmos.util.mapper;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import java.nio.charset.Charset;
-
 public final class StringMapper implements IMetadataValueMapper<String>
 {
     @Override

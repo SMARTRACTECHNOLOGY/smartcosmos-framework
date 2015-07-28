@@ -37,7 +37,6 @@ import net.smartcosmos.util.mapper.StringMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
