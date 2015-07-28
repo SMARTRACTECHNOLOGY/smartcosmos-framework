@@ -28,9 +28,16 @@ import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.model.context.MetadataDataType;
 import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.util.json.JsonGenerationView;
+import net.smartcosmos.util.mapper.BooleanMapper;
+import net.smartcosmos.util.mapper.DoubleMapper;
+import net.smartcosmos.util.mapper.FloatMapper;
+import net.smartcosmos.util.mapper.IntegerMapper;
+import net.smartcosmos.util.mapper.LongMapper;
+import net.smartcosmos.util.mapper.StringMapper;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -38,16 +45,11 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
 {
     public static class MetadataObjectBuilder
     {
-
-        public static final String RFC_3339_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX";
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat(RFC_3339_FORMAT);
-
         private MetadataDataType type;
 
         private String key;
 
-        private String value;
+        private String rawValue;
 
         private IAccount account;
 
@@ -90,71 +92,81 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
             return this;
         }
 
-        public MetadataObjectBuilder setStringValue(String inputValue)
+        public MetadataObjectBuilder setStringValue(String value)
         {
             Preconditions.checkArgument(MetadataDataType.StringType == type, "Data type mismatch");
-            value = inputValue;
+            StringMapper mapper = new StringMapper();
+            rawValue = mapper.toString(value);
             return this;
         }
 
-        public MetadataObjectBuilder setIntegerValue(int inputValue)
+        public MetadataObjectBuilder setIntegerValue(int value)
         {
             Preconditions.checkArgument(MetadataDataType.IntegerType == type, "Data type mismatch");
-            value = Integer.toString(inputValue);
+            IntegerMapper mapper = new IntegerMapper();
+            rawValue = mapper.toString(value);
             return this;
         }
 
-        public MetadataObjectBuilder setLongValue(long inputValue)
+        public MetadataObjectBuilder setLongValue(long value)
         {
             Preconditions.checkArgument(MetadataDataType.LongType == type, "Data type mismatch");
-            value = Long.toString(inputValue);
+            LongMapper mapper = new LongMapper();
+            rawValue = mapper.toString(value);
             return this;
         }
 
-        public MetadataObjectBuilder setBooleanValue(boolean inputValue)
+        public MetadataObjectBuilder setBooleanValue(boolean value)
         {
             Preconditions.checkArgument(MetadataDataType.BooleanType == type, "Data type mismatch");
-            if (inputValue)
-            {
-                value = "true";
-            }
-            value = "false";
-
+            BooleanMapper mapper = new BooleanMapper();
+            rawValue = mapper.toString(value);
             return this;
         }
 
-        public MetadataObjectBuilder setFloatValue(float inputValue)
+        public MetadataObjectBuilder setFloatValue(float value)
         {
             Preconditions.checkArgument(MetadataDataType.FloatType == type, "Data type mismatch");
-            value = Float.toString(inputValue);
+            FloatMapper mapper = new FloatMapper();
+            rawValue = mapper.toString(value);
             return this;
         }
 
-        public MetadataObjectBuilder setDoubleValue(double inputValue)
+        public MetadataObjectBuilder setDoubleValue(double value)
         {
             Preconditions.checkArgument(MetadataDataType.DoubleType == type, "Data type mismatch");
-            value = Double.toString(inputValue);
+            DoubleMapper mapper = new DoubleMapper();
+            rawValue = mapper.toString(value);
             return this;
         }
 
-        public MetadataObjectBuilder setXmlValue(String inputValue)
+        public MetadataObjectBuilder setXmlValue(String value)
         {
             Preconditions.checkArgument(MetadataDataType.XMLType == type, "Data type mismatch");
-            value = inputValue;
+            StringMapper mapper = new StringMapper();
+            rawValue = mapper.toString(value);
             return this;
         }
 
-        public MetadataObjectBuilder setJsonValue(JSONObject inputValue)
+        public MetadataObjectBuilder setJsonValue(JSONObject value)
         {
             Preconditions.checkArgument(MetadataDataType.JSONType == type, "Data type mismatch");
-            value = inputValue.toString();
+            StringMapper mapper = new StringMapper();
+
+            try
+            {
+                rawValue = mapper.toString(value.toString(3));
+            } catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+
             return this;
         }
 
-        public MetadataObjectBuilder setDateValue(Date inputValue)
+        public MetadataObjectBuilder setDateValue(Date value)
         {
             Preconditions.checkArgument(MetadataDataType.DateType == type, "Data type mismatch");
-            value = dateFormat.format(inputValue);
             return this;
         }
 
@@ -166,7 +178,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
             object.referenceUrn = this.referenceUrn;
             object.entityReferenceType = this.entityReferenceType;
             object.key = this.key;
-            object.value = this.value;
+            object.rawValue = this.rawValue;
 
             return object;
         }
@@ -179,7 +191,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
     protected String key;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected String value;
+    protected String rawValue;
 
     @JsonView(JsonGenerationView.Full.class)
     protected String decodedValue = null;
@@ -209,22 +221,22 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
     }
 
     @Override
-    public String getValue()
+    public String getRawValue()
     {
-        return value;
+        return this.rawValue;
     }
 
     @Override
-    public void setValue(String value)
+    public void setRawValue(String value)
     {
-        this.value = value;
+        this.rawValue = value;
     }
 
-//    @Override
-//    public String getDecodedValue()
-//    {
-//        return decodedValue;
-//    }
+    @Override
+    public String getDecodedValue()
+    {
+        return decodedValue;
+    }
 
     @Override
     public boolean equals(Object o)
@@ -239,7 +251,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         if (decodedValue != null ? !decodedValue.equals(metadata.decodedValue) : metadata.decodedValue != null)
             return false;
         if (!key.equals(metadata.key)) return false;
-        if (!value.equals(metadata.value)) return false;
+        if (!rawValue.equals(metadata.rawValue)) return false;
 
         return true;
     }
@@ -250,7 +262,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         int result = super.hashCode();
         result = 31 * result + dataType.hashCode();
         result = 31 * result + key.hashCode();
-        result = 31 * result + (value != null ? value.hashCode() : 0);
+        result = 31 * result + (rawValue != null ? rawValue.hashCode() : 0);
         result = 31 * result + (decodedValue != null ? decodedValue.hashCode() : 0);
         return result;
     }
