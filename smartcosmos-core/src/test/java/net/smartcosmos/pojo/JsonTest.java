@@ -109,8 +109,9 @@ public class JsonTest
         IMetadata reconstituted = JsonUtil.fromJson(json, Metadata.class);
 
         TypeSafeMetadata<JSONObject> m = new TypeSafeMetadata<>(reconstituted);
-
-        Assert.assertEquals(jsonObject.get("foo"), m.getValue().get("foo"));
+        JSONObject metaJson = new JSONObject(m.getValue());
+        Assert.assertTrue (metaJson.get("foo").equals("bar"));
+        Assert.assertTrue ((boolean)metaJson.get("now"));
     }
 
 }
