@@ -116,7 +116,9 @@ public final class Field
 
     public static final String KEY_FIELD = "key";
 
-    public static final String VALUE_FIELD = "value";
+    public static final String RAW_VALUE_FIELD = "rawValue";
+
+    public static final String DECODED_VALUE_FIELD = "decodedValue";
 
     public static final String DATA_TYPE_FIELD = "dataType";
 
