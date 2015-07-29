@@ -39,6 +39,6 @@ public class DateMapper implements IMetadataValueMapper<Date>
     @Override
     public Date fromString(String rawValue)
     {
-        return new Date(rawValue);
+        return RFC3339.parseDateTime(rawValue).toDate();
     }
 }
