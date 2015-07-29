@@ -20,26 +20,27 @@ package net.smartcosmos.util.mapper;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 public class BooleanMapper implements IMetadataValueMapper<Boolean>
 {
     @Override
-    public byte[] toBytes(Boolean value)
+    public String toString(Boolean value)
     {
         if (value)
         {
-            return new byte[]{0x01};
+            return "true";
         } else
         {
-            return new byte[]{0x00};
+            return "false";
         }
     }
 
     @Override
-    public Boolean fromBytes(byte[] rawValue)
+    public Boolean fromString(String rawValue)
     {
-        checkArgument(((null != rawValue) && rawValue.length > 0), "rawValue must be non-null with a length of 1");
-        return (rawValue[0] == 0x01);
+        if (rawValue.equalsIgnoreCase("true"))
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -20,21 +20,25 @@ package net.smartcosmos.util.mapper;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+
 import java.util.Date;
 
 public class DateMapper implements IMetadataValueMapper<Date>
 {
-    private final LongMapper longMapper = new LongMapper();
+
+    protected static final DateTimeFormatter RFC3339 = ISODateTimeFormat.dateTimeParser();
 
     @Override
-    public byte[] toBytes(Date value)
+    public String toString(Date value)
     {
-        return longMapper.toBytes(value.getTime());
+        return value.toString();
     }
 
     @Override
-    public Date fromBytes(byte[] rawValue)
+    public Date fromString(String rawValue)
     {
-        return new Date(longMapper.fromBytes(rawValue));
+        return RFC3339.parseDateTime(rawValue).toDate();
     }
 }

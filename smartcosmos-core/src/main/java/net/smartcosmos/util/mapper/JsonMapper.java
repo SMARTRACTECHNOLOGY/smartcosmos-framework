@@ -28,35 +28,31 @@ public class JsonMapper implements IMetadataValueMapper<JSONObject>
     private final StringMapper stringMapper = new StringMapper();
 
     @Override
-    public byte[] toBytes(JSONObject value)
+    public String toString(JSONObject value)
     {
-        byte[] result = new byte[0];
-
         try
         {
-            result = stringMapper.toBytes(value.toString(3));
+            return value.toString(3);
+
         } catch (JSONException e)
         {
             e.printStackTrace();
+            return null;
         }
-
-        return result;
     }
 
     @Override
-    public JSONObject fromBytes(byte[] rawValue)
+    public JSONObject fromString(String rawValue)
     {
-        JSONObject jsonObject = new JSONObject();
-
-        String json = stringMapper.fromBytes(rawValue);
+        JSONObject jsonObject = null;
         try
         {
-            jsonObject = new JSONObject(json);
+            return new JSONObject(rawValue);
+
         } catch (JSONException e)
         {
             e.printStackTrace();
+            return null;
         }
-
-        return jsonObject;
     }
 }

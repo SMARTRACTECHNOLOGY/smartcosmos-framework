@@ -20,16 +20,16 @@ package net.smartcosmos.util.mapper;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-public class NoopMapper implements IMetadataValueMapper<byte[]>
+public class NoopMapper implements IMetadataValueMapper<String>
 {
     @Override
-    public byte[] toBytes(byte[] value)
+    public String toString(String value)
     {
         return value;
     }
 
     @Override
-    public byte[] fromBytes(byte[] rawValue)
+    public String fromString(String rawValue)
     {
         return rawValue;
     }

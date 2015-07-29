@@ -144,23 +144,23 @@ public class TypeSafeMetadata<T> implements IMetadata
     }
 
     @Override
-    public byte[] getRawValue()
+    public String getRawValue()
     {
         return metadataObject.getRawValue();
     }
 
     public T getValue()
     {
-        return mapper.fromBytes(metadataObject.getRawValue());
+        return mapper.fromString(metadataObject.getRawValue());
     }
 
     public void setValue(T value)
     {
-        metadataObject.setRawValue(mapper.toBytes(value));
+        metadataObject.setRawValue(mapper.toString(value));
     }
 
     @Override
-    public void setRawValue(byte[] value)
+    public void setRawValue(String value)
     {
         metadataObject.setRawValue(value);
     }

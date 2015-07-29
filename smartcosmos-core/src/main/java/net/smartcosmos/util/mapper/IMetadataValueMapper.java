@@ -22,7 +22,7 @@ package net.smartcosmos.util.mapper;
 
 public interface IMetadataValueMapper<T>
 {
-    byte[] toBytes(T value);
+    String toString(T value);
 
-    T fromBytes(byte[] rawValue);
+    T fromString(String rawValue);
 }

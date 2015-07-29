@@ -37,7 +37,6 @@ import net.smartcosmos.util.mapper.StringMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -49,7 +48,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
 
         private String key;
 
-        private byte[] rawValue;
+        private String rawValue;
 
         private IAccount account;
 
@@ -96,7 +95,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         {
             Preconditions.checkArgument(MetadataDataType.StringType == type, "Data type mismatch");
             StringMapper mapper = new StringMapper();
-            rawValue = mapper.toBytes(value);
+            rawValue = mapper.toString(value);
             return this;
         }
 
@@ -104,7 +103,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         {
             Preconditions.checkArgument(MetadataDataType.IntegerType == type, "Data type mismatch");
             IntegerMapper mapper = new IntegerMapper();
-            rawValue = mapper.toBytes(value);
+            rawValue = mapper.toString(value);
             return this;
         }
 
@@ -112,7 +111,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         {
             Preconditions.checkArgument(MetadataDataType.LongType == type, "Data type mismatch");
             LongMapper mapper = new LongMapper();
-            rawValue = mapper.toBytes(value);
+            rawValue = mapper.toString(value);
             return this;
         }
 
@@ -120,7 +119,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         {
             Preconditions.checkArgument(MetadataDataType.BooleanType == type, "Data type mismatch");
             BooleanMapper mapper = new BooleanMapper();
-            rawValue = mapper.toBytes(value);
+            rawValue = mapper.toString(value);
             return this;
         }
 
@@ -128,7 +127,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         {
             Preconditions.checkArgument(MetadataDataType.FloatType == type, "Data type mismatch");
             FloatMapper mapper = new FloatMapper();
-            rawValue = mapper.toBytes(value);
+            rawValue = mapper.toString(value);
             return this;
         }
 
@@ -136,7 +135,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         {
             Preconditions.checkArgument(MetadataDataType.DoubleType == type, "Data type mismatch");
             DoubleMapper mapper = new DoubleMapper();
-            rawValue = mapper.toBytes(value);
+            rawValue = mapper.toString(value);
             return this;
         }
 
@@ -144,7 +143,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         {
             Preconditions.checkArgument(MetadataDataType.XMLType == type, "Data type mismatch");
             StringMapper mapper = new StringMapper();
-            rawValue = mapper.toBytes(value);
+            rawValue = mapper.toString(value);
             return this;
         }
 
@@ -155,7 +154,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
 
             try
             {
-                rawValue = mapper.toBytes(value.toString(3));
+                rawValue = mapper.toString(value.toString(3));
             } catch (JSONException e)
             {
                 e.printStackTrace();
@@ -191,7 +190,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
     protected String key;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected byte[] rawValue;
+    protected String rawValue;
 
     @JsonView(JsonGenerationView.Full.class)
     protected String decodedValue = null;
@@ -221,15 +220,15 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
     }
 
     @Override
-    public byte[] getRawValue()
+    public String getRawValue()
     {
-        return Arrays.copyOf(rawValue, rawValue.length);
+        return this.rawValue;
     }
 
     @Override
-    public void setRawValue(byte[] value)
+    public void setRawValue(String value)
     {
-        rawValue = Arrays.copyOf(value, value.length);
+        this.rawValue = value;
     }
 
     @Override
@@ -251,7 +250,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         if (decodedValue != null ? !decodedValue.equals(metadata.decodedValue) : metadata.decodedValue != null)
             return false;
         if (!key.equals(metadata.key)) return false;
-        if (!Arrays.equals(rawValue, metadata.rawValue)) return false;
+        if (!rawValue.equals(metadata.rawValue)) return false;
 
         return true;
     }
@@ -262,7 +261,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         int result = super.hashCode();
         result = 31 * result + dataType.hashCode();
         result = 31 * result + key.hashCode();
-        result = 31 * result + (rawValue != null ? Arrays.hashCode(rawValue) : 0);
+        result = 31 * result + (rawValue != null ? rawValue.hashCode() : 0);
         result = 31 * result + (decodedValue != null ? decodedValue.hashCode() : 0);
         return result;
     }

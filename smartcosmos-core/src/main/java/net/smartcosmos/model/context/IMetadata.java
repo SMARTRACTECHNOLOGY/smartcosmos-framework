@@ -60,9 +60,9 @@ public interface IMetadata extends IAccountDomainResource<IMetadata>, IReferenti
      *
      * @return raw value
      */
-    byte[] getRawValue();
+    String getRawValue();
 
-    void setRawValue(byte[] value);
+    void setRawValue(String value);
 
     /**
      * Only included when <code>decoded=true</code> is added as a query string, in which case the decoded value is

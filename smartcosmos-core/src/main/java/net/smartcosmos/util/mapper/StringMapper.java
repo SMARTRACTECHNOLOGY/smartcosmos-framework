@@ -20,19 +20,17 @@ package net.smartcosmos.util.mapper;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import java.nio.charset.Charset;
-
 public final class StringMapper implements IMetadataValueMapper<String>
 {
     @Override
-    public byte[] toBytes(String value)
+    public String toString(String value)
     {
-        return value.getBytes(Charset.forName("UTF-8"));
+        return value;
     }
 
     @Override
-    public String fromBytes(byte[] rawValue)
+    public String fromString(String rawValue)
     {
-        return new String(rawValue, 0, rawValue.length, Charset.forName("UTF-8"));
+        return rawValue;
     }
 }
