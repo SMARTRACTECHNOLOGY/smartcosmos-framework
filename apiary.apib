@@ -384,6 +384,10 @@ Once you've identified a realm name, you're ready to complete registration. Regi
 confirming the email address associated with the Account registration are the only prerequisites for using the platform. These
 two steps are required before any endpoints that require authentication can be successfully accessed.
 
+Account registration guides:
+[Account Registration with .NET SDK](https://smartractechnology.atlassian.net/wiki/display/SCKB/Account+Registration+with+.NET+SDK)
+[Account Registration with cURL](https://smartractechnology.atlassian.net/wiki/display/SCKB/Account+Registration+with+cURL)
+
 ## Understanding Realms
 The SMART COSMOS Objects platform is a multi-tenant system by design. Each Account operates within its own _security realm_ in order 
 to keep one Account's data separate from another Account's data. By default, the security realm is established _based on the 
@@ -443,7 +447,7 @@ Check to see if the named realm is available for registration.
                 "urn" : "64618d0b-3b8c-456a-87d0-31bc1a0bc579",
                 "lastModifiedTimestamp" : 1382828220349,
                 "emailAddress" : "you@foo.com",
-                "realm" : "foo.com",
+                "realm" : "foo.com"
             }
 
 + Response 400 (application/json)
@@ -453,6 +457,38 @@ Check to see if the named realm is available for registration.
             {
                 "code" : -5,
                 "message" : "JSON is missing a required field: emailAddress"
+            }
+
+
+## Account Confirmation [/rest/registration/confirm/{emailVerificationToken}/{emailAddress}]
+### Confirm the new SMART COSMOS account [GET]
+
+This endpoint is only available if your server's objects.yml configuration 
+- has set supportDynamicRegistration to true
+- has set includeEmailVerificationTokenInRegistrationJSON to true
+
++ Parameters
+    + emailVerificationToken: `WOCLGXNEXMRZ` (required, string) - System-created confirmation token
+    + emailAddress: `demouser@example.com` (required, string) - email address of the user
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "code" : 1
+                "message" : "11e535bf-2094-180a-b0ef-6b5a3c460e74"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "code" : -8,
+                "message" : "No matching record with email address of demouser@example.com exists"
             }
 
 # Group Account Management Endpoints
