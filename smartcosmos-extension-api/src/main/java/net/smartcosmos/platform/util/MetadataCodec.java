@@ -170,7 +170,7 @@ public final class MetadataCodec
                     break;
                 case BooleanType:
                     outputJson.put(Field.DECODED_VALUE_FIELD, new BooleanMapper().fromString(dataToDecode));
-
+                    break;
                 case DateType:
                     // SimpleDateFormat is NOT thread safe and must be instantiated locally like this!
                     SimpleDateFormat dateFormat = new SimpleDateFormat(RFC_3339_FORMAT);
