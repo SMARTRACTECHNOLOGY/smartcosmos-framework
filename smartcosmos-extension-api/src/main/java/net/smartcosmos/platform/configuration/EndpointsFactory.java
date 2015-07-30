@@ -84,6 +84,9 @@ public class EndpointsFactory
     @JsonProperty
     private Boolean batchEndpoints = true;
 
+    @JsonProperty
+    private Boolean realmEndpoints = true;
+
     public Boolean getTransactionEndpoints()
     {
         return transactionEndpoints;
@@ -182,5 +185,10 @@ public class EndpointsFactory
     public Boolean getBatchEndpoints()
     {
         return batchEndpoints;
+    }
+
+    public boolean getRealmEndpoints()
+    {
+        return realmEndpoints;
     }
 }
