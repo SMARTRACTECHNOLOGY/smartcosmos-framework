@@ -3273,9 +3273,6 @@ Lookup all metadata that matches the specified key pattern.
 
 Count or lookup all entities that matches the specified search criterias.
 
-- Currently for entityReferenceType only 'Object' is supported
-- The dataType 'Custom' is not supported - because serialization of this type is application specific
-
 The includeMatches is a boolean that lets the developer indicate if they want to see up to the maxMatchesToInclude in the result. In other words, if the count is 752, and maxMatchesToInclude is set to 50, then the count would be 752, and matches array would only include the first 50 matches with no guarantee on the sorting order and no guarantee of what 50 records would be returned.
 
 The request contains an array of metadata keys and values to filter the search result. The maximum supported number of keys and values in the search pattern is 10.
@@ -3284,7 +3281,7 @@ Field | Data Type | Required | Default Value | Sample Value
 ------------ | ------------- | ------------ | ------------ | ------------
 key | String  | true | | shoe.color
 dataType | String  | false | StringType | StringType
-value | String  | true | | orange
+rawValue | String  | true | | orange
 
 + Parameters
     + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
@@ -3304,17 +3301,17 @@ value | String  | true | | orange
             [
                 {
                     "key": "shoe.color",
-                    "value": "orange"
+                    "rawValue": "orange"
                 },
                 {
                     "key": "shoe.brand",
                     "dataType": "StringType",
-                    "value": "ABC"
+                    "rawValue": "ABC"
                 },
                 {
                     "key": "shoe.licensed",
                     "dataType": "BooleanType",
-                    "value": "true"
+                    "rawValue": "true"
                 }
             ]
 
@@ -3335,12 +3332,16 @@ value | String  | true | | orange
                 "criteria": [
                     {
                         "key": "shoe.color",
-                        "value": "orange"
+                        "rawValue": "orange"
                     },
                     {
                         "key": "shoe.brand",
-                        "value": "ABC"
-                    }
+                        "rawValue": "ABC"
+                    },
+                    {
+                        "key": "shoe.licensed",
+                        "rawValue": "true"
+                    }                    
                 ]
             }
 
