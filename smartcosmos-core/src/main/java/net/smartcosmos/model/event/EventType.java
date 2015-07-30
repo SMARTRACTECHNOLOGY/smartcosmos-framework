@@ -182,5 +182,26 @@ public enum EventType
 
     TransactionStart,
     TransactionCommit,
-    TransactionRollback
+    TransactionRollback,
+    
+    FlowsBundleDocumentDeployed,
+    FlowsBundleProcessDefinitionCreated,
+    FlowsBundleProcessDefinitionExecuted,
+    FlowsBundleActivityStarted,
+    FlowsBundleActivityCompleted,
+    
+    
+    FlowsBundleEntityCreated,
+    FlowsBundleEntityUpdated,
+    FlowsBundleEntityDeleted,
+    FlowsBundleActivityCancelled,
+    FlowsBundleTaskAssigned,
+    FlowsBundleTaskCreated,
+    FlowsBundleTaskCompleted,
+    FlowsBundleProcessCompleted,
+    FlowsBundleProcessCancelled,
+    FlowsBundleMembershipCreated,
+    FlowsBundleMembershipDeleted
+    
+    
 }
