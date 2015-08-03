@@ -204,7 +204,10 @@ public abstract class AbstractPlatformResource
                     .build();
         }
 
-        return response;
+        return Response
+                .fromResponse(response)
+                .header("X-Content-Type-Options", "nosniff")
+                .build();
     }
     protected <T> Response dispatchTransactionalRequest(T inputValue,
                                            ViewType view,
@@ -259,6 +262,9 @@ public abstract class AbstractPlatformResource
                     .build();
         }
 
-        return response;
+        return Response
+                .fromResponse(response)
+                .header("X-Content-Type-Options", "nosniff")
+                .build();
     }
 }
