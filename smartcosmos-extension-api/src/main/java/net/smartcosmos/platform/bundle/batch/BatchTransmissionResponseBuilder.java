@@ -36,7 +36,7 @@ public final class BatchTransmissionResponseBuilder extends AbstractBuilder<IBat
         this.instance.setTransmissionUrn(transmissionUrn);
 
         // Included only for consistency - not actually used anywhere by the system
-        this.instance.setUrn("urn:uuid:" + UuidUtil.getUuidAsString());
+        this.instance.setUrn(UuidUtil.getUuidAsString());
     }
 
     public BatchTransmissionResponseBuilder setEndpointUri(String endpointUri)
