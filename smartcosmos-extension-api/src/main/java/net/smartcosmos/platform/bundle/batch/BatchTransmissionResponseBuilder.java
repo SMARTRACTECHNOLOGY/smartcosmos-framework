@@ -24,8 +24,8 @@ import com.google.common.base.Preconditions;
 import net.smartcosmos.builder.AbstractBuilder;
 import net.smartcosmos.model.batch.IBatchTransmissionResponse;
 import net.smartcosmos.platform.api.ProtocolType;
-import net.smartcosmos.platform.util.UuidUtil;
 import net.smartcosmos.pojo.batch.BatchTransmissionResponse;
+import net.smartcosmos.util.UuidUtil;
 
 public final class BatchTransmissionResponseBuilder extends AbstractBuilder<IBatchTransmissionResponse>
 {
@@ -36,7 +36,7 @@ public final class BatchTransmissionResponseBuilder extends AbstractBuilder<IBat
         this.instance.setTransmissionUrn(transmissionUrn);
 
         // Included only for consistency - not actually used anywhere by the system
-        this.instance.setUrn(UuidUtil.getUuidAsString());
+        this.instance.setUrn(UuidUtil.getUrn());
     }
 
     public BatchTransmissionResponseBuilder setEndpointUri(String endpointUri)
