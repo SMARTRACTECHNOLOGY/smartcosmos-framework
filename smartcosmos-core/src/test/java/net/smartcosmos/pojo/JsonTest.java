@@ -20,6 +20,7 @@ package net.smartcosmos.pojo;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import junit.framework.Assert;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IMetadata;
@@ -27,15 +28,14 @@ import net.smartcosmos.model.context.MetadataDataType;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.pojo.context.Metadata;
 import net.smartcosmos.pojo.context.TypeSafeMetadata;
+import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
 import net.smartcosmos.util.json.JsonUtil;
-import junit.framework.Assert;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import static org.testng.Assert.assertTrue;
 
@@ -45,12 +45,12 @@ public class JsonTest
     @Test
     public void testAccount() throws IOException
     {
-        UUID urn = UUID.randomUUID();
+        String urn = UuidUtil.getUrn();
         String name = "Test Account";
         String description = "My test Description";
 
         IAccount testAccount = new Account();
-        testAccount.setUrn(urn.toString());
+        testAccount.setUrn(urn);
         testAccount.setName(name);
         testAccount.setDescription(description);
         testAccount.setActive(true);
@@ -64,7 +64,7 @@ public class JsonTest
 
         assertTrue(jsonAccount.getName().equals(name));
         assertTrue(jsonAccount.getDescription().equals(description));
-        assertTrue(jsonAccount.getUrn().equals(urn.toString()));
+        assertTrue(jsonAccount.getUrn().equals(urn));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class JsonTest
 
         IMetadata metadataObject = new Metadata.MetadataObjectBuilder(MetadataDataType.StringType)
                 .setEntityReferenceType(EntityReferenceType.Device)
-                .setReferenceUrn(UUID.randomUUID().toString())
+                .setReferenceUrn(UuidUtil.getUrn())
                 .setKey("foo")
                 .setStringValue(MESSAGE)
                 .build();
@@ -98,7 +98,7 @@ public class JsonTest
 
         IMetadata metadataObject = new Metadata.MetadataObjectBuilder(MetadataDataType.JSONType)
                 .setEntityReferenceType(EntityReferenceType.Device)
-                .setReferenceUrn(UUID.randomUUID().toString())
+                .setReferenceUrn(UuidUtil.getUrn())
                 .setKey("foo")
                 .setJsonValue(jsonObject)
                 .build();

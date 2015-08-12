@@ -38,7 +38,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
 {
@@ -54,7 +53,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
 
         private EntityReferenceType entityReferenceType;
 
-        private UUID referenceUrn;
+        private String referenceUrn;
 
         public MetadataObjectBuilder(MetadataDataType type)
         {
@@ -75,13 +74,7 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
 
         public MetadataObjectBuilder setReferenceUrn(String urn)
         {
-            if (urn == null || urn.isEmpty())
-            {
-                this.referenceUrn = null;
-            } else
-            {
-                this.referenceUrn = UUID.fromString(urn);
-            }
+            this.referenceUrn = urn;
             return this;
         }
 

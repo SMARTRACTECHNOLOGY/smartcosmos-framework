@@ -25,13 +25,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-import java.util.UUID;
-
 @JsonPropertyOrder(value = {"urn", "lastModifiedTimestamp" })
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
     @JsonView(JsonGenerationView.Minimum.class)
-    protected UUID urn;
+    protected String urn;
 
     @JsonView(JsonGenerationView.Standard.class)
     protected long lastModifiedTimestamp;
@@ -39,26 +37,16 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     @JsonView(JsonGenerationView.Full.class)
     protected String moniker;
 
-     @Override
+    @Override
     public void setUrn(String urn)
     {
-        if (urn == null || urn.isEmpty())
-        {
-            this.urn = null;
-        } else
-        {
-            this.urn = UUID.fromString(urn);
-        }
+        this.urn = urn;
     }
 
     @Override
     public String getUrn()
     {
-        if (urn == null)
-        {
-            return null;
-        }
-        return urn.toString();
+        return urn;
     }
 
     @Override
@@ -113,9 +101,9 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     public String toString()
     {
         return "DomainResource{" +
-                ", urn='" + urn + '\'' +
-                ", lastModifiedTimestamp=" + lastModifiedTimestamp +
-                ", moniker='" + moniker + '\'' +
-                '}';
+               ", urn='" + urn + '\'' +
+               ", lastModifiedTimestamp=" + lastModifiedTimestamp +
+               ", moniker='" + moniker + '\'' +
+               '}';
     }
 }

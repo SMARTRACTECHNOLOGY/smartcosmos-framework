@@ -32,7 +32,7 @@ public interface IUrnNamespace
      * defining a referential object, this URN maps to the
      * {@link IReferentialObject#getReferenceUrn()} value.
      *
-     * @return System-assigned UUID
+     * @return System-assigned urn
      * @see IReferentialObject
      */
     String getUrn();
