@@ -37,7 +37,6 @@ import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.objects.model.context.IObject;
 
 import java.util.Collection;
-import java.util.UUID;
 
 public interface IObjectDAO extends IBaseDAO<IObject>, INamedObjectSearchDAO<IObject>
 {
@@ -47,8 +46,7 @@ public interface IObjectDAO extends IBaseDAO<IObject>, INamedObjectSearchDAO<IOb
 
     // Don't know if you've got a system urn or an object urn? This will return a system urn if
     // the object has already been persisted, and a null otherwise
-    UUID getSystemUrnFromObjectUrn(String referenceUrn, IAccount account);
-    String getSystemUrnFromObjectUrnAsString(String referenceUrn, IAccount account);
-    String getSystemUrnFromObjectUrnAsString(String referenceUrn, EntityReferenceType ert, IAccount account);
+    String getSystemUrnFromObjectUrn(String referenceUrn, IAccount account);
+    String getSystemUrnFromObjectUrn(String referenceUrn, EntityReferenceType ert, IAccount account);
 }
 

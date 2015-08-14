@@ -37,7 +37,7 @@ import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IMetadata;
 
 import java.util.Collection;
-import java.util.ArrayList;
+import java.util.Map;
 
 public interface IMetadataDAO extends IBaseDAO<IMetadata>
 {
@@ -49,8 +49,7 @@ public interface IMetadataDAO extends IBaseDAO<IMetadata>
             EntityReferenceType entityReferenceType,
             boolean includeMatches,
             int maxMatchesToInclude,
-            ArrayList<String> listKeys,
-            ArrayList<String> listRawValues,
+            Map<String, String> keyValueMap,
             IAccount account
     );
 }

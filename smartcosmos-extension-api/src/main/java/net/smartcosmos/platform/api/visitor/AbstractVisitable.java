@@ -24,6 +24,9 @@ import com.google.common.base.Preconditions;
 import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.event.EventType;
+import net.smartcosmos.util.UuidUtil;
+
+import java.util.UUID;
 
 abstract class AbstractVisitable<T extends IAccountDomainResource>
         implements IAccountDomainResource<T>, IVisitable<T>
@@ -87,6 +90,12 @@ abstract class AbstractVisitable<T extends IAccountDomainResource>
     public void setUrn(String s)
     {
         instance.setUrn(s);
+    }
+
+    @Override
+    public UUID getSystemUuid()
+    {
+        return UuidUtil.getUuidFromUrn(instance.getUrn());
     }
 
     @Override

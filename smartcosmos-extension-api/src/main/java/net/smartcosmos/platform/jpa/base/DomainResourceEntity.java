@@ -68,7 +68,14 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     @Override
     public void setUrn(String urn)
     {
+        // TODO message
+        //throw new UnsupportedOperationException();
         this.systemUuid = UuidUtil.getUuidFromUrn(urn);
+    }
+
+    public UUID getSystemUuid()
+    {
+        return systemUuid;
     }
 
     @Override
