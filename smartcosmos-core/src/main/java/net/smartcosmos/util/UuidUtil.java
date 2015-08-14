@@ -71,8 +71,13 @@ public final class UuidUtil
 
     public static UUID getUuidFromUrn(String urn)
     {
+        if (urn == null || urn.isEmpty())
+        {
+            return null;
+        }
         return UUID.fromString(urn.replaceAll("urn:uuid:", ""));
     }
+
     /**
      *
      * @return the Sting version (in canonical UUID-as-String format) of a UUID generated in the static getUuid()
@@ -82,6 +87,21 @@ public final class UuidUtil
     public static String getUrn()
     {
         return "urn:uuid:" + UuidUtil.getUuid().toString();
+    }
+
+    /**
+     *
+     * @return the Sting version (in canonical UUID-as-String format) of an input UUID
+     *
+     */
+    public static String getUrnFromUuid(UUID referenceUuid)
+
+    {
+        if (referenceUuid == null)
+        {
+            return null;
+        }
+        return "urn:uuid:" + referenceUuid.toString();
     }
 }
 

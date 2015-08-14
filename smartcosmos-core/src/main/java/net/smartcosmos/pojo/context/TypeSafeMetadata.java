@@ -24,6 +24,7 @@ import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.model.context.MetadataDataType;
+import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.mapper.BooleanMapper;
 import net.smartcosmos.util.mapper.DateMapper;
 import net.smartcosmos.util.mapper.DoubleMapper;
@@ -35,6 +36,8 @@ import net.smartcosmos.util.mapper.LongMapper;
 import net.smartcosmos.util.mapper.NoopMapper;
 import net.smartcosmos.util.mapper.StringMapper;
 import org.json.JSONException;
+
+import java.util.UUID;
 
 public class TypeSafeMetadata<T> implements IMetadata
 {
@@ -206,4 +209,12 @@ public class TypeSafeMetadata<T> implements IMetadata
     {
         metadataObject.setUrn(urn);
     }
+
+    @Override
+    public UUID getSystemUuid()
+    {
+        return UuidUtil.getUuidFromUrn(metadataObject.getUrn());
+    }
+
+
 }

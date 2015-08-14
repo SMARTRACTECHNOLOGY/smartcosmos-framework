@@ -20,6 +20,8 @@ package net.smartcosmos.model.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.util.UUID;
+
 /**
  *
  * Sole means of uniquely identifying a specific object in the SMART COSMOS platform.
@@ -38,6 +40,8 @@ public interface IUrnNamespace
     String getUrn();
 
     void setUrn(String urn);
+
+    UUID getSystemUuid();
 
     /**
      * System managed field for tracking the last time the record was updated. This field

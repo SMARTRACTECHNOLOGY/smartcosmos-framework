@@ -49,7 +49,7 @@ public abstract class ReferentialObject<T> extends DomainResource<T> implements 
     @Override
     public void setReferenceUrn(String urn)
     {
-        this.urn = urn;
+        this.referenceUrn = urn;
     }
 
     @Override
