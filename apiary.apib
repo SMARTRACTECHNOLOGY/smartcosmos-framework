@@ -4442,7 +4442,7 @@ a library link) has no effect on either the library element or the linked object
 ## Library Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ----- | --------- | -------- | ---------- | ------------------- | -------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 name | String | true | true | Standard | none
@@ -4558,7 +4558,7 @@ by updating a library element's parent field.
     + Body
     
             {
-                "urn": "2c253e3c-76a7-4523-8129-787bce12df43",
+                "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
                 "name": "Ford F150 Manuals 2011-2015"
             }
             
@@ -4600,7 +4600,7 @@ This method will only work on library elements which have no children, or in the
     + Body
     
             {
-                "urn": "2c253e3c-76a7-4523-8129-787bce12df43",
+                "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
                 "name": "Ford F150 Manuals 2011-2015"
             }
             
@@ -4627,7 +4627,7 @@ This method will only work on library elements which have no children, or in the
 Lookup a specific library element by its system-assigned URN key.
 
 + Parameters
-    + urn: `2c253e3c-76a7-4523-8129-787bce12df43` (required, string) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43` (required, string) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -4701,7 +4701,7 @@ Lookup library elements matching a name pattern, with or without LibraryElementT
     + Body
     
             {
-                "urn": "2c253e3c-76a7-4523-8129-787bce12df43",
+                "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
                 "LibraryElementType": "Shelf",
                 "name": "Ford F150 Manuals 2011-2015",
                 "parent": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
@@ -4751,10 +4751,10 @@ Look up a specific library element by its name and LibraryElementType.
     
                 [
                     {
-                        "urn": "2c253e3c-76a7-4523-8129-787bce12df43",
+                        "urn": "urn:uuid:2c253e3c-76a7-4523-8129-787bce12df43",
                         "LibraryElementType": "Shelf",
                         "name": "Ford F150 Manuals 2011-2015",
-                        "parent": "66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                        "parent": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                         "description" : null,
                         "activeFlag" : true,
                         "lastModifiedTimestamp" : 1390607277299
@@ -4773,7 +4773,7 @@ Look up parent of a specific library element with the element's system-assigned 
 type at the top of the hierarchy (Library, in these examples)
 
 + Parameters
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -4793,7 +4793,7 @@ type at the top of the hierarchy (Library, in these examples)
     + Body
     
             {
-                "urn": "d5144314-7294-4593-9ca8-c517ed9d1f1e",
+                "urn": "urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e",
                 "libraryType": "Library",
                 "name": "Ford Manuals",
                 "description" : null,
@@ -4809,7 +4809,7 @@ type at the top of the hierarchy (Library, in these examples)
 
             {
                 "code" : -8,
-                "message" : "URN d5144314-7294-4593-9ca8-c517ed9d1f1e is of library element type Library, and has no parent"
+                "message" : "URN urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e is of library element type Library, and has no parent"
             }
             
 + Response 401
@@ -4820,7 +4820,7 @@ type at the top of the hierarchy (Library, in these examples)
 Lookup children specific library element with the element's system-assigned URN key, returning an error if the library element type is PageEntry and thus by definition has no children.
 
 + Parameters
-    + urn: `d5144314-7294-4593-9ca8-c517ed9d1f1e` (required, string) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:d5144314-7294-4593-9ca8-c517ed9d1f1e` (required, string) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -4841,7 +4841,7 @@ Lookup children specific library element with the element's system-assigned URN 
      
             [    
                 {
-                    "urn": "66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                     "libraryElementType": "Shelf",
                     "name": "Ford F150 Manuals 2011-2015",
                     "description" : null,
@@ -4849,7 +4849,7 @@ Lookup children specific library element with the element's system-assigned URN 
                     "lastModifiedTimestamp" : 1390607277299
                 },
                 {
-                    "urn": "d7bfe05d-cc63-4979-b42c-6a584f473809",
+                    "urn": "urn:uuid:d7bfe05d-cc63-4979-b42c-6a584f473809",
                     "libraryElementType": "Shelf",
                     "name": "Ford F150 Manuals 2006-2010",
                     "description" : null,
@@ -4857,7 +4857,7 @@ Lookup children specific library element with the element's system-assigned URN 
                     "lastModifiedTimestamp" : 1436951383051
                 },
                 {
-                    "urn": "9478f2b8-34d1-4583-99fe-61f556ba2b4a",
+                    "urn": "urn:uuid:9478f2b8-34d1-4583-99fe-61f556ba2b4a",
                     "libraryElementType": "Shelf",
                     "name": "Ford F150 Manuals 2001-2005",
                     "description" : null,
@@ -4874,7 +4874,7 @@ Lookup children specific library element with the element's system-assigned URN 
 
             {
                 "code" : -8,
-                "message" : "Library element 9478f2b8-34d1-4583-99fe-61f556ba2b4a is of type PageEntry, and can have no children"
+                "message" : "Library element urn:uuid:9478f2b8-34d1-4583-99fe-61f556ba2b4a is of type PageEntry, and can have no children"
             }
             
 + Response 401
@@ -4887,10 +4887,10 @@ Lookup children specific library element with the element's system-assigned URN 
 ## Timeline Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 entityReferenceType | EntityReferenceType  | true | false | Minimum | 
-referenceUrn | UUID  | true | false | Minimum | 
+referenceUrn | String  | true | false | Minimum | 
 recordedTimestamp | long   | true | true | Standard | 0
 moniker | String  | false | true | Full | null
 name | String  | true | true | Minimum | 
@@ -4907,7 +4907,7 @@ visible | Boolean | true | true | Minimum | true
 Create a new timeline associated with an arbitrary object entry value. The following Timeline attributes are used to create a new record:
 
 - `entityReferenceType` is required and constrained to a valid EntityReferenceType value
-- `referenceUrn` must point to a pre-existing record, either via its system-assigned UUID, or its objectUrn
+- `referenceUrn` must point to a pre-existing record, either via its system-assigned URN, or its objectUrn
 - `name` is required and constrained to 255 characters
 - `description` is optional and constrained to 1024 characters and may be omitted; defaults to **null**
 - `activeFlag` is optional and may be omitted; defaults to **true**
@@ -4977,7 +4977,7 @@ The request body must include a value the `urn` field. Only those fields being u
     + Body
     
             {
-                "urn":"1bd3a9db-3832-4395-ab42-f46819a6ad29",
+                "urn":"urn:uuid:1bd3a9db-3832-4395-ab42-f46819a6ad29",
                 "name": "my new timeline"
             }
             
@@ -5019,7 +5019,7 @@ Look up a specific timeline by its system-assigned URN key.
     + Body
     
             {
-                "urn": "77765351-bc40-4deb-8d33-087d53700e3d",
+                "urn": "urn:uuid:77765351-bc40-4deb-8d33-087d53700e3d",
                 "lastModifiedTimestamp": 1430911319542,
                 "name": "my timeline",
                 "description": "test",
@@ -5027,7 +5027,7 @@ Look up a specific timeline by its system-assigned URN key.
                 "highlightFlag": true,
                 "visibleFlag": true,
                 "entityReferenceType": "Object",
-                "referenceUrn": "b7f29f15-89c8-4fb4-be05-97be9ebbf7ad",
+                "referenceUrn": "urn:uuid:b7f29f15-89c8-4fb4-be05-97be9ebbf7ad",
                 "recordedTimestamp": 1436954324835
             }
 
@@ -5068,7 +5068,7 @@ Call always returns a JSON array, which may be an empty array if no timelines ar
     
             [
                 {
-                    "urn": "77765351-bc40-4deb-8d33-087d53700e3d",
+                    "urn": "urn:uuid:77765351-bc40-4deb-8d33-087d53700e3d",
                     "lastModifiedTimestamp": 1430911319542,
                     "name": "my timeline",
                     "description": "test",
@@ -5076,7 +5076,7 @@ Call always returns a JSON array, which may be an empty array if no timelines ar
                     "highlightFlag": true,
                     "visibleFlag": true,
                     "entityReferenceType": "Object",
-                    "referenceUrn": "b7f29f15-89c8-4fb4-be05-97be9ebbf7ad",
+                    "referenceUrn": "urn:uuid:b7f29f15-89c8-4fb4-be05-97be9ebbf7ad",
                     "recordedTimestamp": 1436954324835
                 }
             ]
