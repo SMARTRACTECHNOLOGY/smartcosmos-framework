@@ -1869,7 +1869,7 @@ around the concept of reading numerous UHF RFID tags with a specialized RFID sca
 ## Object Interaction Session Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
@@ -1950,7 +1950,7 @@ Stop an existing object interaction session. The request body must include a val
     + Body
 
             {
-                "urn": "66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d"
             }
 
 + Response 204
@@ -1972,7 +1972,7 @@ Stop an existing object interaction session. The request body must include a val
 Lookup a specific session by its system-assigned URN key.
 
 + Parameters
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, UUID) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, UUID) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -1992,7 +1992,7 @@ Lookup a specific session by its system-assigned URN key.
     + Body
 
             {
-                "urn": "66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "lastModifiedTimestamp" : 1390607277299,
                 "name": "Daily Tag Scan",
                 "type": "RFID Scan",
@@ -2041,7 +2041,7 @@ Lookup a specific session by its system-assigned URN key.
 
             [
                 {
-                    "urn": "66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                    "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                     "lastModifiedTimestamp" : 1390607277299,
                     "name": "Daily Tag Scan",
                     "type": "RFID Scan",
@@ -2084,15 +2084,15 @@ referenced objects. The platform makes no inferences from any relationships defi
 ## Relationship Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 entityReferenceType | EntityReferenceType | true | false | Minimum |
-referenceUrn | UUID | true | false | Minimum |
+referenceUrn | String | true | false | Minimum |
 type | String | true | false | Minimum |
 relatedEntityReferenceType | EntityReferenceType | true | false | Minimum |
-relatedReferenceUrn | UUID | true | false | Minimum |
+relatedReferenceUrn | String | true | false | Minimum |
 
 ### Field Notes
 - The `entityReferenceType` and `referenceUrn` fields jointly represent the *owner* or *initiator* of the relationship
@@ -2101,7 +2101,7 @@ relatedReferenceUrn | UUID | true | false | Minimum |
 The platform makes no inferences about this case-sensitive field.
 
 Note that for the `referenceUrn` and `relatedReferenceUrn` fields, if the URN refers to an Object (and not, say, a Device or File or LibraryElement),
-you can use as input either the objectUrn or the system-assigned UUID, and the platform will resolve it for you.
+you can use as input either the objectUrn or the system-assigned URN, and the platform will resolve it for you.
 
 ## Relationship Management [/rest/relationships/{entityReferenceType}/{referenceUrn}]
 ### Create a new relationship [PUT]
@@ -2110,11 +2110,11 @@ The following object fields are all required to create a new record:
 
 - `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in
 [data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
-- `referenceUrn` must point to a pre-existing object URN or system-assigned UUID of the given `entityReferenceType`
+- `referenceUrn` must point to a pre-existing object URN or system-assigned URN of the given `entityReferenceType`
 - `type` is required and constrained to 255 characters
 - `relatedEntityReferenceType` is required and constrained to a valid EntityReferenceType value defined in
 [data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
-- `relatedReferenceUrn` must point to a pre-existing object URN or system-assigned UUID of the given `relatedEntityReferenceType`
+- `relatedReferenceUrn` must point to a pre-existing object URN or system-assigned URN of the given `relatedEntityReferenceType`
 - `moniker` is optional and constrained to 2048 characters may be omitted; defaults to **null**
 
 #### Idempotent Behavior
@@ -2185,7 +2185,7 @@ case **the `type` field and `moniker` fields are updated to reflect the values s
 Lookup a specific relationship by its system-assigned URN key.
 
 + Parameters
-    + urn: `a903a905-6923-4ba7-8db3-b138a241c954` (required, string) - System-assigned URN assigned at creation, or objectUrn
+    + urn: `urn:uuid:a903a905-6923-4ba7-8db3-b138a241c954` (required, string) - System-assigned URN assigned at creation, or objectUrn
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -2205,7 +2205,7 @@ Lookup a specific relationship by its system-assigned URN key.
     + Body
 
             {
-                "urn": "a903a905-6923-4ba7-8db3-b138a241c954",
+                "urn": "urn:uuid:a903a905-6923-4ba7-8db3-b138a241c954",
                 "entityReferenceType": "Object",
                 "referenceUrn" : "urn:building:shop:123",
                 "type" : "Owns",
@@ -2228,12 +2228,12 @@ Lookup a specific relationship by its system-assigned URN key.
 + Response 401
 
 ## Delete Relationship by URN [/rest/relationships/{urn}]
-### Deletes an relationship by system-assigned URN or objectURN [DELETE]
+### Deletes an relationship by system-assigned URN or objectUrn [DELETE]
 
 Deletes an existing relationship by its system-assigned URN key.
 
 + Parameters
-    + urn: `a903a905-6923-4ba7-8db3-b138a241c954` (required, string) - System-assigned URN assigned at creation, or objectUrn
+    + urn: `urn:uuid:a903a905-6923-4ba7-8db3-b138a241c954` (required, string) - System-assigned URN assigned at creation, or objectUrn
 
 + Request
 
@@ -2262,9 +2262,9 @@ Lookup an array of all defined relationships between any two entities.
 
 + Parameters
     + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + referenceUrn: `urn:building:shop:123` (required, string) - Case-sensitive `urn (UUID)` or `objectUrn` of an existing entity of type `entityReferenceType`
+    + referenceUrn: `urn:building:shop:123` (required, string) - Case-sensitive `urn (system-assigned` or `objectUrn` of an existing entity of type `entityReferenceType`
     + relatedEntityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + relatedReferenceUrn: `urn:building:shop:456` (required, string) - Case-sensitive `urn (UUID)` or `objectUrn` of an existing entity of type `relatedEntityReferenceType`
+    + relatedReferenceUrn: `urn:building:shop:456` (required, string) - Case-sensitive `urn (system-assigned)` or `objectUrn` of an existing entity of type `relatedEntityReferenceType`
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -2285,7 +2285,7 @@ Lookup an array of all defined relationships between any two entities.
 
             [
                 {
-                    "urn": "a903a905-6923-4ba7-8db3-b138a241c954",
+                    "urn": "urn:uuid:a903a905-6923-4ba7-8db3-b138a241c954",
                     "entityReferenceType": "Object",
                     "referenceUrn" : "urn:building:shop:123",
                     "type" : "Owns",
@@ -2315,9 +2315,9 @@ Lookup a specific relationship between any two entities.
 
 + Parameters
     + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + referenceUrn: `urn:building:shop:123` (required, string) - Case-sensitive `urn (UUID)` or `objectUrn` of an existing entity of type `entityReferenceType`
+    + referenceUrn: `urn:building:shop:123` (required, string) - Case-sensitive `urn (system-assigned)` or `objectUrn` of an existing entity of type `entityReferenceType`
     + relatedEntityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + relatedReferenceUrn: `urn:building:shop:456` (required, string) - Case-sensitive `urn (UUID)` or `objectUrn` of an existing entity of type `relatedEntityReferenceType`
+    + relatedReferenceUrn: `urn:building:shop:456` (required, string) - Case-sensitive `urn (system-assigned)` or `objectUrn` of an existing entity of type `relatedEntityReferenceType`
     + type: `Owns` (required, string) - Case-sensitive `type` of relationship to look for
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
@@ -2338,7 +2338,7 @@ Lookup a specific relationship between any two entities.
     + Body
 
             {
-                "urn": "a903a905-6923-4ba7-8db3-b138a241c954",
+                "urn": "urn:uuid:a903a905-6923-4ba7-8db3-b138a241c954",
                 "entityReferenceType": "Object",
                 "referenceUrn" : "urn:building:shop:123",
                 "type" : "Owns",
@@ -2367,7 +2367,7 @@ Lookup an array of all defined relationships of the specific type.
 
 + Parameters
     + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + referenceUrn: `urn:uuid:12345` (required, string) - Case-sensitive `urn (UUID)` or `objectUrn` of an existing entity of type `entityReferenceType`
+    + referenceUrn: `urn:uuid:12345` (required, string) - Case-sensitive `URN (system-assigned)` or `objectUrn` of an existing entity of type `entityReferenceType`
     + type: `Owns` (required, string) - Case-sensitive `type` of relationship to look for
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
@@ -2391,7 +2391,7 @@ Lookup an array of all defined relationships of the specific type.
 
             [
                 {
-                    "urn": "a903a905-6923-4ba7-8db3-b138a241c954",
+                    "urn": "urn:uuid:a903a905-6923-4ba7-8db3-b138a241c954",
                     "entityReferenceType": "Object",
                     "referenceUrn" : "urn:building:shop:123",
                     "type" : "Owns",
@@ -2421,7 +2421,7 @@ Lookup an array of all defined relationships of the specific type.
 
 + Parameters
     + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + referenceUrn: `urn:uuid:12345` (required, string) - Case-sensitive `urn (UUID)` or `objectUrn` of an existing entity of type `entityReferenceType`
+    + referenceUrn: `urn:uuid:12345` (required, string) - Case-sensitive `urn (system-assigned)` or `objectUrn` of an existing entity of type `entityReferenceType`
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
     + reverse: `false` (optional, boolean) - Flips the query around, finding those relationships where the `entityReferenceType` and `referenceUrn` are in the related fields
@@ -2446,7 +2446,7 @@ Lookup an array of all defined relationships of the specific type.
 
             [
                 {
-                    "urn": "a903a905-6923-4ba7-8db3-b138a241c954",
+                    "urn": "urn:uuid:a903a905-6923-4ba7-8db3-b138a241c954",
                     "entityReferenceType": "Object",
                     "referenceUrn" : "urn:building:shop:123",
                     "type" : "Owns",
@@ -2484,7 +2484,7 @@ arbitrary String, so a relationship type of "Check-In" could be arbitrarily defi
 ## Geospatial Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 account | IAccount  | true | false | Full | Generated
@@ -2665,7 +2665,7 @@ request body.
     + Body
     
             {
-                "urn": "895e8e63-04de-42c1-99d7-f0b7fba439e0",
+                "urn": "urn:uuid:895e8e63-04de-42c1-99d7-f0b7fba439e0",
                 "name": "Columbus Campus"
             }
             
@@ -2711,7 +2711,7 @@ If no `nameLike` query parameter is included, then all interactions are returned
     
             [
                 {
-                    "urn": "895e8e63-04de-42c1-99d7-f0b7fba439e0",
+                    "urn": "urn:uuid:895e8e63-04de-42c1-99d7-f0b7fba439e0",
                     "lastModifiedTimestamp": 1390779082063,
                     "name" : "Campus at 5th Street",
                     "description" : null,
@@ -2840,7 +2840,7 @@ If no `nameLike` query parameter is included, then all interactions are returned
 Lookup a specific geospatial entity by its system-assigned URN key.
 
 + Parameters
-    + urn: `895e8e63-04de-42c1-99d7-f0b7fba439e0` (required, string) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:895e8e63-04de-42c1-99d7-f0b7fba439e0` (required, string) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -2860,7 +2860,7 @@ Lookup a specific geospatial entity by its system-assigned URN key.
     + Body
     
                 {
-                    "urn": "895e8e63-04de-42c1-99d7-f0b7fba439e0",
+                    "urn": "urn:uuid:895e8e63-04de-42c1-99d7-f0b7fba439e0",
                     "lastModifiedTimestamp": 1436873649909,
                     "name" : "Campus at 5th Street",
                     "description" : null,
@@ -3025,18 +3025,18 @@ Hessian binary web service protocol.
 ## Metadata Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 entityReferenceType | EntityReferenceType | true | false | Minimum |
-referenceUrn | UUID | true | false | Minimum |
+referenceUrn | String | true | false | Minimum |
 dataType | MetadataDataType | true | false | Minimum |
 key | String  | true | true | Minimum |
 rawValue | String  | true | true | Minimum  |
 
 ### Field Notes
-- The `referenceUrn` field can either be the `urn (UUID)` or `objectUrn` of an existing entity of type `entityReferenceType`
+- The `referenceUrn` field can either be the `URN (system-generated)` or `objectUrn` of an existing entity of type `entityReferenceType`
 
 <!--
 ## Type-Safe Encoding [/rest/metadata/mapper/encode/{metadataDataType}]
@@ -3187,7 +3187,7 @@ Deletes an existing metadata key by its system-assigned URN key.
 
 + Parameters
     + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + referenceUrn: `5f7f629b-fff7-4d3a-982d-d25e5112fe1b` (required, string) - Case-sensitive `urn` (`objectUrn` works also, if entityReferenceType is `Object`) of an existing entity of type `entityReferenceType`
+    + referenceUrn: `urn:uuid:5f7f629b-fff7-4d3a-982d-d25e5112fe1b` (required, string) - Case-sensitive `urn` (`objectUrn` works also, if entityReferenceType is `Object`) of an existing entity of type `entityReferenceType`
     + key: `alpha` (required, string) - Case-sensitive `key` used to index the metadata raw value
 
 + Request
@@ -3216,7 +3216,7 @@ Lookup all metadata that matches the specified key pattern.
 
 + Parameters
     + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + referenceUrn: `a08713d2-2298-47a1-aaf4-df7b46589982` (required, string) - Case-sensitive `urn` (`objectUrn` works also, if entityReferenceType is `Object`) of an existing entity of type `entityReferenceType`
+    + referenceUrn: `urn:uuid:a08713d2-2298-47a1-aaf4-df7b46589982` (required, string) - Case-sensitive `URN` (`objectUrn` works also, if entityReferenceType is `Object`) of an existing entity of type `entityReferenceType`
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
     + key: `alpha` (optional, string) - A valid, case-sensitive *startsWith* key name pattern. If omitted, then all key-values are returned.
@@ -3244,8 +3244,8 @@ Lookup all metadata that matches the specified key pattern.
                   "key": "alpha",
                   "lastModifiedTimestamp": 1436876899428,
                   "rawValue": "true",
-                  "referenceUrn": "a08713d2-2298-47a1-aaf4-df7b46589982",
-                  "urn": "3f3da499-d17f-4231-8349-c7fc25156c85"
+                  "referenceUrn": "urn:uuid:a08713d2-2298-47a1-aaf4-df7b46589982",
+                  "urn": "urn:uuid:3f3da499-d17f-4231-8349-c7fc25156c85"
                },
                {
                   "dataType": "Custom",
@@ -3253,8 +3253,8 @@ Lookup all metadata that matches the specified key pattern.
                   "key": "foo",
                   "lastModifiedTimestamp": 1436876900544,
                   "rawValue": "12.1212",
-                  "referenceUrn": "a08713d2-2298-47a1-aaf4-df7b46589982",
-                  "urn": "ac901933-c924-4ba0-a92c-f0e29676182b"
+                  "referenceUrn": "urn:uuid:a08713d2-2298-47a1-aaf4-df7b46589982",
+                  "urn": "urn:uuid:ac901933-c924-4ba0-a92c-f0e29676182b"
                }
             ]
 
@@ -3326,10 +3326,10 @@ rawValue | String  | true | | orange
                 "count": 2,
                 "matches": [
                     {
-                        "urn": "82b3a00c-e1b0-44cb-a50d-7705e1c6e2b4"
+                        "urn": "urn:uuid:82b3a00c-e1b0-44cb-a50d-7705e1c6e2b4"
                     },
                     {
-                        "urn": "ad2c6c26-e380-471b-8bd7-aa5c13cc371e"
+                        "urn": "urn:uuid:ad2c6c26-e380-471b-8bd7-aa5c13cc371e"
                     }
                 ],
                 "criteria": [
@@ -3371,12 +3371,12 @@ there is no physical restriction on how many files may be associated with an obj
 ## File Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 entityReferenceType | EntityReferenceType | true | false | Minimum |
-referenceUrn | UUID | true | false | Minimum |
+referenceUrn | String | true | false | Minimum |
 url | String | true | false | Restricted | Generated
 mimeType | String | true | false | Minimum |
 timestamp | long | true | false | Standard |
@@ -3503,7 +3503,7 @@ Define the metadata of a file in preparation of an actual file upload. The follo
 Upload actual file bytes to the cloud using an octet-stream.
 
 + Parameters
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
 
 + Request (application/octet-stream)
 
@@ -3545,7 +3545,7 @@ Upload actual file bytes to the cloud using an octet-stream.
 
             {
                 "code" : 0,
-                "message" : "File with URN 66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists and already has had content uploaded"
+                "message" : "File with URN urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists and already has had content uploaded"
             }
 
 ## File Upload - Multi-Part Form Data [/rest/files/{urn}/multipart]
@@ -3554,7 +3554,7 @@ Upload actual file bytes to the cloud using an octet-stream.
 Upload actual file bytes to the cloud using an multi-part form data submission from a web form. By supporting a multi-part form data upload endpoint, SMART COSMOS allows a web form to be used to upload a file to the cloud.
 
 + Parameters
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
 
 + Request (multipart/form-data)
 
@@ -3596,14 +3596,14 @@ Upload actual file bytes to the cloud using an multi-part form data submission f
 
             {
                 "code" : 0,
-                "message" : "File with URN 66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists and already has had content uploaded"
+                "message" : "File with URN urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d exists and already has had content uploaded"
             }
 
 ## Specific File Definition Retrieval [/rest/files/{urn}{?view}]                
 ### Retrieves the file definition [GET]
 
 + Parameters
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -3622,7 +3622,7 @@ Upload actual file bytes to the cloud using an multi-part form data submission f
     + Body
     
             {
-                "urn" : "66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "urn" : "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "timestamp" : 1393453813429,
                 "lastModifiedTimestamp" : 1393453815268,
                 "fileName" : "system-generated-file-name-to-prevent-collisions",
@@ -3650,7 +3650,7 @@ accurately reported when defining the file.
 
 
 + Parameters
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation of file definition
 
 + Request
 
@@ -3687,7 +3687,7 @@ Retrieves the complete collection of file definitions associated with the specif
 
 + Parameters
     + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + referenceUrn: `ae8fb9d0-ad0e-434c-b8bd-8550cb0f31b1` (required, string) - Case-sensitive `urn` (`objectUrn` works also, if entityReferenceType is `Object`) of an existing entity of type `entityReferenceType`
+    + referenceUrn: `urn:uuid:ae8fb9d0-ad0e-434c-b8bd-8550cb0f31b1` (required, string) - Case-sensitive `urn` (`objectUrn` works also, if entityReferenceType is `Object`) of an existing entity of type `entityReferenceType`
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -3707,7 +3707,7 @@ Retrieves the complete collection of file definitions associated with the specif
 
             [    
                 {
-                    "urn" : "ae8fb9d0-ad0e-434c-b8bd-8550cb0f31b1",
+                    "urn" : "urn:uuid:ae8fb9d0-ad0e-434c-b8bd-8550cb0f31b1",
                     "timestamp" : 1436878416008,
                     "lastModifiedTimestamp" : 1393453815268,
                     "fileName" : "system-generated-file-name-to-prevent-collisions",
@@ -3735,7 +3735,7 @@ Deletes an existing relationship by its system-assigned URN key. Immediately pur
 
 + Parameters
     
-    + urn: `9056c934-4ad0-41f6-b745-e11f83f02c81` (required, string) - System-assigned URN assigned at creation of file definition
+    + urn: `urn:uuid:9056c934-4ad0-41f6-b745-e11f83f02c81` (required, string) - System-assigned URN assigned at creation of file definition
 
 + Request
 
@@ -3768,7 +3768,7 @@ association:
 ## Hash Tag Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
@@ -3912,7 +3912,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
     + Body
     
             {
-               "urn": "00cb6471-de16-4384-b1cc-be6fc7e8523b",
+               "urn": "urn:uuid:00cb6471-de16-4384-b1cc-be6fc7e8523b",
                "lastModifiedTimestamp": 1436951313876,
                "name": "MyTag",
                "description": null,
@@ -3959,7 +3959,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
     + Body
     
             {
-               "urn": "e3d0573d-6b48-4995-9525-3230d8fb7de3",
+               "urn": "urn:uuid:e3d0573d-6b48-4995-9525-3230d8fb7de3",
                "lastModifiedTimestamp": 1436951383051,
                "name": "MyTag",
                "description": null,
@@ -3977,7 +3977,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 
 + Parameters
     + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + referenceUrn: `a0e2284e-960f-4914-b757-2ab8d5db0740` (required, string) - System-assigned URN assigned at creation (objectUrn also works if entityReferenceType is `Object`)
+    + referenceUrn: `urn:uuid:a0e2284e-960f-4914-b757-2ab8d5db0740` (required, string) - System-assigned URN assigned at creation (objectUrn also works if entityReferenceType is `Object`)
 
 + Request (application/json)
 
@@ -4024,7 +4024,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 + Parameters
     + tagName: `MyTag` (required, string) - Client defined name at creation
     + entityReferenceType: `Object` (required, EntityReferenceType) - Valid EntityReferenceType enum value
-    + referenceUrn: `a0e2284e-960f-4914-b757-2ab8d5db0740` (required, string) - System-assigned URN assigned at creation, (objectUrn also works if entityReferenceType is `Object`)
+    + referenceUrn: `urn:uuid:a0e2284e-960f-4914-b757-2ab8d5db0740` (required, string) - System-assigned URN assigned at creation, (objectUrn also works if entityReferenceType is `Object`)
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -4055,7 +4055,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                     "description": null,
                     "lastModifiedTimestamp": 1419272419344,
                     "name": "MyTag",
-                    "urn": "9f88418d-087c-453f-922f-f68c420a7d32"
+                    "urn": "urn:uuid:9f88418d-087c-453f-922f-f68c420a7d32"
                 },
                 "urn": "urn:uuid:b98ce066-c5b5-46a3-bbc0-5a73227dda5b"
             },
@@ -4069,7 +4069,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
                     "description": null,
                     "lastModifiedTimestamp": 1419272188295,
                     "name": "MyTag1",
-                    "urn": "0ada06b7-0880-4177-8a44-bf5a4853db35"
+                    "urn": "urn:uuid:0ada06b7-0880-4177-8a44-bf5a4853db35"
                 },
                 "urn": "8db15dd7-6735-444a-8277-79a46217d3d5"
             }]
@@ -4155,7 +4155,7 @@ in near real-time.
 ## Notification Endpoint Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
@@ -4295,7 +4295,7 @@ Withdraw or terminate delivery of events to an existing endpoint.
 Lookup a specific notification endpoint by its system-assigned URN key.
 
 + Parameters
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -4315,7 +4315,7 @@ Lookup a specific notification endpoint by its system-assigned URN key.
     + Body
 
             {
-                "urn": "66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "entityReferenceType": "Account",
                 "referenceUrn" : "urn:uuid:12345",
                 "lastModifiedTimestamp": 1393328943191,
@@ -4360,7 +4360,7 @@ database, and then immediately dispatched to queue for relay to the notification
 ## Event Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
