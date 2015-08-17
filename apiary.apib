@@ -196,10 +196,10 @@ foundational entities rely on supporting entities (*`Users`,`Devices`,`Files`, `
 additional context.
 
 ### URNs as Keys
-All SMART COSMOS objects are keyed off of a **UUID**, represented using the standard string format for a UUID.
+All SMART COSMOS objects are keyed off of a **URN**, represented using the standard string format for a UUID.
 
 > For some API calls that require a `{referenceUrn}` parameter must provide a full canonical UUID reference,
-e.g. *66b7d3e9-69e1-499e-a867-9c4a939c6f7d*,
+e.g. *urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d*,
 but for most API calls requiring a '{referenceUrn}' you can insert an the Object URN (see below) of the object you're referring to.
 
 ### Object URN
@@ -444,7 +444,7 @@ Check to see if the named realm is available for registration.
     + Body
     
             {
-                "urn" : "64618d0b-3b8c-456a-87d0-31bc1a0bc579",
+                "urn" : "urn:uuid:64618d0b-3b8c-456a-87d0-31bc1a0bc579",
                 "lastModifiedTimestamp" : 1382828220349,
                 "emailAddress" : "you@foo.com",
                 "realm" : "foo.com"
@@ -502,7 +502,7 @@ along with your administrator User record. The Account record holds your account
 ## Account Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | URN  | true | false | Minimum | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 name | String  | true | true | Minimum | 
 description | String  | false | true | Standard | 
@@ -534,7 +534,7 @@ The platform offers two endpoints for password self-service, supporting both pas
     + Body
     
             {
-                "urn" : "a99feae7-8b9d-4a78-b2b9-655ad2b99c84",
+                "urn" : "urn:uuid:a99feae7-8b9d-4a78-b2b9-655ad2b99c84",
                 "lastModifiedTimestamp" : 1436796901917,
                 "name" : "Foo",
                 "description" : "Bar",
@@ -649,7 +649,7 @@ SMART COSMOS Account Management self-service endpoints.
 ## User Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | URN  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
@@ -774,7 +774,7 @@ include that field in the request body.
 Look up a specific user by its system-assigned URN key
 
 + Parameters
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, UUID) - System-assigned UUID assigned at creation
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, String) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -794,7 +794,7 @@ Look up a specific user by its system-assigned URN key
     + Body
 
             {
-                "urn": "66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "lastModifiedTimestamp" : 1390607277299,
                 "emailAddress" : "coworker@foo.com",
                 "roleType" : "User"
@@ -828,7 +828,7 @@ Look up a specific user by its system-assigned URN key
     + Body
 
             {
-                "urn": "66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
+                "urn": "urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d",
                 "lastModifiedTimestamp" : 1390607277299,
                 "emailAddress" : "coworker@foo.com",
                 "roleType" : "User"
@@ -879,7 +879,7 @@ sequence the identification of each device, i.e. 1, 2, 3, etc.
 ## Device Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | URN  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
@@ -1006,7 +1006,7 @@ request body.
 Look up a specific device by its system-assigned URN key.
 
 + Parameters
-    + urn: `c0f8c918-05b7-4d30-8cac-afd8504ee24a (required, UUID) - System-assigned UUID assigned at creation
+    + urn: `urn:uuid:c0f8c918-05b7-4d30-8cac-afd8504ee24a (required, string) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -1026,7 +1026,7 @@ Look up a specific device by its system-assigned URN key.
     + Body
     
             {
-                "urn": "c0f8c918-05b7-4d30-8cac-afd8504ee24a",
+                "urn": "urn:uuid:c0f8c918-05b7-4d30-8cac-afd8504ee24a",
                 "lastModifiedTimestamp" : 1390607277299,
                 "identification" : "gqorighfawpftjqevznxclmndaawetha",
                 "name" : "Jason's Phone",
@@ -1064,7 +1064,7 @@ Lookup a specific device by its system-assigned URN key.
     + Body
     
             {
-                "urn": "c0f8c918-05b7-4d30-8cac-afd8504ee24a",
+                "urn": "urn:uuid:c0f8c918-05b7-4d30-8cac-afd8504ee24a",
                 "lastModifiedTimestamp" : 1390607277299,
                 "identification" : "gqorighfawpftjqevznxclmndaawetha",
                 "name" : "Jason's Phone",
@@ -1102,7 +1102,7 @@ Call always returns a JSON array, which may be an empty array if no devices are 
     
             [
                 {
-                    "urn": "c0f8c918-05b7-4d30-8cac-afd8504ee24a",
+                    "urn": "urn:uuid:c0f8c918-05b7-4d30-8cac-afd8504ee24a",
                     "lastModifiedTimestamp" : 1390607277299,
                     "identification" : "gqorighfawpftjqevznxclmndaawetha",
                     "name" : "Jason's Phone",
@@ -1124,7 +1124,7 @@ or even a place (optionally complimented by a geospatial definition to precisely
 ## Object Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
@@ -1257,7 +1257,7 @@ include that field in the request body.
 Look up a specific object by its system-assigned URN key.
 
 + Parameters
-    + urn: `447744cc-ab7b-4144-9305-40b1928482ef` (required, UUID) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:447744cc-ab7b-4144-9305-40b1928482ef` (required, String) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -1277,7 +1277,7 @@ Look up a specific object by its system-assigned URN key.
     + Body
     
             {
-                "urn": "447744cc-ab7b-4144-9305-40b1928482ef",
+                "urn": "urn:uuid:447744cc-ab7b-4144-9305-40b1928482ef",
                 "objectUrn": "urn:building:mall:ParadiseValley",
                 "type": "Building",
                 "name": "Paradise Valley Merchant's Mall",
@@ -1327,7 +1327,7 @@ Look up a specific object by their arbitrary developer assigned object URN key.
     + Body
     
             {
-                "urn": "447744cc-ab7b-4144-9305-40b1928482ef",
+                "urn": "urn:uuid:447744cc-ab7b-4144-9305-40b1928482ef",
                 "objectUrn": "urn:building:mall:ParadiseValley",
                 "type": "Building",
                 "name": "Paradise Valley Merchant's Mall",
@@ -1376,7 +1376,7 @@ query at this time.
     
             [
                 {
-                    "urn": "447744cc-ab7b-4144-9305-40b1928482ef",
+                    "urn": "urn:uuid:447744cc-ab7b-4144-9305-40b1928482ef",
                     "objectUrn": "urn:building:mall:ParadiseValley",
                     "type": "Building",
                     "name": "Paradise Valley Merchant's Mall",
@@ -1406,7 +1406,7 @@ Incomplete or partial addresses are fully supported by the platform. Only an `ob
 ## Object Address Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 object | IObject | true | false | Standard |
@@ -1525,7 +1525,7 @@ Delete a specific object address by its system-assigned URN key.
 
 + Parameters
     + objectUrn: `urn:building:mall:ParadiseValley` (required, string) - Case-sensitive object URN that owns the address to update
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
 
 + Request
     
@@ -1552,7 +1552,7 @@ Look up a specific object address by its system-assigned URN key.
 
 + Parameters
     + objectUrn: `urn:building:mall:ParadiseValley` (required, string) - Case-sensitive object URN that owns the address to update
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -1584,18 +1584,18 @@ Look up a specific object address by its system-assigned URN key.
                   "name": "foo",
                   "objectUrn": "urn:instagram:FooBar:8fbc1d55-0c3f-461a-ba60-29d7631147fc",
                   "type": "Person",
-                  "urn": "74e9e97a-1f6b-4d38-a12e-a61c42c7c126"
+                  "urn": "urn:uuid:74e9e97a-1f6b-4d38-a12e-a61c42c7c126"
                },
                "postalCode": null,
                "stateProvince": "CA",
                "timestamp": 1390787660961,
                "type": "Mailing",
-               "urn": "0c7b4d26-1843-44eb-a134-3fbcbbf0578d"
+               "urn": "urn:uuid:0c7b4d26-1843-44eb-a134-3fbcbbf0578d"
             }
 
 + Response 204 
              
-## Look Up Matching Object Addresses By URN [/rest/objects/object/{objectUrn}/address{?view,count}]
+## Look Up Matching Object Addresses By Object URN [/rest/objects/object/{objectUrn}/address{?view,count}]
 ### Look up matching object addresses [GET]
 
 + Parameters
@@ -1634,13 +1634,13 @@ Look up a specific object address by its system-assigned URN key.
                       "name": "foo",
                       "objectUrn": "urn:instagram:FooBar:8fbc1d55-0c3f-461a-ba60-29d7631147fc",
                       "type": "Person",
-                      "urn": "74e9e97a-1f6b-4d38-a12e-a61c42c7c126"
+                      "urn": "urn:uuid:74e9e97a-1f6b-4d38-a12e-a61c42c7c126"
                    },
                    "postalCode": null,
                    "stateProvince": "CA",
                    "timestamp": 1390787660961,
                    "type": "Mailing",
-                   "urn": "0c7b4d26-1843-44eb-a134-3fbcbbf0578d"
+                   "urn": "urn:uuid:0c7b4d26-1843-44eb-a134-3fbcbbf0578d"
                 }
             ]
 
@@ -1671,12 +1671,12 @@ difference of minutes, hours, or perhaps days in those instances where the devic
 ## Object Interaction Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | UUID  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
 entityReferenceType | EntityReferenceType | true | false | Minimum |
-referenceUrn | UUID | true | false | Minimum |
+referenceUrn | String | true | false | Minimum |
 object | IObject | true | false | Minimum |
 recordedTimestamp | long | true | false | Standard |
 receivedTimestamp | long | true | false | Full | Generated
@@ -1784,7 +1784,7 @@ If no `objectUrn` query parameter is included, then all interactions are returne
                       "name": "foo",
                       "objectUrn": "urn:instagram:FooBar:ec3819a1-bc9b-4550-afda-4bd8cbb1dd16",
                       "type": "Transaction",
-                      "urn": "ac912b9e-fa52-48e4-a477-aa99f0a2bf92"
+                      "urn": "urn:uuid:ac912b9e-fa52-48e4-a477-aa99f0a2bf92"
                    },
                    "objectInteractionSession": null,
                    "recordedTimestamp": 1390779082039,
@@ -1803,7 +1803,7 @@ If no `objectUrn` query parameter is included, then all interactions are returne
 Lookup a specific interaction by its system-assigned URN key.
 
 + Parameters
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, UUID) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, String) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
@@ -1833,12 +1833,12 @@ Lookup a specific interaction by its system-assigned URN key.
                   "name": "foo",
                   "objectUrn": "urn:instagram:FooBar:ec3819a1-bc9b-4550-afda-4bd8cbb1dd16",
                   "type": "Transaction",
-                  "urn": "ac912b9e-fa52-48e4-a477-aa99f0a2bf92"
+                  "urn": "urn:uuid:ac912b9e-fa52-48e4-a477-aa99f0a2bf92"
                },
                "objectInteractionSession": null,
                "recordedTimestamp": 1390779082039,
                "referenceUrn": "urn:instagram:FooQux:47c23bc6-2a58-4e37-93b0-848776b42404",
-               "urn": "95b995e2-dde5-4dd0-b50c-e804999411d8"
+               "urn": "urn:uuid:95b995e2-dde5-4dd0-b50c-e804999411d8"
             }
             
 + Response 204 
@@ -5000,7 +5000,7 @@ The request body must include a value the `urn` field. Only those fields being u
 Look up a specific timeline by its system-assigned URN key.
 
 + Parameters
-    + urn: `66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
+    + urn: `urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d` (required, string) - System-assigned URN assigned at creation
     + view: `Standard` (optional, string) - A valid JSON Serialization View name (case-sensitive)
         + Default: `Standard`
 
