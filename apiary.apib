@@ -196,9 +196,9 @@ foundational entities rely on supporting entities (*`Users`,`Devices`,`Files`, `
 additional context.
 
 ### URNs as Keys
-All SMART COSMOS objects are keyed off of a **URN**, represented using the standard string format for a UUID.
+All SMART COSMOS objects are keyed off of a **URN**, represented using the standard string format "urn:uuid:UniversallyUniqueIdString>".
 
-> For some API calls that require a `{referenceUrn}` parameter must provide a full canonical UUID reference,
+> For some API calls that require a `{referenceUrn}` parameter must provide a full canonical URN reference,
 e.g. *urn:uuid:66b7d3e9-69e1-499e-a867-9c4a939c6f7d*,
 but for most API calls requiring a '{referenceUrn}' you can insert an the Object URN (see below) of the object you're referring to.
 
@@ -502,7 +502,7 @@ along with your administrator User record. The Account record holds your account
 ## Account Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | URN  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 name | String  | true | true | Minimum | 
 description | String  | false | true | Standard | 
@@ -649,7 +649,7 @@ SMART COSMOS Account Management self-service endpoints.
 ## User Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | URN  | true | false | Minimum | Generated
+urn | String  | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
@@ -879,7 +879,7 @@ sequence the identification of each device, i.e. 1, 2, 3, etc.
 ## Device Fields
 Field | Data Type | Required | Can Update | Serialization Level | Default Value
 ------------ | ------------- | ------------ | ------------ | ------------ | ------------
-urn | URN  | true | false | Minimum | Generated
+urn | String | true | false | Minimum | Generated
 account | IAccount  | true | false | Full | Generated
 lastModifiedTimestamp | long   | true | false | Standard | Generated
 moniker | String  | false | true | Full | null
@@ -1135,7 +1135,7 @@ objectUrn | String | true | false | Minimum |
 type | String | true | true | Minimum |  
 
 ### Field Notes
-- The `objectUrn` field is considered the authoritative URN when dealing with objects, although a system-assigned `urn` is still generated. 
+- The `objectUrn` field is considered the authoritative URN when dealing with objects, although a system-assigned `URN` is still generated. 
 The `objectUrn` field must be unique across object records in your account.
 - The `type` field is available to create an ontology or high level categories that can be used to group related objects. 
 The platform makes no inferences about this case-sensitive field.
@@ -1697,10 +1697,10 @@ The platform makes no inferences about this case-sensitive field.
 
 The following interaction fields may be used to create a new record:
 
-- `objectUrn` must point to a pre-existing record with either an object URN or a system UUID (element 1)
+- `objectUrn` must point to a pre-existing record with either an object URN or a system URN (element 1)
 - `entityReferenceType` is required and constrained to a valid EntityReferenceType value defined in 
 [data types](https://github.com/SMARTRACTECHNOLOGY/smartcosmos-objects-api/blob/master/DATA_TYPES.md "Data Types")
-- `referenceUrn` must point to a pre-existing record of the given `entityReferenceType` with either an objectUrn or a system UUID (element 2)
+- `referenceUrn` must point to a pre-existing record of the given `entityReferenceType` with either an objectUrn or a system URN (element 2)
 - `type` is required and constrained to 255 characters
 - `recordedTimestamp` is required an must a valid long since the java epoch
 - `objectInteractionSession` is optional and may be omitted; defaults to null. Set value to the system-assigned URN on **PUT** call
