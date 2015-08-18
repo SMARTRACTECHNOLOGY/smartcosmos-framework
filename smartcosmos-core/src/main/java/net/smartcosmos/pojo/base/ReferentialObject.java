@@ -28,8 +28,6 @@ import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-import java.util.UUID;
-
 public abstract class ReferentialObject<T> extends DomainResource<T> implements IReferentialObject
 {
     @JsonView(JsonGenerationView.Full.class)
@@ -40,28 +38,18 @@ public abstract class ReferentialObject<T> extends DomainResource<T> implements 
     protected EntityReferenceType entityReferenceType;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected UUID referenceUrn;
+    protected String referenceUrn;
 
     @Override
     public String getReferenceUrn()
     {
-        if (referenceUrn == null)
-        {
-            return null;
-        }
-        return referenceUrn.toString();
+        return referenceUrn;
     }
 
     @Override
     public void setReferenceUrn(String urn)
     {
-        if (urn == null || urn.isEmpty())
-        {
-            this.referenceUrn = null;
-        } else
-        {
-            this.referenceUrn = UUID.fromString(urn);
-        }
+        this.referenceUrn = urn;
     }
 
     @Override

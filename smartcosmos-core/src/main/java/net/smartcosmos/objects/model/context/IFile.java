@@ -89,7 +89,7 @@ public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
      * "signature": "8ae65ce110ab15fbea8df6e61adedaf9ca36dc02ebcd5d451da0f7d18a790abe",<br/>
      * "signedBody":<br/>
      * &nbsp;&nbsp;{<br/>
-     * &nbsp;&nbsp;&nbsp;&nbsp;"accountUrn": "urn:uuid:9728d95e-9ae5-482f-84a7-b8f1fce80389",<br/>
+     * &nbsp;&nbsp;&nbsp;&nbsp;"accountUuid": "urn:uuid:9728d95e-9ae5-482f-84a7-b8f1fce80389",<br/>
      * &nbsp;&nbsp;&nbsp;&nbsp;"contentsSignature": "8F866F53645218F77957675EC197678F2F9D3155455A01FF6F4E6FF68C5696C7",
      * <br/>
      * &nbsp;&nbsp;&nbsp;&nbsp;"entityReferenceType": "ObjectInteraction",<br/>

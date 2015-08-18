@@ -18,15 +18,15 @@
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 package net.smartcosmos.pojo.context;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.pojo.base.DomainResource;
+import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
-
-import java.util.UUID;
 
 
 public class User extends DomainResource< IUser > implements IUser
@@ -110,7 +110,7 @@ public class User extends DomainResource< IUser > implements IUser
             this.urn = null;
         } else
         {
-            this.urn = UUID.fromString(target.getUrn());
+            this.urn = UuidUtil.getUrn();
         }
         this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
         this.moniker = target.getMoniker();

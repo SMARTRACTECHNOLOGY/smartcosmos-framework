@@ -23,9 +23,10 @@ package net.smartcosmos.pojo;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.objects.model.context.IFile;
-import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.objects.pojo.context.File;
+import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.HashUtil;
+import net.smartcosmos.util.UuidUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -33,7 +34,6 @@ import org.testng.annotations.Test;
 import java.io.ByteArrayInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.UUID;
 
 public class SignatureTest
 {
@@ -41,13 +41,13 @@ public class SignatureTest
     public void testSignature() throws NoSuchAlgorithmException, JSONException
     {
         IAccount mockAccount = new Account();
-        mockAccount.setUrn(UUID.randomUUID().toString());
+        mockAccount.setUrn(UuidUtil.getUrn());
 
         IFile mockFile = new File();
         mockFile.setAccount(mockAccount);
-        mockFile.setUrn(UUID.randomUUID().toString());
+        mockFile.setUrn(UuidUtil.getUrn());
         mockFile.setEntityReferenceType(EntityReferenceType.Object);
-        mockFile.setReferenceUrn(UUID.randomUUID().toString());
+        mockFile.setReferenceUrn(UuidUtil.getUrn());
         mockFile.setUrl("http://localhost:8080/foo/bar");
 
         final String MESSAGE = "The quick brown fox jumps over the lazy dog";
