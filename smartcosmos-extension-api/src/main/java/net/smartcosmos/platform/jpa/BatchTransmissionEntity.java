@@ -29,14 +29,12 @@ import net.smartcosmos.platform.api.batch.IBatchTransmission;
 import net.smartcosmos.platform.bundle.batch.BatchTransmissionResponseBuilder;
 import net.smartcosmos.platform.jpa.base.DomainResourceEntity;
 import net.smartcosmos.util.json.JsonGenerationView;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import java.util.UUID;
 
 @Entity(name = "batch_transmission")
 public class BatchTransmissionEntity extends DomainResourceEntity<IBatchTransmission> implements IBatchTransmission
@@ -66,9 +64,8 @@ public class BatchTransmissionEntity extends DomainResourceEntity<IBatchTransmis
     protected ProtocolType uploadProtocol;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 16, nullable = false, updatable = false)
-    @Type(type = "uuid-binary")
-    protected UUID transmissionUrn;
+    @Column(length = 1024, nullable = false, updatable = false)
+    protected String transmissionUrn;
 
     @JsonView(JsonGenerationView.Minimum.class)
     @Column(length = 1024, nullable = false, updatable = false)
@@ -125,7 +122,7 @@ public class BatchTransmissionEntity extends DomainResourceEntity<IBatchTransmis
             this.transmissionUrn = null;
         } else
         {
-            this.transmissionUrn = UUID.fromString(target.getTransmissionUrn());
+            this.transmissionUrn = target.getTransmissionUrn();
         }
         this.endpointUri = target.getEndpointUri();
         this.bucketName = target.getBucketName();
@@ -206,21 +203,13 @@ public class BatchTransmissionEntity extends DomainResourceEntity<IBatchTransmis
     @Override
     public String getTransmissionUrn()
     {
-        if (transmissionUrn == null)
-            return null;
-        return transmissionUrn.toString();
+        return transmissionUrn;
     }
 
     @Override
     public void setTransmissionUrn(String transmissionUrn)
     {
-        if (transmissionUrn == null || transmissionUrn.isEmpty())
-        {
-            this.transmissionUrn = null;
-        } else
-        {
-            this.transmissionUrn = UUID.fromString(transmissionUrn);
-        }
+        this.transmissionUrn = transmissionUrn;
     }
 
     @Override

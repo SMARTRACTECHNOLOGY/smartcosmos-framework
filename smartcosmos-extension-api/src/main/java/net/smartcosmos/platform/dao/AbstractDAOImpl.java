@@ -28,6 +28,7 @@ import net.smartcosmos.platform.api.dao.IBaseDAO;
 import net.smartcosmos.platform.api.dao.IPageProvider;
 import net.smartcosmos.platform.api.dao.domain.IPage;
 import net.smartcosmos.platform.dao.domain.PageEntry;
+import net.smartcosmos.util.UuidUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -37,7 +38,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.UUID;
 
 public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> extends AbstractDAO<T> implements
         IBaseDAO<S>, IPageProvider<S>
@@ -250,9 +250,9 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         {
             Query query = currentSession()
                     .createQuery("select e from " + entityName +
-                                 " e where e.account.urn = :accountUrn and e.urn = :urn")
-                    .setParameter("accountUrn", UUID.fromString(account.getUrn()))
-                    .setParameter("urn", UUID.fromString(urn));
+                                 " e where e.account.systemUuid = :accountSystemUuid and e.systemUuid = :systemUuid")
+                    .setParameter("accountSystemUuid", account.getSystemUuid())
+                    .setParameter("systemUuid", UuidUtil.getUuidFromUrn(urn));
 
             object = (S) query.uniqueResult();
         } catch (IllegalArgumentException iae)
@@ -286,8 +286,9 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
          *
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
-            Query query = currentSession().createQuery("select e from " + entityName + " e where e.urn = :urn")
-                    .setParameter("urn", UUID.fromString(urn));
+            Query query = currentSession().createQuery("select e from " + entityName + " e " +
+                                                       "where e.systemUuid = :systemUuid")
+                    .setParameter("systemUuid", UuidUtil.getUuidFromUrn(urn));
 
             object = (S) query.uniqueResult();
         } catch (IllegalArgumentException iae)
@@ -314,8 +315,9 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
          * 
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
-        Query listQuery = currentSession().createQuery("select m from " + entityName + " m where m.account.urn = :urn")
-                .setParameter("urn", UUID.fromString(account.getUrn()));
+        Query listQuery = currentSession().createQuery("select m from " + entityName + " m " +
+                                                       "where m.account.systemUuid = :accountSystemUuid")
+                .setParameter("accountSystemUuid", account.getSystemUuid());
 
         for (Object o : listQuery.list())
         {
@@ -339,8 +341,11 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
         Query listQuery = currentSession()
-                .createQuery("select m from " + entityName + " m where m.account.urn = :urn and m.moniker = :moniker")
-                .setParameter("urn", UUID.fromString(account.getUrn())).setParameter("moniker", monikerEquals);
+                .createQuery("select m from " + entityName + " m " +
+                             "where m.account.systemUuid = :accountSystemUuid " +
+                             "and m.moniker = :moniker")
+                .setParameter("accountSystemUuid", account.getSystemUuid())
+                .setParameter("moniker", monikerEquals);
 
         for (Object o : listQuery.list())
         {
@@ -365,8 +370,11 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
          */
         Query listQuery = currentSession()
                 .createQuery(
-                        "select m from " + entityName + " m where m.account.urn = :urn and m.moniker like :moniker")
-                .setParameter("urn", UUID.fromString(account.getUrn())).setParameter("moniker", monikerLike + "%");
+                        "select m from " + entityName + " m " +
+                        "where m.account.systemUuid = :accountSystemUuid " +
+                        "and m.moniker like :moniker")
+                .setParameter("accountSystemUuid", account.getSystemUuid())
+                .setParameter("moniker", monikerLike + "%");
 
         for (Object o : listQuery.list())
         {
