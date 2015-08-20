@@ -1,0 +1,20 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+target/
+
+*.log
+
+# Exclude output folders
+bin/
+gen/
+target/
+
+# Exclude local IntelliJ settings
+*.iml
+*.ipr
+.idea
