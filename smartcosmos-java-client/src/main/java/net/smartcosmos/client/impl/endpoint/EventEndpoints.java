@@ -32,13 +32,13 @@ public final class EventEndpoints
 
     private static final String BASE = "/events";
 
-    private static final String CREATE__PUT = BASE;
+    private static final String CREATE_PUT = BASE;
     
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String FIND_BY_EVENT_TYPE__GET = BASE.concat("?eventType=%s&view=%s");
+    private static final String FIND_BY_EVENT_TYPE_GET = BASE.concat("?eventType=%s&view=%s");
 
-    private static final String FIND_BY_TIMESTAMP__GET = BASE.concat("?timestamp=%s&view=%s");
+    private static final String FIND_BY_TIMESTAMP_GET = BASE.concat("?timestamp=%s&view=%s");
 
     public static String findByUrn(String urn)
     {
@@ -47,7 +47,7 @@ public final class EventEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String findByTimestamp(long timestamp)
@@ -57,7 +57,7 @@ public final class EventEndpoints
 
     public static String findSince(long timestamp, ViewType viewType)
     {
-        return String.format(FIND_BY_TIMESTAMP__GET, timestamp, viewType);
+        return String.format(FIND_BY_TIMESTAMP_GET, timestamp, viewType);
     }
 
     public static String findByEventType(EventType eventType)
@@ -67,12 +67,12 @@ public final class EventEndpoints
 
     public static String findByEventType(EventType eventType, ViewType viewType)
     {
-        return String.format(FIND_BY_EVENT_TYPE__GET, eventType, viewType);
+        return String.format(FIND_BY_EVENT_TYPE_GET, eventType, viewType);
     }
     
     public static String create()
     {
-        return CREATE__PUT;
+        return CREATE_PUT;
     }
 }
 

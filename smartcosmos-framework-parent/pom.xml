@@ -62,6 +62,11 @@
         </resources>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>animal-sniffer-maven-plugin</artifactId>
+                    <version>1.14</version>
+                </plugin>
                 <!-- By default this plugin isn't active anywhere, since it re-formats code. It's just declared here to show it's possible. -->
                 <plugin>
                     <groupId>net.revelc.code</groupId>
@@ -100,6 +105,41 @@
                             <goals>
                                 <goal>revision</goal>
                             </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>1.8</version>
+                    <configuration>
+                        <licenseName>apache_v2</licenseName>
+
+                        <projectName>SMART COSMOS Framework</projectName>
+
+                        <inceptionYear>2013</inceptionYear>
+
+                        <processStartTag>*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*</processStartTag>
+                        <sectionDelimiter>===============================================================================</sectionDelimiter>
+                        <processEndTag>#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#</processEndTag>
+
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>first</id>
+                            <goals>
+                                <goal>update-file-header</goal>
+                            </goals>
+                            <phase>process-sources</phase>
+                            <configuration>
+                                <excludes>
+                                    <exclude>**/package-info.java</exclude>
+                                </excludes>
+                                <roots>
+                                    <root>src/main/java</root>
+                                    <root>src/test/java</root>
+                                </roots>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
@@ -253,6 +293,20 @@
                         <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
                 <!-- Ignore Abstract tests and Integration Tests. -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -283,6 +337,7 @@
                         <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
                     </configuration>
                 </plugin>
+
             </plugins>
         </pluginManagement>
         <plugins>
@@ -309,4 +364,48 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <phase>verify</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.10.1</version>
+                        <configuration>
+                            <show>protected</show>
+                            <nohelp>true</nohelp>
+                            <docfilessubdirs>true</docfilessubdirs>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

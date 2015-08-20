@@ -31,17 +31,17 @@ public final class InteractionEndpoints
 
     private static final String BASE = "/interactions";
 
-    private static final String CREATE__PUT = BASE;
+    private static final String CREATE_PUT = BASE;
 
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String LIST_ALL__GET = BASE.concat("?view=%s");
+    private static final String LIST_ALL_GET = BASE.concat("?view=%s");
 
-    private static final String FIND_BY_OBJECT_URN__GET = BASE.concat("?objectUrn=%s&view=%s");
+    private static final String FIND_BY_OBJECT_URN_GET = BASE.concat("?objectUrn=%s&view=%s");
 
     public static String create()
     {
-        return CREATE__PUT;
+        return CREATE_PUT;
     }
 
     public static String findByUrn(String urn)
@@ -51,7 +51,7 @@ public final class InteractionEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String listAllInteractions()
@@ -61,7 +61,7 @@ public final class InteractionEndpoints
 
     public static String listAllInteractions(ViewType viewType)
     {
-        return String.format(LIST_ALL__GET, viewType);
+        return String.format(LIST_ALL_GET, viewType);
     }
 
     public static String findByObjectUrn(String objectUrnLike)
@@ -71,7 +71,7 @@ public final class InteractionEndpoints
 
     public static String findByObjectUrn(String objectUrnLike, ViewType viewType)
     {
-        return String.format(FIND_BY_OBJECT_URN__GET, objectUrnLike, viewType);
+        return String.format(FIND_BY_OBJECT_URN_GET, objectUrnLike, viewType);
     }
 
 }

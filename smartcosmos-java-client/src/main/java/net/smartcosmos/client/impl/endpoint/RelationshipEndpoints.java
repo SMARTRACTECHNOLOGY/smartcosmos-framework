@@ -32,23 +32,23 @@ public final class RelationshipEndpoints
 
     private static final String BASE = "/relationships";
 
-    private static final String UPSERT__PUT = BASE.concat("/%s/%s");
+    private static final String UPSERT_PUT = BASE.concat("/%s/%s");
 
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String FIND_ALL_BETWEEN_TWO_ENTITIES__GET = BASE.concat("/%s/%s/%s/%s?view=%s");
+    private static final String FIND_ALL_BETWEEN_TWO_ENTITIES_GET = BASE.concat("/%s/%s/%s/%s?view=%s");
 
-    private static final String FIND_SPECIFIC_RELATIONSHIP__GET = BASE.concat("/%s/%s/%s/%s/%s?view=%s");
+    private static final String FIND_SPECIFIC_RELATIONSHIP_GET = BASE.concat("/%s/%s/%s/%s/%s?view=%s");
 
-    private static final String FIND_RELATIONSHIPS__GET = BASE.concat("/%s/%s/%s?reverse=false&view=%s");
+    private static final String FIND_RELATIONSHIPS_GET = BASE.concat("/%s/%s/%s?reverse=false&view=%s");
 
-    private static final String FIND_REVERSE_RELATIONSHIPS__GET = BASE.concat("/%s/%s/%s?reverse=true&view=%s");
+    private static final String FIND_REVERSE_RELATIONSHIPS_GET = BASE.concat("/%s/%s/%s?reverse=true&view=%s");
 
-    private static final String DELETE__DELETE = BASE.concat("/%s");
+    private static final String DELETE_DELETE = BASE.concat("/%s");
 
     public static String upsert(EntityReferenceType entityReferenceType, String referenceUrn)
     {
-        return String.format(UPSERT__PUT, entityReferenceType, referenceUrn);
+        return String.format(UPSERT_PUT, entityReferenceType, referenceUrn);
     }
 
     public static String delete(String urn)
@@ -63,7 +63,7 @@ public final class RelationshipEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String findAllBetweenTwoEntities(EntityReferenceType entityReferenceType,
@@ -84,7 +84,7 @@ public final class RelationshipEndpoints
                                                    String relatedReferenceUrn,
                                                    ViewType viewType)
     {
-        return String.format(FIND_ALL_BETWEEN_TWO_ENTITIES__GET,
+        return String.format(FIND_ALL_BETWEEN_TWO_ENTITIES_GET,
                 entityReferenceType,
                 referenceUrn,
                 relatedEntityReferenceType,
@@ -113,7 +113,7 @@ public final class RelationshipEndpoints
                                                   String relationshipType,
                                                   ViewType viewType)
     {
-        return String.format(FIND_SPECIFIC_RELATIONSHIP__GET,
+        return String.format(FIND_SPECIFIC_RELATIONSHIP_GET,
                 entityReferenceType,
                 referenceUrn,
                 relatedEntityReferenceType,
@@ -134,7 +134,7 @@ public final class RelationshipEndpoints
                                            String relationshipType,
                                            ViewType viewType)
     {
-        return String.format(FIND_RELATIONSHIPS__GET, entityReferenceType, referenceUrn, relationshipType, viewType);
+        return String.format(FIND_RELATIONSHIPS_GET, entityReferenceType, referenceUrn, relationshipType, viewType);
     }
 
     public static String findReverseRelationships(EntityReferenceType entityReferenceType,
@@ -149,7 +149,7 @@ public final class RelationshipEndpoints
                                                   String relationshipType,
                                                   ViewType viewType)
     {
-        return String.format(FIND_REVERSE_RELATIONSHIPS__GET,
+        return String.format(FIND_REVERSE_RELATIONSHIPS_GET,
                 entityReferenceType,
                 referenceUrn,
                 relationshipType,

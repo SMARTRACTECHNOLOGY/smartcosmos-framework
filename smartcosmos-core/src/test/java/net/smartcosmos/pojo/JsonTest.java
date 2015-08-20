@@ -1,5 +1,14 @@
 package net.smartcosmos.pojo;
 
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.junit.Assert;
+import org.junit.Test;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
@@ -20,7 +29,6 @@ package net.smartcosmos.pojo;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import junit.framework.Assert;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IMetadata;
@@ -31,13 +39,7 @@ import net.smartcosmos.pojo.context.TypeSafeMetadata;
 import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
 import net.smartcosmos.util.json.JsonUtil;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.testng.annotations.Test;
 
-import java.io.IOException;
-
-import static org.testng.Assert.assertTrue;
 
 
 public class JsonTest

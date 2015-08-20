@@ -37,30 +37,30 @@ public final class TagEndpoints
 
     private static final String BASE = "/tags";
 
-    private static final String UPSERT__PUT = BASE;
+    private static final String UPSERT_PUT = BASE;
 
-    private static final String ASSIGN__PUT = BASE.concat("/%s/%s");
+    private static final String ASSIGN_PUT = BASE.concat("/%s/%s");
 
-    private static final String REVOKE_ASSIGNMENT__DELETE = BASE.concat("/tag/%s/%s/%s");
+    private static final String REVOKE_ASSIGNMENT_DELETE = BASE.concat("/tag/%s/%s/%s");
 
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_ENTITY__GET
+    private static final String FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_ENTITY_GET
             = BASE.concat("?entityReferenceType=%s&referenceUrn=%s&view=%s");
 
-    private static final String FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_TYPE__GET
+    private static final String FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_TYPE_GET
             = BASE.concat("?entityReferenceType=%s&tagName=%s&view=%s");
 
-    private static final String FIND_ENTITIES_BY_TAGS_NAMED_LIKE__GET
+    private static final String FIND_ENTITIES_BY_TAGS_NAMED_LIKE_GET
             = BASE.concat("?tagName=%s&view=%s");
 
-    private static final String FIND_SPECIFIC_TAG__GET = BASE.concat("/tag/%s?view=%s");
+    private static final String FIND_SPECIFIC_TAG_GET = BASE.concat("/tag/%s?view=%s");
 
-    private static final String DELETE__DELETE = BASE.concat("/tag/%s");
+    private static final String DELETE_DELETE = BASE.concat("/tag/%s");
 
     public static String upsert()
     {
-        return UPSERT__PUT;
+        return UPSERT_PUT;
     }
 
     public static String findByUrn(String urn)
@@ -70,17 +70,17 @@ public final class TagEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String delete(String urn)
     {
-        return String.format(DELETE__DELETE, urn);
+        return String.format(DELETE_DELETE, urn);
     }
 
     public static String assign(EntityReferenceType entityReferenceType, String referenceUrn)
     {
-        return String.format(ASSIGN__PUT, entityReferenceType, referenceUrn);
+        return String.format(ASSIGN_PUT, entityReferenceType, referenceUrn);
     }
 
     public static String revokeAssignment(EntityReferenceType entityReferenceType, String referenceUrn, String tagName)
@@ -94,7 +94,7 @@ public final class TagEndpoints
             e.printStackTrace();
         }
 
-        return String.format(REVOKE_ASSIGNMENT__DELETE, encodedTagName, entityReferenceType, referenceUrn);
+        return String.format(REVOKE_ASSIGNMENT_DELETE, encodedTagName, entityReferenceType, referenceUrn);
     }
 
     public static String findByTag(String tagName)
@@ -112,7 +112,7 @@ public final class TagEndpoints
         {
             e.printStackTrace();
         }
-        return String.format(FIND_SPECIFIC_TAG__GET, encodedTagName, viewType);
+        return String.format(FIND_SPECIFIC_TAG_GET, encodedTagName, viewType);
     }
 
     public static String findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
@@ -125,7 +125,7 @@ public final class TagEndpoints
                                                             String referenceUrn,
                                                             ViewType viewType)
     {
-        return String.format(FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_ENTITY__GET,
+        return String.format(FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_ENTITY_GET,
                 entityReferenceType,
                 referenceUrn,
                 viewType);
@@ -140,7 +140,7 @@ public final class TagEndpoints
                                                           String tagName,
                                                           ViewType viewType)
     {
-        return String.format(FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_TYPE__GET, entityReferenceType, tagName, viewType);
+        return String.format(FIND_ENTITIES_BY_TAGS_ASSIGNED_TO_TYPE_GET, entityReferenceType, tagName, viewType);
     }
 
     public static String findEntitiesByTagNameLike(String tagNameLike)
@@ -150,6 +150,6 @@ public final class TagEndpoints
 
     public static String findEntitiesByTagNameLike(String tagName, ViewType viewType)
     {
-        return String.format(FIND_ENTITIES_BY_TAGS_NAMED_LIKE__GET, tagName, viewType);
+        return String.format(FIND_ENTITIES_BY_TAGS_NAMED_LIKE_GET, tagName, viewType);
     }
 }

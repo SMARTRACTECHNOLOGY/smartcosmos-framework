@@ -31,29 +31,29 @@ public final class ObjectEndpoints
 
     private static final String BASE = "/objects";
 
-    private static final String CREATE__PUT = BASE;
+    private static final String CREATE_PUT = BASE;
 
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String UPDATE__POST = BASE;
+    private static final String UPDATE_POST = BASE;
 
-    private static final String QUERY_TYPE_AGNOSTIC__GET
+    private static final String QUERY_TYPE_AGNOSTIC_GET
             = BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&objectUrnLike=%s&view=%s");
 
-    private static final String QUERY_TYPE_SPECIFIC__GET
+    private static final String QUERY_TYPE_SPECIFIC_GET
             = BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&objectUrnLike=%s&objectType=%s&view=%s");
 
-    private static final String FIND_BY_OBJECT_URN__GET
+    private static final String FIND_BY_OBJECT_URN_GET
             = BASE.concat("/object/%s?exact=%s&view=%s");
 
     public static String create()
     {
-        return CREATE__PUT;
+        return CREATE_PUT;
     }
 
     public static String update()
     {
-        return UPDATE__POST;
+        return UPDATE_POST;
     }
 
     public static String findByUrn(String urn)
@@ -63,7 +63,7 @@ public final class ObjectEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String findByExactObjectUrn(String objectUrn)
@@ -73,7 +73,7 @@ public final class ObjectEndpoints
 
     public static String findByExactObjectUrn(String objectUrn, ViewType viewType)
     {
-        return String.format(FIND_BY_OBJECT_URN__GET, objectUrn, true, viewType);
+        return String.format(FIND_BY_OBJECT_URN_GET, objectUrn, true, viewType);
     }
 
     public static String findByObjectUrnLike(String objectUrn)
@@ -83,7 +83,7 @@ public final class ObjectEndpoints
 
     public static String findByObjectUrnLike(String objectUrn, ViewType viewType)
     {
-        return String.format(FIND_BY_OBJECT_URN__GET, objectUrn, false, viewType);
+        return String.format(FIND_BY_OBJECT_URN_GET, objectUrn, false, viewType);
     }
 
     public static class Builder
@@ -145,7 +145,7 @@ public final class ObjectEndpoints
         {
             if (objectType == null)
             {
-                return String.format(QUERY_TYPE_AGNOSTIC__GET,
+                return String.format(QUERY_TYPE_AGNOSTIC_GET,
                         modifiedAfter,
                         monikerLike,
                         nameLike,
@@ -153,7 +153,7 @@ public final class ObjectEndpoints
                         view);
             } else
             {
-                return String.format(QUERY_TYPE_SPECIFIC__GET,
+                return String.format(QUERY_TYPE_SPECIFIC_GET,
                         modifiedAfter,
                         monikerLike,
                         nameLike,

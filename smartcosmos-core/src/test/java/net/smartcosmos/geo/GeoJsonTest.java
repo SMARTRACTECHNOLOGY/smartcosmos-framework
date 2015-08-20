@@ -1,5 +1,6 @@
 package net.smartcosmos.geo;
 
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
@@ -20,14 +21,15 @@ package net.smartcosmos.geo;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.io.IOException;
+import java.net.URL;
+
+import org.junit.Test;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-import org.testng.annotations.Test;
-
-import java.io.IOException;
-import java.net.URL;
 
 public class GeoJsonTest
 {

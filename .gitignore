@@ -1,6 +1,7 @@
 # Java compiled files
 *.class
 
+
 # Package Files #
 *.jar
 *.war
