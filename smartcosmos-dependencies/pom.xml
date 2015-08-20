@@ -31,6 +31,7 @@
     <description>Dependencies used throughout the SMART COSMOS Ecosystem provided in a single location to make sure there are no conflicts down the line.</description>
     <dependencyManagement>
         <dependencies>
+
             <dependency>
                 <groupId>org.apache.directory.server</groupId>
                 <artifactId>apacheds-all</artifactId>
@@ -58,6 +59,11 @@
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>${commons-lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fluttercode.datafactory</groupId>
+                <artifactId>datafactory</artifactId>
+                <version>0.8</version>
             </dependency>
 
             <dependency>
