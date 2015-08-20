@@ -60,14 +60,6 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>maven-restlet</id>
-            <name>Restlet repository</name>
-            <url>http://maven.restlet.com</url>
-        </repository>
-    </repositories>
-
     <profiles>
         <profile>
             <id>release</id>
