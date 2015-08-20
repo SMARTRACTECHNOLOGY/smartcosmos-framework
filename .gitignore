@@ -1,0 +1,40 @@
+# Java compiled files
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# IntelliJ IDE
+*.ipr
+*.iml
+.idea
+
+# Maven Build Target
+target/
+
+
+# Eclipse IDE
+.project
+.classpath
+.settings
+
+server-work
+rest/server-work/
+rest/log
+
+dependency-reduced-pom.xml.bak
+
+*.log
+
+*.iws
+
+*.HIDE
+*.ORIG
+*.SAVE
+
+.DS_Store
+bin
+pom.xml.bak
+*~
