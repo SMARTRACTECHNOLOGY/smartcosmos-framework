@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <groupId>net.smartcosmos</groupId>
+    <artifactId>java-client</artifactId>
+    <version>1.1-SNAPSHOT</version>
+
+    <packaging>jar</packaging>
+
+    <name>Platform Client</name>
+    <description>Provides a thin client wrapper for accessing the SMART COSMOS platform web services</description>
+
+    <url>http://www.smartrac-group.com/</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <smartcosmos.platform-core.version>1.8-SNAPSHOT</smartcosmos.platform-core.version>
+        <restlet.version>2.2-M3</restlet.version>
+        <checkstyle.config.location>${basedir}/src/checkstyle/checkstyle.xml</checkstyle.config.location>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>maven-restlet</id>
+            <name>Public online Restlet repository</name>
+            <url>http://maven.restlet.org</url>
+        </repository>
+    </repositories>
+
+    <organization>
+        <name>SMARTRAC Technology Fletcher, Inc.</name>
+        <url>http://www.smartrac-group.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>cloud.engineering</id>
+            <name>SMARTRAC API Team</name>
+            <email>api@smartrac-group.com</email>
+            <organization>Smartrac Technology Fletcher, Inc.</organization>
+            <timezone>-5</timezone>
+            <roles>
+                <role>Project Lead</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-client-java</url>
+        <connection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-client-java.git</connection>
+        <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-client-java.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>net.smartcosmos</groupId>
+            <artifactId>platform-core</artifactId>
+            <version>${smartcosmos.platform-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet</artifactId>
+            <version>${restlet.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet.ext.json</artifactId>
+            <version>${restlet.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet.ext.ssl</artifactId>
+            <version>${restlet.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet.ext.html</artifactId>
+            <version>${restlet.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>1.8.6</version>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.10.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <groups>
+                                <group>
+                                    <title>SMART COSMOS Connectivity</title>
+                                    <packages>net.smartcosmos.client.connectivity</packages>
+                                </group>
+                                <group>
+                                    <title>SMART COSMOS Common Clients</title>
+                                    <packages>
+                                        net.smartcosmos.client.common.account:net.smartcosmos.client.common.event:net.smartcosmos.client.common.metadata:net.smartcosmos.client.common.registration:net.smartcosmos.client.common.user
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>SMART COSMOS Objects Client Factories</title>
+                                    <packages>
+                                        net.smartcosmos.client.objects.device:net.smartcosmos.client.objects.extension:net.smartcosmos.client.objects.file:net.smartcosmos.client.objects.geospatial:net.smartcosmos.client.objects.interaction*:net.smartcosmos.client.objects.object*:net.smartcosmos.client.objects.relationship:net.smartcosmos.client.objects.tag:net.smartcosmos.client.objects.timeline
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>SMART COSMOS Batch</title>
+                                    <packages>
+                                        net.smartcosmos.client.batch
+                                    </packages>
+                                </group>
+                                <group>
+                                    <title>Private Implementation</title>
+                                    <packages>net.smartcosmos.client.impl*</packages>
+                                </group>
+                            </groups>
+                            <show>protected</show>
+                            <nohelp>true</nohelp>
+                            <docfilessubdirs>true</docfilessubdirs>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/assemble/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.5</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.3</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.5.1</version>
+                    <configuration>
+                        <compilerVersion>1.7</compilerVersion>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <!--
+                          During release:perform, enable the "release" profile
+                         -->
+                        <releaseProfiles>release</releaseProfiles>
+                        <goals>deploy assembly:single</goals>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.8</version>
+                <configuration>
+                    <licenseName>apache_v2</licenseName>
+
+                    <projectName>SMART COSMOS Platform Client</projectName>
+
+                    <inceptionYear>2013</inceptionYear>
+
+                    <processStartTag>*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+                    </processStartTag>
+                    <sectionDelimiter>===============================================================================
+                    </sectionDelimiter>
+                    <processEndTag>#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+                    </processEndTag>
+
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/package-info.java</exclude>
+                            </excludes>
+                            <roots>
+                                <root>src/assemble</root>
+                                <root>src/main/java</root>
+                                <root>src/test/java</root>
+                            </roots>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.13</version>
+                <executions>
+                    <execution>
+                        <id>verify-style</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <consoleOutput>true</consoleOutput>
+                    <logViolationsToConsole>true</logViolationsToConsole>
+                    <excludes>**/package-info.java</excludes>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
