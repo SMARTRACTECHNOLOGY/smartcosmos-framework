@@ -33,19 +33,19 @@ public final class MetadataEndpoints
 
     private static final String BASE = "/metadata/%s/%s";
 
-    private static final String UPSERT__PUT = BASE;
+    private static final String UPSERT_PUT = BASE;
 
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String FIND_SPECIFIC_KEY__GET = BASE.concat("?key=%s&view=%s");
+    private static final String FIND_SPECIFIC_KEY_GET = BASE.concat("?key=%s&view=%s");
 
-    private static final String FINAL_ALL__GET = BASE.concat("?view=%s");
+    private static final String FINAL_ALL_GET = BASE.concat("?view=%s");
 
-    private static final String DELETE__DELETE = BASE.concat("/%s");
+    private static final String DELETE_DELETE = BASE.concat("/%s");
 
-    private static final String ENCODE_METADATA__POST = "/metadata/mapper/encode/%s";
+    private static final String ENCODE_METADATA_POST = "/metadata/mapper/encode/%s";
 
-    private static final String DECODE_METADATA__POST = "/metadata/mapper/decode/%s";
+    private static final String DECODE_METADATA_POST = "/metadata/mapper/decode/%s";
 
     public static String findByUrn(String urn)
     {
@@ -54,17 +54,17 @@ public final class MetadataEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String upsert(EntityReferenceType entityReferenceType, String referenceUrn)
     {
-        return String.format(UPSERT__PUT, entityReferenceType, referenceUrn);
+        return String.format(UPSERT_PUT, entityReferenceType, referenceUrn);
     }
 
     public static String delete(EntityReferenceType entityReferenceType, String referenceUrn, String key)
     {
-        return String.format(DELETE__DELETE, entityReferenceType, referenceUrn, key);
+        return String.format(DELETE_DELETE, entityReferenceType, referenceUrn, key);
     }
 
     public static String findAll(EntityReferenceType entityReferenceType, String referenceUrn)
@@ -74,7 +74,7 @@ public final class MetadataEndpoints
 
     public static String findAll(EntityReferenceType entityReferenceType, String referenceUrn, ViewType view)
     {
-        return String.format(FINAL_ALL__GET, entityReferenceType, referenceUrn, view);
+        return String.format(FINAL_ALL_GET, entityReferenceType, referenceUrn, view);
     }
 
     public static String findSpecificKey(EntityReferenceType entityReferenceType, String referenceUrn, String key)
@@ -87,17 +87,17 @@ public final class MetadataEndpoints
                                          String key,
                                          ViewType view)
     {
-        return String.format(FIND_SPECIFIC_KEY__GET, entityReferenceType, referenceUrn, key, view);
+        return String.format(FIND_SPECIFIC_KEY_GET, entityReferenceType, referenceUrn, key, view);
     }
 
     public static String encodeMetadata(MetadataDataType metadataDataType)
     {
-        return String.format(ENCODE_METADATA__POST, metadataDataType);
+        return String.format(ENCODE_METADATA_POST, metadataDataType);
     }
 
     public static String decodeMetadata(MetadataDataType metadataDataType)
     {
-        return String.format(DECODE_METADATA__POST, metadataDataType);
+        return String.format(DECODE_METADATA_POST, metadataDataType);
     }
 
 }

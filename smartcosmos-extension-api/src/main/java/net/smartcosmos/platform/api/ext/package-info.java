@@ -28,7 +28,7 @@
  * The overall state transition within the extension looks like this:
  * <p/>
  * <ol>
- * <li>Dropwizard's initialize(Bootstrap<?></?></li>
+ * <li>Dropwizard's initialize(Bootstrap</li>
  * <li>SMART COSMOS initialize(T extensionConfiguration)</li>
  * <li>If exceptional condition detected, handleInitializationException(Exception e)</li>
  * <li>(optional) getEntities() for Hibernate registration</li>

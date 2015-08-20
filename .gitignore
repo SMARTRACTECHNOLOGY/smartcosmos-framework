@@ -1,6 +1,7 @@
 # Java compiled files
 *.class
 
+
 # Package Files #
 *.jar
 *.war
@@ -19,6 +20,7 @@ target/
 .project
 .classpath
 .settings
+.checkstyle
 
 server-work
 rest/server-work/

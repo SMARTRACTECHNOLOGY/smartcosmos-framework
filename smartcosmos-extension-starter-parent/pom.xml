@@ -28,5 +28,8 @@
     <artifactId>smartcosmos-extension-starter-parent</artifactId>
     <packaging>pom</packaging>
     <name>SMART COSMOS Extension Starter Parent</name>
-
+    <modules>
+        <module>smartcosmos-extension-starter</module>
+        <module>smartcosmos-extension-starter-test</module>
+    </modules>
 </project>

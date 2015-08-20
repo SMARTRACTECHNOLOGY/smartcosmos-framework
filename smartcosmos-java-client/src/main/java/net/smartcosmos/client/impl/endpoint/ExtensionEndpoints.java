@@ -31,43 +31,43 @@ public final class ExtensionEndpoints
 
     private static final String BASE = "/extensions";
 
-    private static final String CREATE__PUT = BASE;
+    private static final String CREATE_PUT = BASE;
 
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String DELETE__DELETE = BASE.concat("/%s");
+    private static final String DELETE_DELETE = BASE.concat("/%s");
 
-    private static final String FIND_BY_NAME_LIKE__GET = BASE.concat("?nameLike=%s&view=%s");
+    private static final String FIND_BY_NAME_LIKE_GET = BASE.concat("?nameLike=%s&view=%s");
 
-    private static final String UPDATE__POST = BASE;
+    private static final String UPDATE_POST = BASE;
 
-    private static final String CATALOG__GET = "/extensions/catalog";
+    private static final String CATALOG_GET = "/extensions/catalog";
 
-    private static final String PUBLISHED_EXTENSION__GET = "/extensions/catalog/%s";
+    private static final String PUBLISHED_EXTENSION_GET = "/extensions/catalog/%s";
 
     public static String catalog()
     {
-        return CATALOG__GET;
+        return CATALOG_GET;
     }
 
     public static String publishedExtension(String urn)
     {
-        return String.format(PUBLISHED_EXTENSION__GET, urn);
+        return String.format(PUBLISHED_EXTENSION_GET, urn);
     }
 
     public static String create()
     {
-        return CREATE__PUT;
+        return CREATE_PUT;
     }
 
     public static String delete(String urn)
     {
-        return String.format(DELETE__DELETE, urn);
+        return String.format(DELETE_DELETE, urn);
     }
 
     public static String update()
     {
-        return UPDATE__POST;
+        return UPDATE_POST;
     }
 
     public static String findByUrn(String urn)
@@ -77,7 +77,7 @@ public final class ExtensionEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String findByNameLike(String nameLike)
@@ -87,7 +87,7 @@ public final class ExtensionEndpoints
 
     public static String findByNameLike(String nameLike, ViewType viewType)
     {
-        return String.format(FIND_BY_NAME_LIKE__GET, nameLike, viewType);
+        return String.format(FIND_BY_NAME_LIKE_GET, nameLike, viewType);
     }
 
 }

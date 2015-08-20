@@ -31,11 +31,11 @@ public final class AccountEndpoints
 
     private static final String BASE = "/account";
 
-    private static final String VIEW__GET = BASE.concat("?view=%s");
+    private static final String VIEW_GET = BASE.concat("?view=%s");
 
-    private static final String CHANGE_MY_PASSWORD__POST = BASE.concat("/password/change");
+    private static final String CHANGE_MY_PASSWORD_POST = BASE.concat("/password/change");
 
-    private static final String RESET_MY_PASSWORD__POST = BASE.concat("/password/reset");
+    private static final String RESET_MY_PASSWORD_POST = BASE.concat("/password/reset");
 
     public static String view()
     {
@@ -44,16 +44,16 @@ public final class AccountEndpoints
 
     public static String view(ViewType viewType)
     {
-        return String.format(VIEW__GET, viewType);
+        return String.format(VIEW_GET, viewType);
     }
 
     public static String changeMyPassword()
     {
-        return String.format(CHANGE_MY_PASSWORD__POST);
+        return String.format(CHANGE_MY_PASSWORD_POST);
     }
 
     public static String resetMyPassword()
     {
-        return RESET_MY_PASSWORD__POST;
+        return RESET_MY_PASSWORD_POST;
     }
 }
