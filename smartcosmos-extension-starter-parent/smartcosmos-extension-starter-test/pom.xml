@@ -8,7 +8,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-extension-starter-test</artifactId>
-    <packaging>pom</packaging>
     <name>SMART COSMOS Extension Test Starter</name>
 
     <description>Easily packages a bunch of test utilities into a single area so you can add this module with a test scope and get them all.</description>
