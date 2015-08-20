@@ -14,6 +14,8 @@
         <module>smartcosmos-dependencies</module>
         <module>smartcosmos-framework-parent</module>
         <module>smartcosmos-extension-starter-parent</module>
+        <module>smartcosmos-core</module>
+        <module>smartcosmos-extension-api</module>
     </modules>
     <properties>
         <assertj-core.version>3.1.0</assertj-core.version>
