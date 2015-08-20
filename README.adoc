@@ -1,0 +1,22 @@
+<img src="http://smartractechnology.github.io/smartcosmos-sdk-java/images/smart-cosmos-250px-wide.png"/>
+
+# Maven Central
+Java developers that rely on Maven Central can access the SMART COSMOS Platform Core using the following coordinates:
+
+```
+<dependency>
+  <groupId>net.smartcosmos</groupId>
+  <artifactId>smartcosmos-core</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+
+Likewise, Java developers who want to use the SMART COSMOS Java Client for easy access to the platform, thus eliminating the need to deal directly with HTTP, JSON, and REST calls, the Maven Central coordinates are:
+
+```
+<dependency>
+  <groupId>net.smartcosmos</groupId>
+  <artifactId>smartcosmos-java-client</artifactId>
+  <version>1.0</version>
+</dependency>
+```

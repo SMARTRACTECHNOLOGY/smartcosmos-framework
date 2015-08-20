@@ -11,6 +11,8 @@
     <packaging>pom</packaging>
     <name>SMART COSMOS Framework Parent</name>
 
+    <description>This POM file forms the foundation of all POM files that are specific to JAVA packaging.</description>
+
     <build>
         <!-- Turn on filtering by default for application properties -->
         <resources>
@@ -32,6 +34,7 @@
         </resources>
         <pluginManagement>
             <plugins>
+                <!-- By default this plugin isn't active anywhere, since it re-formats code. It's just declared here to show it's possible. -->
                 <plugin>
                     <groupId>net.revelc.code</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
@@ -53,6 +56,7 @@
                         </execution>
                     </executions>
                 </plugin>
+                <!-- Checkstyle configuration, this is used internally and is actually removed from the extension-starter, but it can be added back in. -->
                 <plugin>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>2.15</version>
@@ -97,10 +101,14 @@
                         </archive>
                     </configuration>
                 </plugin>
+                <!-- Ignore Abstract tests and Integration Tests. -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <configuration>
+                        <argLine>-Xmx256m</argLine>
+                        <!-- Force alphabetical order to have a reproducible build -->
+                        <runOrder>alphabetical</runOrder>
                         <includes>
                             <include>**/*Tests.java</include>
                             <include>**/*Test.java</include>
@@ -110,36 +118,7 @@
                         </excludes>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <configuration>
-                        <failOnMissingWebXml>false</failOnMissingWebXml>
-                        <archive>
-                            <manifest>
-                                <mainClass>${start-class}</mainClass>
-                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            </manifest>
-                        </archive>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <configuration>
-                        <mainClass>${start-class}</mainClass>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.6</version>
-                    <configuration>
-                        <delimiters>
-                            <delimiter>${resource.delimiter}</delimiter>
-                        </delimiters>
-                    </configuration>
-                </plugin>
+                <!-- This automatically puts git repository information into the JAR file when compiled. -->
                 <plugin>
                     <groupId>pl.project13.maven</groupId>
                     <artifactId>git-commit-id-plugin</artifactId>
@@ -223,15 +202,82 @@
                         </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.3</version>
+                </plugin>
+                <!-- This replaces the standard maven deploy plugin. -->
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.5</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>nexus</serverId>
+                        <nexusUrl>https://nexus.smartcosmos.net/nexus</nexusUrl>
+                        <stagingProfileId>c0d04f5594b11</stagingProfileId>
+                        <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.5.1</version>
+                    <configuration>
+                        <compilerVersion>${java.version}</compilerVersion>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <!-- During release:perform, enable the "release" profile -->
+                        <releaseProfiles>release</releaseProfiles>
+                        <goals>deploy</goals>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.13</version>
+                    <executions>
+                        <!-- Even thought failsafe was specifically designed for integration tests it will not bind to the integration test by default. -->
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <!-- Failure reporting actually occurs under verify, if you were to skip this phase the build would continue even with failures. This is because 
+									integration tests are designed to run in parallel -->
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>net.revelc.code</groupId>
-                <artifactId>formatter-maven-plugin</artifactId>
-            </plugin>
+            <!-- If you want to format the code on verification. -->
+            <!-- <plugin> <groupId>net.revelc.code</groupId> <artifactId>formatter-maven-plugin</artifactId> </plugin> -->
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+
             </plugin>
         </plugins>
     </build>
