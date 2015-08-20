@@ -13,8 +13,8 @@ If you want to build an extension then there's no need to follow our format, but
 See the build-tools jar for eclipse formatting.
 
 == Additional Resources
-* [SMART COSMOS Developer Knowledge Base](https://smartractechnology.atlassian.net/wiki/display/SCKB/SMART+COSMOS+Developer+Knowledge+Base)
-* [General GitHub documentation](http://help.github.com/)
-* [GitHub pull request documentation](http://help.github.com/send-pull-requests/)
-* [Objects REST Web Services Documentation](http://docs.smartcosmosobjects.apiary.io)
-* [SMART COSMOS Java SDK JavaDocs (stable)](http://smartractechnology.github.io/smartcosmos-sdk-java/stable/index.html)
+* https://smartractechnology.atlassian.net/wiki/display/SCKB/SMART+COSMOS+Developer+Knowledge+Base[SMART COSMOS Developer Knowledge Base]
+* http://help.github.com/[General GitHub documentation]
+* http://help.github.com/send-pull-requests/[GitHub pull request documentation]
+* http://docs.smartcosmosobjects.apiary.io[Objects REST Web Services Documentation]
+* http://smartractechnology.github.io/smartcosmos-sdk-java/stable/index.html[SMART COSMOS Java SDK JavaDocs (stable)]
