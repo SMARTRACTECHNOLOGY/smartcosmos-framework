@@ -1,4 +1,4 @@
-![SMART COSMOS Objects](http://smartractechnology.github.io/smartcosmos-sdk-java/images/smart-cosmos-250px-wide.png)
+image::http://smartractechnology.github.io/smartcosmos-sdk-java/images/smart-cosmos-250px-wide.png[SMART COSMOS Objects]
 
 # Maven Central
 Java developers that rely on Maven Central can access the SMART COSMOS Platform Core using the following coordinates:
