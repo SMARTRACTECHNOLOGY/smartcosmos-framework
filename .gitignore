@@ -19,6 +19,7 @@ target/
 .project
 .classpath
 .settings
+.checkstyle
 
 server-work
 rest/server-work/
