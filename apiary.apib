@@ -4431,10 +4431,10 @@ to allow objects to be linked also to a Shelf, you would change the second-to-la
 entry to "true", and if you wanted to allow objects to be attached to library
 elements at eny level of the tree, you would change them all to "true".
 
-A library link is implemented with the normal SMART COSMOS Relationship, and
-using the normal Relationship REST endpoints. The only additional constraint
-in play is this: if the entityReferenceType in the relationship is a LibraryElement,
-the Type field of the relationship will be set immutably to LibraryLink.
+A library link is implemented with the normal SMART COSMOS Relationship, and using
+the normal Relationship REST endpoints. The only additional constraint in play is this:
+if the relatedEntityReferenceType in the relationship is a LibraryElement, the Type field
+of the relationship will be set immutably to LibraryLink.
 
 Note that as with any relationship in SMART COSMOS, deleting a relationship (i.e.,
 a library link) has no effect on either the library element or the linked object.

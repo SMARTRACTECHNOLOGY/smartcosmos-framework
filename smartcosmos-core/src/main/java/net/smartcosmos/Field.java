@@ -206,6 +206,11 @@ public final class Field
     public static final String CONFIG_APP_INSTANCE_NAME = "configAppInstanceName";
 
     //
+    // Registration
+    //
+    public static final String SEND_REGISTRATION_EMAIL_FIELD = "sendRegistrationEmail";
+
+    //
     // Reporting
     //
     public static final String STATS = "stats";
