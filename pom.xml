@@ -15,6 +15,7 @@
         <module>smartcosmos-framework-parent</module>
         <module>smartcosmos-extension-starter-parent</module>
         <module>smartcosmos-core</module>
+        <module>smartcosmos-java-client</module>
         <module>smartcosmos-extension-api</module>
     </modules>
     <properties>
