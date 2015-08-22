@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.smartcosmos</groupId>
     <artifactId>smartcosmos-framework-root</artifactId>
-    <version>2.10.0-SNAPSHOT</version>
+    <version>2.10.0-development-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>SMART COSMOS Framework Root</name>
     <prerequisites>
@@ -65,7 +65,7 @@
         <quartz.version>2.2.1</quartz.version>
         <querydsl.version>4.0.3</querydsl.version>
         <restlet.version>2.2-M3</restlet.version>
-        <smartcosmos-build-tools.version>1.0.1-SNAPSHOT</smartcosmos-build-tools.version>
+        <smartcosmos-build-tools.version>1.0.1-development-SNAPSHOT</smartcosmos-build-tools.version>
         <smartcosmos-framework.version>${project.version}</smartcosmos-framework.version>
     </properties>
 
