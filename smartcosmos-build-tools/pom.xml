@@ -22,7 +22,7 @@
   <!-- Build tools doesn't have a parent, in fact it doesn't hav anything.  It's just a raw jar with our configuration files in it. -->
   <groupId>net.smartcosmos</groupId>
   <artifactId>smartcosmos-builds-tools</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1-development-SNAPSHOT</version>
   <name>SMART COSMOS Build Tools</name>
   <description>Various XML Configs used throughout the application</description>
 </project>
