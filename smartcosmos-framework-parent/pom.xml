@@ -35,7 +35,7 @@
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-dependencies</artifactId>
-                <version>${project.version}</version>
+                <version>${smartcosmos-framework.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
