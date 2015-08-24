@@ -56,6 +56,8 @@ public final class Field
 
     public static final String URN_FIELD = "urn";
 
+    public static final String SYSTEM_UUID_FIELD = "systemUuid";
+
     public static final String MONIKER_FIELD = "moniker";
 
     public static final String LINE_1_FIELD = "line1";
