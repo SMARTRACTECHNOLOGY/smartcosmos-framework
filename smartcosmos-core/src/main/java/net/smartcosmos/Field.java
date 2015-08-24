@@ -56,6 +56,8 @@ public final class Field
 
     public static final String URN_FIELD = "urn";
 
+    public static final String SYSTEM_UUID_FIELD = "systemUuid";
+
     public static final String MONIKER_FIELD = "moniker";
 
     public static final String LINE_1_FIELD = "line1";
@@ -204,6 +206,11 @@ public final class Field
     public static final String CONFIG_APP_NAME = "configAppName";
 
     public static final String CONFIG_APP_INSTANCE_NAME = "configAppInstanceName";
+
+    //
+    // Registration
+    //
+    public static final String SEND_REGISTRATION_EMAIL_FIELD = "sendRegistrationEmail";
 
     //
     // Reporting

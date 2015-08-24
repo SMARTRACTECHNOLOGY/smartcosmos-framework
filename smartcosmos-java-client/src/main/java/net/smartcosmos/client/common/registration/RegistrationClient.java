@@ -87,11 +87,23 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
     @Override
     public RegistrationResponse register(String emailAddress) throws ServiceException
     {
-        return register(emailAddress, null);
+        return register(emailAddress, null, true);
+    }
+
+    @Override
+    public RegistrationResponse register(String emailAddress, Boolean sendEmail) throws ServiceException
+    {
+        return register(emailAddress, null, sendEmail);
     }
 
     @Override
     public RegistrationResponse register(String emailAddress, String realm) throws ServiceException
+    {
+        return register(emailAddress, realm, true);
+    }
+
+    @Override
+    public RegistrationResponse register(String emailAddress, String realm, Boolean sendEmail) throws ServiceException
     {
         RegistrationResponse response = null;
 
@@ -101,6 +113,7 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
         {
             JSONObject jsonObject = new JSONObject()
                     .put(Field.EMAIL_ADDRESS_FIELD, emailAddress);
+            jsonObject.put(Field.SEND_REGISTRATION_EMAIL_FIELD, sendEmail);
 
             if (realm != null)
             {
@@ -113,7 +126,7 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
             Representation result = service.post(sndJsonRepresentation);
 
             if (service.getStatus().equals(Status.CLIENT_ERROR_CONFLICT) ||
-                    service.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
+                service.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
             {
                 // Email address or Realm is already registered
                 JsonRepresentation rcvJsonRepresentation = new JsonRepresentation(result);

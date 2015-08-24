@@ -49,6 +49,18 @@ public interface IRegistrationClient
     RegistrationResponse register(String emailAddress) throws ServiceException;
 
     /**
+     * Attempts to register a new account under the specified email address where the realm is dynamically extracted
+     * from the domain name of the email address.
+     *
+     * @param emailAddress Email address to register the account under, where the domain name is dynamically
+     *                     extracted to be the realm name
+     * @param sendEmail    Enable or disable confirmation email
+     * @return Registration response containing the account URN
+     * @throws ServiceException If the registration failed for any reason
+     */
+    RegistrationResponse register(String emailAddress, Boolean sendEmail) throws ServiceException;
+
+    /**
      * Attempts to register a new account under the specified email address using the explicitly provided realm.
      *
      * @param emailAddress Email address to register the account under
@@ -57,4 +69,15 @@ public interface IRegistrationClient
      * @throws ServiceException If the registration failed for any reason
      */
     RegistrationResponse register(String emailAddress, String realm) throws ServiceException;
+
+    /**
+     * Attempts to register a new account under the specified email address using the explicitly provided realm.
+     *
+     * @param emailAddress Email address to register the account under
+     * @param realm        Name of the realm
+     * @param sendEmail    Enable or disable confirmation email
+     * @return Registration response containing the account URN
+     * @throws ServiceException If the registration failed for any reason
+     */
+     RegistrationResponse register(String emailAddress, String realm, Boolean sendEmail) throws ServiceException;
 }

@@ -34,12 +34,15 @@ public class RegistrationResponse
 
     private final long lastModifiedTimestamp;
 
+    private final String emailVerificationToken;
+
     public RegistrationResponse(JSONObject jsonObject) throws JSONException
     {
-        this.urn = jsonObject.getString(Field.URN_FIELD);
+        this.urn = "urn:uuid:" + jsonObject.getString(Field.SYSTEM_UUID_FIELD);
         this.realm = jsonObject.getString(Field.REALM_FIELD);
         this.emailAddress = jsonObject.getString(Field.EMAIL_ADDRESS_FIELD);
         this.lastModifiedTimestamp = jsonObject.getLong(Field.LAST_MODIFIED_TIMESTAMP_FIELD);
+        this.emailVerificationToken = jsonObject.getString(Field.EMAIL_VERIFICATION_TOKEN_FIELD);
     }
 
     public String getUrn()
@@ -60,5 +63,10 @@ public class RegistrationResponse
     public long getLastModifiedTimestamp()
     {
         return lastModifiedTimestamp;
+    }
+
+    public String getEmailVerificationToken()
+    {
+        return emailVerificationToken;
     }
 }
