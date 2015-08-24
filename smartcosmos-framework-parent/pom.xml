@@ -60,6 +60,23 @@
                 </excludes>
             </resource>
         </resources>
+        <testResources>
+            <testResource>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/test/resources</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </testResource>
+            <testResource>
+                <directory>${basedir}/src/test/resources</directory>
+                <excludes>
+                    <exclude>**/*.yml</exclude>
+                    <exclude>**/*.properties</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
         <pluginManagement>
             <plugins>
                 <plugin>
