@@ -54,12 +54,12 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     protected final boolean canDelete;
     private final Class<T> entityClass;
 
-    protected AbstractDAOImpl(Class<T> classInstance, SessionFactory sessionFactory)
+    protected AbstractDAOImpl(final Class<T> classInstance, final SessionFactory sessionFactory)
     {
         this(classInstance, sessionFactory, false);
     }
 
-    protected AbstractDAOImpl(Class<T> classInstance, SessionFactory sessionFactory, boolean canDelete)
+    protected AbstractDAOImpl(final Class<T> classInstance, final SessionFactory sessionFactory, final boolean canDelete)
     {
         super(sessionFactory);
         this.entityClass = classInstance;
@@ -78,7 +78,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     }
 
     @Override
-    public S upsert(S object)
+    public S upsert(final S object)
     {
         if (null == object)
         {
@@ -133,7 +133,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
      */
     @Override
     @SuppressWarnings("unchecked")
-    public IPage<S> page(int page, int pageSize)
+    public IPage<S> page(final int page, final int pageSize)
     {
         if (page < 1)
         {
@@ -166,7 +166,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     }
 
     @Override
-    public S insert(S object)
+    public S insert(final S object)
     {
         if (null == object)
         {
@@ -200,7 +200,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     }
 
     @Override
-    public void delete(S object)
+    public void delete(final S object)
     {
         if (!canDelete)
         {
@@ -224,7 +224,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
     @Override
     @SuppressWarnings("unchecked")
-    public S update(S object)
+    public S update(final S object)
     {
         T instance = null;
 
@@ -248,7 +248,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
     @Override
     @SuppressWarnings("unchecked")
-    public S findByUrn(Class<?> clazz, String urn, IAccount account)
+    public S findByUrn(final Class<?> clazz, final String urn, final IAccount account)
     {
         Preconditions.checkNotNull(account, "Parameter 'account' must not be null");
         S object = null;
@@ -281,7 +281,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
     @Override
     @SuppressWarnings("unchecked")
-    public S findByUrn(Class<?> clazz, String urn)
+    public S findByUrn(final Class<?> clazz, final String urn)
     {
         S object = null;
         try
@@ -317,7 +317,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     }
 
     @SuppressWarnings("unchecked")
-    public Collection<S> findByUrns(Collection<UUID> urns)
+    public Collection<S> findByUuids(final Collection<UUID> urns, final IAccount account)
     {
         final Collection<S> list = new ArrayList<>();
 
@@ -326,6 +326,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
             return list;
         }
 
+        // TODO Add in Account restriction.
         for (Object o : criteria().add(Restrictions.in("urn", urns)).list())
         {
             list.add((S) o);
@@ -336,7 +337,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
     @Override
     @SuppressWarnings("unchecked")
-    public Collection<S> findByAccount(Class<?> clazz, IAccount account)
+    public Collection<S> findByAccount(final Class<?> clazz, final IAccount account)
     {
         Collection<S> list = new ArrayList<>();
 
@@ -362,7 +363,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
     @SuppressWarnings("unchecked")
     @Override
-    public Collection<S> searchByMoniker(Class<?> clazz, String monikerEquals, IAccount account)
+    public Collection<S> searchByMoniker(final Class<?> clazz, final String monikerEquals, final IAccount account)
     {
         Collection<S> list = new ArrayList<>();
 
@@ -391,7 +392,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
     @SuppressWarnings("unchecked")
     @Override
-    public Collection<S> searchByMonikerLike(Class<?> clazz, String monikerLike, IAccount account)
+    public Collection<S> searchByMonikerLike(final Class<?> clazz, final String monikerLike, final IAccount account)
     {
         Collection<S> list = new ArrayList<>();
 
@@ -425,7 +426,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     }
 
     @Override
-    public Collection<S> advancedQuery(Predicate... predicates)
+    public Collection<S> advancedQuery(final Predicate... predicates)
     {
         Collection<S> list = new ArrayList<>();
 
