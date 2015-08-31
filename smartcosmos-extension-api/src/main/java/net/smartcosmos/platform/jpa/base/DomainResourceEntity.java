@@ -40,7 +40,6 @@ import java.util.UUID;
 public abstract class DomainResourceEntity<T extends IDomainResource>
         implements IDomainResource<T>, IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler
 {
-    @JsonView(JsonGenerationView.Minimum.class)
     @Column(length = 16, nullable = false, updatable = false, unique = true)
     @Type(type = "uuid-binary")
     @Id
@@ -54,6 +53,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     @Column(length = 2048, nullable = true, updatable = true)
     protected String moniker;
 
+    @JsonView(JsonGenerationView.Minimum.class)
     @Override
     public String getUrn()
     {
@@ -64,12 +64,11 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
         return "urn:uuid:" + systemUuid.toString();
     }
 
-
     @Override
     public void setUrn(String urn)
     {
         // TODO message
-        //throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
         this.systemUuid = UuidUtil.getUuidFromUrn(urn);
     }
 
