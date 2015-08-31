@@ -7,13 +7,9 @@
         <version>2.10.0-development-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
     <artifactId>smartcosmos-extension-starter-test</artifactId>
-
     <name>SMART COSMOS Extension Test Starter</name>
-
     <description>Easily packages a bunch of test utilities into a single area so you can add this module with a test scope and get them all.</description>
-
     <dependencies>
         <dependency>
             <groupId>org.assertj</groupId>

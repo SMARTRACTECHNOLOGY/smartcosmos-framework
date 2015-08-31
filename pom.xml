@@ -68,7 +68,6 @@
         <smartcosmos-build-tools.version>1.0.1-development-SNAPSHOT</smartcosmos-build-tools.version>
         <smartcosmos-framework.version>2.10.0-development-SNAPSHOT</smartcosmos-framework.version>
     </properties>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -105,7 +104,6 @@
                             </requireJavaVersion>
                         </rules>
                     </configuration>
-
                     <executions>
                         <execution>
                             <id>enforce-versions</id>
