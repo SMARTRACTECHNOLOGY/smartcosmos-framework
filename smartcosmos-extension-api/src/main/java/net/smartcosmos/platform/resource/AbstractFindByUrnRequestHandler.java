@@ -38,7 +38,7 @@ import javax.ws.rs.core.Response;
 
 import static net.smartcosmos.Field.HTTP_HEADER_EVENT;
 
-public abstract class AbstractFindByUrnRequestHandler<T extends IDomainResource>
+public abstract class AbstractFindByUrnRequestHandler<T extends IDomainResource<T>>
         extends AbstractRequestHandler<String>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractFindByUrnRequestHandler.class);

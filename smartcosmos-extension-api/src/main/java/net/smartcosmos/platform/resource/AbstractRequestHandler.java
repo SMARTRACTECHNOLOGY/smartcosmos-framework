@@ -94,6 +94,15 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             .noContent()
             .build();
 
+    /**
+     * A successfully authenticated user is impersonating another account. In a multitenant system we want to make sure
+     * we're acting on the correct IAccount, so we need to exchange the authenticated user for the IUser account they
+     * are acting on behalf of.
+     * 
+     * @param authenticatedUser
+     *            who actually authenticated
+     * @return the IUser, and therefore IAccount, that we want to actively work as.
+     */
     protected abstract IUser exchangeForActual(IAuthenticatedUser authenticatedUser);
 
     @Override
@@ -199,11 +208,11 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             } catch (Exception e)
             {
                 LOG.warn("Visitor {} (serviceId {}) threw an uncaught exception {}",
-                        new Object[]{
+                        new Object[] {
                                 visitor.getName(),
                                 visitor.getServiceId(),
-                                e.getMessage()});
-                e.printStackTrace();
+                                e.getMessage() });
+                LOG.debug(e.getMessage(), e);
             }
         }
     }

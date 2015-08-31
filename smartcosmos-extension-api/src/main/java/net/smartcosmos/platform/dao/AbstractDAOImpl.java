@@ -1,5 +1,3 @@
-package net.smartcosmos.platform.dao;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -19,34 +17,42 @@ package net.smartcosmos.platform.dao;
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
+package net.smartcosmos.platform.dao;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.UUID;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
+import com.querydsl.core.types.EntityPath;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.jpa.hibernate.HibernateQuery;
+
 import io.dropwizard.hibernate.AbstractDAO;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.context.IAccount;
+import net.smartcosmos.platform.api.dao.IAdvancedQuery;
 import net.smartcosmos.platform.api.dao.IBaseDAO;
 import net.smartcosmos.platform.api.dao.IPageProvider;
 import net.smartcosmos.platform.api.dao.domain.IPage;
 import net.smartcosmos.platform.dao.domain.PageEntry;
 import net.smartcosmos.util.UuidUtil;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> extends AbstractDAO<T> implements
-        IBaseDAO<S>, IPageProvider<S>
+public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S> extends AbstractDAO<T> implements
+        IBaseDAO<S>, IPageProvider<S>, IAdvancedQuery<S>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractDAOImpl.class);
 
     protected final boolean canDelete;
-
-    protected final Class<T> classInstance;
+    private final Class<T> entityClass;
 
     protected AbstractDAOImpl(Class<T> classInstance, SessionFactory sessionFactory)
     {
@@ -56,8 +62,19 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
     protected AbstractDAOImpl(Class<T> classInstance, SessionFactory sessionFactory, boolean canDelete)
     {
         super(sessionFactory);
+        this.entityClass = classInstance;
         this.canDelete = canDelete;
-        this.classInstance = classInstance;
+    }
+
+    /**
+     * Returns the entity class managed by this DAO.
+     *
+     * @return the entity class managed by this DAO
+     */
+    @Override
+    public Class<T> getEntityClass()
+    {
+        return (Class<T>) entityClass;
     }
 
     @Override
@@ -72,7 +89,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
 
         if (null != object.getUrn())
         {
-            findResult = findByUrn(classInstance, object.getUrn());
+            findResult = findByUrn(getEntityClass(), object.getUrn());
         }
 
         if (null != findResult)
@@ -148,7 +165,6 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         return pagination;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public S insert(S object)
     {
@@ -160,14 +176,14 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         T instance = null;
         try
         {
-            instance = classInstance.newInstance();
+            instance = getEntityClass().newInstance();
             instance.copy(object);
 
             instance = persist(instance);
 
         } catch (InstantiationException e)
         {
-            LOG.warn("Unable to instantiate object of type {}", classInstance.getName());
+            LOG.warn("Unable to instantiate object of type {}", getEntityClass().getName());
             LOG.debug(e.getMessage(), e);
         } catch (IllegalAccessException e)
         {
@@ -193,14 +209,14 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         } else
         {
 
-            S instance = findByUrn(classInstance, object.getUrn());
+            S instance = findByUrn(getEntityClass(), object.getUrn());
 
             if (null != instance)
             {
                 currentSession().delete(instance);
             } else
             {
-                LOG.warn("Unable to locate object of type {} with unique ID {}", classInstance.getName(),
+                LOG.warn("Unable to locate object of type {} with unique ID {}", getEntityClass().getName(),
                         object.getUrn());
             }
         }
@@ -214,14 +230,14 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
 
         try
         {
-            instance = classInstance.newInstance();
+            instance = getEntityClass().newInstance();
             instance.copy(object);
 
             instance = (T) currentSession().merge(instance);
 
         } catch (InstantiationException e)
         {
-            LOG.warn("Unable to instantiate object of type {}", classInstance.getName());
+            LOG.warn("Unable to instantiate object of type {}", getEntityClass().getName());
             LOG.debug(e.getMessage(), e);
         } catch (IllegalAccessException e)
         {
@@ -240,10 +256,9 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         String entityName = clazz.getName();
 
         /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
-         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
-         * identifier.
-         *
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8, which
+         * restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class identifier.
+         * 
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
         try
@@ -301,6 +316,24 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         return object;
     }
 
+    @SuppressWarnings("unchecked")
+    public Collection<S> findByUrns(Collection<UUID> urns)
+    {
+        final Collection<S> list = new ArrayList<>();
+
+        if (urns == null || urns.size() == 0)
+        {
+            return list;
+        }
+
+        for (Object o : criteria().add(Restrictions.in("urn", urns)).list())
+        {
+            list.add((S) o);
+        }
+
+        return list;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public Collection<S> findByAccount(Class<?> clazz, IAccount account)
@@ -327,10 +360,11 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         return list;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Collection<IDomainResource> searchByMoniker(Class<?> clazz, String monikerEquals, IAccount account)
+    public Collection<S> searchByMoniker(Class<?> clazz, String monikerEquals, IAccount account)
     {
-        Collection<IDomainResource> list = new ArrayList<>();
+        Collection<S> list = new ArrayList<>();
 
         String entityName = clazz.getName();
 
@@ -349,16 +383,17 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
 
         for (Object o : listQuery.list())
         {
-            list.add((IDomainResource) o);
+            list.add((S) o);
         }
 
         return list;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Collection<IDomainResource> searchByMonikerLike(Class<?> clazz, String monikerLike, IAccount account)
+    public Collection<S> searchByMonikerLike(Class<?> clazz, String monikerLike, IAccount account)
     {
-        Collection<IDomainResource> list = new ArrayList<>();
+        Collection<S> list = new ArrayList<>();
 
         String entityName = clazz.getName();
 
@@ -378,9 +413,30 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
 
         for (Object o : listQuery.list())
         {
-            list.add((IDomainResource) o);
+            list.add((S) o);
         }
 
         return list;
     }
+
+    protected EntityPath<T> getPath() 
+    {
+        throw new UnsupportedOperationException(getClass() + " does not support advanced queries yet.");
+    }
+
+    @Override
+    public Collection<S> advancedQuery(Predicate... predicates)
+    {
+        Collection<S> list = new ArrayList<>();
+
+        HibernateQuery<T> query = new HibernateQuery<>(currentSession());
+
+        for (T o : query.from(getPath()).where(predicates).fetch())
+        {
+            list.add((S) o);
+        }
+
+        return list;
+    }
+
 }
