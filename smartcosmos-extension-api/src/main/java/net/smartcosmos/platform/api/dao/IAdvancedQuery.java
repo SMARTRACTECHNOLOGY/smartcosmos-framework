@@ -20,31 +20,19 @@ package net.smartcosmos.platform.api.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.base.IDomainResource;
-import net.smartcosmos.model.context.IAccount;
-
 import java.util.Collection;
 
+import net.smartcosmos.model.base.IDomainResource;
+
+import com.querydsl.core.types.Predicate;
+
 /**
- * Minimal DAO implementation that supports basic CRUD, with an optional delete and two basic finder methods.
+ * Interface for advanced queries using the QueryDSL visitor predicate pattern.
  *
- * @param <T>
+ * @param <S>
+ *            the interface implementation of the DAO.
  */
-public interface IBaseDAO<T extends IDomainResource<T>> extends IMonikerSearchDAO<T>
+public interface IAdvancedQuery<S extends IDomainResource<S>>
 {
-    T findByUrn(Class<?> clazz, String urn);
-
-    T findByUrn(Class<?> clazz, String urn, IAccount account);
-
-    Collection<T> findByAccount(Class<?> clazz, IAccount account);
-
-    T insert(T object);
-
-    T upsert(T object);
-
-    boolean canDelete();
-
-    void delete(T object);
-
-    T update(T object);
+    Collection<S> advancedQuery(Predicate... predicates);
 }

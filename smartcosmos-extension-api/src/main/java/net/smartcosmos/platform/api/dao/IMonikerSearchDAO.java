@@ -20,14 +20,14 @@ package net.smartcosmos.platform.api.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.util.Collection;
+
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.context.IAccount;
 
-import java.util.Collection;
-
-public interface IMonikerSearchDAO
+public interface IMonikerSearchDAO<T extends IDomainResource<T>>
 {
-    Collection<IDomainResource> searchByMoniker(Class<?> clazz, String tagEquals, IAccount account);
+    Collection<T> searchByMoniker(Class<?> clazz, String tagEquals, IAccount account);
 
-    Collection<IDomainResource> searchByMonikerLike(Class<?> clazz, String monikerLike, IAccount account);
+    Collection<T> searchByMonikerLike(Class<?> clazz, String monikerLike, IAccount account);
 }
