@@ -8,7 +8,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-extension-starter</artifactId>
-
     <packaging>pom</packaging>
     <name>SMART COSMOS Extension Starter</name>
 </project>

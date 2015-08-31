@@ -19,7 +19,6 @@
 <!-- -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-framework-parent</artifactId>
@@ -29,73 +28,59 @@
     <artifactId>smartcosmos-extension-api</artifactId>
     <name>SMART COSMOS Extension API</name>
     <description>Set of common server-side interfaces used across all SMART COSMOS platform services</description>
-
     <dependencies>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-auth</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-client</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-hibernate</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-views</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.uuid</groupId>
             <artifactId>java-uuid-generator</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
@@ -106,7 +91,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz-jobs</artifactId>
@@ -117,11 +101,20 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- Advanced Queries Generation -->
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+        </dependency>
+        <!-- Advanced Queries Integration -->
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+        </dependency>
         <dependency>
             <groupId>net.smartcosmos</groupId>
             <artifactId>smartcosmos-core</artifactId>
         </dependency>
-
         <!-- Testing Dependencies -->
         <dependency>
             <groupId>org.assertj</groupId>
@@ -143,19 +136,16 @@
             <artifactId>hsqldb</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
@@ -167,28 +157,24 @@
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
-
     <build>
-
         <plugins>
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-
             </plugin>
-
         </plugins>
-
     </build>
-
     <profiles>
         <profile>
             <id>release</id>
             <build>
                 <plugins>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
@@ -227,10 +213,8 @@
                             </execution>
                         </executions>
                     </plugin>
-
                 </plugins>
             </build>
         </profile>
     </profiles>
-
 </project>
