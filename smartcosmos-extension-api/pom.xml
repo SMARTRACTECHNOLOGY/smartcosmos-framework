@@ -101,11 +101,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- Advanced Queries Generation -->
-        <dependency>
-            <groupId>com.querydsl</groupId>
-            <artifactId>querydsl-apt</artifactId>
-        </dependency>
         <!-- Advanced Queries Integration -->
         <dependency>
             <groupId>com.querydsl</groupId>
