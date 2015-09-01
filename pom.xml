@@ -125,6 +125,7 @@
                     <artifactId>maven-sortpom-plugin</artifactId>
                     <version>${maven-sortpom-plugin.version}</version>
                     <configuration>
+                        <pomFile>pom.xml</pomFile>
                         <predefinedSortOrder>custom_1</predefinedSortOrder>
                         <lineSeparator>\n</lineSeparator>
                         <nrOfIndentSpace>4</nrOfIndentSpace>

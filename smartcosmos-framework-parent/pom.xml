@@ -186,7 +186,7 @@
                     <version>1.8</version>
                     <configuration>
                         <licenseName>apache_v2</licenseName>
-                        <projectName>SMART COSMOS Framework</projectName>
+                        <projectName>${project.name}</projectName>
                         <inceptionYear>2013</inceptionYear>
                         <processStartTag>*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*</processStartTag>
                         <sectionDelimiter>===============================================================================</sectionDelimiter>
