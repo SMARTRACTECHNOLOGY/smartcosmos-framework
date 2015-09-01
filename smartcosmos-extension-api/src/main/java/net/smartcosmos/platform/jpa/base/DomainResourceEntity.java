@@ -34,11 +34,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import java.io.Serializable;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class DomainResourceEntity<T extends IDomainResource>
-        implements IDomainResource<T>, IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler
+public abstract class DomainResourceEntity<T extends IDomainResource<T>>
+        implements IDomainResource<T>, IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler, Serializable
 {
     @Column(length = 16, nullable = false, updatable = false, unique = true)
     @Type(type = "uuid-binary")
@@ -65,7 +67,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     }
 
     @Override
-    public void setUrn(String urn)
+    public void setUrn(final String urn)
     {
         // TODO message
         // throw new UnsupportedOperationException();
@@ -78,7 +80,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     }
 
     @Override
-    public void copy(T target)
+    public void copy(final T target)
     {
         this.setUrn(target.getUrn());
         this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
@@ -127,18 +129,13 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     }
 
     @Override
-    public void setMoniker(String moniker)
+    public void setMoniker(final String moniker)
     {
         this.moniker = moniker;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(final Object obj)
     {
         if (this == obj)
             return true;
@@ -157,22 +154,13 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
             return false;
         if (systemUuid == null)
         {
-            if (UuidUtil.getUuidFromUrn(other.getUrn()) != null)
-            {
+            if (other.systemUuid != null)
                 return false;
-            }
-        } else if (!systemUuid.equals(UuidUtil.getUuidFromUrn(other.getUrn())))
-        {
+        } else if (!systemUuid.equals(other.systemUuid))
             return false;
-        }
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode()
     {

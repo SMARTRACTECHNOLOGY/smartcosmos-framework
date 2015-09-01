@@ -1,5 +1,9 @@
 package net.smartcosmos.platform.jpa.base;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -21,17 +25,19 @@ package net.smartcosmos.platform.jpa.base;
  */
 
 import com.fasterxml.jackson.annotation.JsonView;
+
 import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-
 @MappedSuperclass
-public abstract class DomainResourceNamedObjectEntity<T extends INamedObject>
-        extends DomainResourceEntity<T> implements INamedObject<T>
+public abstract class DomainResourceNamedObjectEntity<T extends INamedObject<T>>
+        extends DomainResourceEntity<T>implements INamedObject<T>
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @JsonView(JsonGenerationView.Published.class)
     @Column(length = 255, nullable = false)
     protected String name;
@@ -51,7 +57,7 @@ public abstract class DomainResourceNamedObjectEntity<T extends INamedObject>
     }
 
     @Override
-    public void setName(String name)
+    public void setName(final String name)
     {
         this.name = name;
     }
@@ -63,7 +69,7 @@ public abstract class DomainResourceNamedObjectEntity<T extends INamedObject>
     }
 
     @Override
-    public void setDescription(String description)
+    public void setDescription(final String description)
     {
         this.description = description;
     }
@@ -75,13 +81,13 @@ public abstract class DomainResourceNamedObjectEntity<T extends INamedObject>
     }
 
     @Override
-    public void setActive(boolean flag)
+    public void setActive(final boolean flag)
     {
         this.activeFlag = flag;
     }
 
     @Override
-    public void copy(T target)
+    public void copy(final T target)
     {
         super.copy(target);
 

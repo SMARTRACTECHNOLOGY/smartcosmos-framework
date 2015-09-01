@@ -43,33 +43,24 @@ public final class UuidUtil
     /**
      *
      * @return a time-based UUID, reorganized so that the time-based bits are at the front, , i.e., a bunch of UUIDs
-     * coming from the same server are more or less sequential in the first four bytes, for better insertion speeds.
+     *         coming from the same server are more or less sequential in the first four bytes, for better insertion
+     *         speeds.
      *
-     * @see <a href="https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/">
-     *     https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/
-     *     </a>
+     * @see <a href="https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/"> https://www.percona.com/blog/
+     *      2014/12/19/store-uuid-optimized-way/ </a>
      *
      */
     public static UUID getUuid()
     {
         String baseUuidString = Generators.timeBasedGenerator().generate().toString();
         String[] parts = baseUuidString.split("-");
-        String sortedUuidString = new StringBuilder(36).
-                append(parts[2]).
-                append(parts[1]).
-                append("-").
-                append(parts[0].substring(0, 4)).
-                append("-").
-                append(parts[0].substring(4, 8)).
-                append("-").
-                append(parts[3]).
-                append("-").
-                append(parts[4]).
-                toString();
+        String sortedUuidString = new StringBuilder(36).append(parts[2]).append(parts[1]).append("-")
+                .append(parts[0].substring(0, 4)).append("-").append(parts[0].substring(4, 8)).append("-")
+                .append(parts[3]).append("-").append(parts[4]).toString();
         return UUID.fromString(sortedUuidString);
     }
 
-    public static UUID getUuidFromUrn(String urn)
+    public static UUID getUuidFromUrn(final String urn)
     {
         if (urn == null || urn.isEmpty())
         {
@@ -80,8 +71,8 @@ public final class UuidUtil
 
     /**
      *
-     * @return the Sting version (in canonical UUID-as-String format) of a UUID generated in the static getUuid()
-     * method of this class.
+     * @return the Sting version (in canonical UUID-as-String format) of a UUID generated in the static getUuid() method
+     *         of this class.
      *
      */
     public static String getUrn()
@@ -94,7 +85,7 @@ public final class UuidUtil
      * @return the Sting version (in canonical UUID-as-String format) of an input UUID
      *
      */
-    public static String getUrnFromUuid(UUID referenceUuid)
+    public static String getUrnFromUuid(final UUID referenceUuid)
 
     {
         if (referenceUuid == null)
@@ -104,4 +95,3 @@ public final class UuidUtil
         return "urn:uuid:" + referenceUuid.toString();
     }
 }
-
