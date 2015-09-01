@@ -37,7 +37,7 @@ public interface IBaseDAO<T extends IDomainResource<T>> extends IMonikerSearchDA
 
     T findByUrn(Class<?> clazz, String urn, IAccount account);
     
-    Collection<T> findByUuids(final Collection<UUID> urns, IAccount account);
+    Collection<T> findByUuids(final Collection<UUID> uuids, IAccount account);
 
     Collection<T> findByAccount(Class<?> clazz, IAccount account);
 

@@ -32,8 +32,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class DomainResourceAccountEntity<T extends IDomainResource> extends DomainResourceEntity<T>
+public abstract class DomainResourceAccountEntity<T extends IDomainResource<T>> extends DomainResourceEntity<T>
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @JsonView(JsonGenerationView.Full.class)
     @ManyToOne(targetEntity = AccountEntity.class, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "accountUuid", updatable = false, referencedColumnName = "systemUuid", nullable = false)

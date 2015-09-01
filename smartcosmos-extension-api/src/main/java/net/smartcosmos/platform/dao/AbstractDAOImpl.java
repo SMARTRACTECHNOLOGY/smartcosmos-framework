@@ -319,17 +319,17 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     }
 
     @SuppressWarnings("unchecked")
-    public Collection<S> findByUuids(final Collection<UUID> urns, final IAccount account)
+    public Collection<S> findByUuids(final Collection<UUID> uuids, final IAccount account)
     {
         final Collection<S> list = new ArrayList<>();
 
-        if (urns == null || urns.size() == 0)
+        if (uuids == null || uuids.size() == 0)
         {
             return list;
         }
 
         // TODO Add in Account restriction.
-        for (Object o : criteria().add(Restrictions.in("urn", urns)).list())
+        for (Object o : criteria().add(Restrictions.in("systemUuid", uuids)).list())
         {
             list.add((S) o);
         }
