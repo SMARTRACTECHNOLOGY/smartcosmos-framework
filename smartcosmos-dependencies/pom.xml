@@ -33,8 +33,13 @@
         <dependencies>
             <dependency>
                 <groupId>org.apache.directory.server</groupId>
-                <artifactId>apacheds-all</artifactId>
-                <version>1.5.5</version>
+                <artifactId>apacheds-core</artifactId>
+                <version>${apacheds.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.directory.server</groupId>
+                <artifactId>apacheds-protocol-ldap</artifactId>
+                <version>${apacheds.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
@@ -327,6 +332,11 @@
                 <groupId>com.jayway.restassured</groupId>
                 <artifactId>rest-assured</artifactId>
                 <version>2.4.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.directory.shared</groupId>
+                <artifactId>shared-ldap</artifactId>
+                <version>${apacheds-shared-ldap.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.shiro</groupId>
