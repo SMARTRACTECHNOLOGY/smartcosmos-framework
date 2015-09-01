@@ -1,5 +1,10 @@
 package net.smartcosmos.platform.jpa.base;
 
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -21,18 +26,14 @@ package net.smartcosmos.platform.jpa.base;
  */
 
 import com.fasterxml.jackson.annotation.JsonView;
-import net.smartcosmos.model.base.IDomainResource;
+
+import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.platform.jpa.AccountEntity;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-
 @MappedSuperclass
-public abstract class DomainResourceAccountEntity<T extends IDomainResource<T>> extends DomainResourceEntity<T>
+public abstract class DomainResourceAccountEntity<T extends IAccountDomainResource<T>> extends DomainResourceEntity<T>
 {
     /**
      * 
@@ -42,15 +43,21 @@ public abstract class DomainResourceAccountEntity<T extends IDomainResource<T>> 
     @JsonView(JsonGenerationView.Full.class)
     @ManyToOne(targetEntity = AccountEntity.class, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "accountUuid", updatable = false, referencedColumnName = "systemUuid", nullable = false)
-    protected IAccount account;
+    private IAccount account;
 
     public IAccount getAccount()
     {
         return account;
     }
 
-    public void setAccount(IAccount account)
+    public void setAccount(final IAccount account)
     {
         this.account = account;
+    }
+
+    public void copy(final T target)
+    {
+        super.copy(target);
+        this.setAccount(target.getAccount());
     }
 }

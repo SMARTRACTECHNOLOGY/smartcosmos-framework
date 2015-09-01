@@ -40,15 +40,15 @@ public abstract class DomainResourceNamedObjectEntity<T extends INamedObject<T>>
 
     @JsonView(JsonGenerationView.Published.class)
     @Column(length = 255, nullable = false)
-    protected String name;
+    private String name;
 
     @JsonView(JsonGenerationView.Standard.class)
     @Column(length = 1024)
-    protected String description;
+    private String description;
 
     @JsonView(JsonGenerationView.Standard.class)
     @Basic
-    protected boolean activeFlag = true;
+    private boolean activeFlag = true;
 
     @Override
     public String getName()

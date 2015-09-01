@@ -33,7 +33,7 @@ import javax.persistence.Enumerated;
 import java.io.Serializable;
 
 @Entity(name = "account_user")
-public class UserEntity extends DomainResourceAccountEntity<IUser> implements IUser, Serializable
+public class UserEntity extends DomainResourceAccountEntity<IUser>implements IUser, Serializable
 {
     private static final long serialVersionUID = -1564031691451114125L;
 
@@ -60,7 +60,7 @@ public class UserEntity extends DomainResourceAccountEntity<IUser> implements IU
     }
 
     @Override
-    public void setEmailAddress(String emailAddress)
+    public void setEmailAddress(final String emailAddress)
     {
         this.emailAddress = emailAddress;
     }
@@ -72,7 +72,7 @@ public class UserEntity extends DomainResourceAccountEntity<IUser> implements IU
     }
 
     @Override
-    public void setRoleType(RoleType role)
+    public void setRoleType(final RoleType role)
     {
         this.roleType = role;
     }
@@ -84,7 +84,7 @@ public class UserEntity extends DomainResourceAccountEntity<IUser> implements IU
     }
 
     @Override
-    public void setGivenName(String givenName)
+    public void setGivenName(final String givenName)
     {
         this.givenName = givenName;
     }
@@ -96,24 +96,19 @@ public class UserEntity extends DomainResourceAccountEntity<IUser> implements IU
     }
 
     @Override
-    public void setSurname(String surname)
+    public void setSurname(final String surname)
     {
         this.surname = surname;
     }
 
     @Override
-    public void copy(IUser target)
+    public void copy(final IUser target)
     {
-        this.setUrn(target.getUrn());
-        this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
-        this.moniker = target.getMoniker();
+        super.copy(target);
 
         this.emailAddress = target.getEmailAddress();
-        this.account = target.getAccount();
-
         this.givenName = target.getGivenName();
         this.surname = target.getSurname();
-
         this.roleType = target.getRoleType();
     }
 }
