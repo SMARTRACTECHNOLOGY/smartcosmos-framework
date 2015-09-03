@@ -28,7 +28,7 @@ import net.smartcosmos.pojo.context.User;
 
 /**
  * Convenience Builder pattern class for creating new {@link net.smartcosmos.model.context.IUser} instances.
- * <p/>
+ * <p>
  * The minimum fields required to define a new instance are:
  * <ul>
  * <li>{@link net.smartcosmos.Field#EMAIL_ADDRESS_FIELD}</li>

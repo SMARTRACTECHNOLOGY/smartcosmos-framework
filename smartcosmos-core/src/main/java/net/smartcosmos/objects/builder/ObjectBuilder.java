@@ -28,7 +28,7 @@ import net.smartcosmos.objects.pojo.context.ObjectImpl;
 
 /**
  * Convenience Builder pattern class for creating new {@link net.smartcosmos.objects.model.context.IObject} instances.
- * <p/>
+ * <p>
  * The minimum fields required to define a new Object are
  * <ul>
  * <li>{@link net.smartcosmos.Field#OBJECT_URN_FIELD}</li>

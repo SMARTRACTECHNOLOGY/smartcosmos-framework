@@ -30,6 +30,9 @@ public final class AccountFactory
 
     /**
      * Creates a new instance of a registration client.
+     * 
+     * @param context
+     *            The context to use for the Client.
      *
      * @return New registration client instance
      */

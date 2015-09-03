@@ -36,10 +36,12 @@ public interface IGeospatialClient extends IUpdateableBaseClient<IGeospatialEntr
      * Queries for geospatial definitions with names that start with the case-sensitive pattern, returning all matches
      * using a {@link net.smartcosmos.util.json.ViewType#Standard} view.
      *
-     * @param nameLike Case-sensitive name like pattern (do not append any special characters like % or * to the end)
+     * @param nameLike
+     *            Case-sensitive name like pattern (do not append any special characters like % or * to the end)
      * @return Non-null (but possibly empty) collection of geospatial definitions that have a name that matches the
-     * specified pattern
+     *         specified pattern
      * @throws ServiceException
+     *             on error
      */
     Collection<IGeospatialEntry> findByNameLike(String nameLike) throws ServiceException;
 
@@ -47,11 +49,14 @@ public interface IGeospatialClient extends IUpdateableBaseClient<IGeospatialEntr
      * Queries for geospatial definitions with names that start with the case-sensitive pattern, returning all matches
      * using the specified field verbosity.
      *
-     * @param nameLike Case-sensitive name like pattern (do not append any special characters like % or * to the end)
-     * @param viewType Field verbosity
+     * @param nameLike
+     *            Case-sensitive name like pattern (do not append any special characters like % or * to the end)
+     * @param viewType
+     *            Field verbosity
      * @return Non-null (but possibly empty) collection of geospatial definitions that have a name that matches the
-     * specified pattern
+     *         specified pattern
      * @throws ServiceException
+     *             on error
      */
     Collection<IGeospatialEntry> findByNameLike(String nameLike, ViewType viewType) throws ServiceException;
 }

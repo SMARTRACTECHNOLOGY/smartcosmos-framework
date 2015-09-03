@@ -25,7 +25,7 @@ package net.smartcosmos.model.base;
  * peer domain resources. For example, a set of five different type values
  * may be used exclusively to categorize all of the account's
  * {@link net.smartcosmos.objects.model.context.IObject} instances.
- * <p/>
+ * <p>
  * The ontological categories are account specific; each account context will
  * have its own unique ontology.
  */

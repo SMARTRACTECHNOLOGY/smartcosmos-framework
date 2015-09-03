@@ -30,7 +30,7 @@ import org.json.JSONException;
  * beyond the expected primitive data types to more powerful composite types
  * like {@link MetadataDataType#JSONType} and
  * {@link MetadataDataType#XMLType}.
- * <p/>
+ * <p>
  * Developers <b>must</b> rely on the platform-defined serialization rules
  * for every data type <i>except</i> {@link MetadataDataType#Custom}.
  */

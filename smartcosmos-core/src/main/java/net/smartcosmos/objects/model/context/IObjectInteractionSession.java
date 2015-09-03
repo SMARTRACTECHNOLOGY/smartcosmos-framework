@@ -27,7 +27,7 @@ import net.smartcosmos.model.base.ITypedObject;
 /**
  * Simple construct used to establish a logical albeit arbitrarily defined peer relationship between
  * a collection of {@link IObjectInteraction} instances.
- * <p/>
+ * <p>
  * The duration of an interaction session is arbitrary; it may be seconds, hours, days, or any
  * time period defined by the application data being captured.
  */

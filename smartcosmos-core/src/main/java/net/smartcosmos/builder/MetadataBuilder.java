@@ -27,7 +27,7 @@ import net.smartcosmos.pojo.context.Metadata;
 
 /**
  * Convenience Builder pattern class for creating new {@link net.smartcosmos.model.context.IMetadata} instances.
- * <p/>
+ * <p>
  * The minimum fields required to define a new instance are:
  * <ul>
  * <li>{@link net.smartcosmos.Field#KEY_FIELD}</li>

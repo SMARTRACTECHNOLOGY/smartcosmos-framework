@@ -7,7 +7,7 @@
  * implementation of {@link net.smartcosmos.platform.resource.AbstractPlatformResource}. When a resource encounters
  * an exception, the developer may opt to include logic that checks the <code>KnowledgeBaseFactory</code> for any
  * <code>IKnowledgeBaseArticles</code> that might help end-developer resolve the exceptional condition.
- * <p/>
+ * <p>
  * It is up to the individual {@link net.smartcosmos.platform.api.kb.IKnowledgeBaseArticle} to determine if it can
  * contribute content to a specific exception by means of evaluating the exception and its stack trace programmatically
  * in {@link net.smartcosmos.platform.api.kb.IKnowledgeBaseArticle

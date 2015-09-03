@@ -27,7 +27,7 @@ import net.smartcosmos.pojo.extension.ExternalExtension;
 
 /**
  * Convenience Builder pattern class for creating new {@link IExternalExtension} instances.
- * <p/>
+ * <p>
  * The minimum fields required to define a new instance are:
  * <ul>
  * <li>{@link net.smartcosmos.Field#NAME_FIELD}</li>

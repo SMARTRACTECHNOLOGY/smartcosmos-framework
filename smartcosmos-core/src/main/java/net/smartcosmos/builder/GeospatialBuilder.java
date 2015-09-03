@@ -28,7 +28,7 @@ import net.smartcosmos.pojo.geo.GeospatialEntry;
 
 /**
  * Convenience Builder pattern class for creating new {@link IGeospatialEntry} instances.
- * <p/>
+ * <p>
  * The minimum fields required to define a new instance are:
  * <ul>
  * <li>{@link net.smartcosmos.Field#NAME_FIELD}</li>

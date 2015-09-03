@@ -25,8 +25,8 @@ package net.smartcosmos.platform.bundle.quartz;
  * acceptable values, please refer to the
  * <a href="http://www.quartz-scheduler.org/generated/2.2.1/pdf/Quartz_Scheduler_Configuration_Guide.pdf">Quartz
  * Scheduler Configuration Guide, Version 2.2.1</a>.
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * <b>Configuration Parameters:</b>
  * <table>
  * <tr>

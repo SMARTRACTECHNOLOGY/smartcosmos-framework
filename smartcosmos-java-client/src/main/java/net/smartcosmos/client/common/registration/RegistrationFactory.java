@@ -34,7 +34,8 @@ public final class RegistrationFactory
     /**
      * Creates a new instance of a registration client.
      *
-     * @param server Server location, e.g. https://objects.example.com
+     * @param server
+     *            Server location, e.g. https://objects.example.com
      * @return New registration client instance
      */
     public static IRegistrationClient createClient(String server)
@@ -45,6 +46,8 @@ public final class RegistrationFactory
     /**
      * Creates a new instance of a registration client pointing at a specific server instance.
      *
+     * @param context
+     *            Context to use for client.
      * @return New registration client instance
      */
     public static IRegistrationClient createClient(ServerContext context)
