@@ -280,6 +280,12 @@
                 <plugin>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>2.15</version>
+                    <configuration>
+                        <configLocation>checkstyle/base.xml</configLocation>
+                        <!-- <includeTestSourceDirectory>true</includeTestSourceDirectory> -->
+                        <failOnViolation>true</failOnViolation>
+                        <excludes>**/generated-sources/**/*</excludes>
+                    </configuration>
                     <dependencies>
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
@@ -300,12 +306,6 @@
                                 <goal>check</goal>
                             </goals>
                             <phase>validate</phase>
-                            <configuration>
-                                <configLocation>checkstyle/base.xml</configLocation>
-                                <!-- <includeTestSourceDirectory>true</includeTestSourceDirectory> -->
-                                <failOnViolation>true</failOnViolation>
-                                <excludes>**/generated-sources/**/*</excludes>
-                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
@@ -419,6 +419,13 @@
             <id>release</id>
             <build>
                 <plugins>
+                    <plugin>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <configuration>
+                            <failOnViolation>false</failOnViolation>
+
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
