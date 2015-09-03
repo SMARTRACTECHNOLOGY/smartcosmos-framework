@@ -22,7 +22,7 @@
     <parent>
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-framework-root</artifactId>
-        <version>2.10.1</version>
+        <version>2.10.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-dependencies</artifactId>
@@ -351,22 +351,22 @@
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-core</artifactId>
-                <version>2.10.1</version>
+                <version>2.10.2-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-extension-api</artifactId>
-                <version>2.10.1</version>
+                <version>2.10.2-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos.extension</groupId>
                 <artifactId>smartcosmos-extension-starter-test</artifactId>
-                <version>2.10.1</version>
+                <version>2.10.2-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-java-client</artifactId>
-                <version>2.10.1</version>
+                <version>2.10.2-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.jadira.usertype</groupId>
