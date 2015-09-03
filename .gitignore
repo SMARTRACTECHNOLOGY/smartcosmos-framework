@@ -1,6 +1,6 @@
 # Java compiled files
 *.class
-
+*.releaseBackup
 
 # Package Files #
 *.jar
@@ -25,6 +25,7 @@ target/
 server-work
 rest/server-work/
 rest/log
+/release.properties
 
 dependency-reduced-pom.xml.bak
 
