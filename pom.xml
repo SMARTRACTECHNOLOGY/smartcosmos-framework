@@ -170,6 +170,19 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.18.1</version>
                 </plugin>
+                <!-- This replaces the standard maven deploy plugin. -->
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.5</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>smt-internal</serverId>
+                        <nexusUrl>https://nexus.smartcosmos.net/nexus</nexusUrl>
+                        <stagingProfileId>c0d04f5594b11</stagingProfileId>
+                        <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <!-- Non-JAR related plugins that are necessary for everything across the ecosystem. -->
@@ -181,6 +194,10 @@
             <plugin>
                 <groupId>com.google.code.sortpom</groupId>
                 <artifactId>maven-sortpom-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
