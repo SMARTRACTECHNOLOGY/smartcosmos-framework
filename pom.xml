@@ -132,7 +132,7 @@
                         <scmCommentPrefix>SMART COSMOS Release (Build ${buildNumber})</scmCommentPrefix>
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                         <resume>false</resume>
-                        <goals>verify</goals>
+                        <goals>deploy</goals>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
                 </plugin>
@@ -177,7 +177,7 @@
                     <version>1.6.5</version>
                     <extensions>true</extensions>
                     <configuration>
-                        <serverId>smt-internal</serverId>
+                        <serverId>deployment</serverId>
                         <nexusUrl>https://nexus.smartcosmos.net/nexus</nexusUrl>
                         <stagingProfileId>c0d04f5594b11</stagingProfileId>
                         <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
@@ -235,7 +235,7 @@
     </scm>
     <distributionManagement>
         <repository>
-            <id>smt-internal</id>
+            <id>deployment</id>
             <name>SMARTRAC Internal Releases</name>
             <url>https://nexus.smartcosmos.net/nexus/content/repositories/releases/</url>
         </repository>
