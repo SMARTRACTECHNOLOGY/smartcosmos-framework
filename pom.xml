@@ -127,7 +127,7 @@
                         <scmCommentPrefix>SMART COSMOS Release (Build ${buildNumber})</scmCommentPrefix>
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                         <resume>false</resume>
-                        <goals>deploy</goals>
+                        <goals>verify</goals>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
                 </plugin>
