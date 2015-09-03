@@ -105,12 +105,9 @@ public class User extends DomainResource< IUser > implements IUser
     @Override
     public void copy(IUser target)
     {
-        if (target.getUrn() == null)
+        if (target.getUrn() != null)
         {
-            this.urn = null;
-        } else
-        {
-            this.urn = UuidUtil.getUrn();
+            setUrn(UuidUtil.getUrn());
         }
         this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
         this.moniker = target.getMoniker();

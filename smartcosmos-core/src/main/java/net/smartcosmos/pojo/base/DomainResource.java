@@ -31,44 +31,42 @@ import java.util.UUID;
 @JsonPropertyOrder(value = {"urn", "lastModifiedTimestamp" })
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
-    @JsonView(JsonGenerationView.Minimum.class)
-    protected String urn;
 
-    @JsonView(JsonGenerationView.Minimum.class)
-    protected String systemUuid;
+    protected UUID systemUuid;
 
-    @JsonView(JsonGenerationView.Standard.class)
     protected long lastModifiedTimestamp;
 
-    @JsonView(JsonGenerationView.Full.class)
     protected String moniker;
 
     @Override
     public void setUrn(String urn)
 
     {
-        this.urn = urn;
+        this.systemUuid = UuidUtil.getUuidFromUrn(urn);
     }
 
     @Override
+    @JsonView(JsonGenerationView.Minimum.class)
     public String getUrn()
     {
-        return urn;
+        return UuidUtil.getUrnFromUuid(systemUuid);
     }
 
     @Override
     public UUID getSystemUuid()
     {
-        return UuidUtil.getUuidFromUrn(urn);
+        return systemUuid;
     }
 
     @Override
+    @JsonView(JsonGenerationView.Standard.class)
     public long getLastModifiedTimestamp()
     {
         return lastModifiedTimestamp;
     }
 
     @Override
+    @JsonView(JsonGenerationView.Full.class)
     public String getMoniker()
     {
         return moniker;
@@ -87,36 +85,47 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     }
 
     @Override
-    public boolean equals(Object o)
+    public boolean equals(Object obj)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        DomainResource that = (DomainResource) o;
-
-        if (lastModifiedTimestamp != that.lastModifiedTimestamp) return false;
-        if (moniker != null ? !moniker.equals(that.moniker) : that.moniker != null) return false;
-        if (!urn.equals(that.urn)) return false;
-
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DomainResource other = (DomainResource) obj;
+        if (lastModifiedTimestamp != other.lastModifiedTimestamp)
+            return false;
+        if (moniker == null)
+        {
+            if (other.moniker != null)
+                return false;
+        } else if (!moniker.equals(other.moniker))
+            return false;
+        if (systemUuid == null)
+        {
+            if (other.systemUuid != null)
+                return false;
+        } else if (!systemUuid.equals(other.systemUuid))
+            return false;
         return true;
     }
 
     @Override
     public int hashCode()
     {
-        int result = urn.hashCode();
-        result = 31 * result + (int) (lastModifiedTimestamp ^ (lastModifiedTimestamp >>> 32));
-        result = 31 * result + (moniker != null ? moniker.hashCode() : 0);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (lastModifiedTimestamp ^ (lastModifiedTimestamp >>> 32));
+        result = prime * result + ((moniker == null) ? 0 : moniker.hashCode());
+        result = prime * result + ((systemUuid == null) ? 0 : systemUuid.hashCode());
         return result;
     }
 
     @Override
     public String toString()
     {
-        return "DomainResource{" +
-               ", urn='" + urn + '\'' +
-               ", lastModifiedTimestamp=" + lastModifiedTimestamp +
-               ", moniker='" + moniker + '\'' +
-               '}';
+        return "DomainResource [systemUuid=" + systemUuid + ", lastModifiedTimestamp=" + lastModifiedTimestamp +
+               ", moniker=" + moniker + "]";
     }
 }
