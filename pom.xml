@@ -163,7 +163,7 @@
             </plugin>
         </plugins>
     </build>
-    <url>http://smartcosmos.net/</url>
+    <url>http://smartcosmos.net</url>
     <inceptionYear>2015</inceptionYear>
     <organization>
         <name>Smartrac Technology Fletcher, Inc.</name>
@@ -193,7 +193,7 @@
         <connection>scm:git:git://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework.git</connection>
         <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-framework.git</developerConnection>
         <tag>HEAD</tag>
-        <url>https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework</url>
+        <url>https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework/tree/master/</url>
     </scm>
     <distributionManagement>
         <repository>
