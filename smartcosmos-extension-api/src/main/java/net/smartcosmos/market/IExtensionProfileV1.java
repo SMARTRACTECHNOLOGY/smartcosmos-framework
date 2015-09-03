@@ -62,7 +62,7 @@ public interface IExtensionProfileV1 extends IProfile
     /**
      * Optional URL that links to a <b>GitHub</b> repository that contains the open source software when
      * {@link #isOpenSource()} is set to <b>true</b>.
-     * <p/>
+     * <p>
      * <B>NOTE:</B> URL size is limited to 255 characters and must be a fully qualified URL.
      *
      * @return GitHub repository URL, or null if no URL is provided or {@link #isOpenSource()} is set to <b>false</b>
@@ -79,7 +79,7 @@ public interface IExtensionProfileV1 extends IProfile
 
     /**
      * Optional URL that links to a <b>YouTube</b> video introduction of the extension.
-     * <p/>
+     * <p>
      * <B>NOTE:</B> URL size is limited to 255 characters and must be a fully qualified URL.
      *
      * @return YouTube video URL, or null if no URL is provided or {@link #hasYouTubeVideoIntroduction()} is set to
@@ -98,7 +98,7 @@ public interface IExtensionProfileV1 extends IProfile
     /**
      * Optional URL that links to an external web site that contains elaborated or advanced configuration notes for
      * this extension.
-     * <p/>
+     * <p>
      * <B>NOTE:</B> URL size is limited to 255 characters and must be a fully qualified URL.
      *
      * @return External site URL, or null if no URL is provided or {@link #hasConfigurationNotes()} is set to
@@ -127,7 +127,7 @@ public interface IExtensionProfileV1 extends IProfile
     /**
      * Optional URL that links to the external web site where support or a support ticket system is located for
      * those using this extension and need additional help.
-     * <p/>
+     * <p>
      * <B>NOTE:</B> URL size is limited to 255 characters and must be a fully qualified URL.
      *
      * @return External support site URL, or null if no URL is provided or {@link #hasSupport()} is set to <b>false</b>
@@ -136,7 +136,7 @@ public interface IExtensionProfileV1 extends IProfile
 
     /**
      * Mandatory field that points to a web page containing the license text associated with this extension.
-     * <p/>
+     * <p>
      * <B>NOTE:</B> URL size is limited to 255 characters and must be a fully qualified URL.
      *
      * @return non-null URL of the license text associated with this extension
@@ -163,7 +163,7 @@ public interface IExtensionProfileV1 extends IProfile
 
     /**
      * Optional URL that links to the external web site where the usage instructions are located.
-     * <p/>
+     * <p>
      * <B>NOTE:</B> URL size is limited to 255 characters and must be a fully qualified URL.
      *
      * @return Usage instructions URL, or null if no URL is provided or {@link #hasUsageInstructions()} is set to
@@ -180,7 +180,7 @@ public interface IExtensionProfileV1 extends IProfile
 
     /**
      * Optional URL that links to a PDF download containing a marketing data sheet.
-     * <p/>
+     * <p>
      * <B>NOTE:</B> URL size is limited to 255 characters and must be a fully qualified URL where the MIME type
      * returned is that of a PDF
      *
@@ -197,7 +197,7 @@ public interface IExtensionProfileV1 extends IProfile
 
     /**
      * Optional URL that links to a marketing web site dedicated to this extension.
-     * <p/>
+     * <p>
      * <B>NOTE:</B> URL size is limited to 255 characters and must be a fully qualified URL.
      *
      * @return External marketing web site URL, or null if no URL is provided or {@link #hasMarketingWebSite()}
@@ -207,7 +207,7 @@ public interface IExtensionProfileV1 extends IProfile
 
     /**
      * Flag that indicates if a <b>Server Extension</b> offers an API that other extensions may use.
-     * <p/>
+     * <p>
      * <b>NOTE:</b> When the {@link #getExtensionType()} ()} is not {@link ExtensionType#ServerExtension}, this field
      * is undefined!
      *
@@ -218,8 +218,8 @@ public interface IExtensionProfileV1 extends IProfile
     /**
      * Optional URL that links to a <b>Server Extension</b>'s public API at a location like
      * <a href="Apiary.io">Apiary.io</a>.
-     * <p/>
-     * <p/>
+     * <p>
+     * <p>
      * <B>NOTE:</B> URL size is limited to 255 characters and must be a fully qualified URL.
      *
      * @return External API definition URL, or null if no URL is provided or {@link #hasApiDocumentation()} is set to
@@ -230,7 +230,7 @@ public interface IExtensionProfileV1 extends IProfile
     /**
      * Non-null list of simple search terms defined by the developer that assist in locating this plugin. A maximum of
      * <b>5</b> search terms are supported!
-     * <p/>
+     * <p>
      * <b>NOTE:</b> Search terms should be unique and separate from the seller's profile name, extension type, or other
      * fields included in this interface.
      *

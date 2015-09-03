@@ -29,7 +29,7 @@ import net.smartcosmos.model.base.IReferentialObject;
  * optional description. TimelineEntry entries may be flagged as a highlight (arbitrarily interpreted
  * by the developer). The intent of a highlight is to let some timeline entries stand out over
  * their peers.
- * <p/>
+ * <p>
  * TimelineEntry entries may also be flagged as invisible, preserving the entry but
  * filtering it out automatically from the default timeline retrieval operations. Visibility is
  * a separate property than the {@link net.smartcosmos.model.base.INamedObject#isActive()} property by

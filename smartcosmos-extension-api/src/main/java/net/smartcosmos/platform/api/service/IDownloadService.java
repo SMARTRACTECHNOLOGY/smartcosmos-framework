@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * Provides HTTP download services for remote content, eliminating an extra POST to a platform service by merely
  * pointing to a URL instead of having to actually stream over a (potentially) slow connection the actual content.
- * <p/>
+ * <p>
  * For example, if you are on a mobile device and you want a platform service to work with a large resource found at
  * http://www.example.com/myPicture.jpg, instead of downloading the JPG to the mobile device (bandwidth used) and then
  * uploading it to the platform service (bandwidth used), simply provide the content URL and let the server download

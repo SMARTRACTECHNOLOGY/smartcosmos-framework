@@ -69,7 +69,7 @@ import javax.ws.rs.core.Response;
  * an OAuth 2 bearer token, delegating the authentication to an OAuth 2 {@link io.dropwizard.auth.Authenticator} or,
  * , if no bearer token is present, delegating the authentication to an HTTP Basic
  * {@link io.dropwizard.auth.Authenticator}.
- * <p/>
+ * <p>
  * The primary benefit for this provider is to support multiple authentication types concurrently at a single endpoint.
  *
  * @param <T> the principal type.

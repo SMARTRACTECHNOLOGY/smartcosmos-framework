@@ -67,7 +67,7 @@ public interface IServerExtension<T extends AbstractSmartCosmosExtensionConfigur
      * YML configuration file path is defined. At bootstrap time, the path to the YML file is dynamically injected into
      * the base class {@link net.smartcosmos.platform.base.AbstractServerExtension} for proper processing and
      * loading.
-     * <p/>
+     * <p>
      * <b>NOTE:</b> Rarely should the developer ever have to do anything with this method when relying on the
      * base class.
      *

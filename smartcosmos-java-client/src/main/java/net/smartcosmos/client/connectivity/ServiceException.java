@@ -28,7 +28,7 @@ import net.smartcosmos.pojo.base.Result;
  * Generalized exception that indicates the underlying platform web service call failed. In most instances, the
  * {@link #getCode()} will map to a enum values found in {@link net.smartcosmos.pojo.base.Result}, several examples of
  * which are illustrated below with see links.
- * <p/>
+ * <p>
  * Service exceptions <i>may</i> include a well-defined {@link net.smartcosmos.pojo.base.Result} error code if and only
  * if the web service itself was actually reached and invoked. In those cases where, for example, an Internet connection
  * wasn't available and the web service call never actually reached the cloud, the {@link #hasCode} will return false

@@ -30,7 +30,7 @@ import net.smartcosmos.objects.pojo.context.ObjectInteraction;
 /**
  * Convenience Builder pattern class for creating new
  * {@link net.smartcosmos.objects.model.context.IObjectInteraction} instances.
- * <p/>
+ * <p>
  * The minimum fields required to define a new instance are:
  * <ul>
  * <li>{@link net.smartcosmos.Field#TYPE_FIELD}</li>

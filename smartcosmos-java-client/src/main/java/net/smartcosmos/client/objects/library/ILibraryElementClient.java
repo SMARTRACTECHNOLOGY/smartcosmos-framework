@@ -83,8 +83,8 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
      * Simple query for children libraryElements of a libraryElement.
      *
      * @param libraryElementUrn
-     * @return empty Collection<ILibraryElement> if libraryElement has no children, otherwise
-     * a Collection<LibraryElement> of the child libraryElements
+     * @return empty Collection&lt;ILibraryElement&gt; if libraryElement has no children, otherwise
+     * a Collection&lt;LibraryElement&gt; of the child libraryElements
      */
     Collection<ILibraryElement> getChildren(String libraryElementUrn) throws ServiceException;
 
@@ -93,8 +93,8 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
      *
      * @param libraryElementUrn
      * @param viewType optional viewType
-     * @return empty Collection<ILibraryElement> if libraryElement has no children, otherwise
-     * a Collection<LibraryElement> of the child libraryElements
+     * @return empty Collection&lt;ILibraryElement&gt; if libraryElement has no children, otherwise
+     * a Collection&lt;LibraryElement&gt; of the child libraryElements
      */
     Collection<ILibraryElement> getChildren(String libraryElementUrn, ViewType viewType) throws ServiceException;
 

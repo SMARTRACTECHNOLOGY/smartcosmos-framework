@@ -27,11 +27,11 @@ import net.smartcosmos.model.base.ITypedObject;
 /**
  * Foundational artifact within the SMART COSMOS Objects platform used to represent
  * nouns, e.g. people, bank accounts, vehicles, parks, buildings, etc.
- * <p/>
+ * <p>
  * All objects are {@link net.smartcosmos.model.base.INamedObject} instances so
  * that a human-readable {@link net.smartcosmos.model.base.INamedObject#getName()}
  * can be assigned.
- * <p/>
+ * <p>
  * This is the only class within the SMART COSMOS Objects platform that replaces the
  * system-assigned URN with an arbitrary developer-defined
  * {@link #getObjectUrn()}. This <code>objectUrn</code> must be unique within

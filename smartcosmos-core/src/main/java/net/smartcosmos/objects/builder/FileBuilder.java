@@ -27,7 +27,7 @@ import net.smartcosmos.objects.pojo.context.File;
 
 /**
  * Convenience Builder pattern class for creating new {@link net.smartcosmos.objects.model.context.IFile} instances.
- * <p/>
+ * <p>
  * The minimum fields required to define a new instance are:
  * <ul>
  * <li>{@link net.smartcosmos.Field#ENTITY_REFERENCE_TYPE}</li>

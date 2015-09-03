@@ -37,11 +37,11 @@ import java.util.List;
 
 /**
  * Created by tcross on 26.01.2015.
- * <p/>
+ * <p>
  * A singleton with two public methods, one of which returns the appropriate
  * parent library entity type for a particular library entity type, and the other
  * a boolean to indicate whether a library type accepts links to non-library objects.
- * <p/>
+ * <p>
  * Instantiated by LibraryHierarchyFactory, which is responsible for ensuring its
  * completeness and consistency (in the sense of the list of library element types
  * and the list of library link flags are the same size) of the instance.
@@ -82,12 +82,12 @@ public final class LibraryHierarchy implements ILibraryHierarchy
     /**
      * @param libraryElementType libraryElementType string
      * @return boolean indicating whether this is a legitimate libraryElementType
-     * <p/>
+     * <p>
      * Returns the parent library element type for the input library element type.
-     * <p/>
+     * <p>
      * Returns null if the input library element type is found, but has no parent, ie.,
      * is the element at the top of the hierarchy.
-     * <p/>
+     * <p>
      * If the input type is not found at all, returns an error string "ErrNoSuchType"
      */
     public boolean isLibraryElementType(String libraryElementType)
@@ -105,12 +105,12 @@ public final class LibraryHierarchy implements ILibraryHierarchy
     /**
      * @param libraryElementType libraryElementType string
      * @return String this libraryElementType's parent libraryElementType
-     * <p/>
+     * <p>
      * Returns the parent library element type for the input library element type.
-     * <p/>
+     * <p>
      * Returns null if the input library element type is found, but has no parent, ie.,
      * is the element at the top of the hierarchy.
-     * <p/>
+     * <p>
      * If the input type is not found at all, returns an error string "ErrNoSuchType"
      */
     public String getParentTypeFor(String libraryElementType)
@@ -137,7 +137,7 @@ public final class LibraryHierarchy implements ILibraryHierarchy
     /**
      * @param libraryEntityType
      * @return boolean
-     * <p/>
+     * <p>
      * Returns a boolean flag indicating whether library elements of the input library element type
      * can have library links added to them. default configuration (see objects.yml) is to allow links
      * only to the bottom-most element in the library hierarchy.

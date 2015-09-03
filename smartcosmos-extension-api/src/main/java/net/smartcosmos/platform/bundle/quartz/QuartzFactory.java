@@ -32,8 +32,8 @@ import java.util.Map;
  * acceptable values, please refer to the
  * <a href="http://www.quartz-scheduler.org/generated/2.2.1/pdf/Quartz_Scheduler_Configuration_Guide.pdf">Quartz
  * Scheduler Configuration Guide, Version 2.2.1</a>.
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * <b>Configuration Parameters:</b>
  * <table>
  * <tr>
@@ -137,7 +137,7 @@ import java.util.Map;
  * <td>org.quartz.jobStore.class</td>
  * </tr>
  * </table>
- * <p/>
+ * <p>
  * <b>NOTE:</b> The default configuration uses a RAMJobStore. For example on how to configure a JDBCJobStoreTX, please
  * see the sample documentation at {@link QuartzBundle}.
  */

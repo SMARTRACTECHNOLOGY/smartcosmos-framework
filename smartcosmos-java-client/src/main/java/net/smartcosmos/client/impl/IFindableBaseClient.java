@@ -26,8 +26,9 @@ import net.smartcosmos.util.json.ViewType;
 /**
  * Locates a single, specific SMART COSMOS entity by its system-assigned URN.
  *
- * @param <T> One of the SMART COSMOS contextual entities.
- * @see net.smartcosmos.model.extension.IExtension
+ * @param <T>
+ *            One of the SMART COSMOS contextual entities.
+ * @see net.smartcosmos.model.extension.IExternalExtension
  * @see net.smartcosmos.objects.model.context.IDevice
  * @see net.smartcosmos.objects.model.context.IFile
  * @see net.smartcosmos.model.geo.IGeospatialEntry
@@ -45,22 +46,27 @@ public interface IFindableBaseClient<T>
 {
     /**
      * Locate the contextual entity that has a case-sensitive match on the given system assigned URN.
-     * <p/>
+     * <p>
      * Returns a {@link net.smartcosmos.util.json.ViewType#Standard} view.
      *
-     * @param urn System generated URN assigned to the entity at creation time
+     * @param urn
+     *            System generated URN assigned to the entity at creation time
      * @return Instance of T with all {@link net.smartcosmos.util.json.ViewType#Standard} fields populated
-     * @throws net.smartcosmos.client.connectivity.ServiceException if no matching URN exists
+     * @throws ServiceException
+     *             if no matching URN exists
      */
     T findByUrn(String urn) throws ServiceException;
 
     /**
      * Locate the object that has a case-sensitive match on the given URN.
      *
-     * @param urn      System generated URN assigned to the entity at creation time
-     * @param viewType Field verbosity
+     * @param urn
+     *            System generated URN assigned to the entity at creation time
+     * @param viewType
+     *            Field verbosity
      * @return Instance of T with appropriate fields populated based on the specified viewType
-     * @throws ServiceException if no matching URN exists
+     * @throws ServiceException
+     *             if no matching URN exists
      */
     T findByUrn(String urn, ViewType viewType) throws ServiceException;
 }

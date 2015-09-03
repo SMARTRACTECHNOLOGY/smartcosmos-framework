@@ -30,7 +30,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Convenience Builder pattern class for creating new {@link net.smartcosmos.objects.model.context.IRelationship}
  * instances.
- * <p/>
+ * <p>
  * The minimum fields required to define a new instance are:
  * <ul>
  * <li>{@link net.smartcosmos.Field#ENTITY_REFERENCE_TYPE}</li>

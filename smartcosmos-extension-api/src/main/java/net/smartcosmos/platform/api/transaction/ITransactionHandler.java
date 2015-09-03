@@ -37,7 +37,7 @@ public interface ITransactionHandler extends IService
 {
     /**
      * Processes the "fat JSON" that was submitted, automatically wrapped inside of a single unit-of-work.
-     * <p/>
+     * <p>
      * Throw any exception from this method to trigger a rollback of the <i>entire</i> operation.
      *
      * @param fatJson raw JSON document submitted by the caller

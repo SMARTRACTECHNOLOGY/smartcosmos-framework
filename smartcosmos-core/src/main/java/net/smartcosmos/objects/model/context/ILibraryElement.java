@@ -27,11 +27,11 @@ import net.smartcosmos.model.base.ITypedObject;
 /**
  * Foundational artifact within the SMART COSMOS Objects platform used to represent
  * nouns, e.g. people, bank accounts, vehicles, parks, buildings, etc.
- * <p/>
+ * <p>
  * All objects are {@link net.smartcosmos.model.base.INamedObject} instances so
  * that a human-readable {@link net.smartcosmos.model.base.INamedObject#getName()}
  * can be assigned.
- * <p/>
+ * <p>
  * The library element type is distinct from other {@link net.smartcosmos.model.base.INamedObject}
  * types in that the Type field is always set to "LibraryElement", and cannot be changed. The
  * field "LibraryElementType" is specific to LibraryElements, and is set to one of the values

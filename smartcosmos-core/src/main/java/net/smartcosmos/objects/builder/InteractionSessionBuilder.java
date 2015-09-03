@@ -29,7 +29,7 @@ import net.smartcosmos.objects.pojo.context.ObjectInteractionSession;
  * Convenience Builder pattern class for creating new
  * {@link net.smartcosmos.objects.model.context.IObjectInteractionSession}
  * instances.
- * <p/>
+ * <p>
  * The minimum fields required to define a new instance are:
  * <ul>
  * <li>{@link net.smartcosmos.Field#NAME_FIELD}</li>

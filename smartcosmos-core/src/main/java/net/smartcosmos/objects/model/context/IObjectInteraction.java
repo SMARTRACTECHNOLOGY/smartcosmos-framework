@@ -27,13 +27,13 @@ import net.smartcosmos.model.base.ITypedObject;
 /**
  * Captures an explicit interaction between two existing {@link IObject}
  * instances that already exist in the system.
- * <p/>
+ * <p>
  * The {@link #getObject()} is generally treated as the recipient of the interaction, while
  * the {@link net.smartcosmos.model.base.IReferentialObject} is considered the initiator. As a
  * concrete example, the person 'Jason' would be identified as the {@link net.smartcosmos.model.base.IReferentialObject}
  * while the {@link #getObject()} would be the vehicle 'Jeep' with the {@link #getType()} of
  * <b>Drives</b> to successfully capture the simple interaction that "Jason drives the Jeep."
- * <p/>
+ * <p>
  * Additional metadata, including {@link IFile},
  * {@link net.smartcosmos.model.geo.IGeospatialEntry}, {@link net.smartcosmos.model.context.IMetadata},
  * and {@link ITagAssignment} are typically used to capture
@@ -42,10 +42,10 @@ import net.smartcosmos.model.base.ITypedObject;
  * to capture the route that Jason drove, metadata to capture the mileage of the vehicle at
  * the start of the trip and at the end of the trip, and tags to represent landmarks along
  * the path that the vehicle drove.
- * <p/>
+ * <p>
  * Interactions capture a recurring pattern of interactivity between two objects. In other
  * words, interactions are used to capture 0, 1, or many relationships between objects.
- * <p/>
+ * <p>
  * If you are looking for a binary or true-false existence check, the recommended construct is
  * to use an {@link IRelationship} instead of an interaction.
  */

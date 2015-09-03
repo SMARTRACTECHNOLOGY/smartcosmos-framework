@@ -31,7 +31,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * being invoked. Examples of public (non-protected) endpoints include the use of
  * {@link net.smartcosmos.client.common.registration.IRegistrationClient} and the encode/decode operations defined by
  * {@link net.smartcosmos.client.common.metadata.IMetadataClient}.
- * <p/>
+ * <p>
  * The default {@link #getServerUrl()} is <b>https://objects.smartcosmos.net</b>
  * The default {@link #getContextPath()} is <b>/rest</b>
  */

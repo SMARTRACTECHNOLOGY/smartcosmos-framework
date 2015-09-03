@@ -30,12 +30,12 @@ import org.json.JSONObject;
  * {@link net.smartcosmos.model.base.IUrnNamespace#getUrn()} method or {@link net.smartcosmos.Field#URN_FIELD} field is
  * utilized by the update routines to find the original persisted object. Once that object is found, the new values
  * are merged with the existing values.
- * <p/>
+ * <p>
  * <b>NOTE:</b> For details on how to reset an entity's moniker field back to a <code>NULL</code> value after it has
  * been assigned a non-null value, please refer to the class {@link net.smartcosmos.model.base.IMoniker} JavaDocs.
  *
  * @param <T> One of the updateable SMART COSMOS contextual entities.
- * @see net.smartcosmos.model.extension.IExtension
+ * @see net.smartcosmos.model.extension.IExternalExtension
  * @see net.smartcosmos.objects.model.context.IDevice
  * @see net.smartcosmos.model.geo.IGeospatialEntry
  * @see net.smartcosmos.objects.model.context.IObject
@@ -50,7 +50,8 @@ public interface IUpdateableBaseClient<T> extends ICreateableBaseClient<T>
      * Submits every field for update. Use this method if you aren't sure what fields changed or if
      * you aren't concerned about network utilization.
      *
-     * @param instance
+     * @param instance the instance to update
+     * @throws ServiceException If something went wrong
      */
     void update(T instance) throws ServiceException;
 

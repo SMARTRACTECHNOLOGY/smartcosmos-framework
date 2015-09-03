@@ -75,11 +75,11 @@ public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
      * JSON structure that represents two distinct digital signatures, a signature of the actual file contents
      * upon submission to the platform and a second signature of the metadata used to describe the file definition
      * (including the digital signature of the file itself).
-     * <p/>
+     * <p>
      * The JSON digital signature block also includes narrative on how the digital signatures were generated, including
      * algorithm, iterations, and the actual library used. A prototypical example of a digital signature JSON block is
      * below for reference:
-     * <p/>
+     * <p>
      * <code>{<br/>
      * "algorithm": "SHA-256",<br/>
      * "description": "The contentsSignature is of the file contents exclusively. The root signature is of the

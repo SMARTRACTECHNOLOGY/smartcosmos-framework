@@ -24,10 +24,10 @@ import java.io.Serializable;
 
 /**
  * Standardized versioning mechanism used by plugin archetypes to define API versions.
- * <p/>
+ * <p>
  * A normal version number MUST take the form X.Y.Z-Q+M where X, Y, and Z are integers, Q is a pre-release identifier
  * for development use only, and M is build metadata that is outright ignored.
- * <p/>
+ * <p>
  * <ul>
  * <li>X is the major version</li>
  * <li>Y is the minor version</li>
@@ -35,7 +35,7 @@ import java.io.Serializable;
  * <li>Q is the pre-release identifier</li>
  * <li>M is the build metadata</li>
  * </ul>
- * <p/>
+ * <p>
  * Each element MUST increase numerically, except the identifier or build metadata. For instance: 1.9.0 &lt; 1.10.0 &lt;
  * 1.11.0.
  *
