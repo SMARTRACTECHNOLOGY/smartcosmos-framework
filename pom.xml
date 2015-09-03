@@ -124,6 +124,8 @@
                     <configuration>
                         <!-- During release:perform, enable the "release" profile -->
                         <releaseProfiles>release</releaseProfiles>
+                        <scmCommentPrefix>SMART COSMOS Release from Jenkins Build ${buildNumber}</scmCommentPrefix>
+                        <resume>false</resume>
                         <goals>deploy</goals>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
