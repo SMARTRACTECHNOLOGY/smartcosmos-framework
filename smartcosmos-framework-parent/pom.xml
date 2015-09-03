@@ -34,7 +34,7 @@
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-dependencies</artifactId>
-                <version>${smartcosmos-framework.version}</version>
+                <version>2.10.1-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -150,7 +150,7 @@
                         <dependency>
                             <groupId>net.smartcosmos</groupId>
                             <artifactId>smartcosmos-builds-tools</artifactId>
-                            <version>${smartcosmos-build-tools.version}</version>
+                            <version>1.0.2-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                     <executions>
@@ -290,7 +290,7 @@
                         <dependency>
                             <groupId>net.smartcosmos</groupId>
                             <artifactId>smartcosmos-builds-tools</artifactId>
-                            <version>${smartcosmos-build-tools.version}</version>
+                            <version>1.0.2-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                     <executions>

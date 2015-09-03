@@ -351,22 +351,22 @@
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-core</artifactId>
-                <version>${smartcosmos-framework.version}</version>
+                <version>2.10.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-extension-api</artifactId>
-                <version>${smartcosmos-framework.version}</version>
+                <version>2.10.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos.extension</groupId>
                 <artifactId>smartcosmos-extension-starter-test</artifactId>
-                <version>${smartcosmos-framework.version}</version>
+                <version>2.10.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-java-client</artifactId>
-                <version>${smartcosmos-framework.version}</version>
+                <version>2.10.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.jadira.usertype</groupId>
