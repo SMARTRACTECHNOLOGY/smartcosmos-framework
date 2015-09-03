@@ -304,6 +304,7 @@
                                 <configLocation>checkstyle/base.xml</configLocation>
                                 <!-- <includeTestSourceDirectory>true</includeTestSourceDirectory> -->
                                 <failOnViolation>true</failOnViolation>
+                                <excludes>**/generated/**/*</excludes>
                             </configuration>
                         </execution>
                     </executions>
