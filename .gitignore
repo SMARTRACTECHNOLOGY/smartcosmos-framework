@@ -40,4 +40,6 @@ dependency-reduced-pom.xml.bak
 .DS_Store
 bin
 pom.xml.bak
+pom.xml.tag
+pom.xml.next
 *~
