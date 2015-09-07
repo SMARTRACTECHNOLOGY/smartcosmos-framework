@@ -31,11 +31,11 @@ import java.util.UUID;
 @JsonPropertyOrder(value = {"urn", "lastModifiedTimestamp" })
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
-
+    
     protected UUID systemUuid;
-
+  
     protected long lastModifiedTimestamp;
-
+  
     protected String moniker;
 
     @Override
@@ -126,6 +126,6 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     public String toString()
     {
         return "DomainResource [systemUuid=" + systemUuid + ", lastModifiedTimestamp=" + lastModifiedTimestamp +
-               ", moniker=" + moniker + "]";
+                ", moniker=" + moniker + "]";
     }
 }
