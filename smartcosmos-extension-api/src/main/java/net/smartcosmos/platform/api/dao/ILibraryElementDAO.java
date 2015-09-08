@@ -48,6 +48,8 @@ public interface ILibraryElementDAO extends IBaseDAO<ILibraryElement>, INamedObj
 {
     Collection<ILibraryElement> findChildren(String urn, IAccount account);
     Collection<ILibraryElement> findByNameAndType(String name, String libraryElementType, IAccount account);
+    Collection<ILibraryElement> findByNameAndTypeAndParent(String name, String libraryElementType, String parentUrn,
+                                                           IAccount account);
     ILibraryElement findParent(String urn, IAccount account);
 }
 
