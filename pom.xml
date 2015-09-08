@@ -24,6 +24,7 @@
     <version>2.10.8-development-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>SMART COSMOS Framework Root</name>
+    <description>SMART COSMOS™ Objects Core Interfaces, Extension API, Java Client, and helpful Maven Starter POMs</description>
     <prerequisites>
         <maven>3.0.0</maven>
     </prerequisites>
