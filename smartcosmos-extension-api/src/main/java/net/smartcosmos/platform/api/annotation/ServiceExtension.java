@@ -18,9 +18,20 @@
 
 package net.smartcosmos.platform.api.annotation;
 
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 /**
- * The annotation that defines a SmartCosmosServiceExtension.
+ * The annotation that defines a SMART COSMOS ServiceExtension.
  */
-public @interface SmartCosmosServerExtension
+@Documented
+@Target(TYPE)
+@Retention(RUNTIME)
+public @interface ServiceExtension
 {
+    ServiceType serviceType();
 }

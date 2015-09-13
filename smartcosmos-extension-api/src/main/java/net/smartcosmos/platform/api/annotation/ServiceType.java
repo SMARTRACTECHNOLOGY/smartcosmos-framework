@@ -22,11 +22,11 @@ package net.smartcosmos.platform.api.annotation;
  * Service extension type.
  * <p>
  * The constants of this enumerated type describe the type of service extension being implemented. They are used
- * in conjunction with the {@link SmartCosmosServiceExtension} meta-annotation type to specify the type of service
+ * in conjunction with the {@link ServiceExtension} meta-annotation type to specify the type of service
  * extension.
  * </p>
  */
-public enum SmartCosmosServiceType
+public enum ServiceType
 {
     /**
      * Manage account registrations, defines new users, and allows an administrator to define a specific password or
