@@ -60,7 +60,7 @@ public enum ServiceType
      */
     QUEUE,
     /**
-     * Remote storage service, e.g. AWS S3, Box.com, DropBox, or any other type of storage system
+     * Remote storage service, e.g. AWS S3, Box.com, DropBox, or any other type of storage system.
      */
     STORAGE
 }
