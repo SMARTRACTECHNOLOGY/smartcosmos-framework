@@ -58,12 +58,6 @@ public class SmartCosmosConfiguration extends Configuration
     @JsonProperty
     private String urlPattern;
 
-    @JsonProperty
-    private String enterpriseKey;
-
-    @JsonProperty
-    private String enterpriseKeySignature;
-
     @NotEmpty
     @JsonProperty
     private String adminEmailAddress;
@@ -120,6 +114,10 @@ public class SmartCosmosConfiguration extends Configuration
     @NotNull
     private EndpointsFactory endpointsFactory = new EndpointsFactory();
 
+    @Valid
+    @NotNull
+    LicenseFactory licenseFactory = new LicenseFactory();
+
     @NotNull
     private Map<String, String> serverExtensions = Maps.newLinkedHashMap();
 
@@ -161,6 +159,17 @@ public class SmartCosmosConfiguration extends Configuration
         return transactionHandlerClasses;
     }
 
+    @JsonProperty("license")
+    public LicenseFactory getLicenseFactory()
+    {
+        return licenseFactory;
+    }
+
+    @JsonProperty("license")
+    public void setLicenseFactory(LicenseFactory licenseFactory)
+    {
+        this.licenseFactory = licenseFactory;
+    }
 
     @JsonProperty("endpoints")
     public EndpointsFactory getEndpointsFactory()
@@ -357,16 +366,6 @@ public class SmartCosmosConfiguration extends Configuration
     public DataSourceFactory getDataSourceFactory()
     {
         return dataSourceFactory;
-    }
-
-    public String getEnterpriseKey()
-    {
-        return enterpriseKey;
-    }
-
-    public String getEnterpriseKeySignature()
-    {
-        return enterpriseKeySignature;
     }
 
     public Map<String, String> getServiceParameters()
