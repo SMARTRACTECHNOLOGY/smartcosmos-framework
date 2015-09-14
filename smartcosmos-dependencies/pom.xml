@@ -62,6 +62,11 @@
                 <version>${commons-lang.version}</version>
             </dependency>
             <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>1.4.1</version>
+            </dependency>
+            <dependency>
                 <groupId>org.fluttercode.datafactory</groupId>
                 <artifactId>datafactory</artifactId>
                 <version>0.8</version>
@@ -197,6 +202,11 @@
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-server</artifactId>
                 <version>${jersey-server.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-util</artifactId>
+                <version>9.0.7.v20131107</version>
             </dependency>
             <dependency>
                 <groupId>joda-time</groupId>
