@@ -26,10 +26,10 @@ import net.smartcosmos.model.base.ITypedObject;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.objects.model.context.IObjectAddress;
-import net.smartcosmos.pojo.base.DomainResource;
+import net.smartcosmos.pojo.base.AccountDomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class ObjectAddress extends DomainResource<IObjectAddress> implements IObjectAddress, ITypedObject
+public class ObjectAddress extends AccountDomainResource<IObjectAddress> implements IObjectAddress, ITypedObject
 {
     @JsonView(JsonGenerationView.Standard.class)
     @JsonDeserialize(as = ObjectImpl.class)
@@ -176,7 +176,7 @@ public class ObjectAddress extends DomainResource<IObjectAddress> implements IOb
     @Override
     public void setAccount(IAccount account)
     {
-        throw new IllegalStateException("Object Address account is inferred through it's parent Object");
+        super.setAccount(account);
     }
 
     @Override
