@@ -71,7 +71,7 @@
         <quartz.version>2.2.1</quartz.version>
         <querydsl.version>4.0.3</querydsl.version>
         <restlet.version>2.2-M3</restlet.version>
-        <slf4j.version>1.7.6</slf4j.version>
+        <slf4j.version>1.7.12</slf4j.version>
         <spring-security-ldap.version>2.0.4.RELEASE</spring-security-ldap.version>
         <spring.framework.version>4.1.5.RELEASE</spring.framework.version>
         <spring.security.version>4.0.2.RELEASE</spring.security.version>
