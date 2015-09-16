@@ -20,16 +20,19 @@ package net.smartcosmos.client.common.metadata;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import org.json.JSONObject;
+
+import java.util.Collection;
+import java.util.List;
+
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.IDeleteableBaseClient;
 import net.smartcosmos.client.impl.IUpsertableBaseClient;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.model.context.MetadataDataType;
+import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.util.json.ViewType;
-import org.json.JSONObject;
-
-import java.util.Collection;
 
 /**
  * Defines, deletes, or queries for {@link net.smartcosmos.model.context.IMetadata} instances.
@@ -120,4 +123,13 @@ public interface IMetadataClient extends IUpsertableBaseClient<IMetadata>, IDele
      * @throws ServiceException on error.
      */
     JSONObject decodeMetadata(MetadataDataType metadataDataType, JSONObject jsonObject) throws ServiceException;
+
+    /**
+     * Submit the list of metadata for update if the matching metadata already exists or insert if no matching metadata
+     * exists.
+     *
+     * @param metadataList the list of metadata which is to be upserted
+     * @return the response entities
+     */
+    Collection<ResponseEntity> upsert(List<IMetadata> metadataList) throws ServiceException;
 }
