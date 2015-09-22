@@ -20,6 +20,8 @@ package net.smartcosmos.platform.service.impl;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import io.dropwizard.lifecycle.Managed;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,21 +30,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 
-import com.google.common.hash.HashCode;
-import com.google.common.hash.Hashing;
-import com.google.common.io.Files;
-import io.dropwizard.lifecycle.Managed;
+import net.smartcosmos.objects.model.context.IFile;
+import net.smartcosmos.platform.api.service.IStorageService;
+import net.smartcosmos.platform.base.AbstractService;
+import net.smartcosmos.platform.pojo.service.StorageRequest;
+import net.smartcosmos.platform.pojo.service.StorageResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.smartcosmos.objects.model.context.IFile;
-import net.smartcosmos.platform.api.service.IStorageService;
-import net.smartcosmos.platform.base.AbstractService;
-import net.smartcosmos.platform.pojo.service.StorageRequest;
-import net.smartcosmos.platform.pojo.service.StorageResponse;
+import com.google.common.hash.HashCode;
+import com.google.common.hash.Hashing;
+import com.google.common.io.Files;
 
 /**
  * Just a convenient storage service that uses the current file system. Great for testing or development.
