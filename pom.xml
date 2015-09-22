@@ -143,6 +143,14 @@
                         <goals>deploy</goals>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <inherited>false</inherited>
+                            <configuration>
+                                <releaseProfiles>release, maven-central</releaseProfiles>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>com.google.code.sortpom</groupId>
@@ -253,4 +261,19 @@
             <url>https://nexus.smartcosmos.net/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+    <profiles>
+        <profile>
+            <id>maven-central</id>
+            <distributionManagement>
+                <repository>
+                    <id>smartcosmos</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>smartcosmos</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>
