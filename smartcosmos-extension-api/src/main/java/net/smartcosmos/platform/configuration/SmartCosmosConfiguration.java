@@ -1,15 +1,3 @@
-/*
- * Copyright (C> 2013 - 2015, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
- * This software is the confidential and proprietary information of
- * Smartrac Technology Fletcher, Inc. ("Confidential Information").
- * You shall not disclose such Confidential Information and shall
- * use it only in accordance with the terms of the license agreement
- * you entered into with Smartrac Technology Fletcher, Inc.
- */
-
 package net.smartcosmos.platform.configuration;
 
 /*
