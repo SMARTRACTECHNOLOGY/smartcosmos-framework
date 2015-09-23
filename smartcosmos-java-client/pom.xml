@@ -28,10 +28,6 @@
             <artifactId>org.restlet.ext.json</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.restlet.jse</groupId>
-            <artifactId>org.restlet.ext.ssl</artifactId>
-        </dependency>
-        <dependency>
             <groupId>net.smartcosmos</groupId>
             <artifactId>smartcosmos-core</artifactId>
         </dependency>
