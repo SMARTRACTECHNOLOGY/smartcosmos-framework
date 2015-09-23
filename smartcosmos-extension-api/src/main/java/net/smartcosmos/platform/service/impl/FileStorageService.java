@@ -88,6 +88,8 @@ public class FileStorageService extends AbstractService implements IStorageServi
     {
 
         File storingFile = new File(workingDirectory, request.getFileName());
+        File storingFileDirectory = new File(storingFile.getParent());
+        storingFileDirectory.mkdirs();
 
         FileOutputStream fileOutputStream = new FileOutputStream(storingFile);
         IOUtils.copyLarge(request.getInputStream(), fileOutputStream);

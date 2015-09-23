@@ -1,15 +1,3 @@
-/*
- * Copyright (C> 2013 - 2015, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
- * This software is the confidential and proprietary information of
- * Smartrac Technology Fletcher, Inc. ("Confidential Information").
- * You shall not disclose such Confidential Information and shall
- * use it only in accordance with the terms of the license agreement
- * you entered into with Smartrac Technology Fletcher, Inc.
- */
-
 package net.smartcosmos.platform.configuration;
 
 /*
@@ -93,6 +81,9 @@ public class SmartCosmosConfiguration extends Configuration
     @JsonProperty
     private DataSourceFactory dataSourceFactory = new DataSourceFactory();
 
+    @JsonProperty
+    private boolean migrateSchemaOnStartup;
+
     @Valid
     @NotNull
     private BatchFactory batchFactory = new BatchFactory();
@@ -154,169 +145,11 @@ public class SmartCosmosConfiguration extends Configuration
     @NotNull
     private Map<String, String> transactionHandlerClasses = Maps.newLinkedHashMap();
 
-    public Map<String, String> getTransactionHandlerClasses()
-    {
-        return transactionHandlerClasses;
-    }
-
-    @JsonProperty("license")
-    public LicenseFactory getLicenseFactory()
-    {
-        return licenseFactory;
-    }
-
-    @JsonProperty("license")
-    public void setLicenseFactory(LicenseFactory licenseFactory)
-    {
-        this.licenseFactory = licenseFactory;
-    }
-
-    @JsonProperty("endpoints")
-    public EndpointsFactory getEndpointsFactory()
-    {
-        return endpointsFactory;
-    }
-
-    @JsonProperty("endpoints")
-    public void setEndpointsFactory(EndpointsFactory endpointsFactory)
-    {
-        this.endpointsFactory = endpointsFactory;
-    }
-
-
-    public Map<String, String> getServerExtensionConfigurationPaths()
-    {
-        return serverExtensionConfigurationPaths;
-    }
-
-    public Map<String, String> getServerExtensions()
-    {
-        return serverExtensions;
-    }
-
     @JsonProperty
     private ArrayList<String> libraryHierarchy;
 
     @JsonProperty
     private ArrayList<Boolean> libraryLinkFlags;
-
-    public boolean supportUsers()
-    {
-        return supportUsers;
-    }
-
-    public void setSupportUsers(boolean flag)
-    {
-        this.supportUsers = flag;
-    }
-
-    public HttpClientConfiguration getHttpClientConfiguration()
-    {
-        return httpClient;
-    }
-
-    public boolean supportInteractionSessions()
-    {
-        return supportInteractionSessions;
-    }
-
-    public void setSupportInteractionSessions(boolean flag)
-    {
-        this.supportInteractionSessions = flag;
-    }
-
-    public boolean supportExtensions()
-    {
-        return supportExtensions;
-    }
-
-    public void setSupportExtensions(boolean flag)
-    {
-        this.supportExtensions = flag;
-    }
-
-    public boolean supportMultimediaFiles()
-    {
-        return supportMultimediaFiles;
-    }
-
-    public void setSupportMultimediaFiles(boolean flag)
-    {
-        this.supportMultimediaFiles = flag;
-    }
-
-    public boolean supportRealmCheck()
-    {
-        return supportRealmCheck;
-    }
-
-    public void setSupportRealmCheck(boolean flag)
-    {
-        this.supportRealmCheck = flag;
-    }
-
-    public boolean supportStatusCheck()
-    {
-        return supportStatusCheck;
-    }
-
-    public void setSupportStatusCheck(boolean flag)
-    {
-        this.supportStatusCheck = flag;
-    }
-
-    public boolean supportNotifications()
-    {
-        return supportNotifications;
-    }
-
-    public void setSupportNotifications(boolean flag)
-    {
-        this.supportNotifications = flag;
-    }
-
-    public boolean includeEmailVerificationTokenInRegistrationJSON()
-    {
-        return includeEmailVerificationTokenInRegistrationJSON;
-    }
-
-    public void setIncludeEmailVerificationTokenInRegistration(boolean flag)
-    {
-        this.includeEmailVerificationTokenInRegistrationJSON = flag;
-    }
-
-    public boolean supportDynamicRegistration()
-    {
-        return supportDynamicRegistration;
-    }
-
-    public void setSupportDynamicRegistration(boolean flag)
-    {
-        this.supportDynamicRegistration = flag;
-    }
-
-    public void setLibraryHierarchy(List<String> libraryHierarchy)
-    {
-        LibraryHierarchyFactory.setLibraryHierarchyList(libraryHierarchy);
-    }
-
-    public void setLibraryLinkFlags(List<Boolean> libraryLinkFlags)
-    {
-        LibraryHierarchyFactory.setLibraryLinkFlagsList(libraryLinkFlags);
-    }
-
-
-    @JsonProperty("batch")
-    public BatchFactory getBatchFactory()
-    {
-        return batchFactory;
-    }
-
-    @JsonProperty("batch")
-    public void setBatchFactory(BatchFactory batchFactory)
-    {
-        this.batchFactory = batchFactory;
-    }
 
     //
     //
@@ -326,26 +159,6 @@ public class SmartCosmosConfiguration extends Configuration
     public String getAdminEmailAddress()
     {
         return adminEmailAddress;
-    }
-
-    public Map<String, String> getServiceClasses()
-    {
-        return serviceClasses;
-    }
-
-    public Map<String, String> getEndpointMethodControl()
-    {
-        return endpointMethodControl;
-    }
-
-    public Map<String, String> getVisitors()
-    {
-        return visitors;
-    }
-
-    public Map<String, String> getResourceRegistrarClasses()
-    {
-        return resourceRegistrarClasses;
     }
 
     public String getAppInstanceName()
@@ -358,9 +171,10 @@ public class SmartCosmosConfiguration extends Configuration
         return appName;
     }
 
-    public String getServerRoot()
+    @JsonProperty("batch")
+    public BatchFactory getBatchFactory()
     {
-        return serverRoot;
+        return batchFactory;
     }
 
     public DataSourceFactory getDataSourceFactory()
@@ -368,26 +182,32 @@ public class SmartCosmosConfiguration extends Configuration
         return dataSourceFactory;
     }
 
-    public Map<String, String> getServiceParameters()
+    public Map<String, String> getEndpointMethodControl()
     {
-        return serviceParameters;
+        return endpointMethodControl;
     }
 
-    public String getUrlPattern()
+    @JsonProperty("endpoints")
+    public EndpointsFactory getEndpointsFactory()
     {
-        return urlPattern;
+        return endpointsFactory;
+    }
+
+    public HttpClientConfiguration getHttpClientConfiguration()
+    {
+        return httpClient;
+    }
+
+    @JsonProperty("license")
+    public LicenseFactory getLicenseFactory()
+    {
+        return licenseFactory;
     }
 
     @JsonProperty("oauth2")
     public OAuth2Factory getOAuth2Factory()
     {
         return oAuth2Factory;
-    }
-
-    @JsonProperty("oauth2")
-    public void setOAuth2Factory(OAuth2Factory oAuth2Factory)
-    {
-        this.oAuth2Factory = oAuth2Factory;
     }
 
     //
@@ -401,10 +221,39 @@ public class SmartCosmosConfiguration extends Configuration
         return quartzFactory;
     }
 
-    @JsonProperty("quartz")
-    public void setQuartzFactory(QuartzFactory quartzFactory)
+    public Map<String, String> getResourceRegistrarClasses()
     {
-        this.quartzFactory = quartzFactory;
+        return resourceRegistrarClasses;
+    }
+
+    public Map<String, String> getServerExtensionConfigurationPaths()
+    {
+        return serverExtensionConfigurationPaths;
+    }
+
+    public Map<String, String> getServerExtensions()
+    {
+        return serverExtensions;
+    }
+
+    public String getServerRoot()
+    {
+        return serverRoot;
+    }
+
+    public Map<String, String> getServiceClasses()
+    {
+        return serviceClasses;
+    }
+
+    public Map<String, String> getServiceParameters()
+    {
+        return serviceParameters;
+    }
+
+    public Map<String, String> getTransactionHandlerClasses()
+    {
+        return transactionHandlerClasses;
     }
 
     @JsonProperty("transformations")
@@ -413,10 +262,159 @@ public class SmartCosmosConfiguration extends Configuration
         return transformationsFactory;
     }
 
+    public String getUrlPattern()
+    {
+        return urlPattern;
+    }
+
+    public Map<String, String> getVisitors()
+    {
+        return visitors;
+    }
+
+    public boolean includeEmailVerificationTokenInRegistrationJSON()
+    {
+        return includeEmailVerificationTokenInRegistrationJSON;
+    }
+
+    public boolean isMigrateSchemaOnStartup()
+    {
+        return migrateSchemaOnStartup;
+    }
+
+    @JsonProperty("batch")
+    public void setBatchFactory(final BatchFactory batchFactory)
+    {
+        this.batchFactory = batchFactory;
+    }
+
+    @JsonProperty("endpoints")
+    public void setEndpointsFactory(final EndpointsFactory endpointsFactory)
+    {
+        this.endpointsFactory = endpointsFactory;
+    }
+
+    public void setIncludeEmailVerificationTokenInRegistration(final boolean flag)
+    {
+        this.includeEmailVerificationTokenInRegistrationJSON = flag;
+    }
+
+    public void setLibraryHierarchy(final List<String> libraryHierarchy)
+    {
+        LibraryHierarchyFactory.setLibraryHierarchyList(libraryHierarchy);
+    }
+
+    public void setLibraryLinkFlags(final List<Boolean> libraryLinkFlags)
+    {
+        LibraryHierarchyFactory.setLibraryLinkFlagsList(libraryLinkFlags);
+    }
+
+    @JsonProperty("license")
+    public void setLicenseFactory(final LicenseFactory licenseFactory)
+    {
+        this.licenseFactory = licenseFactory;
+    }
+
+    public void setMigrateSchemaOnStartup(final boolean migrateSchemaOnStartup)
+    {
+        this.migrateSchemaOnStartup = migrateSchemaOnStartup;
+    }
+
+    @JsonProperty("oauth2")
+    public void setOAuth2Factory(final OAuth2Factory oAuth2Factory)
+    {
+        this.oAuth2Factory = oAuth2Factory;
+    }
+
+    @JsonProperty("quartz")
+    public void setQuartzFactory(final QuartzFactory quartzFactory)
+    {
+        this.quartzFactory = quartzFactory;
+    }
+
+    public void setSupportDynamicRegistration(final boolean flag)
+    {
+        this.supportDynamicRegistration = flag;
+    }
+
+    public void setSupportExtensions(final boolean flag)
+    {
+        this.supportExtensions = flag;
+    }
+
+    public void setSupportInteractionSessions(final boolean flag)
+    {
+        this.supportInteractionSessions = flag;
+    }
+
+    public void setSupportMultimediaFiles(final boolean flag)
+    {
+        this.supportMultimediaFiles = flag;
+    }
+
+    public void setSupportNotifications(final boolean flag)
+    {
+        this.supportNotifications = flag;
+    }
+
+    public void setSupportRealmCheck(final boolean flag)
+    {
+        this.supportRealmCheck = flag;
+    }
+
+    public void setSupportStatusCheck(final boolean flag)
+    {
+        this.supportStatusCheck = flag;
+    }
+
+    public void setSupportUsers(final boolean flag)
+    {
+        this.supportUsers = flag;
+    }
+
     @JsonProperty("transformations")
-    public void setTransformationsFactory(TransformationsFactory transformationsFactory)
+    public void setTransformationsFactory(final TransformationsFactory transformationsFactory)
     {
         this.transformationsFactory = transformationsFactory;
     }
-}
 
+    public boolean supportDynamicRegistration()
+    {
+        return supportDynamicRegistration;
+    }
+
+    public boolean supportExtensions()
+    {
+        return supportExtensions;
+    }
+
+    public boolean supportInteractionSessions()
+    {
+        return supportInteractionSessions;
+    }
+
+    public boolean supportMultimediaFiles()
+    {
+        return supportMultimediaFiles;
+    }
+
+    public boolean supportNotifications()
+    {
+        return supportNotifications;
+    }
+
+    public boolean supportRealmCheck()
+    {
+        return supportRealmCheck;
+    }
+
+    public boolean supportStatusCheck()
+    {
+        return supportStatusCheck;
+    }
+
+    public boolean supportUsers()
+    {
+        return supportUsers;
+    }
+}

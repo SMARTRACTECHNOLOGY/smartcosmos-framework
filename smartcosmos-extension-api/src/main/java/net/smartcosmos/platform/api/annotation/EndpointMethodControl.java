@@ -76,9 +76,9 @@ public @interface EndpointMethodControl
      * Error code returned when the associated HTTP Method is either disabled or the authenticated user does not
      * belong to <b>any</b> of the {@link #authorizedRoles()} listed in the declaration.
      *
-     * @return defaults to 0
+     * @return defaults to -1 //ERR_UNAUTHORIZED
      */
-    int code() default 0;
+    int code() default -1;
 
     /**
      * Error message returned when the associated HTTP Method is either disabled or the authenticated user does not
@@ -86,7 +86,7 @@ public @interface EndpointMethodControl
      *
      * @return defaults to "EndpointMethodControl Failure"
      */
-    String message() default "EndpointMethodControl Failure";
+    String message() default "Use of this endpoint is forbidden on this server.";
 }
 
 

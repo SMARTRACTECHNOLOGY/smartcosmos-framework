@@ -34,7 +34,7 @@ public class VisitableRelationship extends AbstractVisitable<IRelationship> impl
     @Override
     public String getRelatedReferenceUrn()
     {
-        return instance.getReferenceUrn();
+        return instance.getRelatedReferenceUrn();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class VisitableRelationship extends AbstractVisitable<IRelationship> impl
     @Override
     public EntityReferenceType getRelatedEntityReferenceType()
     {
-        return instance.getEntityReferenceType();
+        return instance.getRelatedEntityReferenceType();
     }
 
     @Override
