@@ -143,6 +143,7 @@
                         <goals>deploy</goals>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
+
                     <executions>
                         <execution>
                             <inherited>false</inherited>
@@ -251,9 +252,8 @@
     </scm>
     <distributionManagement>
         <repository>
-            <id>deployment</id>
-            <name>SMARTRAC Internal Releases</name>
-            <url>https://nexus.smartcosmos.net/nexus/content/repositories/releases/</url>
+            <id>smartcosmos</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
         <snapshotRepository>
             <id>deployment</id>
@@ -261,19 +261,4 @@
             <url>https://nexus.smartcosmos.net/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
-    <profiles>
-        <profile>
-            <id>maven-central</id>
-            <distributionManagement>
-                <repository>
-                    <id>smartcosmos</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-                <snapshotRepository>
-                    <id>smartcosmos</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
-    </profiles>
 </project>

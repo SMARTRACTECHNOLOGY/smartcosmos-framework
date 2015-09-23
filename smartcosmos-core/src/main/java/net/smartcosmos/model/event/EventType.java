@@ -183,25 +183,36 @@ public enum EventType
     TransactionStart,
     TransactionCommit,
     TransactionRollback,
-    
-    FlowsBundleDocumentDeployed,
-    FlowsBundleProcessDefinitionCreated,
-    FlowsBundleProcessDefinitionExecuted,
-    FlowsBundleActivityStarted,
-    FlowsBundleActivityCompleted,
-    
-    
-    FlowsBundleEntityCreated,
-    FlowsBundleEntityUpdated,
-    FlowsBundleEntityDeleted,
-    FlowsBundleActivityCancelled,
-    FlowsBundleTaskAssigned,
-    FlowsBundleTaskCreated,
-    FlowsBundleTaskCompleted,
-    FlowsBundleProcessCompleted,
-    FlowsBundleProcessCancelled,
-    FlowsBundleMembershipCreated,
-    FlowsBundleMembershipDeleted
-    
-    
+
+    FlowsWorkflowUploaded,
+    FlowsWorkflowStarted,
+    FlowsWorkflowDeleted,
+
+    FlowsPluginUploaded,
+
+//    FlowsBundleDocumentDeployed,
+//    FlowsBundleProcessDefinitionCreated,
+//    FlowsBundleProcessDefinitionExecuted,
+//    FlowsBundleActivityStarted,
+//    FlowsBundleActivityCompleted,
+//
+//
+//    FlowsBundleEntityCreated,
+//    FlowsBundleEntityUpdated,
+//    FlowsBundleEntityDeleted,
+//    FlowsBundleActivityCancelled,
+//    FlowsBundleTaskAssigned,
+//    FlowsBundleTaskCreated,
+//    FlowsBundleTaskCompleted,
+//    FlowsBundleProcessCompleted,
+//    FlowsBundleProcessCancelled,
+//    FlowsBundleMembershipCreated,
+//    FlowsBundleMembershipDeleted
+
+    ExtensionElementCreated,
+    ExtensionElementUpdated,
+    ExtensionElementAccessed,
+    ExtensionElementDeleted,
+    ExtensionElementInsertOrUpdateFailure
+
 }
