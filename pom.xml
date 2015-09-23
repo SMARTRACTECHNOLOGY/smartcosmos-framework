@@ -38,6 +38,7 @@
         <module>smartcosmos-extension-api</module>
     </modules>
     <properties>
+
         <apacheds-shared-ldap.version>0.9.17</apacheds-shared-ldap.version>
         <apacheds.version>1.5.5</apacheds.version>
         <assertj-core.version>3.1.0</assertj-core.version>
@@ -70,6 +71,10 @@
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <quartz.version>2.2.1</quartz.version>
         <querydsl.version>4.0.3</querydsl.version>
+        <!-- Override this for public releases. -->
+        <release.nexusUrl>https://nexus.smartcosmos.net/nexus</release.nexusUrl>
+        <!-- Override this for public releases. -->
+        <release.serverId>deployment</release.serverId>
         <restlet.version>2.2-M3</restlet.version>
         <slf4j.version>1.7.12</slf4j.version>
         <spring-security-ldap.version>2.0.4.RELEASE</spring-security-ldap.version>
@@ -194,10 +199,9 @@
                     <version>1.6.5</version>
                     <extensions>true</extensions>
                     <configuration>
-                        <serverId>deployment</serverId>
-                        <nexusUrl>https://nexus.smartcosmos.net/nexus</nexusUrl>
-                        <stagingProfileId>c0d04f5594b11</stagingProfileId>
-                        <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+                        <nexusUrl>${release.nexusUrl}</nexusUrl>
+                        <serverId>${release.serverId}</serverId>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
             </plugins>
@@ -250,15 +254,4 @@
         <tag>HEAD</tag>
         <url>https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework/tree/master/</url>
     </scm>
-    <distributionManagement>
-        <repository>
-            <id>smartcosmos</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>deployment</id>
-            <name>SMARTRAC Internal Snapshots</name>
-            <url>https://nexus.smartcosmos.net/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
