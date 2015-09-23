@@ -22,7 +22,7 @@
     <parent>
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-framework-root</artifactId>
-        <version>2.10.9-SNAPSHOT</version>
+        <version>2.10.9</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-framework-parent</artifactId>
@@ -34,7 +34,7 @@
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-dependencies</artifactId>
-                <version>2.10.9-SNAPSHOT</version>
+                <version>2.10.9</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -150,7 +150,7 @@
                         <dependency>
                             <groupId>net.smartcosmos</groupId>
                             <artifactId>smartcosmos-builds-tools</artifactId>
-                            <version>2.10.9-SNAPSHOT</version>
+                            <version>2.10.9</version>
                         </dependency>
                     </dependencies>
                     <executions>
@@ -296,7 +296,7 @@
                         <dependency>
                             <groupId>net.smartcosmos</groupId>
                             <artifactId>smartcosmos-builds-tools</artifactId>
-                            <version>2.10.9-SNAPSHOT</version>
+                            <version>2.10.9</version>
                         </dependency>
                     </dependencies>
                     <executions>
