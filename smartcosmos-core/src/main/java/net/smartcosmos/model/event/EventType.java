@@ -188,9 +188,8 @@ public enum EventType
     FlowsWorkflowStarted,
     FlowsWorkflowDeleted,
 
-    FlowsPluginUploaded
+    FlowsPluginUploaded,
 
-    
 //    FlowsBundleDocumentDeployed,
 //    FlowsBundleProcessDefinitionCreated,
 //    FlowsBundleProcessDefinitionExecuted,
@@ -209,6 +208,11 @@ public enum EventType
 //    FlowsBundleProcessCancelled,
 //    FlowsBundleMembershipCreated,
 //    FlowsBundleMembershipDeleted
-    
-    
+
+    ExtensionElementCreated,
+    ExtensionElementUpdated,
+    ExtensionElementAccessed,
+    ExtensionElementDeleted,
+    ExtensionElementInsertOrUpdateFailure
+
 }
