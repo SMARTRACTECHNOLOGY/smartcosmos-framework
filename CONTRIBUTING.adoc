@@ -1,5 +1,9 @@
 = Contributing to SMART COSMOS
+SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
 
+image::http://smartractechnology.github.io/smartcosmos-sdk-java/images/smart-cosmos-250px-wide.png[SMART COSMOS Objects]
+
+== License
 SMART COSMOS Framework is released under the Apache 2.0 license.  SMART COSMOS Objects is a platform designed to easily capture all types of data, especially relationships and interactions, from today's always-on sensors, smart devices, and automated workflows. Enriched data, including multimedia, can be easily fed into various back office systems in near real-time using simple web integration techniques.  Due to the massive amount of integrations and extensions into SMART COSMOS we welcome contributions and feedback on our Extension API in particular.
 
 == Issue Tracking
