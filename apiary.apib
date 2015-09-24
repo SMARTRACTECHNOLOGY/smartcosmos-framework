@@ -431,11 +431,14 @@ Check to see if the named realm is available for registration.
 ## Account Registration [/rest/registration/register]
 ### Register for a new SMART COSMOS account [POST]
 
+The `sendRegistrationEmail` parameter is optional and the default value is true.
+
 + Request (application/json)
 
             {
                 "emailAddress": "you@foo.com",
-                "realm" : "foobar.com"
+                "realm" : "foobar.com",
+                "sendRegistrationEmail": true
             }
 
 + Response 200 (application/json)
