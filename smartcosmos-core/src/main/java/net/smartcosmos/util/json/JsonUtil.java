@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import net.smartcosmos.Field;
 import net.smartcosmos.model.event.IEvent;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -172,5 +173,23 @@ public final class JsonUtil
             LOG.error("Unable to convert object to JSON: {}", e.getMessage());
         }
         return json;
+    }
+
+    public static Boolean isValidJson(String test)
+    {
+        try
+        {
+            new JSONObject(test);
+        } catch (JSONException e)
+        {
+            try
+            {
+                new JSONArray(test);
+            } catch (JSONException e1)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
