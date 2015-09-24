@@ -232,6 +232,7 @@
                                 <artifact>
                                     <file>README.adoc</file>
                                     <type>adoc</type>
+                                    <classifier>README</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>
