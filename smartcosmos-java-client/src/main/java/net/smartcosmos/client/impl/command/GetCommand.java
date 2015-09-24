@@ -28,6 +28,7 @@ import net.smartcosmos.util.json.JsonUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.Client;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -42,25 +43,25 @@ public class GetCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(GetCommand.class);
 
-    public GetCommand(ServerContext context)
+    public GetCommand(final ServerContext context, final Client client)
     {
-        super(context);
+        super(context, client);
     }
 
     @Override
-    public T call(Class<? extends T> clazz, String path, JSONObject inputJson) throws ServiceException
+    public T call(final Class<? extends T> clazz, final String path, final JSONObject inputJson) throws ServiceException
     {
         throw new UnsupportedOperationException("GET command doesn't accept input JSON");
     }
 
     @Override
-    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(final String path, final JSONArray inputJson) throws ServiceException
     {
         throw new UnsupportedOperationException("GET command doesn't accept input as a JSONArray");
     }
 
     @Override
-    public T call(Class<? extends T> clazz, String path) throws ServiceException
+    public T call(final Class<? extends T> clazz, final String path) throws ServiceException
     {
         T instance = null;
 
@@ -91,9 +92,6 @@ public class GetCommand<T> extends AbstractBaseClient implements ICommand<T, T>
         {
             LOGGER.error("Unexpected Exception", e);
             throw new ServiceException(e);
-        } finally
-        {
-            service.release();
         }
 
         return instance;

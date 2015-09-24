@@ -28,19 +28,19 @@ import net.smartcosmos.util.json.ViewType;
 
 public abstract class AbstractFindableBaseClient<T> extends AbstractBaseClient implements IFindableBaseClient<T>
 {
-    protected AbstractFindableBaseClient(ServerContext context)
+    protected AbstractFindableBaseClient(final ServerContext context)
     {
         super(context);
     }
 
-    public T findByUrn(String urn) throws ServiceException
+    public T findByUrn(final String urn) throws ServiceException
     {
         return findByUrn(urn, ViewType.Standard);
     }
 
-    protected T findByUrn(String urn, String path, Class<? extends T> clazz) throws ServiceException
+    protected T findByUrn(final String urn, final String path, final Class<? extends T> clazz) throws ServiceException
     {
-        GetCommand<T> command = new GetCommand<>(context);
+        GetCommand<T> command = new GetCommand<>(context, getClient());
         return command.call(clazz, path);
     }
 }

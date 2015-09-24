@@ -150,7 +150,7 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
             String referenceUrn = instance.getString(REFERENCE_URN_FIELD);
             String key = instance.getString(KEY_FIELD);
 
-            DeleteCommand command = new DeleteCommand(context);
+            DeleteCommand command = new DeleteCommand(context, getClient());
             command.call(Object.class, MetadataEndpoints.delete(ert, referenceUrn, key));
         } catch (JSONException e)
         {
@@ -164,7 +164,7 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
                                      String key,
                                      ViewType viewType) throws ServiceException
     {
-        GetCommand<IMetadata> command = new GetCommand<>(context);
+        GetCommand<IMetadata> command = new GetCommand<>(context, getClient());
         return command.call(Metadata.class,
                 MetadataEndpoints.findSpecificKey(entityReferenceType, referenceUrn, key, viewType));
     }
@@ -174,7 +174,7 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
                                          String referenceUrn,
                                          ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IMetadata> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IMetadata> command = new GetCollectionCommand<>(context, getClient());
         return command.call(Metadata.class, MetadataEndpoints.findAll(entityReferenceType, referenceUrn, viewType));
     }
 
