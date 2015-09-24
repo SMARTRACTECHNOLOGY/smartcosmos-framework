@@ -85,6 +85,19 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+
+                    <groupId>org.asciidoctor</groupId>
+                    <artifactId>asciidoctor-maven-plugin</artifactId>
+                    <version>1.5.2.1</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.asciidoctor</groupId>
+                            <artifactId>asciidoctorj-pdf</artifactId>
+                            <version>1.5.0-alpha.9</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>1.9.1</version>
@@ -218,6 +231,34 @@
         <!-- Non-JAR related plugins that are necessary for everything across the ecosystem. -->
         <plugins>
             <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <inherited>false</inherited>
+
+                <configuration>
+                    <sourceDirectory>${basedir}</sourceDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <backend>pdf</backend>
+                            <sourceHighlighter>rouge</sourceHighlighter>
+                            <attributes>
+                                <allow-uri-read></allow-uri-read>
+                                <icons>font</icons>
+                                <pagenums></pagenums>
+                                <idprefix></idprefix>
+                                <idseparator>-</idseparator>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <inherited>false</inherited>
@@ -230,9 +271,14 @@
                         <configuration>
                             <artifacts>
                                 <artifact>
-                                    <file>README.adoc</file>
-                                    <type>adoc</type>
+                                    <file>${basedir}/target/generated-docs/README.pdf</file>
+                                    <type>pdf</type>
                                     <classifier>README</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${basedir}/target/generated-docs/CONTRIBUTING.pdf</file>
+                                    <type>pdf</type>
+                                    <classifier>CONTRIBUTING</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>
