@@ -11,6 +11,11 @@
     <name>SMART COSMOS Java Client</name>
     <description>Provides a thin client wrapper for accessing the SMART COSMOS platform web services</description>
     <dependencies>
+        <!-- Necessary since Restlet still uses JUL. -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
