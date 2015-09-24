@@ -109,7 +109,7 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                 }
             }
 
-            if (!service.getStatus().equals(Status.SUCCESS_CREATED))
+            if (!service.getStatus().equals(Status.SUCCESS_CREATED) && !service.getStatus().equals(Status.SUCCESS_OK))
             {
                 LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
 
