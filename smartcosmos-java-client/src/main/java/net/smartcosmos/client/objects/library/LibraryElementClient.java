@@ -86,7 +86,7 @@ class LibraryElementClient extends AbstractUpdateableBaseClient<ILibraryElement>
     @Override
     public Collection<ILibraryElement> query(LibraryEndpoints.Builder builder) throws ServiceException
     {
-        GetCollectionCommand<ILibraryElement> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<ILibraryElement> command = new GetCollectionCommand<>(context, getClient());
         return command.call(LibraryElement.class, builder.build());
     }
 
@@ -97,7 +97,7 @@ class LibraryElementClient extends AbstractUpdateableBaseClient<ILibraryElement>
 
     public ILibraryElement getParent(String libraryElementUrn, ViewType viewType) throws ServiceException
     {
-        GetCommand<ILibraryElement> command = new GetCommand<>(context);
+        GetCommand<ILibraryElement> command = new GetCommand<>(context, getClient());
         return command.call(LibraryElement.class, LibraryEndpoints.getParent(libraryElementUrn, viewType));
     }
 
@@ -108,7 +108,7 @@ class LibraryElementClient extends AbstractUpdateableBaseClient<ILibraryElement>
 
     public Collection<ILibraryElement> getChildren(String libraryElementUrn, ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<ILibraryElement> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<ILibraryElement> command = new GetCollectionCommand<>(context, getClient());
         return command.call(LibraryElement.class, LibraryEndpoints.getChildren(libraryElementUrn, viewType));
     }
 }

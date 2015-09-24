@@ -79,7 +79,7 @@ class ObjectAddressClient extends AbstractUpdateableBaseClient<IObjectAddress> i
             Preconditions.checkState(instance.has(URN_FIELD));
             Preconditions.checkState(instance.has(OBJECT_URN_FIELD));
 
-            DeleteCommand command = new DeleteCommand(context);
+            DeleteCommand command = new DeleteCommand(context, getClient());
             command.call(ObjectAddress.class, ObjectAddressEndpoints.delete(instance.getString(OBJECT_URN_FIELD),
                     instance.getString(URN_FIELD)));
         } catch (JSONException e)
@@ -91,7 +91,7 @@ class ObjectAddressClient extends AbstractUpdateableBaseClient<IObjectAddress> i
     @Override
     public Collection<IObjectAddress> findLastN(String objectUrn, int count, ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IObjectAddress> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IObjectAddress> command = new GetCollectionCommand<>(context, getClient());
         return command.call(ObjectAddress.class, ObjectAddressEndpoints.findLast(objectUrn, count, viewType));
     }
 
@@ -109,7 +109,7 @@ class ObjectAddressClient extends AbstractUpdateableBaseClient<IObjectAddress> i
             Preconditions.checkState(instance.has(URN_FIELD));
             Preconditions.checkState(instance.has(OBJECT_URN_FIELD));
 
-            PostCommand command = new PostCommand(context);
+            PostCommand command = new PostCommand(context, getClient());
             command.call(ObjectAddress.class,
                     ObjectAddressEndpoints.update(instance.getString(OBJECT_URN_FIELD), instance.getString(URN_FIELD)),
                     instance);
@@ -143,7 +143,7 @@ class ObjectAddressClient extends AbstractUpdateableBaseClient<IObjectAddress> i
     @Override
     public IObjectAddress findByUrn(String objectUrn, String urn, ViewType viewType) throws ServiceException
     {
-        GetCommand<IObjectAddress> command = new GetCommand<>(context);
+        GetCommand<IObjectAddress> command = new GetCommand<>(context, getClient());
         return command.call(ObjectAddress.class, ObjectAddressEndpoints.findByUrn(objectUrn, urn, viewType));
     }
 

@@ -45,7 +45,7 @@ class InteractionSessionClient
     public Collection<IObjectInteractionSession> findByNameLike(String nameLike, ViewType viewType)
             throws ServiceException
     {
-        GetCollectionCommand<IObjectInteractionSession> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IObjectInteractionSession> command = new GetCollectionCommand<>(context, getClient());
         return command.call(ObjectInteractionSession.class,
                 ObjectInteractionSessionEndpoints.findByNameLike(nameLike, viewType));
     }

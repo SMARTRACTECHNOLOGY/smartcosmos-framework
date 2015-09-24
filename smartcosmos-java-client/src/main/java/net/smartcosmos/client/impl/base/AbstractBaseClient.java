@@ -3,6 +3,7 @@ package net.smartcosmos.client.impl.base;
 import java.util.Arrays;
 
 import org.restlet.Client;
+import org.restlet.Context;
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.data.Protocol;
@@ -39,13 +40,24 @@ public abstract class AbstractBaseClient
     protected final ServerContext context;
 
     /**
-     * Each base client has its own http client for accessing.
+     * Each base client has its own http client for accessing, whereas other ones utilize the same one passed in.
      */
-    private final Client client = new Client(Arrays.asList(Protocol.HTTP, Protocol.HTTPS));
+    private final Client client;
 
     protected AbstractBaseClient(final ServerContext context)
     {
+        this(context, new Client(Arrays.asList(Protocol.HTTP, Protocol.HTTPS)));
+    }
+
+    protected AbstractBaseClient(final ServerContext context, final Client client)
+    {
         this.context = context;
+        this.client = client;
+    }
+
+    protected Client getClient()
+    {
+        return client;
     }
 
     protected ClientResource createClient(final String path)
@@ -53,7 +65,7 @@ public abstract class AbstractBaseClient
         String assembledPath = assembleEndpoint(path);
         log.debug("Endpoint URL: " + assembledPath);
 
-        ClientResource service = new ClientResource(assembledPath);
+        final ClientResource service = new ClientResource(new Context(getClass().getName()), assembledPath);
         service.setNext(client);
 
         if (context.getEmailAddress() != null)

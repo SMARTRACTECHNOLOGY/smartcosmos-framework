@@ -84,7 +84,7 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
 
         try
         {
-            DeleteCommand command = new DeleteCommand(context);
+            DeleteCommand command = new DeleteCommand(context, getClient());
             command.call(Object.class, FileEndpoints.delete(instance.getString(URN_FIELD)));
         } catch (JSONException e)
         {
@@ -110,7 +110,7 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
                                          String referenceUrn,
                                          ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IFile> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IFile> command = new GetCollectionCommand<>(context, getClient());
         return command.call(File.class,
                 FileEndpoints.listFilesOwnedByEntity(entityReferenceType, referenceUrn, viewType));
     }

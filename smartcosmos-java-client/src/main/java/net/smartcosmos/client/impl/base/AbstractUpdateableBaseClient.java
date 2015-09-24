@@ -51,7 +51,7 @@ public abstract class AbstractUpdateableBaseClient<T>
 
     protected void update(JSONObject instance, String path) throws ServiceException
     {
-        PostCommand command = new PostCommand(context);
+        PostCommand command = new PostCommand(context, getClient());
         command.call(Object.class, path, instance);
     }
 }

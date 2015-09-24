@@ -55,14 +55,14 @@ class InteractionClient extends AbstractCreateableBaseClient<IObjectInteraction>
     @Override
     public Collection<IObjectInteraction> listAll(ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IObjectInteraction> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IObjectInteraction> command = new GetCollectionCommand<>(context, getClient());
         return command.call(ObjectInteraction.class, InteractionEndpoints.listAllInteractions(viewType));
     }
 
     @Override
     public Collection<IObjectInteraction> findByObjectUrn(String objectUrn, ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IObjectInteraction> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IObjectInteraction> command = new GetCollectionCommand<>(context, getClient());
         return command.call(ObjectInteraction.class, InteractionEndpoints.findByObjectUrn(objectUrn, viewType));
     }
 
