@@ -32,7 +32,7 @@ import java.util.Properties;
 /**
  * Base class for any Cloud-backed service offering that provides a simple Properties file based mechanism for loading
  * Cloud-specific credentials and creating a Cloud-specific credentials class.
- * <p/>
+ * <p>
  * For example, the AWS SDK relies on an interface named <code>AWSCredentials</code> that consists of an access key
  * and a secret key. Instead of creating an explicit dependency on the AWS SDK in the Server API, and a dependency
  * for every other Cloud provider that might be eventually suppported, this base class abstracts away the actual

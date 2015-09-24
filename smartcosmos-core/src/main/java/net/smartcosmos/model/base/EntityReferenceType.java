@@ -26,7 +26,7 @@ package net.smartcosmos.model.base;
  * mandatory parameters is an {@link EntityReferenceType} coupled with a <b>referenceUrn</b>. This reduces
  * the number of API methods to learn, and provides an easy extension mechanism when new types of entities
  * are defined in future releases.
- * <p/>
+ * <p>
  * As a concrete example, consider a {@link net.smartcosmos.objects.model.context.IRelationship} used to
  * define some arbitrary type of connection between any two existing entities defined in the system.
  * As new entity types are added to the system, no additional work is required to support those entities

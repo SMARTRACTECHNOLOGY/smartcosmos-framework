@@ -1,5 +1,6 @@
 package net.smartcosmos.pojo;
 
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
@@ -20,6 +21,13 @@ package net.smartcosmos.pojo;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.io.ByteArrayInputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.junit.Test;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.objects.model.context.IFile;
@@ -27,13 +35,6 @@ import net.smartcosmos.objects.pojo.context.File;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.HashUtil;
 import net.smartcosmos.util.UuidUtil;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.testng.annotations.Test;
-
-import java.io.ByteArrayInputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class SignatureTest
 {

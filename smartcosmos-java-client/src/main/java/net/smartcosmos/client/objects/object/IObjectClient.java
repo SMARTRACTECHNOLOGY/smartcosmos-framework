@@ -36,7 +36,7 @@ public interface IObjectClient extends IUpdateableBaseClient<IObject>
     /**
      * Find a specific {@link net.smartcosmos.objects.model.context.IObject#getObjectUrn()} using a case-sensitive
      * exact match.
-     * <p/>
+     * <p>
      * Returns a {@link net.smartcosmos.util.json.ViewType#Standard} view.
      *
      * @param objectUrn Exact, case-sensitive object URN to locate

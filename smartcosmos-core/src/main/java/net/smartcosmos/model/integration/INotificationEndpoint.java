@@ -1,5 +1,7 @@
 package net.smartcosmos.model.integration;
 
+import net.smartcosmos.model.base.IAccountDomainResource;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Core SDK
@@ -25,14 +27,12 @@ import net.smartcosmos.model.base.IReferentialObject;
 import net.smartcosmos.model.context.IAccount;
 
 /**
- * Defines a single external integration endpoint whereby the platform will issue an
- * HTTP/S POST of events occurring within a given account context in near real-time.
+ * Defines a single external integration endpoint whereby the platform will issue an HTTP/S POST of events occurring
+ * within a given account context in near real-time.
  */
-public interface INotificationEndpoint extends INamedObject<INotificationEndpoint>, IReferentialObject
+public interface INotificationEndpoint
+        extends IAccountDomainResource<INotificationEndpoint>, INamedObject<INotificationEndpoint>, IReferentialObject
 {
-    IAccount getAccount();
-
-    void setAccount(IAccount account);
 
     IAccount getReferenceAccount();
 

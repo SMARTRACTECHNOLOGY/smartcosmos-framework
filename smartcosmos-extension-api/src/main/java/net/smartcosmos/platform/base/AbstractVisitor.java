@@ -27,6 +27,7 @@ import net.smartcosmos.platform.api.visitor.IVisitor;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public abstract class AbstractVisitor<T> extends AbstractService implements IVisitor<T>, Managed
 {
@@ -62,7 +63,16 @@ public abstract class AbstractVisitor<T> extends AbstractService implements IVis
 
         Preconditions.checkArgument((priority > 0 && priority <= 100),
                 "priority must fall within the range of 0 < priority <= 100");
-        this.priority = priority;
+
+        //
+        // This is here so that visitors of a particular entity type will get loaded into the
+        // per-entity-type SortedSet in the visitor registry (see createEntityVisitors() in
+        // net.smartcosmos.objects.app.ServiceFactory) even if they have the same priority,
+        // i.e., that priority numbers in the visitors registry are (close enough to) unique.
+        //
+        Long leastSignificantBits = UUID.fromString(serviceId).getLeastSignificantBits();
+        Integer uniquePriority = Math.abs(leastSignificantBits.intValue()) % 4096;
+        this.priority = (priority * 4096) + uniquePriority;
 
         Preconditions.checkNotNull(entityReferenceType, "entityReferenceType must not be null");
         Preconditions.checkArgument(BINDABLE_ENTITIES.contains(entityReferenceType),

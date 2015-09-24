@@ -43,12 +43,12 @@ import net.smartcosmos.model.base.ITypedObject;
  * </ul>
  * Features in GeoJSON contain a geometry object and additional properties, and a feature collection represents a list
  * of features.
- * <p/>
+ * <p>
  * To capture the a temporal geo-rectification, create an {@link IGeospatialEntry} that refers
  * to the object, then use the {@link IGeospatialEntry#getUrn()} and
  * {@link net.smartcosmos.model.base.EntityReferenceType#Georectification} to place the location on an
  * {@link net.smartcosmos.objects.model.context.ITimelineEntry}.
- * <p/>
+ * <p>
  * Possible uses of the georectification object include the definition of a complex geo-fence that marks
  * a job site, a multi-point set of coordinates that represents a courier route, or
  * perhaps an analytical view of aggregated data. Another use case is to link an

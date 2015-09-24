@@ -1,14 +1,3 @@
-/*
- * Copyright (C) 2013 - 2015, Smartrac Technology Fletcher, Inc.
- * 267 Cane Creek Rd, Fletcher, NC, 28732, USA
- * All Rights Reserved.
- *
- * This software is the confidential and proprietary information of
- * Smartrac Technology Fletcher, Inc. ("Confidential Information").
- * You shall not disclose such Confidential Information and shall
- * use it only in accordance with the terms of the license agreement
- * you entered into with Smartrac Technology Fletcher, Inc.
- */
 package net.smartcosmos.platform.configuration;
 
 /*
@@ -39,11 +28,11 @@ import java.util.List;
 
 /**
  * Created by tcross on 05.02.2015.
- * <p/>
+ * <p>
  * Source of the singleton library hierarchy. If there is no library hierarchy specified in the configuration,
  * or if there is and it's not completely initialized, it returns an EmptyLibraryHierarchy instance, which
  * basically answers no to everything involving library hierarchies.
- * <p/>
+ * <p>
  * The setLibraryHierarchyList() and setLibraryLinkFlagsList() methods have to be public so they can be accessed
  * by the DropWizard application initialization, but they are noops after the initial call.
  */
@@ -79,7 +68,7 @@ public final class LibraryHierarchyFactory
 
     /**
      * @param libraryHierarchyList: a List<String> names of LibraryElementTypes from objects.yml, from lowest to highest
-     *                              <p/>
+     *                              <p>
      *                              See "LIBRARY HIERARCHY" section of objects.yml for an example
      */
     public static void setLibraryHierarchyList(List<String> libraryHierarchyList)
@@ -95,7 +84,7 @@ public final class LibraryHierarchyFactory
 
     /**
      * @param libraryLinkFlags a List\<Boolean\> of Booleans from objects.yml
-     *                         <p/>
+     *                         <p>
      *                         Each flag indicates whether elements of LibraryElementType with the same index from
      *                         the LibraryHierarchyList can have Objects directly attached directly to them. In the
      *                         default/example version objects can only be attached to library elements of

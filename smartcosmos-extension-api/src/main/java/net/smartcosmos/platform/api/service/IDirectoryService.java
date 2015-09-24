@@ -31,7 +31,7 @@ import net.smartcosmos.platform.api.authentication.IRegistration;
 /**
  * Manage account registrations, defines new users, and allows an administrator to define a specific password or trigger
  * a password reset process via email.
- * <p/>
+ * <p>
  * The enabled (or disabled) status of a user is <b>not</b> managed by SMART COSMOS - it is by design managed by the
  * directory service itself.
  */
@@ -40,7 +40,7 @@ public interface IDirectoryService extends IService, IHealthCheckable, Managed
     /**
      * Defines a new directory based on a registration request. Registration services may be optionally disabled in
      * some SMART COSMOS platform services in the server's yml file.
-     * <p/>
+     * <p>
      * All users are explicitly associated with a directory based on the email address.
      *
      * @param registration Registration request

@@ -60,7 +60,7 @@ public interface IObjectAddressClient
      * {@link net.smartcosmos.objects.model.context.IObject#getObjectUrn()}. This method is useful regardless when an
      * object has a static address (e.g. a building) or when the object moves around a lot (e.g. a vehicle). To learn
      * the last known address, set the <code>count</code> value to 1.
-     * <p/>
+     * <p>
      * Returns a {@link net.smartcosmos.util.json.ViewType#Standard} view.
      *
      * @param objectUrn Exact, case-sensitive object URN to locate
@@ -75,7 +75,7 @@ public interface IObjectAddressClient
      * {@link net.smartcosmos.objects.model.context.IObject#getObjectUrn()}. This method is useful regardless when an
      * object has a static address (e.g. a building) or when the object moves around a lot (e.g. a vehicle). To learn
      * the last known address, set the <code>count</code> value to 1.
-     * <p/>
+     * <p>
      * Returns the address records at the specified field verbosity.
      *
      * @param objectUrn Exact, case-sensitive object URN to locate

@@ -56,7 +56,7 @@ public interface IUserClient extends IUpdateableBaseClient<IUser>
      *
      * @param emailAddress Email address of the user to locate
      * @param newPassword  New password to assign
-     * @throws ServiceException
+     * @throws ServiceException if the new password save was unsuccessful
      */
     void changePassword(String emailAddress, String newPassword) throws ServiceException;
 
@@ -65,7 +65,7 @@ public interface IUserClient extends IUpdateableBaseClient<IUser>
      * call is assigned the {@link net.smartcosmos.model.context.RoleType#Administrator}</b> role.
      *
      * @param emailAddress Email address of the user to initiate a password reset workflow on
-     * @throws ServiceException
+     * @throws ServiceException if the password was not reset
      */
     void resetPassword(String emailAddress) throws ServiceException;
 }

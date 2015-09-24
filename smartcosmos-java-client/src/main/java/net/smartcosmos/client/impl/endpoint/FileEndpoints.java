@@ -32,34 +32,34 @@ public final class FileEndpoints
 
     private static final String BASE = "/files";
 
-    private static final String CREATE__PUT = BASE;
+    private static final String CREATE_PUT = BASE;
 
-    private static final String DELETE__DELETE = BASE.concat("/%s");
+    private static final String DELETE_DELETE = BASE.concat("/%s");
 
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String RETRIEVE_FILE_CONTENT__GET = BASE.concat("/%s/contents");
+    private static final String RETRIEVE_FILE_CONTENT_GET = BASE.concat("/%s/contents");
 
-    private static final String LIST_OWNED_BY__GET = BASE.concat("/%s/%s?view=%s");
+    private static final String LIST_OWNED_BY_GET = BASE.concat("/%s/%s?view=%s");
 
     /**
      * MULTIPART_FORM_DATA with a file stream and filename content disposition.
      */
-    private static final String UPLOAD_FILE_CONTENT__MULTIPART__POST = BASE.concat("/%s/multipart");
+    private static final String UPLOAD_FILE_CONTENT_MULTIPART_POST = BASE.concat("/%s/multipart");
 
     /**
      * application/octet-stream.
      */
-    private static final String UPLOAD_FILE_CONTENT__OCTET_STREAM__POST = BASE.concat("/%s/octet");
+    private static final String UPLOAD_FILE_CONTENT_OCTET_STREAM_POST = BASE.concat("/%s/octet");
 
     public static String create()
     {
-        return CREATE__PUT;
+        return CREATE_PUT;
     }
 
     public static String delete(String urn)
     {
-        return String.format(DELETE__DELETE, urn);
+        return String.format(DELETE_DELETE, urn);
     }
 
     public static String findByUrn(String urn)
@@ -69,22 +69,22 @@ public final class FileEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String retrieveContents(String urn)
     {
-        return String.format(RETRIEVE_FILE_CONTENT__GET, urn);
+        return String.format(RETRIEVE_FILE_CONTENT_GET, urn);
     }
 
     public static String uploadContentsAsMultipart(String urn)
     {
-        return String.format(UPLOAD_FILE_CONTENT__MULTIPART__POST, urn);
+        return String.format(UPLOAD_FILE_CONTENT_MULTIPART_POST, urn);
     }
 
     public static String uploadContentsAsOctetStream(String urn)
     {
-        return String.format(UPLOAD_FILE_CONTENT__OCTET_STREAM__POST, urn);
+        return String.format(UPLOAD_FILE_CONTENT_OCTET_STREAM_POST, urn);
     }
 
     public static String listFilesOwnedByEntity(EntityReferenceType entityReferenceType, String referenceUrn)
@@ -96,6 +96,6 @@ public final class FileEndpoints
                                                 String referenceUrn,
                                                 ViewType view)
     {
-        return String.format(LIST_OWNED_BY__GET, entityReferenceType, referenceUrn, view);
+        return String.format(LIST_OWNED_BY_GET, entityReferenceType, referenceUrn, view);
     }
 }

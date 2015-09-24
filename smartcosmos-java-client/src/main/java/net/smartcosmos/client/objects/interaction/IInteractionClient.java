@@ -35,7 +35,7 @@ public interface IInteractionClient extends ICreateableBaseClient<IObjectInterac
     /**
      * Lists all known object interactions under the authenticated account using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view
-     * <p/>
+     * <p>
      * <b>NOTE:</b> Use caution on this method as it may return a large amount of data!
      *
      * @return Non-null (but possibly empty) collection of object interaction definitions
@@ -45,7 +45,7 @@ public interface IInteractionClient extends ICreateableBaseClient<IObjectInterac
 
     /**
      * Lists all known object interactions under the authenticated account using the specified field verbosity.
-     * <p/>
+     * <p>
      * <b>NOTE:</b> Use caution on this method as it may return a large amount of data!
      *
      * @param viewType Field verbosity

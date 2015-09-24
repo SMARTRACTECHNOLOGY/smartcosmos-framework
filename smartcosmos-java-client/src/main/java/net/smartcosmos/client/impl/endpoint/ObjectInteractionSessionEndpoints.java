@@ -31,22 +31,22 @@ public final class ObjectInteractionSessionEndpoints
 
     private static final String BASE = "/sessions";
 
-    private static final String CREATE__PUT = BASE;
+    private static final String CREATE_PUT = BASE;
 
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String FIND_BY_NAME_LIKE__GET = BASE.concat("?nameLike=%s&view=%s");
+    private static final String FIND_BY_NAME_LIKE_GET = BASE.concat("?nameLike=%s&view=%s");
 
-    private static final String UPDATE__POST = BASE;
+    private static final String UPDATE_POST = BASE;
 
     public static String create()
     {
-        return CREATE__PUT;
+        return CREATE_PUT;
     }
 
     public static String update()
     {
-        return UPDATE__POST;
+        return UPDATE_POST;
     }
 
     public static String findByUrn(String urn)
@@ -56,7 +56,7 @@ public final class ObjectInteractionSessionEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String findByNameLike(String nameLike)
@@ -66,6 +66,6 @@ public final class ObjectInteractionSessionEndpoints
 
     public static String findByNameLike(String nameLike, ViewType viewType)
     {
-        return String.format(FIND_BY_NAME_LIKE__GET, nameLike, viewType);
+        return String.format(FIND_BY_NAME_LIKE_GET, nameLike, viewType);
     }
 }

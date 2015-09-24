@@ -30,29 +30,29 @@ public final class UserEndpoints
 
     private static final String BASE = "/users";
 
-    private static final String CREATE__PUT = BASE;
+    private static final String CREATE_PUT = BASE;
 
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String FIND_BY_EMAIL__GET = BASE.concat("/user/%s?view=%s");
+    private static final String FIND_BY_EMAIL_GET = BASE.concat("/user/%s?view=%s");
 
-    private static final String MANAGE_PASSWORD__POST = BASE.concat("/user");
+    private static final String MANAGE_PASSWORD_POST = BASE.concat("/user");
 
-    private static final String UPDATE__POST = BASE;
+    private static final String UPDATE_POST = BASE;
 
     public static String create()
     {
-        return CREATE__PUT;
+        return CREATE_PUT;
     }
 
     public static String update()
     {
-        return UPDATE__POST;
+        return UPDATE_POST;
     }
 
     public static String managePassword()
     {
-        return MANAGE_PASSWORD__POST;
+        return MANAGE_PASSWORD_POST;
     }
 
     public static String findByUrn(String urn)
@@ -62,7 +62,7 @@ public final class UserEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String findByEmailAddress(String emailAddress)
@@ -72,6 +72,6 @@ public final class UserEndpoints
 
     public static String findByEmailAddress(String emailAddress, ViewType viewType)
     {
-        return String.format(FIND_BY_EMAIL__GET, emailAddress, viewType);
+        return String.format(FIND_BY_EMAIL_GET, emailAddress, viewType);
     }
 }

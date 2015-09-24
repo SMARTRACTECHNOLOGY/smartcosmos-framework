@@ -26,12 +26,12 @@ import net.smartcosmos.platform.api.IContext;
  * Provides 3rd party (e.g. DropBox, Box, etc.) OAuth 2.0 bearer and refresh token management services. Each token
  * manager is declared in the .yml configuration file as key-value property pairs underneath the
  * <b>oauthTokenManagers</b> parent key. For example:
- * <p/>
+ * <p>
  * <pre>
  * oauthTokenManagers:
  * <nbsp/><nbsp/>Box.com : net.smartcosmos.objects.job.tokenmanager.BoxOAuthTokenManager
  * </pre>
- * <p/>
+ * <p>
  * <B>NOTE:</B> It is critical that the value of the {@link #getName()} method return an exact match to the key
  * identified under the <b>oauthTokenManagers</b>.
  */
@@ -53,7 +53,7 @@ public interface IExternalOAuthTokenManager
 
     /**
      * Case-sensitive name assigned to the external service accessed using OAuth 2.0 bearer tokens.
-     * <p/>
+     * <p>
      * <b>NOTE:</b> The name assigned here must be a case-sensitive exact match against the entry in the .yml file
      * under the <i>oauthTokenManagers</i> parent key.
      *

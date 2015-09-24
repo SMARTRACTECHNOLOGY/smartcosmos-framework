@@ -1,5 +1,7 @@
 package net.smartcosmos.platform.jpa.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -34,26 +36,87 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import java.io.Serializable;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class DomainResourceEntity<T extends IDomainResource>
-        implements IDomainResource<T>, IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler
+public abstract class DomainResourceEntity<T extends IDomainResource<T>>
+        implements IDomainResource<T>, IPrePersistHandler, IPreUpdateHandler, IPostLoadHandler, Serializable
 {
-    @JsonView(JsonGenerationView.Minimum.class)
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @Column(length = 16, nullable = false, updatable = false, unique = true)
     @Type(type = "uuid-binary")
     @Id
-    UUID systemUuid;
+    @JsonIgnore
+    private UUID systemUuid;
 
     @JsonView(JsonGenerationView.Standard.class)
     @Basic
-    protected long lastModifiedTimestamp;
+    private long lastModifiedTimestamp;
 
     @JsonView(JsonGenerationView.Full.class)
     @Column(length = 2048, nullable = true, updatable = true)
-    protected String moniker;
+    private String moniker;
 
+    @Override
+    public void copy(final T target)
+    {
+        this.setSystemUuid(target.getSystemUuid());
+        this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
+        this.moniker = target.getMoniker();
+    }
+
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DomainResourceEntity other = (DomainResourceEntity) obj;
+        if (lastModifiedTimestamp != other.lastModifiedTimestamp)
+            return false;
+        if (moniker == null)
+        {
+            if (other.moniker != null)
+                return false;
+        } else if (!moniker.equals(other.moniker))
+            return false;
+        if (systemUuid == null)
+        {
+            if (other.systemUuid != null)
+                return false;
+        } else if (!systemUuid.equals(other.systemUuid))
+            return false;
+        return true;
+    }
+
+    @Override
+    public long getLastModifiedTimestamp()
+    {
+        return lastModifiedTimestamp;
+    }
+
+    @Override
+    public String getMoniker()
+    {
+        return moniker;
+    }
+
+    @Override
+    public UUID getSystemUuid()
+    {
+        return systemUuid;
+    }
+
+    @JsonView(JsonGenerationView.Minimum.class)
     @Override
     public String getUrn()
     {
@@ -64,26 +127,15 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
         return "urn:uuid:" + systemUuid.toString();
     }
 
-
     @Override
-    public void setUrn(String urn)
+    public int hashCode()
     {
-        // TODO message
-        //throw new UnsupportedOperationException();
-        this.systemUuid = UuidUtil.getUuidFromUrn(urn);
-    }
-
-    public UUID getSystemUuid()
-    {
-        return systemUuid;
-    }
-
-    @Override
-    public void copy(T target)
-    {
-        this.setUrn(target.getUrn());
-        this.lastModifiedTimestamp = target.getLastModifiedTimestamp();
-        this.moniker = target.getMoniker();
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (lastModifiedTimestamp ^ (lastModifiedTimestamp >>> 32));
+        result = prime * result + ((moniker == null) ? 0 : moniker.hashCode());
+        result = prime * result + ((systemUuid == null) ? 0 : systemUuid.hashCode());
+        return result;
     }
 
     @Override
@@ -116,72 +168,25 @@ public abstract class DomainResourceEntity<T extends IDomainResource>
     }
 
     @Override
-    public long getLastModifiedTimestamp()
-    {
-        return lastModifiedTimestamp;
-    }
-
-    @Override
-    public String getMoniker()
-    {
-        return moniker;
-    }
-
-    @Override
-    public void setMoniker(String moniker)
+    public void setMoniker(final String moniker)
     {
         this.moniker = moniker;
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * This setter is here for Hibernate to override so that it can set the database ID.
      * 
-     * @see java.lang.Object#equals(java.lang.Object)
+     * @param systemUuid
+     *            the database id to set
      */
-    @Override
-    public boolean equals(Object obj)
+    protected void setSystemUuid(final UUID systemUuid)
     {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        DomainResourceEntity other = (DomainResourceEntity) obj;
-        if (lastModifiedTimestamp != other.lastModifiedTimestamp)
-            return false;
-        if (moniker == null)
-        {
-            if (other.moniker != null)
-                return false;
-        } else if (!moniker.equals(other.moniker))
-            return false;
-        if (systemUuid == null)
-        {
-            if (UuidUtil.getUuidFromUrn(other.getUrn()) != null)
-            {
-                return false;
-            }
-        } else if (!systemUuid.equals(UuidUtil.getUuidFromUrn(other.getUrn())))
-        {
-            return false;
-        }
-        return true;
+        this.systemUuid = systemUuid;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
     @Override
-    public int hashCode()
+    public void setUrn(final String urn)
     {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (lastModifiedTimestamp ^ (lastModifiedTimestamp >>> 32));
-        result = prime * result + ((moniker == null) ? 0 : moniker.hashCode());
-        result = prime * result + ((systemUuid == null) ? 0 : systemUuid.hashCode());
-        return result;
+        throw new UnsupportedOperationException("System UUID should only be set by the Database!");
     }
 }

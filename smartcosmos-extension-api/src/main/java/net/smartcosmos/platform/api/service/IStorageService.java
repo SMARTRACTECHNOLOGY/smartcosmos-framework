@@ -55,7 +55,7 @@ public interface IStorageService extends IService, IHealthCheckable
 
     /**
      * Permanently delete the file contents pointed to by the {@link net.smartcosmos.objects.model.context.IFile}.
-     * <p/>
+     * <p>
      * <b>NOTE:</b> Each concrete implementation must define its own purge guarantees. For example, if the file's space
      * should be securely wiped by overwriting with 0s, it is the responsibility of the concrete implementation to
      * ensure this type of service level agreement.

@@ -39,7 +39,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
 {
     /**
      * Assigns the collection of tags to the specified entity indicated by the entity reference type and reference URN.
-     * <p/>
+     * <p>
      * <b>NOTE:</b> Use this method if you aren't sure what fields changed or if you aren't concerned about network
      * utilization.
      *
@@ -55,7 +55,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
 
     /**
      * Assigns the collection of tags to the specified entity indicated by the entity reference type and reference URN.
-     * <p/>
+     * <p>
      * <b>NOTE:</b> Use this method if you are concerned about network utilization and only want to send the tag names.
      *
      * @param entityReferenceType Entity reference type
@@ -71,10 +71,10 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
     /**
      * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
      * tags assigned to the specified entity indicated by the entity reference type and reference URN.
-     * <p/>
+     * <p>
      * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
-     * <p/>
+     * <p>
      * Effectively this method would be used to tell you that, for example,
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} with
      * {@link net.smartcosmos.objects.model.context.IDevice#getUrn()} of <code>uuid:urn:system-assigned-uuid</code> has
@@ -92,10 +92,10 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
     /**
      * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
      * tags assigned to the specified entity indicated by the entity reference type and reference URN.
-     * <p/>
+     * <p>
      * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using the specified field
      * verbosity.
-     * <p/>
+     * <p>
      * Effectively this method would be used to tell you that, for example,
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} with
      * {@link net.smartcosmos.objects.model.context.IDevice#getUrn()} of <code>uuid:urn:system-assigned-uuid</code> has
@@ -115,10 +115,10 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
     /**
      * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
      * entities of the specified type that have been assigned such a tag.
-     * <p/>
+     * <p>
      * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
-     * <p/>
+     * <p>
      * Effectively this method would be used to tell you that, for example, there are 13
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances assigned the tag <code>Foo</code>.
      *
@@ -133,10 +133,10 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
     /**
      * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
      * entities of the specified type that have been assigned such a tag.
-     * <p/>
+     * <p>
      * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using the specified field
      * verbosity.
-     * <p/>
+     * <p>
      * Effectively this method would be used to tell you that, for example, there are 13
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag
      * <code>Foo</code>.
@@ -154,10 +154,10 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
     /**
      * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
      * entities that have been assigned such a tag.
-     * <p/>
+     * <p>
      * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
-     * <p/>
+     * <p>
      * Effectively this method would be used to tell you that, for example, there are 13
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag
      * <code>Foo</code>, and 4 {@link net.smartcosmos.objects.model.context.IDevice} instances, and 2
@@ -172,10 +172,10 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
     /**
      * Retrieves a collection of {@link net.smartcosmos.objects.model.context.ITagAssignment} records that represent the
      * entities that have been assigned such a tag.
-     * <p/>
+     * <p>
      * Each {@link net.smartcosmos.objects.model.context.ITagAssignment} will be serialized using the specified field
      * verbosity.
-     * <p/>
+     * <p>
      * Effectively this method would be used to tell you that, for example, there are 13
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag
      * <code>Foo</code>, and 4 {@link net.smartcosmos.objects.model.context.IDevice} instances, and 2

@@ -27,13 +27,13 @@ import org.json.JSONObject;
 /**
  * Type-safe creation routines for SMART COSMOS entities either by providing an explicit strongly typed instance or
  * through a more fluid JSON definition.
- * <p/>
+ * <p>
  * Every creatable entity will be assigned a system-generated URN. Most clients provide additional search methods
  * beyond the standard {@link IFindableBaseClient#findByUrn(String)} method, so generally it
  * isn't necessary to explicitly remember the system-generated URN.
  *
- * @param <T> One of the SMART COSMOS contextual entities.
- * @see net.smartcosmos.model.extension.IExtension
+ * @param <T> One of the SMART COSMOS contextual entities. 
+ * @see net.smartcosmos.model.extension.IExternalExtension
  * @see net.smartcosmos.objects.model.context.IFile
  * @see net.smartcosmos.objects.model.context.IDevice
  * @see net.smartcosmos.model.geo.IGeospatialEntry
@@ -53,11 +53,11 @@ public interface ICreateableBaseClient<T> extends IFindableBaseClient<T>
      * Creates a new instance of T, submitting every member field. Use this method if you aren't sure what fields
      * have been defined or if you aren't concerned about network utilization.
      *
-     * @param instance
+     * @param instance instance to create
      * @return response entity that contains the system-assigned URN in
      * {@link net.smartcosmos.pojo.base.ResponseEntity#getMessage()} when the
      * {@link net.smartcosmos.pojo.base.ResponseEntity#getCode()} equals {@link net.smartcosmos.pojo.base.Result#OK}
-     * @throws net.smartcosmos.client.connectivity.ServiceException
+     * @throws ServiceException on error
      */
     ResponseEntity create(T instance) throws ServiceException;
 
@@ -69,7 +69,7 @@ public interface ICreateableBaseClient<T> extends IFindableBaseClient<T>
      * @return response entity that contains the system-assigned URN in
      * {@link net.smartcosmos.pojo.base.ResponseEntity#getMessage()} when the
      * {@link net.smartcosmos.pojo.base.ResponseEntity#getCode()} equals {@link net.smartcosmos.pojo.base.Result#OK}
-     * @throws ServiceException
+     * @throws ServiceException on error
      */
     ResponseEntity create(JSONObject instance) throws ServiceException;
 }

@@ -50,36 +50,36 @@ public final class LibraryEndpoints
 
     private static final String BASE = "/library";
 
-    private static final String CREATE__PUT = BASE;
+    private static final String CREATE_PUT = BASE;
 
-    private static final String FIND_BY_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_URN_GET = BASE.concat("/%s?view=%s");
 
-    private static final String UPDATE__POST = BASE;
+    private static final String UPDATE_POST = BASE;
 
-    private static final String FIND_BY_NAME_LIKE__GET = BASE.concat("/?nameLike=%s&libraryElementType=%s");
+    private static final String FIND_BY_NAME_LIKE_GET = BASE.concat("/?nameLike=%s&libraryElementType=%s");
 
-    private static final String FIND_BY_NAME_AND_ELEMENT_TYPE__GET = BASE.concat("/%s/%s?view=%s");
+    private static final String FIND_BY_NAME_AND_ELEMENT_TYPE_GET = BASE.concat("/%s/%s?view=%s");
 
-    private static final String FIND_PARENT__GET = BASE.concat("/parent/%s?view=%s");
+    private static final String FIND_PARENT_GET = BASE.concat("/parent/%s?view=%s");
 
-    private static final String FIND_CHILDREN__GET = BASE.concat("/children/%s?view=%s");
+    private static final String FIND_CHILDREN_GET = BASE.concat("/children/%s?view=%s");
 
-    private static final String QUERY_ELT_TYPE_AGNOSTIC__GET =
+    private static final String QUERY_ELT_TYPE_AGNOSTIC_GET =
             BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&view=%s");
 
-    private static final String QUERY_ELT_TYPE_SPECIFIC__GET =
+    private static final String QUERY_ELT_TYPE_SPECIFIC_GET =
             BASE.concat("?modifiedAfter=%s&monikerLike=%s&nameLike=%s&libraryElementType=%s&view=%s");
 
-    private static final String DELETE__DELETE = BASE;
+    private static final String DELETE_DELETE = BASE;
 
     public static String create()
     {
-        return CREATE__PUT;
+        return CREATE_PUT;
     }
 
     public static String update()
     {
-        return UPDATE__POST;
+        return UPDATE_POST;
     }
 
     public static String findByUrn(String urn)
@@ -89,7 +89,7 @@ public final class LibraryEndpoints
 
     public static String findByUrn(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_URN__GET, urn, viewType);
+        return String.format(FIND_BY_URN_GET, urn, viewType);
     }
 
     public static String findByNameLike(String nameLike)
@@ -99,27 +99,27 @@ public final class LibraryEndpoints
 
     public static String findByNameLike(String nameLike, ViewType viewType)
     {
-        return String.format(FIND_BY_NAME_LIKE__GET, nameLike, viewType);
+        return String.format(FIND_BY_NAME_LIKE_GET, nameLike, viewType);
     }
 
     public static String findByNameAndElementType(String name, String elementType, ViewType viewType)
     {
-        return String.format(FIND_BY_NAME_AND_ELEMENT_TYPE__GET, name, elementType, viewType);
+        return String.format(FIND_BY_NAME_AND_ELEMENT_TYPE_GET, name, elementType, viewType);
     }
 
     public static String getParent(String urn, ViewType viewType)
     {
-        return String.format(FIND_PARENT__GET, urn, viewType);
+        return String.format(FIND_PARENT_GET, urn, viewType);
     }
 
     public static String getChildren(String urn, ViewType viewType)
     {
-        return String.format(FIND_CHILDREN__GET, urn, viewType);
+        return String.format(FIND_CHILDREN_GET, urn, viewType);
     }
 
     public static String delete(String urn)
     {
-        return String.format(DELETE__DELETE, urn);
+        return String.format(DELETE_DELETE, urn);
     }
 
     public static class Builder
@@ -173,10 +173,10 @@ public final class LibraryEndpoints
         {
             if (libraryElementType == null)
             {
-                return String.format(QUERY_ELT_TYPE_AGNOSTIC__GET, modifiedAfter, monikerLike, nameLike, view);
+                return String.format(QUERY_ELT_TYPE_AGNOSTIC_GET, modifiedAfter, monikerLike, nameLike, view);
             } else
             {
-                return String.format(QUERY_ELT_TYPE_SPECIFIC__GET, modifiedAfter, monikerLike, nameLike,
+                return String.format(QUERY_ELT_TYPE_SPECIFIC_GET, modifiedAfter, monikerLike, nameLike,
                         libraryElementType, view);
             }
         }

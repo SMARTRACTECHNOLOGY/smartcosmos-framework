@@ -34,34 +34,42 @@ public interface IAccountClient
      *
      * @return your account
      * @throws ServiceException
+     *             on error
      */
     IAccount fetch() throws ServiceException;
 
     /**
      * Fetches your account using the specified field verbosity.
      *
-     * @param viewType Field verbosity
+     * @param viewType
+     *            Field verbosity
      * @return your account
      * @throws ServiceException
+     *             on error
      */
     IAccount fetch(ViewType viewType) throws ServiceException;
 
     /**
      * Changes your existing password to a new password.
      *
-     * @param oldPassword Current password
-     * @param newPassword New password
+     * @param oldPassword
+     *            Current password
+     * @param newPassword
+     *            New password
      * @return true, if the password was changed successfully
      * @throws ServiceException
+     *             on error
      */
     boolean changePassword(String oldPassword, String newPassword) throws ServiceException;
 
     /**
-     * Initiates a password reset workflow on the {@link net.smartcosmos.model.context.IUser} account represented
-     * by the specified email address.
+     * Initiates a password reset workflow on the {@link net.smartcosmos.model.context.IUser} account represented by the
+     * specified email address.
      *
-     * @param emailAddress email address of the user account to initiate a password reset workflow
+     * @param emailAddress
+     *            email address of the user account to initiate a password reset workflow
      * @throws ServiceException
+     *             on error
      */
     void sendPasswordResetEmail(String emailAddress) throws ServiceException;
 }

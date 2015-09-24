@@ -21,20 +21,6 @@ package net.smartcosmos.client.objects.file;
  */
 
 import com.google.common.base.Preconditions;
-import net.smartcosmos.client.connectivity.ServerContext;
-import net.smartcosmos.client.connectivity.ServiceException;
-import net.smartcosmos.client.impl.base.AbstractCreateableBaseClient;
-import net.smartcosmos.client.impl.command.DeleteCommand;
-import net.smartcosmos.client.impl.command.GetCollectionCommand;
-import net.smartcosmos.client.impl.endpoint.FileEndpoints;
-import net.smartcosmos.client.impl.endpoint.RelationshipEndpoints;
-import net.smartcosmos.model.base.EntityReferenceType;
-import net.smartcosmos.objects.model.context.IFile;
-import net.smartcosmos.objects.pojo.context.File;
-import net.smartcosmos.pojo.base.ResponseEntity;
-import net.smartcosmos.pojo.base.Result;
-import net.smartcosmos.util.json.JsonUtil;
-import net.smartcosmos.util.json.ViewType;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.Disposition;
@@ -53,6 +39,20 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+
+import net.smartcosmos.client.connectivity.ServerContext;
+import net.smartcosmos.client.connectivity.ServiceException;
+import net.smartcosmos.client.impl.base.AbstractCreateableBaseClient;
+import net.smartcosmos.client.impl.command.DeleteCommand;
+import net.smartcosmos.client.impl.command.GetCollectionCommand;
+import net.smartcosmos.client.impl.endpoint.FileEndpoints;
+import net.smartcosmos.model.base.EntityReferenceType;
+import net.smartcosmos.objects.model.context.IFile;
+import net.smartcosmos.objects.pojo.context.File;
+import net.smartcosmos.pojo.base.ResponseEntity;
+import net.smartcosmos.pojo.base.Result;
+import net.smartcosmos.util.json.JsonUtil;
+import net.smartcosmos.util.json.ViewType;
 
 import static net.smartcosmos.Field.URN_FIELD;
 
@@ -85,7 +85,7 @@ class FileClient extends AbstractCreateableBaseClient<IFile> implements IFileCli
         try
         {
             DeleteCommand command = new DeleteCommand(context);
-            command.call(Object.class, RelationshipEndpoints.delete(instance.getString(URN_FIELD)));
+            command.call(Object.class, FileEndpoints.delete(instance.getString(URN_FIELD)));
         } catch (JSONException e)
         {
             throw new ServiceException(e);

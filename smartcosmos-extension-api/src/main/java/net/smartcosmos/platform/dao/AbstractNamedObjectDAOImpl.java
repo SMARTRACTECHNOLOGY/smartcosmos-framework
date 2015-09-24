@@ -29,7 +29,7 @@ import org.hibernate.SessionFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class AbstractNamedObjectDAOImpl<U extends INamedObject, V extends U> extends AbstractDAOImpl<U, V> implements
+public abstract class AbstractNamedObjectDAOImpl<U extends INamedObject<U>, V extends U> extends AbstractDAOImpl<U, V> implements
         INamedObjectSearchDAO<U>
 {
     protected AbstractNamedObjectDAOImpl(Class<V> classInstance, SessionFactory sessionFactory)

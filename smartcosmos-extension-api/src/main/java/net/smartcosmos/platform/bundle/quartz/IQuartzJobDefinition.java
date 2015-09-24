@@ -26,7 +26,7 @@ import org.quartz.SchedulerException;
 /**
  * Stand alone representation of a Quartz Job and Trigger that is to be scheduled
  * automatically at bootstrap.
- * <p/>
+ * <p>
  * <B>NOTE:</B> Every concrete implementation must support a no-arg public constructor.
  *
  * @see {@link AbstractQuartzJobDefinition}

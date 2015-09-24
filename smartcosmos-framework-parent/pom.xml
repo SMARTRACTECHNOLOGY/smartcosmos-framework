@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- -->
+<!-- SMART COSMOS Framework -->
+<!-- Copyright (C) 2013-2015, Smartrac Technology Fletcher, Inc. -->
+<!-- 267 Cane Creek Rd, Fletcher, NC, 28732, USA -->
+<!-- All Rights Reserved. -->
+<!-- -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); -->
+<!-- you may not use this file except in compliance with the License. -->
+<!-- You may obtain a copy of the License at -->
+<!-- -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0 -->
+<!-- -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS, -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. -->
+<!-- See the License for the specific language governing permissions and -->
+<!-- limitations under the License. -->
+<!-- -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-framework-root</artifactId>
-        <version>2.10-SNAPSHOT</version>
+        <version>2.10.11-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-framework-parent</artifactId>
     <packaging>pom</packaging>
     <name>SMART COSMOS Framework Parent</name>
-
     <description>This POM file forms the foundation of all POM files that are specific to JAVA packaging.</description>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-dependencies</artifactId>
-                <version>${project.version}</version>
+                <version>2.10.11-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -32,6 +49,7 @@
                 <includes>
                     <include>**/*.yml</include>
                     <include>**/*.properties</include>
+                    <include>**/*.xml</include>
                 </includes>
             </resource>
             <resource>
@@ -39,11 +57,88 @@
                 <excludes>
                     <exclude>**/*.yml</exclude>
                     <exclude>**/*.properties</exclude>
+                    <exclude>**/*.xml</exclude>
                 </excludes>
             </resource>
         </resources>
+        <testResources>
+            <testResource>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/test/resources</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </testResource>
+            <testResource>
+                <directory>${basedir}/src/test/resources</directory>
+                <excludes>
+                    <exclude>**/*.yml</exclude>
+                    <exclude>**/*.properties</exclude>
+                    <exclude>**/*.xml</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>animal-sniffer-maven-plugin</artifactId>
+                    <version>1.14</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.mysema.maven</groupId>
+                    <artifactId>apt-maven-plugin</artifactId>
+                    <version>1.1.3</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.querydsl</groupId>
+                            <artifactId>querydsl-apt</artifactId>
+                            <version>${querydsl.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>process</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>target/generated-sources/java</outputDirectory>
+                                <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                                <options>
+                                    <querydsl.entityAccessors>true</querydsl.entityAccessors>
+                                </options>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>3.0.2</version>
+                    <configuration>
+                        <failOnError>false</failOnError>
+                        <!-- Enables analysis which takes more memory but finds more bugs. If you run out of memory, changes the value of the effort element to 'Low'. -->
+                        <effort>Max</effort>
+                        <!-- Reports all bugs (other values are medium and max) -->
+                        <threshold>Low</threshold>
+                        <!-- Produces XML report -->
+                        <xmlOutput>true</xmlOutput>
+                        <!-- Configures the directory in which the XML report is created -->
+                        <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+                    </configuration>
+                    <executions>
+                        <!-- Ensures that FindBugs inspects source code when project is compiled. -->
+                        <execution>
+                            <id>analyze-compile</id>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <phase>compile</phase>
+                        </execution>
+                    </executions>
+                </plugin>
                 <!-- By default this plugin isn't active anywhere, since it re-formats code. It's just declared here to show it's possible. -->
                 <plugin>
                     <groupId>net.revelc.code</groupId>
@@ -55,7 +150,7 @@
                         <dependency>
                             <groupId>net.smartcosmos</groupId>
                             <artifactId>smartcosmos-builds-tools</artifactId>
-                            <version>${smartcosmos-build-tools.version}</version>
+                            <version>2.10.11-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                     <executions>
@@ -85,6 +180,37 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>1.8</version>
+                    <configuration>
+                        <licenseName>apache_v2</licenseName>
+                        <projectName>${project.name}</projectName>
+                        <inceptionYear>2013</inceptionYear>
+                        <processStartTag>*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*</processStartTag>
+                        <sectionDelimiter>===============================================================================</sectionDelimiter>
+                        <processEndTag>#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#</processEndTag>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>first</id>
+                            <goals>
+                                <goal>update-file-header</goal>
+                            </goals>
+                            <phase>process-sources</phase>
+                            <configuration>
+                                <excludes>
+                                    <exclude>**/package-info.java</exclude>
+                                </excludes>
+                                <roots>
+                                    <root>src/main/java</root>
+                                    <root>src/test/java</root>
+                                </roots>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
                 <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
@@ -103,7 +229,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <execute></execute>
+                                        <execute>true</execute>
                                     </action>
                                 </pluginExecution>
                                 <pluginExecution>
@@ -116,7 +242,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <execute></execute>
+                                        <execute>true</execute>
                                     </action>
                                 </pluginExecution>
                                 <pluginExecution>
@@ -130,7 +256,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore></ignore>
+                                        <ignore>true</ignore>
                                     </action>
                                 </pluginExecution>
                                 <pluginExecution>
@@ -143,7 +269,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore></ignore>
+                                        <ignore>true</ignore>
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>
@@ -154,6 +280,12 @@
                 <plugin>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>2.15</version>
+                    <configuration>
+                        <configLocation>checkstyle/base.xml</configLocation>
+                        <!-- <includeTestSourceDirectory>true</includeTestSourceDirectory> -->
+                        <failOnViolation>true</failOnViolation>
+                        <excludes>**/generated-sources/**/*</excludes>
+                    </configuration>
                     <dependencies>
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
@@ -164,7 +296,7 @@
                         <dependency>
                             <groupId>net.smartcosmos</groupId>
                             <artifactId>smartcosmos-builds-tools</artifactId>
-                            <version>${smartcosmos-build-tools.version}</version>
+                            <version>2.10.11-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                     <executions>
@@ -174,11 +306,6 @@
                                 <goal>check</goal>
                             </goals>
                             <phase>validate</phase>
-                            <configuration>
-                                <configLocation>checkstyle/base.xml</configLocation>
-                                <!-- <includeTestSourceDirectory>true</includeTestSourceDirectory> -->
-                                <failOnViolation>true</failOnViolation>
-                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
@@ -226,14 +353,17 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5</version>
-                    <configuration>
-                        <!-- During release:perform, enable the "release" profile -->
-                        <releaseProfiles>release</releaseProfiles>
-                        <goals>deploy</goals>
-                        <mavenExecutorId>forked-path</mavenExecutorId>
-                    </configuration>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <!-- Ignore Abstract tests and Integration Tests. -->
                 <plugin>
@@ -250,19 +380,6 @@
                         <excludes>
                             <exclude>**/Abstract*.java</exclude>
                         </excludes>
-                    </configuration>
-                </plugin>
-                <!-- This replaces the standard maven deploy plugin. -->
-                <plugin>
-                    <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.5</version>
-                    <extensions>true</extensions>
-                    <configuration>
-                        <serverId>nexus</serverId>
-                        <nexusUrl>https://nexus.smartcosmos.net/nexus</nexusUrl>
-                        <stagingProfileId>c0d04f5594b11</stagingProfileId>
-                        <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
                     </configuration>
                 </plugin>
             </plugins>
@@ -283,7 +400,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-
             </plugin>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
@@ -291,4 +407,12 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>maven-restlet</id>
+            <name>Restlet repository</name>
+            <url>http://maven.restlet.com</url>
+        </repository>
+    </repositories>
+
 </project>

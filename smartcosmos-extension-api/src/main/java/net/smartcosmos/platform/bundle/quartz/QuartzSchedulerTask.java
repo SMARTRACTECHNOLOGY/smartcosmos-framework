@@ -33,7 +33,7 @@ import java.io.PrintWriter;
 /**
  * Administrative mechanisms for putting the Quartz scheduler into standby, pausing all jobs, resuming all jobs, or
  * (re-) starting the scheduler if it had been put into standby mode.
- * <p/>
+ * <p>
  * Query string must include a valid action parameter, e.g. ?action=start. Valid action values include:
  * <ul>
  * <li>standby</li>
@@ -41,7 +41,7 @@ import java.io.PrintWriter;
  * <li>pauseAll</li>
  * <li>resumeAll</li>
  * </ul>
- * <p/>
+ * <p>
  * <b>NOTE:</b> For the differences between standby and pauseAll, please refer to the Quartz documentation with respect
  * to how each of these handles misfires.
  */

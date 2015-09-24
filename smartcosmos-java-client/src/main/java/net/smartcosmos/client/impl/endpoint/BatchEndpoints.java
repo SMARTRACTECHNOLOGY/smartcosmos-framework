@@ -30,20 +30,20 @@ public final class BatchEndpoints
 
     private static final String BASE = "/batch";
 
-    private static final String CREATE__PUT = BASE;
+    private static final String CREATE_PUT = BASE;
 
-    private static final String UPDATE__POST = BASE;
+    private static final String UPDATE_POST = BASE;
 
-    private static final String FIND_BY_TRANSMISSION_URN__GET = BASE.concat("/%s?view=%s");
+    private static final String FIND_BY_TRANSMISSION_URN_GET = BASE.concat("/%s?view=%s");
 
     public static String fileTransmissionRequest()
     {
-        return CREATE__PUT;
+        return CREATE_PUT;
     }
 
     public static String fileTransmissionReceipt()
     {
-        return UPDATE__POST;
+        return UPDATE_POST;
     }
 
     public static String transmissionStatus(String urn)
@@ -53,6 +53,6 @@ public final class BatchEndpoints
 
     public static String transmissionStatus(String urn, ViewType viewType)
     {
-        return String.format(FIND_BY_TRANSMISSION_URN__GET, urn, viewType);
+        return String.format(FIND_BY_TRANSMISSION_URN_GET, urn, viewType);
     }
 }

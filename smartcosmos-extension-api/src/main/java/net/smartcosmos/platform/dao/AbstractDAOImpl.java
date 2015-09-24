@@ -1,5 +1,3 @@
-package net.smartcosmos.platform.dao;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -19,49 +17,69 @@ package net.smartcosmos.platform.dao;
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
+package net.smartcosmos.platform.dao;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.UUID;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
+import com.querydsl.core.types.EntityPath;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.jpa.hibernate.HibernateQuery;
+
 import io.dropwizard.hibernate.AbstractDAO;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.context.IAccount;
+import net.smartcosmos.platform.api.dao.IAdvancedQuery;
 import net.smartcosmos.platform.api.dao.IBaseDAO;
 import net.smartcosmos.platform.api.dao.IPageProvider;
 import net.smartcosmos.platform.api.dao.domain.IPage;
 import net.smartcosmos.platform.dao.domain.PageEntry;
 import net.smartcosmos.util.UuidUtil;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> extends AbstractDAO<T> implements
-        IBaseDAO<S>, IPageProvider<S>
+public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S> extends AbstractDAO<T>implements
+        IBaseDAO<S>, IPageProvider<S>, IAdvancedQuery<S>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractDAOImpl.class);
 
     protected final boolean canDelete;
+    private final Class<T> entityClass;
 
-    protected final Class<T> classInstance;
-
-    protected AbstractDAOImpl(Class<T> classInstance, SessionFactory sessionFactory)
+    protected AbstractDAOImpl(final Class<T> classInstance, final SessionFactory sessionFactory)
     {
         this(classInstance, sessionFactory, false);
     }
 
-    protected AbstractDAOImpl(Class<T> classInstance, SessionFactory sessionFactory, boolean canDelete)
+    protected AbstractDAOImpl(final Class<T> classInstance, final SessionFactory sessionFactory,
+            final boolean canDelete)
     {
         super(sessionFactory);
+        this.entityClass = classInstance;
         this.canDelete = canDelete;
-        this.classInstance = classInstance;
+    }
+
+    /**
+     * Returns the entity class managed by this DAO.
+     *
+     * @return the entity class managed by this DAO
+     */
+    @Override
+    public Class<T> getEntityClass()
+    {
+        return (Class<T>) entityClass;
     }
 
     @Override
-    public S upsert(S object)
+    public S upsert(final S object)
     {
         if (null == object)
         {
@@ -72,7 +90,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
 
         if (null != object.getUrn())
         {
-            findResult = findByUrn(classInstance, object.getUrn());
+            findResult = findByUrn(getEntityClass(), object.getUrn());
         }
 
         if (null != findResult)
@@ -116,7 +134,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
      */
     @Override
     @SuppressWarnings("unchecked")
-    public IPage<S> page(int page, int pageSize)
+    public IPage<S> page(final int page, final int pageSize)
     {
         if (page < 1)
         {
@@ -148,9 +166,8 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         return pagination;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public S insert(S object)
+    public S insert(final S object)
     {
         if (null == object)
         {
@@ -160,14 +177,14 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         T instance = null;
         try
         {
-            instance = classInstance.newInstance();
+            instance = getEntityClass().newInstance();
             instance.copy(object);
 
             instance = persist(instance);
 
         } catch (InstantiationException e)
         {
-            LOG.warn("Unable to instantiate object of type {}", classInstance.getName());
+            LOG.warn("Unable to instantiate object of type {}", getEntityClass().getName());
             LOG.debug(e.getMessage(), e);
         } catch (IllegalAccessException e)
         {
@@ -184,7 +201,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
     }
 
     @Override
-    public void delete(S object)
+    public void delete(final S object)
     {
         if (!canDelete)
         {
@@ -193,14 +210,14 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         } else
         {
 
-            S instance = findByUrn(classInstance, object.getUrn());
+            S instance = findByUrn(getEntityClass(), object.getUrn());
 
             if (null != instance)
             {
                 currentSession().delete(instance);
             } else
             {
-                LOG.warn("Unable to locate object of type {} with unique ID {}", classInstance.getName(),
+                LOG.warn("Unable to locate object of type {} with unique ID {}", getEntityClass().getName(),
                         object.getUrn());
             }
         }
@@ -208,20 +225,20 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
 
     @Override
     @SuppressWarnings("unchecked")
-    public S update(S object)
+    public S update(final S object)
     {
         T instance = null;
 
         try
         {
-            instance = classInstance.newInstance();
+            instance = getEntityClass().newInstance();
             instance.copy(object);
 
             instance = (T) currentSession().merge(instance);
 
         } catch (InstantiationException e)
         {
-            LOG.warn("Unable to instantiate object of type {}", classInstance.getName());
+            LOG.warn("Unable to instantiate object of type {}", getEntityClass().getName());
             LOG.debug(e.getMessage(), e);
         } catch (IllegalAccessException e)
         {
@@ -232,7 +249,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
 
     @Override
     @SuppressWarnings("unchecked")
-    public S findByUrn(Class<?> clazz, String urn, IAccount account)
+    public S findByUrn(final Class<?> clazz, final String urn, final IAccount account)
     {
         Preconditions.checkNotNull(account, "Parameter 'account' must not be null");
         S object = null;
@@ -240,17 +257,16 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         String entityName = clazz.getName();
 
         /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
-         * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
-         * identifier.
-         *
+         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8, which
+         * restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class identifier.
+         * 
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
         try
         {
             Query query = currentSession()
                     .createQuery("select e from " + entityName +
-                                 " e where e.account.systemUuid = :accountSystemUuid and e.systemUuid = :systemUuid")
+                            " e where e.account.systemUuid = :accountSystemUuid and e.systemUuid = :systemUuid")
                     .setParameter("accountSystemUuid", account.getSystemUuid())
                     .setParameter("systemUuid", UuidUtil.getUuidFromUrn(urn));
 
@@ -266,7 +282,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
 
     @Override
     @SuppressWarnings("unchecked")
-    public S findByUrn(Class<?> clazz, String urn)
+    public S findByUrn(final Class<?> clazz, final String urn)
     {
         S object = null;
         try
@@ -280,14 +296,15 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
 
             String entityName = clazz.getName();
 
-        /*
-         * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8, which
-         * restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class identifier.
-         *
-         * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
-         */
+            /*
+             * NOTE: The risk of SQL injection here is virtually zero because of the Java Language Specification 3.8,
+             * which restricts special characters like semicolon (;), dash (-), parentheses, etc. as part of a class
+             * identifier.
+             *
+             * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
+             */
             Query query = currentSession().createQuery("select e from " + entityName + " e " +
-                                                       "where e.systemUuid = :systemUuid")
+                    "where e.systemUuid = :systemUuid")
                     .setParameter("systemUuid", UuidUtil.getUuidFromUrn(urn));
 
             object = (S) query.uniqueResult();
@@ -301,9 +318,28 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         return object;
     }
 
+    @SuppressWarnings("unchecked")
+    public Collection<S> findByUuids(final Collection<UUID> uuids, final IAccount account)
+    {
+        final Collection<S> list = new ArrayList<>();
+
+        if (uuids == null || uuids.size() == 0)
+        {
+            return list;
+        }
+
+        // TODO Add in Account restriction.
+        for (Object o : criteria().add(Restrictions.in("systemUuid", uuids)).list())
+        {
+            list.add((S) o);
+        }
+
+        return list;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
-    public Collection<S> findByAccount(Class<?> clazz, IAccount account)
+    public Collection<S> findByAccount(final Class<?> clazz, final IAccount account)
     {
         Collection<S> list = new ArrayList<>();
 
@@ -316,7 +352,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
          * See http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8
          */
         Query listQuery = currentSession().createQuery("select m from " + entityName + " m " +
-                                                       "where m.account.systemUuid = :accountSystemUuid")
+                "where m.account.systemUuid = :accountSystemUuid")
                 .setParameter("accountSystemUuid", account.getSystemUuid());
 
         for (Object o : listQuery.list())
@@ -327,10 +363,11 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         return list;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Collection<IDomainResource> searchByMoniker(Class<?> clazz, String monikerEquals, IAccount account)
+    public Collection<S> searchByMoniker(final Class<?> clazz, final String monikerEquals, final IAccount account)
     {
-        Collection<IDomainResource> list = new ArrayList<>();
+        Collection<S> list = new ArrayList<>();
 
         String entityName = clazz.getName();
 
@@ -342,23 +379,24 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
          */
         Query listQuery = currentSession()
                 .createQuery("select m from " + entityName + " m " +
-                             "where m.account.systemUuid = :accountSystemUuid " +
-                             "and m.moniker = :moniker")
+                        "where m.account.systemUuid = :accountSystemUuid " +
+                        "and m.moniker = :moniker")
                 .setParameter("accountSystemUuid", account.getSystemUuid())
                 .setParameter("moniker", monikerEquals);
 
         for (Object o : listQuery.list())
         {
-            list.add((IDomainResource) o);
+            list.add((S) o);
         }
 
         return list;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Collection<IDomainResource> searchByMonikerLike(Class<?> clazz, String monikerLike, IAccount account)
+    public Collection<S> searchByMonikerLike(final Class<?> clazz, final String monikerLike, final IAccount account)
     {
-        Collection<IDomainResource> list = new ArrayList<>();
+        Collection<S> list = new ArrayList<>();
 
         String entityName = clazz.getName();
 
@@ -371,16 +409,37 @@ public abstract class AbstractDAOImpl<S extends IDomainResource, T extends S> ex
         Query listQuery = currentSession()
                 .createQuery(
                         "select m from " + entityName + " m " +
-                        "where m.account.systemUuid = :accountSystemUuid " +
-                        "and m.moniker like :moniker")
+                                "where m.account.systemUuid = :accountSystemUuid " +
+                                "and m.moniker like :moniker")
                 .setParameter("accountSystemUuid", account.getSystemUuid())
                 .setParameter("moniker", monikerLike + "%");
 
         for (Object o : listQuery.list())
         {
-            list.add((IDomainResource) o);
+            list.add((S) o);
         }
 
         return list;
     }
+
+    protected EntityPath<T> getPath()
+    {
+        throw new UnsupportedOperationException(getClass() + " does not support advanced queries yet.");
+    }
+
+    @Override
+    public Collection<S> advancedQuery(final Predicate... predicates)
+    {
+        Collection<S> list = new ArrayList<>();
+
+        HibernateQuery<T> query = new HibernateQuery<>(currentSession());
+
+        for (T o : query.from(getPath()).where(predicates).fetch())
+        {
+            list.add((S) o);
+        }
+
+        return list;
+    }
+
 }
