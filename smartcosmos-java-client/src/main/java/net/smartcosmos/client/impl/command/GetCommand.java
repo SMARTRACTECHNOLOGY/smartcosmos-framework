@@ -91,6 +91,9 @@ public class GetCommand<T> extends AbstractBaseClient implements ICommand<T, T>
         {
             LOGGER.error("Unexpected Exception", e);
             throw new ServiceException(e);
+        } finally
+        {
+            service.release();
         }
 
         return instance;

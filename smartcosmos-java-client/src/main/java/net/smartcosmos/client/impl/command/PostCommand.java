@@ -94,7 +94,7 @@ public class PostCommand extends AbstractBaseClient implements ICommand<Object, 
                     ResponseEntity entity = new ResponseEntity.Builder(
                             Result.ERR_FAILURE.getCode(),
                             String.format(Result.ERR_FAILURE.getFormattedMessage(), e.getMessage()))
-                            .build();
+                                    .build();
 
                     throw new ServiceException(entity);
                 } else
@@ -102,12 +102,18 @@ public class PostCommand extends AbstractBaseClient implements ICommand<Object, 
                     LOGGER.error("Unexpected Resource Exception", e);
                     throw new ServiceException(e);
                 }
+            } finally
+            {
+                service.release();
             }
 
         } catch (JSONException | IOException e)
         {
             LOGGER.error("Unexpected Exception", e);
             throw new ServiceException(e);
+        } finally
+        {
+            service.release();
         }
 
         return null;

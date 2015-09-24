@@ -90,7 +90,7 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                             String.format(Result.ERR_ALREADY_EXISTS.getFormattedMessage(),
                                     "user",
                                     inputJson.getString(Field.EMAIL_ADDRESS_FIELD)))
-                            .build();
+                                            .build();
 
                     throw new ServiceException(entity);
                 } else if (e.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
@@ -99,7 +99,7 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                             Result.ERR_FAILURE.getCode(),
                             String.format(Result.ERR_FAILURE.getFormattedMessage(),
                                     "Bad Request - if this was an interaction, was your session already closed?"))
-                            .build();
+                                            .build();
 
                     throw new ServiceException(entity);
                 } else
@@ -143,6 +143,9 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
         {
             LOGGER.error("Unexpected Exception", e);
             throw new ServiceException(e);
+        } finally
+        {
+            service.release();
         }
 
         return response;
@@ -211,4 +214,3 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
         return response;
     }
 }
-

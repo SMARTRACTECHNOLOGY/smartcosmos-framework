@@ -73,6 +73,9 @@ public class DeleteCommand extends AbstractBaseClient implements ICommand<Object
         {
             LOGGER.error("Unexpected Exception", e);
             throw new ServiceException(e);
+        } finally
+        {
+            service.release();
         }
 
         return null;
@@ -90,4 +93,3 @@ public class DeleteCommand extends AbstractBaseClient implements ICommand<Object
         throw new UnsupportedOperationException("DELETE command doesn't accept input as a JSONArray");
     }
 }
-

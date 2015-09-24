@@ -1,5 +1,7 @@
 package net.smartcosmos.client.connectivity;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Client
@@ -23,17 +25,15 @@ package net.smartcosmos.client.connectivity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
- * Defines a SMART COSMOS server context consisting of an email address, credentials, server location, and the
- * context path, where the credentials are optional in those situations where a public (non-protected) endpoint is
- * being invoked. Examples of public (non-protected) endpoints include the use of
+ * Defines a SMART COSMOS server context consisting of an email address, credentials, server location, and the context
+ * path, where the credentials are optional in those situations where a public (non-protected) endpoint is being
+ * invoked. Examples of public (non-protected) endpoints include the use of
  * {@link net.smartcosmos.client.common.registration.IRegistrationClient} and the encode/decode operations defined by
  * {@link net.smartcosmos.client.common.metadata.IMetadataClient}.
  * <p>
- * The default {@link #getServerUrl()} is <b>https://objects.smartcosmos.net</b>
- * The default {@link #getContextPath()} is <b>/rest</b>
+ * The default {@link #getServerUrl()} is <b>https://objects.smartcosmos.net</b> The default {@link #getContextPath()}
+ * is <b>/rest</b>
  */
 public final class ServerContext
 {
@@ -50,10 +50,11 @@ public final class ServerContext
     private final String contextPath;
 
     /**
-     * Defines a SMART COSMOS server context using the specified server location with no
-     * authentication credentials (suitable for accessing public endpoints).
+     * Defines a SMART COSMOS server context using the specified server location with no authentication credentials
+     * (suitable for accessing public endpoints).
      *
-     * @param server Server location, e.g. https://objects.example.com
+     * @param server
+     *            Server location, e.g. https://objects.example.com
      */
     public ServerContext(String server)
     {
@@ -61,12 +62,15 @@ public final class ServerContext
     }
 
     /**
-     * Defines a SMART COSMOS server context using a specific SMART COSMOS server location and the default context
-     * path of /rest.
+     * Defines a SMART COSMOS server context using a specific SMART COSMOS server location and the default context path
+     * of /rest.
      *
-     * @param emailAddress Email address
-     * @param credentials  Credentials
-     * @param server       Server location, e.g. https://objects.example.com
+     * @param emailAddress
+     *            Email address
+     * @param credentials
+     *            Credentials
+     * @param server
+     *            Server location, e.g. https://objects.example.com
      */
     public ServerContext(String emailAddress, String credentials, String server)
     {
@@ -74,19 +78,22 @@ public final class ServerContext
     }
 
     /**
-     * Defines a SMART COSMOS server context using a specific SMART COSMOS server location and a specific context
-     * path prepended in front of the well-known client endpoints.
+     * Defines a SMART COSMOS server context using a specific SMART COSMOS server location and a specific context path
+     * prepended in front of the well-known client endpoints.
      *
-     * @param emailAddress Email address
-     * @param credentials  Credentials
-     * @param server       Server location, e.g. https://objects.example.com
-     * @param contextPath  Prepended context path in front of all client endpoints, e.g. /rest
+     * @param emailAddress
+     *            Email address
+     * @param credentials
+     *            Credentials
+     * @param server
+     *            Server location, e.g. https://objects.example.com
+     * @param contextPath
+     *            Prepended context path in front of all client endpoints, e.g. /rest
      */
     public ServerContext(String emailAddress, String credentials, String server, String contextPath)
     {
         checkNotNull(server, "parameter 'server' must be a valid server location, e.g. https://objects.example.com");
         checkNotNull(contextPath, "parameter 'contextPath' must be a valid context path, e.g. /rest");
-
 
         if (emailAddress == null && credentials == null)
         {

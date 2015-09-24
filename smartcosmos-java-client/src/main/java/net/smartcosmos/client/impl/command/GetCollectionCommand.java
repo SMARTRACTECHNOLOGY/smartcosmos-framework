@@ -101,6 +101,9 @@ public class GetCollectionCommand<T> extends AbstractBaseClient implements IComm
         {
             LOGGER.error("Unexpected Exception", e);
             throw new ServiceException(e);
+        } finally
+        {
+            service.release();
         }
 
         return matches;

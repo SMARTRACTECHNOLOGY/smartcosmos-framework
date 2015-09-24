@@ -111,6 +111,9 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
         {
             LOGGER.error("Unexpected Exception", e);
             throw new ServiceException(e);
+        } finally
+        {
+            service.release();
         }
 
         return responses;
@@ -169,5 +172,3 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
         return response;
     }
 }
-
-
