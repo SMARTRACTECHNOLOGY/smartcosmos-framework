@@ -231,61 +231,6 @@
         <!-- Non-JAR related plugins that are necessary for everything across the ecosystem. -->
         <plugins>
             <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <inherited>false</inherited>
-
-                <configuration>
-                    <sourceDirectory>${basedir}</sourceDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <backend>pdf</backend>
-                            <sourceHighlighter>rouge</sourceHighlighter>
-                            <attributes>
-                                <allow-uri-read></allow-uri-read>
-                                <icons>font</icons>
-                                <pagenums></pagenums>
-                                <idprefix></idprefix>
-                                <idseparator>-</idseparator>
-                            </attributes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-
-                        <goals>
-                            <goal>attach-artifact</goal>
-                        </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${basedir}/target/generated-docs/README.pdf</file>
-                                    <type>pdf</type>
-                                    <classifier>README</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>${basedir}/target/generated-docs/CONTRIBUTING.pdf</file>
-                                    <type>pdf</type>
-                                    <classifier>CONTRIBUTING</classifier>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
@@ -383,6 +328,69 @@
                                 <goals>
                                     <goal>jar-no-fork</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>docs</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctor-maven-plugin</artifactId>
+                        <inherited>false</inherited>
+
+                        <configuration>
+                            <sourceDirectory>${basedir}</sourceDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>process-asciidoc</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <backend>pdf</backend>
+                                    <sourceHighlighter>rouge</sourceHighlighter>
+                                    <attributes>
+                                        <allow-uri-read></allow-uri-read>
+                                        <icons>font</icons>
+                                        <pagenums></pagenums>
+                                        <idprefix></idprefix>
+                                        <idseparator>-</idseparator>
+                                    </attributes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${basedir}/target/generated-docs/README.pdf</file>
+                                            <type>pdf</type>
+                                            <classifier>README</classifier>
+                                        </artifact>
+                                        <artifact>
+                                            <file>${basedir}/target/generated-docs/CONTRIBUTING.pdf</file>
+                                            <type>pdf</type>
+                                            <classifier>CONTRIBUTING</classifier>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
