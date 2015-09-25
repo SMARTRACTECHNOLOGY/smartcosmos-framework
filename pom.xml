@@ -169,22 +169,13 @@
                     <version>2.5.2</version>
                     <configuration>
                         <!-- During release:perform, enable the "release" profile -->
-                        <releaseProfiles>release</releaseProfiles>
+                        <releaseProfiles>release, docs</releaseProfiles>
                         <scmCommentPrefix>SMART COSMOS Release (Build ${buildNumber})</scmCommentPrefix>
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                         <resume>false</resume>
                         <goals>deploy</goals>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
-
-                    <executions>
-                        <execution>
-                            <inherited>false</inherited>
-                            <configuration>
-                                <releaseProfiles>release, maven-central</releaseProfiles>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
