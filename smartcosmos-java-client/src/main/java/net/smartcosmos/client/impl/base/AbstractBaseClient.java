@@ -68,15 +68,18 @@ public abstract class AbstractBaseClient
         final ClientResource service = new ClientResource(new Context(getClass().getName()), assembledPath);
         service.setNext(client);
 
+        ChallengeScheme scheme = ChallengeScheme.HTTP_BASIC;
         if (context.getEmailAddress() != null)
         {
-            ChallengeScheme scheme = ChallengeScheme.HTTP_BASIC;
 
             ChallengeResponse authentication = new ChallengeResponse(scheme,
                     context.getEmailAddress(),
                     context.getCredentials());
 
             service.setChallengeResponse(authentication);
+        } else
+        {
+            service.setChallengeResponse(null);
         }
 
         return service;

@@ -7,8 +7,8 @@
         <version>2.10.8-development-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>net.smartcosmos.extension</groupId>
     <artifactId>smartcosmos-extension-archetype</artifactId>
     <packaging>jar</packaging>
+    <name>SMART COSMOS Extension Archetype</name>
 
 </project>

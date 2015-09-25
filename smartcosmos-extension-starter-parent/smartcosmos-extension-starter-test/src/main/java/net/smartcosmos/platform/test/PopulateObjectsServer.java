@@ -250,7 +250,9 @@ public class PopulateObjectsServer
     {
 
         IRegistrationClient registrationClient = RegistrationFactory.createClient(serverAddress);
-        if (registrationClient.isRealmAvailable(realm))
+        final boolean realmAvailable = registrationClient.isRealmAvailable(realm);
+        LOG.info("Realm is avaialble? {}", realmAvailable);
+        if (realmAvailable)
         {
 
             JSONObject jsonObject = new JSONObject()
