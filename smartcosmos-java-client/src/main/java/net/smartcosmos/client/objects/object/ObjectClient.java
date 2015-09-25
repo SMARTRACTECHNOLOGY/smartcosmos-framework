@@ -68,14 +68,14 @@ class ObjectClient extends AbstractUpdateableBaseClient<IObject> implements IObj
     @Override
     public IObject findByExactObjectUrn(String objectUrn, ViewType viewType) throws ServiceException
     {
-        GetCommand<IObject> command = new GetCommand<>(context);
+        GetCommand<IObject> command = new GetCommand<>(context, getClient());
         return command.call(ObjectImpl.class, ObjectEndpoints.findByExactObjectUrn(objectUrn, viewType));
     }
 
     @Override
     public Collection<IObject> query(ObjectEndpoints.Builder builder) throws ServiceException
     {
-        GetCollectionCommand<IObject> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IObject> command = new GetCollectionCommand<>(context, getClient());
         return command.call(ObjectImpl.class, builder.build());
     }
 }

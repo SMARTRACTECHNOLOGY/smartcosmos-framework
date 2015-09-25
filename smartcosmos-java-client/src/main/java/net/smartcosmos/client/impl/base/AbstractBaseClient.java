@@ -1,5 +1,16 @@
 package net.smartcosmos.client.impl.base;
 
+import java.util.Arrays;
+
+import org.restlet.Client;
+import org.restlet.Context;
+import org.restlet.data.ChallengeResponse;
+import org.restlet.data.ChallengeScheme;
+import org.restlet.data.Protocol;
+import org.restlet.resource.ClientResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Client
@@ -21,29 +32,41 @@ package net.smartcosmos.client.impl.base;
  */
 
 import net.smartcosmos.client.connectivity.ServerContext;
-import org.restlet.data.ChallengeResponse;
-import org.restlet.data.ChallengeScheme;
-import org.restlet.resource.ClientResource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class AbstractBaseClient
 {
-    private static final Logger LOG = LoggerFactory.getLogger(AbstractBaseClient.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     protected final ServerContext context;
 
-    protected AbstractBaseClient(ServerContext context)
+    /**
+     * Each base client has its own http client for accessing, whereas other ones utilize the same one passed in.
+     */
+    private final Client client;
+
+    protected AbstractBaseClient(final ServerContext context)
     {
-        this.context = context;
+        this(context, new Client(Arrays.asList(Protocol.HTTP, Protocol.HTTPS)));
     }
 
-    protected ClientResource createClient(String path)
+    protected AbstractBaseClient(final ServerContext context, final Client client)
+    {
+        this.context = context;
+        this.client = client;
+    }
+
+    protected Client getClient()
+    {
+        return client;
+    }
+
+    protected ClientResource createClient(final String path)
     {
         String assembledPath = assembleEndpoint(path);
-        LOG.debug("Endpoint URL: " + assembledPath);
+        log.debug("Endpoint URL: " + assembledPath);
 
-        ClientResource service = new ClientResource(assembledPath);
+        final ClientResource service = new ClientResource(new Context(getClass().getName()), assembledPath);
+        service.setNext(client);
 
         if (context.getEmailAddress() != null)
         {
@@ -59,7 +82,7 @@ public abstract class AbstractBaseClient
         return service;
     }
 
-    private String assembleEndpoint(String path)
+    private String assembleEndpoint(final String path)
     {
         return context
                 .getServerUrl()

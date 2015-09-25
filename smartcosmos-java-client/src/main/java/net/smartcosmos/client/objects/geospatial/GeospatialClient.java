@@ -61,7 +61,7 @@ class GeospatialClient extends AbstractUpdateableBaseClient<IGeospatialEntry> im
     @Override
     public Collection<IGeospatialEntry> findByNameLike(String nameLike, ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IGeospatialEntry> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IGeospatialEntry> command = new GetCollectionCommand<>(context, getClient());
         return command.call(GeospatialEntry.class, GeospatialEndpoints.findByNameLike(nameLike, viewType));
     }
 

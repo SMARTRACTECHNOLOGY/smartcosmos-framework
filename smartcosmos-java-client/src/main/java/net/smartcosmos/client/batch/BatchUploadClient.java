@@ -23,6 +23,7 @@ package net.smartcosmos.client.batch;
 import com.google.common.base.Preconditions;
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
+import net.smartcosmos.client.impl.base.AbstractBaseClient;
 import net.smartcosmos.client.impl.command.PostCommand;
 import net.smartcosmos.client.impl.command.PutCommand;
 import net.smartcosmos.client.impl.endpoint.BatchEndpoints;
@@ -35,16 +36,15 @@ import net.smartcosmos.util.json.ViewType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class BatchUploadClient implements IBatchUploadClient
+public class BatchUploadClient extends AbstractBaseClient implements IBatchUploadClient
 {
-    private final ServerContext context;
 
-    public BatchUploadClient(ServerContext context)
+    public BatchUploadClient(final ServerContext context)
     {
-        this.context = context;
+        super(context);
     }
 
-    public IBatchTransmissionResponse sendBatchTransmissionRequest(IBatchTransmissionRequest request)
+    public IBatchTransmissionResponse sendBatchTransmissionRequest(final IBatchTransmissionRequest request)
             throws ServiceException
     {
         Preconditions.checkNotNull(request);
@@ -54,7 +54,7 @@ public class BatchUploadClient implements IBatchUploadClient
             JSONObject json = new JSONObject(JsonUtil.toJson(request, ViewType.Full));
 
             // PUT
-            PutCommand<BatchTransmissionResponse> command = new PutCommand<>(context);
+            PutCommand<BatchTransmissionResponse> command = new PutCommand<>(context, getClient());
             return command.call(BatchTransmissionResponse.class, BatchEndpoints.fileTransmissionRequest(), json);
         } catch (JSONException e)
         {
@@ -62,7 +62,7 @@ public class BatchUploadClient implements IBatchUploadClient
         }
     }
 
-    public void sendBatchTransmissionReceipt(IBatchTransmissionReceipt receipt) throws ServiceException
+    public void sendBatchTransmissionReceipt(final IBatchTransmissionReceipt receipt) throws ServiceException
     {
         Preconditions.checkNotNull(receipt);
 
@@ -71,7 +71,7 @@ public class BatchUploadClient implements IBatchUploadClient
             JSONObject json = new JSONObject(JsonUtil.toJson(receipt, ViewType.Full));
 
             // POST
-            PostCommand command = new PostCommand(context);
+            PostCommand command = new PostCommand(context, getClient());
             command.call(Object.class, BatchEndpoints.fileTransmissionReceipt(), json);
         } catch (JSONException e)
         {

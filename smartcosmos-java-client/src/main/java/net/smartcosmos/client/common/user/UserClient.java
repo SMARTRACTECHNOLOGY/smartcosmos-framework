@@ -51,7 +51,7 @@ class UserClient extends AbstractUpdateableBaseClient<IUser> implements IUserCli
     @Override
     public IUser findByEmailAddress(String emailAddress, ViewType viewType) throws ServiceException
     {
-        GetCommand<IUser> command = new GetCommand<>(context);
+        GetCommand<IUser> command = new GetCommand<>(context, getClient());
         return command.call(User.class, UserEndpoints.findByEmailAddress(emailAddress, viewType));
     }
 
@@ -68,7 +68,7 @@ class UserClient extends AbstractUpdateableBaseClient<IUser> implements IUserCli
                     .put(Field.EMAIL_ADDRESS_FIELD, emailAddress)
                     .put(Field.NEW_PASSWORD_FIELD, newPassword);
 
-            PostCommand command = new PostCommand(context);
+            PostCommand command = new PostCommand(context, getClient());
             command.call(Object.class, UserEndpoints.managePassword(), jsonObject);
 
         } catch (JSONException e)
@@ -88,7 +88,7 @@ class UserClient extends AbstractUpdateableBaseClient<IUser> implements IUserCli
             JSONObject jsonObject = new JSONObject()
                     .put(Field.EMAIL_ADDRESS_FIELD, emailAddress);
 
-            PostCommand command = new PostCommand(context);
+            PostCommand command = new PostCommand(context, getClient());
             command.call(Object.class, UserEndpoints.managePassword(), jsonObject);
 
         } catch (JSONException e)

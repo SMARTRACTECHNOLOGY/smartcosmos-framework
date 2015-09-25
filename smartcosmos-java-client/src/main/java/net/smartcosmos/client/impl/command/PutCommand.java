@@ -31,6 +31,7 @@ import net.smartcosmos.util.json.JsonUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.Client;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -50,19 +51,19 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(PutCommand.class);
 
-    public PutCommand(ServerContext context)
+    public PutCommand(final ServerContext context, final Client client)
     {
-        super(context);
+        super(context, client);
     }
 
     @Override
-    public T call(Class<? extends T> clazz, String path) throws ServiceException
+    public T call(final Class<? extends T> clazz, final String path) throws ServiceException
     {
         throw new UnsupportedOperationException("PUT command must have inputJson");
     }
 
     @Override
-    public T call(Class<? extends T> clazz, String path, JSONObject inputJson) throws ServiceException
+    public T call(final Class<? extends T> clazz, final String path, final JSONObject inputJson) throws ServiceException
     {
         T response;
 
@@ -90,7 +91,7 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                             String.format(Result.ERR_ALREADY_EXISTS.getFormattedMessage(),
                                     "user",
                                     inputJson.getString(Field.EMAIL_ADDRESS_FIELD)))
-                            .build();
+                                            .build();
 
                     throw new ServiceException(entity);
                 } else if (e.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
@@ -99,7 +100,7 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                             Result.ERR_FAILURE.getCode(),
                             String.format(Result.ERR_FAILURE.getFormattedMessage(),
                                     "Bad Request - if this was an interaction, was your session already closed?"))
-                            .build();
+                                            .build();
 
                     throw new ServiceException(entity);
                 } else
@@ -107,6 +108,13 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                     LOGGER.error("Unexpected Resource Exception", e);
                     throw new ServiceException(e);
                 }
+            }
+
+            // This occurs when a put command is invoked and the object already exists.
+            if (service.getStatus().equals(Status.SUCCESS_OK))
+            {
+                LOGGER.info("Object might have already existed, success but not a CREATED success.");
+
             }
 
             if (!service.getStatus().equals(Status.SUCCESS_CREATED))
@@ -149,7 +157,7 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
     }
 
     @Override
-    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(final String path, final JSONArray inputJson) throws ServiceException
     {
         Collection<ResponseEntity> response = new ArrayList<>();
 
@@ -211,4 +219,3 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
         return response;
     }
 }
-

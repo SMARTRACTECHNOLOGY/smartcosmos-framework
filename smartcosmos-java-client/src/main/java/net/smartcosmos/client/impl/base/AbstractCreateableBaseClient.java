@@ -52,7 +52,7 @@ public abstract class AbstractCreateableBaseClient<T>
 
     protected ResponseEntity create(JSONObject instance, String path) throws ServiceException
     {
-        PutCommand<ResponseEntity> command = new PutCommand<>(context);
+        PutCommand<ResponseEntity> command = new PutCommand<>(context, getClient());
         return command.call(ResponseEntity.class, path, instance);
     }
 }

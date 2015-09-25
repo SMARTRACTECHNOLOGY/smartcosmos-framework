@@ -71,7 +71,7 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
 
         try
         {
-            DeleteCommand command = new DeleteCommand(context);
+            DeleteCommand command = new DeleteCommand(context, getClient());
             command.call(Object.class, RelationshipEndpoints.delete(instance.getString(Field.URN_FIELD)));
         } catch (JSONException e)
         {
@@ -99,7 +99,7 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
                                                                String relatedReferenceUrn,
                                                                ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IRelationship> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IRelationship> command = new GetCollectionCommand<>(context, getClient());
         return command.call(Relationship.class, RelationshipEndpoints.findAllBetweenTwoEntities(entityReferenceType,
                 referenceUrn, relatedEntityReferenceType, relatedReferenceUrn, viewType));
     }
@@ -112,7 +112,7 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
                                                   String relationshipType,
                                                   ViewType viewType) throws ServiceException
     {
-        GetCommand<IRelationship> command = new GetCommand<>(context);
+        GetCommand<IRelationship> command = new GetCommand<>(context, getClient());
         return command.call(Relationship.class,
                 RelationshipEndpoints.findSpecificRelationship(entityReferenceType,
                         referenceUrn,
@@ -128,7 +128,7 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
                                                        String relationshipType,
                                                        ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IRelationship> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IRelationship> command = new GetCollectionCommand<>(context, getClient());
         return command.call(Relationship.class,
                 RelationshipEndpoints.findRelationships(entityReferenceType, referenceUrn, relationshipType, viewType));
     }
@@ -139,7 +139,7 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
                                                               String relationshipType,
                                                               ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IRelationship> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IRelationship> command = new GetCollectionCommand<>(context, getClient());
         return command.call(Relationship.class,
                 RelationshipEndpoints.findReverseRelationships(entityReferenceType,
                         referenceUrn,

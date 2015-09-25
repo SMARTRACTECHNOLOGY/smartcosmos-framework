@@ -71,7 +71,7 @@ public class EventBroadcastClient extends AbstractUpdateableBaseClient<IEvent> i
    @Override
    public Collection<IEvent> findByEventType(EventType eventType, ViewType viewType) throws ServiceException 
    {
-        GetCollectionCommand<IEvent> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IEvent> command = new GetCollectionCommand<>(context, getClient());
         return command.call(Event.class, EventEndpoints.findByEventType(eventType, viewType));
    }
 
@@ -84,7 +84,7 @@ public class EventBroadcastClient extends AbstractUpdateableBaseClient<IEvent> i
    @Override
    public Collection<IEvent> findSince(long timestamp, ViewType viewType) throws ServiceException 
    {
-        GetCollectionCommand<DynamicEvent> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<DynamicEvent> command = new GetCollectionCommand<>(context, getClient());
         Collection<DynamicEvent> dynamicEvents
                 = command.call(DynamicEvent.class, EventEndpoints.findSince(timestamp, viewType));
 
