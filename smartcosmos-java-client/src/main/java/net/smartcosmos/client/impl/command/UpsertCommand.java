@@ -30,6 +30,7 @@ import net.smartcosmos.util.json.JsonUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.Client;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -48,19 +49,19 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(UpsertCommand.class);
 
-    public UpsertCommand(ServerContext context)
+    public UpsertCommand(final ServerContext context, final Client client)
     {
-        super(context);
+        super(context, client);
     }
 
     @Override
-    public T call(Class<? extends T> clazz, String path) throws ServiceException
+    public T call(final Class<? extends T> clazz, final String path) throws ServiceException
     {
         throw new UnsupportedOperationException("UPSERT command must have inputJson");
     }
 
     @Override
-    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(final String path, final JSONArray inputJson) throws ServiceException
     {
         Collection<ResponseEntity> responses = new ArrayList<>();
 
@@ -111,16 +112,13 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
         {
             LOGGER.error("Unexpected Exception", e);
             throw new ServiceException(e);
-        } finally
-        {
-            service.release();
         }
 
         return responses;
     }
 
     @Override
-    public T call(Class<? extends T> clazz, String path, JSONObject inputJson) throws ServiceException
+    public T call(final Class<? extends T> clazz, final String path, final JSONObject inputJson) throws ServiceException
     {
         T response;
 

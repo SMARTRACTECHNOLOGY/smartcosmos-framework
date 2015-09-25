@@ -1,5 +1,20 @@
 package net.smartcosmos.client.impl.command;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.restlet.Client;
+import org.restlet.data.Status;
+import org.restlet.ext.json.JsonRepresentation;
+import org.restlet.representation.Representation;
+import org.restlet.resource.ClientResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Client
@@ -25,44 +40,32 @@ import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractBaseClient;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.util.json.JsonUtil;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.restlet.data.Status;
-import org.restlet.ext.json.JsonRepresentation;
-import org.restlet.representation.Representation;
-import org.restlet.resource.ClientResource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class GetCollectionCommand<T> extends AbstractBaseClient implements ICommand<Collection<T>, T>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(GetCollectionCommand.class);
 
-    public GetCollectionCommand(ServerContext context)
+    public GetCollectionCommand(final ServerContext context, final Client client)
     {
-        super(context);
+        super(context, client);
     }
 
     @Override
-    public Collection<T> call(Class<? extends T> clazz, String path, JSONObject inputJson) throws ServiceException
+    public Collection<T> call(final Class<? extends T> clazz, final String path, final JSONObject inputJson)
+            throws ServiceException
     {
         throw new UnsupportedOperationException("GET command doesn't accept input JSON");
     }
 
     @Override
-    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(final String path, final JSONArray inputJson) throws ServiceException
     {
         throw new UnsupportedOperationException("GET command doesn't accept input as a JSONArray");
     }
 
     @SuppressWarnings("checkstyle:emptyblock")
     @Override
-    public Collection<T> call(Class<? extends T> clazz, String path) throws ServiceException
+    public Collection<T> call(final Class<? extends T> clazz, final String path) throws ServiceException
     {
         Collection<T> matches = new ArrayList<>();
 
@@ -101,9 +104,6 @@ public class GetCollectionCommand<T> extends AbstractBaseClient implements IComm
         {
             LOGGER.error("Unexpected Exception", e);
             throw new ServiceException(e);
-        } finally
-        {
-            service.release();
         }
 
         return matches;

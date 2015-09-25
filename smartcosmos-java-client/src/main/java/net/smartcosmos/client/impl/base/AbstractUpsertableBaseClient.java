@@ -56,13 +56,13 @@ public abstract class AbstractUpsertableBaseClient<T>
 
     protected ResponseEntity upsert(JSONObject instance, String path) throws ServiceException
     {
-        UpsertCommand<ResponseEntity> command = new UpsertCommand<>(context);
+        UpsertCommand<ResponseEntity> command = new UpsertCommand<>(context, getClient());
         return command.call(ResponseEntity.class, path, instance);
     }
 
     protected Collection<ResponseEntity> upsert(JSONArray jsonArray, String path) throws ServiceException
     {
-        UpsertCommand<ResponseEntity> command = new UpsertCommand<>(context);
+        UpsertCommand<ResponseEntity> command = new UpsertCommand<>(context, getClient());
         return command.call(path, jsonArray);
     }
 

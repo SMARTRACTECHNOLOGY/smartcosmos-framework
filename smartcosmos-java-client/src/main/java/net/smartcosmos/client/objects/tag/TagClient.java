@@ -83,7 +83,7 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
 
         try
         {
-            DeleteCommand command = new DeleteCommand(context);
+            DeleteCommand command = new DeleteCommand(context, getClient());
             command.call(Object.class, TagEndpoints.delete(instance.getString(Field.URN_FIELD)));
         } catch (JSONException e)
         {
@@ -121,7 +121,7 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
                                              JSONArray jsonArray) throws ServiceException
     {
         // PUT
-        PutCommand<ResponseEntity> command = new PutCommand<>(context);
+        PutCommand<ResponseEntity> command = new PutCommand<>(context, getClient());
         return command.call(TagEndpoints.assign(entityReferenceType, referenceUrn), jsonArray);
     }
 
@@ -130,7 +130,7 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
                                                                          String referenceUrn,
                                                                          ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context, getClient());
         return command.call(TagAssignment.class,
                 TagEndpoints.findEntitiesByTagsAssignedToEntity(entityReferenceType, referenceUrn, viewType));
     }
@@ -140,7 +140,7 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
                                                                        String tagName,
                                                                        ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context, getClient());
         return command.call(TagAssignment.class,
                 TagEndpoints.findEntitiesByTagsAssignedToType(entityReferenceType, tagName, viewType));
     }
@@ -149,14 +149,14 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     public Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName, ViewType viewType)
             throws ServiceException
     {
-        GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<ITagAssignment> command = new GetCollectionCommand<>(context, getClient());
         return command.call(TagAssignment.class, TagEndpoints.findEntitiesByTagNameLike(tagName, viewType));
     }
 
     @Override
     public ITag findByTag(String tagName, ViewType viewType) throws ServiceException
     {
-        GetCommand<ITag> command = new GetCommand<>(context);
+        GetCommand<ITag> command = new GetCommand<>(context, getClient());
         return command.call(Tag.class, TagEndpoints.findByTag(tagName, viewType));
     }
 
@@ -164,7 +164,7 @@ class TagClient extends AbstractUpsertableBaseClient<ITag> implements ITagClient
     public void revokeAssignment(String tagName, EntityReferenceType entityReferenceType, String referenceUrn)
             throws ServiceException
     {
-        DeleteCommand command = new DeleteCommand(context);
+        DeleteCommand command = new DeleteCommand(context, getClient());
         command.call(Object.class, TagEndpoints.revokeAssignment(entityReferenceType, referenceUrn, tagName));
     }
 

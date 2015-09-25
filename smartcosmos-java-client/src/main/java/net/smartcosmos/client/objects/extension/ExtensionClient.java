@@ -72,7 +72,7 @@ class ExtensionClient extends AbstractUpdateableBaseClient<IExternalExtension> i
 
         try
         {
-            DeleteCommand command = new DeleteCommand(context);
+            DeleteCommand command = new DeleteCommand(context, getClient());
             command.call(Object.class, ExtensionEndpoints.delete(instance.getString(URN_FIELD)));
         } catch (JSONException e)
         {
@@ -96,21 +96,21 @@ class ExtensionClient extends AbstractUpdateableBaseClient<IExternalExtension> i
     @Override
     public Collection<IExternalExtension> findByNameLike(String nameLike, ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IExternalExtension> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IExternalExtension> command = new GetCollectionCommand<>(context, getClient());
         return command.call(ExternalExtension.class, ExtensionEndpoints.findByNameLike(nameLike, viewType));
     }
 
     @Override
     public Collection<IExternalExtension> catalog() throws ServiceException
     {
-        GetCollectionCommand<IExternalExtension> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IExternalExtension> command = new GetCollectionCommand<>(context, getClient());
         return command.call(ExternalExtension.class, ExtensionEndpoints.catalog());
     }
 
     @Override
     public IExternalExtension getPublishedExtension(String urn) throws ServiceException
     {
-        GetCommand<IExternalExtension> command = new GetCommand<>(context);
+        GetCommand<IExternalExtension> command = new GetCommand<>(context, getClient());
         return command.call(ExternalExtension.class, ExtensionEndpoints.publishedExtension(urn));
     }
 

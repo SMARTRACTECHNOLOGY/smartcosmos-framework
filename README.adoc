@@ -1,6 +1,15 @@
+= SMART COSMOS Getting Started
+SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
+
 image::http://smartractechnology.github.io/smartcosmos-sdk-java/images/smart-cosmos-250px-wide.png[SMART COSMOS Objects]
 
-# Maven Central
+== About Documentation
+Get the latest documentation at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework
+
+== License
+
+
+== Maven Central
 Java developers that rely on Maven Central can access the SMART COSMOS Platform Core using the following coordinates:
 
 ```

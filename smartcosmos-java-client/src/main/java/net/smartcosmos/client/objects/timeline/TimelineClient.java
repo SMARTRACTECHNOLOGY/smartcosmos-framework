@@ -81,7 +81,7 @@ class TimelineClient extends AbstractUpdateableBaseClient<ITimelineEntry> implem
     @Override
     public Collection<ITimelineEntry> findByNameLike(String nameLike, ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<ITimelineEntry> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<ITimelineEntry> command = new GetCollectionCommand<>(context, getClient());
         return command.call(TimelineEntry.class, TimelineEndpoints.findByNameLike(nameLike, viewType));
     }
 }

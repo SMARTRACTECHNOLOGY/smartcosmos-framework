@@ -29,6 +29,7 @@ import net.smartcosmos.util.json.JsonUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.Client;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -46,19 +47,19 @@ public class PostCommand extends AbstractBaseClient implements ICommand<Object, 
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(PostCommand.class);
 
-    public PostCommand(ServerContext context)
+    public PostCommand(final ServerContext context, final Client client)
     {
-        super(context);
+        super(context, client);
     }
 
     @Override
-    public Object call(Class<?> clazz, String path) throws ServiceException
+    public Object call(final Class<?> clazz, final String path) throws ServiceException
     {
         throw new UnsupportedOperationException("POST command must have inputJson");
     }
 
     @Override
-    public Object call(Class<?> clazz, String path, JSONObject inputJson) throws ServiceException
+    public Object call(final Class<?> clazz, final String path, final JSONObject inputJson) throws ServiceException
     {
         ClientResource service = createClient(path);
 
@@ -102,9 +103,6 @@ public class PostCommand extends AbstractBaseClient implements ICommand<Object, 
                     LOGGER.error("Unexpected Resource Exception", e);
                     throw new ServiceException(e);
                 }
-            } finally
-            {
-                service.release();
             }
 
         } catch (JSONException | IOException e)
@@ -120,7 +118,7 @@ public class PostCommand extends AbstractBaseClient implements ICommand<Object, 
     }
 
     @Override
-    public Collection<ResponseEntity> call(String path, JSONArray inputJson) throws ServiceException
+    public Collection<ResponseEntity> call(final String path, final JSONArray inputJson) throws ServiceException
     {
         throw new UnsupportedOperationException("POST command doesn't accept input as a JSONArray");
     }

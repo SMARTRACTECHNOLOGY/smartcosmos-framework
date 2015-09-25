@@ -50,14 +50,14 @@ class DeviceClient extends AbstractUpdateableBaseClient<IDevice> implements IDev
     @Override
     public Collection<IDevice> findByNameLike(String nameLike, ViewType viewType) throws ServiceException
     {
-        GetCollectionCommand<IDevice> command = new GetCollectionCommand<>(context);
+        GetCollectionCommand<IDevice> command = new GetCollectionCommand<>(context, getClient());
         return command.call(Device.class, DeviceEndpoints.findByNameLike(nameLike, viewType));
     }
 
     @Override
     public IDevice findByDeviceIdentification(String identification, ViewType viewType) throws ServiceException
     {
-        GetCommand<IDevice> command = new GetCommand<>(context);
+        GetCommand<IDevice> command = new GetCommand<>(context, getClient());
         return command.call(Device.class, DeviceEndpoints.findByDeviceIdentification(identification, viewType));
     }
 
