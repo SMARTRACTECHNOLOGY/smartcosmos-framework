@@ -32,5 +32,6 @@
     <modules>
         <module>smartcosmos-extension-starter</module>
         <module>smartcosmos-extension-starter-test</module>
+        <module>smartcosmos-archetype</module>
     </modules>
 </project>

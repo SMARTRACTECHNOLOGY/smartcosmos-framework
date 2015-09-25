@@ -1,0 +1,810 @@
+#
+# Logical name for the server, displayed as the name of the realm in the HTTP BASIC Auth response,
+# among several other places
+#
+# DEVELOPER EDITION RESTRICTED FIELD - DO NOT MODIFY
+appName: SMART COSMOS Objects Developer Edition
+
+#
+# Physical name for this Objects server instance. This name is not used programmatically
+# per se. It is included in the /status endpoint under the JSON key "app" for reference
+#
+# DEVELOPER EDITION RESTRICTED FIELD - DO NOT MODIFY
+appInstanceName: Objects-Server-1
+
+#
+# This is the FROM: email address used to confirm a dynamic registration request.
+# When supportDynamicRegistration is set to false, this field is ignored.
+#
+adminEmailAddress: api@smartrac-group.com
+
+#
+# When a dynamic registration email is constructed, a hyperlink inside of the email
+# message is dynamically created. Since the IP of the box in a clustered environment
+# may not map to the actual web domain mapped at a load balancer, this setting enables
+# the administrator to control what the base URL is inside of the dynamic registration
+# email. When supportDynamicRegistration is set to false, this field is ignored.
+#
+serverRoot: http://localhost:8080
+
+#
+# Defines the absolute root of all Web Service calls, e.g. serverRoot/urlPattern/endpointName.
+# Administrators are strongly encouraged to not change this URL pattern. There are no side
+# effects known from changing it beyond the fact that most developer documentation will no longer
+# properly align with the server's configuration.
+#
+urlPattern: /rest
+
+license:
+
+  #
+  #
+  edition : DevKit
+
+  #
+  # Developer Edition License Key
+  editionKey : BoDUAnSbK0L63R0oYTAfXct3wHpXdTKqIkdlVdqloxgL90ajn0U5SV5k/+hz8NZdwghxBqxlia+q3v+vCaxRQ5dVLOEKP/rLOnlWbvC+TmwfPn2KKwOxJyWX6PRjK6jFQ7E+rkDxOFggR7f+x91e44q0qGzngqb6C4jiV3pxO+zJ05En8WyCVBXleZJaavcWiTDTe6ftqayHSUpvzApZ9FFPBvun38uBtrJ8WK76srTy4XMO0DVFaE3WK/en2jH7uebXPBzhLecVX2es4mAZecw4YNo4EDKR6rA2XIT0vmpvlDRfeKr0eKzSiVE0f+2eqGzNfHY9koi50lo3O0wMKA==
+
+  #
+  # If you have been assigned an enterprise key, enter it here
+  #enterpriseKey:
+
+  #
+  # Enter the enterprise key digital signature here to validate the key
+  #enterpriseKeySignature:
+
+  #
+  # Permitted Object Count
+  objectCount : 500
+
+
+#
+# Enables or disables the realm check web services endpoint. Set to false to disable
+# the endpoint if dynamic registration is set to false
+#
+supportRealmCheck : true
+
+#
+# Enables or disables the /users endpoints. Set to false to lock down the server when
+# using a Restricted Cluster architecture.
+#
+# See: https://smartractechnology.atlassian.net/wiki/display/SCKB/Deployment+Topologies
+#
+supportUsers : true
+
+#
+# Enables or disables the notification endpoints. Set to false to disable
+# near real-time event notifications to 3rd party or back office systems.
+#
+supportNotifications : true
+
+#
+# Enables or disables the ability of the server to accept dynamically registered accounts
+# on the system. In some cases, a deployment may operate using a single tenant, in which
+# case the dynamic tenant registration system is not needed. In other cases, the server may
+# be deployed in a multi-tenant scenario, where each tenant has its own realm. Set to false
+# to disable anonymous multi-tenant registration capabilities.
+#
+supportDynamicRegistration : true
+
+#
+# Enables or disables the ability of a server to accept multimedia files for an object,
+# relationship, or interaction. In short, if this is set to false then no file endpoints
+# will be registered and all file uploads are completely disabled
+#
+supportMultimediaFiles : true
+
+#
+# Enables or disables the ability to logically batch together a series of related object
+# interactions. If every interaction is always intended to be performed in isolation, then
+# disable the batch endpoints.
+#
+supportInteractionSessions: true
+
+#
+# EXPERIMENTAL - NO PRODUCTION SUPPORT
+#
+# DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+#
+# DEVELOPER EDITION RESTRICTED FIELD - DO NOT MODIFY
+supportExtensions : false
+
+#
+# Enables or disables the ability of the server programmatically report high level
+# status and configuration data. Particularly useful endpoint for verifying that all
+# Objects servers in a cluster have been successfully upgraded to a specific revision
+#
+supportStatusCheck: true
+
+#
+# Enables dynamic registration that can be completely scripted, rendering the email verification
+# step useless. This is used in either integration testing situations, or when multi-tenant
+# capabilities are desired but without any mandatory email verification.
+#
+# Use this setting when running integration tests
+#includeEmailVerificationTokenInRegistrationJSON : false
+includeEmailVerificationTokenInRegistrationJSON : true
+
+#
+# Master control flags for enabling/disabling various Objects endpoints
+#
+endpoints:
+
+  metadataEncodingEndpoints : true
+  eventsEndpoint : true
+  objectAddressEndpoint : true
+  deviceEndpoints : true
+  metadataEndpoints : true
+  tagEndpoints : true
+  timelineEndpoints : true
+  geospatialEndpoints : true
+  relationshipEndpoints : true
+  interactionEndpoints : true
+  objectEndpoints : true
+  transactionEndpoints : true
+  libraryEndpoints : true
+  registrationEndpoints : true
+  accountEndpoints : true
+  fileEndpoints : true
+  notificationEndpoints : true
+  sessionEndpoints : true
+  userEndpoints : true
+  batchEndpoints : true
+
+#
+# Master endpoint method enablement flags. When endpoint method is set to 'true' then that specific
+# HTTP Method is supported on a given endpoint. These flags contrast from the 'endpoints' flags above
+# in that they are HTTP METHOD oriented whereas the above 'endpoints' section is an 'all or nothing' flag.
+# If the 'endpoints' flag is set to false, then the endpoint HTTP METHOD flags below HAVE NO EFFECT since
+# the entire endpoint has been disabled. In other words, the flags below only are applicable if the overall
+# endpoint is enabled.
+#
+endpointMethodControl:
+  realm.get : true
+  register.post : true
+
+  account.get : true
+  account.post : true
+  account.password.change.post : true
+  account.password.reset.post : true
+
+  users.put : true
+  users.post : true
+  users.urn.get : true
+  users.user.get : true
+  users.user.post : true
+
+  devices.put : true
+  devices.post : true
+  devices.urn.get : true
+  devices.device.get : true
+  devices.get : true
+
+  objects.put : true
+  objects.post : true
+  objects.urn.get : true
+  objects.objecturn.get : true
+  objects.get : true
+
+  address.put : true
+  address.post : true
+  address.urn.get : true
+  address.get : true
+  address.urn.delete : true
+
+  sessions.put : true
+  sessions.post : true
+  sessions.urn.get : true
+  sessions.get : true
+
+  interactions.put : true
+  interactions.get : true
+  interactions.urn.get : true
+
+  relationships.put : true
+  relationships.urn.get : true
+  relationships.urn.delete : true
+  relationships.reference.all.get : true
+  relationships.reference.specific.get : true
+  relationships.reference.type.get : true
+  relationships.reference.get : true
+
+  geospatial.put : true
+  geospatial.post : true
+  geospatial.get : true
+  geospatial.urn.get : true
+
+  metadata.encode.post : true
+  metadata.decode.post : true
+  metadata.reference.put : true
+  metadata.reference.delete : true
+  metadata.reference.get : true
+  metadata.query.post : true
+
+  files.put : true
+  files.urn.octet.post : true
+  files.urn.multipart.post : true
+  files.urn.get : true
+  files.urn.contents.get : true
+  files.entity.reference.get : true
+  files.urn.delete : true
+
+  tags.put : true
+  tags.tag.get : true
+  tags.urn.get : true
+  tags.tag.reference.put : true
+  tags.get : true
+  tags.tag.delete : true
+  tags.tag.reference.delete : true
+
+  notifications.enroll.put : true
+  notifications.confirm.put : true
+  notifications.withdraw.put : true
+  notifications.urn.get : true
+
+  events.get : true
+  events.urn.get : true
+
+  library.put : true
+  library.post : true
+  library.delete : true
+  library.urn.get : true
+  library.get : true
+  library.type.get : true
+  library.parent.get : true
+  library.children.get : true
+
+  timelines.reference.put : true
+  timelines.reference.post : true
+  timelines.urn.get : true
+  timelines.get : true
+
+  transaction.handler.post: true
+
+  extension.example.putTwoStrings : true
+  extension.example.findByFirstString : true
+  extension.example.findByBothStrings : true
+  extension.example.updateAll : true
+
+  extension.moreInterestingExample.moreInterestingPutTwoStrings : true
+  extension.moreInterestingExample.moreInterestingFindByFirstString : true
+  extension.moreInterestingExample.moreInterestingFindByBothStrings : true
+  extension.moreInterestingExample.moreInterestingUpdateAll : true
+
+#
+# Transformations provide additional formatting capabilities after an endpoint has completed its processing
+#
+transformations:
+  # Master switch for enabling transformations
+  # When false: all transformations are DISABLED
+  # When true: only those named transformations set to true are enabled
+  enabled : true
+  prettyPrintJSON: true
+  toSimpleXml : true
+
+#
+# Resource Registrars are responsible for registering related collections of endpoint resources with Jersey.
+# To add custom endpoints to an Objects server, add the .jar to the CLASSPATH, implement an IResourceRegistrar class,
+# and add a custom key here pointing to the full path of your registrar
+#
+resourceRegistrarClasses:
+  #
+  # DO NOT DELETE THE FIRST THREE REGISTRARS UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # EXAMPLE EXTENSION CONFIGURATION
+  #
+  publicEndpointsRegistrar : net.smartcosmos.objects.resource.pub.PublicEndpointsResourceRegistrar
+  oauthEndpointsRegistrar : net.smartcosmos.objects.resource.oauth.OAuthEndpointsResourceRegistrar
+  secureEndpointsRegistrar : net.smartcosmos.objects.resource.secure.SecureEndpointsResourceRegistrar
+  exampleExtensionEndpointsRegistrar: ${package}.smartcosmos.extension.server.ExampleExtensionEndpointsResourceRegistrar
+
+#
+# Server Extensions are Dropwizard bundles that are based on the net.smartcosmos::objects-platform-api artifact. These
+# extensions represent dynamic add-in server-side capabilities that can be managed and configured without requiring
+# access to the core server (source code).
+serverExtensions:
+  #
+  # Embedded LDAP server bundle
+  EmbeddedApacheDS : net.smartcosmos.bundle.apacheds.ApacheDSBundle
+
+  #
+  # Example extension
+  ExampleExtension : ${package}.smartcosmos.extension.server.ExampleExtension
+
+serverExtensionConfigurationPaths:
+  #
+  # Embedded LDAP server bundle
+  EmbeddedApacheDS : src/main/resources/apacheds.yml
+
+  #
+  # Example extension configuration
+  ExampleExtension : src/main/resources/exampleExtension.yml
+
+#
+# Service Classes are core infrastructure plugins to abstract away the underlying IaaS. For example, if one wants
+# to leave AWS in favor of Rackspace, then only the AWS specific service implementations below would have to be
+# plugged with Rackspace specific features
+#
+serviceClasses:
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # Fully qualified classname of the directory service being used to manage user authentication
+  # and authorization.
+  #
+  #directoryService: net.smartcosmos.platform.service.directory.NonProductionTestDirectoryService
+  # DEVELOPER EDITION RESTRICTED FIELD - DO NOT MODIFY
+  directoryService: net.smartcosmos.platform.service.directory.EmbeddedLdapService
+
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # Fully qualified classname of the notification service being used to stream events to
+  # back office systems in near real-time.
+  #
+  notificationService: net.smartcosmos.platform.service.notification.LogOnlyNotificationService
+  #notificationService: net.smartcosmos.plugin.service.aws.notification.AwsNotificationService
+
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # Fully qualified classname of the queue service being used to push async jobs to a secondary server
+  #
+  queueService: net.smartcosmos.platform.service.queue.LogOnlyQueueService
+  #queueService: net.smartcosmos.plugin.service.aws.queue.AwsQueueService
+
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # Fully qualified classname of the email service being used to deliver email messages.
+  #
+  emailService: net.smartcosmos.platform.service.email.LogOnlyEmailService
+  #emailService: net.smartcosmos.plugin.service.aws.email.AwsEmailService
+
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # Fully qualified classname of the download service being used to fetch files asynchronously.
+  #
+  downloadService: net.smartcosmos.platform.service.download.LogOnlyDownloadService
+  #downloadService: net.smartcosmos.platform.service.download.ApacheHttpClientDownloadService
+
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # Fully qualified classname of the storage service being used to persist multimedia files.
+  #
+  storageService: net.smartcosmos.platform.service.storage.LogOnlyStorageService
+  #storageService: net.smartcosmos.plugin.service.aws.storage.AwsS3StorageService
+
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # Fully qualified classname of the exception service being to track and respond to
+  # runtime exceptions in combination with Knoweldge Base articles.
+  #
+  exceptionService: net.smartcosmos.platform.service.exception.DefaultExceptionService
+
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # Fully qualified classname of the template service being used to provide merge capabilities.
+  #
+  templateService: net.smartcosmos.platform.service.template.FreemarkerTemplateService
+
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # Fully qualified classname of the event broadcast notification service being used to provide easy
+  # back office integration capabilities by sending all persisted events to a registered endpoint(s)
+  #
+  eventBroadcastNotificationService : net.smartcosmos.platform.service.notification.ObjectsEventBroadcastNotificationService
+
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  # Fully qualified classname of the event service being used to handle all insert, update, and read
+  # audits by sending all events to persistentstorage.
+  #
+  eventService : net.smartcosmos.platform.service.event.PersistedEventService
+
+#
+# Collection of entity-type specific visitors that serve as post-update, post-commit triggers.
+#
+visitors:
+  #sample: net.smartcosmos.platform.service.visitor.SampleVisitorService
+  happyBirthdayRandyWestonObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayRandyWestonObjectVisitorService
+  happyBirthdayKeithRichardsObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayKeithRichardsObjectVisitorService
+  merryChristmasMetadataVisitor : ${package}.smartcosmos.extension.visitor.MerryChristmasMetadataVisitorService
+
+#
+# Certain services require service-specific configurations. The SMART COSMOS platform framework provides this
+# Map<String,String> of key-value pairs that are easily accessed by a service plugin. For example, the AWS plugins
+# require the path to the API keys, and that path is defined as a service parameter below
+#
+serviceParameters:
+
+  #
+  # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
+  #
+  awsApiKeys: /var/.aws/apiKey.properties
+
+  #
+  # Name of an AWS S3 bucket that will be used to manage all multimedia uploads. In an Objects
+  # cluster, each server MUST define the exact same bucket name. This is because the Objects
+  # servers are stateless, and when placed behind a load balancer the call to upload a multimedia
+  # file might go to Server 1, while the call to retrieve the file might go to Server 2.
+  #
+  s3bucketName: net.smartcosmos.objects.stage
+
+  #
+  # Name of the queue to send batch transmission upload complete notifications for separate, async
+  # processing by one or more dedicated queue clients
+  # NOTE: The Objects server can be turned into a queue client via Quartz, but this is not recommended
+  # for production environments.
+  #
+  queueServiceQueueName : batchProcessingQueue
+
+  #
+  # Well defined region value that be meaningful to the queueService class. In the case of the AwsQueueService, this
+  # value must be one of the well-documented enum values found in the AWS class com.amazonaws.regions.Regions.
+  #
+  queueServiceRegion : us-east-1
+
+  #
+  # Path to the Freemarker *.ftl templates used for email generation. These templates are intended to be modified
+  # by the administrator
+  #
+  ftlTemplateDirectory: /var/ftl-templates
+
+  #
+  # Number of threads in the PersistedEventService
+  eventThreadPoolSize: 5
+
+#
+# SMART COSMOS platform services provide strong support for OAuth 2.0 authorization where a 3rd party may be authorized
+# by an existing user account to call SMART COSMOS web services on its behalf. In addition to inbound OAuth 2 support,
+# SMART COSMOS also provides the ability to define a collection of one or more OAuth 2 token manager plugins to
+# automatically manage the lifecycle of outbound OAuth 2 tokens. For example, if the AWS S3 storage provider is replaced
+# with a Box.com storage provider, the platform needs to manage the Box.com tokens to ensure that the refresh token
+# doesn't expire.
+#
+oauth2:
+  # 60 minutes bearer token shelf life
+  maxBearerTokenLife: 60 minutes
+
+  # 14 days refresh token shelf life
+  maxRefreshTokenLife: 14 days
+
+  # 30 second authentication code shelf life
+  maxAuthenticationCodeLife: 30 seconds
+
+  #
+  # OAuth 2.0 Token Managers rely on Quartz jobs to wake up at regularly scheduled windows to automatically check
+  # the refresh token's age and automatically refresh those tokens that are due to expire in a short period of time.
+  # This behavior ensures that the user-authorized access to these OAuth 2 managed external (non-SMART COSMOS) services
+  # continues without interruption.
+  oauthTokenManagers:
+    Box.com : net.smartcosmos.objects.job.tokenmanager.BoxOAuthTokenManager
+
+#
+# Batch Upload is a custom Dropwizard bundle that enables the Objects server to act as a batch file upload repository.
+# For example, if a file from a 3rd party is going to be imported and represented in an Objects instance, this bundle
+# provides an safe and secure mechanism for issuing time-constrained signed URLs that the caller can use to submit
+# batch files for processing by assigning a routing URN that is arbitrarily defined by the platform-service specific
+# implementation.
+batch:
+  #
+  # Enables or disables the ability of a server to accept file transmission requests for batch
+  # processing. If this is set to true, then a public endpoint at /batch is setup to support
+  # anonymous batch processing requests where a the requestor must present a valid, registered
+  # routingUrn in order to successfully be issued a file transmission response with upload instructions.
+  #
+  enabled : true
+
+  #
+  # Determines if an authenticated user is required in order to submit a batch file for processing. This is
+  # intended as a "secondary" security mechanism since, statistically, the odds of someone guessing a routing UUID
+  # are statistically insignificant. However, open end-points are open end-points, and the admin may choose to require
+  # actual user accounts on the Objects server in order to submit a file as a batch process.
+  #
+  authenticationRequired : false
+
+  #
+  # Which upload protocol should be used when generating a pre-signed URL for upload
+  # Valid choices are HTTPS and HTTP
+  #
+  # It is STRONGLY recommended that you stick with HTTPS, but HTTP may be helpful for debugging
+  #
+  uploadProtocol : HTTPS
+
+  #
+  # Dedicated bucket named or path (depending on the upload service) that defines where the uploaded
+  # batch file should be stored for future processing
+  #
+  uploadBucketName : batch-upload-test
+
+  #
+  # Define the maximum validity period of the signed batch upload URL. Any attempt to upload the batch
+  # file after the expiration date must result in a failure.
+  #
+  signedUrlLife :  30 minutes
+
+  #
+  # The actual batch upload service that generates the pre-signed URL request is a pluging. The default
+  # upload service relies on AWS S3 and its pre-signed URL capabilities.
+  #
+  uploadService : net.smartcosmos.objects.service.S3UploadService
+
+#
+# SMART COSMOS provides tightly integrated support for the Quartz cron scheduling framework by implementing it as a
+# Dropwizard bundle. With Quartz, it is possible for the platform service to wake to perform jobs or batch tasks
+#
+quartz:
+
+  #
+  # Enables or disables the ability of a server to schedule tasks
+  enabled : true
+
+  # Setting to false to disable automatic registration of all Quartz jobs listed below
+  autoScheduleJobs : true
+
+  # Quartz Job Scheduler Logical Instance Name
+  instanceName: ObjectsQuartzScheduler
+
+  #threadPool:
+    # Number of threads to allocate in the Quartz thread pool
+    #threadCount: 5
+
+  #jdbcjobStoreTX:
+    #driverDelegate: StdJDBC
+    #dataSource: MyQuartzDataSource
+
+    # Quartz properties specific to your JDBC Data Source:
+    #properties:
+     #org.quartz.dataSource.MyQuartzDataSource.driver : com.mysql.jdbc.Driver
+     #org.quartz.dataSource.MyQuartzDataSource.URL : jdbc:mysql://localhost/quartz?autoReconnect=true
+     #org.quartz.dataSource.MyQuartzDataSource.user : quartzuser
+     #org.quartz.dataSource.MyQuartzDataSource.password : secret
+
+  #
+  # Set of Quartz job definitions
+  #
+  jobDefinitions:
+    oauthJob : net.smartcosmos.objects.job.OAuthTokenManagerJobDefinition
+
+
+#
+# Used for directory service calls in some enterprise configurations
+#
+httpClient:
+  timeout: 500ms
+  connectionTimeout: 500ms
+  timeToLive: 1h
+  cookiesEnabled: false
+  maxConnections: 1024
+  maxConnectionsPerRoute: 1024
+  keepAlive: 0ms
+  retries: 0
+
+  #
+  # DEVELOPER EDITION RESTRICTED FIELD - DO NOT MODIFY
+  userAgent: SMART COSMOS/1.0 (Objects; rv:2.4)
+
+dataSourceFactory:
+  driverClass: com.mysql.jdbc.Driver
+
+  # db username
+  user: demo
+
+  # db password
+  password: demo
+
+  # db JDBC URL
+  url: jdbc:mysql://localhost/exampledb?autoReconnect=true
+
+  # any properties specific to your JDBC driver:
+  properties:
+     hibernate.dialect : org.hibernate.dialect.MySQL5InnoDBDialect
+     hibernate.hbm2ddl.auto : update
+     hiberante.show_sql : false
+
+  # the maximum amount of time to wait on an empty pool before throwing an exception
+  maxWaitForConnection: 1s
+
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "/* MyService Health Check */ SELECT 1"
+
+  # the minimum number of connections to keep open
+  minSize: 8
+
+  # the maximum number of connections to keep open
+  maxSize: 32
+
+  # whether or not idle connections should be validated
+  checkConnectionWhileIdle: false
+
+  # how long a connection must be held before it can be validated
+  #checkConnectionHealthWhenIdleFor: 10s
+
+  # the maximum lifetime of an idle connection
+  #closeConnectionIfIdleFor: 1 minute
+
+  # Whether or not connections will be validated before being borrowed from the pool.
+  # If the connection fails to validate, it will be dropped from the pool, and another will be borrowed
+  checkConnectionOnBorrow: true
+
+# HTTP-specific options.
+
+#
+#
+# Server Configuration
+#
+#
+
+# NOTE: For full server configuration options, see io.dropwizard.server.SimpleServerFactory source code
+
+server:
+  type: simple
+
+  applicationContextPath: /
+  adminContextPath: /admin
+
+  connector:
+    type: http
+
+    # The port on which the HTTP server listens for service requests.
+    # Because Java cannot drop privileges in a POSIX system, these
+    # ports cannot be in the range 1-1024. A port value of 0 will
+    # make the OS use an arbitrary unused port.
+    #
+    # NOTE: A startup script can override the port via
+    #       -Ddw.server.connector.port=$PORT
+    port: 8080
+
+#
+#
+# LIBRARY HIERARCHY
+#
+#
+#
+# SMART COSMOS Objects allows you to impose a hierarchy on your stored objects
+# (which includes users, devices, files, metadata, etc.) by linking them to
+# library elements, and linking library elements to each other. In the example
+# below, a Shelf can only be the child of a Library, a Book can only be the
+# child of a Shelf, and so on. Library elements do not have to have parents,
+# i.e., a Shelf can have Books and those Books can have Chapters and so on,
+# without the Shelf having to have a parent Library. However, the Shelf can
+# have at most one parent Library (a Library can of course have an arbitrary
+# number of Shelves), and so on down the hierarchy. You can have as many
+# Libraries as you want, and move Shelves from one to another, and similarly
+# for the rest of the hierarchy.
+#
+# The highest level element in the hierarchy (Library, in this example)
+# cannot have a parent. The lowest level element in the hierarchy (PageEntry,
+# in this example) cannot have children. There are no restrictions on the
+# number of levels in the hierarcy, but every level must have a distinct name.
+# Think your hierarchy through carefully in advance of starting to use it;
+# reorganizing your data from one hierarchy schema to another will in most
+# cases be non-trivial and best done in collaboration with a SMARTRAC
+# support engineer.
+#
+# The "Link Flags" element below declare which kinds of library elements can
+# have objects (again, to include users, devices, files, metadata, etc.) linked
+# to them. In this example, the "normal" case holds, in which objects can only
+# be linked to the lowest level of the hierarchy tree, i.e., PageEntry. If you
+# wanted to allow objects to be linked also to a Shelf, you would change the
+# second-to-last entry to "true", and if you wanted to allow objects to be
+# attached to library elements at eny level of the tree, you would change
+# them all to "true".
+#
+# A library link is implemented with the normal SMART COSMOS Relationship, and using
+# the normal Relationship REST endpoints. The only additional constraint in play is this:
+# if the relatedEntityReferenceType in the relationship is a LibraryElement, the Type field
+# of the relationship will be set immutably to LibraryLink.
+#
+# Note that as with any relationship in SMART COSMOS, deleting a relationship (i.e.,
+# a library link) has no effect on either the library element or the linked object.
+#
+# Configuration note: if you choose not to populate a library hierarchy, comment out
+# the lines "libraryHierarcy:" and "libraryLinkFlags:" as well as the hierarchy elements
+# and link flags.
+#
+# Library Elements
+libraryHierarchy:
+  - PageEntry
+  - Page
+  - ChapterSection
+  - Chapter
+  - Book
+  - Shelf
+  - Library
+
+# Link Flags
+libraryLinkFlags:
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+
+#
+#
+# LOGGING
+#
+#
+
+# NOTE: For full logging options, see io.dropwizard.logging.LoggingFactory source code
+
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  appenders:
+
+    - type: console
+      threshold: ALL
+      timeZone: UTC
+      target: stdout
+
+    - type: file
+
+      # Do not write log statements below this threshold to the file.
+      threshold: ALL
+
+      # The file to which current statements will be logged.
+      currentLogFilename: ./log/objects.log
+
+      # When the log file rotates, the archived log will be renamed to this. The
+      # %d is replaced with the previous day (yyyy-MM-dd). Custom rolling windows can be created
+      # by passing a SimpleDateFormat-compatible format as an argument: "%d{yyyy-MM-dd-hh}".
+      archivedLogFilenamePattern: ./log/objects-%d.log
+
+      # The number of archived files to keep.
+      archivedFileCount: 5
+
+      # The timezone used to format dates. HINT: USE THE DEFAULT, UTC.
+      timeZone: UTC
+
+  # Logger-specific levels.
+  loggers:
+
+    # Log all SQL DML statements as they are executed
+    "org.hibernate.SQL": INFO
+
+    # Log all JDBC parameters
+    "org.hibernate.type": INFO
+
+    "org.hibernate.tool.hbm2ddl": WARN
+
+    # Log the state of all entities (max 20 entities) associated with the session at flush time
+    "org.hibernate.pretty": INFO
+
+    # Log all second-level cache activity
+    "org.hibernate.cache": INFO
+
+    # Log transaction related activity
+    "org.hibernate.transaction" : INFO
+
+    # Amazon Web Services Client can be noisy
+    "com.amazonaws.http.AmazonHttpClient" : WARN
+
+    # Lower this to an INFO setting to see JDBC connection and statement statistics in the log
+    "org.hibernate.engine.internal.StatisticalLoggingSessionEventListener" : WARN
+
+    #org.hibernate.jdbc	Log all JDBC resource acquisition
+    #org.hibernate.hql.ast.AST	 Log HQL and SQL ASTs during query parsing
+
+transactionHandlerClasses:
+  myExampleTransactionHandler: ${package}.smartcosmos.extension.server.resource.secure.transaction.handlers.ExampleTransactionHandler
+
+#
+# End of file
+#
+
+
+
+
