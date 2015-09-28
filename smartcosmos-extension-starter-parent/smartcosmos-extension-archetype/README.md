@@ -21,7 +21,7 @@ mvn archetype:generate \
 	-B \
 	-DarchetypeGroupId=net.smartcosmos.extension \
 	-DarchetypeArtifactId=smartcosmos-extension-archetype \
-	-DarchetypeVersion=1.0-SNAPSHOT \
+	-DarchetypeVersion=LATEST-VERSION \
 	-DgroupId=com.example \
 	-DartifactId=foo-extension \
 	-Dversion=0.1-SNAPSHOT \
@@ -68,7 +68,7 @@ set both, but your Java packaging does not have to match your Maven coordinates!
 For your convenience, here is the command in a single line:
 
 ```
-mvn archetype:generate -B -DarchetypeGroupId=net.smartcosmos.extension -DarchetypeArtifactId=smartcosmos-extension-archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=com.example -DartifactId=foo-extension -Dversion=0.1-SNAPSHOT -Dpackage=com.example.extension.foo
+mvn archetype:generate -B -DarchetypeGroupId=net.smartcosmos.extension -DarchetypeArtifactId=smartcosmos-extension-archetype -DarchetypeVersion=2.10.13 -DgroupId=com.example -DartifactId=foo-extension -Dversion=0.1-SNAPSHOT -Dpackage=com.example.extension.foo
 ```
 
 ### Building and Running the Project
