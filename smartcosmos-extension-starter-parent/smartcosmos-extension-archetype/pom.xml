@@ -11,13 +11,4 @@
     <packaging>maven-archetype</packaging>
     <name>SMART COSMOS Extension Archetype</name>
 
-    <build>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.archetype</groupId>
-                <artifactId>archetype-packaging</artifactId>
-            </extension>
-        </extensions>
-    </build>
-
 </project>
