@@ -8,7 +8,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-extension-archetype</artifactId>
-    <packaging>maven-archetype</packaging>
+    <packaging>jar</packaging>
     <name>SMART COSMOS Extension Archetype</name>
 
 </project>
