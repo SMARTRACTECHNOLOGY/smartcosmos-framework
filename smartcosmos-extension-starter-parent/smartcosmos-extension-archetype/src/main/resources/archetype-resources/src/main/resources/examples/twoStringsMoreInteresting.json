@@ -1,0 +1,6 @@
+{
+    "firstString" : "hello",
+    "secondString" : "goodbye",
+    "referenceUrn" : "urn:exampleObject:teapot:short:stout",
+    "entityReferenceType" : "Object"
+}

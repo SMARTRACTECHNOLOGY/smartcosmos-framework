@@ -30,12 +30,13 @@
     </prerequisites>
     <modules>
         <module>smartcosmos-build-tools</module>
-        <module>smartcosmos-dependencies</module>
-        <module>smartcosmos-framework-parent</module>
-        <module>smartcosmos-extension-starter-parent</module>
         <module>smartcosmos-core</module>
-        <module>smartcosmos-java-client</module>
+        <module>smartcosmos-dependencies</module>
+        <module>smartcosmos-documentation</module>
         <module>smartcosmos-extension-api</module>
+        <module>smartcosmos-extension-starter-parent</module>
+        <module>smartcosmos-framework-parent</module>
+        <module>smartcosmos-java-client</module>
     </modules>
     <properties>
 
@@ -103,6 +104,11 @@
                     <version>1.9.1</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.4.0</version>
+                </plugin>
+                <plugin>
                     <groupId>net.revelc.code</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
                     <version>${formatter-maven-plugin.version}</version>
@@ -163,22 +169,17 @@
                     <version>2.5.2</version>
                     <configuration>
                         <!-- During release:perform, enable the "release" profile -->
-                        <releaseProfiles>release</releaseProfiles>
+                        <releaseProfiles>release, docs</releaseProfiles>
                         <scmCommentPrefix>SMART COSMOS Release (Build ${buildNumber})</scmCommentPrefix>
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                         <resume>false</resume>
                         <goals>deploy</goals>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
-
-                    <executions>
-                        <execution>
-                            <inherited>false</inherited>
-                            <configuration>
-                                <releaseProfiles>release, maven-central</releaseProfiles>
-                            </configuration>
-                        </execution>
-                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.7</version>
                 </plugin>
                 <plugin>
                     <groupId>com.google.code.sortpom</groupId>
@@ -230,61 +231,6 @@
         </pluginManagement>
         <!-- Non-JAR related plugins that are necessary for everything across the ecosystem. -->
         <plugins>
-            <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <inherited>false</inherited>
-
-                <configuration>
-                    <sourceDirectory>${basedir}</sourceDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <backend>pdf</backend>
-                            <sourceHighlighter>rouge</sourceHighlighter>
-                            <attributes>
-                                <allow-uri-read></allow-uri-read>
-                                <icons>font</icons>
-                                <pagenums></pagenums>
-                                <idprefix></idprefix>
-                                <idseparator>-</idseparator>
-                            </attributes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-
-                        <goals>
-                            <goal>attach-artifact</goal>
-                        </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${basedir}/target/generated-docs/README.pdf</file>
-                                    <type>pdf</type>
-                                    <classifier>README</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>${basedir}/target/generated-docs/CONTRIBUTING.pdf</file>
-                                    <type>pdf</type>
-                                    <classifier>CONTRIBUTING</classifier>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -389,5 +335,6 @@
                 </plugins>
             </build>
         </profile>
+
     </profiles>
 </project>
