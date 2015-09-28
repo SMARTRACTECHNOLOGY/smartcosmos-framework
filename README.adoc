@@ -1,31 +1,161 @@
-= SMART COSMOS Getting Started
+= SMART COSMOS Getting Started Guide
 SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
 
-image::http://smartractechnology.github.io/smartcosmos-sdk-java/images/smart-cosmos-250px-wide.png[SMART COSMOS Objects]
+'''
+image::http://developer.smartcosmos.net/smartcosmos-framework/images/banner/miot.png[SMART COSMOS]
 
-== About Documentation
-Get the latest documentation at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework
+== Welcome to SMART COSMOS
+Welcome to SMART COSMOS!
 
-== License
+Are you ready to become part of creating something really big? With SMART COSMOS
+you can connect a universe of everyday things to the digital world. In fact,
+SMART COSMOS is the only platform that is purely focused on providing a fast
+track for both enterprises and developers to Monetize the IoT.
 
+SMART COSMOS is an ecosystem. It consists of a robust partner network where
+hardware manufacturers, system integrators, software developers and enterprises
+come together to create the IoT. It is comprised of both SaaS and PaaS offerings
+that help you EMBED, ENRICH, EFFECT, and EXPLORE IoT driven data.
+
+SMART COSMOS also includes an education portal,
+*http://lessons.smart-cosmos.com[SMART COSMOS Lessons]*, and a
+vibrant developer community at our
+*https://partner.smart-cosmos.com[Partner Development Portal]*. Developers who
+complete the full Extension Developer learning path, passing all exams, earn the
+right and privileges of being a SMART COSMOS Certified Engineer.
+
+In order to accelerate value creation with the IoT, enterprises must learn how
+to obtain new value from four key areas:
+
+* Data
+* Things
+* People
+* Process
+
+The IoT is nothing more than combining a creative mixture of low-cost sensing
+hardware, auto-identification technologies like RFID, and the Cloud! Now, we
+invite you to take the next steps and learn how to use our proven blueprint to
+*Monetize the IoT*.
+
+*EXPLORE* the full capabilities of the entire ecosystem by participating in one or
+more Web based learning paths at SMART COSMOS Lessons.
+
+*CREATE* new and innovative IoT Mashups by building Extensions that perform an
+IaaS Cloud Pivot or integrate new applications, features, and REST Web services
+into the platform.
+
+*SELL* innovative Extensions at the SMART COSMOS Market by defining the level of
+support provided, marketing materials, manuals, and of course an appropriate
+recurring revenue model.
+
+Finally, platforms are living designs that are always evolving. If you have
+feedback, feature requests, or just want to meet for some drinks and talk
+software design patterns, contact us either at the developer portal or via
+email: mailto:api@smartrac-group.com[api@smartrac-group.com]
+
+
+== SMART COSMOS Objects License
+You must review and accept the
+https://licensing.smartcosmos.net/objects/[SMART COSMOS Objects EULA] before
+working with this developer kit.
+
+== Open Source Development Framework
+SMART COSMOS includes a number of open sourced frameworks available under the
+Apache License, Version 2. You can clone freely use these frameworks in your
+projects, submit pull requests, and access the latest documentation at GitHub:
+
+https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework
+
+IMPORTANT: The core of the Objects server itself is proprietary and must be
+properly licensed when deployed in a production environment. There are two
+versions of the software available for single-user development environments.
+First, the https://aws.amazon.com/marketplace/search/results/ref=srh_navgno_search_box?page=1&searchTerms=smartrac[AWS Marketplace]
+hosts a fully function *Developer Edition* that cannot be deployed in a
+highly-available/load balanced topology by restricting the way user accounts are
+created. Second, there is a *Developer Kit* version that does not restrict
+user account creation, but does define a maximum number of object records that
+can be manipulated before the endpoint returns a 403.
+
+== SMART COSMOS Lessons: Get Certified
+Software developers have the opportunity to complete the Extension Developer
+learning path at our education portal, SMART COSMOS Lessons. Upon completing
+about 14 hours of self-paced web courses and passing all of the exams, you
+establish yourself as SMART COSMOS expert and have the ability to promote your
+expertise at the https://partner.smart-cosmos.com[Partner Development Portal].
+
+TIP: You need a code to complete the
+http://lessons.smart-cosmos.com/self-signup[SMART COSMOS Lessons self-signup].
+If you don't have one, just ask for one by dropping us an email at
+mailto:api@smartrac-group.com[api@smartrac-group.com].
+
+== Partner Development Portal
+The https://partner.smart-cosmos.com[Partner Development Portal] is the online
+community for all things SMART COSMOS. Here you can review partner profiles,
+developer profiles, access technical white papers, review technical use cases,
+register for contests, and much more. If you haven't already, you should visit
+the site and register as a developer to gain access to more technical data
+about the SMART COSMOS platform and network with other professionals using
+SMART COSMOS to Monetize the IoT.
+
+== Extension Developer Quick Start
+image::http://developer.smartcosmos.net/smartcosmos-framework/images/quick-start.png[You Tube]
+There is a short 15 minute video, https://youtu.be/xmAQOvjJqmU[Extension Developer Quick Start],
+at the SMART COSMOS DevTube channel. This video will help you quickly setup
+a suitable development environment for creating and selling SMART COSMOS
+Extensions.
 
 == Maven Central
-Java developers that rely on Maven Central can access the SMART COSMOS Platform Core using the following coordinates:
+Java developers that rely on Maven Central can access the SMART COSMOS
+libraries by searching for groupId of *net.smartcosmos*.:
+
+The http://search.maven.org/#artifactdetails%7Cnet.smartcosmos%7Csmartcosmos-core%7C2.10.13%7Cjar[core framework]
+has the following coordinates:
 
 ```
 <dependency>
   <groupId>net.smartcosmos</groupId>
   <artifactId>smartcosmos-core</artifactId>
-  <version>1.0</version>
+  <version>2.10.13/version>
 </dependency>
 ```
 
-Likewise, Java developers who want to use the SMART COSMOS Java Client for easy access to the platform, thus eliminating the need to deal directly with HTTP, JSON, and REST calls, the Maven Central coordinates are:
+The http://search.maven.org/#artifactdetails%7Cnet.smartcosmos%7Csmartcosmos-extension-api%7C2.10.13%7Cjar[extension API]
+has the following coordinates:
+
+```
+<dependency>
+  <groupId>net.smartcosmos</groupId>
+  <artifactId>smartcosmos-extension-api</artifactId>
+  <version>2.10.13/version>
+</dependency>
+```
+
+Finally, if you want to use a Maven Archetype to get started, use the following
+coordinates:
+
+```
+<dependency>
+  <groupId>net.smartcosmos.extension</groupId>
+  <artifactId>smartcosmos-extension-archetype</artifactId>
+  <version>2.10.13/version>
+</dependency>
+```
+
+TIP: Remember, the artifacts in Maven Central are *living* artifacts and will
+have new releases from time to time. You are _strongly encouraged* to visit
+http://search.maven.org/#search%7Cga%7C1%7Cg%3Anet.smartcosmos[https://search.maven.org]
+to find the latest version after 2.10.13.
+
+If you are a Java developer interested in just building an Objects client, with
+no interest in building extensions, then you may consider using the SMART COSMOS
+Java Client for easy access to the platform without having to worry about the
+underlying HTTP, JSON, and REST calls. The Maven Central coordinates for this
+library are:
 
 ```
 <dependency>
   <groupId>net.smartcosmos</groupId>
   <artifactId>smartcosmos-java-client</artifactId>
-  <version>1.0</version>
+  <version>2.10.13</version>
 </dependency>
 ```
