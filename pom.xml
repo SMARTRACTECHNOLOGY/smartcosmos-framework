@@ -174,7 +174,7 @@
                     <version>2.5.2</version>
                     <configuration>
                         <!-- During release:perform, enable the "release" profile -->
-                        <releaseProfiles>release, docs</releaseProfiles>
+                        <releaseProfiles>release,docs</releaseProfiles>
                         <scmCommentPrefix>SMART COSMOS Release (Build ${buildNumber})</scmCommentPrefix>
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                         <resume>false</resume>
