@@ -9,18 +9,18 @@ import org.slf4j.LoggerFactory;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class HappyBirthdayJensObjectVisitorService extends AbstractVisitor<VisitableObject>
+public class HappyBirthdayFredObjectVisitorService extends AbstractVisitor<VisitableObject>
 {
 
-    private static final Logger LOG = LoggerFactory.getLogger(HappyBirthdayJensObjectVisitorService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HappyBirthdayFredObjectVisitorService.class);
 
-    private Boolean onlyJensBirthday;
+    private Boolean onlyFredsBirthday;
 
-    public HappyBirthdayJensObjectVisitorService()
+    public HappyBirthdayFredObjectVisitorService()
     {
         // NOTE TO EXTENSION DEVELOPER:
-        // Notice that the last argument of the super constructor is present in HappyBirthdayJason.java,
-        // but is not in HappyBirthdayJens. HappyBirthdayJens will receive the default priority
+        // Notice that the last argument of the super constructor is present in HappyBirthdayFred,
+        // but is not in HappyBirthdayWaldo. HappyBirthdayWaldo will receive the default priority
         // of 50 (the range for priorities is 0 <= priority <= 100).
         //
         // Note also that the priority stored in the visitors registration table itself will not be this number,
@@ -35,10 +35,10 @@ public class HappyBirthdayJensObjectVisitorService extends AbstractVisitor<Visit
         // java.util.UUID.getRandomUUID().toString()
         // and replace this string with that.
         //
-        super("9D87E521-B5A4-4136-B42D-75A19A4C4ABD", "Happy Birthday Jens Object Visitor Service",
-              EntityReferenceType.Object);
+        super("45E7E88B-3223-4366-ABAB-E55D7A1E07F5", "Happy Birthday Fred Object Visitor Service",
+              EntityReferenceType.Object, 49);
 
-        onlyJensBirthday = false;
+        onlyFredsBirthday = false;
 
     }
 
@@ -47,14 +47,14 @@ public class HappyBirthdayJensObjectVisitorService extends AbstractVisitor<Visit
 
         Calendar today = new GregorianCalendar();
 
-        if (onlyJensBirthday && (today.DAY_OF_MONTH != 16 || today.MONTH != Calendar.APRIL))
+        if (onlyFredsBirthday && (today.DAY_OF_MONTH != 29 || today.MONTH != Calendar.JANUARY))
         {
-            LOG.info("No present for Jens today!");
+            LOG.info("No present for Fred today!");
             return;
         }
 
-        // either it's Jens' birthday or onlyJensBirthday is set to false
-        LOG.info("Happy birthday to Jens from object " + object.getUrn() +
+        // either it's Fred's birthday or onlyFredsBirthday is set to false
+        LOG.info("Happy birthday to Fred from object " + object.getUrn() +
                  " with name " + object.getName() + " and objectUrn " + object.getObjectUrn() +
                  " and type " + object.getType() + " and moniker " + object.getMoniker());
     }
