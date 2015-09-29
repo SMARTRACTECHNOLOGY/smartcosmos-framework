@@ -1,6 +1,6 @@
 {
-    "firstString" : "hello",
-    "secondString" : "goodbye",
+    "firstString" : "Hello, there!",
+    "secondString" : "See you later!",
     "referenceUrn" : "urn:exampleObject:teapot:short:stout",
     "entityReferenceType" : "Object"
 }
