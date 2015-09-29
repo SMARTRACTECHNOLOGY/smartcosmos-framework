@@ -1,8 +1,8 @@
 
 # INTRODUCTION
 
-This file (NOT intended to be run as a shell script) contains instructions for creating an initial account/user (by default bunkhouse@banzai.com,
-with password Buckar00) and running a few curl commands for a basic test of the functionality provided in the SMART COSMOS example extension,
+This file (NOT intended to be run as a shell script) contains instructions for creating an initial account/user (by default alice@example,
+with password p@ssw0rd) and running a few curl commands for a basic test of the functionality provided in the SMART COSMOS example extension,
 created from the SMART COSMOS Server Extension archetype.
 
 Creation of an extension project based on the archetype is described here:
@@ -39,12 +39,12 @@ curl -XPOST -H 'Content-Type:application/json' http://localhost:8080/rest/regist
 
 # Here we confirm the registration, replacing SHMJHOIUYAMQ with the email verification token (See? Told you we'd need it!) from above.
 # WE NEED THE ASSIGNED PASSWORD FOR THE NEXT STEP, SO KEEP TRACK OF IT!
-curl -XGET -H 'Content-Type:application/json' http://localhost:8080/rest/registration/confirm/SHMJHOIUYAMQ/bunkhouse@banzai.com
+curl -XGET -H 'Content-Type:application/json' http://localhost:8080/rest/registration/confirm/SHMJHOIUYAMQ/alice@example.com
 
 # Now you have to do two things:
 # 1. Update the changePassword.json file with the password in the response above (See? Told you we'd need it!).
 # 2. Generate an Authorization: Basic string (see below) for the username and password, which we'll use to authenticate the password change. Once
-#    that's done, all the commands that follow you can use as-is, because the Authorization: Basic string is for bunkhouse@banzai.com:Buckar00,
+#    that's done, all the commands that follow you can use as-is, because the Authorization: Basic string is for alice@example.com:p@ssw0rd,
 #    which is what we're setting the password to.
 #
 # To generate a Authorization: Basic string, we provide for your convenience a utility class (with main method) called BasicAuth, in this directory.
@@ -52,7 +52,7 @@ curl -XGET -H 'Content-Type:application/json' http://localhost:8080/rest/registr
 #
 # $ java BasicAuth '1GJVYHCKo2*2'
 #
-# then replace the Authorization: Basic string in the next line with the result. After that, user bunkhouse@banzai.com with password Buckar00
+# then replace the Authorization: Basic string in the next line with the result. After that, user alice@example.com with password p@ssw0rd
 # is an admin user in the system, and you can leave all the following Authorization: Basic strings alone.
 #
 # NOTE: BasicAuth can also be called with username and password, i.e, 
@@ -62,7 +62,7 @@ curl -XGET -H 'Content-Type:application/json' http://localhost:8080/rest/registr
 curl -XPOST -H 'Content-Type:application/json' -H "Authorization: Basic YnVua2hvdXNlQGJhbnphaS5jb206MUdKVllIQ0tvMioy" http://localhost:8080/rest/account/password/change --data @changePassword.json
 
 #
-# OK, now we have a user, bunkhouse@banzai.com, with password Buckar00, and Authorization: Basic string YnVua2hvdXNlQGJhbnphaS5jb206QnVja2FyMDA=
+# OK, now we have a user, alice@example.com, with password p@ssw0rd, and Authorization: Basic string YnVua2hvdXNlQGJhbnphaS5jb206QnVja2FyMDA=
 #
 
 # Here we put a pair of strings into our example table.
