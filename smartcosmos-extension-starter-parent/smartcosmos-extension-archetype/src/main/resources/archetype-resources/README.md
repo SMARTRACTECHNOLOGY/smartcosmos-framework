@@ -70,14 +70,14 @@ Every visitor has a priority between 1 (highest possible priority) and 100 (lowe
 assigned in your visitor's super constructor, like:
 
 ```java
-super("9D87E521-B5A4-4136-B42D-75A19A4C4ABD", "Happy Birthday Randy Weston Object Visitor Service",
+super("9D87E521-B5A4-4136-B42D-75A19A4C4ABD", "Happy Birthday Jason Object Visitor Service",
       EntityReferenceType.Object, 90);
 ```
 
 where the last argument is the priority. If you use the super constructor
 
 ```java
-super("9D87E521-B5A4-4136-B42D-75A19A4C4ABD", "Happy Birthday Randy Weston Object Visitor Service",
+super("9D87E521-B5A4-4136-B42D-75A19A4C4ABD", "Happy Birthday Jens Object Visitor Service",
       EntityReferenceType.Object);
 ```
 i.e, not explicitly assigning a priority, the visitor will be assigned a priority of 50. If multiple visitors for a 

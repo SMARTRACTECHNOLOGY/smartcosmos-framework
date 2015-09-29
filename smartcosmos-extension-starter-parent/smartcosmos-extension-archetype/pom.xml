@@ -10,15 +10,25 @@
     <artifactId>smartcosmos-extension-archetype</artifactId>
     <packaging>maven-archetype</packaging>
     <name>SMART COSMOS Extension Archetype</name>
+    <description>SMART COSMOS Extension Archetype</description>
 
     <build>
         <resources>
             <resource>
                 <filtering>true</filtering>
-                <directory>${basedir}/src/main/resources</directory>
+                <directory>src/main/resources</directory>
                 <excludes>
-                    <exclude>${basedir}/src/main/resources/archetype-resources/pom.xml</exclude>
+                    <exclude>**/*.xml</exclude>
+                    <exclude>**/README.md</exclude>
                 </excludes>
+            </resource>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/README.md</include>
+                </includes>
             </resource>
         </resources>
         <extensions>

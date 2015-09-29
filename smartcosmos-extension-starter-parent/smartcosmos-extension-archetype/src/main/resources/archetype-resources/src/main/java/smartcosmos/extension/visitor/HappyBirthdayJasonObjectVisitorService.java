@@ -9,25 +9,25 @@ import org.slf4j.LoggerFactory;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class HappyBirthdayRandyWestonObjectVisitorService extends AbstractVisitor<VisitableObject>
+public class HappyBirthdayJasonObjectVisitorService extends AbstractVisitor<VisitableObject>
 {
 
-    private static final Logger LOG = LoggerFactory.getLogger(HappyBirthdayRandyWestonObjectVisitorService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HappyBirthdayJasonObjectVisitorService.class);
 
-    private Boolean onlyRandysBirthday;
+    private Boolean onlyJasonsBirthday;
 
-    public HappyBirthdayRandyWestonObjectVisitorService()
+    public HappyBirthdayJasonObjectVisitorService()
     {
         // NOTE TO EXTENSION DEVELOPER:
-        // Notice that the last argument of the super constructor is present in HappyBirthdayKeithRichards,
-        // but is not in HappyBirthdayRandyWeston. HappyBirthdayRandyWeston will receive the default priority
+        // Notice that the last argument of the super constructor is present in HappyBirthdayJason,
+        // but is not in HappyBirthdayJens. HappyBirthdayJens will receive the default priority
         // of 50 (the range for priorities is 0 <= priority <= 100).
         //
         // Note also that the priority stored in the visitors registration table itself will not be this number,
         // but rather a much larger number that preserves your ordering and ensures that no two visitors have the
-        // same priority. If you assign two visitor with the same entity type the same priority, the order in which
-        // their visit() methods are executed will be random. If you need visitors to a particular entity type to
-        // execute in a particular order, assign them priorites.
+        // same priority. If you assign two visitors with the same entity type the same priority, the order in which
+        // their visit() methods are executed will be indeterminate. If you need visitors to a particular entity type
+        // to execute in a particular order, assign them priorites.
         //
         // NOTE TO EXTENSION DEVELOPER:
         // The UUID that constitutes the first argument of this constructor has to be unique. Don't use this string!
@@ -35,10 +35,10 @@ public class HappyBirthdayRandyWestonObjectVisitorService extends AbstractVisito
         // java.util.UUID.getRandomUUID().toString()
         // and replace this string with that.
         //
-        super("9D87E521-B5A4-4136-B42D-75A19A4C4ABD", "Happy Birthday Randy Weston Object Visitor Service",
-              EntityReferenceType.Object, 90);
+        super("45E7E88B-3223-4366-ABAB-E55D7A1E07F5", "Happy Birthday Jason Object Visitor Service",
+              EntityReferenceType.Object, 49);
 
-        onlyRandysBirthday = false;
+        onlyJasonsBirthday = false;
 
     }
 
@@ -47,14 +47,14 @@ public class HappyBirthdayRandyWestonObjectVisitorService extends AbstractVisito
 
         Calendar today = new GregorianCalendar();
 
-        if (onlyRandysBirthday && (today.DAY_OF_MONTH != 18 || today.MONTH != Calendar.DECEMBER))
+        if (onlyJasonsBirthday && (today.DAY_OF_MONTH != 29 || today.MONTH != Calendar.JANUARY))
         {
-            LOG.info("No present for Randy Weston today!");
+            LOG.info("No present for Jason today!");
             return;
         }
 
-        // either it's Keith's birthday or onlyKeefsBirthday is set to false
-        LOG.info("Happy birthday to Randy Weston from object " + object.getUrn() +
+        // either it's Jason's birthday or onlyJasonsBirthday is set to false
+        LOG.info("Happy birthday to Jason from object " + object.getUrn() +
                  " with name " + object.getName() + " and objectUrn " + object.getObjectUrn() +
                  " and type " + object.getType() + " and moniker " + object.getMoniker());
     }
