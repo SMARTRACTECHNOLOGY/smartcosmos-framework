@@ -76,6 +76,10 @@ created. Second, there is a *Developer Kit* version that does not restrict
 user account creation, but does define a maximum number of object records that
 can be manipulated before the endpoint returns a 403.
 
+In addition to the open source development framework, the entirety of the
+SMART COSMOS REST Web Service APIs are fully documented at our API web site,
+http://api.smartcosmos.net
+
 == SMART COSMOS Lessons: Get Certified
 Software developers have the opportunity to complete the Extension Developer
 learning path at our education portal, SMART COSMOS Lessons. Upon completing
