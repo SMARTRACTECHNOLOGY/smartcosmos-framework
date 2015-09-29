@@ -413,8 +413,8 @@ serviceClasses:
 #
 visitors:
   #sample: net.smartcosmos.platform.service.visitor.SampleVisitorService
-  happyBirthdayJasonObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayJasonObjectVisitorService
-  happyBirthdayJensObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayJensObjectVisitorService
+  happyBirthdayFredObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayFredObjectVisitorService
+  happyBirthdayWaldoObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayWaldoObjectVisitorService
   happyNewYearMetadataVisitor : ${package}.smartcosmos.extension.visitor.HappyNewYearMetadataVisitorService
 
 #
