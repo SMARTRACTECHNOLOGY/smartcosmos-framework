@@ -93,7 +93,7 @@
     </build>
     <profiles>
         <profile>
-            <id>release</id>
+            <id>docs</id>
             <build>
                 <plugins>
                     <plugin>
