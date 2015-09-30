@@ -395,8 +395,28 @@
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
+                <artifactId>smartcosmos-documentation</artifactId>
+                <version>2.10.8-development-SNAPSHOT</version>
+                <classifier>CONTRIBUTING</classifier>
+                <type>pdf</type>
+            </dependency>
+            <dependency>
+                <groupId>net.smartcosmos</groupId>
+                <artifactId>smartcosmos-documentation</artifactId>
+                <version>2.10.8-development-SNAPSHOT</version>
+                <classifier>README</classifier>
+                <type>pdf</type>
+            </dependency>
+            <dependency>
+                <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-extension-api</artifactId>
                 <version>2.10.8-development-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>net.smartcosmos</groupId>
+                <artifactId>smartcosmos-extension-api</artifactId>
+                <version>2.10.8-development-SNAPSHOT</version>
+                <classifier>javadoc</classifier>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos.extension</groupId>
