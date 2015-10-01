@@ -170,9 +170,9 @@ Once you have become a SMART COSMOS Certified and gained access to the SMART COS
 === About the Kit
 In your SMART COSMOS Developer Kit are several files:
 
-* README.PDF -- The document you're reading right now.  This document is open source and we encourage feedback and improvements at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework
-* CONTRIBUTING.PDF -- The main framework or SMART COSMOS is actually Open Source and available at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework this guide provides ways for you to contribute.
-* Java Docs for the SMART COSMOS Extension API -- these Java Docs are also available online at  https://api.smartcosmos.net
+* `README.pdf` -- The document you're reading right now.  This document is open source and we encourage feedback and improvements at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework
+* `CONTRIBUTING.pdf` -- The main framework or SMART COSMOS is actually Open Source and available at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework this guide provides ways for you to contribute.
+* `javadocs` -- Java Docs for the SMART COSMOS Extension API.  These Java Docs are also available online at  https://api.smartcosmos.net
 * `apacheds.yml` -- Configuration file necessary to run the Embedded Apache Directory Service Authentication Service Extension for your SMART COSMOS Embedded installation
 * `objects.yml` -- Configuration file for your SMART COSMOS Objects Developer Edition server.
 * `smartcosmos-extension-starter-test-all.jar` -- This is the test harness for the SMART COSMOS Framework that will be expanded upon heavily to help you, the developer, test and verify your extensions.  Additionally, this package also helps you populate your SMART COSMOS Objects server with some basic objects and an account to get you started.
@@ -215,7 +215,7 @@ pong
 * Connection #0 to host localhost left intact
 ```
 
-=== Populating Your Server
+=== Populating YOUR Server
 The DevKit comes with the SMART COSMOS Test Harness packaged in, which is code freely available in the SMART COSMOS Framework located at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework the default class for the Test Harness is a `PopulateObjectsServer` JUnit test that will connect to your server and populate the database with some details.  You can run the Test Harness with the following:
 
 ```
@@ -236,4 +236,30 @@ java \
 
 === Adding YOUR Extension
 Once you develop your own Extension you'll want to add it to test with your own SMART COSMOS Objects Server.  This involves running
-the SMART COSMOS Server so that it can also detect your jar file.
+the SMART COSMOS Server so that it can also detect your jar file.  The easiest way to do this is to create a new folder in the directory called `lib`, put your SMART COSMOS Extension into that folder, and run with the following command:
+
+```
+java -cp "lib/*" -jar smartcosmos-objects-devkit-edition.jar server objects.yml
+```
+TIP: Notice the addition of the `-cp "lib/*"` to the java command line.
+
+You'll also need to make sure you included your Extension's details in the `objects.yml` file.
+
+==== Special Procedure for Directory Service Extensions
+SMART COSMOS Objects Developer Edition locks the Directory Service Extension to the Embedded Apache DS Directory Service Extension.  However, developers for Directory Service Extensions need to be able to test their software.  For that reason, *only* the Developer Kit comes with the capability to switch to `DevKit` mode.  This limits the amount of Objects you can store in your Objects Server to *500*, but unlocks the Directory Service Extension so that developers can test their Extension.  All of these changes are done in the `objects.yml` configuration file.
+
+WARNING: This procedure is only necessary for those that want to create a Directory Service Extension!
+
+1. Change the `license.edition` to `DevKit`
+1. Change the `license.editionKey` to the alternative key denoted in the file with the comment `CHANGE TO DEVELOP AN AUTHENTICATION SERVICE` above it.
+1. Change the `license.objectCount` to `500`
+1. Comment out the EmbeddedApacheDS entries to disable the ApacheDS Server Extension:
+```
+serverExtensions:
+  #
+  # Embedded LDAP server bundle
+  # EmbeddedApacheDS : net.smartcosmos.bundle.apacheds.ApacheDSBundle
+
+serverExtensionConfigurationPaths:
+  # EmbeddedApacheDS : ./apacheds.yml
+```
