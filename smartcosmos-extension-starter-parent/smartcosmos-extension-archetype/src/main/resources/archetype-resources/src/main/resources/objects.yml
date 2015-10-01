@@ -413,9 +413,9 @@ serviceClasses:
 #
 visitors:
   #sample: net.smartcosmos.platform.service.visitor.SampleVisitorService
-  happyBirthdayRandyWestonObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayRandyWestonObjectVisitorService
-  happyBirthdayKeithRichardsObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayKeithRichardsObjectVisitorService
-  merryChristmasMetadataVisitor : ${package}.smartcosmos.extension.visitor.MerryChristmasMetadataVisitorService
+  happyBirthdayFredObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayFredObjectVisitorService
+  happyBirthdayWaldoObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayWaldoObjectVisitorService
+  happyNewYearMetadataVisitor : ${package}.smartcosmos.extension.visitor.HappyNewYearMetadataVisitorService
 
 #
 # Certain services require service-specific configurations. The SMART COSMOS platform framework provides this

@@ -30,7 +30,8 @@
         <fileSet filtered="true" packaged="false" encoding="UTF-8">
             <directory></directory>
             <includes>
-                <include>README.md</include>
+                <include>**/README.md</include>
+                <include>**/pom.xml</include>
             </includes>
         </fileSet>
 

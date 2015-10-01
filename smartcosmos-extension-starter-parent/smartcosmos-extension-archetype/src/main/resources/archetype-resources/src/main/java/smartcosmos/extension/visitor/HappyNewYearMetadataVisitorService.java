@@ -11,18 +11,18 @@ import org.slf4j.LoggerFactory;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class MerryChristmasMetadataVisitorService extends AbstractVisitor<VisitableMetadata>
+public class HappyNewYearMetadataVisitorService extends AbstractVisitor<VisitableMetadata>
 {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MerryChristmasMetadataVisitorService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HappyNewYearMetadataVisitorService.class);
 
-    private Boolean onlyChristmas;
+    private Boolean onlyNewYear;
 
     private Boolean contextInitialized = false;
 
     private IObjectDAO objectDAO;
 
-    public MerryChristmasMetadataVisitorService()
+    public HappyNewYearMetadataVisitorService()
     {
         // NOTE TO EXTENSION DEVELOPER:
         // Note the absence of a priority argument in the super constructor. The priority for this
@@ -37,10 +37,10 @@ public class MerryChristmasMetadataVisitorService extends AbstractVisitor<Visita
         // Generate your own with:
         // java.util.UUID.getRandomUUID().toString()
         // and replace this string with that.
-        super("3D734CAE-933B-457A-AF90-203605619579", "Merry Christmas Metadata Visitor Service",
+        super("3D734CAE-933B-457A-AF90-203605619579", "Happy New Year Metadata Visitor Service",
               EntityReferenceType.Metadata);
 
-        onlyChristmas = false;
+        onlyNewYear = false;
 
     }
 
@@ -57,13 +57,13 @@ public class MerryChristmasMetadataVisitorService extends AbstractVisitor<Visita
 
         Calendar today = new GregorianCalendar();
 
-        if (onlyChristmas && (today.DAY_OF_MONTH != 25 || today.MONTH != Calendar.DECEMBER))
+        if (onlyNewYear && (today.DAY_OF_MONTH != 1 || today.MONTH != Calendar.JANUARY))
         {
-            LOG.info("No present for you today!");
+            LOG.info("No champagne for you today!");
             return;
         }
-        // either it's Christmas, or onlyChristmas is set to false
-        LOG.info("Merry Christmas from metadata item " + metadata.getUrn() +
+        // either it's New Year's Day, or onlyNewYear is set to false
+        LOG.info("Happy New Year from metadata item " + metadata.getUrn() +
                  " with key " + metadata.getKey() +
                  " and raw value " + metadata.getRawValue() +
                  ", associated with reference entity: " + metadata.getReferenceUrn() +

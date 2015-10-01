@@ -241,7 +241,7 @@ SMART COSMOS dates _when represented as a string_ are formatted using **RFC 3339
 __2013-07-04T09:00:00-00:00__
 
 ### Use of time format
-SMART COSMOS timestamps are always represented in JSON with a `long` datatype, where the value must be interpretted as a 
+SMART COSMOS timestamps are always represented in JSON with a `long` datatype, where the value must be interpreted as a
 [Java Timestamp](http://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html) and defines the number of milliseconds since January 1, 1970, 00:00:00 GMT. e.g. 1390779082039
 
 ### Tracking Modification Timestamps
@@ -381,7 +381,7 @@ Check the version of all available modules and extensions of the current instanc
 # Group Registration Endpoints
 Every SMART COSMOS Account belongs to a _security realm_. By default, the registration endpoint will extract the domain name
 from your email address. However, if you are using a popular email service like GMail or Yahoo, you **must** provide a custom 
-realm name at registation. Use the **Realm Availability** endpoint to see if your desired realm name is available.   
+realm name at registration. Use the **Realm Availability** endpoint to see if your desired realm name is available.
 
 Once you've identified a realm name, you're ready to complete registration. Registering for an SMART COSMOS Account and then
 confirming the email address associated with the Account registration are the only prerequisites for using the platform. These
@@ -1418,7 +1418,7 @@ moniker | String  | false | true | Full | null
 object | IObject | true | false | Standard |
 type | String | true | true | Minimum |  
 line1 | String | false | true | Minimum | null
-line2 | String | false | true | Minumum | null
+line2 | String | false | true | Minimum | null
 city | String | false | true | Minimum | null
 stateProvince | String | false | true | Minimum | null
 countryAbbreviation | String | false | true | Minimum | null
@@ -1663,7 +1663,7 @@ captures context; _this_ Object did _something_ with _that_ object at _this_ tim
 additional characteristics, including metadata, tags, geospatial references, etc. 
 
 The primary difference between a _Reference_ and an _Interaction_ is cardinality. Either you are a customer with that bank,
-or you aren't a customer- but if you are a customer then each deposit or withdrawl would be a separate interaction. Where
+or you aren't a customer- but if you are a customer then each deposit or withdrawal would be a separate interaction. Where
 a Reference is treated as a binary relationship (yes or no, true or false), an Interaction is treated as a 0, 1, or many
 relationship.
 
@@ -2481,9 +2481,9 @@ Lookup an array of all defined relationships of the specific type.
 
 ## Overview
 SMART COSMOS Objects fully supports the [GeoJSON 1.0 Specification](http://geojson.org/geojson-spec.html). This powerful specification 
-allows develoeprs to _fully_ define georectified shapes for any object managed by the platform.
+allows developers to _fully_ define georectified shapes for any object managed by the platform.
 
-The design is similar to popular social media sites that offer check-in capabilities. It is reasonble to define a single 
+The design is similar to popular social media sites that offer check-in capabilities. It is reasonable to define a single
 georectified entity and then create multiple relationships, such as check-ins, etc. (Remember, the relationship type is an 
 arbitrary String, so a relationship type of "Check-In" could be arbitrarily defined by the developer)
 
@@ -4131,7 +4131,7 @@ This endpoint is idempotent and will respond with an appropriate HTTP status cod
 ## Overview
 The SMART COSMOS Objects platform was built from the ground up to be back-office integration friendly. Design decisions early on included 
 focusing on an **event-driven model** built around **JSON**. The platform supports nearly 100 different event types, and counting. 
-Integration uses the terminology *notificaiton endpoint* to reflect the fact that the endpoint is being *notified of an event* that
+Integration uses the terminology *notification endpoint* to reflect the fact that the endpoint is being *notified of an event* that
 occurred.
 
 > For a complete list of `EventType` values, please review the [primary data types](https://s3-eu-west-1.amazonaws.com/smartcosmos-api-images-public/Objects/DATA_TYPES.md "Primary Data Types") documentation.
@@ -4423,7 +4423,7 @@ and move Shelves from one to another, and similarly for the rest of the hierarch
 The highest level element in the hierarchy (Library, in this example)
 cannot have a parent. The lowest level element in the hierarchy (PageEntry,
 in this example) cannot have children. There are no restrictions on the
-number of levels in the hierarcy, but every level must have a distinct name.
+number of levels in the hierarchy, but every level must have a distinct name.
 Think your hierarchy through carefully in advance of starting to use it;
 reorganizing your data from one hierarchy schema to another will in most
 cases be non-trivial and best done in collaboration with a SMARTRAC

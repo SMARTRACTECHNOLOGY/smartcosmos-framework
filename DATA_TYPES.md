@@ -29,7 +29,7 @@ your account based on your subscription plan.
 Each of the data types defined in this section are secondary types that are entirely contained within a primary data
 type or directly refer to a pre-existing primary data type entity; they cannot stand on their own. For example,
 `SecurityRole` is _not_ a primary data type; it only exists within the context of a User primary data type. Similarly,
-an `ObjectAddress`  is _not_ a primary data type because it must be associated with an existing `Obect` at creation
+an `ObjectAddress`  is _not_ a primary data type because it must be associated with an existing `Object` at creation
 time. (In OO parlance, an Object "has-a" Object Address)
 
 * [EntityReferenceType](#ert)
@@ -43,7 +43,7 @@ time. (In OO parlance, an Object "has-a" Object Address)
 * [EventType](#et)
 
 ### [EntityReferenceType](id:ert)
-An Entity Reference Type is used to provide context to a type-agnositc call, such as a search operation.  
+An Entity Reference Type is used to provide context to a type-agnostic call, such as a search operation.  
 
 * Account
 * Extension
