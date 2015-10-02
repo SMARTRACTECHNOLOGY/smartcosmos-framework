@@ -31,7 +31,7 @@ public abstract class AbstractInterruptableRunner<T> extends Thread implements I
 
     protected final BlockingQueue<T> blockingQueue;
 
-    protected boolean terminateFlag = false;
+    protected volatile boolean terminateFlag = false;
 
     protected AbstractInterruptableRunner(IContext context, BlockingQueue<T> blockingQueue)
     {
