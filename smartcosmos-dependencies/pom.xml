@@ -22,7 +22,7 @@
     <parent>
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-framework-root</artifactId>
-        <version>2.10.14-SNAPSHOT</version>
+        <version>2.10.14</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-dependencies</artifactId>
@@ -391,48 +391,48 @@
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-core</artifactId>
-                <version>2.10.14-SNAPSHOT</version>
+                <version>2.10.14</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-documentation</artifactId>
-                <version>2.10.14-SNAPSHOT</version>
+                <version>2.10.14</version>
                 <classifier>CONTRIBUTING</classifier>
                 <type>pdf</type>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-documentation</artifactId>
-                <version>2.10.14-SNAPSHOT</version>
+                <version>2.10.14</version>
                 <classifier>README</classifier>
                 <type>pdf</type>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-extension-api</artifactId>
-                <version>2.10.14-SNAPSHOT</version>
+                <version>2.10.14</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-extension-api</artifactId>
-                <version>2.10.14-SNAPSHOT</version>
+                <version>2.10.14</version>
                 <classifier>javadoc</classifier>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos.extension</groupId>
                 <artifactId>smartcosmos-extension-starter-test</artifactId>
-                <version>2.10.14-SNAPSHOT</version>
+                <version>2.10.14</version>
                 <classifier>all</classifier>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos.extension</groupId>
                 <artifactId>smartcosmos-extension-starter-test</artifactId>
-                <version>2.10.14-SNAPSHOT</version>
+                <version>2.10.14</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-java-client</artifactId>
-                <version>2.10.14-SNAPSHOT</version>
+                <version>2.10.14</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
