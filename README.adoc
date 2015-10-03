@@ -165,7 +165,7 @@ library are:
 ```
 
 == Getting Started
-Once you have become a SMART COSMOS Certified and gained access to the SMART COSMOS Objects Developer Kit you need to get your server up and running.  This section helps with some basic commands to get you started.
+Once you have become SMART COSMOS Certified and gained access to the SMART COSMOS Objects Developer Kit you need to get your server up and running.  This section helps with some basic commands to get you started.
 
 === About the Kit
 In your SMART COSMOS Developer Kit are several files:
