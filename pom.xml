@@ -67,7 +67,7 @@
         <maven-sortpom-plugin.version>2.3.0</maven-sortpom-plugin.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <metrics-spring.version>3.0.4</metrics-spring.version>
+        <metrics-spring.version>3.1.2</metrics-spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <quartz.version>2.2.1</quartz.version>
