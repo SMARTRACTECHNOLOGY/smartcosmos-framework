@@ -49,7 +49,7 @@
         <dropwizard-metrics.version>3.1.2</dropwizard-metrics.version>
         <dropwizard.version>0.7.1</dropwizard.version>
         <formatter-maven-plugin.version>0.5.2</formatter-maven-plugin.version>
-        <freemarker.version>2.3.20</freemarker.version>
+        <freemarker.version>2.3.23</freemarker.version>
         <groovy.version>1.7.5</groovy.version>
         <guava.version>18.0</guava.version>
         <h2.version>1.4.187</h2.version>
