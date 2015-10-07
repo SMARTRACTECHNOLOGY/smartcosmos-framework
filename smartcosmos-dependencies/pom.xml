@@ -241,7 +241,7 @@
             <dependency>
                 <groupId>org.json</groupId>
                 <artifactId>json</artifactId>
-                <version>20090211</version>
+                <version>20150729</version>
             </dependency>
             <dependency>
                 <groupId>javax.ws.rs</groupId>
