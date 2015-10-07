@@ -42,7 +42,7 @@
 
         <apacheds-shared-ldap.version>0.9.17</apacheds-shared-ldap.version>
         <apacheds.version>1.5.5</apacheds.version>
-        <assertj-core.version>3.1.0</assertj-core.version>
+        <assertj-core.version>3.2.0</assertj-core.version>
         <aws-java-sdk.version>1.10.22</aws-java-sdk.version>
         <commons-io.version>2.4</commons-io.version>
         <commons-lang.version>2.6</commons-lang.version>
@@ -54,20 +54,20 @@
         <guava.version>18.0</guava.version>
         <h2.version>1.4.189</h2.version>
         <hamcrest.version>1.3</hamcrest.version>
-        <jackson.version>2.4.6</jackson.version>
+        <jackson.version>2.6.2</jackson.version>
         <jadira.version>4.0.0.GA</jadira.version>
         <java-uuid-generator.version>3.1.4</java-uuid-generator.version>
         <java.version>1.8</java.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.jsr.version>1.1.1</javax.jsr.version>
-        <jersey-server.version>2.13</jersey-server.version>
-        <jetty.version>9.3.3.v20150827</jetty.version>
-        <joda-time-hibernate.version>1.3</joda-time-hibernate.version>
+        <jersey-server.version>2.22</jersey-server.version>
+        <jetty.version>9.0.7.v20131107</jetty.version>
+        <joda-time-hibernate.version>1.4</joda-time-hibernate.version>
         <maven-enforcer-plugin.version>1.3.1</maven-enforcer-plugin.version>
         <maven-sortpom-plugin.version>2.3.0</maven-sortpom-plugin.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <metrics-spring.version>3.0.4</metrics-spring.version>
+        <metrics-spring.version>3.1.2</metrics-spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <quartz.version>2.2.1</quartz.version>
