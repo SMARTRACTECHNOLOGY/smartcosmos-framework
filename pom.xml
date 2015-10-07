@@ -76,7 +76,7 @@
         <release.nexusUrl>https://nexus.smartcosmos.net/nexus</release.nexusUrl>
         <!-- Override this for public releases. -->
         <release.serverId>deployment</release.serverId>
-        <restlet.version>2.3.4</restlet.version>
+        <restlet.version>2.3.5</restlet.version>
         <slf4j.version>1.7.12</slf4j.version>
         <spring-security-ldap.version>2.0.4.RELEASE</spring-security-ldap.version>
         <spring.framework.version>4.1.5.RELEASE</spring.framework.version>
