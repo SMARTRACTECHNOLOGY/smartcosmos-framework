@@ -326,7 +326,7 @@
             <dependency>
                 <groupId>com.openpojo</groupId>
                 <artifactId>openpojo</artifactId>
-                <version>0.7.3</version>
+                <version>0.8.0</version>
             </dependency>
             <dependency>
                 <groupId>org.restlet.jse</groupId>
