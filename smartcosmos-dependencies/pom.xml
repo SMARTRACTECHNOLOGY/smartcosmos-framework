@@ -38,8 +38,24 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.directory.server</groupId>
+                <artifactId>apacheds-ldif-partition</artifactId>
+                <version>${apacheds.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.directory.server</groupId>
                 <artifactId>apacheds-protocol-ldap</artifactId>
                 <version>${apacheds.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.directory.api</groupId>
+                <artifactId>api-ldap-codec-standalone</artifactId>
+                <version>${apacheds-shared-ldap.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
