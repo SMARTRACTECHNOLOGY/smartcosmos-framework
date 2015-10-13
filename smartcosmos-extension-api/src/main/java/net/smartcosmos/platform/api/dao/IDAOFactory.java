@@ -21,6 +21,7 @@ package net.smartcosmos.platform.api.dao;
  */
 
 import net.smartcosmos.model.base.EntityReferenceType;
+import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.platform.api.ext.IExtendable;
 
 public interface IDAOFactory extends IExtendable
@@ -76,4 +77,11 @@ public interface IDAOFactory extends IExtendable
     INotificationEndpointDAO getNotificationEndpointDAO();
 
     IBatchTransmissionDAO getBatchTransmissionDAO();
+    
+    /**
+     * Convenience method, that allows retrieving all of the DAO objects at once, in the event you need to iterate over them all.
+     * 
+     * @return All DAO in the factory that implement IAdvancedDAO.
+     */
+    IAdvancedDAO<? extends IDomainResource<?>> allDAO();
 }
