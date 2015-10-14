@@ -38,6 +38,11 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.directory.server</groupId>
+                <artifactId>apacheds-jdbm-partition</artifactId>
+                <version>${apacheds.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.directory.server</groupId>
                 <artifactId>apacheds-ldif-partition</artifactId>
                 <version>${apacheds.version}</version>
                 <exclusions>
@@ -383,11 +388,6 @@
                 <groupId>com.jayway.restassured</groupId>
                 <artifactId>rest-assured</artifactId>
                 <version>2.5.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.directory.shared</groupId>
-                <artifactId>shared-ldap</artifactId>
-                <version>${apacheds-shared-ldap.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.shiro</groupId>
