@@ -58,7 +58,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     }
 
     protected AbstractDAOImpl(final Class<T> classInstance, final SessionFactory sessionFactory,
-            final boolean canDelete)
+            final Boolean canDelete)
     {
         super(sessionFactory);
         this.entityClass = classInstance;
