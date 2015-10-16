@@ -28,7 +28,7 @@ import net.smartcosmos.objects.model.context.IObjectInteractionSession;
 import java.util.Collection;
 
 public interface IObjectInteractionSessionDAO
-        extends IBaseDAO<IObjectInteractionSession>, INamedObjectSearchDAO<IObjectInteractionSession>
+        extends IAdvancedDAO<IObjectInteractionSession>, INamedObjectSearchDAO<IObjectInteractionSession>
 {
     Collection<IObjectInteraction> findRelated(String urn, IAccount account);
 

@@ -44,7 +44,7 @@ import net.smartcosmos.objects.model.context.ILibraryElement;
 
 import java.util.Collection;
 
-public interface ILibraryElementDAO extends IBaseDAO<ILibraryElement>, INamedObjectSearchDAO<ILibraryElement>
+public interface ILibraryElementDAO extends IAdvancedDAO<ILibraryElement>, INamedObjectSearchDAO<ILibraryElement>
 {
     Collection<ILibraryElement> findChildren(String urn, IAccount account);
     Collection<ILibraryElement> findByNameAndType(String name, String libraryElementType, IAccount account);

@@ -40,7 +40,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
 
-public abstract class AbstractNameSearchRequestHandler<T extends IDomainResource>
+public abstract class AbstractNameSearchRequestHandler<T extends IDomainResource<T>>
         extends AbstractRequestHandler<String>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractNameSearchRequestHandler.class);

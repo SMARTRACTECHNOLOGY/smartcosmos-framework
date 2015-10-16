@@ -27,7 +27,7 @@ import net.smartcosmos.model.context.IMetadata;
 import java.util.Collection;
 import java.util.Map;
 
-public interface IMetadataDAO extends IBaseDAO<IMetadata>
+public interface IMetadataDAO extends IAdvancedDAO<IMetadata>
 {
     IMetadata findSpecific(EntityReferenceType entityReferenceType, String referenceUrn, String key, IAccount account);
 

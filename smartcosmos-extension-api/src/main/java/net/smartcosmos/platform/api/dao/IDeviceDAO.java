@@ -23,7 +23,7 @@ package net.smartcosmos.platform.api.dao;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.objects.model.context.IDevice;
 
-public interface IDeviceDAO extends IBaseDAO<IDevice>, INamedObjectSearchDAO<IDevice>
+public interface IDeviceDAO extends IAdvancedDAO<IDevice>, INamedObjectSearchDAO<IDevice>
 {
     IDevice findByIdentification(String identification, IAccount account);
 }

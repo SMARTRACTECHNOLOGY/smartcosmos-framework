@@ -26,7 +26,7 @@ import net.smartcosmos.objects.model.context.ITimelineEntry;
 
 import java.util.Collection;
 
-public interface ITimelineDAO extends IBaseDAO<ITimelineEntry>, INamedObjectSearchDAO<ITimelineEntry>
+public interface ITimelineDAO extends IAdvancedDAO<ITimelineEntry>, INamedObjectSearchDAO<ITimelineEntry>
 {
     Collection<ITimelineEntry> fetchTimeline(EntityReferenceType entityReferenceType,
                                              String referenceUrn,

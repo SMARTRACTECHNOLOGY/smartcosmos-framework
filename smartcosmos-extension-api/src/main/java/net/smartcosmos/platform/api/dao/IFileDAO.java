@@ -26,7 +26,7 @@ import net.smartcosmos.objects.model.context.IFile;
 
 import java.util.Collection;
 
-public interface IFileDAO extends IBaseDAO<IFile>
+public interface IFileDAO extends IAdvancedDAO<IFile>
 {
     Collection<IFile> listByReferenceUrn(EntityReferenceType entityReferenceType,
                                          String referenceUrn,

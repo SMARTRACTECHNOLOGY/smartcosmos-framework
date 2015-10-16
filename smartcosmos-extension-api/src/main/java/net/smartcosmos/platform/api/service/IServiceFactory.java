@@ -32,7 +32,7 @@ import org.quartz.Scheduler;
 
 import java.util.SortedSet;
 
-public interface IServiceFactory extends IService, IExtendable
+public interface IServiceFactory extends IService, IExtendable<IService>
 {
     /**
      * Case-sensitive name of the service's implementation class in the platform service's YML file.

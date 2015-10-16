@@ -28,7 +28,7 @@ import net.smartcosmos.platform.api.service.IEventService;
 
 import java.util.Collection;
 
-public interface IRelationshipDAO extends IBaseDAO<IRelationship>
+public interface IRelationshipDAO extends IAdvancedDAO<IRelationship>
 {
     void purgeAllRelationships(EntityReferenceType entityReferenceType,
                                String referenceUrn,
