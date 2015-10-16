@@ -2,7 +2,7 @@ package net.smartcosmos.platform.api.dao;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Server API
+ * SMART COSMOS Extension API
  * ===============================================================================
  * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
@@ -20,19 +20,9 @@ package net.smartcosmos.platform.api.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.model.context.IUser;
-import net.smartcosmos.objects.model.context.IObjectInteraction;
-import net.smartcosmos.objects.model.context.IObjectInteractionSession;
+import net.smartcosmos.model.base.IDomainResource;
 
-import java.util.Collection;
-
-public interface IObjectInteractionSessionDAO
-        extends IAdvancedDAO<IObjectInteractionSession>, INamedObjectSearchDAO<IObjectInteractionSession>
+public interface IAdvancedDAO<T extends IDomainResource<T>> extends IBaseDAO<T>, IPageProvider<T>, IAdvancedQuery<T>
 {
-    Collection<IObjectInteraction> findRelated(String urn, IAccount account);
 
-    Collection<IObjectInteractionSession> findSessionsByUser(IUser user);
-
-    Collection<IObjectInteractionSession> findOpenSessionsByAccount(IAccount account);
 }

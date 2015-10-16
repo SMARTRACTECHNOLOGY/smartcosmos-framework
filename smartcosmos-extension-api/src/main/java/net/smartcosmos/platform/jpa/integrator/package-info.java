@@ -1,4 +1,4 @@
 /**
- * SMART COSMOS Server JPA Integrator Handlers.
+ * Hibernate Integrator.
  */
 package net.smartcosmos.platform.jpa.integrator;

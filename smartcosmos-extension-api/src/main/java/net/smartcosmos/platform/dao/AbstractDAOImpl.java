@@ -39,15 +39,13 @@ import com.querydsl.jpa.hibernate.HibernateQuery;
 import io.dropwizard.hibernate.AbstractDAO;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.platform.api.dao.IAdvancedQuery;
-import net.smartcosmos.platform.api.dao.IBaseDAO;
-import net.smartcosmos.platform.api.dao.IPageProvider;
+import net.smartcosmos.platform.api.dao.IAdvancedDAO;
 import net.smartcosmos.platform.api.dao.domain.IPage;
 import net.smartcosmos.platform.dao.domain.PageEntry;
 import net.smartcosmos.util.UuidUtil;
 
 public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S> extends AbstractDAO<T>implements
-        IBaseDAO<S>, IPageProvider<S>, IAdvancedQuery<S>
+        IAdvancedDAO<S>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractDAOImpl.class);
 
@@ -60,7 +58,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     }
 
     protected AbstractDAOImpl(final Class<T> classInstance, final SessionFactory sessionFactory,
-            final boolean canDelete)
+            final Boolean canDelete)
     {
         super(sessionFactory);
         this.entityClass = classInstance;

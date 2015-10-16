@@ -36,6 +36,9 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -139,12 +142,14 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
     }
 
     @Override
+    @PostLoad
     public void onPostLoad()
     {
 
     }
 
     @Override
+    @PrePersist
     public void onPrePersist()
     {
         lastModifiedTimestamp = System.currentTimeMillis();
@@ -157,6 +162,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
     }
 
     @Override
+    @PreUpdate
     public void onPreUpdate()
     {
         lastModifiedTimestamp = System.currentTimeMillis();
