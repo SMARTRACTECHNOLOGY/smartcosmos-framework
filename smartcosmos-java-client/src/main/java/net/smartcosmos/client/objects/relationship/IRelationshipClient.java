@@ -31,7 +31,7 @@ import java.util.Collection;
 
 /**
  * Defines, deletes, or queries for {@link net.smartcosmos.objects.model.context.IRelationship} instances.
- * <p>
+ * <p/>
  * A relationship is a <b>binary concept</b> that either exists or doesn't. For example, a specific Driver object cannot
  * "LIKE" a specific Car object multiple times. The driver "LIKE"s the Car, or does not "LIKE" the car. As documented
  * by {@link net.smartcosmos.client.impl.IUpsertableBaseClient}, relationship creation is idempotent; no matter how
@@ -41,7 +41,7 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
 {
     /**
      * Retrieves <b>all</b> of the documented relationships between two specific entities.
-     * <p>
+     * <p/>
      * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
      *
@@ -59,7 +59,7 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
 
     /**
      * Retrieves <b>all</b> of the documented relationships between two specific entities.
-     * <p>
+     * <p/>
      * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using the specified field
      * verbosity.
      *
@@ -79,7 +79,7 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
 
     /**
      * Retrieves <b>a very specific</b> relationship between two specific entities, if it exists.
-     * <p>
+     * <p/>
      * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
      *
@@ -90,14 +90,15 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
      * @return Non-null collection of matching relationships; collection may have a size of 0 to indicate no matches
      * @throws ServiceException on error
      */
-    IRelationship findSpecificRelationship(EntityReferenceType entityReferenceType, String referenceUrn,
+    IRelationship findSpecificRelationship(EntityReferenceType entityReferenceType,
+                                           String referenceUrn,
                                            EntityReferenceType relatedEntityReferenceType,
                                            String relatedReferenceUrn,
                                            String relationshipType) throws ServiceException;
 
     /**
      * Retrieves <b>a very specific</b> relationship between two specific entities, if it exists.
-     * <p>
+     * <p/>
      * The {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using the specified field
      * verbosity.
      *
@@ -119,10 +120,10 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
 
     /**
      * Retrieves <b>all</b> child entities that the specified entity has the specified relationship type with.
-     * <p>
+     * <p/>
      * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
-     * <p>
+     * <p/>
      * One can use this query to answer the question "Tell me all of the relationships my Vehicle has, which might
      * be two: an {@link net.smartcosmos.objects.model.context.IObject} that is the "garage" where the vehicle is worked
      * on and another {@link net.smartcosmos.objects.model.context.IObject} that is the "owner" of the vehicle. Compare
@@ -134,17 +135,17 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
      * @param relationshipType    case-sensitive name of the relationship
      * @return Non-null collection of matching relationships; collection may have a size of 0 to indicate no matches
      * @throws ServiceException on error
-     */ 
+     */
     Collection<IRelationship> findRelationships(EntityReferenceType entityReferenceType,
                                                 String referenceUrn,
                                                 String relationshipType) throws ServiceException;
 
     /**
      * Retrieves <b>all</b> child entities that the specified entity has the specified relationship type with.
-     * <p>
+     * <p/>
      * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using the specified field
      * verbosity.
-     * <p>
+     * <p/>
      * One can use this query to answer the question "Tell me all of the relationships my Vehicle has, which might
      * be two: an {@link net.smartcosmos.objects.model.context.IObject} that is the "garage" where the vehicle is worked
      * on and another {@link net.smartcosmos.objects.model.context.IObject} that is the "owner" of the vehicle. Compare
@@ -164,11 +165,41 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
                                                 ViewType viewType) throws ServiceException;
 
     /**
-     * Retrieves <b>all</b> owner/parent entities that the specified entity has the specified relationship type with.
-     * <p>
+     * Retrieves <b>all</b> child entities that the specified entity has the specified relationship type with.
+     * <p/>
      * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
-     * <p>
+     *
+     * @param entityReferenceType owner/parent entity reference type
+     * @param referenceUrn        owner/parent reference URN
+     * @return Non-null collection of matching relationships; collection may have a size of 0 to indicate no matches
+     * @throws ServiceException on error
+     */
+    Collection<IRelationship> findRelationships(EntityReferenceType entityReferenceType,
+                                                String referenceUrn) throws ServiceException;
+
+    /**
+     * Retrieves <b>all</b> child entities that the specified entity has an relationship with.
+     * <p/>
+     * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using the specified field
+     * verbosity.
+     *
+     * @param entityReferenceType owner/parent entity reference type
+     * @param referenceUrn        owner/parent reference URN
+     * @param viewType            Field verbosity
+     * @return Non-null collection of matching relationships; collection may have a size of 0 to indicate no matches
+     * @throws ServiceException on error
+     */
+    Collection<IRelationship> findRelationships(EntityReferenceType entityReferenceType,
+                                                String referenceUrn,
+                                                ViewType viewType) throws ServiceException;
+
+    /**
+     * Retrieves <b>all</b> owner/parent entities that the specified entity has the specified relationship type with.
+     * <p/>
+     * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using a
+     * {@link net.smartcosmos.util.json.ViewType#Standard} view.
+     * <p/>
      * One can use this query to answer the question "Tell me all of the parent relationships to my "garage",
      * which might be four: an {@link net.smartcosmos.objects.model.context.IObject} for each "Vehicle" that has been to
      * the garage. Compare this result with the collection returned from
@@ -186,10 +217,10 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
 
     /**
      * Retrieves <b>all</b> owner/parent entities that the specified entity has the specified relationship type with.
-     * <p>
+     * <p/>
      * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using the specified field
      * verbosity.
-     * <p>
+     * <p/>
      * One can use this query to answer the question "Tell me all of the parent relationships to my "garage", which
      * might be four: an {@link net.smartcosmos.objects.model.context.IObject} for each "Vehicle" that has been to the
      * garage. Compare this result with the collection returned from
