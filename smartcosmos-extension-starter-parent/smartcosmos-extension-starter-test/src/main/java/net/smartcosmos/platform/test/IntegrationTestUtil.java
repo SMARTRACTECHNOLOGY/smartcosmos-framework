@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jayway.restassured.internal.http.URIBuilder;
 
 import net.smartcosmos.Field;
 import net.smartcosmos.client.common.account.AccountFactory;
@@ -60,6 +60,52 @@ public final class IntegrationTestUtil
     public static ServerContext createUser(final String realm, final String username, final String password,
             final String serverAddress)
     {
+        // Map<String, Object> registrationBody = new HashMap<>();
+        // registrationBody.put(EMAIL_ADDRESS_FIELD, username);
+        //
+        // try
+        // {
+        // try
+        // {
+        // given().contentType("application/json").when()
+        // .get(serverAddress + "/rest/registration/realm/" + URLEncoder.encode(realm, "UTF-8")).then()
+        // .log()
+        // .all()
+        // .statusCode(200);
+        // } catch (AssertionError e)
+        // {
+        // // realm is already registered... check if our user exists already.
+        // if (e.getMessage().contains("doesn't match actual status code <4"))
+        // {
+        //
+        // }
+        // }
+        //
+        // String emailVerificationToken = given().contentType("application/json").body(registrationBody).when()
+        // .post(serverAddress + "/rest/registration/register").then().log().all().statusCode(201).extract()
+        // .path("emailVerificationToken");
+        //
+        // String generatedPassword = given().contentType("application/json").when()
+        // .get(serverAddress + "/rest/registration/confirm/" + emailVerificationToken + "/" + username).then()
+        // .log().all()
+        // .statusCode(200).extract().path("message");
+        //
+        // Map<String, Object> changePasswordBody = new HashMap<>();
+        // changePasswordBody.put(OLD_PASSWORD_FIELD, generatedPassword);
+        // changePasswordBody.put(NEW_PASSWORD_FIELD, password);
+        //
+        // given().contentType("application/json").body(changePasswordBody).auth().preemptive()
+        // .basic(password, generatedPassword).when().post(serverAddress + "/rest/account/password/change")
+        // .then()
+        // .log().all()
+        // .statusCode(200);
+        //
+        // return new ServerContext(username, password, serverAddress);
+        // } catch (UnsupportedEncodingException e)
+        // {
+        // return null;
+        // }
+
         try
         {
             final ObjectMapper mapper = new ObjectMapper();
@@ -83,7 +129,7 @@ public final class IntegrationTestUtil
                 final Representation confirmResponse = new ClientResource(
                         serverAddress.concat("/rest/registration/confirm/")
                                 .concat(emailVerificationToken)
-                                .concat("/").concat(URIBuilder.encode(username, null))).get();
+                                .concat("/").concat(URLEncoder.encode(username, "UTF-8"))).get();
 
                 JsonNode confirmJson = mapper.readValue(confirmResponse.getText(), JsonNode.class);
 

@@ -32,13 +32,6 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.integrator.spi.Integrator;
-import org.hibernate.integrator.spi.IntegratorService;
-import org.hibernate.service.ServiceRegistry;
-import org.hsqldb.jdbcDriver;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -50,7 +43,6 @@ import io.dropwizard.hibernate.UnitOfWork;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.platform.api.dao.domain.IPage;
 import net.smartcosmos.platform.dao.AbstractDAOImpl;
-import net.smartcosmos.platform.jpa.integrator.PlatformHibernateIntegrator;
 
 /**
  * This is a basic DAO test class that is included to assist in making sure your DAO implementations correspond to the
@@ -62,8 +54,13 @@ import net.smartcosmos.platform.jpa.integrator.PlatformHibernateIntegrator;
 public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extends S, U extends AbstractDAOImpl<S, T>>
 {
 
+    /**
+     * This is what enables Hibernate by creating a SessionFactory you can use throughout the test classes. In order for
+     * this to work you need to build the sessionFactoryRule, which can be done in the function show here, or directly
+     * with a static function.
+     */
     @Rule
-    public SessionFactoryRule sessionFactoryRule = new SessionFactoryRule(buildSessionFactory());
+    public SessionFactoryRule sessionFactoryRule = buildSessionFactory();
 
     /**
      * The DAO under test.
@@ -146,71 +143,26 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
     /**
      * Bootstrapping process for creating the session factory, making sure the Hibernate Integrator is present.
      * 
-     * @see PlatformHibernateIntegrator
+     * @see net.smartcosmos.platform.jpa.integrator.PlatformHibernateIntegrator
      * @see org.hibernate.context.internal.ManagedSessionContext
      * 
      * @return created in-memory session factory.
      */
-    protected SessionFactory buildSessionFactory()
+    protected SessionFactoryRule buildSessionFactory()
     {
+
+        List<Class<?>> entities = new ArrayList<>();
+
+        assertNotNull(getEntityClass());
+        if (getEntities() != null)
+        {
+            entities.addAll(getEntities());
+        }
+        entities.add(getEntityClass());
+
         try
         {
-            Configuration configuration = new Configuration()
-                    .setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect")
-                    .setProperty("hibernate.show_sql", "true")
-                    // This makes sure we keep the org.hsqldb.jdbcDriver on the classpath.
-                    .setProperty("hibernate.connection.driver_class", jdbcDriver.class.getName())
-                    .setProperty("hibernate.connection.url", "jdbc:hsqldb:mem:testdb")
-                    .setProperty("hibernate.hbm2ddl.auto", "create")
-                    // This is very important, we utilized
-                    .setProperty("hibernate.current_session_context_class", "managed");
-            StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
-
-            if (getEntities() != null)
-            {
-                for (Class<?> clazz : getEntities())
-                {
-                    configuration.addAnnotatedClass(clazz);
-                }
-            }
-
-            assertNotNull(getEntityClass());
-
-            configuration.addAnnotatedClass(getEntityClass());
-
-            // Make sure this is applied, this is how we make sure everything new entry has a unique ID and URN
-            // associated.
-            final Integrator integrator = new PlatformHibernateIntegrator();
-            serviceRegistryBuilder.applySettings(configuration.getProperties());
-            serviceRegistryBuilder.addService(IntegratorService.class, new IntegratorService()
-            {
-
-                /**
-                 * 
-                 */
-                private static final long serialVersionUID = 1L;
-
-                @Override
-                public Iterable<Integrator> getIntegrators()
-                {
-                    LOG.debug("Adding in integrators.");
-                    List<Integrator> integrators = new ArrayList<>();
-                    integrators.add(integrator);
-                    return integrators;
-                }
-            });
-            ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
-
-            Iterable<Integrator> applied = serviceRegistry.getService(IntegratorService.class).getIntegrators();
-            // Like I said, very important this is there.
-            assertNotNull(applied);
-
-            // Like super important.
-            assertEquals(integrator, applied.iterator().next());
-
-            final SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-            return sessionFactory;
+            return SessionFactoryRule.build(entities);
         } catch (Exception ex)
         {
             LOG.error("Initial SessionFactory creation failed." + ex);
@@ -239,6 +191,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * Test method for {@link net.smartcosmos.platform.dao.AbstractDAOImpl#getEntityClass()}.
      */
     @Test
+    @UnitOfWork
     public void testGetEntityClass()
     {
         assertNotNull(dao.getEntityClass());

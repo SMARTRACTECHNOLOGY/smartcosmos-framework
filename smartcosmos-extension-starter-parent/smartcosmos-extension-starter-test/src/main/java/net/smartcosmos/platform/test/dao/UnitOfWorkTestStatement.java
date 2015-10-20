@@ -28,9 +28,9 @@ public class UnitOfWorkTestStatement extends Statement
     private final Statement statement;
     private final SessionFactory sessionFactory;
 
-    public UnitOfWorkTestStatement(UnitOfWork unitOfWork,
-            Statement statement,
-            SessionFactory sessionFactory)
+    public UnitOfWorkTestStatement(final UnitOfWork unitOfWork,
+            final Statement statement,
+            final SessionFactory sessionFactory)
     {
         this.unitOfWork = unitOfWork;
         this.statement = statement;
@@ -52,7 +52,7 @@ public class UnitOfWorkTestStatement extends Statement
         return sessionFactory;
     }
 
-    private void beginTransaction(Session session)
+    private void beginTransaction(final Session session)
     {
         if (unitOfWork.transactional())
         {
@@ -60,14 +60,14 @@ public class UnitOfWorkTestStatement extends Statement
         }
     }
 
-    private void configureSession(Session session)
+    private void configureSession(final Session session)
     {
         session.setDefaultReadOnly(unitOfWork.readOnly());
         session.setCacheMode(unitOfWork.cacheMode());
         session.setFlushMode(unitOfWork.flushMode());
     }
 
-    private void rollbackTransaction(Session session)
+    private void rollbackTransaction(final Session session)
     {
         if (unitOfWork.transactional())
         {
@@ -79,7 +79,7 @@ public class UnitOfWorkTestStatement extends Statement
         }
     }
 
-    private void commitTransaction(Session session)
+    private void commitTransaction(final Session session)
     {
         if (unitOfWork.transactional())
         {
@@ -92,7 +92,7 @@ public class UnitOfWorkTestStatement extends Statement
     }
 
     @SuppressWarnings("unchecked")
-    private <E extends Exception> void rethrow(Exception e) throws E
+    private <E extends Exception> void rethrow(final Exception e) throws E
     {
         throw (E) e;
     }
