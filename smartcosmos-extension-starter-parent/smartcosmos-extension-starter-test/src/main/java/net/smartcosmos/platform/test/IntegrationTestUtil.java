@@ -1,17 +1,31 @@
 package net.smartcosmos.platform.test;
 
-import static com.jayway.restassured.RestAssured.given;
-import static net.smartcosmos.Field.EMAIL_ADDRESS_FIELD;
-import static net.smartcosmos.Field.NEW_PASSWORD_FIELD;
-import static net.smartcosmos.Field.OLD_PASSWORD_FIELD;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.net.URLEncoder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.restlet.ext.json.JsonRepresentation;
+import org.restlet.representation.Representation;
+import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import net.smartcosmos.Field;
+import net.smartcosmos.client.common.account.AccountFactory;
+import net.smartcosmos.client.common.account.IAccountClient;
+import net.smartcosmos.client.common.registration.IRegistrationClient;
+import net.smartcosmos.client.common.registration.RegistrationFactory;
 import net.smartcosmos.client.connectivity.ServerContext;
+import net.smartcosmos.client.connectivity.ServiceException;
+import net.smartcosmos.model.context.IAccount;
 
 public final class IntegrationTestUtil
 {
@@ -46,87 +60,109 @@ public final class IntegrationTestUtil
     public static ServerContext createUser(final String realm, final String username, final String password,
             final String serverAddress)
     {
-
-        Map<String, Object> registrationBody = new HashMap<>();
-        registrationBody.put(EMAIL_ADDRESS_FIELD, username);
-
-        String emailVerificationToken = given().contentType("application/json").body(registrationBody).when()
-                .post(serverAddress + "/rest/registration/register").then().log().all().statusCode(201).extract()
-                .path("emailVerificationToken");
-
-        String generatedPassword = given().contentType("application/json").when()
-                .get(serverAddress + "/rest/registration/confirm/" + emailVerificationToken + "/" + username).then()
-                .log().all()
-                .statusCode(200).extract().path("message");
-
-        Map<String, Object> changePasswordBody = new HashMap<>();
-        changePasswordBody.put(OLD_PASSWORD_FIELD, generatedPassword);
-        changePasswordBody.put(NEW_PASSWORD_FIELD, password);
-
-        given().contentType("application/json").body(changePasswordBody).auth().preemptive()
-                .basic(password, generatedPassword).when().post(serverAddress + "/rest/account/password/change").then()
-                .log().all()
-                .statusCode(200);
-
-        return new ServerContext(username, password, serverAddress);
-
+        // Map<String, Object> registrationBody = new HashMap<>();
+        // registrationBody.put(EMAIL_ADDRESS_FIELD, username);
+        //
         // try
         // {
-        // final ObjectMapper mapper = new ObjectMapper();
-        // IRegistrationClient registrationClient = RegistrationFactory.createClient(serverAddress);
-        // final boolean realmAvailable = registrationClient.isRealmAvailable(realm);
-        // LOG.info("Realm is avaialble? {}", realmAvailable);
-        // if (realmAvailable)
+        // try
         // {
-        //
-        // JSONObject jsonObject = new JSONObject()
-        // .put(Field.EMAIL_ADDRESS_FIELD, username);
-        //
-        // ClientResource service = new ClientResource(serverAddress.concat("/rest/registration/register"));
-        //
-        // Representation response = service.post(new JsonRepresentation(jsonObject));
-        //
-        // JsonNode responseJson = mapper.readValue(response.getText(), JsonNode.class);
-        //
-        // final String emailVerificationToken = responseJson.get("emailVerificationToken").asText();
-        //
-        // final Representation confirmResponse = new ClientResource(
-        // serverAddress.concat("/rest/registration/confirm/")
-        // .concat(emailVerificationToken)
-        // .concat("/").concat(URIBuilder.encode(username, null))).get();
-        //
-        // JsonNode confirmJson = mapper.readValue(confirmResponse.getText(), JsonNode.class);
-        //
-        // final String tempPassword = confirmJson.get("message").asText();
-        //
-        // LOG.info("Password is {}", tempPassword);
-        //
-        // final IAccountClient accountClient = AccountFactory
-        // .createClient(new ServerContext(username, tempPassword, serverAddress));
-        //
-        // if (accountClient.changePassword(tempPassword, password))
+        // given().contentType("application/json").when()
+        // .get(serverAddress + "/rest/registration/realm/" + URLEncoder.encode(realm, "UTF-8")).then()
+        // .log()
+        // .all()
+        // .statusCode(200);
+        // } catch (AssertionError e)
         // {
-        // LOG.info("Changed password, now it's {}", password);
-        // }
-        // } else
+        // // realm is already registered... check if our user exists already.
+        // if (e.getMessage().contains("doesn't match actual status code <4"))
         // {
-        // LOG.info("Account might already exist.");
-        // final IAccountClient accountClient = AccountFactory
-        // .createClient(new ServerContext(username, password, serverAddress));
-        //
-        // final IAccount account = accountClient.fetch();
-        //
-        // assertNotNull(account);
-        // assertEquals(realm, account.getName());
         //
         // }
+        // }
+        //
+        // String emailVerificationToken = given().contentType("application/json").body(registrationBody).when()
+        // .post(serverAddress + "/rest/registration/register").then().log().all().statusCode(201).extract()
+        // .path("emailVerificationToken");
+        //
+        // String generatedPassword = given().contentType("application/json").when()
+        // .get(serverAddress + "/rest/registration/confirm/" + emailVerificationToken + "/" + username).then()
+        // .log().all()
+        // .statusCode(200).extract().path("message");
+        //
+        // Map<String, Object> changePasswordBody = new HashMap<>();
+        // changePasswordBody.put(OLD_PASSWORD_FIELD, generatedPassword);
+        // changePasswordBody.put(NEW_PASSWORD_FIELD, password);
+        //
+        // given().contentType("application/json").body(changePasswordBody).auth().preemptive()
+        // .basic(password, generatedPassword).when().post(serverAddress + "/rest/account/password/change")
+        // .then()
+        // .log().all()
+        // .statusCode(200);
         //
         // return new ServerContext(username, password, serverAddress);
-        // } catch (ResourceException | ServiceException | JSONException | IOException e)
+        // } catch (UnsupportedEncodingException e)
         // {
-        // LOG.error("Failed to create user: {}", e.getMessage());
-        // LOG.debug(e.getMessage(), e);
-        // throw new RuntimeException(e.getMessage(), e);
+        // return null;
         // }
+
+        try
+        {
+            final ObjectMapper mapper = new ObjectMapper();
+            IRegistrationClient registrationClient = RegistrationFactory.createClient(serverAddress);
+            final boolean realmAvailable = registrationClient.isRealmAvailable(realm);
+            LOG.info("Realm is avaialble? {}", realmAvailable);
+            if (realmAvailable)
+            {
+
+                JSONObject jsonObject = new JSONObject()
+                        .put(Field.EMAIL_ADDRESS_FIELD, username);
+
+                ClientResource service = new ClientResource(serverAddress.concat("/rest/registration/register"));
+
+                Representation response = service.post(new JsonRepresentation(jsonObject));
+
+                JsonNode responseJson = mapper.readValue(response.getText(), JsonNode.class);
+
+                final String emailVerificationToken = responseJson.get("emailVerificationToken").asText();
+
+                final Representation confirmResponse = new ClientResource(
+                        serverAddress.concat("/rest/registration/confirm/")
+                                .concat(emailVerificationToken)
+                                .concat("/").concat(URLEncoder.encode(username, "UTF-8"))).get();
+
+                JsonNode confirmJson = mapper.readValue(confirmResponse.getText(), JsonNode.class);
+
+                final String tempPassword = confirmJson.get("message").asText();
+
+                LOG.info("Password is {}", tempPassword);
+
+                final IAccountClient accountClient = AccountFactory
+                        .createClient(new ServerContext(username, tempPassword, serverAddress));
+
+                if (accountClient.changePassword(tempPassword, password))
+                {
+                    LOG.info("Changed password, now it's {}", password);
+                }
+            } else
+            {
+                LOG.info("Account might already exist.");
+                final IAccountClient accountClient = AccountFactory
+                        .createClient(new ServerContext(username, password, serverAddress));
+
+                final IAccount account = accountClient.fetch();
+
+                assertNotNull(account);
+                assertEquals(realm, account.getName());
+
+            }
+
+            return new ServerContext(username, password, serverAddress);
+        } catch (ResourceException | ServiceException | JSONException | IOException e)
+        {
+            LOG.error("Failed to create user: {}", e.getMessage());
+            LOG.debug(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 }
