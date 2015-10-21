@@ -21,13 +21,14 @@ package net.smartcosmos.platform.api.dao;
  */
 
 import net.smartcosmos.model.base.EntityReferenceType;
+import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.platform.api.ext.IExtendable;
 
-public interface IDAOFactory extends IExtendable
+public interface IDAOFactory extends IExtendable<IAdvancedDAO<? extends IDomainResource<?>>>
 {
-    IMonikerSearchDAO getMonikerSearchDAO(EntityReferenceType entityReferenceType);
+    IMonikerSearchDAO<? extends IDomainResource<?>> getMonikerSearchDAO(EntityReferenceType entityReferenceType);
 
-    INamedObjectSearchDAO getNamedObjectSearchDAO(EntityReferenceType entityReferenceType);
+    INamedObjectSearchDAO<? extends IDomainResource<?>> getNamedObjectSearchDAO(EntityReferenceType entityReferenceType);
 
     IDeviceDAO getDeviceDAO();
 

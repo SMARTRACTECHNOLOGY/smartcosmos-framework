@@ -25,7 +25,7 @@ import net.smartcosmos.model.context.IAccount;
 
 import java.util.Collection;
 
-public interface INamedObjectSearchDAO<T extends IDomainResource>
+public interface INamedObjectSearchDAO<T extends IDomainResource<T>>
 {
     Collection<T> findByNameLike(Class<?> clazz, String nameLike, IAccount account);
     Collection<T> findByNameExact(Class<?> clazz, String nameLike, IAccount account);

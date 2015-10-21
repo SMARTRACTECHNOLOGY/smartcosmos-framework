@@ -22,6 +22,6 @@ package net.smartcosmos.platform.api.dao;
 
 import net.smartcosmos.model.context.IAccount;
 
-public interface IAccountDAO extends IBaseDAO<IAccount>, INamedObjectSearchDAO<IAccount>
+public interface IAccountDAO extends IAdvancedDAO<IAccount>, INamedObjectSearchDAO<IAccount>
 {
 }

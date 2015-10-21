@@ -26,7 +26,7 @@ import net.smartcosmos.model.geo.IGeospatialEntry;
 
 import java.util.Collection;
 
-public interface IGeospatialDAO extends IBaseDAO<IGeospatialEntry>, INamedObjectSearchDAO<IGeospatialEntry>
+public interface IGeospatialDAO extends IAdvancedDAO<IGeospatialEntry>, INamedObjectSearchDAO<IGeospatialEntry>
 {
     Collection<IGeospatialEntry> findAllByType(GeometricType geometricType, IAccount account);
 }

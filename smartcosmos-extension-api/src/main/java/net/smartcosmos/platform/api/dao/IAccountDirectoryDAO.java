@@ -23,7 +23,7 @@ package net.smartcosmos.platform.api.dao;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.platform.api.directory.IAccountDirectory;
 
-public interface IAccountDirectoryDAO extends IBaseDAO<IAccountDirectory>
+public interface IAccountDirectoryDAO extends IAdvancedDAO<IAccountDirectory>
 {
     IAccountDirectory findByAccount(IAccount account);
 }

@@ -25,7 +25,7 @@ import net.smartcosmos.model.context.IUser;
 
 import java.util.Collection;
 
-public interface IUserDAO extends IBaseDAO<IUser>
+public interface IUserDAO extends IAdvancedDAO<IUser>
 {
     IUser lookupByUrn(String urn);
 
