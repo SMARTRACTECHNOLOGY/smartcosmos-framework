@@ -26,7 +26,7 @@ import net.smartcosmos.objects.model.context.IObjectInteraction;
 import java.util.Collection;
 import java.util.Map;
 
-public interface IObjectInteractionDAO extends IBaseDAO<IObjectInteraction>
+public interface IObjectInteractionDAO extends IAdvancedDAO<IObjectInteraction>
 {
     Collection<IObjectInteraction> findCustom(String parameterizedWhereClause,
                                               Map<String, Object> substitutions,

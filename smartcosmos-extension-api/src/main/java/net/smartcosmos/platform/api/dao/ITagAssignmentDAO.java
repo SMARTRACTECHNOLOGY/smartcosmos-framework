@@ -27,7 +27,7 @@ import net.smartcosmos.objects.model.context.ITagAssignment;
 
 import java.util.Collection;
 
-public interface ITagAssignmentDAO extends IBaseDAO<ITagAssignment>
+public interface ITagAssignmentDAO extends IAdvancedDAO<ITagAssignment>
 {
     Collection<ITagAssignment> findByTag(String name,
                                          IAccount account);

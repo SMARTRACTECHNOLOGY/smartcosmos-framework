@@ -25,7 +25,7 @@ import net.smartcosmos.model.extension.IExternalExtension;
 
 import java.util.Collection;
 
-public interface IExtensionDAO extends IBaseDAO<IExternalExtension>, INamedObjectSearchDAO<IExternalExtension>
+public interface IExtensionDAO extends IAdvancedDAO<IExternalExtension>, INamedObjectSearchDAO<IExternalExtension>
 {
     IExternalExtension findPublished(String urn);
 

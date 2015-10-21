@@ -1,5 +1,7 @@
 package net.smartcosmos.platform.jpa.integrator;
 
+import javax.persistence.PreUpdate;
+
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -22,5 +24,6 @@ package net.smartcosmos.platform.jpa.integrator;
 
 public interface IPreUpdateHandler
 {
+    @PreUpdate
     void onPreUpdate();
 }

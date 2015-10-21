@@ -23,7 +23,7 @@ package net.smartcosmos.platform.api.dao;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.platform.api.authentication.IRegistration;
 
-public interface IRegistrationDAO extends IBaseDAO<IRegistration>
+public interface IRegistrationDAO extends IAdvancedDAO<IRegistration>
 {
     IRegistration findByEmailAddress(String emailAddress);
 
