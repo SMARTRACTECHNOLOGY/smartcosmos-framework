@@ -25,9 +25,12 @@ import com.google.common.base.Preconditions;
 import net.smartcosmos.model.base.ITypedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.Size;
+
 public abstract class TypedNamedObject<T> extends NamedObject<T> implements ITypedObject
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = 255)
     protected String type;
 
     @Override
