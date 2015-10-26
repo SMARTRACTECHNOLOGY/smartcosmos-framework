@@ -21,6 +21,8 @@ package net.smartcosmos.platform.resource;
  */
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import io.dropwizard.views.View;
@@ -33,9 +35,11 @@ import net.smartcosmos.platform.api.IRequestHandler;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.visitor.IVisitable;
 import net.smartcosmos.platform.api.visitor.IVisitor;
+import net.smartcosmos.platform.jpa.base.DomainResourceEntity;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.ViewType;
+import org.apache.commons.lang.StringUtils;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.json.JSONException;
@@ -43,13 +47,21 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.EntityTag;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.ValidationException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
@@ -67,8 +79,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 
     protected final IContext context;
 
-    protected static final List<EntityReferenceType> BINDABLE_ENTITIES = Arrays.asList(
-            EntityReferenceType.Object,
+    protected static final List<EntityReferenceType> BINDABLE_ENTITIES = Arrays.asList(EntityReferenceType.Object,
             EntityReferenceType.ObjectAddress,
             EntityReferenceType.ObjectInteraction,
             EntityReferenceType.ObjectInteractionSession,
@@ -92,6 +103,22 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 
     protected static final Response NO_CONTENT = Response
             .noContent()
+            .build();
+
+    /**
+     * TODO: Decide whether stay with 400 BAD REQUEST or switch to the actually correct 422 UNPROCESSABLE ENTITY
+     * author: asiegel
+     * date: 26 Okt 2015
+     */
+
+    protected static final Response FIELD_CONSTRAINT_VIOLATION = Response
+            .status(org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY)
+            .type(MediaType.APPLICATION_JSON_TYPE)
+            .build();
+
+    protected static final Response VALIDATION_FAILURE = Response.status(Response.Status.BAD_REQUEST)
+            .type(MediaType.APPLICATION_JSON_TYPE)
+            .entity(ResponseEntity.toJson(Result.ERR_VALIDATION))
             .build();
 
     /**
@@ -147,6 +174,45 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     public View render(T inputValue, IAuthenticatedUser authenticatedUser) throws JsonProcessingException, JSONException
     {
         throw new WebApplicationException(Response.status(Response.Status.GONE).build());
+    }
+
+    /**
+     * Validates an input and maps it to the corresponding domain resource entity.
+     *
+     * @param inputValue the input
+     * @param clazz the class used for mapping and validation
+     * @return returns the validated domain resource
+     * @throws JsonProcessingException
+     */
+    public DomainResourceEntity validate(String inputValue, Class clazz) throws ValidationException
+    {
+        DomainResourceEntity entity;
+        try
+        {
+            entity = mapInputToEntity(inputValue, clazz);
+            validate(entity);
+        } catch (IOException | ClassCastException e)
+        {
+            LOG.warn(e.getMessage());
+            throw new ValidationException(e.getMessage(), String.valueOf(Result.ERR_VALIDATION.getCode()), e);
+        } catch (ConstraintViolationException e1)
+        {
+            throw new ValidationException(e1.getMessage(), String.valueOf(Result.ERR_FIELD_CONSTRAINT_VIOLATION.getCode()), e1);
+        }
+        return entity;
+    }
+
+    public Response getValidationExceptionResponse(ValidationException e)
+    {
+        if (e.getErrorCode().equals(String.valueOf(Result.ERR_FIELD_CONSTRAINT_VIOLATION.getCode())))
+        {
+            return Response.fromResponse(FIELD_CONSTRAINT_VIOLATION)
+                    .entity(ResponseEntity.toJson(Result.ERR_FIELD_CONSTRAINT_VIOLATION, e.getMessage()))
+                    .build();
+        } else
+        {
+            return VALIDATION_FAILURE;
+        }
     }
 
     @VisibleForTesting
@@ -222,5 +288,46 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         CacheControl cc = new CacheControl();
         cc.setMaxAge((int) TimeUnit.SECONDS.convert(1, TimeUnit.DAYS));
         return cc;
+    }
+
+    private ObjectMapper createObjectMapper()
+    {
+        ObjectMapper om = new ObjectMapper();
+        om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+
+        return om;
+    }
+
+    private DomainResourceEntity mapInputToEntity(String inputValue, Class clazz) throws ClassCastException, IOException
+    {
+        ObjectMapper mapper = createObjectMapper();
+        Object e = mapper.readValue(inputValue, clazz);
+        if (e instanceof DomainResourceEntity)
+        {
+            return (DomainResourceEntity) e;
+        }
+        throw new ClassCastException("Cannot cast " + clazz.getSimpleName() + " to DomainResourceEntity");
+    }
+
+    private void validate(DomainResourceEntity e) throws ConstraintViolationException
+    {
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<DomainResourceEntity>> violations = validator.validate(e);
+
+        if (violations.size() > 0)
+        {
+            List<String> invalidFields = new ArrayList<>();
+            String field;
+
+            for (ConstraintViolation<DomainResourceEntity> violation : violations)
+            {
+                field = violation.getPropertyPath().toString();
+                invalidFields.add(field);
+                LOG.warn(field + " - " + violation.getMessage() + "\nInvalid value: " + violation.getInvalidValue());
+            }
+
+            String invalidFieldString = StringUtils.join(invalidFields, ", ");
+            throw new ConstraintViolationException(invalidFieldString, violations);
+        }
     }
 }
