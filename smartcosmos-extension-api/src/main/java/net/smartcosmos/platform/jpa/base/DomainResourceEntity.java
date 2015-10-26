@@ -1,6 +1,26 @@
 package net.smartcosmos.platform.jpa.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import net.smartcosmos.Field;
+import net.smartcosmos.model.base.IDomainResource;
+import net.smartcosmos.platform.jpa.integrator.IPostLoadHandler;
+import net.smartcosmos.platform.jpa.integrator.IPrePersistHandler;
+import net.smartcosmos.platform.jpa.integrator.IPreUpdateHandler;
+import net.smartcosmos.util.UuidUtil;
+import net.smartcosmos.util.json.JsonGenerationView;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.UUID;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -21,27 +41,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-
-import com.fasterxml.jackson.annotation.JsonView;
-import net.smartcosmos.Field;
-import net.smartcosmos.model.base.IDomainResource;
-import net.smartcosmos.platform.jpa.integrator.IPostLoadHandler;
-import net.smartcosmos.platform.jpa.integrator.IPrePersistHandler;
-import net.smartcosmos.platform.jpa.integrator.IPreUpdateHandler;
-import net.smartcosmos.util.UuidUtil;
-import net.smartcosmos.util.json.JsonGenerationView;
-import org.hibernate.annotations.Type;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PostLoad;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-
-import java.io.Serializable;
-import java.util.UUID;
 
 @MappedSuperclass
 public abstract class DomainResourceEntity<T extends IDomainResource<T>>
@@ -64,6 +63,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
 
     @JsonView(JsonGenerationView.Full.class)
     @Column(length = 2048, nullable = true, updatable = true)
+    @Size(max = 2048)
     private String moniker;
 
     @Override
