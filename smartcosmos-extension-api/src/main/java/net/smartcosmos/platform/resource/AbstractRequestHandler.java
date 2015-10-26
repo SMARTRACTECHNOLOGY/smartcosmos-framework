@@ -106,7 +106,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             .build();
 
     /**
-     * TODO: Decide whether stay with 400 BAD REQUEST or switch to the actually correct 422 UNPROCESSABLE ENTITY
+     * TODO: Decide whether stay with 400 BAD REQUEST or switch to the actually correct 422 UNPROCESSABLE ENTITY.
      * author: asiegel
      * date: 26 Okt 2015
      */
