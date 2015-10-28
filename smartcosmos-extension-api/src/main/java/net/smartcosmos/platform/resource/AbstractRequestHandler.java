@@ -303,8 +303,6 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     private DomainResourceEntity mapInputToEntity(String inputValue, Class clazz) throws ClassCastException, IOException
     {
         ObjectMapper mapper = createObjectMapper();
-//        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
-//        mapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
         Object e = mapper.readValue(inputValue, clazz);
         if (e instanceof DomainResourceEntity)
         {
