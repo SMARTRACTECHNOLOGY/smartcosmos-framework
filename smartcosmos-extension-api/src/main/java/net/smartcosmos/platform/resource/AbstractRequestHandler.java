@@ -112,7 +112,9 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      */
 
     protected static final Response FIELD_CONSTRAINT_VIOLATION = Response
-            .status(org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY)
+            /* would be the actually correct response code but we don't use it at the moment to avoid breakting the API */
+//            .status(org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY)
+            .status(Response.Status.BAD_REQUEST)
             .type(MediaType.APPLICATION_JSON_TYPE)
             .build();
 
