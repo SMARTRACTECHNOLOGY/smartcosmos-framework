@@ -56,7 +56,6 @@ import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.EntityTag;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.ValidationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -186,35 +185,32 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      * @return returns the validated domain resource
      * @throws JsonProcessingException
      */
-    public DomainResourceEntity validate(String inputValue, Class targetClass) throws ValidationException
+    public DomainResourceEntity validate(String inputValue, Class targetClass) throws WebApplicationException
     {
-        DomainResourceEntity entity;
+        DomainResourceEntity entity = null;
+        Response response = null;
         try
         {
             entity = mapInputToEntity(inputValue, targetClass);
             validate(entity);
         } catch (IOException | ClassCastException e)
         {
-            LOG.warn(e.getMessage());
-            throw new ValidationException(e.getMessage(), String.valueOf(Result.ERR_VALIDATION.getCode()), e);
+                LOG.warn(e.getMessage());
+                response = VALIDATION_FAILURE;
         } catch (ConstraintViolationException e1)
         {
-            throw new ValidationException(e1.getMessage(), String.valueOf(Result.ERR_FIELD_CONSTRAINT_VIOLATION.getCode()), e1);
-        }
-        return entity;
-    }
-
-    public Response getValidationExceptionResponse(ValidationException e)
-    {
-        if (e.getErrorCode().equals(String.valueOf(Result.ERR_FIELD_CONSTRAINT_VIOLATION.getCode())))
-        {
-            return Response.fromResponse(FIELD_CONSTRAINT_VIOLATION)
-                    .entity(ResponseEntity.toJson(Result.ERR_FIELD_CONSTRAINT_VIOLATION, e.getMessage()))
+            response = Response.fromResponse(FIELD_CONSTRAINT_VIOLATION)
+                    .entity(ResponseEntity.toJson(Result.ERR_FIELD_CONSTRAINT_VIOLATION, e1.getMessage()))
                     .build();
-        } else
-        {
-            return VALIDATION_FAILURE;
         }
+
+        if (response != null)
+        {
+            LOG.debug("Throw new WebApplicationException.\nResponse: " + response.toString());
+            throw new WebApplicationException(response);
+        }
+
+        return entity;
     }
 
     @VisibleForTesting
