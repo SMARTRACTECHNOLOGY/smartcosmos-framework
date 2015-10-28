@@ -66,7 +66,7 @@ public final class UuidUtil
         {
             return null;
         }
-        return UUID.fromString(urn.replaceAll("urn:uuid:", ""));
+        return UUID.fromString(urn.replaceFirst("urn:uuid:", ""));
     }
 
     /**
