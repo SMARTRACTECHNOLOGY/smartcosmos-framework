@@ -182,16 +182,16 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      * Validates an input and maps it to the corresponding domain resource entity.
      *
      * @param inputValue the input
-     * @param clazz the class used for mapping and validation
+     * @param targetClass the class used for mapping and validation
      * @return returns the validated domain resource
      * @throws JsonProcessingException
      */
-    public DomainResourceEntity validate(String inputValue, Class clazz) throws ValidationException
+    public DomainResourceEntity validate(String inputValue, Class targetClass) throws ValidationException
     {
         DomainResourceEntity entity;
         try
         {
-            entity = mapInputToEntity(inputValue, clazz);
+            entity = mapInputToEntity(inputValue, targetClass);
             validate(entity);
         } catch (IOException | ClassCastException e)
         {
