@@ -206,7 +206,6 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 
         if (response != null)
         {
-            LOG.debug("Throw new WebApplicationException.\nResponse: " + response.toString());
             throw new WebApplicationException(response);
         }
 
