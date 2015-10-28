@@ -60,7 +60,9 @@ public enum Result
     ERR_LIBRARY_WRONG_PARENT_TYPE(-72, "Library element type %s cannot be the parent to a library element of type %s"),
     ERR_LIBRARY_DUPLICATE_NAME_FOR_PARENT(-73, "Parent element %s already has a child named %s"),
     ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_CHILDREN(-74, "Library element %s has children and cannot be deleted"),
-    ERR_LIBRARY_CANNOT_LINK_TO_LIBRARY_ELEMENT_TYPE(-75, "Library element type %s cannot accept links");
+    ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_RELATIONSHIPS(-74, "Library element %s has relationships and cannot be deleted"),
+    ERR_LIBRARY_CANNOT_LINK_TO_LIBRARY_ELEMENT_TYPE(-75, "Library element type %s cannot accept links"),
+    ERR_WRONG_RELATIONSHIP_TYPE_FOR_LIBRARYELEMENT(-76, "Requested relationship type is %s but must be of type LibraryLink");
 
     private final String formattedMessage;
 
