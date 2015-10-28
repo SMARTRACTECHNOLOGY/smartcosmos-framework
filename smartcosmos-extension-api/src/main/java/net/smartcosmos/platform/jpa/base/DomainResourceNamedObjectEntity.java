@@ -1,8 +1,14 @@
 package net.smartcosmos.platform.jpa.base;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import net.smartcosmos.model.base.INamedObject;
+import net.smartcosmos.util.json.JsonGenerationView;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -24,11 +30,6 @@ import javax.persistence.MappedSuperclass;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import net.smartcosmos.model.base.INamedObject;
-import net.smartcosmos.util.json.JsonGenerationView;
-
 @MappedSuperclass
 public abstract class DomainResourceNamedObjectEntity<T extends INamedObject<T>>
         extends DomainResourceEntity<T>implements INamedObject<T>
@@ -40,10 +41,13 @@ public abstract class DomainResourceNamedObjectEntity<T extends INamedObject<T>>
 
     @JsonView(JsonGenerationView.Published.class)
     @Column(length = 255, nullable = false)
+    @Size(max = 255)
+    @NotNull
     private String name;
 
     @JsonView(JsonGenerationView.Standard.class)
     @Column(length = 1024)
+    @Size(max = 1024)
     private String description;
 
     @JsonView(JsonGenerationView.Standard.class)
