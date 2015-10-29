@@ -481,6 +481,11 @@
                 <artifactId>usertype.core</artifactId>
                 <version>${jadira.version}</version>
             </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${javax.validation.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
