@@ -1,7 +1,5 @@
 package net.smartcosmos.platform.jpa.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -11,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.Field;
 import net.smartcosmos.model.base.IDomainResource;
@@ -39,7 +38,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -64,6 +63,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
 
     @JsonView(JsonGenerationView.Full.class)
     @Column(length = 2048, nullable = true, updatable = true)
+    @Size(max = 2048)
     private String moniker;
 
     @Override

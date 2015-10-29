@@ -29,6 +29,8 @@ import net.smartcosmos.objects.model.context.IObjectAddress;
 import net.smartcosmos.pojo.base.AccountDomainResource;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.Size;
+
 public class ObjectAddress extends AccountDomainResource<IObjectAddress> implements IObjectAddress, ITypedObject
 {
     @JsonView(JsonGenerationView.Standard.class)
@@ -39,21 +41,27 @@ public class ObjectAddress extends AccountDomainResource<IObjectAddress> impleme
     protected String type;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = 1024)
     private String line1;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = 1024)
     private String line2;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = 1024)
     private String city;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = 50)
     private String stateProvince;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = 20)
     private String postalCode;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = 2)
     private String countryAbbreviation;
 
     @JsonView(JsonGenerationView.Standard.class)
