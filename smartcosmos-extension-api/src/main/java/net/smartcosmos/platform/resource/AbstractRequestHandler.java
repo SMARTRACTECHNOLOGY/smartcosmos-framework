@@ -180,23 +180,23 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     /**
      * Validates an input and maps it to the corresponding domain resource entity.
      *
-     * @param inputValue the input
-     * @param targetClass the class used for mapping and validation
+     * @param jsonString the json input
+     * @param targetEntityClass the class used for mapping and validation
      * @return returns the validated domain resource
      * @throws JsonProcessingException
      */
-    public DomainResourceEntity validate(String inputValue, Class targetClass) throws WebApplicationException
+    public <T extends DomainResourceEntity> T parse(String jsonString, Class<T> targetEntityClass) throws WebApplicationException
     {
-        DomainResourceEntity entity = null;
+        T entity = null;
         Response response = null;
         try
         {
-            entity = mapInputToEntity(inputValue, targetClass);
+            entity = jsonToEntity(jsonString, targetEntityClass);
             validate(entity);
         } catch (IOException | ClassCastException e)
         {
-                LOG.warn(e.getMessage());
-                response = VALIDATION_FAILURE;
+            LOG.warn(e.getMessage());
+            response = VALIDATION_FAILURE;
         } catch (ConstraintViolationException e1)
         {
             response = Response.fromResponse(FIELD_CONSTRAINT_VIOLATION)
@@ -295,28 +295,30 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         return om;
     }
 
-    private DomainResourceEntity mapInputToEntity(String inputValue, Class clazz) throws ClassCastException, IOException
+    private <T extends DomainResourceEntity> T jsonToEntity(String jsonString, Class<T> targetEntityClass) throws ClassCastException, IOException
     {
         ObjectMapper mapper = createObjectMapper();
-        Object e = mapper.readValue(inputValue, clazz);
-        if (e instanceof DomainResourceEntity)
+        T entity = mapper.readValue(jsonString, targetEntityClass);
+
+        if (!(entity instanceof DomainResourceEntity))
         {
-            return (DomainResourceEntity) e;
+            throw new ClassCastException("Cannot cast " + targetEntityClass.getSimpleName() + " to DomainResourceEntity");
         }
-        throw new ClassCastException("Cannot cast " + clazz.getSimpleName() + " to DomainResourceEntity");
+
+        return entity;
     }
 
-    private void validate(DomainResourceEntity e) throws ConstraintViolationException
+    public <T extends DomainResourceEntity> void validate(T entity) throws ConstraintViolationException
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        Set<ConstraintViolation<DomainResourceEntity>> violations = validator.validate(e);
+        Set<ConstraintViolation<T>> violations = validator.validate(entity);
 
         if (violations.size() > 0)
         {
             List<String> invalidFields = new ArrayList<>();
             String field;
 
-            for (ConstraintViolation<DomainResourceEntity> violation : violations)
+            for (ConstraintViolation<T> violation : violations)
             {
                 field = violation.getPropertyPath().toString();
                 invalidFields.add(field);
