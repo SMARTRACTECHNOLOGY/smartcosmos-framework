@@ -111,7 +111,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      */
 
     protected static final Response FIELD_CONSTRAINT_VIOLATION = Response
-            /* would be the actually correct response code but we don't use it at the moment to avoid breakting the API */
+            /* would be the actually correct response code but we don't use it at the moment to avoid breaking the API */
 //            .status(org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY)
             .status(Response.Status.BAD_REQUEST)
             .type(MediaType.APPLICATION_JSON_TYPE)
@@ -123,7 +123,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             .build();
 
     /**
-     * A successfully authenticated user is impersonating another account. In a multitenant system we want to make sure
+     * A successfully authenticated user is impersonating another account. In a multi tenant system we want to make sure
      * we're acting on the correct IAccount, so we need to exchange the authenticated user for the IUser account they
      * are acting on behalf of.
      * 
