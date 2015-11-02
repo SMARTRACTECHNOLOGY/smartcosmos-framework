@@ -35,6 +35,7 @@ public enum Result
     ERR_UNLICENSED_FEATURE(-3, "Unlicensed feature"),
     ERR_UNKNOWN_ENTITY_TYPE(-4, "Unknown Entity Reference Type: %s"),
     ERR_MISSING_FIELD(-5, "JSON is missing a required field: %s"),
+    ERR_FIELD_CONSTRAINT_VIOLATION(-5, "JSON is missing a required field or violates a field constraint: %s"),
     ERR_UNKNOWN_DEVICE_IDENTIFICATION(-6, "No device found with identification %s"),
     ERR_ALREADY_EXISTS(-7, "A %s with matching key %s already exists"),
     ERR_NOT_EXISTS(-8, "No matching record with %s of %s exists"),
@@ -44,6 +45,7 @@ public enum Result
     ERR_NO_SUCH_EMAIL(-12, "No user associated with email address %s"),
     ERR_NO_FILE_CONTENT(-13, "File URN %s exists but is flagged as pending content upload"),
     ERR_MISSING_AUTHENTICATION_HEADER(-14, "Endpoint requires authentication"),
+    ERR_VALIDATION(-15, "Validation Failure"),
 
     ERR_EXTENSION_SECURITY_RESTRICTION(-50, "Extensions are not permitted to perform %s"),
     ERR_EXTENSION_NO_ACCESS(-51, "Caller lacked the authorization to complete the requested operation"),

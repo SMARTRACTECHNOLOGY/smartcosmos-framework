@@ -1,7 +1,5 @@
 package net.smartcosmos.platform.jpa.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -22,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.Field;
 import net.smartcosmos.model.base.IDomainResource;
@@ -39,7 +38,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -64,6 +63,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
 
     @JsonView(JsonGenerationView.Full.class)
     @Column(length = 2048, nullable = true, updatable = true)
+    @Size(max = 2048)
     private String moniker;
 
     @Override

@@ -62,5 +62,6 @@ public final class ObjectBuilder extends AbstractNamedObjectBuilder<IObject, Obj
     protected void onValidate()
     {
         Preconditions.checkNotNull(instance.getType(), "type must not be null");
+        Preconditions.checkNotNull(instance.getName(), "name must not be null");
     }
 }
