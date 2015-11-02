@@ -38,4 +38,3 @@ public interface IObjectAddressDAO extends IAdvancedDAO<IObjectAddress>
 
     IObjectAddress upsert(IObjectAddress objectAddress, IObject object);
 }
-

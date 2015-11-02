@@ -111,7 +111,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      */
 
     protected static final Response FIELD_CONSTRAINT_VIOLATION = Response
-            /* would be the actually correct response code but we don't use it at the moment to avoid breakting the API */
+            /* would be the actually correct response code but we don't use it at the moment to avoid breaking the API */
 //            .status(org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY)
             .status(Response.Status.BAD_REQUEST)
             .type(MediaType.APPLICATION_JSON_TYPE)
@@ -123,7 +123,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             .build();
 
     /**
-     * A successfully authenticated user is impersonating another account. In a multitenant system we want to make sure
+     * A successfully authenticated user is impersonating another account. In a multi tenant system we want to make sure
      * we're acting on the correct IAccount, so we need to exchange the authenticated user for the IUser account they
      * are acting on behalf of.
      * 
@@ -180,27 +180,27 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     /**
      * Validates an input and maps it to the corresponding domain resource entity.
      *
-     * @param inputValue the input
-     * @param targetClass the class used for mapping and validation
+     * @param jsonString the json input
+     * @param targetEntityClass the class used for mapping and validation
      * @return returns the validated domain resource
      * @throws JsonProcessingException
      */
-    public DomainResourceEntity validate(String inputValue, Class targetClass) throws WebApplicationException
+    public <T extends DomainResourceEntity> T parse(String jsonString, Class<T> targetEntityClass) throws WebApplicationException
     {
-        DomainResourceEntity entity = null;
+        T entity = null;
         Response response = null;
         try
         {
-            entity = mapInputToEntity(inputValue, targetClass);
+            entity = jsonToEntity(jsonString, targetEntityClass);
             validate(entity);
-        } catch (IOException | ClassCastException e)
+        } catch (IOException e)
         {
-                LOG.warn(e.getMessage());
-                response = VALIDATION_FAILURE;
-        } catch (ConstraintViolationException e1)
+            LOG.warn(e.getMessage());
+            response = VALIDATION_FAILURE;
+        } catch (ConstraintViolationException e)
         {
             response = Response.fromResponse(FIELD_CONSTRAINT_VIOLATION)
-                    .entity(ResponseEntity.toJson(Result.ERR_FIELD_CONSTRAINT_VIOLATION, e1.getMessage()))
+                    .entity(ResponseEntity.toJson(Result.ERR_FIELD_CONSTRAINT_VIOLATION, e.getMessage()))
                     .build();
         }
 
@@ -295,28 +295,25 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         return om;
     }
 
-    private DomainResourceEntity mapInputToEntity(String inputValue, Class clazz) throws ClassCastException, IOException
+    private <T extends DomainResourceEntity> T jsonToEntity(String jsonString, Class<T> targetEntityClass) throws IOException
     {
         ObjectMapper mapper = createObjectMapper();
-        Object e = mapper.readValue(inputValue, clazz);
-        if (e instanceof DomainResourceEntity)
-        {
-            return (DomainResourceEntity) e;
-        }
-        throw new ClassCastException("Cannot cast " + clazz.getSimpleName() + " to DomainResourceEntity");
+        T entity = mapper.readValue(jsonString, targetEntityClass);
+
+        return entity;
     }
 
-    private void validate(DomainResourceEntity e) throws ConstraintViolationException
+    public <T extends DomainResourceEntity> void validate(T entity) throws ConstraintViolationException
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        Set<ConstraintViolation<DomainResourceEntity>> violations = validator.validate(e);
+        Set<ConstraintViolation<T>> violations = validator.validate(entity);
 
         if (violations.size() > 0)
         {
             List<String> invalidFields = new ArrayList<>();
             String field;
 
-            for (ConstraintViolation<DomainResourceEntity> violation : violations)
+            for (ConstraintViolation<T> violation : violations)
             {
                 field = violation.getPropertyPath().toString();
                 invalidFields.add(field);
@@ -327,4 +324,5 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             throw new ConstraintViolationException(invalidFieldString, violations);
         }
     }
+
 }
