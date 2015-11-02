@@ -193,14 +193,14 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         {
             entity = jsonToEntity(jsonString, targetEntityClass);
             validate(entity);
-        } catch (IOException | ClassCastException e)
+        } catch (IOException e)
         {
             LOG.warn(e.getMessage());
             response = VALIDATION_FAILURE;
-        } catch (ConstraintViolationException e1)
+        } catch (ConstraintViolationException e)
         {
             response = Response.fromResponse(FIELD_CONSTRAINT_VIOLATION)
-                    .entity(ResponseEntity.toJson(Result.ERR_FIELD_CONSTRAINT_VIOLATION, e1.getMessage()))
+                    .entity(ResponseEntity.toJson(Result.ERR_FIELD_CONSTRAINT_VIOLATION, e.getMessage()))
                     .build();
         }
 
@@ -295,15 +295,10 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         return om;
     }
 
-    private <T extends DomainResourceEntity> T jsonToEntity(String jsonString, Class<T> targetEntityClass) throws ClassCastException, IOException
+    private <T extends DomainResourceEntity> T jsonToEntity(String jsonString, Class<T> targetEntityClass) throws IOException
     {
         ObjectMapper mapper = createObjectMapper();
         T entity = mapper.readValue(jsonString, targetEntityClass);
-
-        if (!(entity instanceof DomainResourceEntity))
-        {
-            throw new ClassCastException("Cannot cast " + targetEntityClass.getSimpleName() + " to DomainResourceEntity");
-        }
 
         return entity;
     }
@@ -329,4 +324,5 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             throw new ConstraintViolationException(invalidFieldString, violations);
         }
     }
+
 }
