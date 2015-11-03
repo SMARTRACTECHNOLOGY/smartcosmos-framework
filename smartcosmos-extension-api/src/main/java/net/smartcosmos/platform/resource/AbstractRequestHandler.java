@@ -182,17 +182,22 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      *
      * @param jsonString the json input
      * @param targetEntityClass the class used for mapping and validation
+     * @param performValidation if set to true, the domain resource entity will be validated
      * @return returns the validated domain resource
-     * @throws JsonProcessingException
+     * @throws WebApplicationException
      */
-    public <T extends DomainResourceEntity> T parse(String jsonString, Class<T> targetEntityClass) throws WebApplicationException
+    public <T extends DomainResourceEntity> T parse(String jsonString, Class<T> targetEntityClass, Boolean performValidation) throws
+            WebApplicationException
     {
         T entity = null;
         Response response = null;
         try
         {
             entity = jsonToEntity(jsonString, targetEntityClass);
-            validate(entity);
+            if (performValidation)
+            {
+                validate(entity);
+            }
         } catch (IOException e)
         {
             LOG.warn(e.getMessage());
@@ -210,6 +215,19 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         }
 
         return entity;
+    }
+
+    /**
+     * Validates an input and maps it to the corresponding domain resource entity.
+     *
+     * @param jsonString the json input
+     * @param targetEntityClass the class used for mapping and validation
+     * @return returns the validated domain resource
+     * @throws WebApplicationException
+     */
+    public <T extends DomainResourceEntity> T parse(String jsonString, Class<T> targetEntityClass) throws WebApplicationException
+    {
+        return parse(jsonString, targetEntityClass, true);
     }
 
     @VisibleForTesting
@@ -298,9 +316,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     private <T extends DomainResourceEntity> T jsonToEntity(String jsonString, Class<T> targetEntityClass) throws IOException
     {
         ObjectMapper mapper = createObjectMapper();
-        T entity = mapper.readValue(jsonString, targetEntityClass);
-
-        return entity;
+        return mapper.readValue(jsonString, targetEntityClass);
     }
 
     public <T extends DomainResourceEntity> void validate(T entity) throws ConstraintViolationException
@@ -324,5 +340,4 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             throw new ConstraintViolationException(invalidFieldString, violations);
         }
     }
-
 }
