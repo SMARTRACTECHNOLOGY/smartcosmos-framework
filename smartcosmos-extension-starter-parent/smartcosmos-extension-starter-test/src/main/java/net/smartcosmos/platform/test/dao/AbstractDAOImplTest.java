@@ -29,6 +29,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -393,4 +394,52 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
         fail("Not yet implemented");
     }
 
+    @Test
+    @Ignore
+    @UnitOfWork
+    public void testFindByUrnJson() throws IOException
+    {
+    }
+
+    @Test
+    @Ignore
+    @UnitOfWork
+    public void testFindByUuidsJson() throws IOException
+    {
+    }
+
+    @Test
+    @Ignore
+    @UnitOfWork
+    public void testFindByAccountJson() throws IOException
+    {
+    }
+
+    @Test
+    @Ignore
+    @UnitOfWork
+    public void testInsertJson() throws IOException
+    {
+    }
+
+    @Test
+    @Ignore
+    @UnitOfWork
+    public void testUpsertJson() throws IOException
+    {
+    }
+
+    @Test
+    @Ignore
+    @UnitOfWork
+    public void testDeleteJson() throws IOException
+    {
+    }
+
+    @Test
+    @Ignore
+    @UnitOfWork
+    public void testUpdateJson() throws IOException
+    {
+    }
 }

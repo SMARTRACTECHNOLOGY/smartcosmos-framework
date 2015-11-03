@@ -42,9 +42,10 @@ public class PageEntry<T> implements IPage<T>
     @JsonView(JsonGenerationView.Standard.class)
     private final Collection<T> contents;
 
-    public PageEntry(@JsonProperty("contents") Collection<T> contents, @JsonProperty("totalPages") int totalPages,
-            @JsonProperty("totalSize") int totalSize, @JsonProperty("currentPage") int currentPage,
-            @JsonProperty("pageSize") int pageSize)
+    public PageEntry(@JsonProperty("contents") final Collection<T> contents,
+            @JsonProperty("totalPages") final int totalPages,
+            @JsonProperty("totalSize") final int totalSize, @JsonProperty("currentPage") final int currentPage,
+            @JsonProperty("pageSize") final int pageSize)
     {
         super();
         this.contents = contents;
