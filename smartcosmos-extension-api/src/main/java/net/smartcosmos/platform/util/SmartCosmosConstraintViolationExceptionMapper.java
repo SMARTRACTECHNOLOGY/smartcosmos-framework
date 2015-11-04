@@ -2,7 +2,7 @@ package net.smartcosmos.platform.util;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Objects JPA Mappings
+ * SMART COSMOS Extension API
  * ===============================================================================
  * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
@@ -19,6 +19,7 @@ package net.smartcosmos.platform.util;
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
+
 
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
