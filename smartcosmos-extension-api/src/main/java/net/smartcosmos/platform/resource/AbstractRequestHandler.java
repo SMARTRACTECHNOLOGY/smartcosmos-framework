@@ -36,10 +36,11 @@ import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.visitor.IVisitable;
 import net.smartcosmos.platform.api.visitor.IVisitor;
 import net.smartcosmos.platform.jpa.base.DomainResourceEntity;
+import net.smartcosmos.platform.util.SmartCosmosConstraintViolationExceptionMapper;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.ViewType;
-import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpStatus;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.json.JSONException;
@@ -57,7 +58,6 @@ import javax.ws.rs.core.EntityTag;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -94,15 +94,12 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         this.context = context;
     }
 
-    protected static final Response NO_SUCH_URN = Response
-            .status(Response.Status.BAD_REQUEST)
+    protected static final Response NO_SUCH_URN = Response.status(Response.Status.BAD_REQUEST)
             .type(MediaType.APPLICATION_JSON_TYPE)
             .entity(ResponseEntity.toJson(Result.ERR_NO_SUCH_URN))
             .build();
 
-    protected static final Response NO_CONTENT = Response
-            .noContent()
-            .build();
+    protected static final Response NO_CONTENT = Response.noContent().build();
 
     /**
      * TODO: Decide whether stay with 400 BAD REQUEST or switch to the actually correct 422 UNPROCESSABLE ENTITY.
@@ -113,9 +110,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     protected static final Response FIELD_CONSTRAINT_VIOLATION = Response
             /* would be the actually correct response code but we don't use it at the moment to avoid breaking the API */
 //            .status(org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY)
-            .status(Response.Status.BAD_REQUEST)
-            .type(MediaType.APPLICATION_JSON_TYPE)
-            .build();
+            .status(Response.Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON_TYPE).build();
 
     protected static final Response VALIDATION_FAILURE = Response.status(Response.Status.BAD_REQUEST)
             .type(MediaType.APPLICATION_JSON_TYPE)
@@ -126,9 +121,8 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      * A successfully authenticated user is impersonating another account. In a multi tenant system we want to make sure
      * we're acting on the correct IAccount, so we need to exchange the authenticated user for the IUser account they
      * are acting on behalf of.
-     * 
-     * @param authenticatedUser
-     *            who actually authenticated
+     *
+     * @param authenticatedUser who actually authenticated
      * @return the IUser, and therefore IAccount, that we want to actively work as.
      */
     protected abstract IUser exchangeForActual(IAuthenticatedUser authenticatedUser);
@@ -158,15 +152,13 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     }
 
     @Override
-    public Response handle(T inputValue, IAuthenticatedUser authenticatedUser)
-            throws JsonProcessingException, JSONException
+    public Response handle(T inputValue, IAuthenticatedUser authenticatedUser) throws JsonProcessingException, JSONException
     {
         return handle(inputValue, ViewType.Standard, authenticatedUser);
     }
 
     @Override
-    public Response handle(T inputValue, ViewType view, IAuthenticatedUser authenticatedUser)
-            throws JsonProcessingException, JSONException
+    public Response handle(T inputValue, ViewType view, IAuthenticatedUser authenticatedUser) throws JsonProcessingException, JSONException
     {
         throw new WebApplicationException(Response.status(Response.Status.GONE).build());
     }
@@ -180,14 +172,14 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     /**
      * Validates an input and maps it to the corresponding domain resource entity.
      *
-     * @param jsonString the json input
+     * @param jsonString        the json input
      * @param targetEntityClass the class used for mapping and validation
      * @return returns the validated domain resource
      * @throws JsonProcessingException
      */
-    public <T extends DomainResourceEntity> T parse(String jsonString, Class<T> targetEntityClass) throws WebApplicationException
+    public <ENTITY extends DomainResourceEntity> ENTITY parse(String jsonString, Class<ENTITY> targetEntityClass) throws WebApplicationException
     {
-        T entity = null;
+        ENTITY entity = null;
         Response response = null;
         try
         {
@@ -199,9 +191,9 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             response = VALIDATION_FAILURE;
         } catch (ConstraintViolationException e)
         {
-            response = Response.fromResponse(FIELD_CONSTRAINT_VIOLATION)
-                    .entity(ResponseEntity.toJson(Result.ERR_FIELD_CONSTRAINT_VIOLATION, e.getMessage()))
-                    .build();
+            SmartCosmosConstraintViolationExceptionMapper exceptionMapper = new SmartCosmosConstraintViolationExceptionMapper();
+            exceptionMapper.setHttpResponseStatus(HttpStatus.SC_BAD_REQUEST);
+            response = exceptionMapper.toResponse(e);
         }
 
         if (response != null)
@@ -221,8 +213,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         } else if (!curObject.has(MONIKER_FIELD))
         {
             newValues.setMoniker(oldValues.getMoniker());
-        } else if (curObject.has(MONIKER_FIELD) &&
-                curObject.getString(MONIKER_FIELD).equals(NULL_MONIKER))
+        } else if (curObject.has(MONIKER_FIELD) && curObject.getString(MONIKER_FIELD).equals(NULL_MONIKER))
         {
             newValues.setMoniker(null);
         } else
@@ -236,8 +227,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         if (!curObject.has(MONIKER_FIELD))
         {
             return;
-        } else if (curObject.has(MONIKER_FIELD) &&
-                curObject.getString(MONIKER_FIELD).equals(NULL_MONIKER))
+        } else if (curObject.has(MONIKER_FIELD) && curObject.getString(MONIKER_FIELD).equals(NULL_MONIKER))
         {
             target.setMoniker(null);
         } else
@@ -248,8 +238,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 
     protected EntityTag createETag(IDomainResource domainResource)
     {
-        return new EntityTag(domainResource
-                .getClass()
+        return new EntityTag(domainResource.getClass()
                 .getSimpleName()
                 .concat("-" + domainResource.getUrn())
                 .concat("-" + ISO8601.print(domainResource.getLastModifiedTimestamp())));
@@ -271,10 +260,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             } catch (Exception e)
             {
                 LOG.warn("Visitor {} (serviceId {}) threw an uncaught exception {}",
-                        new Object[] {
-                                visitor.getName(),
-                                visitor.getServiceId(),
-                                e.getMessage() });
+                        new Object[]{visitor.getName(), visitor.getServiceId(), e.getMessage()});
                 LOG.debug(e.getMessage(), e);
             }
         }
@@ -295,33 +281,20 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         return om;
     }
 
-    private <T extends DomainResourceEntity> T jsonToEntity(String jsonString, Class<T> targetEntityClass) throws IOException
+    private <ENTITY extends DomainResourceEntity> ENTITY jsonToEntity(String jsonString, Class<ENTITY> targetEntityClass) throws IOException
     {
         ObjectMapper mapper = createObjectMapper();
-        T entity = mapper.readValue(jsonString, targetEntityClass);
 
-        return entity;
+        return mapper.readValue(jsonString, targetEntityClass);
     }
 
-    public <T extends DomainResourceEntity> void validate(T entity) throws ConstraintViolationException
+    public <ENTITY extends DomainResourceEntity> void validate(ENTITY entity) throws ConstraintViolationException
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        Set<ConstraintViolation<T>> violations = validator.validate(entity);
-
-        if (violations.size() > 0)
+        Set<ConstraintViolation<ENTITY>> violations = validator.validate(entity);
+        if (!violations.isEmpty())
         {
-            List<String> invalidFields = new ArrayList<>();
-            String field;
-
-            for (ConstraintViolation<T> violation : violations)
-            {
-                field = violation.getPropertyPath().toString();
-                invalidFields.add(field);
-                LOG.warn(field + " - " + violation.getMessage() + "\nInvalid value: " + violation.getInvalidValue());
-            }
-
-            String invalidFieldString = StringUtils.join(invalidFields, ", ");
-            throw new ConstraintViolationException(invalidFieldString, violations);
+            throw new ConstraintViolationException(violations);
         }
     }
 
