@@ -169,7 +169,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     }
 
     /**
-     * Validates an input and maps it to the corresponding domain resource entity.
+     * Parses an domain resource entity from the JSON input but does not validate it.
      *
      * @param jsonString        the json input
      * @param targetEntityClass the class used for mapping and validation
@@ -297,6 +297,13 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         return mapper.readValue(jsonString, targetEntityClass);
     }
 
+    /**
+     * Validates a domain resource entity.
+     *
+     * @param entity the domain resource entity for validation
+     * @param <ENTITY> the sub-type of DomainResourceEntity
+     * @throws WebApplicationException
+     */
     public <ENTITY extends DomainResourceEntity> void validate(ENTITY entity) throws WebApplicationException
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
