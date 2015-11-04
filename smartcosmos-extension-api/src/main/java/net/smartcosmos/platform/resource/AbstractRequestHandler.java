@@ -40,7 +40,6 @@ import net.smartcosmos.platform.util.SmartCosmosConstraintViolationExceptionMapp
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.ViewType;
-import org.apache.http.HttpStatus;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.json.JSONException;
@@ -174,11 +173,10 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      *
      * @param jsonString        the json input
      * @param targetEntityClass the class used for mapping and validation
-     * @param performValidation if set to true, the domain resource entity will be validated
      * @return returns the validated domain resource
      * @throws WebApplicationException
      */
-    public <ENTITY extends DomainResourceEntity> ENTITY parse(String jsonString, Class<ENTITY> targetEntityClass, boolean performValidation) throws
+    public <ENTITY extends DomainResourceEntity> ENTITY parseWithoutValidation(String jsonString, Class<ENTITY> targetEntityClass) throws
             WebApplicationException
     {
         ENTITY entity = null;
@@ -186,19 +184,10 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         try
         {
             entity = jsonToEntity(jsonString, targetEntityClass);
-            if (performValidation)
-            {
-                validate(entity);
-            }
         } catch (IOException e)
         {
             LOG.warn(e.getMessage());
             response = VALIDATION_FAILURE;
-        } catch (ConstraintViolationException e)
-        {
-            SmartCosmosConstraintViolationExceptionMapper exceptionMapper = new SmartCosmosConstraintViolationExceptionMapper();
-            exceptionMapper.setHttpResponseStatus(HttpStatus.SC_BAD_REQUEST);
-            response = exceptionMapper.toResponse(e);
         }
 
         if (response != null)
@@ -217,9 +206,12 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      * @return returns the validated domain resource
      * @throws WebApplicationException
      */
-    public <T extends DomainResourceEntity> T parse(String jsonString, Class<T> targetEntityClass) throws WebApplicationException
+    public <ENTITY extends DomainResourceEntity> ENTITY parse(String jsonString, Class<ENTITY> targetEntityClass) throws WebApplicationException
     {
-        return parse(jsonString, targetEntityClass, true);
+        ENTITY entity = parseWithoutValidation(jsonString, targetEntityClass);
+        validate(entity);
+
+        return entity;
     }
 
     @VisibleForTesting
@@ -305,13 +297,14 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         return mapper.readValue(jsonString, targetEntityClass);
     }
 
-    public <ENTITY extends DomainResourceEntity> void validate(ENTITY entity) throws ConstraintViolationException
+    public <ENTITY extends DomainResourceEntity> void validate(ENTITY entity) throws WebApplicationException
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<ENTITY>> violations = validator.validate(entity);
         if (!violations.isEmpty())
         {
-            throw new ConstraintViolationException(violations);
+            SmartCosmosConstraintViolationExceptionMapper exceptionMapper = new SmartCosmosConstraintViolationExceptionMapper();
+            throw new WebApplicationException(exceptionMapper.toResponse(new ConstraintViolationException(violations)));
         }
     }
 }
