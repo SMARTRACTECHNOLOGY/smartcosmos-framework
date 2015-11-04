@@ -30,6 +30,7 @@ import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.base.IMoniker;
 import net.smartcosmos.model.context.IUser;
+import net.smartcosmos.objects.jpa.util.SmartCosmosConstraintViolationExceptionMapper;
 import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.IRequestHandler;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
@@ -65,6 +66,7 @@ import java.util.SortedSet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static net.smartcosmos.Field.CITY_FIELD;
 import static net.smartcosmos.Field.MONIKER_FIELD;
 import static net.smartcosmos.Field.NULL_MONIKER;
 
@@ -307,6 +309,8 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<T>> violations = validator.validate(entity);
+
+        SmartCosmosConstraintViolationExceptionMapper.errorMessageFields(violations);
 
         if (violations.size() > 0)
         {
