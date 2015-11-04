@@ -28,7 +28,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import net.smartcosmos.Field;
 import net.smartcosmos.model.event.IEvent;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -96,8 +95,7 @@ public final class JsonUtil
 
     public static JSONObject translateEvent(IEvent event) throws JSONException
     {
-        JSONObject curEvent = new JSONObject()
-                .put(Field.URN_FIELD, event.getUrn())
+        JSONObject curEvent = new JSONObject().put(Field.URN_FIELD, event.getUrn())
                 .put(Field.EVENT_TYPE, event.getEventType())
                 .put(Field.LAST_MODIFIED_TIMESTAMP_FIELD, event.getLastModifiedTimestamp());
 
@@ -177,18 +175,13 @@ public final class JsonUtil
 
     public static Boolean isValidJson(String test)
     {
+        ObjectMapper objectMapper = new ObjectMapper();
         try
         {
-            new JSONObject(test);
-        } catch (JSONException e)
+            objectMapper.readTree(test);
+        } catch (IOException e)
         {
-            try
-            {
-                new JSONArray(test);
-            } catch (JSONException e1)
-            {
-                return false;
-            }
+            return false;
         }
         return true;
     }

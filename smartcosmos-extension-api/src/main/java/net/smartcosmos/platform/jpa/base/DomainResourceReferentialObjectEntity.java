@@ -34,6 +34,7 @@ import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -49,9 +50,10 @@ public abstract class DomainResourceReferentialObjectEntity<T extends IAccountDo
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = false)
     @Index(name = "entity_reference_type_idx")
+    @NotNull
     private EntityReferenceType entityReferenceType;
 
-    @Column(length = 16, nullable = false, updatable = false)
+    @Column(length = UUID_LENGTH, nullable = false, updatable = false)
     @Index(name = "entity_reference_urn_idx")
     @Type(type = "uuid-binary")
     @JsonIgnore

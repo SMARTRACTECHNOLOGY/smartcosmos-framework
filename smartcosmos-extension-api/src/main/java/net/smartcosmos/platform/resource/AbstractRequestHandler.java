@@ -40,7 +40,6 @@ import net.smartcosmos.platform.util.SmartCosmosConstraintViolationExceptionMapp
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.ViewType;
-import org.apache.http.HttpStatus;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.json.JSONException;
@@ -170,36 +169,47 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     }
 
     /**
-     * Validates an input and maps it to the corresponding domain resource entity.
+     * Parses an domain resource entity from the JSON input but does not validate it.
      *
      * @param jsonString        the json input
      * @param targetEntityClass the class used for mapping and validation
      * @return returns the validated domain resource
-     * @throws JsonProcessingException
+     * @throws WebApplicationException
      */
-    public <ENTITY extends DomainResourceEntity> ENTITY parse(String jsonString, Class<ENTITY> targetEntityClass) throws WebApplicationException
+    public <ENTITY extends DomainResourceEntity> ENTITY parseWithoutValidation(String jsonString, Class<ENTITY> targetEntityClass) throws
+            WebApplicationException
     {
         ENTITY entity = null;
         Response response = null;
         try
         {
             entity = jsonToEntity(jsonString, targetEntityClass);
-            validate(entity);
         } catch (IOException e)
         {
             LOG.warn(e.getMessage());
             response = VALIDATION_FAILURE;
-        } catch (ConstraintViolationException e)
-        {
-            SmartCosmosConstraintViolationExceptionMapper exceptionMapper = new SmartCosmosConstraintViolationExceptionMapper();
-            exceptionMapper.setHttpResponseStatus(HttpStatus.SC_BAD_REQUEST);
-            response = exceptionMapper.toResponse(e);
         }
 
         if (response != null)
         {
             throw new WebApplicationException(response);
         }
+
+        return entity;
+    }
+
+    /**
+     * Validates an input and maps it to the corresponding domain resource entity.
+     *
+     * @param jsonString the json input
+     * @param targetEntityClass the class used for mapping and validation
+     * @return returns the validated domain resource
+     * @throws WebApplicationException
+     */
+    public <ENTITY extends DomainResourceEntity> ENTITY parse(String jsonString, Class<ENTITY> targetEntityClass) throws WebApplicationException
+    {
+        ENTITY entity = parseWithoutValidation(jsonString, targetEntityClass);
+        validate(entity);
 
         return entity;
     }
@@ -284,18 +294,24 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     private <ENTITY extends DomainResourceEntity> ENTITY jsonToEntity(String jsonString, Class<ENTITY> targetEntityClass) throws IOException
     {
         ObjectMapper mapper = createObjectMapper();
-
         return mapper.readValue(jsonString, targetEntityClass);
     }
 
-    public <ENTITY extends DomainResourceEntity> void validate(ENTITY entity) throws ConstraintViolationException
+    /**
+     * Validates a domain resource entity.
+     *
+     * @param entity the domain resource entity for validation
+     * @param <ENTITY> the sub-type of DomainResourceEntity
+     * @throws WebApplicationException
+     */
+    public <ENTITY extends DomainResourceEntity> void validate(ENTITY entity) throws WebApplicationException
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<ENTITY>> violations = validator.validate(entity);
         if (!violations.isEmpty())
         {
-            throw new ConstraintViolationException(violations);
+            SmartCosmosConstraintViolationExceptionMapper exceptionMapper = new SmartCosmosConstraintViolationExceptionMapper();
+            throw new WebApplicationException(exceptionMapper.toResponse(new ConstraintViolationException(violations)));
         }
     }
-
 }
