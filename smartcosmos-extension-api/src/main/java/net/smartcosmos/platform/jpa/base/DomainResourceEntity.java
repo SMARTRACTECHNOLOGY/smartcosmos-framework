@@ -51,7 +51,10 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
      */
     private static final long serialVersionUID = 1L;
 
-    @Column(length = 16, nullable = false, updatable = false, unique = true)
+    protected static final Integer uuidLength = 16;
+    private static final Integer monikerLength = 2048;
+
+    @Column(length = uuidLength, nullable = false, updatable = false, unique = true)
     @Type(type = "uuid-binary")
     @Id
     @JsonIgnore
@@ -62,8 +65,8 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
     private long lastModifiedTimestamp;
 
     @JsonView(JsonGenerationView.Full.class)
-    @Column(length = 2048, nullable = true, updatable = true)
-    @Size(max = 2048)
+    @Column(length = monikerLength, nullable = true, updatable = true)
+    @Size(max = monikerLength)
     private String moniker;
 
     @Override
