@@ -42,7 +42,8 @@ public class SmartCosmosConstraintViolationExceptionMapper implements ExceptionM
 {
     private static final Logger LOG = LoggerFactory.getLogger(SmartCosmosConstraintViolationExceptionMapper.class);
 
-    private int httpResponseStatus = HttpStatus.SC_UNPROCESSABLE_ENTITY;
+//    private int httpResponseStatus = HttpStatus.SC_UNPROCESSABLE_ENTITY; // should be the correct default response
+    private int httpResponseStatus = HttpStatus.SC_BAD_REQUEST;
 
     @Override
     public Response toResponse(ConstraintViolationException exception)
