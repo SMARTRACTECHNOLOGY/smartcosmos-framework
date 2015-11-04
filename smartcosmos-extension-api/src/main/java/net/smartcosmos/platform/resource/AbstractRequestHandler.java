@@ -187,9 +187,9 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      * @return returns the validated domain resource
      * @throws JsonProcessingException
      */
-    public <T extends DomainResourceEntity> T parse(String jsonString, Class<T> targetEntityClass) throws WebApplicationException
+    public <ENTITY extends DomainResourceEntity> ENTITY parse(String jsonString, Class<ENTITY> targetEntityClass) throws WebApplicationException
     {
-        T entity = null;
+        ENTITY entity = null;
         Response response = null;
         try
         {
@@ -297,18 +297,17 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         return om;
     }
 
-    private <T extends DomainResourceEntity> T jsonToEntity(String jsonString, Class<T> targetEntityClass) throws IOException
+    private <ENTITY extends DomainResourceEntity> ENTITY jsonToEntity(String jsonString, Class<ENTITY> targetEntityClass) throws IOException
     {
         ObjectMapper mapper = createObjectMapper();
-        T entity = mapper.readValue(jsonString, targetEntityClass);
 
-        return entity;
+        return mapper.readValue(jsonString, targetEntityClass);
     }
 
-    public <T extends DomainResourceEntity> void validate(T entity) throws ConstraintViolationException
+    public <ENTITY extends DomainResourceEntity> void validate(ENTITY entity) throws ConstraintViolationException
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        Set<ConstraintViolation<T>> violations = validator.validate(entity);
+        Set<ConstraintViolation<ENTITY>> violations = validator.validate(entity);
 
         SmartCosmosConstraintViolationExceptionMapper.errorMessageFields(violations);
 
@@ -317,7 +316,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             List<String> invalidFields = new ArrayList<>();
             String field;
 
-            for (ConstraintViolation<T> violation : violations)
+            for (ConstraintViolation<ENTITY> violation : violations)
             {
                 field = violation.getPropertyPath().toString();
                 invalidFields.add(field);
