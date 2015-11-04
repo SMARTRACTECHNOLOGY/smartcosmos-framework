@@ -53,7 +53,7 @@ public abstract class DomainResourceReferentialObjectEntity<T extends IAccountDo
     @NotNull
     private EntityReferenceType entityReferenceType;
 
-    @Column(length = uuidLength, nullable = false, updatable = false)
+    @Column(length = UUID_LENGTH, nullable = false, updatable = false)
     @Index(name = "entity_reference_urn_idx")
     @Type(type = "uuid-binary")
     @JsonIgnore
