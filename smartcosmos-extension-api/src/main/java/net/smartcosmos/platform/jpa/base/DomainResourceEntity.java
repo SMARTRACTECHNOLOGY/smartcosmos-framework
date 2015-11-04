@@ -51,8 +51,8 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
      */
     private static final long serialVersionUID = 1L;
 
-    public static final Integer UUID_LENGTH = 16;
-    private static final Integer MONIKER_LENGTH = 2048;
+    public static final int UUID_LENGTH = 16;
+    private static final int MONIKER_LENGTH = 2048;
 
     @Column(length = UUID_LENGTH, nullable = false, updatable = false, unique = true)
     @Type(type = "uuid-binary")
