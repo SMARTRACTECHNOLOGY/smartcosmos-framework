@@ -32,7 +32,6 @@ import java.util.UUID;
 @JsonPropertyOrder(value = {"urn", "lastModifiedTimestamp" })
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
-    @JsonView(JsonGenerationView.Minimum.class)
     protected UUID systemUuid;
 
     @JsonView(JsonGenerationView.Standard.class)
@@ -50,6 +49,7 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     }
 
     @Override
+    @JsonView(JsonGenerationView.Minimum.class)
     public String getUrn()
     {
         return UuidUtil.getUrnFromUuid(systemUuid);
