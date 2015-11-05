@@ -281,7 +281,9 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             } catch (Exception e)
             {
                 LOG.warn("Visitor {} (serviceId {}) threw an uncaught exception {}",
-                        new Object[] { visitor.getName(), visitor.getServiceId(), e.getMessage() });
+                        new Object[] {
+                                visitor.getName(), visitor.getServiceId(), e.getMessage()
+                        });
                 LOG.debug(e.getMessage(), e);
             }
         }
