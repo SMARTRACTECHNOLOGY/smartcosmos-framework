@@ -87,7 +87,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             EntityReferenceType.Timeline,
             EntityReferenceType.LibraryElement);
 
-    protected AbstractRequestHandler(IContext context)
+    protected AbstractRequestHandler(final IContext context)
     {
         counter = new AtomicLong();
         this.context = context;
@@ -102,13 +102,14 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 
     /**
      * TODO: Decide whether stay with 400 BAD REQUEST or switch to the actually correct 422 UNPROCESSABLE ENTITY.
-     * author: asiegel
-     * date: 26 Okt 2015
+     * author: asiegel date: 26 Okt 2015
      */
 
     protected static final Response FIELD_CONSTRAINT_VIOLATION = Response
-            /* would be the actually correct response code but we don't use it at the moment to avoid breaking the API */
-//            .status(org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY)
+            /*
+             * would be the actually correct response code but we don't use it at the moment to avoid breaking the API
+             */
+            // .status(org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY)
             .status(Response.Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON_TYPE).build();
 
     protected static final Response VALIDATION_FAILURE = Response.status(Response.Status.BAD_REQUEST)
@@ -121,7 +122,8 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      * we're acting on the correct IAccount, so we need to exchange the authenticated user for the IUser account they
      * are acting on behalf of.
      *
-     * @param authenticatedUser who actually authenticated
+     * @param authenticatedUser
+     *            who actually authenticated
      * @return the IUser, and therefore IAccount, that we want to actively work as.
      */
     protected abstract IUser exchangeForActual(IAuthenticatedUser authenticatedUser);
@@ -145,25 +147,28 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     }
 
     @Override
-    public boolean isAuthorized(IAuthenticatedUser authenticatedUser)
+    public boolean isAuthorized(final IAuthenticatedUser authenticatedUser)
     {
         return true;
     }
 
     @Override
-    public Response handle(T inputValue, IAuthenticatedUser authenticatedUser) throws JsonProcessingException, JSONException
+    public Response handle(final T inputValue, final IAuthenticatedUser authenticatedUser)
+            throws JsonProcessingException, JSONException
     {
         return handle(inputValue, ViewType.Standard, authenticatedUser);
     }
 
     @Override
-    public Response handle(T inputValue, ViewType view, IAuthenticatedUser authenticatedUser) throws JsonProcessingException, JSONException
+    public Response handle(final T inputValue, final ViewType view, final IAuthenticatedUser authenticatedUser)
+            throws JsonProcessingException, JSONException
     {
         throw new WebApplicationException(Response.status(Response.Status.GONE).build());
     }
 
     @Override
-    public View render(T inputValue, IAuthenticatedUser authenticatedUser) throws JsonProcessingException, JSONException
+    public View render(final T inputValue, final IAuthenticatedUser authenticatedUser)
+            throws JsonProcessingException, JSONException
     {
         throw new WebApplicationException(Response.status(Response.Status.GONE).build());
     }
@@ -171,13 +176,15 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     /**
      * Parses an domain resource entity from the JSON input but does not validate it.
      *
-     * @param jsonString        the json input
-     * @param targetEntityClass the class used for mapping and validation
+     * @param jsonString
+     *            the json input
+     * @param targetEntityClass
+     *            the class used for mapping and validation
      * @return returns the validated domain resource
      * @throws WebApplicationException
      */
-    public <ENTITY extends DomainResourceEntity> ENTITY parseWithoutValidation(String jsonString, Class<ENTITY> targetEntityClass) throws
-            WebApplicationException
+    public <ENTITY> ENTITY parseWithoutValidation(final String jsonString, final Class<ENTITY> targetEntityClass)
+            throws WebApplicationException
     {
         ENTITY entity = null;
         Response response = null;
@@ -201,12 +208,15 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     /**
      * Validates an input and maps it to the corresponding domain resource entity.
      *
-     * @param jsonString the json input
-     * @param targetEntityClass the class used for mapping and validation
+     * @param jsonString
+     *            the json input
+     * @param targetEntityClass
+     *            the class used for mapping and validation
      * @return returns the validated domain resource
      * @throws WebApplicationException
      */
-    public <ENTITY extends DomainResourceEntity> ENTITY parse(String jsonString, Class<ENTITY> targetEntityClass) throws WebApplicationException
+    public <ENTITY> ENTITY parse(final String jsonString, final Class<ENTITY> targetEntityClass)
+            throws WebApplicationException
     {
         ENTITY entity = parseWithoutValidation(jsonString, targetEntityClass);
         validate(entity);
@@ -215,7 +225,8 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     }
 
     @VisibleForTesting
-    public void updateMoniker(JSONObject curObject, IMoniker newValues, IMoniker oldValues) throws JSONException
+    public void updateMoniker(final JSONObject curObject, final IMoniker newValues, final IMoniker oldValues)
+            throws JSONException
     {
         if (!curObject.has(MONIKER_FIELD) && oldValues == null)
         {
@@ -232,7 +243,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         }
     }
 
-    protected void updateMoniker(JSONObject curObject, IMoniker target) throws JSONException
+    protected void updateMoniker(final JSONObject curObject, final IMoniker target) throws JSONException
     {
         if (!curObject.has(MONIKER_FIELD))
         {
@@ -246,7 +257,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         }
     }
 
-    protected EntityTag createETag(IDomainResource domainResource)
+    protected EntityTag createETag(final IDomainResource domainResource)
     {
         return new EntityTag(domainResource.getClass()
                 .getSimpleName()
@@ -255,7 +266,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     }
 
     @SuppressWarnings("unchecked")
-    protected void processVisitors(EntityReferenceType entityReferenceType, IVisitable instance)
+    protected void processVisitors(final EntityReferenceType entityReferenceType, final IVisitable instance)
     {
         Preconditions.checkNotNull(instance, "instance must not be null");
         Preconditions.checkNotNull(entityReferenceType, "entityReferenceType must not be null");
@@ -270,7 +281,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             } catch (Exception e)
             {
                 LOG.warn("Visitor {} (serviceId {}) threw an uncaught exception {}",
-                        new Object[]{visitor.getName(), visitor.getServiceId(), e.getMessage()});
+                        new Object[] { visitor.getName(), visitor.getServiceId(), e.getMessage() });
                 LOG.debug(e.getMessage(), e);
             }
         }
@@ -291,7 +302,8 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         return om;
     }
 
-    private <ENTITY extends DomainResourceEntity> ENTITY jsonToEntity(String jsonString, Class<ENTITY> targetEntityClass) throws IOException
+    private <ENTITY> ENTITY jsonToEntity(final String jsonString, final Class<ENTITY> targetEntityClass)
+            throws IOException
     {
         ObjectMapper mapper = createObjectMapper();
         return mapper.readValue(jsonString, targetEntityClass);
@@ -300,11 +312,13 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     /**
      * Validates a domain resource entity.
      *
-     * @param entity the domain resource entity for validation
-     * @param <ENTITY> the sub-type of DomainResourceEntity
+     * @param entity
+     *            the domain resource entity for validation
+     * @param <ENTITY>
+     *            the sub-type of DomainResourceEntity
      * @throws WebApplicationException
      */
-    public <ENTITY extends DomainResourceEntity> void validate(ENTITY entity) throws WebApplicationException
+    public <ENTITY> void validate(final ENTITY entity) throws WebApplicationException
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<ENTITY>> violations = validator.validate(entity);
