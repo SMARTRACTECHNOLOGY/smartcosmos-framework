@@ -1,4 +1,6 @@
 language: java
+install: mvn install -U -DskipTests -DbuildNumber=$TRAVIS_BUILD_NUMBER -P docs
+script: mvn verify -DbuildNumber=$TRAVIS_BUILD_NUMBER
 jdk:
 - oraclejdk8
 notifications:
