@@ -27,7 +27,7 @@ import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public class AccountTypedNamedObject<T> extends TypedNamedObject<T> implements IAccountContext
+public class AccountTypedNamedObject<T> extends TypedNamedObject<T>implements IAccountContext
 {
     @JsonDeserialize(as = Account.class)
     @JsonView(JsonGenerationView.Full.class)
@@ -40,30 +40,36 @@ public class AccountTypedNamedObject<T> extends TypedNamedObject<T> implements I
     }
 
     @Override
-    public void setAccount(IAccount account)
+    public void setAccount(final IAccount account)
     {
         this.account = account;
     }
 
     @Override
-    public boolean equals(Object o)
+    public boolean equals(final Object obj)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        AccountTypedNamedObject that = (AccountTypedNamedObject) o;
-
-        if (!account.equals(that.account)) return false;
-
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AccountTypedNamedObject other = (AccountTypedNamedObject) obj;
+        if (account == null)
+        {
+            if (other.account != null)
+                return false;
+        } else if (!account.equals(other.account))
+            return false;
         return true;
     }
 
     @Override
     public int hashCode()
     {
+        final int prime = 31;
         int result = super.hashCode();
-        result = 31 * result + account.hashCode();
+        result = prime * result + ((account == null) ? 0 : account.hashCode());
         return result;
     }
 }

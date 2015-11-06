@@ -29,7 +29,7 @@ import net.smartcosmos.util.json.JsonGenerationView;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 
-@JsonPropertyOrder(value = {"urn", "lastModifiedTimestamp" })
+@JsonPropertyOrder(value = { "urn", "lastModifiedTimestamp" })
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
     protected UUID systemUuid;
