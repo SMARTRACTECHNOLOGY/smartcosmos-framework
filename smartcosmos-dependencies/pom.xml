@@ -233,6 +233,11 @@
                 <version>${javax.inject.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-core</artifactId>
+                <version>1.18.1</version>
+            </dependency>
+            <dependency>
                 <groupId>com.sun.jersey.contribs</groupId>
                 <artifactId>jersey-multipart</artifactId>
                 <!-- This version must stay in synch with the Jersey version in Dropwizard -->
@@ -501,6 +506,11 @@
                 <groupId>org.jadira.usertype</groupId>
                 <artifactId>usertype.core</artifactId>
                 <version>${jadira.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${javax.validation.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

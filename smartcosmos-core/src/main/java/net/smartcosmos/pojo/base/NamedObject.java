@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public abstract class NamedObject<T> extends DomainResource<T> implements INamedObject<T>
+public abstract class NamedObject<T> extends DomainResource<T>implements INamedObject<T>
 {
     @JsonView(JsonGenerationView.Published.class)
     protected String name;
@@ -72,28 +72,40 @@ public abstract class NamedObject<T> extends DomainResource<T> implements INamed
     }
 
     @Override
-    public boolean equals(Object o)
+    public boolean equals(Object obj)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        NamedObject that = (NamedObject) o;
-
-        if (activeFlag != that.activeFlag) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (!name.equals(that.name)) return false;
-
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        NamedObject other = (NamedObject) obj;
+        if (activeFlag != other.activeFlag)
+            return false;
+        if (description == null)
+        {
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
+        if (name == null)
+        {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
         return true;
     }
 
     @Override
     public int hashCode()
     {
+        final int prime = 31;
         int result = super.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (activeFlag ? 1 : 0);
+        result = prime * result + (activeFlag ? 1231 : 1237);
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
     }
 }

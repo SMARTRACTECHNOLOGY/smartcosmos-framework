@@ -26,16 +26,19 @@ import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.Size;
 import java.util.UUID;
 
-@JsonPropertyOrder(value = {"urn", "lastModifiedTimestamp" })
+@JsonPropertyOrder(value = { "urn", "lastModifiedTimestamp" })
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
-    
     protected UUID systemUuid;
-  
+
+    @JsonView(JsonGenerationView.Standard.class)
     protected long lastModifiedTimestamp;
-  
+
+    @JsonView(JsonGenerationView.Full.class)
+    @Size(max = 1024)
     protected String moniker;
 
     @Override
@@ -59,14 +62,12 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     }
 
     @Override
-    @JsonView(JsonGenerationView.Standard.class)
     public long getLastModifiedTimestamp()
     {
         return lastModifiedTimestamp;
     }
 
     @Override
-    @JsonView(JsonGenerationView.Full.class)
     public String getMoniker()
     {
         return moniker;

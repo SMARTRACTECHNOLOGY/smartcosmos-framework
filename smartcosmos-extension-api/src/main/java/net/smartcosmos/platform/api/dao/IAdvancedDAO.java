@@ -22,7 +22,7 @@ package net.smartcosmos.platform.api.dao;
 
 import net.smartcosmos.model.base.IDomainResource;
 
-public interface IAdvancedDAO<T extends IDomainResource<T>> extends IBaseDAO<T>, IPageProvider<T>, IAdvancedQuery<T>
+public interface IAdvancedDAO<T extends IDomainResource<T>> extends IBaseDAO<T>, IPageProvider<T>, IAdvancedQuery<T>, IJsonEnabledDAO
 {
 
 }

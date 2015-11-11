@@ -43,24 +43,30 @@ public class ObjectImpl extends AccountTypedNamedObject<IObject> implements IObj
     }
 
     @Override
-    public boolean equals(Object o)
+    public boolean equals(Object obj)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        ObjectImpl object = (ObjectImpl) o;
-
-        if (!objectUrn.equals(object.objectUrn)) return false;
-
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ObjectImpl other = (ObjectImpl) obj;
+        if (objectUrn == null)
+        {
+            if (other.objectUrn != null)
+                return false;
+        } else if (!objectUrn.equals(other.objectUrn))
+            return false;
         return true;
     }
 
     @Override
     public int hashCode()
     {
+        final int prime = 31;
         int result = super.hashCode();
-        result = 31 * result + objectUrn.hashCode();
+        result = prime * result + ((objectUrn == null) ? 0 : objectUrn.hashCode());
         return result;
     }
 }

@@ -1,7 +1,5 @@
 package net.smartcosmos.platform.jpa.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -22,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.Field;
 import net.smartcosmos.model.base.IDomainResource;
@@ -39,7 +38,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -52,7 +51,10 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
      */
     private static final long serialVersionUID = 1L;
 
-    @Column(length = 16, nullable = false, updatable = false, unique = true)
+    public static final int UUID_LENGTH = 16;
+    public static final int MONIKER_LENGTH = 2048;
+
+    @Column(length = UUID_LENGTH, nullable = false, updatable = false, unique = true)
     @Type(type = "uuid-binary")
     @Id
     @JsonIgnore
@@ -63,7 +65,8 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
     private long lastModifiedTimestamp;
 
     @JsonView(JsonGenerationView.Full.class)
-    @Column(length = 2048, nullable = true, updatable = true)
+    @Column(length = MONIKER_LENGTH, nullable = true, updatable = true)
+    @Size(max = MONIKER_LENGTH)
     private String moniker;
 
     @Override
