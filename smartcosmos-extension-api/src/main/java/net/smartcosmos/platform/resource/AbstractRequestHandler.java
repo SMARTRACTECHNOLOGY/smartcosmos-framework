@@ -1,33 +1,5 @@
 package net.smartcosmos.platform.resource;
 
-import static net.smartcosmos.Field.MONIKER_FIELD;
-import static net.smartcosmos.Field.NULL_MONIKER;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.CacheControl;
-import javax.ws.rs.core.EntityTag;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -53,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
-
 import io.dropwizard.views.View;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.base.IDomainResource;
@@ -68,6 +39,32 @@ import net.smartcosmos.platform.util.SmartCosmosConstraintViolationExceptionMapp
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.ViewType;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.EntityTag;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static net.smartcosmos.Field.MONIKER_FIELD;
+import static net.smartcosmos.Field.NULL_MONIKER;
 
 public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 {
@@ -185,7 +182,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      * @return returns the validated domain resource
      * @throws WebApplicationException
      */
-    public <ENTITY> ENTITY parseWithoutValidation(final String jsonString, final Class<ENTITY> targetEntityClass)
+    public <ENTITY extends IDomainResource> ENTITY parseWithoutValidation(final String jsonString, final Class<ENTITY> targetEntityClass)
             throws WebApplicationException
     {
         ENTITY entity = null;
@@ -217,7 +214,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      * @return returns the validated domain resource
      * @throws WebApplicationException
      */
-    public <ENTITY> ENTITY parse(final String jsonString, final Class<ENTITY> targetEntityClass)
+    public <ENTITY extends IDomainResource> ENTITY parse(final String jsonString, final Class<ENTITY> targetEntityClass)
             throws WebApplicationException
     {
         ENTITY entity = parseWithoutValidation(jsonString, targetEntityClass);
@@ -306,7 +303,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
         return om;
     }
 
-    private <ENTITY> ENTITY jsonToEntity(final String jsonString, final Class<ENTITY> targetEntityClass)
+    private <ENTITY extends IDomainResource> ENTITY jsonToEntity(final String jsonString, final Class<ENTITY> targetEntityClass)
             throws IOException
     {
         ObjectMapper mapper = createObjectMapper();
@@ -322,7 +319,7 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
      *            the sub-type of DomainResourceEntity
      * @throws WebApplicationException
      */
-    public <ENTITY> void validate(final ENTITY entity) throws WebApplicationException
+    public <ENTITY extends IDomainResource> void validate(final ENTITY entity) throws WebApplicationException
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<ENTITY>> violations = validator.validate(entity);

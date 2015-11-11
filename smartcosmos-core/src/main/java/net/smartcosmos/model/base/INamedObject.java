@@ -28,6 +28,9 @@ package net.smartcosmos.model.base;
  */
 public interface INamedObject<T> extends IDomainResource<T>
 {
+    int NAME_LENGTH = 255;
+    int DESCRIPTION_LENGTH = 1024;
+
     String getName();
 
     void setName(String name);

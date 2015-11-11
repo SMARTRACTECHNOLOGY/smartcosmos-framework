@@ -24,12 +24,18 @@ import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public abstract class NamedObject<T> extends DomainResource<T>implements INamedObject<T>
 {
     @JsonView(JsonGenerationView.Published.class)
+    @Size(max = NAME_LENGTH)
+    @NotNull
     protected String name;
 
     @JsonView(JsonGenerationView.Standard.class)
+    @Size(max = DESCRIPTION_LENGTH)
     protected String description;
 
     @JsonView(JsonGenerationView.Standard.class)
