@@ -49,6 +49,7 @@ import org.slf4j.LoggerFactory;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
+import javax.validation.ValidationException;
 import javax.validation.Validator;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.CacheControl;
@@ -322,11 +323,18 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     public <ENTITY extends IDomainResource> void validate(final ENTITY entity) throws WebApplicationException
     {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        Set<ConstraintViolation<ENTITY>> violations = validator.validate(entity);
-        if (!violations.isEmpty())
+        try
         {
-            SmartCosmosConstraintViolationExceptionMapper exceptionMapper = new SmartCosmosConstraintViolationExceptionMapper();
-            throw new WebApplicationException(exceptionMapper.toResponse(new ConstraintViolationException(violations)));
+            Set<ConstraintViolation<ENTITY>> violations = validator.validate(entity);
+            if (!violations.isEmpty())
+            {
+                SmartCosmosConstraintViolationExceptionMapper exceptionMapper = new SmartCosmosConstraintViolationExceptionMapper();
+                throw new WebApplicationException(exceptionMapper.toResponse(new ConstraintViolationException(violations)));
+            }
+        } catch (ValidationException e)
+        {
+            e.printStackTrace();
+            throw new WebApplicationException(VALIDATION_FAILURE);
         }
     }
 }
