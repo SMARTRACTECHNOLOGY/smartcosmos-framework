@@ -143,11 +143,11 @@ public class User extends DomainResource< IUser > implements IUser
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + emailAddress.hashCode();
+        result = 31 * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
         result = 31 * result + (account != null ? account.hashCode() : 0);
         result = 31 * result + (givenName != null ? givenName.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + roleType.hashCode();
+        result = 31 * result + ((roleType == null) ? 0 : roleType.hashCode());
         return result;
     }
 

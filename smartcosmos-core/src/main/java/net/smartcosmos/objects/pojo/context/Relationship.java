@@ -112,19 +112,9 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
     {
         int result = super.hashCode();
 
-        // hashCode() is called during validation and would throw a ValidationException if hashCode() of fields can not be called:
-        if (relatedEntityReferenceType != null)
-        {
-            result = 31 * result + relatedEntityReferenceType.hashCode();
-        }
-        if (relatedReferenceUrn != null)
-        {
-            result = 31 * result + relatedReferenceUrn.hashCode();
-        }
-        if (type != null)
-        {
-            result = 31 * result + type.hashCode();
-        }
+        result = 31 * result + ((relatedEntityReferenceType == null) ? 0 : relatedEntityReferenceType.hashCode());
+        result = 31 * result + ((relatedReferenceUrn == null) ? 0 : relatedReferenceUrn.hashCode());
+        result = 31 * result + ((type == null) ? 0 : type.hashCode());
         result = 31 * result + Boolean.valueOf(reciprocal).hashCode();
         return result;
     }
