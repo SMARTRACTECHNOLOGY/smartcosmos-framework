@@ -25,9 +25,14 @@ import net.smartcosmos.objects.model.context.IDevice;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Device extends AccountTypedNamedObject<IDevice> implements IDevice
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = IDENTIFICATION_LENGTH)
     protected String identification;
 
     @Override
@@ -61,8 +66,8 @@ public class Device extends AccountTypedNamedObject<IDevice> implements IDevice
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + type.hashCode();
-        result = 31 * result + identification.hashCode();
+        result = 31 * result + ((type == null) ? 0 : type.hashCode());
+        result = 31 * result + ((identification == null) ? 0 : identification.hashCode());
         return result;
     }
 }
