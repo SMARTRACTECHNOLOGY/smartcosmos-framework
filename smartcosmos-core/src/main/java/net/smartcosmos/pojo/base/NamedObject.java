@@ -30,12 +30,12 @@ import javax.validation.constraints.Size;
 public abstract class NamedObject<T> extends DomainResource<T>implements INamedObject<T>
 {
     @JsonView(JsonGenerationView.Published.class)
-    @Size(max = NAME_LENGTH)
+    @Size(max = NAME_MAX_LENGTH)
     @NotNull
     protected String name;
 
     @JsonView(JsonGenerationView.Standard.class)
-    @Size(max = DESCRIPTION_LENGTH)
+    @Size(max = DESCRIPTION_MAX_LENGTH)
     protected String description;
 
     @JsonView(JsonGenerationView.Standard.class)

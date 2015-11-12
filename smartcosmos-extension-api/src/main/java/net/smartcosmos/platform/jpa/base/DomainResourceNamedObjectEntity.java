@@ -38,14 +38,14 @@ public abstract class DomainResourceNamedObjectEntity<T extends INamedObject<T>>
     private static final long serialVersionUID = 1L;
 
     @JsonView(JsonGenerationView.Published.class)
-    @Column(length = NAME_LENGTH, nullable = false)
-//    @Size(max = NAME_LENGTH)
+    @Column(length = NAME_MAX_LENGTH, nullable = false)
+//    @Size(max = NAME_MAX_LENGTH)
 //    @NotNull
     private String name;
 
     @JsonView(JsonGenerationView.Standard.class)
-    @Column(length = DESCRIPTION_LENGTH)
-//    @Size(max = DESCRIPTION_LENGTH)
+    @Column(length = DESCRIPTION_MAX_LENGTH)
+//    @Size(max = DESCRIPTION_MAX_LENGTH)
     private String description;
 
     @JsonView(JsonGenerationView.Standard.class)
