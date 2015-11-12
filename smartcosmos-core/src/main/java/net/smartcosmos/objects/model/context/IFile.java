@@ -32,6 +32,11 @@ import net.smartcosmos.model.base.IReferentialObject;
  */
 public interface IFile extends IAccountDomainResource<IFile>, IReferentialObject
 {
+    int URL_MAX_LENGTH = 2048;
+    int FILE_NAME_MAX_LENGTH = 2048;
+    int MIME_TYPE_MAX_LENGTH = 100;
+    int DIGITAL_SIGNATURE_MAX_LENGTH = 1024;
+
     long getTimestamp();
 
     void setTimestamp(long timestamp);
