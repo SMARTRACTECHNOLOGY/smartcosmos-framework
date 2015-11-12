@@ -28,6 +28,9 @@ import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 public class User extends DomainResource< IUser > implements IUser
 {
@@ -36,12 +39,22 @@ public class User extends DomainResource< IUser > implements IUser
     protected IAccount account;
     @JsonView(JsonGenerationView.Minimum.class)
     protected RoleType roleType;
+
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = EMAIL_ADDRESS_MAX_LENGTH)
     private String emailAddress;
+
     @JsonView(JsonGenerationView.Full.class)
+    @NotNull
+    @Size(max = GIVEN_NAME_MAX_LENGTH)
     private String givenName;
+
     @JsonView(JsonGenerationView.Full.class)
+    @NotNull
+    @Size(max = SURNAME_MAX_LENGTH)
     private String surname;
+
     @Override
     public String getEmailAddress()
     {
