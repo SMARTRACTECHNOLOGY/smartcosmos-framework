@@ -41,27 +41,27 @@ public class ObjectAddress extends AccountDomainResource<IObjectAddress> impleme
     protected String type;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Size(max = 1024)
+    @Size(max = LINE_1_MAX_LENGTH)
     private String line1;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Size(max = 1024)
+    @Size(max = LINE_2_MAX_LENGTH)
     private String line2;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Size(max = 1024)
+    @Size(max = CITY_MAX_LENGTH)
     private String city;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Size(max = 50)
+    @Size(max = STATE_PROVINCE_MAX_LENGTH)
     private String stateProvince;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Size(max = 20)
+    @Size(max = POSTAL_CODE_MAX_LENGTH)
     private String postalCode;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Size(max = 2)
+    @Size(max = COUNTRY_ABBREVIATION_MAX_LENGTH)
     private String countryAbbreviation;
 
     @JsonView(JsonGenerationView.Standard.class)
@@ -225,8 +225,8 @@ public class ObjectAddress extends AccountDomainResource<IObjectAddress> impleme
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + object.hashCode();
-        result = 31 * result + type.hashCode();
+        result = 31 * result + (object != null ? object.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (line1 != null ? line1.hashCode() : 0);
         result = 31 * result + (line2 != null ? line2.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
