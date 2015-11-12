@@ -28,6 +28,9 @@ import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Represents an HTTP/S integration endpoint POJO that SMART COSMOS uses to push SMART COSMOS events in JSON form
  * in near real-time. These endpoints are used for back office integration and 3rd party extension integration.
@@ -36,30 +39,41 @@ public class NotificationEndpoint extends ReferentialObject<INotificationEndpoin
 {
     @JsonView(JsonGenerationView.Restricted.class)
     @JsonDeserialize(as = Account.class)
+    @NotNull
     protected IAccount referenceAccount;
 
     @JsonView(JsonGenerationView.Standard.class)
+    @NotNull
+    @Size(max = ENCODED_PUBLIC_KEY_MAX_LENGTH)
     protected String encodedPublicKey;
 
     @JsonView(JsonGenerationView.Restricted.class)
+    @NotNull
+    @Size(max = ENCODED_PRIVATE_KEY_MAX_LENGTH)
     protected String encodedPrivateKey;
 
     @JsonView(JsonGenerationView.Restricted.class)
+    @Size(max = TOPIC_ARN_MAX_LENGTH)
     protected String topicArn;
 
     @JsonView(JsonGenerationView.Restricted.class)
+    @Size(max = SUBSCRIPTION_ARN_MAX_LENGTH)
     protected String subscriptionArn;
 
     @JsonView(JsonGenerationView.Full.class)
+    @Size(max = NOTIFICATION_ENDPOINT_URL_MAX_LENGTH)
     protected String integrationEndpointUrl;
 
     @JsonView(JsonGenerationView.Full.class)
     protected boolean pendingConfirmation;
 
     @JsonView(JsonGenerationView.Published.class)
+    @NotNull
+    @Size(max = NAME_MAX_LENGTH)
     protected String name;
 
     @JsonView(JsonGenerationView.Standard.class)
+    @Size(max = DESCRIPTION_MAX_LENGTH)
     protected String description;
 
     @JsonView(JsonGenerationView.Standard.class)
@@ -201,14 +215,14 @@ public class NotificationEndpoint extends ReferentialObject<INotificationEndpoin
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + referenceAccount.hashCode();
-        result = 31 * result + encodedPublicKey.hashCode();
-        result = 31 * result + encodedPrivateKey.hashCode();
+        result = 31 * result + ((referenceAccount == null) ? 0 : referenceAccount.hashCode());
+        result = 31 * result + ((encodedPublicKey == null) ? 0 : encodedPublicKey.hashCode());
+        result = 31 * result + ((encodedPrivateKey == null) ? 0 : encodedPrivateKey.hashCode());
         result = 31 * result + (topicArn != null ? topicArn.hashCode() : 0);
         result = 31 * result + (subscriptionArn != null ? subscriptionArn.hashCode() : 0);
-        result = 31 * result + integrationEndpointUrl.hashCode();
+        result = 31 * result + ((integrationEndpointUrl == null) ? 0 : integrationEndpointUrl.hashCode());
         result = 31 * result + (pendingConfirmation ? 1 : 0);
-        result = 31 * result + name.hashCode();
+        result = 31 * result + ((name == null) ? 0 : name.hashCode());
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (activeFlag ? 1 : 0);
         return result;
