@@ -41,7 +41,7 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
     protected String relatedReferenceUrn;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Size(max = TYPE_LENGTH)
+    @Size(max = TYPE_MAX_LENGTH)
     @NotNull
     protected String type;
 

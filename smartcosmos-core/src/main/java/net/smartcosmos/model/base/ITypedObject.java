@@ -31,7 +31,7 @@ package net.smartcosmos.model.base;
  */
 public interface ITypedObject
 {
-    int TYPE_LENGTH = 255;
+    int TYPE_MAX_LENGTH = 255;
 
     String getType();
 

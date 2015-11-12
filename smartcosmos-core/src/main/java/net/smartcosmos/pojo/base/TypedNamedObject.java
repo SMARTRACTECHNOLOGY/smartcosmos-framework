@@ -31,7 +31,7 @@ import javax.validation.constraints.Size;
 public abstract class TypedNamedObject<T> extends NamedObject<T>implements ITypedObject
 {
     @JsonView(JsonGenerationView.Minimum.class)
-    @Size(max = TYPE_LENGTH)
+    @Size(max = TYPE_MAX_LENGTH)
     @NotNull
     protected String type;
 

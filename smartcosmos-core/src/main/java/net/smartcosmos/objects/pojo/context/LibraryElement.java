@@ -34,7 +34,7 @@ public class LibraryElement extends AccountTypedNamedObject<ILibraryElement> imp
 {
     @JsonView(JsonGenerationView.Minimum.class)
     @NotNull
-    @Size(max = TYPE_LENGTH)
+    @Size(max = TYPE_MAX_LENGTH)
     private String libraryElementType;
 
     @JsonView(JsonGenerationView.Minimum.class)
