@@ -26,9 +26,14 @@ import net.smartcosmos.model.geo.IGeospatialEntry;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class GeospatialEntry extends AccountTypedNamedObject<IGeospatialEntry> implements IGeospatialEntry
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = GEO_JSON_MAX_LENGTH)
     protected GeometricShape geometricShape;
 
     @Override
@@ -61,7 +66,7 @@ public class GeospatialEntry extends AccountTypedNamedObject<IGeospatialEntry> i
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + geometricShape.hashCode();
+        result = 31 * result + ((geometricShape == null) ? 0 : geometricShape.hashCode());
         return result;
     }
 }

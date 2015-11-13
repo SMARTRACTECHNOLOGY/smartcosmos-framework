@@ -63,7 +63,7 @@ public class AccountNamedObject<T> extends NamedObject<T> implements IAccountCon
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + account.hashCode();
+        result = 31 * result + ((account == null) ? 0 : account.hashCode());
         return result;
     }
 }

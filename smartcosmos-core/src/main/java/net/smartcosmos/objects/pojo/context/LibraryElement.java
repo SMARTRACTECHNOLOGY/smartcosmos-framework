@@ -25,14 +25,21 @@ import net.smartcosmos.objects.model.context.ILibraryElement;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import static net.smartcosmos.Field.LIBRARY_ELEMENT_TYPE_NAME;
 
 public class LibraryElement extends AccountTypedNamedObject<ILibraryElement> implements ILibraryElement
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = TYPE_MAX_LENGTH)
     private String libraryElementType;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = UUID_LENGTH)
     private String parent;
 
     public String getLibraryElementType()

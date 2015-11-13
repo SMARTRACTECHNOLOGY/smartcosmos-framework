@@ -117,36 +117,19 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 
             }
 
-            if (!service.getStatus().equals(Status.SUCCESS_CREATED))
-            {
-                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
-
-                try
-                {
-                    if (jsonResult.has(CODE_FIELD) && jsonResult.has(MESSAGE_FIELD))
-                    {
-                        ResponseEntity responseEntity = new ResponseEntity();
-                        responseEntity.setCode(jsonResult.getInt(CODE_FIELD));
-                        responseEntity.setMessage(jsonResult.getString(MESSAGE_FIELD));
-
-                        throw new ServiceException(responseEntity);
-
-                    } else if (jsonResult.has(CODE_FIELD))
-                    {
-                        throw new ServiceException(jsonResult.getInt(CODE_FIELD));
-                    }
-                } catch (JSONException e)
-                {
-                    throw new ServiceException(Result.ERR_FAILURE.getCode());
-                }
-            } else
+            Status status = service.getStatus();
+            if (status.equals(Status.SUCCESS_CREATED))
             {
                 if (clazz.isAssignableFrom(ResponseEntity.class))
                 {
                     LOGGER.debug(((ResponseEntity) response).getMessage());
                 }
-            }
+            } else
+            {
+                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
 
+                throwServiceException(jsonResult);
+            }
         } catch (JSONException | IOException e)
         {
             LOGGER.error("Unexpected Exception", e);
@@ -175,24 +158,7 @@ public class PutCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                 LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
 
                 JSONObject jsonResult = jsonRepresentation.getJsonObject();
-                try
-                {
-                    if (jsonResult.has(CODE_FIELD) && jsonResult.has(MESSAGE_FIELD))
-                    {
-                        ResponseEntity responseEntity = new ResponseEntity();
-                        responseEntity.setCode(jsonResult.getInt(CODE_FIELD));
-                        responseEntity.setMessage(jsonResult.getString(MESSAGE_FIELD));
-
-                        throw new ServiceException(responseEntity);
-
-                    } else if (jsonResult.has(CODE_FIELD))
-                    {
-                        throw new ServiceException(jsonResult.getInt(CODE_FIELD));
-                    }
-                } catch (JSONException e)
-                {
-                    throw new ServiceException(Result.ERR_FAILURE.getCode());
-                }
+                throwServiceException(jsonResult);
             } else
             {
                 JSONArray jsonResult = jsonRepresentation.getJsonArray();

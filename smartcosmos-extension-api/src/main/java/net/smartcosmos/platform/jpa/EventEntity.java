@@ -50,7 +50,7 @@ public class EventEntity extends DomainResourceEntity<IEvent> implements IEvent
     protected EventType eventType;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 8192, nullable = true, updatable = false)
+    @Column(length = USER_DEFINITION_MAX_LENGTH, nullable = true, updatable = false)
     protected String jsonUserDefinition;
 
     @JsonView(JsonGenerationView.Restricted.class)
@@ -60,7 +60,7 @@ public class EventEntity extends DomainResourceEntity<IEvent> implements IEvent
     protected IAccount account;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 8192, nullable = true)
+    @Column(length = SOURCE_MAX_LENGTH, nullable = true)
     protected String source;
 
     @JsonView(JsonGenerationView.Minimum.class)

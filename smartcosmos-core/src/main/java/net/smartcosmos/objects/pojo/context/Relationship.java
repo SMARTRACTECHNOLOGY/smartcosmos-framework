@@ -27,15 +27,22 @@ import net.smartcosmos.objects.model.context.IRelationship;
 import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Relationship extends ReferentialObject<IRelationship> implements IRelationship
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
     protected EntityReferenceType relatedEntityReferenceType;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
     protected String relatedReferenceUrn;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = TYPE_MAX_LENGTH)
+    @NotNull
     protected String type;
 
     @JsonView(JsonGenerationView.Full.class)
@@ -104,9 +111,10 @@ public class Relationship extends ReferentialObject<IRelationship> implements IR
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + relatedEntityReferenceType.hashCode();
-        result = 31 * result + relatedReferenceUrn.hashCode();
-        result = 31 * result + type.hashCode();
+
+        result = 31 * result + ((relatedEntityReferenceType == null) ? 0 : relatedEntityReferenceType.hashCode());
+        result = 31 * result + ((relatedReferenceUrn == null) ? 0 : relatedReferenceUrn.hashCode());
+        result = 31 * result + ((type == null) ? 0 : type.hashCode());
         result = 31 * result + Boolean.valueOf(reciprocal).hashCode();
         return result;
     }

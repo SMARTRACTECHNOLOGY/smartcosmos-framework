@@ -63,7 +63,7 @@ public class TagAssignment extends ReferentialObject<ITagAssignment> implements 
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + tag.hashCode();
+        result = 31 * result + ((tag == null) ? 0 : tag.hashCode());
         return result;
     }
 }

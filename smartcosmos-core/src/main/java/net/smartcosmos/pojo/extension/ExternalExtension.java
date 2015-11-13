@@ -29,6 +29,9 @@ import net.smartcosmos.pojo.base.NamedObject;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class ExternalExtension extends NamedObject<IExternalExtension> implements IExternalExtension
 {
     @JsonView(JsonGenerationView.Restricted.class)
@@ -36,24 +39,36 @@ public class ExternalExtension extends NamedObject<IExternalExtension> implement
     protected IAccount account;
 
     @JsonView(JsonGenerationView.Standard.class)
+    @NotNull
+    @Size(max = SUPPORT_EMAIL_MAX_LENGTH)
     protected String supportEmail;
 
     @JsonView(JsonGenerationView.Published.class)
+    @Size(max = WEBSITE_URL_MAX_LENGTH)
     protected String webSiteUrl;
 
     @JsonView(JsonGenerationView.Full.class)
+    @NotNull
+    @Size(max = CLIENT_ID_MAX_LENGTH)
     protected String clientId;
 
     @JsonView(JsonGenerationView.Full.class)
+    @NotNull
+    @Size(max = CLIENT_SECRET_MAX_LENGTH)
     protected String clientSecret;
 
     @JsonView(JsonGenerationView.Full.class)
+    @NotNull
+    @Size(max = REDIRECT_URL_MAX_LENGTH)
     protected String redirectUrl;
 
     @JsonView(JsonGenerationView.Published.class)
+    @NotNull
+    @Size(max = APP_CATALOG_URL_MAX_LENGTH)
     protected String appCatalogUrl;
 
     @JsonView(JsonGenerationView.Standard.class)
+    @Size(max = LONG_DESCRIPTION_MAX_LENGTH)
     protected String longDescription;
 
     @JsonView(JsonGenerationView.Published.class)
