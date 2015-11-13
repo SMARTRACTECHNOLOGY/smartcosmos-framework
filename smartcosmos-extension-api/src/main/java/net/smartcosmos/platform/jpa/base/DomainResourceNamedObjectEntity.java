@@ -27,6 +27,8 @@ import net.smartcosmos.util.json.JsonGenerationView;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public abstract class DomainResourceNamedObjectEntity<T extends INamedObject<T>>
@@ -39,13 +41,13 @@ public abstract class DomainResourceNamedObjectEntity<T extends INamedObject<T>>
 
     @JsonView(JsonGenerationView.Published.class)
     @Column(length = NAME_MAX_LENGTH, nullable = false)
-//    @Size(max = NAME_MAX_LENGTH)
-//    @NotNull
+    @Size(max = NAME_MAX_LENGTH)
+    @NotNull
     private String name;
 
     @JsonView(JsonGenerationView.Standard.class)
     @Column(length = DESCRIPTION_MAX_LENGTH)
-//    @Size(max = DESCRIPTION_MAX_LENGTH)
+    @Size(max = DESCRIPTION_MAX_LENGTH)
     private String description;
 
     @JsonView(JsonGenerationView.Standard.class)

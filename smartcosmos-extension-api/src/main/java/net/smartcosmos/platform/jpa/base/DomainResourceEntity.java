@@ -38,6 +38,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -62,7 +63,7 @@ public abstract class DomainResourceEntity<T extends IDomainResource<T>>
 
     @JsonView(JsonGenerationView.Full.class)
     @Column(length = MONIKER_LENGTH, nullable = true, updatable = true)
-//    @Size(max = MONIKER_LENGTH)
+    @Size(max = MONIKER_LENGTH)
     private String moniker;
 
     @Override
