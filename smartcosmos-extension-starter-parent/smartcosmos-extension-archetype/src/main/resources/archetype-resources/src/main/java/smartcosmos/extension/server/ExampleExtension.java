@@ -40,7 +40,23 @@ public class ExampleExtension
     @Override
     public void initialize(Bootstrap<?> bootstrap)
     {
-        super.initialize(bootstrap);
+        ConfigurationFactory<T> cf = new DefaultConfigurationFactoryFactory<T>()
+                .create(extensionConfigurationClass,
+                        bootstrap.getValidatorFactory().getValidator(),
+                        bootstrap.getObjectMapper(),
+                        "dw");
+
+        try
+        {
+            extensionConfiguration = (T) cf.build(bootstrap.getConfigurationSourceProvider(),
+                    getServerExtensionConfigurationPath());
+
+            initialize(extensionConfiguration);
+
+        } catch (Exception e)
+        {
+            handleInitializationException(e);
+        }
     }
 
 
@@ -102,4 +118,11 @@ public class ExampleExtension
     {
         return entities();
     }
+
+    @Override
+    public void run(SmartCosmosConfiguration configuration, Environment environment) throws Exception
+    {
+        this.smartCosmosConfiguration = configuration;
+    }
+
 }

@@ -21,194 +21,40 @@ package net.smartcosmos.platform.configuration;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.Maps;
-import io.dropwizard.Configuration;
-import io.dropwizard.client.HttpClientConfiguration;
-import io.dropwizard.db.DataSourceFactory;
 import net.smartcosmos.platform.bundle.batch.BatchFactory;
 import net.smartcosmos.platform.bundle.quartz.QuartzFactory;
 import net.smartcosmos.platform.bundle.transformation.TransformationsFactory;
-import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SmartCosmosConfiguration extends Configuration
+public interface SmartCosmosConfiguration
 {
-    @NotEmpty
-    @JsonProperty
-    private String serverRoot;
-
-    @NotEmpty
-    @JsonProperty
-    private String urlPattern;
-
-    @NotEmpty
-    @JsonProperty
-    private String adminEmailAddress;
-
-    @NotEmpty
-    @JsonProperty
-    private String appInstanceName;
-
-    @NotEmpty
-    @JsonProperty
-    private String appName;
-
-    @Valid
-    @NotNull
-    private OAuth2Factory oAuth2Factory = new OAuth2Factory();
-
-    @NotNull
-    private Map<String, String> serviceClasses = Maps.newLinkedHashMap();
-
-    @NotNull
-    private Map<String, String> endpointMethodControl = Maps.newLinkedHashMap();
-
-    private Map<String, String> visitors = Maps.newLinkedHashMap();
-
-    @NotNull
-    private Map<String, String> resourceRegistrarClasses = Maps.newLinkedHashMap();
-
-    @NotNull
-    private Map<String, String> serviceParameters = Maps.newLinkedHashMap();
-
-    @Valid
-    @NotNull
-    @JsonProperty
-    private DataSourceFactory dataSourceFactory = new DataSourceFactory();
-
-    @JsonProperty
-    private boolean migrateSchemaOnStartup;
-
-    @Valid
-    @NotNull
-    private BatchFactory batchFactory = new BatchFactory();
-
-    @Valid
-    @NotNull
-    private QuartzFactory quartzFactory = new QuartzFactory();
-
-    @Valid
-    @NotNull
-    private TransformationsFactory transformationsFactory = new TransformationsFactory();
-
-    @Valid
-    @NotNull
-    @JsonProperty
-    private HttpClientConfiguration httpClient = new HttpClientConfiguration();
-
-    @Valid
-    @NotNull
-    private EndpointsFactory endpointsFactory = new EndpointsFactory();
-
-    @Valid
-    @NotNull
-    LicenseFactory licenseFactory = new LicenseFactory();
-
-    @NotNull
-    private Map<String, String> serverExtensions = Maps.newLinkedHashMap();
-
-    @NotNull
-    private Map<String, String> serverExtensionConfigurationPaths = Maps.newLinkedHashMap();
-
-    @JsonProperty
-    private boolean supportRealmCheck;
-
-    @JsonProperty
-    private boolean supportDynamicRegistration;
-
-    @JsonProperty
-    private boolean supportStatusCheck;
-
-    @JsonProperty
-    private boolean supportNotifications;
-
-    @JsonProperty
-    private boolean supportExtensions;
-
-    @JsonProperty
-    private boolean supportMultimediaFiles;
-
-    @JsonProperty
-    private boolean supportInteractionSessions;
-
-    @JsonProperty
-    private boolean supportUsers;
-
-    @JsonProperty
-    private boolean includeEmailVerificationTokenInRegistrationJSON;
-
-    @NotNull
-    private Map<String, String> transactionHandlerClasses = Maps.newLinkedHashMap();
-
-    @JsonProperty
-    private ArrayList<String> libraryHierarchy;
-
-    @JsonProperty
-    private ArrayList<Boolean> libraryLinkFlags;
 
     //
     //
     // General Platform Definition
     //
     //
-    public String getAdminEmailAddress()
-    {
-        return adminEmailAddress;
-    }
+    String getAdminEmailAddress();
 
-    public String getAppInstanceName()
-    {
-        return appInstanceName;
-    }
+    String getAppInstanceName();
 
-    public String getAppName()
-    {
-        return appName;
-    }
+    String getAppName();
 
     @JsonProperty("batch")
-    public BatchFactory getBatchFactory()
-    {
-        return batchFactory;
-    }
+    BatchFactory getBatchFactory();
 
-    public DataSourceFactory getDataSourceFactory()
-    {
-        return dataSourceFactory;
-    }
-
-    public Map<String, String> getEndpointMethodControl()
-    {
-        return endpointMethodControl;
-    }
+    Map<String, String> getEndpointMethodControl();
 
     @JsonProperty("endpoints")
-    public EndpointsFactory getEndpointsFactory()
-    {
-        return endpointsFactory;
-    }
-
-    public HttpClientConfiguration getHttpClientConfiguration()
-    {
-        return httpClient;
-    }
+    EndpointsFactory getEndpointsFactory();
 
     @JsonProperty("license")
-    public LicenseFactory getLicenseFactory()
-    {
-        return licenseFactory;
-    }
+    LicenseFactory getLicenseFactory();
 
     @JsonProperty("oauth2")
-    public OAuth2Factory getOAuth2Factory()
-    {
-        return oAuth2Factory;
-    }
+    OAuth2Factory getOAuth2Factory();
 
     //
     //
@@ -216,205 +62,88 @@ public class SmartCosmosConfiguration extends Configuration
     //
     //
     @JsonProperty("quartz")
-    public QuartzFactory getQuartzFactory()
-    {
-        return quartzFactory;
-    }
+    QuartzFactory getQuartzFactory();
 
-    public Map<String, String> getResourceRegistrarClasses()
-    {
-        return resourceRegistrarClasses;
-    }
+    Map<String, String> getResourceRegistrarClasses();
 
-    public Map<String, String> getServerExtensionConfigurationPaths()
-    {
-        return serverExtensionConfigurationPaths;
-    }
+    Map<String, String> getServerExtensionConfigurationPaths();
 
-    public Map<String, String> getServerExtensions()
-    {
-        return serverExtensions;
-    }
+    Map<String, String> getServerExtensions();
 
-    public String getServerRoot()
-    {
-        return serverRoot;
-    }
+    String getServerRoot();
 
-    public Map<String, String> getServiceClasses()
-    {
-        return serviceClasses;
-    }
+    Map<String, String> getServiceClasses();
 
-    public Map<String, String> getServiceParameters()
-    {
-        return serviceParameters;
-    }
+    Map<String, String> getServiceParameters();
 
-    public Map<String, String> getTransactionHandlerClasses()
-    {
-        return transactionHandlerClasses;
-    }
+    Map<String, String> getTransactionHandlerClasses();
 
     @JsonProperty("transformations")
-    public TransformationsFactory getTransformationsFactory()
-    {
-        return transformationsFactory;
-    }
+    TransformationsFactory getTransformationsFactory();
 
-    public String getUrlPattern()
-    {
-        return urlPattern;
-    }
+    String getUrlPattern();
 
-    public Map<String, String> getVisitors()
-    {
-        return visitors;
-    }
+    Map<String, String> getVisitors();
 
-    public boolean includeEmailVerificationTokenInRegistrationJSON()
-    {
-        return includeEmailVerificationTokenInRegistrationJSON;
-    }
+    boolean includeEmailVerificationTokenInRegistrationJSON();
 
-    public boolean isMigrateSchemaOnStartup()
-    {
-        return migrateSchemaOnStartup;
-    }
+    boolean isMigrateSchemaOnStartup();
 
     @JsonProperty("batch")
-    public void setBatchFactory(final BatchFactory batchFactory)
-    {
-        this.batchFactory = batchFactory;
-    }
+    void setBatchFactory(final BatchFactory batchFactory);
 
     @JsonProperty("endpoints")
-    public void setEndpointsFactory(final EndpointsFactory endpointsFactory)
-    {
-        this.endpointsFactory = endpointsFactory;
-    }
+    void setEndpointsFactory(final EndpointsFactory endpointsFactory);
 
-    public void setIncludeEmailVerificationTokenInRegistration(final boolean flag)
-    {
-        this.includeEmailVerificationTokenInRegistrationJSON = flag;
-    }
+    void setIncludeEmailVerificationTokenInRegistration(final boolean flag);
 
-    public void setLibraryHierarchy(final List<String> libraryHierarchy)
-    {
-        LibraryHierarchyFactory.setLibraryHierarchyList(libraryHierarchy);
-    }
+    void setLibraryHierarchy(final List<String> libraryHierarchy);
 
-    public void setLibraryLinkFlags(final List<Boolean> libraryLinkFlags)
-    {
-        LibraryHierarchyFactory.setLibraryLinkFlagsList(libraryLinkFlags);
-    }
+    void setLibraryLinkFlags(final List<Boolean> libraryLinkFlags);
 
     @JsonProperty("license")
-    public void setLicenseFactory(final LicenseFactory licenseFactory)
-    {
-        this.licenseFactory = licenseFactory;
-    }
+    void setLicenseFactory(final LicenseFactory licenseFactory);
 
-    public void setMigrateSchemaOnStartup(final boolean migrateSchemaOnStartup)
-    {
-        this.migrateSchemaOnStartup = migrateSchemaOnStartup;
-    }
+    void setMigrateSchemaOnStartup(final boolean migrateSchemaOnStartup);
 
     @JsonProperty("oauth2")
-    public void setOAuth2Factory(final OAuth2Factory oAuth2Factory)
-    {
-        this.oAuth2Factory = oAuth2Factory;
-    }
+    void setOAuth2Factory(final OAuth2Factory oAuth2Factory);
 
     @JsonProperty("quartz")
-    public void setQuartzFactory(final QuartzFactory quartzFactory)
-    {
-        this.quartzFactory = quartzFactory;
-    }
+    void setQuartzFactory(final QuartzFactory quartzFactory);
 
-    public void setSupportDynamicRegistration(final boolean flag)
-    {
-        this.supportDynamicRegistration = flag;
-    }
+    void setSupportDynamicRegistration(final boolean flag);
 
-    public void setSupportExtensions(final boolean flag)
-    {
-        this.supportExtensions = flag;
-    }
+    void setSupportExtensions(final boolean flag);
 
-    public void setSupportInteractionSessions(final boolean flag)
-    {
-        this.supportInteractionSessions = flag;
-    }
+    void setSupportInteractionSessions(final boolean flag);
 
-    public void setSupportMultimediaFiles(final boolean flag)
-    {
-        this.supportMultimediaFiles = flag;
-    }
+    void setSupportMultimediaFiles(final boolean flag);
 
-    public void setSupportNotifications(final boolean flag)
-    {
-        this.supportNotifications = flag;
-    }
+    void setSupportNotifications(final boolean flag);
 
-    public void setSupportRealmCheck(final boolean flag)
-    {
-        this.supportRealmCheck = flag;
-    }
+    void setSupportRealmCheck(final boolean flag);
 
-    public void setSupportStatusCheck(final boolean flag)
-    {
-        this.supportStatusCheck = flag;
-    }
+    void setSupportStatusCheck(final boolean flag);
 
-    public void setSupportUsers(final boolean flag)
-    {
-        this.supportUsers = flag;
-    }
+    void setSupportUsers(final boolean flag);
 
     @JsonProperty("transformations")
-    public void setTransformationsFactory(final TransformationsFactory transformationsFactory)
-    {
-        this.transformationsFactory = transformationsFactory;
-    }
+    void setTransformationsFactory(final TransformationsFactory transformationsFactory);
 
-    public boolean supportDynamicRegistration()
-    {
-        return supportDynamicRegistration;
-    }
+    boolean supportDynamicRegistration();
 
-    public boolean supportExtensions()
-    {
-        return supportExtensions;
-    }
+    boolean supportExtensions();
 
-    public boolean supportInteractionSessions()
-    {
-        return supportInteractionSessions;
-    }
+    boolean supportInteractionSessions();
 
-    public boolean supportMultimediaFiles()
-    {
-        return supportMultimediaFiles;
-    }
+    boolean supportMultimediaFiles();
 
-    public boolean supportNotifications()
-    {
-        return supportNotifications;
-    }
+    boolean supportNotifications();
 
-    public boolean supportRealmCheck()
-    {
-        return supportRealmCheck;
-    }
+    boolean supportRealmCheck();
 
-    public boolean supportStatusCheck()
-    {
-        return supportStatusCheck;
-    }
+    boolean supportStatusCheck();
 
-    public boolean supportUsers()
-    {
-        return supportUsers;
-    }
+    boolean supportUsers();
 }

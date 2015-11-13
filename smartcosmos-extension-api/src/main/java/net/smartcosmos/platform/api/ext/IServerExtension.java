@@ -20,11 +20,8 @@ package net.smartcosmos.platform.api.ext;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import io.dropwizard.ConfiguredBundle;
-import io.dropwizard.lifecycle.Managed;
+import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.base.AbstractSmartCosmosExtensionConfiguration;
-import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
-import net.smartcosmos.platform.resource.IResourceRegistrar;
 
 import java.util.List;
 
@@ -36,7 +33,6 @@ import java.util.List;
  * @see net.smartcosmos.platform.base.AbstractServerExtension
  */
 public interface IServerExtension<T extends AbstractSmartCosmosExtensionConfiguration>
-        extends ConfiguredBundle<SmartCosmosConfiguration>, IResourceRegistrar, Managed
 {
     /**
      * Every SMART COSMOS Extension must provide a UUID that unqiuely identifies this extension within the global
@@ -54,8 +50,7 @@ public interface IServerExtension<T extends AbstractSmartCosmosExtensionConfigur
     String getName();
 
     /**
-     * Access to the type-safe extension specific configuration file separate from the standard
-     * {@link SmartCosmosConfiguration} YML file.
+     * Access to the type-safe extension specific configuration file separate from the standard YML file.
      *
      * @return non-null, type-safe extension configuration
      */
@@ -82,4 +77,20 @@ public interface IServerExtension<T extends AbstractSmartCosmosExtensionConfigur
      * @return Non-null, but possibly empty, list of Hibernate annotated classes to register during server bootstrap
      */
     List<Class<?>> getEntities();
+
+    /**
+     * From io.dropwizard.ConfiguredBundle.
+     */
+    void registerResources(IContext context);
+
+    /**
+     * From io.dropwizard.ConfiguredBundle.
+     */
+    void start() throws Exception;
+
+    /**
+     * From io.dropwizard.ConfiguredBundle.
+     */
+    void stop() throws Exception;
+
 }
