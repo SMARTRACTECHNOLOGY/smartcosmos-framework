@@ -2,7 +2,7 @@ package net.smartcosmos.platform.api;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Server API
+ * SMART COSMOS Extension API
  * ===============================================================================
  * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
@@ -20,35 +20,22 @@ package net.smartcosmos.platform.api;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
-import net.smartcosmos.util.json.ViewType;
-import org.json.JSONException;
-
-import javax.ws.rs.core.Response;
-
 /**
- * Stateless implementation capable of processing a specific HTTP method type within a resource.
- *
- * @param <T>
+ * Initially created by tcross on November 13, 2015.
  */
-public interface IRequestHandler<T>
+public interface Managed
 {
+
     /**
-     * Statistical counter that indicates how many times this handler has been invoked.
-     *
-     * @return Execution count
+     * Lifted from io.dropwizard.lifecyle.Managed, as part of eliminating Framework dependencies on DropWizard.
+     * @throws Exception
      */
-    long count();
+    void start() throws Exception;
 
-    boolean forceAuthentication();
+    /**
+     * Lifted from io.dropwizard.lifecyle.Managed, as part of eliminating Framework dependencies on DropWizard.
+     * @throws Exception
+     */
+    void stop() throws Exception;
 
-    long increment();
-
-    boolean isAuthorized(IAuthenticatedUser authenticatedUser);
-
-    Response handle(T inputValue, IAuthenticatedUser authenticatedUser) throws JsonProcessingException, JSONException;
-
-    Response handle(T inputValue, ViewType view, IAuthenticatedUser authenticatedUser)
-            throws JsonProcessingException, JSONException;
 }

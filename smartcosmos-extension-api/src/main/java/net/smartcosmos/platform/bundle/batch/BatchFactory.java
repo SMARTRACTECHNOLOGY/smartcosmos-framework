@@ -21,7 +21,7 @@ package net.smartcosmos.platform.bundle.batch;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.dropwizard.util.Duration;
+import net.smartcosmos.platform.api.Duration;
 import net.smartcosmos.platform.api.ProtocolType;
 
 import javax.validation.Valid;

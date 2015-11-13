@@ -24,7 +24,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMultimap;
-import io.dropwizard.servlets.tasks.Task;
+import net.smartcosmos.platform.api.Task;
 import org.quartz.JobKey;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;

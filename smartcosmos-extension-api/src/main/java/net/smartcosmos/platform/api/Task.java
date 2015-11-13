@@ -1,8 +1,8 @@
-package net.smartcosmos.platform.api.visitor;
+package net.smartcosmos.platform.api;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Server API
+ * SMART COSMOS Extension API
  * ===============================================================================
  * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
@@ -20,47 +20,48 @@ package net.smartcosmos.platform.api.visitor;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.base.EntityReferenceType;
-import net.smartcosmos.platform.api.IService;
-import net.smartcosmos.platform.api.Managed;
+import com.google.common.collect.ImmutableMultimap;
+
+import java.io.PrintWriter;
 
 /**
- * Generic visitor design pattern.
+ * Initially created by tcross on November 13, 2015.
  *
- * @param <T> Type of object to visit
+ * DIRECTLY STOLEN FROM io.dropwizard.servlets.tasks.Task
+ *
  */
-public interface IVisitor<T> extends IService, Managed, Comparable<IVisitor>
+public abstract class Task
 {
-    int FIRST_PRIORITY = 1;
-
-    int HIGH_PRIORITY = 25;
-
-    int MEDIUM_PRIORITY = 50;
-
-    int LOW_PRIORITY = 75;
-
-    int LAST_PRIORITY = 100;
-
-    int DEFAULT_PRIORITY = MEDIUM_PRIORITY;
+    private final String name;
 
     /**
-     * Prioritizes this visitor in relationship to other registered visitors.
+     * Create a new task with the given name.
      *
-     * @return a priority value between 1 and 100 where 1 is more important than 100
+     * @param name the task's name
      */
-    int getPriority();
+    protected Task(String name)
+    {
+        this.name = name;
+    }
 
     /**
-     * Declares the entity reference type this visitor can work against.
+     * Returns the task's name.
      *
-     * @return entity reference type
+     * @return the task's name
      */
-    EntityReferenceType getEntityReferenceType();
+    public String getName()
+    {
+        return name;
+    }
 
     /**
-     * Visit the object.
+     * Executes the task.
      *
-     * @param instance instance to visit
+     * @param parameters the query string parameters
+     * @param output     a {@link PrintWriter} wrapping the output stream of the task
+     * @throws Exception if something goes wrong
      */
-    void visit(T instance);
+    public abstract void execute(ImmutableMultimap<String, String> parameters,
+                                 PrintWriter output) throws Exception;
+
 }

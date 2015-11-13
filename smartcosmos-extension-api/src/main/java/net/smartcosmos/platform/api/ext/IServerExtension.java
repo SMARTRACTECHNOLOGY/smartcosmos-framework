@@ -79,17 +79,17 @@ public interface IServerExtension<T extends AbstractSmartCosmosExtensionConfigur
     List<Class<?>> getEntities();
 
     /**
-     * From io.dropwizard.ConfiguredBundle.
+     * From ConfiguredBundle.
      */
     void registerResources(IContext context);
 
     /**
-     * From io.dropwizard.ConfiguredBundle.
+     * From ConfiguredBundle.
      */
     void start() throws Exception;
 
     /**
-     * From io.dropwizard.ConfiguredBundle.
+     * From ConfiguredBundle.
      */
     void stop() throws Exception;
 

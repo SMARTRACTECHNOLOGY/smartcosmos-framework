@@ -20,7 +20,7 @@ package net.smartcosmos.platform.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import io.dropwizard.lifecycle.Managed;
+import net.smartcosmos.platform.api.Managed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

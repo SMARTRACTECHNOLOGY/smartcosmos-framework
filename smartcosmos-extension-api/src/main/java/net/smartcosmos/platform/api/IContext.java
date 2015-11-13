@@ -21,7 +21,6 @@ package net.smartcosmos.platform.api;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import io.dropwizard.setup.Environment;
 import net.smartcosmos.platform.api.dao.IDAOFactory;
 import net.smartcosmos.platform.api.ext.IServerExtension;
 import net.smartcosmos.platform.api.service.IServiceFactory;
@@ -67,13 +66,6 @@ public interface IContext extends JobListener
      * @return Hibernate session
      */
     SessionFactory getSessionFactory();
-
-    /**
-     * Dropwizard runtime environment.
-     *
-     * @return runtime environment
-     */
-    Environment getEnvironment();
 
     /**
      * Quartz Scheduler.
