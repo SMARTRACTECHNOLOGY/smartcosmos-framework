@@ -36,6 +36,9 @@ import org.json.JSONException;
  */
 public interface IMetadata extends IAccountDomainResource<IMetadata>, IReferentialObject
 {
+    int KEY_MAX_LENGTH = 255;
+    int RAW_VALUE_MAX_LENGTH = 767;
+
     MetadataDataType getDataType();
 
     void setDataType(MetadataDataType type);

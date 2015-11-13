@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.base.IReferentialObject;
+import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
 import org.hibernate.annotations.Index;
@@ -53,7 +54,7 @@ public abstract class DomainResourceReferentialObjectEntity<T extends IAccountDo
     @NotNull
     private EntityReferenceType entityReferenceType;
 
-    @Column(length = UUID_LENGTH, nullable = false, updatable = false)
+    @Column(length = DomainResource.UUID_LENGTH, nullable = false, updatable = false)
     @Index(name = "entity_reference_urn_idx")
     @Type(type = "uuid-binary")
     @JsonIgnore

@@ -40,6 +40,8 @@ import net.smartcosmos.model.base.ITypedObject;
  */
 public interface IObject extends IAccountDomainResource<IObject>, INamedObject<IObject>, ITypedObject
 {
+    int OBJECT_URN_LENGTH = 767;
+
     String getObjectUrn();
 
     void setObjectUrn(String urn);

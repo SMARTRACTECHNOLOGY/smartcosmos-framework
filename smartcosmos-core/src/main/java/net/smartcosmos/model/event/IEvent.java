@@ -32,6 +32,9 @@ import net.smartcosmos.model.context.IUser;
  */
 public interface IEvent extends IAccountDomainResource<IEvent>
 {
+    int SOURCE_MAX_LENGTH = 8192;
+    int USER_DEFINITION_MAX_LENGTH = 8192;
+
     EventType getEventType();
 
     void setEventType(EventType eventType);

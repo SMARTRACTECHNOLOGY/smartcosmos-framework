@@ -31,10 +31,13 @@ import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.pojo.context.User;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.Size;
+
 public class Event extends DomainResource<IEvent> implements IEvent
 {
     @JsonView(JsonGenerationView.Minimum.class)
     @JsonDeserialize(as = User.class)
+    @Size(max = USER_DEFINITION_MAX_LENGTH)
     protected IUser user;
 
     @JsonView(JsonGenerationView.Restricted.class)
@@ -45,6 +48,7 @@ public class Event extends DomainResource<IEvent> implements IEvent
     protected EventType eventType;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = SOURCE_MAX_LENGTH)
     protected String source;
 
     @JsonView(JsonGenerationView.Minimum.class)
