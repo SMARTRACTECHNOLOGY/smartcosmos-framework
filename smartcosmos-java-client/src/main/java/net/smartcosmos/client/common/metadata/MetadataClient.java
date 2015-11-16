@@ -43,7 +43,7 @@ import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractUpsertableBaseClient;
 import net.smartcosmos.client.impl.command.DeleteCommand;
 import net.smartcosmos.client.impl.command.GetCollectionCommand;
-import net.smartcosmos.client.impl.command.GetCommand;
+//import net.smartcosmos.client.impl.command.GetCommand;
 import net.smartcosmos.client.impl.endpoint.MetadataEndpoints;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IMetadata;
@@ -164,9 +164,14 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
                                      String key,
                                      ViewType viewType) throws ServiceException
     {
-        GetCommand<IMetadata> command = new GetCommand<>(context, getClient());
-        return command.call(Metadata.class,
+        GetCollectionCommand<IMetadata> command = new GetCollectionCommand<>(context, getClient());
+        Collection<IMetadata> matches = command.call(Metadata.class,
                 MetadataEndpoints.findSpecificKey(entityReferenceType, referenceUrn, key, viewType));
+        if (matches.size() != 1)
+        {
+            throw new ServiceException(new Exception("Unexpected number of results."));
+        }
+        return matches.iterator().next();
     }
 
     @Override
