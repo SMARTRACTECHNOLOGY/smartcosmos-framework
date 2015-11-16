@@ -98,6 +98,11 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             .entity(ResponseEntity.toJson(Result.ERR_NO_SUCH_URN))
             .build();
 
+    protected  static final Response EMPTY_REQUEST_BODY = Response.status(Response.Status.BAD_REQUEST)
+            .type(MediaType.APPLICATION_JSON_TYPE)
+            .entity(ResponseEntity.toJson(Result.ERR_EMPTY_REQUEST))
+            .build();
+
     protected static final Response NO_CONTENT = Response.noContent().build();
 
     /**
@@ -181,13 +186,20 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     {
         ENTITY entity = null;
         Response response = null;
-        try
+
+        if (!jsonString.isEmpty())
         {
-            entity = jsonToEntity(jsonString, targetClass);
-        } catch (IOException e)
+            try
+            {
+                entity = jsonToEntity(jsonString, targetClass);
+            } catch (IOException e)
+            {
+                LOG.warn(e.getMessage());
+                response = VALIDATION_FAILURE;
+            }
+        } else
         {
-            LOG.warn(e.getMessage());
-            response = VALIDATION_FAILURE;
+            response = EMPTY_REQUEST_BODY;
         }
 
         if (response != null)
@@ -202,13 +214,20 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
     {
         List<ENTITY> resourceList = new ArrayList<>();
         Response response = null;
-        try
+
+        if (!jsonString.isEmpty())
         {
-            resourceList = jsonListToEntity(jsonString, targetClass);
-        } catch (IOException e)
+            try
+            {
+                resourceList = jsonListToEntity(jsonString, targetClass);
+            } catch (IOException e)
+            {
+                LOG.warn(e.getMessage());
+                response = VALIDATION_FAILURE;
+            }
+        } else
         {
-            LOG.warn(e.getMessage());
-            response = VALIDATION_FAILURE;
+            response = EMPTY_REQUEST_BODY;
         }
 
         if (response != null)
