@@ -59,16 +59,7 @@ public interface IAbstractDAO<S extends IDomainResource<S>, T extends S> extends
      void deleteJson(final String object) throws JsonParseException, JsonMappingException, IOException;
 
     @Override
-     Collection<S> findByAccount(final Class<?> clazz, final IAccount account);
-
-    @Override
      Collection<String> findByAccountJson(final IAccount account) throws JsonProcessingException;
-
-    @Override
-     S findByUrn(final Class<?> clazz, final String urn);
-
-    @Override
-     S findByUrn(final Class<?> clazz, final String urn, final IAccount account);
 
     @Override
      String findByUrnJson(final String urn) throws JsonProcessingException;
@@ -103,10 +94,10 @@ public interface IAbstractDAO<S extends IDomainResource<S>, T extends S> extends
      IPage<S> page(final int page, final int pageSize);
 
     @Override
-     Collection<S> searchByMoniker(final Class<?> clazz, final String monikerEquals, final IAccount account);
+     Collection<S> searchByMoniker(final Class clazz, final String monikerEquals, final IAccount account);
 
     @Override
-     Collection<S> searchByMonikerLike(final Class<?> clazz, final String monikerLike, final IAccount account);
+     Collection<S> searchByMonikerLike(final Class clazz, final String monikerLike, final IAccount account);
 
     @Override
      S update(final S object);

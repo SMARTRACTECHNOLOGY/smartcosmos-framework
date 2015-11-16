@@ -33,13 +33,13 @@ import java.util.UUID;
  */
 public interface IBaseDAO<T extends IDomainResource<T>> extends IMonikerSearchDAO<T>, IAdvancedQuery<T>
 {
-    T findByUrn(Class<?> clazz, String urn);
+    T findByUrn(Class clazz, String urn);
 
-    T findByUrn(Class<?> clazz, String urn, IAccount account);
+    T findByUrn(Class clazz, String urn, IAccount account);
     
     Collection<T> findByUuids(final Collection<UUID> uuids, IAccount account);
 
-    Collection<T> findByAccount(Class<?> clazz, IAccount account);
+    Collection<T> findByAccount(Class clazz, IAccount account);
 
     T insert(T object);
 
