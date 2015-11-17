@@ -353,3 +353,4 @@ Creating and using transaction handlers is very thoroughly documented here:
 
 https://smartractechnology.atlassian.net/wiki/display/SCKB/Creating+and+Using+Transaction+Handlers+in+SMART+COSMOS
 
+Last updated: 17 November 2015

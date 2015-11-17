@@ -3,7 +3,7 @@ package ${package}.smartcosmos.extension.server.dao.impl;
 import ${package}.smartcosmos.extension.server.dao.IExampleExtensionDAO;
 import ${package}.smartcosmos.extension.server.jpa.IExampleEntity;
 import ${package}.smartcosmos.extension.server.jpa.impl.ExampleEntity;
-import net.smartcosmos.platform.dao.AbstractDAOImpl;
+import net.smartcosmos.objects.dao.AbstractDAOImpl;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 

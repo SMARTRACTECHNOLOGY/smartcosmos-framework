@@ -42,7 +42,7 @@ public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExten
 
     protected T extensionConfiguration;
 
-    private final Class<T> extensionConfigurationClass;
+    protected final Class<T> extensionConfigurationClass;
 
     protected SmartCosmosConfiguration smartCosmosConfiguration;
 
