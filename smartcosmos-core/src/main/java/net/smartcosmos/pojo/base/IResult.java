@@ -88,7 +88,7 @@ public interface IResult
             {
                 if (resultSize > 1)
                 {
-                    throw new IllegalArgumentException("Duplicate Result: " + code);
+                    throw new DuplicateResultException("Duplicate Result: " + code, resultList);
                 } else
                 {
                     throw new IllegalArgumentException("Unknown Result: " + code);
