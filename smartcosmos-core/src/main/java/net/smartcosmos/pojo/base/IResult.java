@@ -21,6 +21,14 @@ package net.smartcosmos.pojo.base;
  */
 
 
+import org.reflections.Reflections;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Created by asiegel on 19.11.2015.
  */
@@ -29,8 +37,66 @@ public interface IResult
     int getCode();
     String getFormattedMessage();
 
-    /*default RESULT_ENUM_TYPE translate(int code) throws IllegalArgumentException
+    static IResult translate(int code) throws IllegalArgumentException
     {
-        throw new IllegalArgumentException("Method not implemented");
-    }*/
+        return ResultTranslator.getInstance().translate(code);
+    }
+
+    final class ResultTranslator
+    {
+        private static ResultTranslator instance;
+        private Set<Class<? extends IResult>> resultClasses;
+
+        private ResultTranslator()
+        {
+            Reflections reflections = new Reflections("net.smartcosmos");
+            resultClasses = reflections.getSubTypesOf(IResult.class);
+        }
+
+        public static ResultTranslator getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new ResultTranslator();
+            }
+
+            return instance;
+        }
+
+        public IResult translate(int code) throws IllegalArgumentException
+        {
+            List<IResult> resultList = new ArrayList<>();
+
+            for (Class<? extends IResult> clazz : resultClasses)
+            {
+                try
+                {
+                    Method method = clazz.getMethod("translate", int.class);
+                    Object result = method.invoke(null, code);
+                    if (result instanceof IResult)
+                    {
+                        resultList.add((IResult) result);
+                    }
+                } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | IllegalArgumentException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+            int resultSize = resultList.size();
+            if (resultSize != 1)
+            {
+                if (resultSize > 1)
+                {
+                    throw new IllegalArgumentException("Duplicate Result: " + code);
+                } else
+                {
+                    throw new IllegalArgumentException("Unknown Result: " + code);
+                }
+            } else
+            {
+                return resultList.get(0);
+            }
+        }
+    }
 }
