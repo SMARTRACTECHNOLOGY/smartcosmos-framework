@@ -86,9 +86,7 @@
                                             <classifier>CONTRIBUTING</classifier>
                                         </artifact>
                                         <artifact>
-                                            <!-- Since Aglio is failing on Jenkins, temporarily committing the file to repo. -->
-                                            <file>${basedir}/api-index.html</file>
-                                            <!-- <file>${basedir}/target/api-index.html</file> -->
+                                            <file>${basedir}/target/api-index.html</file>
                                             <type>html</type>
                                             <classifier>API</classifier>
                                         </artifact>
@@ -109,10 +107,9 @@
                                 <phase>compile</phase>
                                 <inherited>false</inherited>
                                 <configuration>
-                                    <!-- This is currently failing on Jenkins, which is unfortunate. -->
-                                    <skip>true</skip>
-                                    <executable>aglio</executable>
+                                    <executable>node</executable>
                                     <arguments>
+                                        <argument>${basedir}/../node_modules/aglio/bin/aglio.js</argument>
                                         <argument>-i</argument>
                                         <argument>../apiary.apib</argument>
                                         <argument>-o</argument>
