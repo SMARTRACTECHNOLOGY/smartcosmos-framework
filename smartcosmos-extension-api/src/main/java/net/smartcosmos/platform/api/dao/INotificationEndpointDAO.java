@@ -23,7 +23,7 @@ package net.smartcosmos.platform.api.dao;
 import net.smartcosmos.model.integration.INotificationEndpoint;
 
 public interface INotificationEndpointDAO
-        extends IBaseDAO<INotificationEndpoint>, INamedObjectSearchDAO<INotificationEndpoint>
+        extends IAdvancedDAO<INotificationEndpoint>, INamedObjectSearchDAO<INotificationEndpoint>
 {
     INotificationEndpoint findByTopicArn(String topicArn);
 }

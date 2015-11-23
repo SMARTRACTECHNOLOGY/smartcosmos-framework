@@ -31,6 +31,9 @@ import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class ObjectInteraction extends ReferentialObject<IObjectInteraction> implements IObjectInteraction
 {
     @JsonView(JsonGenerationView.Full.class)
@@ -39,6 +42,7 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
 
     @JsonView(JsonGenerationView.Minimum.class)
     @JsonDeserialize(as = ObjectImpl.class)
+    @NotNull
     protected IObject object;
 
     @JsonView(JsonGenerationView.Standard.class)
@@ -55,6 +59,8 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
     protected IObjectInteractionSession objectInteractionSession;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = TYPE_MAX_LENGTH)
     protected String type;
 
     @Override

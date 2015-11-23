@@ -35,6 +35,8 @@ import net.smartcosmos.model.base.ITypedObject;
  */
 public interface IDevice extends IAccountDomainResource<IDevice>, INamedObject<IDevice>, ITypedObject
 {
+    int IDENTIFICATION_LENGTH = 256;
+
     String getIdentification();
 
     void setIdentification(String identification);

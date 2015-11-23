@@ -26,7 +26,7 @@ import net.smartcosmos.model.event.IEvent;
 
 import java.util.Collection;
 
-public interface IEventDAO extends IBaseDAO<IEvent>
+public interface IEventDAO extends IAdvancedDAO<IEvent>
 {
     Collection<IEvent> findAllAfter(long timestampStart, IAccount account);
 

@@ -36,7 +36,7 @@ public abstract class AbstractVisitor<T> extends AbstractService implements IVis
     /**
      * Only those EntityReferenceType values in the list below can be bound as a visitable entity.
      */
-    protected static final List<EntityReferenceType> BINDABLE_ENTITIES = Arrays.asList(
+    protected static final List<EntityReferenceType> VISITOR_BINDABLE_ENTITIES = Arrays.asList(
             EntityReferenceType.Device,
             EntityReferenceType.Event,
             EntityReferenceType.File,
@@ -75,7 +75,7 @@ public abstract class AbstractVisitor<T> extends AbstractService implements IVis
         this.priority = (priority * 4096) + uniquePriority;
 
         Preconditions.checkNotNull(entityReferenceType, "entityReferenceType must not be null");
-        Preconditions.checkArgument(BINDABLE_ENTITIES.contains(entityReferenceType),
+        Preconditions.checkArgument(VISITOR_BINDABLE_ENTITIES.contains(entityReferenceType),
                 "Specified entityReferenceType is not bindable as a visitor");
         this.entityReferenceType = entityReferenceType;
     }

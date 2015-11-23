@@ -25,9 +25,14 @@ import net.smartcosmos.objects.model.context.ITimelineEntry;
 import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class TimelineEntry extends ReferentialObject<ITimelineEntry> implements ITimelineEntry
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = NAME_MAX_LENGTH)
     protected String name;
 
     @JsonView(JsonGenerationView.Standard.class)

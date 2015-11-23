@@ -25,7 +25,7 @@ import net.smartcosmos.platform.api.batch.IBatchTransmission;
 
 import java.util.Collection;
 
-public interface IBatchTransmissionDAO extends IBaseDAO<IBatchTransmission>
+public interface IBatchTransmissionDAO extends IAdvancedDAO<IBatchTransmission>
 {
     IBatchTransmission findByTransmissionUrn(String transmissionUrn);
 
