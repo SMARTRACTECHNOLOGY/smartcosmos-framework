@@ -117,7 +117,7 @@ public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExten
 
     protected void handleInitializationException(Exception e)
     {
-        LOG.error(e.toString() + "\n" + e.getMessage() + " " + e.getCause());
+        LOG.error(e.getMessage());
     }
 
     @Override
