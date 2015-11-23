@@ -5,7 +5,7 @@ import ${package}.smartcosmos.extension.server.jpa.IMoreInterestingExampleEntity
 import ${package}.smartcosmos.extension.server.jpa.impl.MoreInterestingExampleEntity;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.objects.dao.AbstractDAOImpl;
+import net.smartcosmos.platform.api.dao.AbstractDAOImpl;
 import net.smartcosmos.util.UuidUtil;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;

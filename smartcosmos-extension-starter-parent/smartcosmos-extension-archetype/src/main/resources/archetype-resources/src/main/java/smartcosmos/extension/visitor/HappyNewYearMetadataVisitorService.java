@@ -79,8 +79,8 @@ public class HappyNewYearMetadataVisitorService extends AbstractVisitor<Visitabl
         //
         if (metadata.getEntityReferenceType() == EntityReferenceType.Object)
         {
-            IObject referenceObject = objectDAO.findByUrn(IObject.class, metadata.getReferenceUrn(),
-                                                          metadata.getAccount());
+            IObject referenceObject = objectDAO.findByUrn(metadata.getReferenceUrn(), metadata.getAccount());
+
             LOG.info("More on the reference entity for this metadata item: it's an Object with" +
                      " name " + referenceObject.getName() + " and objectUrn " + referenceObject.getObjectUrn() +
                      " and type " + referenceObject.getType());

@@ -25,6 +25,6 @@ import net.smartcosmos.platform.api.directory.IAccountDirectory;
 
 public interface IAccountDirectoryDAO extends IAdvancedDAO<IAccountDirectory>
 {
-    IAccountDirectory findByAccount(IAccount account);
+    IAccountDirectory findDirectoryByAccount(IAccount account);
 }
 

@@ -32,8 +32,8 @@ public interface IAbstractNamedObjectDAO <U extends INamedObject<U>, V extends U
 
 {
 
-    Collection<U> findByNameLike(Class<?> clazz, String nameLike, IAccount account);
+    Collection<U> findByNameLike(String nameLike, IAccount account);
 
-    Collection<U> findByNameExact(Class<?> clazz, String name, IAccount account);
+    Collection<U> findByNameExact(String name, IAccount account);
 
 }

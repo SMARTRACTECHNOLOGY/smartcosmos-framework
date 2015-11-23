@@ -32,12 +32,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>net.smartcosmos</groupId>
-            <artifactId>smartcosmos-objects-developer-edition</artifactId>
-            <version>2.10.8-development-SNAPSHOT</version>
-        </dependency>
-
     </dependencies>
 
 

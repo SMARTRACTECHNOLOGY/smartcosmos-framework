@@ -94,10 +94,10 @@ public interface IAbstractDAO<S extends IDomainResource<S>, T extends S> extends
      IPage<S> page(final int page, final int pageSize);
 
     @Override
-     Collection<S> searchByMoniker(final Class clazz, final String monikerEquals, final IAccount account);
+     Collection<S> searchByMoniker(final String monikerEquals, final IAccount account);
 
     @Override
-     Collection<S> searchByMonikerLike(final Class clazz, final String monikerLike, final IAccount account);
+     Collection<S> searchByMonikerLike(final String monikerLike, final IAccount account);
 
     @Override
      S update(final S object);

@@ -27,7 +27,7 @@ import net.smartcosmos.model.context.IAccount;
 
 public interface IMonikerSearchDAO<T extends IDomainResource<T>>
 {
-    Collection<T> searchByMoniker(Class<?> clazz, String tagEquals, IAccount account);
+    Collection<T> searchByMoniker(String tagEquals, IAccount account);
 
-    Collection<T> searchByMonikerLike(Class<?> clazz, String monikerLike, IAccount account);
+    Collection<T> searchByMonikerLike(String monikerLike, IAccount account);
 }

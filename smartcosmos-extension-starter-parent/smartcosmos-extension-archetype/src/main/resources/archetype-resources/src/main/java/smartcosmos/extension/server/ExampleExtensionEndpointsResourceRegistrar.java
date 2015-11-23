@@ -2,20 +2,20 @@ package ${package}.smartcosmos.extension.server;
 
 import ${package}.smartcosmos.extension.server.resource.pub.ExampleExtensionResource;
 import ${package}.smartcosmos.extension.server.resource.secure.MoreInterestingExampleExtensionResource;
-import net.smartcosmos.objects.app.IObjectsContext;
-import net.smartcosmos.objects.resource.secure.IObjectsResourceRegistrar;
+import net.smartcosmos.platform.api.IContext;
+import net.smartcosmos.platform.resource.IResourceRegistrar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ExampleExtensionEndpointsResourceRegistrar
-        implements IObjectsResourceRegistrar
+        implements IResourceRegistrar
 {
 
     private static final Logger LOG = LoggerFactory.getLogger(ExampleExtensionEndpointsResourceRegistrar.class);
 
     // NOTE TO EXTENSION DEVELOPER:
     // This is where you register your endpoints, in accordance with access settings in objects.yml
-    public void registerResources(IObjectsContext context)
+    public void registerResources(IContext context)
     {
         EndpointsFactory endpointsFactory = new EndpointsFactory();
 
