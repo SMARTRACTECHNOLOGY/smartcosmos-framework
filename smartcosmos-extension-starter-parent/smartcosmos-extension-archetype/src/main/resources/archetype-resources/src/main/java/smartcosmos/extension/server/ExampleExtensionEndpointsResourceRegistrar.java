@@ -21,7 +21,7 @@ public class ExampleExtensionEndpointsResourceRegistrar
 
         if (endpointsFactory.getExampleEndpoints())
         {
-            context.getEnvironment().jersey().register(new ExampleExtensionResource(context));
+            //context.getEnvironment().jersey().register(new ExampleExtensionResource(context));
         } else
         {
             LOG.info("Disabling example endpoints as configured in objects.yml");
@@ -29,7 +29,7 @@ public class ExampleExtensionEndpointsResourceRegistrar
 
         if (endpointsFactory.getMoreInterestingExampleEndpoints())
         {
-            context.getEnvironment().jersey().register(new MoreInterestingExampleExtensionResource(context));
+            //context.getEnvironment().jersey().register(new MoreInterestingExampleExtensionResource(context));
         } else
         {
             LOG.info("Disabling moreInterestingExample endpoints as configured in objects.yml");
