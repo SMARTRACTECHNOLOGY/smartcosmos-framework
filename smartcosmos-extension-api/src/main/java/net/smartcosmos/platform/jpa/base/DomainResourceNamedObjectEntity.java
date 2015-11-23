@@ -1,9 +1,5 @@
 package net.smartcosmos.platform.jpa.base;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -25,9 +21,14 @@ import javax.persistence.MappedSuperclass;
  */
 
 import com.fasterxml.jackson.annotation.JsonView;
-
 import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public abstract class DomainResourceNamedObjectEntity<T extends INamedObject<T>>
@@ -39,11 +40,14 @@ public abstract class DomainResourceNamedObjectEntity<T extends INamedObject<T>>
     private static final long serialVersionUID = 1L;
 
     @JsonView(JsonGenerationView.Published.class)
-    @Column(length = 255, nullable = false)
+    @Column(length = NAME_MAX_LENGTH, nullable = false)
+    @Size(max = NAME_MAX_LENGTH)
+    @NotNull
     private String name;
 
     @JsonView(JsonGenerationView.Standard.class)
-    @Column(length = 1024)
+    @Column(length = DESCRIPTION_MAX_LENGTH)
+    @Size(max = DESCRIPTION_MAX_LENGTH)
     private String description;
 
     @JsonView(JsonGenerationView.Standard.class)

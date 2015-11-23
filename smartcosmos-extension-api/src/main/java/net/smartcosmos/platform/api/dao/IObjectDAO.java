@@ -26,7 +26,7 @@ import net.smartcosmos.objects.model.context.IObject;
 
 import java.util.Collection;
 
-public interface IObjectDAO extends IBaseDAO<IObject>, INamedObjectSearchDAO<IObject>
+public interface IObjectDAO extends IAdvancedDAO<IObject>, INamedObjectSearchDAO<IObject>
 {
     IObject findByObjectUrn(String objectUrn, IAccount account);
 

@@ -31,6 +31,10 @@ import net.smartcosmos.model.base.IAccountDomainResource;
  */
 public interface IUser extends IAccountDomainResource<IUser>
 {
+    int EMAIL_ADDRESS_MAX_LENGTH = 128;
+    int GIVEN_NAME_MAX_LENGTH = 50;
+    int SURNAME_MAX_LENGTH = 50;
+
     String getGivenName();
 
     void setGivenName(String givenName);

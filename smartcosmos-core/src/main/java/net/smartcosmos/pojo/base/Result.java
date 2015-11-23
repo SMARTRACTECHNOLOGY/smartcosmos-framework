@@ -26,7 +26,7 @@ package net.smartcosmos.pojo.base;
  * <p>
  * Effectively, any {@link ResponseEntity#getCode()} value less than zero is an error condition.
  */
-public enum Result
+public enum Result implements IResult
 {
     OK(1, "%s"),
     ERR_FAILURE(0, "%s"),
@@ -35,6 +35,7 @@ public enum Result
     ERR_UNLICENSED_FEATURE(-3, "Unlicensed feature"),
     ERR_UNKNOWN_ENTITY_TYPE(-4, "Unknown Entity Reference Type: %s"),
     ERR_MISSING_FIELD(-5, "JSON is missing a required field: %s"),
+    ERR_FIELD_CONSTRAINT_VIOLATION(-5, "JSON is missing a required field or violates a field constraint: %s"),
     ERR_UNKNOWN_DEVICE_IDENTIFICATION(-6, "No device found with identification %s"),
     ERR_ALREADY_EXISTS(-7, "A %s with matching key %s already exists"),
     ERR_NOT_EXISTS(-8, "No matching record with %s of %s exists"),
@@ -44,6 +45,8 @@ public enum Result
     ERR_NO_SUCH_EMAIL(-12, "No user associated with email address %s"),
     ERR_NO_FILE_CONTENT(-13, "File URN %s exists but is flagged as pending content upload"),
     ERR_MISSING_AUTHENTICATION_HEADER(-14, "Endpoint requires authentication"),
+    ERR_VALIDATION(-15, "Validation Failure"),
+    ERR_EMPTY_REQUEST(-16, "Request body must not be empty"),
 
     ERR_EXTENSION_SECURITY_RESTRICTION(-50, "Extensions are not permitted to perform %s"),
     ERR_EXTENSION_NO_ACCESS(-51, "Caller lacked the authorization to complete the requested operation"),
@@ -58,7 +61,9 @@ public enum Result
     ERR_LIBRARY_WRONG_PARENT_TYPE(-72, "Library element type %s cannot be the parent to a library element of type %s"),
     ERR_LIBRARY_DUPLICATE_NAME_FOR_PARENT(-73, "Parent element %s already has a child named %s"),
     ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_CHILDREN(-74, "Library element %s has children and cannot be deleted"),
-    ERR_LIBRARY_CANNOT_LINK_TO_LIBRARY_ELEMENT_TYPE(-75, "Library element type %s cannot accept links");
+    ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_RELATIONSHIPS(-74, "Library element %s has relationships and cannot be deleted"),
+    ERR_LIBRARY_CANNOT_LINK_TO_LIBRARY_ELEMENT_TYPE(-75, "Library element type %s cannot accept links"),
+    ERR_WRONG_RELATIONSHIP_TYPE_FOR_LIBRARYELEMENT(-76, "Requested relationship type is %s but must be of type LibraryLink");
 
     private final String formattedMessage;
 

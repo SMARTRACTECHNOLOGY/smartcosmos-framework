@@ -63,7 +63,7 @@ public class AccountDomainResource <T> extends DomainResource<T> implements IAcc
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + account.hashCode();
+        result = 31 * result + (account != null ? account.hashCode() : 0);
         return result;
     }
 }

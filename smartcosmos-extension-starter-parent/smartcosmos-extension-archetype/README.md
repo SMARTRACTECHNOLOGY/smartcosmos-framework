@@ -3,11 +3,11 @@
 
 ##Introduction
 
-This document describes the SMART COSMOS Objects Extension Archetype, a Maven archetype which allows you to get off to 
+This document describes the SMART COSMOS Objects Extension Archetype, a Maven archetype which allows you to get off to
 a quick start building extensions for the SMART COSMOS Objects platform service.
 
-**NOTE:** *There is absolutely, positively no need for you to clone this repository!* The Maven archetype itself is 
-available via Maven Central, and by following the instructions below, you can build a Maven project based on this 
+**NOTE:** *There is absolutely, positively no need for you to clone this repository!* The Maven archetype itself is
+available via Maven Central, and by following the instructions below, you can build a Maven project based on this
 archetype on your local machine without having to clone this repository.
 
 ##Getting Started
@@ -28,19 +28,19 @@ mvn archetype:generate \
 	-Dpackage=com.example.extension.foo
 ```
 
-**"-B"** means non-interactive; maven will simply create the project. Leave it out, and Maven will ask for any missing 
+**"-B"** means non-interactive; maven will simply create the project. Leave it out, and Maven will ask for any missing
 arguments, and for a confirmation before it does the actual generation.
 
-**"-DarchetypeGroupId", "-DarchetypeArtifactId" and "-DarchetypeVersion"**  are the Maven coordinates for the SMART COSMOS 
+**"-DarchetypeGroupId", "-DarchetypeArtifactId" and "-DarchetypeVersion"**  are the Maven coordinates for the SMART COSMOS
 Objects Extension archetype itself. Leave these as they are.
 
 **"-DgroupId"** is where (typically) the top two levels of your URL go.
 
 **"-DartifactId"** is the name of your extension project.
- 
-**"-Dversion"** is the initial version number of the generated project. 
 
-Together, {groupId, artifactId, version} create the unique Maven coordinates for your generated Extension project. 
+**"-Dversion"** is the initial version number of the generated project.
+
+Together, {groupId, artifactId, version} create the unique Maven coordinates for your generated Extension project.
 The command line above will result in coordinates in the generated pom.xml file that look like:
 
 ```
@@ -50,8 +50,8 @@ The command line above will result in coordinates in the generated pom.xml file 
     <packaging>jar</packaging>
 ```
 
-**"-Dpackage"** defines the Java package name placed into the generated Java files. If you set this to 
-*com.example.extension.foo*, the package statement would look like this: 
+**"-Dpackage"** defines the Java package name placed into the generated Java files. If you set this to
+*com.example.extension.foo*, the package statement would look like this:
 
 
 ```
@@ -59,16 +59,16 @@ package com.example.extension.foo.smartcosmos.extension.jpa.impl;
 ```
 
 and .java files in this package will reside in the following directory:
- 
+
 *src/main/java/com/example/extension/foo/smartcosmos/extension/jpa/impl*
 
-**NOTE:** The archetype maintains the distinction between package and the groupId/artifactId combination. You have to 
+**NOTE:** The archetype maintains the distinction between package and the groupId/artifactId combination. You have to
 set both, but your Java packaging does not have to match your Maven coordinates!
 
 For your convenience, here is the command in a single line:
 
 ```
-mvn archetype:generate -B -DarchetypeGroupId=net.smartcosmos.extension -DarchetypeArtifactId=smartcosmos-extension-archetype -DarchetypeVersion=2.10.13 -DgroupId=com.example -DartifactId=foo-extension -Dversion=0.1-SNAPSHOT -Dpackage=com.example.extension.foo
+mvn archetype:generate -B -DarchetypeGroupId=net.smartcosmos.extension -DarchetypeArtifactId=smartcosmos-extension-archetype -DarchetypeVersion=2.10.15 -DgroupId=com.example -DartifactId=foo-extension -Dversion=0.1-SNAPSHOT -Dpackage=com.example.extension.foo
 ```
 
 ### Building and Running the Project
@@ -95,7 +95,7 @@ Look inside src/main/resources/objects.yml, and find the section that looks like
 
 ```
 
-Either create a MySQL database with this database name/user name/user password combination, or adjust this part of 
+Either create a MySQL database with this database name/user name/user password combination, or adjust this part of
 objects.yml to match an existing empty MySQL database.
 
 THIS SECTION NEEDS TO BE ADJUSTED TO MATCH NEW PACKAGING SCHEME
@@ -107,10 +107,10 @@ java -jar target/foo-extension-1.0-SNAPSHOT.jar server src/main/resources/object
 ```
 
 Open http://localhost:8080 in a browser, and you should see a page which includes the following text:
- 
+
 *SMART COSMOS Objects is up and running!*
 
-Congratulations! You now have a running SMART COSMOS server on your local system. Now is the time to look at the 
+Congratulations! You now have a running SMART COSMOS server on your local system. Now is the time to look at the
 README.md file in the generated project itself, and see what you can do with the SMART COSMOS platform.
 
 # Learning More About SMART COSMOS
@@ -130,11 +130,7 @@ any current contests that may be running, and the opportunity to register as a S
 
 ## SELL
 ### SMART COSMOS Market
-The SMART COSMOS Market helps developers *Monetize the IoT*. After creating your amazing Extensions, you can upload 
+The SMART COSMOS Market helps developers *Monetize the IoT*. After creating your amazing Extensions, you can upload
 them to the Market, set your recurring billing model, your price, and enter other marketing related information. Once
 your Extension has passed the test harness and been validated by SMARTRAC, you can then decide if you want to publish
 your work and monetize it.
-
-
-
-

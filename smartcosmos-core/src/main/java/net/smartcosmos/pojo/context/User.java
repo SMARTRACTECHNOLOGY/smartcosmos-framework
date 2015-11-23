@@ -28,20 +28,34 @@ import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 public class User extends DomainResource< IUser > implements IUser
 {
     @JsonView(JsonGenerationView.Full.class)
     @JsonDeserialize(as = Account.class)
     protected IAccount account;
+
     @JsonView(JsonGenerationView.Minimum.class)
     protected RoleType roleType;
+
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = EMAIL_ADDRESS_MAX_LENGTH)
     private String emailAddress;
+
     @JsonView(JsonGenerationView.Full.class)
+    @NotNull
+    @Size(max = GIVEN_NAME_MAX_LENGTH)
     private String givenName;
+
     @JsonView(JsonGenerationView.Full.class)
+    @NotNull
+    @Size(max = SURNAME_MAX_LENGTH)
     private String surname;
+
     @Override
     public String getEmailAddress()
     {
@@ -143,11 +157,11 @@ public class User extends DomainResource< IUser > implements IUser
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + emailAddress.hashCode();
+        result = 31 * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
         result = 31 * result + (account != null ? account.hashCode() : 0);
         result = 31 * result + (givenName != null ? givenName.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + roleType.hashCode();
+        result = 31 * result + ((roleType == null) ? 0 : roleType.hashCode());
         return result;
     }
 

@@ -23,7 +23,7 @@ package net.smartcosmos.platform.api.dao;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.objects.model.context.ITag;
 
-public interface ITagDAO extends IBaseDAO<ITag>
+public interface ITagDAO extends IAdvancedDAO<ITag>
 {
     ITag findByTag(String name, IAccount account);
 }

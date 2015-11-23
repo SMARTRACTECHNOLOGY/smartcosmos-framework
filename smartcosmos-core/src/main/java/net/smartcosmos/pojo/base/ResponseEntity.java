@@ -102,12 +102,12 @@ public class ResponseEntity
         this.message = message;
     }
 
-    public Result getResult()
+    public IResult getResult()
     {
-        return Result.translate(getCode());
+        return IResult.translate(getCode());
     }
 
-    public static String toJson(Result result, Object... args)
+    public static<RESULT_ENUM_TYPE extends IResult> String toJson(RESULT_ENUM_TYPE result, Object... args)
     {
         ResponseEntity re = new ResponseEntity();
         re.setMessage(String.format(result.getFormattedMessage(), args));

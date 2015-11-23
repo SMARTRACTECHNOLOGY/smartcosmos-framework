@@ -26,7 +26,7 @@ import net.smartcosmos.objects.model.context.IObjectAddress;
 
 import java.util.Collection;
 
-public interface IObjectAddressDAO extends IBaseDAO<IObjectAddress>
+public interface IObjectAddressDAO extends IAdvancedDAO<IObjectAddress>
 {
     Collection<IObjectAddress> findByObjectUrn(String objectUrn, IAccount account);
 
@@ -38,4 +38,3 @@ public interface IObjectAddressDAO extends IBaseDAO<IObjectAddress>
 
     IObjectAddress upsert(IObjectAddress objectAddress, IObject object);
 }
-

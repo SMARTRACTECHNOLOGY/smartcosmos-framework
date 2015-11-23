@@ -191,6 +191,7 @@
                         <processStartTag>*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*</processStartTag>
                         <sectionDelimiter>===============================================================================</sectionDelimiter>
                         <processEndTag>#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#</processEndTag>
+                        <licenseResolver>classpath://license</licenseResolver>
                         <includes>
                             <include>**/*.java</include>
                         </includes>
@@ -198,6 +199,13 @@
                             <exclude>**/package-info.java</exclude>
                         </excludes>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>net.smartcosmos</groupId>
+                            <artifactId>smartcosmos-builds-tools</artifactId>
+                            <version>2.10.15-SNAPSHOT</version>
+                        </dependency>
+                    </dependencies>
                     <executions>
                         <execution>
                             <goals>
@@ -379,6 +387,8 @@
                         </includes>
                         <excludes>
                             <exclude>**/Abstract*.java</exclude>
+                            <exclude>**/IT*.java</exclude>
+                            <exclude>**/*IT.java</exclude>
                         </excludes>
                     </configuration>
                 </plugin>
