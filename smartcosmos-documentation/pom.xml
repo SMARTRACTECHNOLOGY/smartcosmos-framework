@@ -85,41 +85,12 @@
                                             <type>pdf</type>
                                             <classifier>CONTRIBUTING</classifier>
                                         </artifact>
-                                        <artifact>
-                                            <file>${basedir}/target/api-index.html</file>
-                                            <type>html</type>
-                                            <classifier>API</classifier>
-                                        </artifact>
                                     </artifacts>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>aglio-process</id>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <inherited>false</inherited>
-                                <configuration>
-                                    <executable>node</executable>
-                                    <arguments>
-                                        <argument>${basedir}/../node_modules/aglio/bin/aglio.js</argument>
-                                        <argument>-i</argument>
-                                        <argument>../apiary.apib</argument>
-                                        <argument>-o</argument>
-                                        <argument>target/api-index.html</argument>
-                                        <argument>--theme-full-width</argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
+
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
                         <executions>
