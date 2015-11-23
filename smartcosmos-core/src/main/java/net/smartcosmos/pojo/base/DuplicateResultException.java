@@ -1,10 +1,10 @@
-package net.smartcosmos.model.base;
+package net.smartcosmos.pojo.base;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Core SDK
+ * SMART COSMOS Core
  * ===============================================================================
- * Copyright (C) 2013 - 2015 SMARTRAC Technology Fletcher, Inc.
+ * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,26 +20,29 @@ package net.smartcosmos.model.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+
+import java.util.List;
+
 /**
- * Provides a human readable name and optional descriptive narrative. Named objects typically are marked <i>inactive</i>
- * instead of being physically deleted to preserve historical reporting capabilities.
- *
- * @param <T> Concrete domain object type from the object model.
+ * Created by asiegel on 19.11.2015.
  */
-public interface INamedObject<T> extends IDomainResource<T>
+public class DuplicateResultException extends IllegalArgumentException
 {
-    int NAME_MAX_LENGTH = 255;
-    int DESCRIPTION_MAX_LENGTH = 1024;
+    private List<IResult> results;
 
-    String getName();
+    public DuplicateResultException(String message)
+    {
+        super(message);
+    }
 
-    void setName(String name);
+    public DuplicateResultException(String message, List<IResult> resultList)
+    {
+        this(message);
+        this.results = resultList;
+    }
 
-    String getDescription();
-
-    void setDescription(String description);
-
-    boolean isActive();
-
-    void setActive(boolean flag);
+    public List<IResult> getResults()
+    {
+        return results;
+    }
 }

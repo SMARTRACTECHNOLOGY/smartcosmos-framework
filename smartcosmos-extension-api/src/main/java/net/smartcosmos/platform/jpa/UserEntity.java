@@ -38,15 +38,15 @@ public class UserEntity extends DomainResourceAccountEntity<IUser>implements IUs
     private static final long serialVersionUID = -1564031691451114125L;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Column(length = 128, nullable = false, updatable = false)
+    @Column(length = EMAIL_ADDRESS_MAX_LENGTH, nullable = false, updatable = false)
     protected String emailAddress;
 
     @JsonView(JsonGenerationView.Full.class)
-    @Column(length = 50, nullable = false)
+    @Column(length = GIVEN_NAME_MAX_LENGTH, nullable = false)
     protected String givenName;
 
     @JsonView(JsonGenerationView.Full.class)
-    @Column(length = 50, nullable = false)
+    @Column(length = SURNAME_MAX_LENGTH, nullable = false)
     protected String surname;
 
     @JsonView(JsonGenerationView.Minimum.class)

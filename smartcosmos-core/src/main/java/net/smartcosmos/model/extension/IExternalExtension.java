@@ -33,6 +33,14 @@ import net.smartcosmos.model.context.IAccount;
  */
 public interface IExternalExtension extends IDomainResource<IExternalExtension>, INamedObject<IExternalExtension>
 {
+    int SUPPORT_EMAIL_MAX_LENGTH = 128;
+    int WEBSITE_URL_MAX_LENGTH = 1024;
+    int CLIENT_ID_MAX_LENGTH = 48;
+    int CLIENT_SECRET_MAX_LENGTH = 48;
+    int REDIRECT_URL_MAX_LENGTH = 1024;
+    int APP_CATALOG_URL_MAX_LENGTH = 1024;
+    int LONG_DESCRIPTION_MAX_LENGTH = 1024;
+
     int getVersion();
 
     void setVersion(int version);

@@ -25,9 +25,14 @@ import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class ObjectImpl extends AccountTypedNamedObject<IObject> implements IObject
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = OBJECT_URN_LENGTH)
     protected String objectUrn;
 
     @Override

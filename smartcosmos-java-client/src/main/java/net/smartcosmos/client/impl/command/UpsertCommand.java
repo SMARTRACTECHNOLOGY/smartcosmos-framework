@@ -25,7 +25,6 @@ import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractBaseClient;
 import net.smartcosmos.pojo.base.ResponseEntity;
-import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.JsonUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,9 +40,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import static net.smartcosmos.Field.CODE_FIELD;
-import static net.smartcosmos.Field.MESSAGE_FIELD;
 
 public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, T>
 {
@@ -87,25 +83,7 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
             {
                 JSONObject jsonResult = jsonRepresentation.getJsonObject();
                 LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
-
-                try
-                {
-                    if (jsonResult.has(CODE_FIELD) && jsonResult.has(MESSAGE_FIELD))
-                    {
-                        ResponseEntity responseEntity = new ResponseEntity();
-                        responseEntity.setCode(jsonResult.getInt(CODE_FIELD));
-                        responseEntity.setMessage(jsonResult.getString(MESSAGE_FIELD));
-
-                        throw new ServiceException(responseEntity);
-
-                    } else if (jsonResult.has(CODE_FIELD))
-                    {
-                        throw new ServiceException(jsonResult.getInt(CODE_FIELD));
-                    }
-                } catch (JSONException e)
-                {
-                    throw new ServiceException(Result.ERR_FAILURE.getCode());
-                }
+                throwServiceException(jsonResult);
             }
 
         } catch (JSONException | IOException e)
@@ -140,25 +118,7 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
             } else
             {
                 LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
-
-                try
-                {
-                    if (jsonResult.has(CODE_FIELD) && jsonResult.has(MESSAGE_FIELD))
-                    {
-                        ResponseEntity responseEntity = new ResponseEntity();
-                        responseEntity.setCode(jsonResult.getInt(CODE_FIELD));
-                        responseEntity.setMessage(jsonResult.getString(MESSAGE_FIELD));
-
-                        throw new ServiceException(responseEntity);
-
-                    } else if (jsonResult.has(CODE_FIELD))
-                    {
-                        throw new ServiceException(jsonResult.getInt(CODE_FIELD));
-                    }
-                } catch (JSONException e)
-                {
-                    throw new ServiceException(Result.ERR_FAILURE.getCode());
-                }
+                throwServiceException(jsonResult);
             }
 
         } catch (JSONException | IOException e)

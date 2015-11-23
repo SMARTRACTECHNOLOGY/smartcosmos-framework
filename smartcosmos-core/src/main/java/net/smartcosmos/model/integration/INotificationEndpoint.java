@@ -33,6 +33,11 @@ import net.smartcosmos.model.context.IAccount;
 public interface INotificationEndpoint
         extends IAccountDomainResource<INotificationEndpoint>, INamedObject<INotificationEndpoint>, IReferentialObject
 {
+    int ENCODED_PUBLIC_KEY_MAX_LENGTH = 1024;
+    int ENCODED_PRIVATE_KEY_MAX_LENGTH = 1024;
+    int TOPIC_ARN_MAX_LENGTH = 1024;
+    int SUBSCRIPTION_ARN_MAX_LENGTH = 1024;
+    int NOTIFICATION_ENDPOINT_URL_MAX_LENGTH = 1024;
 
     IAccount getReferenceAccount();
 
