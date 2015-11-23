@@ -26,7 +26,7 @@ package net.smartcosmos.pojo.base;
  * <p>
  * Effectively, any {@link ResponseEntity#getCode()} value less than zero is an error condition.
  */
-public enum Result
+public enum Result implements IResult
 {
     OK(1, "%s"),
     ERR_FAILURE(0, "%s"),
