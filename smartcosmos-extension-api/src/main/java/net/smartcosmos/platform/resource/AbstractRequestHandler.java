@@ -35,7 +35,7 @@ import net.smartcosmos.platform.api.IRequestHandler;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.visitor.IVisitable;
 import net.smartcosmos.platform.api.visitor.IVisitor;
-import net.smartcosmos.platform.util.SmartCosmosConstraintViolationExceptionMapper;
+import net.smartcosmos.platform.exception.mapper.SmartCosmosConstraintViolationExceptionMapper;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.ViewType;
