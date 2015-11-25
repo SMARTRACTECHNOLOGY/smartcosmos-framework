@@ -1,7 +1,7 @@
 package ${package}.smartcosmos.extension.server;
 
-import ${package}.smartcosmos.extension.server.resource.pub.ExampleExtensionResource;
-import ${package}.smartcosmos.extension.server.resource.secure.MoreInterestingExampleExtensionResource;
+// import ${package}.smartcosmos.extension.server.resource.pub.ExampleExtensionResource;
+// import ${package}.smartcosmos.extension.server.resource.secure.MoreInterestingExampleExtensionResource;
 import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.resource.IResourceRegistrar;
 import org.slf4j.Logger;
@@ -21,6 +21,7 @@ public class ExampleExtensionEndpointsResourceRegistrar
 
         if (endpointsFactory.getExampleEndpoints())
         {
+            System.out.println("There has to be runnable code here");
             //context.getEnvironment().jersey().register(new ExampleExtensionResource(context));
         } else
         {
@@ -29,6 +30,7 @@ public class ExampleExtensionEndpointsResourceRegistrar
 
         if (endpointsFactory.getMoreInterestingExampleEndpoints())
         {
+            System.out.println("There has to be runnable code here");
             //context.getEnvironment().jersey().register(new MoreInterestingExampleExtensionResource(context));
         } else
         {
