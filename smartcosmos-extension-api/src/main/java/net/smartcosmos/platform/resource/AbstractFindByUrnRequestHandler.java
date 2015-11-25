@@ -66,7 +66,7 @@ public abstract class AbstractFindByUrnRequestHandler<T extends IDomainResource<
     {
         Response response;
 
-        T target = dao.findByUrn(entity, urn, authenticatedUser.getAccount());
+        T target = dao.findByUrn(urn, authenticatedUser.getAccount());
 
         if (target != null)
         {

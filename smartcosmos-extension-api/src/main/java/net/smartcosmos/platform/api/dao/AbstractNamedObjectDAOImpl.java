@@ -1,4 +1,4 @@
-package net.smartcosmos.platform.dao;
+package net.smartcosmos.platform.api.dao;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -22,15 +22,15 @@ package net.smartcosmos.platform.dao;
 
 import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.platform.api.dao.INamedObjectSearchDAO;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public abstract class AbstractNamedObjectDAOImpl<U extends INamedObject<U>, V extends U> extends AbstractDAOImpl<U, V> implements
-        INamedObjectSearchDAO<U>
+public abstract class AbstractNamedObjectDAOImpl<U extends INamedObject<U>, V extends U>
+    extends AbstractDAOImpl<U, V>
+    implements INamedObjectSearchDAO<U>, IAbstractNamedObjectDAO<U, V>
 {
     protected AbstractNamedObjectDAOImpl(Class<V> classInstance, SessionFactory sessionFactory)
     {
@@ -44,8 +44,9 @@ public abstract class AbstractNamedObjectDAOImpl<U extends INamedObject<U>, V ex
 
     @Override
     @SuppressWarnings("unchecked")
-    public Collection<U> findByNameLike(Class<?> clazz, String nameLike, IAccount account)
+    public Collection<U> findByNameLike(String nameLike, IAccount account)
     {
+        Class clazz = getEntityClass();
         Collection<U> list = new ArrayList<>();
 
         String entityName = clazz.getName();
@@ -73,8 +74,9 @@ public abstract class AbstractNamedObjectDAOImpl<U extends INamedObject<U>, V ex
 
     @Override
     @SuppressWarnings("unchecked")
-    public Collection<U> findByNameExact(Class<?> clazz, String name, IAccount account)
+    public Collection<U> findByNameExact(String name, IAccount account)
     {
+        Class clazz = getEntityClass();
         Collection<U> list = new ArrayList<>();
 
         String entityName = clazz.getName();

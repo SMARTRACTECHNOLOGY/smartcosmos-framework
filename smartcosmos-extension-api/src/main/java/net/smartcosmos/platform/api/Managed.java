@@ -1,8 +1,8 @@
-package net.smartcosmos.platform.api.dao;
+package net.smartcosmos.platform.api;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Server API
+ * SMART COSMOS Extension API
  * ===============================================================================
  * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
@@ -20,11 +20,22 @@ package net.smartcosmos.platform.api.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.platform.api.directory.IAccountDirectory;
-
-public interface IAccountDirectoryDAO extends IAdvancedDAO<IAccountDirectory>
+/**
+ * Initially created by tcross on November 13, 2015.
+ */
+public interface Managed
 {
-    IAccountDirectory findDirectoryByAccount(IAccount account);
-}
 
+    /**
+     * Lifted from io.dropwizard.lifecyle.Managed, as part of eliminating Framework dependencies on DropWizard.
+     * @throws Exception
+     */
+    void start() throws Exception;
+
+    /**
+     * Lifted from io.dropwizard.lifecyle.Managed, as part of eliminating Framework dependencies on DropWizard.
+     * @throws Exception
+     */
+    void stop() throws Exception;
+
+}

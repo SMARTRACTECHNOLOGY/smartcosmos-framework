@@ -72,7 +72,7 @@ public abstract class AbstractNameSearchRequestHandler<T extends IDomainResource
     {
         Response response;
 
-        Collection<T> matches = dao.findByNameLike(entity, nameLike, authenticatedUser.getAccount());
+        Collection<T> matches = dao.findByNameLike(nameLike, authenticatedUser.getAccount());
 
         if (matches.size() > 0)
         {

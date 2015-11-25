@@ -22,7 +22,7 @@ package net.smartcosmos.platform.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
-import io.dropwizard.util.Duration;
+import net.smartcosmos.platform.api.Duration;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

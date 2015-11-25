@@ -20,10 +20,6 @@ package net.smartcosmos.platform.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import io.dropwizard.configuration.ConfigurationFactory;
-import io.dropwizard.configuration.DefaultConfigurationFactoryFactory;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
 import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.ext.IServerExtension;
 import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
@@ -46,7 +42,7 @@ public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExten
 
     protected T extensionConfiguration;
 
-    private final Class<T> extensionConfigurationClass;
+    protected final Class<T> extensionConfigurationClass;
 
     protected SmartCosmosConfiguration smartCosmosConfiguration;
 
@@ -88,28 +84,6 @@ public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExten
         this.extensionConfigurationPath = extensionConfigurationPath;
     }
 
-    @Override
-    public void initialize(Bootstrap<?> bootstrap)
-    {
-        ConfigurationFactory<T> cf = new DefaultConfigurationFactoryFactory<T>()
-                .create(extensionConfigurationClass,
-                        bootstrap.getValidatorFactory().getValidator(),
-                        bootstrap.getObjectMapper(),
-                        "dw");
-
-        try
-        {
-            extensionConfiguration = (T) cf.build(bootstrap.getConfigurationSourceProvider(),
-                    getServerExtensionConfigurationPath());
-
-            initialize(extensionConfiguration);
-
-        } catch (Exception e)
-        {
-            handleInitializationException(e);
-        }
-    }
-
     protected void initialize(T extensionConfiguration) throws Exception
     {
 
@@ -118,12 +92,6 @@ public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExten
     protected void handleInitializationException(Exception e)
     {
         LOG.error(e.getMessage());
-    }
-
-    @Override
-    public void run(SmartCosmosConfiguration configuration, Environment environment) throws Exception
-    {
-        this.smartCosmosConfiguration = configuration;
     }
 
     @Override

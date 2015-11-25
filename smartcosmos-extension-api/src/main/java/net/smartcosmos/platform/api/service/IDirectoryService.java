@@ -20,10 +20,10 @@ package net.smartcosmos.platform.api.service;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import io.dropwizard.lifecycle.Managed;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.platform.api.IService;
+import net.smartcosmos.platform.api.Managed;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.authentication.ICredentials;
 import net.smartcosmos.platform.api.authentication.IRegistration;

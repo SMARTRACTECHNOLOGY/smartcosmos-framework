@@ -22,7 +22,7 @@ package net.smartcosmos.platform.bundle.quartz;
 
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMultimap;
-import io.dropwizard.servlets.tasks.Task;
+import net.smartcosmos.platform.api.Task;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerFactory;
 import org.slf4j.Logger;
@@ -63,6 +63,7 @@ public class QuartzSchedulerTask extends Task
 
     public QuartzSchedulerTask(SchedulerFactory schedulerFactory)
     {
+        // TODO: 13/11/15 TAC
         super("quartz-scheduler");
         this.schedulerFactory = schedulerFactory;
     }

@@ -17,20 +17,7 @@
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-package net.smartcosmos.platform.dao;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.UUID;
-
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package net.smartcosmos.platform.api.dao;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -40,17 +27,28 @@ import com.google.common.base.Preconditions;
 import com.querydsl.core.types.EntityPath;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.hibernate.HibernateQuery;
-
 import io.dropwizard.hibernate.AbstractDAO;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.platform.api.dao.IAdvancedDAO;
 import net.smartcosmos.platform.api.dao.domain.IPage;
 import net.smartcosmos.platform.dao.domain.PageEntry;
 import net.smartcosmos.util.UuidUtil;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S> extends AbstractDAO<T>implements
-        IAdvancedDAO<S>
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.UUID;
+
+public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
+    extends AbstractDAO<T>
+    implements IAdvancedDAO<S>, IAbstractDAO<S, T>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractDAOImpl.class);
 
@@ -125,7 +123,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
         } else
         {
 
-            S instance = findByUrn(getEntityClass(), object.getUrn());
+            S instance = findByUrn(object.getUrn());
 
             if (null != instance)
             {
@@ -145,8 +143,9 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     }
     @Override
     @SuppressWarnings("unchecked")
-    public Collection<S> findByAccount(final Class<?> clazz, final IAccount account)
+    public Collection<S> findByAccount(final IAccount account)
     {
+        Class clazz = getEntityClass();
         Collection<S> list = new ArrayList<>();
 
         String entityName = clazz.getName();
@@ -184,8 +183,9 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
     @Override
     @SuppressWarnings("unchecked")
-    public S findByUrn(final Class<?> clazz, final String urn)
+    public S findByUrn(final String urn)
     {
+        Class clazz = getEntityClass();
         S object = null;
         try
         {
@@ -222,9 +222,10 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
     @Override
     @SuppressWarnings("unchecked")
-    public S findByUrn(final Class<?> clazz, final String urn, final IAccount account)
+    public S findByUrn(final String urn, final IAccount account)
     {
         Preconditions.checkNotNull(account, "Parameter 'account' must not be null");
+        Class clazz = getEntityClass();
         S object = null;
 
         String entityName = clazz.getName();
@@ -256,13 +257,13 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
     @Override
     public String findByUrnJson(final String urn) throws JsonProcessingException
     {
-        return objectMapper.writeValueAsString(findByUrn(entityClass, urn));
+        return objectMapper.writeValueAsString(findByUrn(urn));
     }
 
     @Override
     public String findByUrnJson(final String urn, final IAccount account) throws JsonProcessingException
     {
-        return objectMapper.writeValueAsString(findByUrn(entityClass, urn, account));
+        return objectMapper.writeValueAsString(findByUrn(urn, account));
     }
 
     @SuppressWarnings("unchecked")
@@ -395,8 +396,9 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
     @SuppressWarnings("unchecked")
     @Override
-    public Collection<S> searchByMoniker(final Class<?> clazz, final String monikerEquals, final IAccount account)
+    public Collection<S> searchByMoniker(final String monikerEquals, final IAccount account)
     {
+        Class clazz = getEntityClass();
         Collection<S> list = new ArrayList<>();
 
         String entityName = clazz.getName();
@@ -424,8 +426,9 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
     @SuppressWarnings("unchecked")
     @Override
-    public Collection<S> searchByMonikerLike(final Class<?> clazz, final String monikerLike, final IAccount account)
+    public Collection<S> searchByMonikerLike(final String monikerLike, final IAccount account)
     {
+        Class clazz = getEntityClass();
         Collection<S> list = new ArrayList<>();
 
         String entityName = clazz.getName();
@@ -495,7 +498,7 @@ public abstract class AbstractDAOImpl<S extends IDomainResource<S>, T extends S>
 
         if (null != object.getUrn())
         {
-            findResult = findByUrn(getEntityClass(), object.getUrn());
+            findResult = findByUrn(object.getUrn());
         }
 
         if (null != findResult)

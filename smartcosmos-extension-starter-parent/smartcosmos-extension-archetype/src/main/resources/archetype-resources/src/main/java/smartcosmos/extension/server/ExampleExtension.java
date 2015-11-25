@@ -7,7 +7,11 @@ import ${package}.smartcosmos.extension.server.dao.impl.ExampleExtensionDAOImpl;
 import ${package}.smartcosmos.extension.server.dao.impl.MoreInterestingExampleExtensionDAOImpl;
 import ${package}.smartcosmos.extension.server.jpa.impl.ExampleEntity;
 import ${package}.smartcosmos.extension.server.jpa.impl.MoreInterestingExampleEntity;
+import io.dropwizard.configuration.ConfigurationFactory;
+import io.dropwizard.configuration.DefaultConfigurationFactoryFactory;
 import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
+import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
 import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.base.AbstractServerExtension;
 import org.slf4j.Logger;
@@ -37,10 +41,25 @@ public class ExampleExtension
         super(EXTENSION_ID, "ExampleExtension", ExampleConfiguration.class);
     }
 
-    @Override
     public void initialize(Bootstrap<?> bootstrap)
     {
-        super.initialize(bootstrap);
+        ConfigurationFactory<ExampleConfiguration> cf = new DefaultConfigurationFactoryFactory<ExampleConfiguration>()
+                .create(extensionConfigurationClass,
+                        bootstrap.getValidatorFactory().getValidator(),
+                        bootstrap.getObjectMapper(),
+                        "dw");
+
+        try
+        {
+            extensionConfiguration = (ExampleConfiguration) cf.build(bootstrap.getConfigurationSourceProvider(),
+                    getServerExtensionConfigurationPath());
+
+            initialize(extensionConfiguration);
+
+        } catch (Exception e)
+        {
+            handleInitializationException(e);
+        }
     }
 
 
@@ -102,4 +121,10 @@ public class ExampleExtension
     {
         return entities();
     }
+
+    public void run(SmartCosmosConfiguration configuration, Environment environment) throws Exception
+    {
+        this.smartCosmosConfiguration = configuration;
+    }
+
 }

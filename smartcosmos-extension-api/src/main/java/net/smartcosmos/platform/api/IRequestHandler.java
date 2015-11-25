@@ -21,7 +21,6 @@ package net.smartcosmos.platform.api;
  */
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.dropwizard.views.View;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.util.json.ViewType;
 import org.json.JSONException;
@@ -47,8 +46,6 @@ public interface IRequestHandler<T>
     long increment();
 
     boolean isAuthorized(IAuthenticatedUser authenticatedUser);
-
-    View render(T inputValue, IAuthenticatedUser authenticatedUser) throws JsonProcessingException, JSONException;
 
     Response handle(T inputValue, IAuthenticatedUser authenticatedUser) throws JsonProcessingException, JSONException;
 

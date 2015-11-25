@@ -21,8 +21,8 @@ package net.smartcosmos.platform.base;
  */
 
 import com.google.common.base.Preconditions;
-import io.dropwizard.lifecycle.Managed;
 import net.smartcosmos.model.base.EntityReferenceType;
+import net.smartcosmos.platform.api.Managed;
 import net.smartcosmos.platform.api.visitor.IVisitor;
 
 import java.util.Arrays;

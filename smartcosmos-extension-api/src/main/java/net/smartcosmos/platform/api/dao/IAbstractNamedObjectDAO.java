@@ -2,7 +2,7 @@ package net.smartcosmos.platform.api.dao;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
- * SMART COSMOS Platform Server API
+ * SMART COSMOS Extension API
  * ===============================================================================
  * Copyright (C) 2013 - 2015 Smartrac Technology Fletcher, Inc.
  * ===============================================================================
@@ -20,11 +20,20 @@ package net.smartcosmos.platform.api.dao;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import net.smartcosmos.model.base.INamedObject;
 import net.smartcosmos.model.context.IAccount;
-import net.smartcosmos.platform.api.directory.IAccountDirectory;
 
-public interface IAccountDirectoryDAO extends IAdvancedDAO<IAccountDirectory>
+import java.util.Collection;
+
+/**
+ * Initially created by tcross on November 16, 2015.
+ */
+public interface IAbstractNamedObjectDAO <U extends INamedObject<U>, V extends U> extends IAbstractDAO<U, V>
+
 {
-    IAccountDirectory findDirectoryByAccount(IAccount account);
-}
 
+    Collection<U> findByNameLike(String nameLike, IAccount account);
+
+    Collection<U> findByNameExact(String name, IAccount account);
+
+}

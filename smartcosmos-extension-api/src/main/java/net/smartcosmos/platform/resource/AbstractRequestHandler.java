@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
-import io.dropwizard.views.View;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.model.base.IMoniker;
@@ -167,13 +166,6 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
 
     @Override
     public Response handle(final T inputValue, final ViewType view, final IAuthenticatedUser authenticatedUser)
-            throws JsonProcessingException, JSONException
-    {
-        throw new WebApplicationException(Response.status(Response.Status.GONE).build());
-    }
-
-    @Override
-    public View render(final T inputValue, final IAuthenticatedUser authenticatedUser)
             throws JsonProcessingException, JSONException
     {
         throw new WebApplicationException(Response.status(Response.Status.GONE).build());
