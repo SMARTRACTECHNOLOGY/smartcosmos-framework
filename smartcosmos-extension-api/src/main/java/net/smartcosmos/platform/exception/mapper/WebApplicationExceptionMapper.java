@@ -60,9 +60,9 @@ public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplica
     private Response unauthorized(WebApplicationException e)
     {
         return Response.status(Response.Status.UNAUTHORIZED)
-            .type(MediaType.APPLICATION_JSON_TYPE)
-            .entity(ResponseEntity.toJson(Result.ERR_UNAUTHORIZED))
-            .build();
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .entity(ResponseEntity.toJson(Result.ERR_UNAUTHORIZED))
+                .build();
     }
 
     private Response paramException(WebApplicationException e)
@@ -86,7 +86,10 @@ public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplica
                     type = matcher.group(1);
                 }
 
-                response = Response.status(Response.Status.BAD_REQUEST).entity(ResponseEntity.toJson(Result.ERR_UNKNOWN_ENTITY_TYPE, type)).build();
+                response = Response.status(Response.Status.BAD_REQUEST)
+                        .type(MediaType.APPLICATION_JSON_TYPE)
+                        .entity(ResponseEntity.toJson(Result.ERR_UNKNOWN_ENTITY_TYPE, type))
+                        .build();
             }
         }
 
