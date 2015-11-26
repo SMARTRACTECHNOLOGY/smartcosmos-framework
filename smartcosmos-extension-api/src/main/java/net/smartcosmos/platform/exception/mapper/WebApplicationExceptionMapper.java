@@ -26,6 +26,7 @@ import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
 
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -41,12 +42,27 @@ public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplica
     @Override
     public Response toResponse(WebApplicationException e)
     {
+        Response response = e.getResponse();
+
         if (e instanceof ParamException)
         {
-            return paramException(e);
+            response = paramException(e);
         }
 
-        return e.getResponse();
+        if (e.getResponse().getStatus() == Response.Status.UNAUTHORIZED.getStatusCode())
+        {
+            response = unauthorized(e);
+        }
+
+        return response;
+    }
+
+    private Response unauthorized(WebApplicationException e)
+    {
+        return Response.status(Response.Status.UNAUTHORIZED)
+            .type(MediaType.APPLICATION_JSON_TYPE)
+            .entity(ResponseEntity.toJson(Result.ERR_UNAUTHORIZED))
+            .build();
     }
 
     private Response paramException(WebApplicationException e)
