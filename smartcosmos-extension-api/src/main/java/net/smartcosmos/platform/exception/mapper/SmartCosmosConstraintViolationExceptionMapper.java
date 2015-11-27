@@ -1,4 +1,4 @@
-package net.smartcosmos.platform.util;
+package net.smartcosmos.platform.exception.mapper;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
