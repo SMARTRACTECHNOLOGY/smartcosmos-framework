@@ -30,10 +30,12 @@ import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.JsonUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.Response;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,26 +61,39 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
         boolean isAvailable = false;
         ClientResource service = createClient(RegistrationEndpoints.checkRealmAvailability(realm));
 
+        Response response = null;
         try
         {
-            Representation result = service.get();
-            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
-            JSONObject jsonResult = jsonRepresentation.getJsonObject();
-            ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-
-            if (!service.getStatus().equals(Status.SUCCESS_OK))
-            {
-                LOGGER.error("Unexpected HTTP status code returned: " + service.getStatus().getCode());
-                throw new ServiceException(responseEntity);
-            } else
-            {
-                isAvailable = (responseEntity.getCode() == Result.OK.getCode());
-            }
-
-        } catch (JSONException | IOException e)
+            service.get();
+            response = service.getResponse();
+        } catch (ResourceException e)
         {
             LOGGER.error("Unexpected exception", e);
             throw new ServiceException(e);
+        }
+
+        if (response != null)
+        {
+            try
+            {
+                JsonRepresentation jsonRepresentation = new JsonRepresentation(response.getEntityAsText());
+                JSONObject jsonResult = jsonRepresentation.getJsonObject();
+                ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+
+                if (!response.getStatus().equals(Status.SUCCESS_OK))
+                {
+                    LOGGER.error("Unexpected HTTP status code returned: " + service.getStatus().getCode());
+                    throw new ServiceException(responseEntity);
+                } else
+                {
+                    isAvailable = (responseEntity.getCode() == Result.OK.getCode());
+                }
+
+            } catch (JSONException e)
+            {
+                LOGGER.error("Unexpected exception", e);
+                throw new ServiceException(e);
+            }
         }
 
         return isAvailable;
