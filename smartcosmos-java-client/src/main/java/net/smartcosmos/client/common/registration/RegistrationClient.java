@@ -94,6 +94,11 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
                 LOGGER.error("Unexpected exception", e);
                 throw new ServiceException(e);
             }
+        } else
+        {
+            LOGGER.error("Unexpected NULL response");
+            throw new ServiceException(JsonUtil.fromJson(ResponseEntity.toJson(Result.ERR_FAILURE, "Response should not be NULL"),
+                    ResponseEntity.class));
         }
 
         return isAvailable;
@@ -126,8 +131,7 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
 
         try
         {
-            JSONObject jsonObject = new JSONObject()
-                    .put(Field.EMAIL_ADDRESS_FIELD, emailAddress);
+            JSONObject jsonObject = new JSONObject().put(Field.EMAIL_ADDRESS_FIELD, emailAddress);
             jsonObject.put(Field.SEND_REGISTRATION_EMAIL_FIELD, sendEmail);
 
             if (realm != null)
@@ -140,8 +144,7 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
             ClientResource service = createClient(RegistrationEndpoints.registration());
             Representation result = service.post(sndJsonRepresentation);
 
-            if (service.getStatus().equals(Status.CLIENT_ERROR_CONFLICT) ||
-                service.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
+            if (service.getStatus().equals(Status.CLIENT_ERROR_CONFLICT) || service.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
             {
                 // Email address or Realm is already registered
                 JsonRepresentation rcvJsonRepresentation = new JsonRepresentation(result);
