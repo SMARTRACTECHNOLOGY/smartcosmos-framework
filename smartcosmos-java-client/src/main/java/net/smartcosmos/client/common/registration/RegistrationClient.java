@@ -97,8 +97,8 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
         } else
         {
             LOGGER.error("Unexpected NULL response");
-            throw new ServiceException(JsonUtil.fromJson(ResponseEntity.toJson(Result.ERR_FAILURE, "Response should not be NULL"),
-                    ResponseEntity.class));
+            ResponseEntity responseEntity = new ResponseEntity.Builder(Result.ERR_FAILURE.getCode(), "Response should not be NULL").build();
+            throw new ServiceException(responseEntity);
         }
 
         return isAvailable;
