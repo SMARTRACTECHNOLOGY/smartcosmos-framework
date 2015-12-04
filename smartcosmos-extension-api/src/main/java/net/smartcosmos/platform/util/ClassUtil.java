@@ -40,7 +40,7 @@ public final class ClassUtil
             instance = clazz.cast(Class.forName(className, true, classLoader).newInstance());
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e)
         {
-            LOG.error("Unable to instantiate class named {}", className);
+            LOG.error("Unable to instantiate class named {}, cause: {}", className, e.toString());
         }
 
         return instance;
@@ -55,7 +55,7 @@ public final class ClassUtil
             instance = clazz.cast(Class.forName(className).newInstance());
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e)
         {
-            LOG.error("Unable to instantiate class named {}", className);
+            LOG.error("Unable to instantiate class named {}, cause: {}", className, e.toString());
         }
 
         return instance;
