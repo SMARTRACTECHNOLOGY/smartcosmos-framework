@@ -136,7 +136,7 @@ public class QuartzJDBCJobStoreTX
 
         private final String dialect;
 
-        private DriverDelegateClass(String dialect)
+        DriverDelegateClass(String dialect)
         {
             this.dialect = dialect;
         }

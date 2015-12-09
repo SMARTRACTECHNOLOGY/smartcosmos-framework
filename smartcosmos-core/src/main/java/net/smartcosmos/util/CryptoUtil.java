@@ -53,7 +53,7 @@ import java.util.Arrays;
  */
 public final class CryptoUtil
 {
-    public static enum KeyFormat
+    public enum KeyFormat
     {
         /**
          * Public Keys.
