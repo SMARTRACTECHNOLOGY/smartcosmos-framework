@@ -33,9 +33,6 @@ import javax.ws.rs.ext.Provider;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by asiegel on 24.11.2015.
- */
 @Provider
 public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplicationException>
 {
