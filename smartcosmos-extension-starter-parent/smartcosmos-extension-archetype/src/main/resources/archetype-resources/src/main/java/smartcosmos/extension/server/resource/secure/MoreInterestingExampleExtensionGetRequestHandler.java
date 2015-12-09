@@ -53,7 +53,7 @@ class MoreInterestingExampleExtensionGetRequestHandler extends AbstractRequestHa
                     context.getDAOFactory().lookup(IMoreInterestingExampleExtensionDAO.class.getName(),
                                                    IMoreInterestingExampleExtensionDAO.class);
 
-            if (!inputValue.has("referenceUrn") || !inputValue.has("entityReferenceType"))
+            if (!inputValue.has(Field.REFERENCE_URN_FIELD) || !inputValue.has(Field.ENTITY_REFERENCE_TYPE))
             {
                 return Response
                         .status(Response.Status.BAD_REQUEST)
@@ -62,8 +62,8 @@ class MoreInterestingExampleExtensionGetRequestHandler extends AbstractRequestHa
                         .build();
             }
             EntityReferenceType entityReferenceType =
-                    EntityReferenceType.valueOf(inputValue.getString("entityRerferenceType"));
-            String referenceUrn = objectDAO.getSystemUrnFromObjectUrn(inputValue.getString("referenceUrn"),
+                    EntityReferenceType.valueOf(inputValue.getString(Field.ENTITY_REFERENCE_TYPE));
+            String referenceUrn = objectDAO.getSystemUrnFromObjectUrn(inputValue.getString(Field.REFERENCE_URN_FIELD),
                                                                       entityReferenceType,
                                                                       authenticatedUser.getAccount());
 

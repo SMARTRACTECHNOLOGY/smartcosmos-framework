@@ -3,7 +3,7 @@ package ${package}.smartcosmos.extension.server.jpa;
 import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.base.IReferentialObject;
 
-// NOTE TO EXENSION DEVELOPER:
+// NOTE TO EXTENSION DEVELOPER:
 // Observe that the only difference between this interface and the IExampleEntity interface
 // are the interfaces being extended.
 //
