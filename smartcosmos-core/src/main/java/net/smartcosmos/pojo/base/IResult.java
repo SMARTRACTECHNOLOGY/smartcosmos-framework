@@ -29,9 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by asiegel on 19.11.2015.
- */
 public interface IResult
 {
     int getCode();
