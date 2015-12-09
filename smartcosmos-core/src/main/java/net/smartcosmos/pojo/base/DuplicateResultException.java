@@ -23,9 +23,6 @@ package net.smartcosmos.pojo.base;
 
 import java.util.List;
 
-/**
- * Created by asiegel on 19.11.2015.
- */
 public class DuplicateResultException extends IllegalArgumentException
 {
     private List<IResult> results;

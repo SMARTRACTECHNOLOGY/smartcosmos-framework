@@ -371,6 +371,17 @@
             </dependency>
             <dependency>
                 <groupId>org.restlet.jse</groupId>
+                <artifactId>org.restlet.ext.httpclient</artifactId>
+                <version>${restlet.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.httpcomponents</groupId>
+                        <artifactId>httpcore</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.restlet.jse</groupId>
                 <artifactId>org.restlet.ext.json</artifactId>
                 <version>${restlet.version}</version>
             </dependency>

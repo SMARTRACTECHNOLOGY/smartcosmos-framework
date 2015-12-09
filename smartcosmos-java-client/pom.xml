@@ -11,6 +11,10 @@
     <name>SMART COSMOS Java Client</name>
     <description>Provides a thin client wrapper for accessing the SMART COSMOS platform web services</description>
     <dependencies>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
         <!-- Necessary since Restlet still uses JUL. -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -31,7 +35,6 @@
         <dependency>
             <groupId>org.restlet.jse</groupId>
             <artifactId>org.restlet.ext.httpclient</artifactId>
-            <version>${restlet.version}</version>
         </dependency>
         <dependency>
             <groupId>org.restlet.jse</groupId>
