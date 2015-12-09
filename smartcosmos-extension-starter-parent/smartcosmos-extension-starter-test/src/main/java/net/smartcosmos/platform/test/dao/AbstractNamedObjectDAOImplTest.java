@@ -14,7 +14,7 @@ public abstract class AbstractNamedObjectDAOImplTest<S extends INamedObject<S>, 
 {
 
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED
     @UnitOfWork
     public void testFindByNameLike()
     {
@@ -22,7 +22,7 @@ public abstract class AbstractNamedObjectDAOImplTest<S extends INamedObject<S>, 
     }
 
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED
     @UnitOfWork
     public void testFindByNameExact()
     {
