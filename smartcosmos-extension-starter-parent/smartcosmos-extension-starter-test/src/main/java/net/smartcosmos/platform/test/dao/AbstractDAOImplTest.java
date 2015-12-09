@@ -245,11 +245,10 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * Test method for {@link net.smartcosmos.platform.dao.AbstractDAOImpl#page(int, int)}.
      */
     @Test
-    @Ignore
     @UnitOfWork
     public void testPage()
     {
-        IPage<S> page = dao.page(0, 1);
+        IPage<S> page = dao.page(1, 1);
     }
 
     /**
@@ -257,7 +256,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * {@link net.smartcosmos.platform.dao.AbstractDAOImpl#insert(net.smartcosmos.model.base.IDomainResource)}.
      */
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testInsert()
     {
@@ -268,7 +267,6 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * Test method for {@link net.smartcosmos.platform.dao.AbstractDAOImpl#canDelete()}.
      */
     @Test
-    @Ignore
     @UnitOfWork
     public void testCanDelete()
     {
@@ -280,7 +278,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * {@link net.smartcosmos.platform.dao.AbstractDAOImpl#delete(net.smartcosmos.model.base.IDomainResource)}.
      */
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testDelete()
     {
@@ -292,7 +290,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * {@link net.smartcosmos.platform.dao.AbstractDAOImpl#update(net.smartcosmos.model.base.IDomainResource)}.
      */
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testUpdate()
     {
@@ -305,7 +303,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * .
      */
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testFindByUrnClassOfQStringIAccount()
     {
@@ -317,7 +315,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * .
      */
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testFindByUrnClassOfQString()
     {
@@ -330,7 +328,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * .
      */
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testFindByUuids()
     {
@@ -343,7 +341,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * .
      */
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testFindByAccount()
     {
@@ -356,7 +354,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * .
      */
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testSearchByMoniker()
     {
@@ -364,7 +362,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
     }
 
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testSearchByMonikerLike()
     {
@@ -375,7 +373,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * Test method for {@link net.smartcosmos.platform.dao.AbstractDAOImpl#getPath()}.
      */
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testGetPath()
     {
@@ -387,7 +385,7 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
      * {@link net.smartcosmos.platform.dao.AbstractDAOImpl#advancedQuery(com.querydsl.core.types.Predicate[])}.
      */
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testAdvancedQuery()
     {
@@ -395,49 +393,49 @@ public abstract class AbstractDAOImplTest<S extends IDomainResource<S>, T extend
     }
 
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testFindByUrnJson() throws IOException
     {
     }
 
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testFindByUuidsJson() throws IOException
     {
     }
 
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testFindByAccountJson() throws IOException
     {
     }
 
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testInsertJson() throws IOException
     {
     }
 
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testUpsertJson() throws IOException
     {
     }
 
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testDeleteJson() throws IOException
     {
     }
 
     @Test
-    @Ignore
+    @Ignore // NOT YET IMPLEMENTED 
     @UnitOfWork
     public void testUpdateJson() throws IOException
     {
