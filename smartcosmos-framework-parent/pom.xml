@@ -22,7 +22,7 @@
     <parent>
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-framework-root</artifactId>
-        <version>2.11.2-development-SNAPSHOT</version>
+        <version>2.11.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-framework-parent</artifactId>
@@ -34,7 +34,7 @@
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-dependencies</artifactId>
-                <version>2.11.2-development-SNAPSHOT</version>
+                <version>2.11.2-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -150,7 +150,7 @@
                         <dependency>
                             <groupId>net.smartcosmos</groupId>
                             <artifactId>smartcosmos-builds-tools</artifactId>
-                            <version>2.11.2-development-SNAPSHOT</version>
+                            <version>2.11.2-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                     <executions>
@@ -203,7 +203,7 @@
                         <dependency>
                             <groupId>net.smartcosmos</groupId>
                             <artifactId>smartcosmos-builds-tools</artifactId>
-                            <version>2.11.2-development-SNAPSHOT</version>
+                            <version>2.11.2-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                     <executions>
@@ -299,7 +299,7 @@
                         <dependency>
                             <groupId>net.smartcosmos</groupId>
                             <artifactId>smartcosmos-builds-tools</artifactId>
-                            <version>2.11.2-development-SNAPSHOT</version>
+                            <version>2.11.2-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                     <executions>
