@@ -165,7 +165,7 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
                                                 ViewType viewType) throws ServiceException;
 
     /**
-     * Retrieves <b>all</b> child entities that the specified entity has the specified relationship type with.
+     * Retrieves <b>all</b> child entities that the specified entity has a relationship with.
      * <p/>
      * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using a
      * {@link net.smartcosmos.util.json.ViewType#Standard} view.
@@ -179,7 +179,7 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
                                                 String referenceUrn) throws ServiceException;
 
     /**
-     * Retrieves <b>all</b> child entities that the specified entity has an relationship with.
+     * Retrieves <b>all</b> child entities that the specified entity has a relationship with.
      * <p/>
      * Each {@link net.smartcosmos.objects.model.context.IRelationship} will be serialized using the specified field
      * verbosity.
