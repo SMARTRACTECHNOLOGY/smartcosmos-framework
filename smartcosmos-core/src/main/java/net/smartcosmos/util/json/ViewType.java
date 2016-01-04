@@ -45,5 +45,22 @@ public enum ViewType
     {
         return viewClass;
     }
+
+    /**
+     * Provides a safe parsing method to get the ViewType from the "view" query parameter.
+     *
+     * @param s : requested ViewType as String
+     * @return parsed ViewType enum or ViewType.Standard in case of error
+     */
+    public static ViewType parseViewType(String s)
+    {
+        try
+        {
+            return valueOf(ViewType.class, s);
+        } catch (IllegalArgumentException | NullPointerException e)
+        {
+            return ViewType.Standard;
+        }
+    }
 }
 

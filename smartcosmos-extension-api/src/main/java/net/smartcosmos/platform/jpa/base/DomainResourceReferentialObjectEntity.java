@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.base.IAccountDomainResource;
 import net.smartcosmos.model.base.IReferentialObject;
+import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
 import org.hibernate.annotations.Index;
@@ -34,6 +35,7 @@ import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -49,9 +51,10 @@ public abstract class DomainResourceReferentialObjectEntity<T extends IAccountDo
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = false)
     @Index(name = "entity_reference_type_idx")
+    @NotNull
     private EntityReferenceType entityReferenceType;
 
-    @Column(length = 16, nullable = false, updatable = false)
+    @Column(length = DomainResource.UUID_LENGTH, nullable = false, updatable = false)
     @Index(name = "entity_reference_urn_idx")
     @Type(type = "uuid-binary")
     @JsonIgnore

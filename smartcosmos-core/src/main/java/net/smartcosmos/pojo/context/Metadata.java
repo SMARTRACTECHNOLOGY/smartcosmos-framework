@@ -37,6 +37,8 @@ import net.smartcosmos.util.mapper.StringMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
@@ -180,9 +182,13 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
     protected MetadataDataType dataType;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = KEY_MAX_LENGTH)
     protected String key;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = RAW_VALUE_MAX_LENGTH)
     protected String rawValue;
 
     @JsonView(JsonGenerationView.Full.class)

@@ -28,5 +28,8 @@ package net.smartcosmos.model.base;
  */
 public interface IDomainResource<T> extends IUrnNamespace, IMoniker
 {
+    int UUID_LENGTH = 16;
+    int MONIKER_LENGTH = 2048;
+
     void copy(T object);
 }

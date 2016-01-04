@@ -22,7 +22,7 @@
     <parent>
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-framework-root</artifactId>
-        <version>2.10.8-development-SNAPSHOT</version>
+        <version>2.11.2-development-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-documentation</artifactId>
@@ -85,44 +85,12 @@
                                             <type>pdf</type>
                                             <classifier>CONTRIBUTING</classifier>
                                         </artifact>
-                                        <artifact>
-                                            <!-- Since Aglio is failing on Jenkins, temporarily committing the file to repo. -->
-                                            <file>${basedir}/api-index.html</file>
-                                            <!-- <file>${basedir}/target/api-index.html</file> -->
-                                            <type>html</type>
-                                            <classifier>API</classifier>
-                                        </artifact>
                                     </artifacts>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>aglio-process</id>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <inherited>false</inherited>
-                                <configuration>
-                                    <!-- This is currently failing on Jenkins, which is unfortunate. -->
-                                    <skip>true</skip>
-                                    <executable>aglio</executable>
-                                    <arguments>
-                                        <argument>-i</argument>
-                                        <argument>../apiary.apib</argument>
-                                        <argument>-o</argument>
-                                        <argument>target/api-index.html</argument>
-                                        <argument>--theme-full-width</argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
+
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
                         <executions>

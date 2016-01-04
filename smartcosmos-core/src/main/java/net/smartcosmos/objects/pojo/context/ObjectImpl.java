@@ -25,9 +25,14 @@ import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.pojo.base.AccountTypedNamedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class ObjectImpl extends AccountTypedNamedObject<IObject> implements IObject
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = OBJECT_URN_LENGTH)
     protected String objectUrn;
 
     @Override
@@ -43,24 +48,30 @@ public class ObjectImpl extends AccountTypedNamedObject<IObject> implements IObj
     }
 
     @Override
-    public boolean equals(Object o)
+    public boolean equals(Object obj)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        ObjectImpl object = (ObjectImpl) o;
-
-        if (!objectUrn.equals(object.objectUrn)) return false;
-
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ObjectImpl other = (ObjectImpl) obj;
+        if (objectUrn == null)
+        {
+            if (other.objectUrn != null)
+                return false;
+        } else if (!objectUrn.equals(other.objectUrn))
+            return false;
         return true;
     }
 
     @Override
     public int hashCode()
     {
+        final int prime = 31;
         int result = super.hashCode();
-        result = 31 * result + objectUrn.hashCode();
+        result = prime * result + ((objectUrn == null) ? 0 : objectUrn.hashCode());
         return result;
     }
 }

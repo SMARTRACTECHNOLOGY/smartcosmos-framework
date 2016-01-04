@@ -25,9 +25,14 @@ import com.google.common.base.Preconditions;
 import net.smartcosmos.model.base.ITypedObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
-public abstract class TypedNamedObject<T> extends NamedObject<T> implements ITypedObject
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+public abstract class TypedNamedObject<T> extends NamedObject<T>implements ITypedObject
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = TYPE_MAX_LENGTH)
+    @NotNull
     protected String type;
 
     @Override
@@ -44,24 +49,30 @@ public abstract class TypedNamedObject<T> extends NamedObject<T> implements ITyp
     }
 
     @Override
-    public boolean equals(Object o)
+    public boolean equals(Object obj)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        TypedNamedObject that = (TypedNamedObject) o;
-
-        if (!type.equals(that.type)) return false;
-
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TypedNamedObject other = (TypedNamedObject) obj;
+        if (type == null)
+        {
+            if (other.type != null)
+                return false;
+        } else if (!type.equals(other.type))
+            return false;
         return true;
     }
 
     @Override
     public int hashCode()
     {
+        final int prime = 31;
         int result = super.hashCode();
-        result = 31 * result + type.hashCode();
+        result = prime * result + ((type == null) ? 0 : type.hashCode());
         return result;
     }
 }

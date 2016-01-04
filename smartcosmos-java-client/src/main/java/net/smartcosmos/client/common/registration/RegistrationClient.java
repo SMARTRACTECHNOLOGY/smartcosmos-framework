@@ -43,7 +43,7 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
 {
     static final Logger LOGGER = LoggerFactory.getLogger(RegistrationClient.class);
 
-    public RegistrationClient(String server)
+    RegistrationClient(String server)
     {
         super(new ServerContext(server));
     }

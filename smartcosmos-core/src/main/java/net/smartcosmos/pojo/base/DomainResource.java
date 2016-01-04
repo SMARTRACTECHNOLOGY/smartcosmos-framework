@@ -20,22 +20,27 @@ package net.smartcosmos.pojo.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
 import net.smartcosmos.model.base.IDomainResource;
 import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.Size;
 import java.util.UUID;
 
-@JsonPropertyOrder(value = {"urn", "lastModifiedTimestamp" })
+@JsonPropertyOrder(value = { "urn", "lastModifiedTimestamp" })
+@JsonIgnoreProperties({"returnValueType"})
 public abstract class DomainResource<T> implements IDomainResource<T>
 {
-    
     protected UUID systemUuid;
-  
+
+    @JsonView(JsonGenerationView.Standard.class)
     protected long lastModifiedTimestamp;
-  
+
+    @JsonView(JsonGenerationView.Full.class)
+    @Size(max = MONIKER_LENGTH)
     protected String moniker;
 
     @Override
@@ -59,14 +64,12 @@ public abstract class DomainResource<T> implements IDomainResource<T>
     }
 
     @Override
-    @JsonView(JsonGenerationView.Standard.class)
     public long getLastModifiedTimestamp()
     {
         return lastModifiedTimestamp;
     }
 
     @Override
-    @JsonView(JsonGenerationView.Full.class)
     public String getMoniker()
     {
         return moniker;

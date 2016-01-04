@@ -60,6 +60,8 @@ import net.smartcosmos.model.base.ITypedObject;
 public interface IGeospatialEntry
         extends IAccountDomainResource<IGeospatialEntry>, INamedObject<IGeospatialEntry>, ITypedObject
 {
+    int GEO_JSON_MAX_LENGTH = 8192;
+
     GeometricShape getGeometricShape();
 
     void setGeometricShape(GeometricShape geometricShape);

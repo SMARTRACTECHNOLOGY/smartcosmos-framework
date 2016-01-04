@@ -30,6 +30,13 @@ import net.smartcosmos.model.base.ITypedObject;
  */
 public interface IObjectAddress extends IAccountDomainResource<IObjectAddress>, ITypedObject
 {
+    int LINE_1_MAX_LENGTH = 1024;
+    int LINE_2_MAX_LENGTH = 1024;
+    int CITY_MAX_LENGTH = 1024;
+    int STATE_PROVINCE_MAX_LENGTH = 50;
+    int POSTAL_CODE_MAX_LENGTH = 20;
+    int COUNTRY_ABBREVIATION_MAX_LENGTH = 2;
+
     IObject getObject();
 
     void setObject(IObject object);

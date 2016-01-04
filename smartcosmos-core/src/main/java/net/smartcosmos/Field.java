@@ -114,7 +114,7 @@ public final class Field
 
     public static final String MIME_TYPE_FIELD = "mimeType";
 
-    public static final String CONTENT_URL_FIELD = "contentUrl";
+    public static final String CONTENT_URL_FIELD = "url";
 
     public static final String KEY_FIELD = "key";
 

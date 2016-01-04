@@ -25,12 +25,18 @@ import net.smartcosmos.objects.model.context.IFile;
 import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class File extends ReferentialObject<IFile> implements IFile
 {
     @JsonView(JsonGenerationView.Restricted.class)
+    @Size(max = URL_MAX_LENGTH)
     protected String url;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Size(max = MIME_TYPE_MAX_LENGTH)
     protected String mimeType;
 
     @JsonView(JsonGenerationView.Standard.class)
@@ -40,9 +46,11 @@ public class File extends ReferentialObject<IFile> implements IFile
     protected boolean pending;
 
     @JsonView(JsonGenerationView.Full.class)
+    @Size(max = DIGITAL_SIGNATURE_MAX_LENGTH)
     protected String digitalSignature;
 
     @JsonView(JsonGenerationView.Standard.class)
+    @Size(max = FILE_NAME_MAX_LENGTH)
     protected String fileName;
 
     @Override

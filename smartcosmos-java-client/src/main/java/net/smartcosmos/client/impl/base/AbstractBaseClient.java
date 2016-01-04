@@ -1,7 +1,11 @@
 package net.smartcosmos.client.impl.base;
 
-import java.util.Arrays;
-
+import net.smartcosmos.client.connectivity.ServerContext;
+import net.smartcosmos.client.connectivity.ServiceException;
+import net.smartcosmos.pojo.base.ResponseEntity;
+import net.smartcosmos.pojo.base.Result;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.restlet.Client;
 import org.restlet.Context;
 import org.restlet.data.ChallengeResponse;
@@ -10,6 +14,11 @@ import org.restlet.data.Protocol;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
+
+import static net.smartcosmos.Field.CODE_FIELD;
+import static net.smartcosmos.Field.MESSAGE_FIELD;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -30,8 +39,6 @@ import org.slf4j.LoggerFactory;
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-
-import net.smartcosmos.client.connectivity.ServerContext;
 
 public abstract class AbstractBaseClient
 {
@@ -91,5 +98,27 @@ public abstract class AbstractBaseClient
                 .getServerUrl()
                 .concat(context.getContextPath())
                 .concat(path);
+    }
+
+    protected void throwServiceException(JSONObject jsonResult) throws ServiceException
+    {
+        try
+        {
+            if (jsonResult.has(CODE_FIELD) && jsonResult.has(MESSAGE_FIELD))
+            {
+                ResponseEntity responseEntity = new ResponseEntity();
+                responseEntity.setCode(jsonResult.getInt(CODE_FIELD));
+                responseEntity.setMessage(jsonResult.getString(MESSAGE_FIELD));
+
+                throw new ServiceException(responseEntity);
+
+            } else if (jsonResult.has(CODE_FIELD))
+            {
+                throw new ServiceException(jsonResult.getInt(CODE_FIELD));
+            }
+        } catch (JSONException e)
+        {
+            throw new ServiceException(Result.ERR_FAILURE.getCode());
+        }
     }
 }

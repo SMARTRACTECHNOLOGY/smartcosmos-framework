@@ -20,6 +20,9 @@ package net.smartcosmos.model.base;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Represents a specific type of platform entity in a generic operation. Instead of defining many different
  * entity specific operations, a singular operation is typically defined by the platform where one of the
@@ -58,6 +61,42 @@ public enum EntityReferenceType
     LibraryElement,
 
     Event;
+
+    public static final List<EntityReferenceType> RELATIONSHIP_BINDABLE_ENTITY_TYPES = Arrays.asList(
+            Object,
+            ObjectAddress,
+            ObjectInteraction,
+            ObjectInteractionSession,
+            Georectification,
+            Device,
+            File,
+            Timeline,
+            LibraryElement
+    );
+
+    public static final List<EntityReferenceType> VISITOR_BINDABLE_ENTITY_TYPES = Arrays.asList(
+            Device,
+            Event,
+            File,
+            Georectification,
+            Metadata,
+            Relationship,
+            Object,
+            ObjectAddress,
+            ObjectInteraction,
+            ObjectInteractionSession,
+            Tag,
+            Timeline);
+
+    public static boolean isRelationshipBindable(EntityReferenceType referenceType)
+    {
+        return RELATIONSHIP_BINDABLE_ENTITY_TYPES.contains(referenceType);
+    }
+
+    public static boolean isVisitorBindable(EntityReferenceType referenceType)
+    {
+        return VISITOR_BINDABLE_ENTITY_TYPES.contains(referenceType);
+    }
     
     public static final boolean isValid(String referenceType)
     {
