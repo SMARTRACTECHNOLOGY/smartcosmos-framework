@@ -57,8 +57,30 @@ public abstract class AbstractAwsService<U> extends AbstractCloudService<U>
     @Override
     protected U createCloudCredentials(Properties properties)
     {
-        String accessKey = properties.getProperty(ACCESS_KEY);
-        String secretAccessKey = properties.getProperty(SECRET_KEY);
+        String accessKey = null;
+        String secretAccessKey = null;
+
+        // If the incoming AWS API key file is a CSV file (which is what you download from AWS by default),
+        // we've already marked it as a CSV file in net.smartcosmos.platform.base.AbstractCloudService, so
+        // here we just strip out the two irrelevant lines, split the key of the relevant line on ",", and
+        // use the second and third fields as access key and secret key respectively.
+        // We assume here that the user has left the extension alone on the key file, whatever she's done
+        // with it in terms of base name and location.
+
+        if (properties.containsKey("csv") && properties.get("csv").equals("true"))
+        {
+            properties.remove("csv");
+            properties.remove("User");
+            String relevantLine = (String) properties.propertyNames().nextElement();
+            String[] relevantTokens = relevantLine.split(",");
+            accessKey = relevantTokens[1];
+            secretAccessKey = relevantTokens[2];
+        }
+        else
+        {
+            accessKey = properties.getProperty(ACCESS_KEY);
+            secretAccessKey = properties.getProperty(SECRET_KEY);
+        }
 
         return createCloudCredentials(accessKey, secretAccessKey);
     }
