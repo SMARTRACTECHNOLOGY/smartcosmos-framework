@@ -81,8 +81,18 @@ public abstract class AbstractCloudService<U> extends AbstractService
                 try
                 {
                     InputStream is = new FileInputStream(cloudCredentialsFile);
+
+                    // we just load the properties directly, as if we know it's a .properties file
                     properties.load(is);
 
+                    // If the file is a .csv file, as per e.g., the AWS default format, we add a property that says so,
+                    // so we can do service-specific parsing later.
+                    // See net.smartcosmos.platform.base.AbstractAwsService for an (at this writing the only) example.
+
+                    if (cloudCredentialsFile.getName().endsWith(".csv"))
+                    {
+                        properties.put("csv", "true");
+                    }
                     credentials = createCloudCredentials(properties);
 
                 } catch (Exception e)
@@ -122,6 +132,6 @@ public abstract class AbstractCloudService<U> extends AbstractService
     protected void onMissingFileAtServiceKeyPath(String cloudCredentialsPath)
     {
         LOG.error("Unable to locate Cloud credential properties at path found in configuration file: {}",
-                  cloudCredentialsPath);
+            cloudCredentialsPath);
     }
 }
