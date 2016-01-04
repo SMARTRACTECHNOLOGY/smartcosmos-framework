@@ -175,7 +175,7 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
      * @return Non-null collection of matching relationships; collection may have a size of 0 to indicate no matches
      * @throws ServiceException on error
      */
-    Collection<IRelationship> findRelationships(EntityReferenceType entityReferenceType,
+    Collection<IRelationship> findAllRelationships(EntityReferenceType entityReferenceType,
                                                 String referenceUrn) throws ServiceException;
 
     /**
@@ -190,7 +190,7 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
      * @return Non-null collection of matching relationships; collection may have a size of 0 to indicate no matches
      * @throws ServiceException on error
      */
-    Collection<IRelationship> findRelationships(EntityReferenceType entityReferenceType,
+    Collection<IRelationship> findAllRelationships(EntityReferenceType entityReferenceType,
                                                 String referenceUrn,
                                                 ViewType viewType) throws ServiceException;
 
