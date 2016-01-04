@@ -75,8 +75,7 @@ public abstract class AbstractAwsService<U> extends AbstractCloudService<U>
             String[] relevantTokens = relevantLine.split(",");
             accessKey = relevantTokens[1];
             secretAccessKey = relevantTokens[2];
-        }
-        else
+        } else
         {
             accessKey = properties.getProperty(ACCESS_KEY);
             secretAccessKey = properties.getProperty(SECRET_KEY);

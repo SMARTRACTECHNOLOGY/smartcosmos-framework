@@ -28,7 +28,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.Scanner;
 
 /**
  * Base class for any Cloud-backed service offering that provides a simple Properties file based mechanism for loading
@@ -133,6 +132,6 @@ public abstract class AbstractCloudService<U> extends AbstractService
     protected void onMissingFileAtServiceKeyPath(String cloudCredentialsPath)
     {
         LOG.error("Unable to locate Cloud credential properties at path found in configuration file: {}",
-                  cloudCredentialsPath);
+            cloudCredentialsPath);
     }
 }
