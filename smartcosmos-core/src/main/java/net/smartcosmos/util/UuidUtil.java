@@ -81,7 +81,7 @@ public final class UuidUtil
     }
 
     /**
-     *
+     * @param referenceUuid the reference UUID
      * @return the Sting version (in canonical UUID-as-String format) of an input UUID
      *
      */
