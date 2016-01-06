@@ -41,6 +41,7 @@ public interface IObjectAddressClient
      * @param objectUrn Exact, case-sensitive object URN to locate
      * @param urn       Exact, case-sensitive system-assigned URN of the address record to locate
      * @return Matching object
+     * @throws ServiceException
      */
     IObjectAddress findByUrn(String objectUrn, String urn) throws ServiceException;
 
@@ -52,6 +53,7 @@ public interface IObjectAddressClient
      * @param urn       Exact, case-sensitive system-assigned URN of the address record to locate
      * @param viewType  Field verbosity
      * @return Matching object
+     * @throws ServiceException
      */
     IObjectAddress findByUrn(String objectUrn, String urn, ViewType viewType) throws ServiceException;
 
@@ -80,6 +82,7 @@ public interface IObjectAddressClient
      *
      * @param objectUrn Exact, case-sensitive object URN to locate
      * @param count     How many last known address records to return, chronologically descending
+     * @param viewType  Field verbosity
      * @return Non-null collection of matching addresses; collection may have a size of 0 to indicate no matches found
      * @throws ServiceException
      */

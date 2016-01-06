@@ -39,7 +39,7 @@ public interface ITimelineClient extends IUpdateableBaseClient<ITimelineEntry>
      * @param nameLike Case-sensitive name like pattern (do not append any special characters like % or * to the end)
      * @return Non-null (but possibly empty) collection of timeline entries that have a name that matches the specified
      * pattern
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     Collection<ITimelineEntry> findByNameLike(String nameLike) throws ServiceException;
 
@@ -51,7 +51,7 @@ public interface ITimelineClient extends IUpdateableBaseClient<ITimelineEntry>
      * @param viewType Field verbosity
      * @return Non-null (but possibly empty) collection of timeline entries that have a name that matches the specified
      * pattern
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     Collection<ITimelineEntry> findByNameLike(String nameLike, ViewType viewType) throws ServiceException;
 }

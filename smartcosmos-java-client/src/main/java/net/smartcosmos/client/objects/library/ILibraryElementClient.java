@@ -59,6 +59,7 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
      *
      * @param builder Builder that defines the query to perform
      * @return Non-null collection of matching entities; collection may have a size of 0 to indicate no matches found
+     * @throws ServiceException
      */
     Collection<ILibraryElement> query(LibraryEndpoints.Builder builder) throws ServiceException;
 
@@ -67,6 +68,7 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
      *
      * @param libraryElementUrn
      * @return null if libraryElement has no parent, otherwise the Urn of the parent libraryElement
+     * @throws ServiceException
      */
     ILibraryElement getParent(String libraryElementUrn) throws ServiceException;
 
@@ -76,6 +78,7 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
      * @param libraryElementUrn
      * @param viewType optional viewType
      * @return null if libraryElement has no parent, otherwise the Urn of the parent libraryElement
+     * @throws ServiceException
      */
     ILibraryElement getParent(String libraryElementUrn, ViewType viewType) throws ServiceException;
 
@@ -85,6 +88,7 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
      * @param libraryElementUrn
      * @return empty Collection&lt;ILibraryElement&gt; if libraryElement has no children, otherwise
      * a Collection&lt;LibraryElement&gt; of the child libraryElements
+     * @throws ServiceException
      */
     Collection<ILibraryElement> getChildren(String libraryElementUrn) throws ServiceException;
 
@@ -95,6 +99,7 @@ public interface ILibraryElementClient extends IUpdateableBaseClient<ILibraryEle
      * @param viewType optional viewType
      * @return empty Collection&lt;ILibraryElement&gt; if libraryElement has no children, otherwise
      * a Collection&lt;LibraryElement&gt; of the child libraryElements
+     * @throws ServiceException
      */
     Collection<ILibraryElement> getChildren(String libraryElementUrn, ViewType viewType) throws ServiceException;
 

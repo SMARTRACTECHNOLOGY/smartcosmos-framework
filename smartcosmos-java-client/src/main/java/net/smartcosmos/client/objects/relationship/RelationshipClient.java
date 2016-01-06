@@ -134,6 +134,21 @@ class RelationshipClient extends AbstractUpsertableBaseClient<IRelationship> imp
     }
 
     @Override
+    public Collection<IRelationship> findAllRelationships(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException
+    {
+        return findAllRelationships(entityReferenceType, referenceUrn, ViewType.Standard);
+    }
+
+    @Override
+    public Collection<IRelationship> findAllRelationships(EntityReferenceType entityReferenceType, String referenceUrn, ViewType viewType)
+            throws ServiceException
+    {
+        GetCollectionCommand<IRelationship> command = new GetCollectionCommand<>(context, getClient());
+        return command.call(Relationship.class,
+                RelationshipEndpoints.findRelationships(entityReferenceType, referenceUrn, viewType));
+    }
+
+    @Override
     public Collection<IRelationship> findReverseRelationships(EntityReferenceType entityReferenceType,
                                                               String referenceUrn,
                                                               String relationshipType,
