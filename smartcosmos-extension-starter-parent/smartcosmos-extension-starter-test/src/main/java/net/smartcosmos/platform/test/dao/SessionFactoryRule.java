@@ -1,11 +1,7 @@
 package net.smartcosmos.platform.test.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import io.dropwizard.hibernate.UnitOfWork;
+import net.smartcosmos.platform.jpa.integrator.PlatformHibernateIntegrator;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -19,8 +15,11 @@ import org.junit.runners.model.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.dropwizard.hibernate.UnitOfWork;
-import net.smartcosmos.platform.jpa.integrator.PlatformHibernateIntegrator;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * This enables adding a Rule to your JUnit tests so you can use the familiar {@link UnitOfWork} on the test methods
@@ -68,7 +67,8 @@ public class SessionFactoryRule implements MethodRule
      * 
      * @see PlatformHibernateIntegrator
      * @see org.hibernate.context.internal.ManagedSessionContext
-     * 
+     *
+     * @param entities
      * @return created in-memory session factory.
      */
     public static SessionFactoryRule build(final List<Class<?>> entities)
