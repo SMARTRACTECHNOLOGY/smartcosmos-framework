@@ -47,7 +47,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param referenceUrn        Reference URN
      * @param tags                Collection of tags to assign to the indicated entity
      * @return response entity indicating the success (or failure) of each assignment
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType,
                                       String referenceUrn,
@@ -63,7 +63,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param jsonArray           Collection of {@link net.smartcosmos.objects.model.context.ITag#getName()} values to
      *                            assign to the indicated entity
      * @return response entity indicating the success (or failure) of each assignment
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     Collection<ResponseEntity> assign(EntityReferenceType entityReferenceType, String referenceUrn, JSONArray jsonArray)
             throws ServiceException;
@@ -84,7 +84,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param referenceUrn        Reference URN
      * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
      * found
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
                                                                   String referenceUrn) throws ServiceException;
@@ -106,7 +106,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param viewType            Field verbosity
      * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
      * found
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     Collection<ITagAssignment> findEntitiesByTagsAssignedToEntity(EntityReferenceType entityReferenceType,
                                                                   String referenceUrn,
@@ -125,7 +125,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param entityReferenceType Entity reference type
      * @param tagName             Case-sensitive name of the tag
      * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType, String tagName)
             throws ServiceException;
@@ -145,7 +145,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param tagName             Case-sensitive name of the tag
      * @param viewType            Field verbosity
      * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     Collection<ITagAssignment> findEntitiesByTagsAssignedToType(EntityReferenceType entityReferenceType,
                                                                 String tagName,
@@ -165,7 +165,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      *
      * @param tagName Case-sensitive name of the tag
      * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName) throws ServiceException;
 
@@ -184,7 +184,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param tagName  Case-sensitive name of the tag
      * @param viewType Field verbosity
      * @return Non-null collection of matching tag assignments; collection may have a size of 0 to indicate no matches
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     Collection<ITagAssignment> findEntitiesByTagNameLike(String tagName, ViewType viewType) throws ServiceException;
 
@@ -194,7 +194,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      *
      * @param tagName Case-sensitive name of the tag
      * @return tag instance
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     ITag findByTag(String tagName) throws ServiceException;
 
@@ -205,7 +205,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param tagName  Case-sensitive name of the tag
      * @param viewType Field verbosity
      * @return tag instance
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     ITag findByTag(String tagName, ViewType viewType) throws ServiceException;
 
@@ -215,7 +215,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * @param tagName             Case-sensitive name of the tag
      * @param entityReferenceType Entity reference type
      * @param referenceUrn        Reference URN
-     * @throws ServiceException
+     * @throws ServiceException on error.
      */
     void revokeAssignment(String tagName, EntityReferenceType entityReferenceType, String referenceUrn)
             throws ServiceException;
