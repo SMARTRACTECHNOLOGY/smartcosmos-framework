@@ -80,6 +80,7 @@ public interface IObjectAddressClient
      *
      * @param objectUrn Exact, case-sensitive object URN to locate
      * @param count     How many last known address records to return, chronologically descending
+     * @param viewType  Field verbosity
      * @return Non-null collection of matching addresses; collection may have a size of 0 to indicate no matches found
      * @throws ServiceException
      */
