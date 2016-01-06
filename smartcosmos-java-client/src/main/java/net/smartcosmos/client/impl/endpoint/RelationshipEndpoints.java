@@ -44,6 +44,8 @@ public final class RelationshipEndpoints
 
     private static final String FIND_REVERSE_RELATIONSHIPS_GET = BASE.concat("/%s/%s/%s?reverse=true&view=%s");
 
+    private static final String FIND_ALL_RELATIONSHIPS_GET = BASE.concat("/%s/%s?reverse=false&view=%s");
+
     private static final String DELETE_DELETE = BASE.concat("/%s");
 
     public static String upsert(EntityReferenceType entityReferenceType, String referenceUrn)
@@ -127,6 +129,16 @@ public final class RelationshipEndpoints
                                            String relationshipType)
     {
         return findRelationships(entityReferenceType, referenceUrn, relationshipType, ViewType.Standard);
+    }
+
+    public static String findRelationships(EntityReferenceType entityReferenceType,
+                                           String referenceUrn,
+                                           ViewType viewType)
+    {
+        return String.format(FIND_ALL_RELATIONSHIPS_GET,
+                entityReferenceType,
+                referenceUrn,
+                viewType);
     }
 
     public static String findRelationships(EntityReferenceType entityReferenceType,
