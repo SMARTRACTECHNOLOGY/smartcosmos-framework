@@ -83,6 +83,7 @@ public interface IRelationshipClient extends IUpsertableBaseClient<IRelationship
      * @param referenceUrn               owner/parent reference URN
      * @param relatedEntityReferenceType child entity reference type
      * @param relatedReferenceUrn        child entity reference URN
+     * @param relationshipType           relationship type
      * @return Non-null collection of matching relationships; collection may have a size of 0 to indicate no matches
      * @throws ServiceException on error
      */
