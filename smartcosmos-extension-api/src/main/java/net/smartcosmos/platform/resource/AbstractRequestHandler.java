@@ -205,10 +205,10 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
                 entity = jsonToEntity(jsonString, targetClass);
             } catch (JsonParseException e)
             {
-                LOG.warn(e.getMessage());
+                LOG.warn("Unable to parse JSON Input: " + e.getMessage());
                 response = Response.status(Response.Status.BAD_REQUEST)
                         .type(MediaType.APPLICATION_JSON_TYPE)
-                        .entity(ResponseEntity.toJson(Result.ERR_FAILURE, "Parsing error: " + e.getMessage()))
+                        .entity(ResponseEntity.toJson(Result.ERR_PARSE_ERROR))
                         .build();
             } catch (JsonMappingException e)
             {
