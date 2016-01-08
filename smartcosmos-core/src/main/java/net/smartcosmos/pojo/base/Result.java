@@ -47,6 +47,7 @@ public enum Result implements IResult
     ERR_MISSING_AUTHENTICATION_HEADER(-14, "Endpoint requires authentication"),
     ERR_VALIDATION(-15, "Validation Failure"),
     ERR_EMPTY_REQUEST(-16, "Request body must not be empty"),
+    ERR_PARSE_ERROR(-17, "Unable to parse input"),
 
     ERR_EXTENSION_SECURITY_RESTRICTION(-50, "Extensions are not permitted to perform %s"),
     ERR_EXTENSION_NO_ACCESS(-51, "Caller lacked the authorization to complete the requested operation"),
@@ -60,6 +61,7 @@ public enum Result implements IResult
     ERR_LIBRARY_NO_SUCH_ELEMENT_TYPE(-71, "There is no library element type called %s"),
     ERR_LIBRARY_WRONG_PARENT_TYPE(-72, "Library element type %s cannot be the parent to a library element of type %s"),
     ERR_LIBRARY_DUPLICATE_NAME_FOR_PARENT(-73, "Parent element %s already has a child named %s"),
+    ERR_LIBRARY_CANNOT_DELETE_ELEMENT(-74, "Library element cannot be deleted"),
     ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_CHILDREN(-74, "Library element %s has children and cannot be deleted"),
     ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_RELATIONSHIPS(-74, "Library element %s has relationships and cannot be deleted"),
     ERR_LIBRARY_CANNOT_LINK_TO_LIBRARY_ELEMENT_TYPE(-75, "Library element type %s cannot accept links"),
@@ -119,12 +121,34 @@ public enum Result implements IResult
                 return ERR_NO_SUCH_EMAIL;
             case -13:
                 return ERR_NO_FILE_CONTENT;
+            case -14:
+                return ERR_MISSING_AUTHENTICATION_HEADER;
+            case -15:
+                return ERR_VALIDATION;
+            case -16:
+                return ERR_EMPTY_REQUEST;
+            case -17:
+                return ERR_PARSE_ERROR;
             case -50:
                 return ERR_EXTENSION_SECURITY_RESTRICTION;
             case -51:
                 return ERR_EXTENSION_NO_ACCESS;
             case -500:
                 return ERR_INTERNAL;
+            case -70:
+                return ERR_LIBRARY_PARENT_NOT_FOUND;
+            case -71:
+                return ERR_LIBRARY_NO_SUCH_ELEMENT_TYPE;
+            case -72:
+                return ERR_LIBRARY_WRONG_PARENT_TYPE;
+            case -73:
+            return ERR_LIBRARY_DUPLICATE_NAME_FOR_PARENT;
+            case -74:
+                return ERR_LIBRARY_CANNOT_DELETE_ELEMENT;
+            case -75:
+                return ERR_LIBRARY_CANNOT_LINK_TO_LIBRARY_ELEMENT_TYPE;
+            case -76:
+                return ERR_WRONG_RELATIONSHIP_TYPE_FOR_LIBRARYELEMENT;
             default:
                 throw new IllegalArgumentException("Unknown Result: " + code);
         }
