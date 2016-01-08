@@ -32,6 +32,7 @@ import net.smartcosmos.objects.model.context.IObjectInteractionSession;
 import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -44,7 +45,7 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
     protected IObject object;
 
     @JsonView(JsonGenerationView.Standard.class)
-    @NotNull
+    @Min(value = 1)
     protected long recordedTimestamp;
 
     @JsonView(JsonGenerationView.Full.class)
