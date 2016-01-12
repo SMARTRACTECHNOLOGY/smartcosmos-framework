@@ -27,14 +27,14 @@ import io.dropwizard.setup.Environment;
 import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.ext.IServerExtension;
 import net.smartcosmos.platform.configuration.SmartCosmosConfiguration;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExtensionConfiguration>
-        implements IServerExtension<T>
+public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExtensionConfiguration> implements IServerExtension<T>
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractServerExtension.class);
 
@@ -91,23 +91,30 @@ public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExten
     @Override
     public void initialize(Bootstrap<?> bootstrap)
     {
-        ConfigurationFactory<T> cf = new DefaultConfigurationFactoryFactory<T>()
-                .create(extensionConfigurationClass,
-                        bootstrap.getValidatorFactory().getValidator(),
-                        bootstrap.getObjectMapper(),
-                        "dw");
+        ConfigurationFactory<T> cf = new DefaultConfigurationFactoryFactory<T>().create(extensionConfigurationClass,
+                bootstrap.getValidatorFactory().getValidator(),
+                bootstrap.getObjectMapper(),
+                "dw");
 
-        try
+        if (extensionConfigurationPath != null && !extensionConfigurationPath.isEmpty())
         {
-            extensionConfiguration = (T) cf.build(bootstrap.getConfigurationSourceProvider(),
-                    getServerExtensionConfigurationPath());
-
-            initialize(extensionConfiguration);
-
-        } catch (Exception e)
+            try
+            {
+                extensionConfiguration = (T) cf.build(bootstrap.getConfigurationSourceProvider(), extensionConfigurationPath);
+                initialize(extensionConfiguration);
+            } catch (Exception e)
+            {
+                handleInitializationException(e);
+            }
+        } else
         {
-            handleInitializationException(e);
+            handleMissingConfigurationException();
         }
+    }
+
+    protected void handleMissingConfigurationException()
+    {
+        LOG.error("Server extension {} has no configuration.", name);
     }
 
     protected void initialize(T extensionConfiguration) throws Exception
@@ -117,8 +124,8 @@ public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExten
 
     protected void handleInitializationException(Exception e)
     {
-        LOG.error("Exception during extension initialization: " + e.getMessage());
-        e.printStackTrace();
+        LOG.error("Exception during extension initialization: {}", e.toString());
+        LOG.debug(ExceptionUtils.getFullStackTrace(e));
     }
 
     @Override
