@@ -1,6 +1,6 @@
 # Release Notes
 
-## Release 2.12.1 (January 1, 1970)
+## Release {version} ({date})
 
 ### New Features
 
