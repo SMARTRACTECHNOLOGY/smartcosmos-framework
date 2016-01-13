@@ -108,13 +108,8 @@ public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExten
             }
         } else
         {
-            handleMissingConfigurationException();
+            throw new RuntimeException("Server extension " + name + " has no configuration.");
         }
-    }
-
-    protected void handleMissingConfigurationException()
-    {
-        LOG.error("Server extension {} has no configuration.", name);
     }
 
     protected void initialize(T extensionConfiguration) throws Exception
@@ -122,10 +117,11 @@ public abstract class AbstractServerExtension<T extends AbstractSmartCosmosExten
 
     }
 
-    protected void handleInitializationException(Exception e)
+    protected void handleInitializationException(Exception e) throws RuntimeException
     {
         LOG.error("Exception during extension initialization: {}", e.toString());
         LOG.debug(ExceptionUtils.getFullStackTrace(e));
+        throw new RuntimeException(e);
     }
 
     @Override
