@@ -6,6 +6,7 @@
 
 ### Bugfixes / Improvements
 
+- OBJECTS-552 Improve Extension Configuration Exception Handling: if reading extension configuration fails, a `RuntimeException` is thrown
 - new error result code for parse errors: `ERR_PARSE_ERROR`
 - new general error result code `ERR_LIBRARY_CANNOT_DELETE_ELEMENT` to resolve conflict between `ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_CHILDREN` and `ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_RELATIONSHIPS`
 - `Result.translate()` can translate all results defined in `Result.java` now
