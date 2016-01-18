@@ -45,13 +45,18 @@ public abstract class AbstractNameSearchRequestHandler<T extends IDomainResource
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractNameSearchRequestHandler.class);
 
-    private final Class<?> entity;
+    protected Class<?> entity;
 
-    private final Class<T> targetClass;
+    protected Class<T> targetClass;
 
-    private final EventType accessedEventType;
+    protected EventType accessedEventType;
 
-    private INamedObjectSearchDAO<T> dao;
+    protected INamedObjectSearchDAO<T> dao;
+
+    protected AbstractNameSearchRequestHandler(IContext context)
+    {
+        super(context);
+    }
 
     protected AbstractNameSearchRequestHandler(IContext context,
                                                INamedObjectSearchDAO<T> dao,
