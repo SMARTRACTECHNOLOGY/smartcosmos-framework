@@ -23,23 +23,35 @@ package net.smartcosmos.platform.pojo.authentication;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
+import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.platform.api.authentication.IRegistration;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public final class Registration extends DomainResource<IRegistration> implements IRegistration
 {
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
+    @Email
+    @Size(max = IUser.EMAIL_ADDRESS_MAX_LENGTH)
     protected String emailAddress;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @Size(max = IRegistration.REALM_MAX_LENGTH)
+    @NotNull
     protected String realm;
 
     @JsonView(JsonGenerationView.Full.class)
+    @Size(max = IRegistration.ADMIN_USER_URN_MAX_LENGTH)
     protected String adminUserUrn;
 
     @JsonView(JsonGenerationView.Standard.class)
+    @Size(max = IRegistration.EMAIL_VERIFICATION_TOKEN_LENGTH)
     protected String emailVerificationToken;
 
     @JsonView(JsonGenerationView.Full.class)
