@@ -25,11 +25,14 @@ import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.platform.jpa.base.DomainResourceAccountEntity;
 import net.smartcosmos.util.json.JsonGenerationView;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity(name = "account_user")
@@ -39,14 +42,21 @@ public class UserEntity extends DomainResourceAccountEntity<IUser>implements IUs
 
     @JsonView(JsonGenerationView.Minimum.class)
     @Column(length = EMAIL_ADDRESS_MAX_LENGTH, nullable = false, updatable = false)
+    @Email
+    @NotNull
+    @Size(max = EMAIL_ADDRESS_MAX_LENGTH)
     protected String emailAddress;
 
     @JsonView(JsonGenerationView.Full.class)
     @Column(length = GIVEN_NAME_MAX_LENGTH, nullable = false)
+    @NotNull
+    @Size(max = GIVEN_NAME_MAX_LENGTH)
     protected String givenName;
 
     @JsonView(JsonGenerationView.Full.class)
     @Column(length = SURNAME_MAX_LENGTH, nullable = false)
+    @NotNull
+    @Size(max = SURNAME_MAX_LENGTH)
     protected String surname;
 
     @JsonView(JsonGenerationView.Minimum.class)
