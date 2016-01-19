@@ -14,3 +14,4 @@
 - new `objectInteractionSessionUrn` field for create interaction request (cf. `objectUrn` and `object`)
 - more robust `hashCode()` methods in POJO classes
 - improved input validation for interactions
+- validation constraints in `User` and `Registration` POJO classes
