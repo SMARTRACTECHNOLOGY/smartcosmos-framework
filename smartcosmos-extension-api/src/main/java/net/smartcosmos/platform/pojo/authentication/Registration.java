@@ -20,6 +20,7 @@ package net.smartcosmos.platform.pojo.authentication;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
@@ -33,6 +34,7 @@ import org.hibernate.validator.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@JsonIgnoreProperties({"sendRegistrationEmail"})
 public final class Registration extends DomainResource<IRegistration> implements IRegistration
 {
     @JsonView(JsonGenerationView.Minimum.class)
