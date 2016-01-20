@@ -49,12 +49,10 @@ public class User extends DomainResource< IUser > implements IUser
     private String emailAddress;
 
     @JsonView(JsonGenerationView.Full.class)
-    @NotNull
     @Size(max = GIVEN_NAME_MAX_LENGTH)
     private String givenName;
 
     @JsonView(JsonGenerationView.Full.class)
-    @NotNull
     @Size(max = SURNAME_MAX_LENGTH)
     private String surname;
 

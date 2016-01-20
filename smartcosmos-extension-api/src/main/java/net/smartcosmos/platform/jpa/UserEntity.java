@@ -48,14 +48,12 @@ public class UserEntity extends DomainResourceAccountEntity<IUser>implements IUs
     protected String emailAddress;
 
     @JsonView(JsonGenerationView.Full.class)
-    @Column(length = GIVEN_NAME_MAX_LENGTH, nullable = false)
-    @NotNull
+    @Column(length = GIVEN_NAME_MAX_LENGTH, nullable = true)
     @Size(max = GIVEN_NAME_MAX_LENGTH)
     protected String givenName;
 
     @JsonView(JsonGenerationView.Full.class)
-    @Column(length = SURNAME_MAX_LENGTH, nullable = false)
-    @NotNull
+    @Column(length = SURNAME_MAX_LENGTH, nullable = true)
     @Size(max = SURNAME_MAX_LENGTH)
     protected String surname;
 
