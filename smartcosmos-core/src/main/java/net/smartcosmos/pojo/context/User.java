@@ -37,9 +37,11 @@ public class User extends DomainResource< IUser > implements IUser
 {
     @JsonView(JsonGenerationView.Full.class)
     @JsonDeserialize(as = Account.class)
+    @NotNull
     protected IAccount account;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
     protected RoleType roleType;
 
     @JsonView(JsonGenerationView.Minimum.class)
