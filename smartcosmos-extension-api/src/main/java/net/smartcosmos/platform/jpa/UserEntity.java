@@ -58,7 +58,9 @@ public class UserEntity extends DomainResourceAccountEntity<IUser>implements IUs
     protected String surname;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @NotNull
     protected RoleType roleType;
 
     @Override
