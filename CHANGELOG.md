@@ -1,6 +1,6 @@
 # Release Notes
 
-## Release {version} ({date})
+## Release 2.12.1 (January 21, 2016)
 
 ### New Features
 
