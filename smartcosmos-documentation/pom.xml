@@ -55,10 +55,10 @@
                                     <backend>pdf</backend>
                                     <sourceHighlighter>rouge</sourceHighlighter>
                                     <attributes>
-                                        <allow-uri-read />
+                                        <allow-uri-read></allow-uri-read>
                                         <icons>font</icons>
-                                        <pagenums />
-                                        <idprefix />
+                                        <pagenums></pagenums>
+                                        <idprefix></idprefix>
                                         <idseparator>-</idseparator>
                                     </attributes>
                                 </configuration>

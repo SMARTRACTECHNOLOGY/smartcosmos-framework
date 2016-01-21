@@ -40,6 +40,10 @@ import net.smartcosmos.model.base.IAccountDomainResource;
  */
 public interface IRegistration extends IAccountDomainResource<IRegistration>
 {
+    int REALM_MAX_LENGTH = 128;
+    int ADMIN_USER_URN_MAX_LENGTH = 767;
+    int EMAIL_VERIFICATION_TOKEN_LENGTH = 16;
+
     String getEmailAddress();
 
     void setEmailAddress(String emailAddress);

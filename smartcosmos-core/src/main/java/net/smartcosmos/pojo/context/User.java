@@ -27,6 +27,7 @@ import net.smartcosmos.model.context.RoleType;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
+import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,23 +37,24 @@ public class User extends DomainResource< IUser > implements IUser
 {
     @JsonView(JsonGenerationView.Full.class)
     @JsonDeserialize(as = Account.class)
+    @NotNull
     protected IAccount account;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
     protected RoleType roleType;
 
     @JsonView(JsonGenerationView.Minimum.class)
     @NotNull
+    @Email
     @Size(max = EMAIL_ADDRESS_MAX_LENGTH)
     private String emailAddress;
 
     @JsonView(JsonGenerationView.Full.class)
-    @NotNull
     @Size(max = GIVEN_NAME_MAX_LENGTH)
     private String givenName;
 
     @JsonView(JsonGenerationView.Full.class)
-    @NotNull
     @Size(max = SURNAME_MAX_LENGTH)
     private String surname;
 
