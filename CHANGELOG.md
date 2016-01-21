@@ -4,11 +4,13 @@
 
 ### New Features
 
-### Bugfixes / Improvements
+### Bugfixes & Improvements
 
 ## Release 2.12.1 (January 21, 2016)
 
 ### New Features
+
+* No new features are added in this release.
 
 ### Bugfixes / Improvements
 
