@@ -1,4 +1,4 @@
-# Release Notes
+# SMART COSMOS Framework Release Notes
 
 ## Release 2.12.2 (February 4, 2016)
 
