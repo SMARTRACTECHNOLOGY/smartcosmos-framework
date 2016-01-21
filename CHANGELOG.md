@@ -1,5 +1,11 @@
 # Release Notes
 
+## Release 2.12.2 (February 4, 2016)
+
+### New Features
+
+### Bugfixes / Improvements
+
 ## Release 2.12.1 (January 21, 2016)
 
 ### New Features
