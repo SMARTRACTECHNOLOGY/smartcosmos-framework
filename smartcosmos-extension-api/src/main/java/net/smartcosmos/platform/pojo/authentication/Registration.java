@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.platform.api.authentication.IRegistration;
+import net.smartcosmos.platform.constraint.annotation.ValidRealm;
 import net.smartcosmos.pojo.base.DomainResource;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
@@ -44,8 +45,7 @@ public final class Registration extends DomainResource<IRegistration> implements
     protected String emailAddress;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    @Size(max = IRegistration.REALM_MAX_LENGTH)
-    @NotNull
+    @ValidRealm
     protected String realm;
 
     @JsonView(JsonGenerationView.Full.class)
