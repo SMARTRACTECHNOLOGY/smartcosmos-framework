@@ -74,7 +74,7 @@
                                 </group>
                                 <group>
                                     <title>SMART COSMOS Objects Client Factories</title>
-                                    <packages>net.smartcosmos.client.objects.device:net.smartcosmos.client.objects.extension:net.smartcosmos.client.objects.file:net.smartcosmos.client.objects.geospatial:net.smartcosmos.client.objects.interaction*:net.smartcosmos.client.objects.object*:net.smartcosmos.client.objects.relationship:net.smartcosmos.client.objects.tag:net.smartcosmos.client.objects.timeline</packages>
+                                    <packages>net.smartcosmos.client.objects.extension:net.smartcosmos.client.objects.file:net.smartcosmos.client.objects.geospatial:net.smartcosmos.client.objects.interaction*:net.smartcosmos.client.objects.object*:net.smartcosmos.client.objects.relationship:net.smartcosmos.client.objects.tag:net.smartcosmos.client.objects.timeline</packages>
                                 </group>
                                 <group>
                                     <title>SMART COSMOS Batch</title>
