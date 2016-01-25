@@ -6,6 +6,8 @@
 
 ### Bugfixes & Improvements
 
+* added a reusable compound validation constraint annotation for realms (OBJECTS-568)
+
 ## Release 2.12.1 (January 21, 2016)
 
 ### New Features
