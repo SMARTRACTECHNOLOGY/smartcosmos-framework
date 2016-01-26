@@ -69,7 +69,7 @@ public class PostCommand extends AbstractBaseClient implements ICommand<Object, 
             {
                 Representation result = service.post(new JsonRepresentation(inputJson));
 
-                if (service.getStatus().equals(Status.SUCCESS_NO_CONTENT))
+                if (service.getStatus().isSuccess())
                 {
                     if (inputJson.has(URN_FIELD))
                     {

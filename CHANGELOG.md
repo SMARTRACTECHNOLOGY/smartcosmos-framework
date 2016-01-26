@@ -18,6 +18,7 @@
 
 - OBJECTS-552 Improve Extension Configuration Exception Handling: if reading extension configuration fails, a `RuntimeException` is thrown
 - OBJECTS-570 Conflict Between Implementation and Documentation: User names optional vs. required
+- OBJECTS-580 UserClient throws ServiceException when password was changed successfully
 - new error result code for parse errors: `ERR_PARSE_ERROR`
 - new general error result code `ERR_LIBRARY_CANNOT_DELETE_ELEMENT` to resolve conflict between `ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_CHILDREN` and `ERR_LIBRARY_CANNOT_DELETE_ELEMENT_WITH_RELATIONSHIPS`
 - `Result.translate()` can translate all results defined in `Result.java` now
