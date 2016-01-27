@@ -7,6 +7,7 @@
 ### Bugfixes & Improvements
 
 * added a reusable compound validation constraint annotation for realms (OBJECTS-568)
+* OBJECTS-582 Java Client UpsertCommand does not catch ResourceException
 
 ## Release 2.12.1 (January 21, 2016)
 
