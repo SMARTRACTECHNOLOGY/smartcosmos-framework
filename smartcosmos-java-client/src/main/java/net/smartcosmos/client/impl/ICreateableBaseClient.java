@@ -35,7 +35,6 @@ import org.json.JSONObject;
  * @param <T> One of the SMART COSMOS contextual entities. 
  * @see net.smartcosmos.model.extension.IExternalExtension
  * @see net.smartcosmos.objects.model.context.IFile
- * @see net.smartcosmos.objects.model.context.IDevice
  * @see net.smartcosmos.model.geo.IGeospatialEntry
  * @see net.smartcosmos.model.context.IMetadata
  * @see net.smartcosmos.objects.model.context.IRelationship
