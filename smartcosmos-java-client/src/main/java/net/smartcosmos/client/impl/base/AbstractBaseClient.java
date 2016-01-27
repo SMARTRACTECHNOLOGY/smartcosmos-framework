@@ -121,4 +121,16 @@ public abstract class AbstractBaseClient
             throw new ServiceException(Result.ERR_FAILURE.getCode());
         }
     }
+
+    protected void throwServiceException(String responseEntity) throws ServiceException
+    {
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(responseEntity);
+            throwServiceException(jsonResponse);
+        } catch (JSONException e)
+        {
+            throw new ServiceException(Result.ERR_FAILURE.getCode());
+        }
+    }
 }
