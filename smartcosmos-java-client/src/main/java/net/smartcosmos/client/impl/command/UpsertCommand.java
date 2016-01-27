@@ -34,6 +34,7 @@ import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,11 +86,17 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
                 LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
                 throwServiceException(jsonResult);
             }
-
-        } catch (JSONException | IOException e)
+        } catch (JSONException | IOException | ResourceException e)
         {
-            LOGGER.error("Unexpected Exception", e);
-            throw new ServiceException(e);
+            if (e instanceof  ResourceException)
+            {
+                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
+                throwServiceException(service.getResponse().getEntityAsText());
+            } else
+            {
+                LOGGER.error("Unexpected Exception", e);
+                throw new ServiceException(e);
+            }
         }
 
         return responses;
@@ -121,7 +128,7 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
                 throwServiceException(jsonResult);
             }
 
-        } catch (JSONException | IOException e)
+        } catch (JSONException | IOException | ResourceException e)
         {
             LOGGER.error("Unexpected Exception", e);
             throw new ServiceException(e);
