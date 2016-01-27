@@ -34,9 +34,6 @@ public class EndpointsFactory
     private Boolean objectAddressEndpoint = true;
 
     @JsonProperty
-    private Boolean deviceEndpoints = true;
-
-    @JsonProperty
     private Boolean metadataEndpoints = true;
 
     @JsonProperty
@@ -125,11 +122,6 @@ public class EndpointsFactory
     public Boolean getMetadataEndpoints()
     {
         return metadataEndpoints;
-    }
-
-    public Boolean getDeviceEndpoints()
-    {
-        return deviceEndpoints;
     }
 
     public Boolean getObjectAddressEndpoint()
