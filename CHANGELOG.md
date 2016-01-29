@@ -7,7 +7,9 @@
 ### Bugfixes & Improvements
 
 * added a reusable compound validation constraint annotation for realms (OBJECTS-568)
-* OBJECTS-582 Java Client UpsertCommand does not catch ResourceException
+* OBJECTS-582 Java Client `UpsertCommand` and `GetCollectionCommand` does not catch `ResourceException`
+* OBJECTS-584 Add method to create ResponseEntity from Result
+* OBJECTS-585 MetadataClient throws ServiceException when looking up by key
 
 ## Release 2.12.1 (January 21, 2016)
 
