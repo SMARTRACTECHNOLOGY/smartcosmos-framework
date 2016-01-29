@@ -32,6 +32,7 @@ import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.model.context.MetadataDataType;
 import net.smartcosmos.pojo.base.ResponseEntity;
+import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.pojo.context.Metadata;
 import net.smartcosmos.util.json.JsonUtil;
 import net.smartcosmos.util.json.ViewType;
@@ -167,7 +168,13 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
                 MetadataEndpoints.findSpecificKey(entityReferenceType, referenceUrn, key, viewType));
         if (matches.size() != 1)
         {
-            throw new ServiceException(new Exception("Unexpected number of results."));
+            if (matches.size() == 0)
+            {
+                return null;
+            } else
+            {
+                throw new ServiceException(ResponseEntity.toResponseEntity(Result.ERR_FAILURE, "Unexpected number of results."));
+            }
         }
         return matches.iterator().next();
     }
