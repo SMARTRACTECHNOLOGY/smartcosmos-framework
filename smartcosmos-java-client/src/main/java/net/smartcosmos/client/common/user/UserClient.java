@@ -21,13 +21,13 @@ package net.smartcosmos.client.common.user;
  */
 
 import com.google.common.base.Preconditions;
+import net.smartcosmos.Field;
 import net.smartcosmos.client.connectivity.ServerContext;
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.base.AbstractUpdateableBaseClient;
 import net.smartcosmos.client.impl.command.GetCommand;
 import net.smartcosmos.client.impl.command.PostCommand;
 import net.smartcosmos.client.impl.endpoint.UserEndpoints;
-import net.smartcosmos.Field;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.context.User;
