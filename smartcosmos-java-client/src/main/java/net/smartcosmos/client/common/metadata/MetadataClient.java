@@ -21,6 +21,20 @@ package net.smartcosmos.client.common.metadata;
  */
 
 import com.google.common.base.Preconditions;
+import net.smartcosmos.Field;
+import net.smartcosmos.client.connectivity.ServerContext;
+import net.smartcosmos.client.connectivity.ServiceException;
+import net.smartcosmos.client.impl.base.AbstractUpsertableBaseClient;
+import net.smartcosmos.client.impl.command.DeleteCommand;
+import net.smartcosmos.client.impl.command.GetCollectionCommand;
+import net.smartcosmos.client.impl.endpoint.MetadataEndpoints;
+import net.smartcosmos.model.base.EntityReferenceType;
+import net.smartcosmos.model.context.IMetadata;
+import net.smartcosmos.model.context.MetadataDataType;
+import net.smartcosmos.pojo.base.ResponseEntity;
+import net.smartcosmos.pojo.context.Metadata;
+import net.smartcosmos.util.json.JsonUtil;
+import net.smartcosmos.util.json.ViewType;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,22 +50,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import net.smartcosmos.Field;
-import net.smartcosmos.client.connectivity.ServerContext;
-import net.smartcosmos.client.connectivity.ServiceException;
-import net.smartcosmos.client.impl.base.AbstractUpsertableBaseClient;
-import net.smartcosmos.client.impl.command.DeleteCommand;
-import net.smartcosmos.client.impl.command.GetCollectionCommand;
-//import net.smartcosmos.client.impl.command.GetCommand;
-import net.smartcosmos.client.impl.endpoint.MetadataEndpoints;
-import net.smartcosmos.model.base.EntityReferenceType;
-import net.smartcosmos.model.context.IMetadata;
-import net.smartcosmos.model.context.MetadataDataType;
-import net.smartcosmos.pojo.base.ResponseEntity;
-import net.smartcosmos.pojo.context.Metadata;
-import net.smartcosmos.util.json.JsonUtil;
-import net.smartcosmos.util.json.ViewType;
 
 import static net.smartcosmos.Field.ENTITY_REFERENCE_TYPE;
 import static net.smartcosmos.Field.KEY_FIELD;
