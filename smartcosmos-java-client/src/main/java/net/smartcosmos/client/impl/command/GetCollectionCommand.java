@@ -1,9 +1,10 @@
 package net.smartcosmos.client.impl.command;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-
+import net.smartcosmos.client.connectivity.ServerContext;
+import net.smartcosmos.client.connectivity.ServiceException;
+import net.smartcosmos.client.impl.base.AbstractBaseClient;
+import net.smartcosmos.pojo.base.ResponseEntity;
+import net.smartcosmos.util.json.JsonUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,8 +13,13 @@ import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
@@ -24,9 +30,9 @@ import org.slf4j.LoggerFactory;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,12 +40,6 @@ import org.slf4j.LoggerFactory;
  * limitations under the License.
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
-
-import net.smartcosmos.client.connectivity.ServerContext;
-import net.smartcosmos.client.connectivity.ServiceException;
-import net.smartcosmos.client.impl.base.AbstractBaseClient;
-import net.smartcosmos.pojo.base.ResponseEntity;
-import net.smartcosmos.util.json.JsonUtil;
 
 public class GetCollectionCommand<T> extends AbstractBaseClient implements ICommand<Collection<T>, T>
 {
@@ -100,10 +100,9 @@ public class GetCollectionCommand<T> extends AbstractBaseClient implements IComm
                 throw new ServiceException(responseEntity);
             }
 
-        } catch (JSONException | IOException e)
+        } catch (JSONException | IOException | ResourceException e)
         {
-            LOGGER.error("Unexpected Exception", e);
-            throw new ServiceException(e);
+            throwServiceException(service, e);
         }
 
         return matches;

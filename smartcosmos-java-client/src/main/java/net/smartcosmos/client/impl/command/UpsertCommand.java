@@ -88,15 +88,7 @@ public class UpsertCommand<T> extends AbstractBaseClient implements ICommand<T, 
             }
         } catch (JSONException | IOException | ResourceException e)
         {
-            if (e instanceof  ResourceException)
-            {
-                LOGGER.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
-                throwServiceException(service.getResponse().getEntityAsText());
-            } else
-            {
-                LOGGER.error("Unexpected Exception", e);
-                throw new ServiceException(e);
-            }
+            throwServiceException(service, e);
         }
 
         return responses;
