@@ -43,11 +43,16 @@ public abstract class AbstractFindByUrnRequestHandler<T extends IDomainResource<
 {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractFindByUrnRequestHandler.class);
 
-    private final Class<?> entity;
+    protected Class<?> entity;
 
-    private final EventType accessedEventType;
+    protected EventType accessedEventType;
 
-    private IBaseDAO<T> dao;
+    protected IBaseDAO<T> dao;
+
+    protected AbstractFindByUrnRequestHandler(IContext context)
+    {
+        super(context);
+    }
 
     protected AbstractFindByUrnRequestHandler(IContext context,
                                               IBaseDAO<T> dao,
