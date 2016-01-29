@@ -166,14 +166,16 @@ class MetadataClient extends AbstractUpsertableBaseClient<IMetadata> implements 
         GetCollectionCommand<IMetadata> command = new GetCollectionCommand<>(context, getClient());
         Collection<IMetadata> matches = command.call(Metadata.class,
                 MetadataEndpoints.findSpecificKey(entityReferenceType, referenceUrn, key, viewType));
-        if (matches.size() != 1)
+        int resultCount = matches.size();
+        if (resultCount != 1)
         {
-            if (matches.size() == 0)
+            if (resultCount == 0)
             {
                 return null;
             } else
             {
-                throw new ServiceException(ResponseEntity.toResponseEntity(Result.ERR_FAILURE, "Unexpected number of results."));
+                throw new ServiceException(ResponseEntity.toResponseEntity(Result.ERR_FAILURE,
+                        "Unexpected number of results: " + String.valueOf(resultCount)));
             }
         }
         return matches.iterator().next();
