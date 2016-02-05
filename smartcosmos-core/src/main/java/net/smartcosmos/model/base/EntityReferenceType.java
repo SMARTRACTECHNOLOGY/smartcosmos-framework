@@ -38,6 +38,7 @@ import java.util.List;
 public enum EntityReferenceType
 {
     Account,
+    User,
 
     BatchTransmission,
 
