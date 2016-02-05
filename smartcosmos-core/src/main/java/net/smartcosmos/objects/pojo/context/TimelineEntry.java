@@ -145,7 +145,7 @@ public class TimelineEntry extends ReferentialObject<ITimelineEntry> implements 
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + name.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (highlightFlag ? 1 : 0);
         result = 31 * result + (visibleFlag ? 1 : 0);
