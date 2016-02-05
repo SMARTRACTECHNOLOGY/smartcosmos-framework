@@ -7,6 +7,7 @@
 ### Bugfixes & Improvements
 
 * added a reusable compound validation constraint annotation for realms (OBJECTS-568)
+* added default values for `TimelineEntry` (OBJECTS-321)
 * OBJECTS-582 Java Client `UpsertCommand` and `GetCollectionCommand` does not catch `ResourceException`
 * OBJECTS-584 Add method to create ResponseEntity from Result
 * OBJECTS-585 MetadataClient throws ServiceException when looking up by key
