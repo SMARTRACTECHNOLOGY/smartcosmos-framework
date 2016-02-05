@@ -20,11 +20,10 @@
 package net.smartcosmos.pojo.context;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IUser;
 import net.smartcosmos.model.context.RoleType;
-import net.smartcosmos.pojo.base.DomainResource;
+import net.smartcosmos.pojo.base.AccountDomainResource;
 import net.smartcosmos.util.UuidUtil;
 import net.smartcosmos.util.json.JsonGenerationView;
 import org.hibernate.validator.constraints.Email;
@@ -33,13 +32,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
-public class User extends DomainResource< IUser > implements IUser
+public class User extends AccountDomainResource< IUser > implements IUser
 {
-    @JsonView(JsonGenerationView.Full.class)
-    @JsonDeserialize(as = Account.class)
-    @NotNull
-    protected IAccount account;
-
     @JsonView(JsonGenerationView.Minimum.class)
     @NotNull
     protected RoleType roleType;
@@ -160,7 +154,6 @@ public class User extends DomainResource< IUser > implements IUser
     {
         int result = super.hashCode();
         result = 31 * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
-        result = 31 * result + (account != null ? account.hashCode() : 0);
         result = 31 * result + (givenName != null ? givenName.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + ((roleType == null) ? 0 : roleType.hashCode());
