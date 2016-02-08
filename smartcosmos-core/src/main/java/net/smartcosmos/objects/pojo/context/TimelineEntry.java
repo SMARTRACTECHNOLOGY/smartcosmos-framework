@@ -39,16 +39,16 @@ public class TimelineEntry extends ReferentialObject<ITimelineEntry> implements 
     protected String description;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected boolean highlightFlag;
+    protected boolean highlightFlag = true;
 
     @JsonView(JsonGenerationView.Standard.class)
-    protected boolean visibleFlag;
+    protected boolean visibleFlag = true;
 
     @JsonView(JsonGenerationView.Standard.class)
-    protected boolean activeFlag;
+    protected boolean activeFlag = true;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected long timelineTimestamp;
+    protected long timelineTimestamp = 0;
 
     @Override
     public String getName()
@@ -145,7 +145,7 @@ public class TimelineEntry extends ReferentialObject<ITimelineEntry> implements 
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + name.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (highlightFlag ? 1 : 0);
         result = 31 * result + (visibleFlag ? 1 : 0);
