@@ -6,6 +6,7 @@
 
 ### Bugfixes & Improvements
 
+* change inheritance of `User` from `DomainResource` to `AccountDomainResource` (OBJECTS-322)
 * added a reusable compound validation constraint annotation for realms (OBJECTS-568)
 * added default values for `TimelineEntry` (OBJECTS-321)
 * OBJECTS-582 Java Client `UpsertCommand` and `GetCollectionCommand` does not catch `ResourceException`
