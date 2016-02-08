@@ -12,6 +12,7 @@
 * OBJECTS-582 Java Client `UpsertCommand` and `GetCollectionCommand` does not catch `ResourceException`
 * OBJECTS-584 Add method to create ResponseEntity from Result
 * OBJECTS-585 MetadataClient throws ServiceException when looking up by key
+* OBJECTS-586 MetadataCodec does not support `Custom` MetadataDataType
 
 ## Release 2.12.1 (January 21, 2016)
 

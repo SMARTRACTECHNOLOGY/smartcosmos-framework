@@ -39,16 +39,16 @@ public class TimelineEntry extends ReferentialObject<ITimelineEntry> implements 
     protected String description;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected boolean highlightFlag = true;
+    protected boolean highlightFlag;
 
     @JsonView(JsonGenerationView.Standard.class)
-    protected boolean visibleFlag = true;
+    protected boolean visibleFlag;
 
     @JsonView(JsonGenerationView.Standard.class)
-    protected boolean activeFlag = true;
+    protected boolean activeFlag;
 
     @JsonView(JsonGenerationView.Minimum.class)
-    protected long timelineTimestamp = 0;
+    protected long timelineTimestamp;
 
     @Override
     public String getName()
