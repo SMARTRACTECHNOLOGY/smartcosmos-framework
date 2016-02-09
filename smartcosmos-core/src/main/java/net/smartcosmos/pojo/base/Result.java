@@ -48,6 +48,7 @@ public enum Result implements IResult
     ERR_VALIDATION(-15, "Validation Failure"),
     ERR_EMPTY_REQUEST(-16, "Request body must not be empty"),
     ERR_PARSE_ERROR(-17, "Unable to parse input"),
+    ERR_UNSUPPORTED_ENTITY_TYPE(-18, "Entity Reference Type %s is not supported by this method"),
 
     ERR_EXTENSION_SECURITY_RESTRICTION(-50, "Extensions are not permitted to perform %s"),
     ERR_EXTENSION_NO_ACCESS(-51, "Caller lacked the authorization to complete the requested operation"),
