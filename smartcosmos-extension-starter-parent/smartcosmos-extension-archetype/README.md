@@ -86,7 +86,7 @@ cd example-server-extension
 mvn install
 ```
 
-When this completes successfully, you have a runnable SMART COSMOS extension which includes the server extension.
+When this completes successfully, you have a runnable SMART COSMOS extension.
 Look inside src/main/resources/objects.yml, and find the section that looks like this:
 
 ```
