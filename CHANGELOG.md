@@ -13,6 +13,8 @@
 * OBJECTS-584 Add method to create ResponseEntity from Result
 * OBJECTS-585 MetadataClient throws ServiceException when looking up by key
 * OBJECTS-586 MetadataCodec does not support `Custom` MetadataDataType
+* OBJECTS-539 Extract devices from Objects into separate "Device Extension"
+* SCE-5 Archetype needs update
 
 ## Release 2.12.1 (January 21, 2016)
 
