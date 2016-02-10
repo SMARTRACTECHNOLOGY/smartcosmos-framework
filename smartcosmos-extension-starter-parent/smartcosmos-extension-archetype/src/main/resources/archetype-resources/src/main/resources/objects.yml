@@ -133,7 +133,6 @@ endpoints:
   metadataEncodingEndpoints : true
   eventsEndpoint : true
   objectAddressEndpoint : true
-  deviceEndpoints : true
   metadataEndpoints : true
   tagEndpoints : true
   timelineEndpoints : true
@@ -173,12 +172,6 @@ endpointMethodControl:
   users.urn.get : true
   users.user.get : true
   users.user.post : true
-
-  devices.put : true
-  devices.post : true
-  devices.urn.get : true
-  devices.device.get : true
-  devices.get : true
 
   objects.put : true
   objects.post : true
@@ -296,7 +289,7 @@ resourceRegistrarClasses:
   publicEndpointsRegistrar : net.smartcosmos.objects.resource.pub.PublicEndpointsResourceRegistrar
   oauthEndpointsRegistrar : net.smartcosmos.objects.resource.oauth.OAuthEndpointsResourceRegistrar
   secureEndpointsRegistrar : net.smartcosmos.objects.resource.secure.SecureEndpointsResourceRegistrar
-  exampleExtensionEndpointsRegistrar: ${package}.smartcosmos.extension.server.ExampleExtensionEndpointsResourceRegistrar
+  exampleExtensionEndpointsRegistrar: ${package}.server.ExampleExtensionEndpointsResourceRegistrar
 
 #
 # Server Extensions are Dropwizard bundles that are based on the net.smartcosmos::objects-platform-api artifact. These
@@ -309,7 +302,7 @@ serverExtensions:
 
   #
   # Example extension
-  ExampleExtension : ${package}.smartcosmos.extension.server.ExampleExtension
+  ExampleExtension : ${package}.server.ExampleExtension
 
 serverExtensionConfigurationPaths:
   #
@@ -413,9 +406,9 @@ serviceClasses:
 #
 visitors:
   #sample: net.smartcosmos.platform.service.visitor.SampleVisitorService
-  happyBirthdayFredObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayFredObjectVisitorService
-  happyBirthdayWaldoObjectVisitor : ${package}.smartcosmos.extension.visitor.HappyBirthdayWaldoObjectVisitorService
-  happyNewYearMetadataVisitor : ${package}.smartcosmos.extension.visitor.HappyNewYearMetadataVisitorService
+  happyBirthdayFredObjectVisitor : ${package}.visitor.HappyBirthdayFredObjectVisitorService
+  happyBirthdayWaldoObjectVisitor : ${package}.visitor.HappyBirthdayWaldoObjectVisitorService
+  happyNewYearMetadataVisitor : ${package}.visitor.HappyNewYearMetadataVisitorService
 
 #
 # Certain services require service-specific configurations. The SMART COSMOS platform framework provides this

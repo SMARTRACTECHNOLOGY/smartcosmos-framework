@@ -44,7 +44,7 @@ ObjectInteractionSession
 Tag
 Timeline
 
-Look in the directory ${package}.smartcosmos.extension.visitor, and you'll see three examples of visitor classes.
+Look in the directory ${package}.visitor, and you'll see three examples of visitor classes.
 
 Read through the source code (they're very short) and be conscious of the following:
 
@@ -136,11 +136,11 @@ net.smartcosmos.objects.jpa.base.DomainResourceAccountNamedReferentialObjectEnti
 
 There are two example entity classes in this project. The first is:
 
-*${package}.smartcosmos.extension.server.jpa.impl.ExampleEntity*
+*${package}.jpa.impl.ExampleEntity*
 
 and is a very simple extension of DomainResourceEntity which creates two String columns. The second is:
  
-*${package}.smartcosmos.extensionserver.jpa.impl.MoreInterestingExampleEntity*
+*${package}.jpa.impl.MoreInterestingExampleEntity*
 
 which extends DomainResourceReferentialObjectEntity, and thus requires that you provide a referenceUrn and a 
 referenceEntityType when inserting a MoreInterestingExampleEntity in the database. Read through these to get a feel for 
@@ -159,8 +159,8 @@ net.smartcosmos.platform.api.dao.IBaseDAO before adding any methods, so you know
 provides. It could well be the case that the method you need is already in place, or that you could assemble it more 
 quickly using methods that are already in place.
 
-Pay attention to the packaging, and keep your interfaces in yourpackage.yourextension.smartcosmos.extension.server.dao, 
-and implementations in yourpackage.yourextension.smartcomsmos.extension.server.dao.impl. And use the interfaces in 
+Pay attention to the packaging, and keep your interfaces in ${package}.dao, 
+and implementations in ${package}.dao.impl. And use the interfaces in 
 request handlers; there are many examples in this code.
 
 $H$H$H Creating a REST Web Service Endpoint
@@ -206,7 +206,7 @@ though, to core Objects endpoints. Endpoints which are registered as part of an 
 objects.yml: 
 
 
-exampleEndpointsRegistrar: net.smartcosmos.archtest.smartcosmos.extension.server.ExampleExtensionEndpointsResourceRegistrar
+exampleEndpointsRegistrar: ${package}.ExampleExtensionEndpointsResourceRegistrar
 
 - this is the line that registers the example endpoints; ; if you want to turn them off just comment out the line 
 containing their EndpointResourceRegistrar.
@@ -283,7 +283,7 @@ First, the configuration, since it's simple. In your objects.yml file, you see t
 $H$H$H Configuration
 
 	transactionHandlerClasses:
-  		myExampleTransactionHandler: net.smartcosmos.archtest.smartcosmos.extension.server.resource.secure.transaction.handlers.ExampleTransactionHandler
+  		myExampleTransactionHandler: ${package}.resource.secure.transaction.handlers.ExampleTransactionHandler
 
 That's it for the configuration. When you specify the name of the transaction handler in the rest call 
 (PUT /rest/transaction/myExampleTransactionHandler), the JSON body will be passed intact to the run() method of the 
@@ -292,7 +292,7 @@ handler, as described below.
 
 $H$H$H The Code
 
-In the example transaction handler, your.package.smartcosmos.extension.server.resource.secure.transaction.handlers.ExampleTransactionHandler.java,
+In the example transaction handler, ${package}.resource.secure.transaction.handlers.ExampleTransactionHandler.java,
 notice the following:
 
 There are only one constructor and two methods. As elsewhere, you'll need to create your own UUID to use as a serviceID 

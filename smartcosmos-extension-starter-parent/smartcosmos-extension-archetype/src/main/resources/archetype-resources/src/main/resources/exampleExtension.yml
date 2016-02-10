@@ -1,12 +1,12 @@
 #
-# Enables or disables the Example Extension bundle
+# Enables or disables the Example Server Extension
 #
 enabled: true
 
 #
-# Logical name for the bundle (required by Objects Server Extensions)
+# Logical name for the extension (required by Objects Server Extensions)
 #
-extensionName: SMART COSMOS Example Extension Bundle
+extensionName: SMART COSMOS Example Server Extension
 
 #
 # End of file

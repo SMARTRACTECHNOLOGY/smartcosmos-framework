@@ -14,5 +14,5 @@ mvn archetype:generate -B \
     -DarchetypeVersion=2.12.2-development-SNAPSHOT \
     -DgroupId=com.example \
     -DartifactId=example-server-extension \
-    -Dversion=1.0-SNAPSHOT \
+    -Dversion=0.1.0-SNAPSHOT \
     -Dpackage=com.example.smartcosmos.server.extension.example

@@ -17,15 +17,14 @@ archetype on your local machine without having to clone this repository.
 To create a Maven project for a new SMART COSMOS server extension, run the following command (notes on arguments below):
 
 ```bash
-mvn archetype:generate \
-	-B \
-	-DarchetypeGroupId=net.smartcosmos.extension \
-	-DarchetypeArtifactId=smartcosmos-extension-archetype \
-	-DarchetypeVersion=LATEST-VERSION \
-	-DgroupId=com.example \
-	-DartifactId=foo-extension \
-	-Dversion=0.1-SNAPSHOT \
-	-Dpackage=com.example.extension.foo
+mvn archetype:generate -B \
+    -DarchetypeGroupId=net.smartcosmos.extension \
+    -DarchetypeArtifactId=smartcosmos-extension-archetype \
+    -DarchetypeVersion=2.12.2-development-SNAPSHOT \
+    -DgroupId=com.example \
+    -DartifactId=example-server-extension \
+    -Dversion=0.1.0-SNAPSHOT \
+    -Dpackage=com.example.smartcosmos.server.extension.example
 ```
 
 **"-B"** means non-interactive; maven will simply create the project. Leave it out, and Maven will ask for any missing
@@ -44,31 +43,38 @@ Together, {groupId, artifactId, version} create the unique Maven coordinates for
 The command line above will result in coordinates in the generated pom.xml file that look like:
 
 ```
-    <groupId>com.extension</groupId>
-    <artifactId>foo-extension</artifactId>
-    <version>0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <parent>
+        <groupId>net.smartcosmos.extension</groupId>
+        <artifactId>smartcosmos-extension-starter</artifactId>
+        <version>2.12.2-development-SNAPSHOT</version>
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>example-server-extension</artifactId>
+    <version>1.0-SNAPSHOT</version>
 ```
 
 **"-Dpackage"** defines the Java package name placed into the generated Java files. If you set this to
-*com.example.extension.foo*, the package statement would look like this:
+*com.example.smartcosmso.sever.myext*, a package statement in jpa/impl would look like this:
 
 
 ```
-package com.example.extension.foo.smartcosmos.extension.jpa.impl;
+package com.example.smartcosmso.sever.extension.myext.jpa.impl;
 ```
 
 and .java files in this package will reside in the following directory:
 
-*src/main/java/com/example/extension/foo/smartcosmos/extension/jpa/impl*
+*src/main/java/com/example/smartcosmos/server/extension/myext/jpa/impl*
 
 **NOTE:** The archetype maintains the distinction between package and the groupId/artifactId combination. You have to
 set both, but your Java packaging does not have to match your Maven coordinates!
 
+We recommend including the subpackage smartcosmos.server.extension in your packaging; it will make life simpler when
+you find yourself maintaining multiple Smart Cosmos server extensions.
+
 For your convenience, here is the command in a single line:
 
 ```
-mvn archetype:generate -B -DarchetypeGroupId=net.smartcosmos.extension -DarchetypeArtifactId=smartcosmos-extension-archetype -DarchetypeVersion=2.10.15 -DgroupId=com.example -DartifactId=foo-extension -Dversion=0.1-SNAPSHOT -Dpackage=com.example.extension.foo
+mvn archetype:generate -B -DarchetypeGroupId=net.smartcosmos.extension -DarchetypeArtifactId=smartcosmos-extension-archetype -DarchetypeVersion=2.12.2-development-SNAPSHOT -DgroupId=com.example -DartifactId=example-server-extension -Dversion=0.1.0-SNAPSHOT -Dpackage=com.example.smartcosmos.server.extension.example
 ```
 
 ### Building and Running the Project
@@ -76,7 +82,7 @@ mvn archetype:generate -B -DarchetypeGroupId=net.smartcosmos.extension -Darchety
 After running the command above, build your new project:
 
 ```
-cd foo-extension
+cd example-server-extension
 mvn install
 ```
 
@@ -98,12 +104,11 @@ Look inside src/main/resources/objects.yml, and find the section that looks like
 Either create a MySQL database with this database name/user name/user password combination, or adjust this part of
 objects.yml to match an existing empty MySQL database.
 
-THIS SECTION NEEDS TO BE ADJUSTED TO MATCH NEW PACKAGING SCHEME
 
-To start the server, run the following command:
+To start the server, run the following command from example-server-extension (ROOT.jar is your Objects application jarfile):
 
 ```
-java -jar target/foo-extension-1.0-SNAPSHOT.jar server src/main/resources/objects.yml
+java -cp path/to/your/ROOT.jar:target/example-server-extension-0.1.0-SNAPSHOT.jar net.smartcosmos.objects.app.ObjectsApplication server src/main/resources/objects.yml
 ```
 
 Open http://localhost:8080 in a browser, and you should see a page which includes the following text:
