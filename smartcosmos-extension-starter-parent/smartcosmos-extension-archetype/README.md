@@ -20,7 +20,7 @@ To create a Maven project for a new SMART COSMOS server extension, run the follo
 mvn archetype:generate -B \
     -DarchetypeGroupId=net.smartcosmos.extension \
     -DarchetypeArtifactId=smartcosmos-extension-archetype \
-    -DarchetypeVersion=2.12.2-development-SNAPSHOT \
+    -DarchetypeVersion=2.12.1 \
     -DgroupId=com.example \
     -DartifactId=example-server-extension \
     -Dversion=0.1.0-SNAPSHOT \
@@ -46,7 +46,7 @@ The command line above will result in coordinates in the generated pom.xml file 
     <parent>
         <groupId>net.smartcosmos.extension</groupId>
         <artifactId>smartcosmos-extension-starter</artifactId>
-        <version>2.12.2-development-SNAPSHOT</version>
+        <version>2.12.1</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>example-server-extension</artifactId>
@@ -74,7 +74,7 @@ you find yourself maintaining multiple Smart Cosmos server extensions.
 For your convenience, here is the command in a single line:
 
 ```
-mvn archetype:generate -B -DarchetypeGroupId=net.smartcosmos.extension -DarchetypeArtifactId=smartcosmos-extension-archetype -DarchetypeVersion=2.12.2-development-SNAPSHOT -DgroupId=com.example -DartifactId=example-server-extension -Dversion=0.1.0-SNAPSHOT -Dpackage=com.example.smartcosmos.server.extension.example
+mvn archetype:generate -B -DarchetypeGroupId=net.smartcosmos.extension -DarchetypeArtifactId=smartcosmos-extension-archetype -DarchetypeVersion=2.12.1 -DgroupId=com.example -DartifactId=example-server-extension -Dversion=0.1.0-SNAPSHOT -Dpackage=com.example.smartcosmos.server.extension.example
 ```
 
 ### Building and Running the Project

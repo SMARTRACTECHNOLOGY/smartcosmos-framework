@@ -188,69 +188,67 @@ $H$H$H Controlling Access to REST Endpoints
 Look in src/main/resources/objects.yml, and you will see two sections that relate to access control for endpoints. 
 The first looks something like:
 
-$H
-$H Master control flags for enabling/disabling various Objects endpoints
-$H
-endpoints:
-
-  metadataEncodingEndpoints : true
-  eventsEndpoint : true
-  objectAddressEndpoint : true
-  deviceEndpoints : true
-  metadataEndpoints : true
-...
+    #
+    # Master control flags for enabling/disabling various Objects endpoints
+    #
+    endpoints:
+      metadataEncodingEndpoints : true
+      eventsEndpoint : true
+      objectAddressEndpoint : true
+      deviceEndpoints : true
+      metadataEndpoints : true
+    ...
 
 With these flags you can disable entire categories of core Objects functionality. Set "deviceEndpoints" to "false", and 
 none of the device endpoints will even be loaded, and will return a 404 Not Found if invoked. These flags only apply, 
 though, to core Objects endpoints. Endpoints which are registered as part of an extension can be found in the
 objects.yml: 
 
+    exampleEndpointsRegistrar: com.example.smartcosmos.server.extension.example.ExampleExtensionEndpointsResourceRegistrar
 
-exampleEndpointsRegistrar: ${package}.ExampleExtensionEndpointsResourceRegistrar
-
-- this is the line that registers the example endpoints; ; if you want to turn them off just comment out the line 
+This is the line that registers the example endpoints; ; if you want to turn them off just comment out the line 
 containing their EndpointResourceRegistrar.
 
 The second looks like:
 
-$H
-$H Master endpoint method enablement flags. When endpoint method is set to 'true' then that specific
-$H HTTP Method is supported on a given endpoint. These flags contrast from the 'endpoints' flags above
-$H in that they are HTTP METHOD oriented whereas the above 'endpoints' section is an 'all or nothing' flag.
-$H If the 'endpoints' flag is set to false, then the endpoint HTTP METHOD flags below HAVE NO EFFECT since
-$H the entire endpoint has been disabled. In other words, the flags below only are applicable if the overall
-$H endpoint is enabled.
-$H
-endpointMethodControl:
-  realm.get : true
-  register.post : true
+    # 
+    #  Master endpoint method enablement flags. When endpoint method is set to 'true' then that specific
+    #  HTTP Method is supported on a given endpoint. These flags contrast from the 'endpoints' flags above
+    #  in that they are HTTP METHOD oriented whereas the above 'endpoints' section is an 'all or nothing' flag.
+    #  If the 'endpoints' flag is set to false, then the endpoint HTTP METHOD flags below HAVE NO EFFECT since
+    #  the entire endpoint has been disabled. In other words, the flags below only are applicable if the overall
+    #  endpoint is enabled.
+    # 
+    endpointMethodControl:
+      realm.get : true
+      register.post : true
 
-  account.get : true
-  account.post : true
-  account.password.change.post : true
-  account.password.reset.post : true
+      account.get : true
+      account.post : true
+      account.password.change.post : true
+      account.password.reset.post : true
 
-  users.put : true
-  users.post : true
-  users.urn.get : true
-  users.user.get : true
-  users.user.post : true
+      users.put : true
+      users.post : true
+      users.urn.get : true
+      users.user.get : true
+      users.user.post : true
 
-  devices.put : true
-  devices.post : true
-  devices.urn.get : true
-  devices.device.get : true
-  devices.get : true
+      devices.put : true
+      devices.post : true
+      devices.urn.get : true
+      devices.device.get : true
+      devices.get : true
 
-...
+    ...
 
-  extension.example.putTwoStrings : true
-  extension.example.findByFirstString : true
-  extension.example.findByBothStrings : true
+      extension.example.putTwoStrings : true
+      extension.example.findByFirstString : true
+      extension.example.findByBothStrings : true
 
-  extension.moreInterestingExample.moreInterestingPutTwoStrings : true
-  extension.moreInterestingExample.moreInterestingFindByFirstString : true
-  extension.moreInterestingExample.moreInterestingFindByBothStrings : true
+      extension.moreInterestingExample.moreInterestingPutTwoStrings : true
+      extension.moreInterestingExample.moreInterestingFindByFirstString : true
+      extension.moreInterestingExample.moreInterestingFindByBothStrings : true
 
 
 Two things about this:
