@@ -21,7 +21,8 @@ package net.smartcosmos.objects.resource.secure.libraries;
  */
 
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by tcross on 26.01.2015.
@@ -44,9 +45,7 @@ public final class LibraryHierarchy implements ILibraryHierarchy
     {
     }
 
-    private List<String> hierarchyArray = null;
-
-    private List<Boolean> linkFlagsArray = null;
+    private LinkedHashMap<String, Boolean> hierarchyMap = null;
 
     public static synchronized LibraryHierarchy getInstance()
     {
@@ -57,14 +56,9 @@ public final class LibraryHierarchy implements ILibraryHierarchy
         return libraryHierarchy;
     }
 
-    public void setLibraryHierarchyList(List<String> hierarchy)
+    public void setLibraryHierarchyMap(LinkedHashMap<String, Boolean> hierarchyMap)
     {
-        this.hierarchyArray = hierarchy;
-    }
-
-    public void setLibraryLinkFlagsList(List<Boolean> linkFlags)
-    {
-        this.linkFlagsArray = linkFlags;
+        this.hierarchyMap = hierarchyMap;
     }
 
     /**
@@ -80,7 +74,7 @@ public final class LibraryHierarchy implements ILibraryHierarchy
      */
     public boolean isLibraryElementType(String libraryElementType)
     {
-        for (String next : hierarchyArray)
+        for (String next : hierarchyMap.keySet())
         {
             if (next.equals(libraryElementType))
             {
@@ -103,7 +97,7 @@ public final class LibraryHierarchy implements ILibraryHierarchy
      */
     public String getParentTypeFor(String libraryElementType)
     {
-        Iterator<String> iterator = hierarchyArray.iterator();
+        Iterator<String> iterator = hierarchyMap.keySet().iterator();
         while (iterator.hasNext())
         {
             String next = iterator.next();
@@ -132,11 +126,11 @@ public final class LibraryHierarchy implements ILibraryHierarchy
      */
     public boolean canLink(String libraryEntityType)
     {
-        for (int i = 0; i < hierarchyArray.size(); i++)
+        for (Map.Entry<String, Boolean> entry: hierarchyMap.entrySet())
         {
-            if (hierarchyArray.get(i).equals(libraryEntityType))
+            if (entry.getKey().equals(libraryEntityType))
             {
-                return linkFlagsArray.get(i);
+                return entry.getValue();
             }
         }
         return false;
