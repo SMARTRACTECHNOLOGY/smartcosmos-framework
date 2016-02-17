@@ -32,8 +32,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class SmartCosmosConfiguration extends Configuration
@@ -146,10 +146,7 @@ public class SmartCosmosConfiguration extends Configuration
     private Map<String, String> transactionHandlerClasses = Maps.newLinkedHashMap();
 
     @JsonProperty
-    private ArrayList<String> libraryHierarchy;
-
-    @JsonProperty
-    private ArrayList<Boolean> libraryLinkFlags;
+    private HashMap<String, Boolean> libraryHierarchy = Maps.newLinkedHashMap();
 
     //
     //
@@ -299,14 +296,10 @@ public class SmartCosmosConfiguration extends Configuration
         this.includeEmailVerificationTokenInRegistrationJSON = flag;
     }
 
-    public void setLibraryHierarchy(final List<String> libraryHierarchy)
+    public void setLibraryHierarchy(final LinkedHashMap<String, Boolean> libraryHierarchy)
     {
-        LibraryHierarchyFactory.setLibraryHierarchyList(libraryHierarchy);
-    }
-
-    public void setLibraryLinkFlags(final List<Boolean> libraryLinkFlags)
-    {
-        LibraryHierarchyFactory.setLibraryLinkFlagsList(libraryLinkFlags);
+        this.libraryHierarchy = libraryHierarchy;
+        LibraryHierarchyFactory.setLibraryHierarchy(libraryHierarchy);
     }
 
     @JsonProperty("license")
