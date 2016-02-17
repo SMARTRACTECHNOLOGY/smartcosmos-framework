@@ -13,6 +13,7 @@
 * OBJECTS-584 Add method to create ResponseEntity from Result
 * OBJECTS-585 MetadataClient throws ServiceException when looking up by key
 * OBJECTS-586 MetadataCodec does not support `Custom` MetadataDataType
+* SCE-12 Add Maven Shade Plugin to Extension Starter
 
 ## Release 2.12.1 (January 21, 2016)
 
