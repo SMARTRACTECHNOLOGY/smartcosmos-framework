@@ -10,33 +10,39 @@ Library Element attachment capabilities, there is now a single map, mapping name
 to attachment capabilities.
 
 **OLD VERSION:**
-            libraryHierarchy:
-              - PageEntry
-              - Page
-              - ChapterSection
-              - Chapter
-              - Book
-              - Shelf
-              - Library
-            
-            libraryLinkFlags:
-              - true
-              - true
-              - true
-              - true
-              - true
-              - true
-              - true
+
+```
+libraryHierarchy:
+  - PageEntry
+  - Page
+  - ChapterSection
+  - Chapter
+  - Book
+  - Shelf
+  - Library
+
+libraryLinkFlags:
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+```
+
 **NEW VERSION:**
 
-            libraryHierarchy:
-              PageEntry: true
-              Page: false
-              ChapterSection: false
-              Chapter: false
-              Book: false
-              Shelf: false
-              Library: false
+```
+libraryHierarchy:
+  PageEntry: true
+  Page: false
+  ChapterSection: false
+  Chapter: false
+  Book: false
+  Shelf: false
+  Library: false
+```
 
 ### New Features
 
