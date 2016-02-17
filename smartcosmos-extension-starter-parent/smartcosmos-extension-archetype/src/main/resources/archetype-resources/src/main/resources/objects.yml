@@ -655,11 +655,11 @@ server:
     #       -Ddw.server.connector.port=$PORT
     port: 8080
 
-#
-#
-# LIBRARY HIERARCHY
-#
-#
+##
+##
+## LIBRARY HIERARCHY
+##
+##
 #
 # SMART COSMOS Objects allows you to impose a hierarchy on your stored objects
 # (which includes users, devices, files, metadata, etc.) by linking them to
@@ -682,7 +682,7 @@ server:
 # cases be non-trivial and best done in collaboration with a SMARTRAC
 # support engineer.
 #
-# The "Link Flags" element below declare which kinds of library elements can
+# The true/false elements below declare which kinds of library elements can
 # have objects (again, to include users, devices, files, metadata, etc.) linked
 # to them. In this example, the "normal" case holds, in which objects can only
 # be linked to the lowest level of the hierarchy tree, i.e., PageEntry. If you
@@ -691,37 +691,26 @@ server:
 # attached to library elements at eny level of the tree, you would change
 # them all to "true".
 #
-# A library link is implemented with the normal SMART COSMOS Relationship, and using
-# the normal Relationship REST endpoints. The only additional constraint in play is this:
-# if the relatedEntityReferenceType in the relationship is a LibraryElement, the Type field
-# of the relationship will be set immutably to LibraryLink.
+# A library link is implemented with the normal SMART COSMOS Relationship, and
+# using the normal Relationship REST endpoints. The only additional constraint
+# in play is this: if the entityReferenceType in the relationship is a LibraryElement,
+# the Type field of the relationship will be set immutably to LibraryLink.
 #
 # Note that as with any relationship in SMART COSMOS, deleting a relationship (i.e.,
 # a library link) has no effect on either the library element or the linked object.
 #
 # Configuration note: if you choose not to populate a library hierarchy, comment out
-# the lines "libraryHierarcy:" and "libraryLinkFlags:" as well as the hierarchy elements
-# and link flags.
+# the lines "libraryHierarcy:" as well as the hierarchy elements.
 #
 # Library Elements
 libraryHierarchy:
-  - PageEntry
-  - Page
-  - ChapterSection
-  - Chapter
-  - Book
-  - Shelf
-  - Library
-
-# Link Flags
-libraryLinkFlags:
-  - true
-  - true
-  - true
-  - true
-  - true
-  - true
-  - true
+  PageEntry: true
+  Page: false
+  ChapterSection: false
+  Chapter: false
+  Book: false
+  Shelf: false
+  Library: false
 
 #
 #
