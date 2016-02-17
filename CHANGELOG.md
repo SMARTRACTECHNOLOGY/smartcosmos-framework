@@ -1,8 +1,46 @@
 # SMART COSMOS Framework Release Notes
 
-## Release 2.12.2 (February 4, 2016)
+## Release 2.12.2 (February 18, 2016)
+
+### IMPORTANT CONFIGURATION NOTE
+
+Configuration of the Library Element hierarchy has been improved.
+Instead of two separate lists for (String) Library Element names and (Boolean)
+Library Element attachment capabilities, there is now a single map, mapping names
+to attachment capabilities.
+
+**OLD VERSION:**
+            libraryHierarchy:
+              - PageEntry
+              - Page
+              - ChapterSection
+              - Chapter
+              - Book
+              - Shelf
+              - Library
+            
+            libraryLinkFlags:
+              - true
+              - true
+              - true
+              - true
+              - true
+              - true
+              - true
+**NEW VERSION:**
+
+            libraryHierarchy:
+              PageEntry: true
+              Page: false
+              ChapterSection: false
+              Chapter: false
+              Book: false
+              Shelf: false
+              Library: false
 
 ### New Features
+
+* No new features are added in this release.
 
 ### Bugfixes & Improvements
 
@@ -13,7 +51,10 @@
 * OBJECTS-584 Add method to create ResponseEntity from Result
 * OBJECTS-585 MetadataClient throws ServiceException when looking up by key
 * OBJECTS-586 MetadataCodec does not support `Custom` MetadataDataType
+* OBJECTS-539 Extract devices from Objects into separate "Device Extension"
+* SCE-5 Archetype needs update
 * SCE-12 Add Maven Shade Plugin to Extension Starter
+* PROFILES-394 Fix library config so that level name and attachment capability are on one line
 
 ## Release 2.12.1 (January 21, 2016)
 
