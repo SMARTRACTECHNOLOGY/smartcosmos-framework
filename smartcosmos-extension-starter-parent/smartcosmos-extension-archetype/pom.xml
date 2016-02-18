@@ -4,7 +4,7 @@
     <parent>
         <groupId>net.smartcosmos.extension</groupId>
         <artifactId>smartcosmos-extension-starter-parent</artifactId>
-        <version>2.13.1-SNAPSHOT</version>
+        <version>2.13.1-development-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-extension-archetype</artifactId>
