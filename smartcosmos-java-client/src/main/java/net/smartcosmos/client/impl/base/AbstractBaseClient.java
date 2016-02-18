@@ -12,6 +12,7 @@ import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.data.Protocol;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -119,6 +120,31 @@ public abstract class AbstractBaseClient
         } catch (JSONException e)
         {
             throw new ServiceException(Result.ERR_FAILURE.getCode());
+        }
+    }
+
+    protected void throwServiceException(String responseEntity) throws ServiceException
+    {
+        try
+        {
+            JSONObject jsonResponse = new JSONObject(responseEntity);
+            throwServiceException(jsonResponse);
+        } catch (JSONException e)
+        {
+            throw new ServiceException(Result.ERR_FAILURE.getCode());
+        }
+    }
+
+    protected void throwServiceException(ClientResource service, Exception e) throws ServiceException
+    {
+        if (e instanceof ResourceException)
+        {
+            log.error("Unexpected HTTP status code returned: {}", service.getStatus().getCode());
+            throwServiceException(service.getResponse().getEntityAsText());
+        } else
+        {
+            log.error("Unexpected Exception", e);
+            throw new ServiceException(e);
         }
     }
 }

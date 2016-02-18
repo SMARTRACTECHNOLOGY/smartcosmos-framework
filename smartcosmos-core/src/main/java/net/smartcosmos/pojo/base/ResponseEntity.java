@@ -109,11 +109,17 @@ public class ResponseEntity
 
     public static<RESULT_ENUM_TYPE extends IResult> String toJson(RESULT_ENUM_TYPE result, Object... args)
     {
-        ResponseEntity re = new ResponseEntity();
-        re.setMessage(String.format(result.getFormattedMessage(), args));
-        re.setCode(result.getCode());
+        ResponseEntity responseEntity = toResponseEntity(result, args);
+        return JsonUtil.toJson(responseEntity);
+    }
 
-        return JsonUtil.toJson(re);
+    public static<RESULT_ENUM_TYPE extends IResult> ResponseEntity toResponseEntity(RESULT_ENUM_TYPE result, Object... args)
+    {
+        ResponseEntity responseEntity = new ResponseEntity();
+        responseEntity.setMessage(String.format(result.getFormattedMessage(), args));
+        responseEntity.setCode(result.getCode());
+
+        return responseEntity;
     }
 
     public void log()
