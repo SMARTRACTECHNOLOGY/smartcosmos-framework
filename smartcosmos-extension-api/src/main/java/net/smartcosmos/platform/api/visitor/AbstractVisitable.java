@@ -28,14 +28,14 @@ import net.smartcosmos.util.UuidUtil;
 
 import java.util.UUID;
 
-abstract class AbstractVisitable<T extends IAccountDomainResource>
+public abstract class AbstractVisitable<T extends IAccountDomainResource>
         implements IAccountDomainResource<T>, IVisitable<T>
 {
     protected final T instance;
 
     protected final EventType eventType;
 
-    AbstractVisitable(EventType eventType, T instance)
+    public AbstractVisitable(EventType eventType, T instance)
     {
         Preconditions.checkNotNull(instance, "instance must not be null");
         this.instance = instance;

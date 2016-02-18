@@ -77,7 +77,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * <p>
      * Effectively this method would be used to tell you that, for example,
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} with
-     * {@link net.smartcosmos.objects.model.context.IDevice#getUrn()} of <code>uuid:urn:system-assigned-uuid</code> has
+     * {@link net.smartcosmos.objects.model.context.IFile#getUrn()} of <code>uuid:urn:system-assigned-uuid</code> has
      * the tags {"Foo", "Bar", "Baaq"} assigned to it.
      *
      * @param entityReferenceType Entity reference type
@@ -98,7 +98,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * <p>
      * Effectively this method would be used to tell you that, for example,
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} with
-     * {@link net.smartcosmos.objects.model.context.IDevice#getUrn()} of <code>uuid:urn:system-assigned-uuid</code> has
+     * {@link net.smartcosmos.objects.model.context.IFile#getUrn()} of <code>uuid:urn:system-assigned-uuid</code> has
      * the tags {"Foo", "Bar", "Baaq"} assigned to it.
      *
      * @param entityReferenceType Entity reference type
@@ -160,7 +160,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * <p>
      * Effectively this method would be used to tell you that, for example, there are 13
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag
-     * <code>Foo</code>, and 4 {@link net.smartcosmos.objects.model.context.IDevice} instances, and 2
+     * <code>Foo</code>, and 4 {@link net.smartcosmos.objects.model.context.IFile} instances, and 2
      * {@link net.smartcosmos.objects.model.context.IObjectAddress} instances as well.
      *
      * @param tagName Case-sensitive name of the tag
@@ -178,7 +178,7 @@ public interface ITagClient extends IUpsertableBaseClient<ITag>, IDeleteableBase
      * <p>
      * Effectively this method would be used to tell you that, for example, there are 13
      * {@link net.smartcosmos.model.base.EntityReferenceType#Object} instances that are assigned the tag
-     * <code>Foo</code>, and 4 {@link net.smartcosmos.objects.model.context.IDevice} instances, and 2
+     * <code>Foo</code>, and 4 {@link net.smartcosmos.objects.model.context.IFile} instances, and 2
      * {@link net.smartcosmos.objects.model.context.IObjectAddress} instances as well.
      *
      * @param tagName  Case-sensitive name of the tag

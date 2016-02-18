@@ -1,10 +1,5 @@
 package net.smartcosmos.platform.util;
 
-import java.util.UnknownFormatConversionException;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 /*
  * *#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
  * SMART COSMOS Platform Server API
@@ -35,6 +30,10 @@ import net.smartcosmos.util.mapper.IntegerMapper;
 import net.smartcosmos.util.mapper.JsonMapper;
 import net.smartcosmos.util.mapper.LongMapper;
 import net.smartcosmos.util.mapper.StringMapper;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.UnknownFormatConversionException;
 
 /**
  *
@@ -60,11 +59,11 @@ public final class MetadataCodec
      */
     public static String encodeMetadata(MetadataDataType dataType, String dataToEncode)
     {
-
         String resultString;
         switch (dataType)
         {
         case StringType:
+        case Custom:
         case XMLType:
             resultString = new StringMapper().toString(dataToEncode);
             break;
@@ -132,6 +131,7 @@ public final class MetadataCodec
             switch (dataType)
             {
             case StringType:
+            case Custom:
             case XMLType:
                 outputJson.put(Field.DECODED_VALUE_FIELD, new StringMapper().fromString(dataToDecode));
                 break;

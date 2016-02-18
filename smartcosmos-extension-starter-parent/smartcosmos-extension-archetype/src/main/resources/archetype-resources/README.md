@@ -44,7 +44,7 @@ ObjectInteractionSession
 Tag
 Timeline
 
-Look in the directory ${package}.smartcosmos.extension.visitor, and you'll see three examples of visitor classes.
+Look in the directory ${package}.visitor, and you'll see three examples of visitor classes.
 
 Read through the source code (they're very short) and be conscious of the following:
 
@@ -136,11 +136,11 @@ net.smartcosmos.objects.jpa.base.DomainResourceAccountNamedReferentialObjectEnti
 
 There are two example entity classes in this project. The first is:
 
-*${package}.smartcosmos.extension.server.jpa.impl.ExampleEntity*
+*${package}.jpa.impl.ExampleEntity*
 
 and is a very simple extension of DomainResourceEntity which creates two String columns. The second is:
  
-*${package}.smartcosmos.extensionserver.jpa.impl.MoreInterestingExampleEntity*
+*${package}.jpa.impl.MoreInterestingExampleEntity*
 
 which extends DomainResourceReferentialObjectEntity, and thus requires that you provide a referenceUrn and a 
 referenceEntityType when inserting a MoreInterestingExampleEntity in the database. Read through these to get a feel for 
@@ -159,8 +159,8 @@ net.smartcosmos.platform.api.dao.IBaseDAO before adding any methods, so you know
 provides. It could well be the case that the method you need is already in place, or that you could assemble it more 
 quickly using methods that are already in place.
 
-Pay attention to the packaging, and keep your interfaces in yourpackage.yourextension.smartcosmos.extension.server.dao, 
-and implementations in yourpackage.yourextension.smartcomsmos.extension.server.dao.impl. And use the interfaces in 
+Pay attention to the packaging, and keep your interfaces in ${package}.dao, 
+and implementations in ${package}.dao.impl. And use the interfaces in 
 request handlers; there are many examples in this code.
 
 $H$H$H Creating a REST Web Service Endpoint
@@ -188,69 +188,67 @@ $H$H$H Controlling Access to REST Endpoints
 Look in src/main/resources/objects.yml, and you will see two sections that relate to access control for endpoints. 
 The first looks something like:
 
-$H
-$H Master control flags for enabling/disabling various Objects endpoints
-$H
-endpoints:
-
-  metadataEncodingEndpoints : true
-  eventsEndpoint : true
-  objectAddressEndpoint : true
-  deviceEndpoints : true
-  metadataEndpoints : true
-...
+    #
+    # Master control flags for enabling/disabling various Objects endpoints
+    #
+    endpoints:
+      metadataEncodingEndpoints : true
+      eventsEndpoint : true
+      objectAddressEndpoint : true
+      deviceEndpoints : true
+      metadataEndpoints : true
+    ...
 
 With these flags you can disable entire categories of core Objects functionality. Set "deviceEndpoints" to "false", and 
 none of the device endpoints will even be loaded, and will return a 404 Not Found if invoked. These flags only apply, 
 though, to core Objects endpoints. Endpoints which are registered as part of an extension can be found in the
 objects.yml: 
 
+    exampleEndpointsRegistrar: com.example.smartcosmos.server.extension.example.ExampleExtensionEndpointsResourceRegistrar
 
-exampleEndpointsRegistrar: net.smartcosmos.archtest.smartcosmos.extension.server.ExampleExtensionEndpointsResourceRegistrar
-
-- this is the line that registers the example endpoints; ; if you want to turn them off just comment out the line 
+This is the line that registers the example endpoints; ; if you want to turn them off just comment out the line 
 containing their EndpointResourceRegistrar.
 
 The second looks like:
 
-$H
-$H Master endpoint method enablement flags. When endpoint method is set to 'true' then that specific
-$H HTTP Method is supported on a given endpoint. These flags contrast from the 'endpoints' flags above
-$H in that they are HTTP METHOD oriented whereas the above 'endpoints' section is an 'all or nothing' flag.
-$H If the 'endpoints' flag is set to false, then the endpoint HTTP METHOD flags below HAVE NO EFFECT since
-$H the entire endpoint has been disabled. In other words, the flags below only are applicable if the overall
-$H endpoint is enabled.
-$H
-endpointMethodControl:
-  realm.get : true
-  register.post : true
+    # 
+    #  Master endpoint method enablement flags. When endpoint method is set to 'true' then that specific
+    #  HTTP Method is supported on a given endpoint. These flags contrast from the 'endpoints' flags above
+    #  in that they are HTTP METHOD oriented whereas the above 'endpoints' section is an 'all or nothing' flag.
+    #  If the 'endpoints' flag is set to false, then the endpoint HTTP METHOD flags below HAVE NO EFFECT since
+    #  the entire endpoint has been disabled. In other words, the flags below only are applicable if the overall
+    #  endpoint is enabled.
+    # 
+    endpointMethodControl:
+      realm.get : true
+      register.post : true
 
-  account.get : true
-  account.post : true
-  account.password.change.post : true
-  account.password.reset.post : true
+      account.get : true
+      account.post : true
+      account.password.change.post : true
+      account.password.reset.post : true
 
-  users.put : true
-  users.post : true
-  users.urn.get : true
-  users.user.get : true
-  users.user.post : true
+      users.put : true
+      users.post : true
+      users.urn.get : true
+      users.user.get : true
+      users.user.post : true
 
-  devices.put : true
-  devices.post : true
-  devices.urn.get : true
-  devices.device.get : true
-  devices.get : true
+      devices.put : true
+      devices.post : true
+      devices.urn.get : true
+      devices.device.get : true
+      devices.get : true
 
-...
+    ...
 
-  extension.example.putTwoStrings : true
-  extension.example.findByFirstString : true
-  extension.example.findByBothStrings : true
+      extension.example.putTwoStrings : true
+      extension.example.findByFirstString : true
+      extension.example.findByBothStrings : true
 
-  extension.moreInterestingExample.moreInterestingPutTwoStrings : true
-  extension.moreInterestingExample.moreInterestingFindByFirstString : true
-  extension.moreInterestingExample.moreInterestingFindByBothStrings : true
+      extension.moreInterestingExample.moreInterestingPutTwoStrings : true
+      extension.moreInterestingExample.moreInterestingFindByFirstString : true
+      extension.moreInterestingExample.moreInterestingFindByBothStrings : true
 
 
 Two things about this:
@@ -283,7 +281,7 @@ First, the configuration, since it's simple. In your objects.yml file, you see t
 $H$H$H Configuration
 
 	transactionHandlerClasses:
-  		myExampleTransactionHandler: net.smartcosmos.archtest.smartcosmos.extension.server.resource.secure.transaction.handlers.ExampleTransactionHandler
+  		myExampleTransactionHandler: ${package}.resource.secure.transaction.handlers.ExampleTransactionHandler
 
 That's it for the configuration. When you specify the name of the transaction handler in the rest call 
 (PUT /rest/transaction/myExampleTransactionHandler), the JSON body will be passed intact to the run() method of the 
@@ -292,7 +290,7 @@ handler, as described below.
 
 $H$H$H The Code
 
-In the example transaction handler, your.package.smartcosmos.extension.server.resource.secure.transaction.handlers.ExampleTransactionHandler.java,
+In the example transaction handler, ${package}.resource.secure.transaction.handlers.ExampleTransactionHandler.java,
 notice the following:
 
 There are only one constructor and two methods. As elsewhere, you'll need to create your own UUID to use as a serviceID 
