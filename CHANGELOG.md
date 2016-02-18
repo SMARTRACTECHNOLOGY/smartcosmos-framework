@@ -1,6 +1,6 @@
 # SMART COSMOS Framework Release Notes
 
-## Release 2.12.2 (February 18, 2016)
+## Release 2.13.0 (February 18, 2016)
 
 ### IMPORTANT CONFIGURATION NOTE
 
@@ -53,11 +53,12 @@ libraryHierarchy:
 * change inheritance of `User` from `DomainResource` to `AccountDomainResource` (OBJECTS-322)
 * added a reusable compound validation constraint annotation for realms (OBJECTS-568)
 * added default values for `TimelineEntry` (OBJECTS-321)
+* OBJECTS-539 Extract devices from Objects into separate "Device Extension"
 * OBJECTS-582 Java Client `UpsertCommand` and `GetCollectionCommand` does not catch `ResourceException`
 * OBJECTS-584 Add method to create ResponseEntity from Result
 * OBJECTS-585 MetadataClient throws ServiceException when looking up by key
 * OBJECTS-586 MetadataCodec does not support `Custom` MetadataDataType
-* OBJECTS-539 Extract devices from Objects into separate "Device Extension"
+* OBJECTS-592 Look up (all) Custom metadata with Full view returns internal server error
 * SCE-5 Archetype needs update
 * SCE-12 Add Maven Shade Plugin to Extension Starter
 * PROFILES-394 Fix library config so that level name and attachment capability are on one line
