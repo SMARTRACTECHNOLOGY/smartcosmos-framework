@@ -335,7 +335,7 @@
                         <execution>
                             <goals>
                                 <goal>integration-test</goal>
-                                <!-- Failure reporting actually occurs under verify, if you were to skip this phase the build would continue even with failures. This is because 
+                                <!-- Failure reporting actually occurs under verify, if you were to skip this phase the build would continue even with failures. This is because
 									integration tests are designed to run in parallel -->
                                 <goal>verify</goal>
                             </goals>
