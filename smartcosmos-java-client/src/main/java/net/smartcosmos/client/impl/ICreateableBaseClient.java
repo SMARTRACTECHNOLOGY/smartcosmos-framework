@@ -38,7 +38,6 @@ import org.json.JSONObject;
  * @see net.smartcosmos.model.geo.IGeospatialEntry
  * @see net.smartcosmos.model.context.IMetadata
  * @see net.smartcosmos.objects.model.context.IRelationship
- * @see net.smartcosmos.objects.model.context.ITag
  * @see net.smartcosmos.objects.model.context.ITimelineEntry
  * @see net.smartcosmos.objects.model.context.IObject
  * @see net.smartcosmos.objects.model.context.IObjectAddress
