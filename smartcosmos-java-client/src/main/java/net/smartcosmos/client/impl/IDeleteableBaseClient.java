@@ -37,7 +37,6 @@ import org.json.JSONObject;
  * @see net.smartcosmos.objects.model.context.IFile
  * @see net.smartcosmos.model.context.IMetadata
  * @see net.smartcosmos.objects.model.context.IRelationship
- * @see net.smartcosmos.objects.model.context.ITag
  * @see net.smartcosmos.objects.model.context.IObjectAddress
  */
 public interface IDeleteableBaseClient<T>

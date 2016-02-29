@@ -39,8 +39,6 @@ public class Statistics
 
     private int metadataCount;
 
-    private int tagsCount;
-
     private int interactionsCount;
 
     private int librariesCount;
@@ -132,21 +130,6 @@ public class Statistics
     public Statistics setMetadataCount(int metadataCount)
     {
         this.metadataCount = metadataCount;
-        return this;
-    }
-
-    @JsonView(JsonGenerationView.Minimum.class)
-    @JsonProperty(Field.STATS_TAGS)
-    public int getTagsCount()
-    {
-        return tagsCount;
-    }
-
-    @JsonView(JsonGenerationView.Minimum.class)
-    @JsonProperty(Field.STATS_TAGS)
-    public Statistics setTagsCount(int tagsCount)
-    {
-        this.tagsCount = tagsCount;
         return this;
     }
 
