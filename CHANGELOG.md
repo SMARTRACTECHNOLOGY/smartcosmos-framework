@@ -1,5 +1,13 @@
 # SMART COSMOS Framework Release Notes
 
+## Release 2.13.1 (March 3, 2016)
+
+### New Features
+
+* OBJECTS-593 Add a Result (JSON response) for unsupported entity reference types
+
+### Bugfixes / Improvements
+
 ## Release 2.13.0 (February 18, 2016)
 
 ### IMPORTANT CONFIGURATION NOTE
