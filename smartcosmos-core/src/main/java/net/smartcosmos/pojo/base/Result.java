@@ -130,6 +130,8 @@ public enum Result implements IResult
                 return ERR_EMPTY_REQUEST;
             case -17:
                 return ERR_PARSE_ERROR;
+            case -18:
+                return ERR_UNSUPPORTED_ENTITY_TYPE;
             case -50:
                 return ERR_EXTENSION_SECURITY_RESTRICTION;
             case -51:
