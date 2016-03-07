@@ -37,6 +37,7 @@ public abstract class ReferentialObject<T> extends DomainResource<T> implements 
     protected IAccount account;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
     protected EntityReferenceType entityReferenceType;
 
     @JsonView(JsonGenerationView.Minimum.class)
