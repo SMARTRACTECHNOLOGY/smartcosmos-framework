@@ -704,13 +704,13 @@ server:
 #
 # Library Elements
 libraryHierarchy:
-  PageEntry: true
-  Page: false
-  ChapterSection: false
-  Chapter: false
-  Book: false
-  Shelf: false
-  Library: false
+  - PageEntry: true
+  - Page: false
+  - ChapterSection: false
+  - Chapter: false
+  - Book: false
+  - Shelf: false
+  - Library: false
 
 #
 #

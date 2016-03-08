@@ -32,8 +32,8 @@ import java.util.Collection;
  * through a more fluid JSON definition. Upsert is a hybrid operation that checks to see if a specific key already
  * exists in order to choose between either an <b>up</b>date or an in<b>sert</b> operation.
  * <p>
- * The {@link net.smartcosmos.model.context.IMetadata} and {@link net.smartcosmos.objects.model.context.ITag} entities
- * rely exclusively on the {@link net.smartcosmos.model.base.INamedObject#getName()} field for determining existence.
+ * The {@link net.smartcosmos.model.context.IMetadata} entity relies exclusively on the {@link net.smartcosmos.model.base.INamedObject#getName()}
+ * field for determining existence.
  * The {@link net.smartcosmos.objects.model.context.IRelationship} relies on the relationship being defined by the
  * {@link net.smartcosmos.objects.model.context.IRelationship#getEntityReferenceType()},
  * {@link net.smartcosmos.objects.model.context.IRelationship#getReferenceUrn()},
@@ -48,7 +48,6 @@ import java.util.Collection;
  *            One of the upsertable SMART COSMOS contextual entities.
  * @see net.smartcosmos.model.context.IMetadata
  * @see net.smartcosmos.objects.model.context.IRelationship
- * @see net.smartcosmos.objects.model.context.ITag
  */
 public interface IUpsertableBaseClient<T> extends IFindableBaseClient<T>
 {

@@ -42,10 +42,6 @@ public interface IDAOFactory extends IExtendable<IAdvancedDAO<? extends IDomainR
 
     IMetadataDAO getMetadataDAO();
 
-    ITagDAO getTagDAO();
-
-    ITagAssignmentDAO getTagAssignmentDAO();
-
     IObjectAddressDAO getObjectAddressDAO();
 
     IObjectInteractionSessionDAO getObjectInteractiveSessionDAO();
