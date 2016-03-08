@@ -43,7 +43,7 @@
                         <artifactId>asciidoctor-maven-plugin</artifactId>
 
                         <configuration>
-                            <imagesDir>${basedir}</imagesDir>
+                            <imagesDir>${basedir}/..</imagesDir>
                             <sourceDirectory>${asciidoc.sourceDirectory}</sourceDirectory>
                         </configuration>
                         <executions>
