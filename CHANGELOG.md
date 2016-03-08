@@ -1,6 +1,6 @@
 # SMART COSMOS Framework Release Notes
 
-## UNRELEASED
+## Release 2.13.1 (March 8, 2016)
 
 ### IMPORTANT CONFIGURATION NOTE
 
