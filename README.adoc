@@ -3,7 +3,7 @@ SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
 ifdef::env-github[:imagepath: BLAHBLAHBLAH]
 
 '''
-image::{imagepath}/images/banner/miot.png[SMART COSMOS]
+image::/images/banner/miot.png[SMART COSMOS]
 
 == Welcome to SMART COSMOS
 Welcome to SMART COSMOS!
