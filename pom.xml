@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.smartcosmos</groupId>
     <artifactId>smartcosmos-framework-root</artifactId>
-    <version>2.13.1-development-SNAPSHOT</version>
+    <version>2.13.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>SMART COSMOS Framework Root</name>
     <description>SMART COSMOS™ Objects Core Interfaces, Extension API, Java Client, and helpful Maven Starter POMs</description>
