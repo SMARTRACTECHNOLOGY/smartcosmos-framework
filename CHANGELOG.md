@@ -41,6 +41,7 @@ libraryHierarchy:
 ### Bugfixes / Improvements
 
 * OBJECTS-616 LibraryElement configuration ignoring order in Ansible config generation
+* Extract hashtags from Objects into separate "Hashtag Extension"
 
 ## Release 2.13.0 (February 18, 2016)
 
