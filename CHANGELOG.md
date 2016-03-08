@@ -1,6 +1,38 @@
 # SMART COSMOS Framework Release Notes
 
-## Release 2.13.1 (March 3, 2016)
+## UNRELEASED
+
+### IMPORTANT CONFIGURATION NOTE
+
+See the note below about why we changed the library hierarchy configuration.
+We have changed it again, since the ordering of library elements was not remaining
+consistent in environments where the objects.yml file was being generated, e.g.,
+Ansible playbooks. The only difference is the dash before the individual map entries.
+
+**OLD VERSION:**
+
+```
+libraryHierarchy:
+  PageEntry: true
+  Page: false
+  ChapterSection: false
+  Chapter: false
+  Book: false
+  Shelf: false
+  Library: false
+```
+**NEW VERSION:**
+
+```
+libraryHierarchy:
+  - PageEntry: true
+  - Page: false
+  - ChapterSection: false
+  - Chapter: false
+  - Book: false
+  - Shelf: false
+  - Library: false
+```
 
 ### New Features
 
