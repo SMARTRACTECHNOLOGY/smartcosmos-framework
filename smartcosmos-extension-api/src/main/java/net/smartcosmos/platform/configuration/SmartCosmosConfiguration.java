@@ -32,8 +32,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SmartCosmosConfiguration extends Configuration
@@ -146,7 +147,7 @@ public class SmartCosmosConfiguration extends Configuration
     private Map<String, String> transactionHandlerClasses = Maps.newLinkedHashMap();
 
     @JsonProperty
-    private HashMap<String, Boolean> libraryHierarchy = Maps.newLinkedHashMap();
+    private List<Map<String, Boolean>> libraryHierarchy = new ArrayList<>();
 
     //
     //
@@ -296,10 +297,20 @@ public class SmartCosmosConfiguration extends Configuration
         this.includeEmailVerificationTokenInRegistrationJSON = flag;
     }
 
-    public void setLibraryHierarchy(final LinkedHashMap<String, Boolean> libraryHierarchy)
+    public void setLibraryHierarchy(final List<Map<String, Boolean>> libraryHierarchy)
     {
         this.libraryHierarchy = libraryHierarchy;
-        LibraryHierarchyFactory.setLibraryHierarchy(libraryHierarchy);
+        // spectacularly ugly, but the only way to read in ordered maps from YML -
+        // they come in as an ordered array of single-entry maps.
+        LinkedHashMap<String, Boolean> flattenedMap = new LinkedHashMap<>();
+        for (Map<String, Boolean> arrayEntry: libraryHierarchy)
+        {
+            for (Map.Entry<String, Boolean> entry : arrayEntry.entrySet())
+            {
+                flattenedMap.put(entry.getKey(), entry.getValue());
+            }
+        }
+        LibraryHierarchyFactory.setLibraryHierarchy(flattenedMap);
     }
 
     @JsonProperty("license")
