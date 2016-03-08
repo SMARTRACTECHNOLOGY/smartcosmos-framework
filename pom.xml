@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.smartcosmos</groupId>
     <artifactId>smartcosmos-framework-root</artifactId>
-    <version>2.13.1</version>
+    <version>2.13.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>SMART COSMOS Framework Root</name>
     <description>SMART COSMOS™ Objects Core Interfaces, Extension API, Java Client, and helpful Maven Starter POMs</description>
@@ -284,7 +284,7 @@
     <scm>
         <connection>scm:git:git://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework.git</connection>
         <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-framework.git</developerConnection>
-        <tag>v2.13.1</tag>
+        <tag>HEAD</tag>
         <url>https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework/tree/master/</url>
     </scm>
     <profiles>
