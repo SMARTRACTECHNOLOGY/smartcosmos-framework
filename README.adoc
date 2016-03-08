@@ -1,9 +1,9 @@
 = SMART COSMOS Getting Started Guide
 SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
-ifdef::env-github[:imagepath: BLAHBLAHBLAH]
+ifndef::env-github[:imagepath: ..]
 
 '''
-image::/images/banner/miot.png[SMART COSMOS]
+image::{imagepath}/images/banner/miot.png[SMART COSMOS]
 
 == Welcome to SMART COSMOS
 Welcome to SMART COSMOS!
