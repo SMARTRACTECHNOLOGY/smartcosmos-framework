@@ -1,13 +1,13 @@
 # SMART COSMOS Framework Release Notes
 
-## UNRELEASED
+## Release 2.13.1 (March 8, 2016)
 
 ### IMPORTANT CONFIGURATION NOTE
 
 See the note below about why we changed the library hierarchy configuration.
 We have changed it again, since the ordering of library elements was not remaining
 consistent in environments where the objects.yml file was being generated, e.g.,
-Ansible playbooks. The only difference is the dash before the individual map entries.
+Ansible playbooks(OBJECTS-616). The only difference is the dash before the individual map entries.
 
 **OLD VERSION:**
 
@@ -39,6 +39,8 @@ libraryHierarchy:
 * OBJECTS-593 Add a Result (JSON response) for unsupported entity reference types
 
 ### Bugfixes / Improvements
+
+* OBJECTS-616 LibraryElement configuration ignoring order in Ansible config generation
 
 ## Release 2.13.0 (February 18, 2016)
 
