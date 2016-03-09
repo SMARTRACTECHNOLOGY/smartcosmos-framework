@@ -1,5 +1,15 @@
 # SMART COSMOS Framework Release Notes
 
+## UNRELEASED
+
+### New Features
+
+* No new features are added in this release.
+
+### Bugfixes / Improvements
+
+* OBJECTS-620 Refer to Images Locally instead of remotely in documentation
+
 ## Release 2.13.1 (March 8, 2016)
 
 ### IMPORTANT CONFIGURATION NOTE
