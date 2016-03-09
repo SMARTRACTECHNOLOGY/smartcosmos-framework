@@ -20,12 +20,21 @@ package net.smartcosmos.pojo.context;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.util.Date;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.base.Preconditions;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.model.context.MetadataDataType;
+import net.smartcosmos.objects.constraints.ObjectsData;
 import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 import net.smartcosmos.util.mapper.BooleanMapper;
@@ -34,13 +43,8 @@ import net.smartcosmos.util.mapper.FloatMapper;
 import net.smartcosmos.util.mapper.IntegerMapper;
 import net.smartcosmos.util.mapper.LongMapper;
 import net.smartcosmos.util.mapper.StringMapper;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
-
+@ObjectsData
 public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
 {
     public static class MetadataObjectBuilder

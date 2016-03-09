@@ -21,6 +21,7 @@ package net.smartcosmos.objects.constraints;
  */
 
 import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
@@ -37,7 +38,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * An annotation for indicating data should be validated against Objects data rules..
  */
 @Documented
-@Target({ ANNOTATION_TYPE, FIELD, PARAMETER})
+@Target({ ANNOTATION_TYPE, FIELD, PARAMETER, ElementType.TYPE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = { ObjectsDataValidator.class})
 public @interface ObjectsData
