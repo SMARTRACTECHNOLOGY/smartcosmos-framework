@@ -268,4 +268,15 @@ public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
         result = 31 * result + (decodedValue != null ? decodedValue.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Metadata{" +
+               "dataType=" + dataType +
+               ", key='" + key + '\'' +
+               ", rawValue='" + rawValue + '\'' +
+               ", decodedValue='" + decodedValue + '\'' +
+               "} " + super.toString();
+    }
 }
