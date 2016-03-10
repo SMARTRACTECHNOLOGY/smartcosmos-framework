@@ -19,11 +19,13 @@
         <dependency>
             <groupId>net.smartcosmos</groupId>
             <artifactId>smartcosmos-core</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>net.smartcosmos</groupId>
             <artifactId>smartcosmos-extension-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
