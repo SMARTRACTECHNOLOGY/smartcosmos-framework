@@ -39,11 +39,11 @@ license:
 
   #
   #
-  edition : DevKit
+  edition: DevKit
 
   #
   # Developer Edition License Key
-  editionKey : BoDUAnSbK0L63R0oYTAfXct3wHpXdTKqIkdlVdqloxgL90ajn0U5SV5k/+hz8NZdwghxBqxlia+q3v+vCaxRQ5dVLOEKP/rLOnlWbvC+TmwfPn2KKwOxJyWX6PRjK6jFQ7E+rkDxOFggR7f+x91e44q0qGzngqb6C4jiV3pxO+zJ05En8WyCVBXleZJaavcWiTDTe6ftqayHSUpvzApZ9FFPBvun38uBtrJ8WK76srTy4XMO0DVFaE3WK/en2jH7uebXPBzhLecVX2es4mAZecw4YNo4EDKR6rA2XIT0vmpvlDRfeKr0eKzSiVE0f+2eqGzNfHY9koi50lo3O0wMKA==
+  editionKey: BoDUAnSbK0L63R0oYTAfXct3wHpXdTKqIkdlVdqloxgL90ajn0U5SV5k/+hz8NZdwghxBqxlia+q3v+vCaxRQ5dVLOEKP/rLOnlWbvC+TmwfPn2KKwOxJyWX6PRjK6jFQ7E+rkDxOFggR7f+x91e44q0qGzngqb6C4jiV3pxO+zJ05En8WyCVBXleZJaavcWiTDTe6ftqayHSUpvzApZ9FFPBvun38uBtrJ8WK76srTy4XMO0DVFaE3WK/en2jH7uebXPBzhLecVX2es4mAZecw4YNo4EDKR6rA2XIT0vmpvlDRfeKr0eKzSiVE0f+2eqGzNfHY9koi50lo3O0wMKA==
 
   #
   # If you have been assigned an enterprise key, enter it here
@@ -55,14 +55,14 @@ license:
 
   #
   # Permitted Object Count
-  objectCount : 500
+  objectCount: 500
 
 
 #
 # Enables or disables the realm check web services endpoint. Set to false to disable
 # the endpoint if dynamic registration is set to false
 #
-supportRealmCheck : true
+supportRealmCheck: true
 
 #
 # Enables or disables the /users endpoints. Set to false to lock down the server when
@@ -70,13 +70,13 @@ supportRealmCheck : true
 #
 # See: https://smartractechnology.atlassian.net/wiki/display/SCKB/Deployment+Topologies
 #
-supportUsers : true
+supportUsers: true
 
 #
 # Enables or disables the notification endpoints. Set to false to disable
 # near real-time event notifications to 3rd party or back office systems.
 #
-supportNotifications : true
+supportNotifications: true
 
 #
 # Enables or disables the ability of the server to accept dynamically registered accounts
@@ -85,14 +85,14 @@ supportNotifications : true
 # be deployed in a multi-tenant scenario, where each tenant has its own realm. Set to false
 # to disable anonymous multi-tenant registration capabilities.
 #
-supportDynamicRegistration : true
+supportDynamicRegistration: true
 
 #
 # Enables or disables the ability of a server to accept multimedia files for an object,
 # relationship, or interaction. In short, if this is set to false then no file endpoints
 # will be registered and all file uploads are completely disabled
 #
-supportMultimediaFiles : true
+supportMultimediaFiles: true
 
 #
 # Enables or disables the ability to logically batch together a series of related object
@@ -107,7 +107,7 @@ supportInteractionSessions: true
 # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
 #
 # DEVELOPER EDITION RESTRICTED FIELD - DO NOT MODIFY
-supportExtensions : false
+supportExtensions: false
 
 #
 # Enables or disables the ability of the server programmatically report high level
@@ -122,33 +122,33 @@ supportStatusCheck: true
 # capabilities are desired but without any mandatory email verification.
 #
 # Use this setting when running integration tests
-#includeEmailVerificationTokenInRegistrationJSON : false
-includeEmailVerificationTokenInRegistrationJSON : true
+#includeEmailVerificationTokenInRegistrationJSON: false
+includeEmailVerificationTokenInRegistrationJSON: true
 
 #
 # Master control flags for enabling/disabling various Objects endpoints
 #
 endpoints:
 
-  metadataEncodingEndpoints : true
-  eventsEndpoint : true
-  objectAddressEndpoint : true
-  metadataEndpoints : true
-  tagEndpoints : true
-  timelineEndpoints : true
-  geospatialEndpoints : true
-  relationshipEndpoints : true
-  interactionEndpoints : true
-  objectEndpoints : true
-  transactionEndpoints : true
-  libraryEndpoints : true
-  registrationEndpoints : true
-  accountEndpoints : true
-  fileEndpoints : true
-  notificationEndpoints : true
-  sessionEndpoints : true
-  userEndpoints : true
-  batchEndpoints : true
+  metadataEncodingEndpoints: true
+  eventsEndpoint: true
+  objectAddressEndpoint: true
+  metadataEndpoints: true
+  tagEndpoints: true
+  timelineEndpoints: true
+  geospatialEndpoints: true
+  relationshipEndpoints: true
+  interactionEndpoints: true
+  objectEndpoints: true
+  transactionEndpoints: true
+  libraryEndpoints: true
+  registrationEndpoints: true
+  accountEndpoints: true
+  fileEndpoints: true
+  notificationEndpoints: true
+  sessionEndpoints: true
+  userEndpoints: true
+  batchEndpoints: true
 
 #
 # Master endpoint method enablement flags. When endpoint method is set to 'true' then that specific
@@ -159,110 +159,110 @@ endpoints:
 # endpoint is enabled.
 #
 endpointMethodControl:
-  realm.get : true
-  register.post : true
+  realm.get: true
+  register.post: true
 
-  account.get : true
-  account.post : true
-  account.password.change.post : true
-  account.password.reset.post : true
+  account.get: true
+  account.post: true
+  account.password.change.post: true
+  account.password.reset.post: true
 
-  users.put : true
-  users.post : true
-  users.urn.get : true
-  users.user.get : true
-  users.user.post : true
+  users.put: true
+  users.post: true
+  users.urn.get: true
+  users.user.get: true
+  users.user.post: true
 
-  objects.put : true
-  objects.post : true
-  objects.urn.get : true
-  objects.objecturn.get : true
-  objects.get : true
+  objects.put: true
+  objects.post: true
+  objects.urn.get: true
+  objects.objecturn.get: true
+  objects.get: true
 
-  address.put : true
-  address.post : true
-  address.urn.get : true
-  address.get : true
-  address.urn.delete : true
+  address.put: true
+  address.post: true
+  address.urn.get: true
+  address.get: true
+  address.urn.delete: true
 
-  sessions.put : true
-  sessions.post : true
-  sessions.urn.get : true
-  sessions.get : true
+  sessions.put: true
+  sessions.post: true
+  sessions.urn.get: true
+  sessions.get: true
 
-  interactions.put : true
-  interactions.get : true
-  interactions.urn.get : true
+  interactions.put: true
+  interactions.get: true
+  interactions.urn.get: true
 
-  relationships.put : true
-  relationships.urn.get : true
-  relationships.urn.delete : true
-  relationships.reference.all.get : true
-  relationships.reference.specific.get : true
-  relationships.reference.type.get : true
-  relationships.reference.get : true
+  relationships.put: true
+  relationships.urn.get: true
+  relationships.urn.delete: true
+  relationships.reference.all.get: true
+  relationships.reference.specific.get: true
+  relationships.reference.type.get: true
+  relationships.reference.get: true
 
-  geospatial.put : true
-  geospatial.post : true
-  geospatial.get : true
-  geospatial.urn.get : true
+  geospatial.put: true
+  geospatial.post: true
+  geospatial.get: true
+  geospatial.urn.get: true
 
-  metadata.encode.post : true
-  metadata.decode.post : true
-  metadata.reference.put : true
-  metadata.reference.delete : true
-  metadata.reference.get : true
-  metadata.query.post : true
+  metadata.encode.post: true
+  metadata.decode.post: true
+  metadata.reference.put: true
+  metadata.reference.delete: true
+  metadata.reference.get: true
+  metadata.query.post: true
 
-  files.put : true
-  files.urn.octet.post : true
-  files.urn.multipart.post : true
-  files.urn.get : true
-  files.urn.contents.get : true
-  files.entity.reference.get : true
-  files.urn.delete : true
+  files.put: true
+  files.urn.octet.post: true
+  files.urn.multipart.post: true
+  files.urn.get: true
+  files.urn.contents.get: true
+  files.entity.reference.get: true
+  files.urn.delete: true
 
-  tags.put : true
-  tags.tag.get : true
-  tags.urn.get : true
-  tags.tag.reference.put : true
-  tags.get : true
-  tags.tag.delete : true
-  tags.tag.reference.delete : true
+  tags.put: true
+  tags.tag.get: true
+  tags.urn.get: true
+  tags.tag.reference.put: true
+  tags.get: true
+  tags.tag.delete: true
+  tags.tag.reference.delete: true
 
-  notifications.enroll.put : true
-  notifications.confirm.put : true
-  notifications.withdraw.put : true
-  notifications.urn.get : true
+  notifications.enroll.put: true
+  notifications.confirm.put: true
+  notifications.withdraw.put: true
+  notifications.urn.get: true
 
-  events.get : true
-  events.urn.get : true
+  events.get: true
+  events.urn.get: true
 
-  library.put : true
-  library.post : true
-  library.delete : true
-  library.urn.get : true
-  library.get : true
-  library.type.get : true
-  library.parent.get : true
-  library.children.get : true
+  library.put: true
+  library.post: true
+  library.delete: true
+  library.urn.get: true
+  library.get: true
+  library.type.get: true
+  library.parent.get: true
+  library.children.get: true
 
-  timelines.reference.put : true
-  timelines.reference.post : true
-  timelines.urn.get : true
-  timelines.get : true
+  timelines.reference.put: true
+  timelines.reference.post: true
+  timelines.urn.get: true
+  timelines.get: true
 
   transaction.handler.post: true
 
-  extension.example.putTwoStrings : true
-  extension.example.findByFirstString : true
-  extension.example.findByBothStrings : true
-  extension.example.updateAll : true
+  extension.example.putTwoStrings: true
+  extension.example.findByFirstString: true
+  extension.example.findByBothStrings: true
+  extension.example.updateAll: true
 
-  extension.moreInterestingExample.moreInterestingPutTwoStrings : true
-  extension.moreInterestingExample.moreInterestingFindByFirstString : true
-  extension.moreInterestingExample.moreInterestingFindByBothStrings : true
-  extension.moreInterestingExample.moreInterestingUpdateAll : true
+  extension.moreInterestingExample.moreInterestingPutTwoStrings: true
+  extension.moreInterestingExample.moreInterestingFindByFirstString: true
+  extension.moreInterestingExample.moreInterestingFindByBothStrings: true
+  extension.moreInterestingExample.moreInterestingUpdateAll: true
 
 #
 # Transformations provide additional formatting capabilities after an endpoint has completed its processing
@@ -271,9 +271,9 @@ transformations:
   # Master switch for enabling transformations
   # When false: all transformations are DISABLED
   # When true: only those named transformations set to true are enabled
-  enabled : true
+  enabled: true
   prettyPrintJSON: true
-  toSimpleXml : true
+  toSimpleXml: true
 
 #
 # Resource Registrars are responsible for registering related collections of endpoint resources with Jersey.
@@ -286,9 +286,9 @@ resourceRegistrarClasses:
   #
   # EXAMPLE EXTENSION CONFIGURATION
   #
-  publicEndpointsRegistrar : net.smartcosmos.objects.resource.pub.PublicEndpointsResourceRegistrar
-  oauthEndpointsRegistrar : net.smartcosmos.objects.resource.oauth.OAuthEndpointsResourceRegistrar
-  secureEndpointsRegistrar : net.smartcosmos.objects.resource.secure.SecureEndpointsResourceRegistrar
+  publicEndpointsRegistrar: net.smartcosmos.objects.resource.pub.PublicEndpointsResourceRegistrar
+  oauthEndpointsRegistrar: net.smartcosmos.objects.resource.oauth.OAuthEndpointsResourceRegistrar
+  secureEndpointsRegistrar: net.smartcosmos.objects.resource.secure.SecureEndpointsResourceRegistrar
   exampleExtensionEndpointsRegistrar: ${package}.server.ExampleExtensionEndpointsResourceRegistrar
 
 #
@@ -298,20 +298,20 @@ resourceRegistrarClasses:
 serverExtensions:
   #
   # Embedded LDAP server bundle
-  EmbeddedApacheDS : net.smartcosmos.bundle.apacheds.ApacheDSBundle
+  EmbeddedApacheDS: net.smartcosmos.bundle.apacheds.ApacheDSBundle
 
   #
   # Example extension
-  ExampleExtension : ${package}.server.ExampleExtension
+  ExampleExtension: ${package}.server.ExampleExtension
 
 serverExtensionConfigurationPaths:
   #
   # Embedded LDAP server bundle
-  EmbeddedApacheDS : src/main/resources/apacheds.yml
+  EmbeddedApacheDS: src/main/resources/apacheds.yml
 
   #
   # Example extension configuration
-  ExampleExtension : src/main/resources/exampleExtension.yml
+  ExampleExtension: src/main/resources/exampleExtension.yml
 
 #
 # Service Classes are core infrastructure plugins to abstract away the underlying IaaS. For example, if one wants
@@ -391,7 +391,7 @@ serviceClasses:
   # Fully qualified classname of the event broadcast notification service being used to provide easy
   # back office integration capabilities by sending all persisted events to a registered endpoint(s)
   #
-  eventBroadcastNotificationService : net.smartcosmos.platform.service.notification.ObjectsEventBroadcastNotificationService
+  eventBroadcastNotificationService: net.smartcosmos.platform.service.notification.ObjectsEventBroadcastNotificationService
 
   #
   # DO NOT CHANGE UNLESS DIRECTED BY A SMARTRAC SUPPORT ENGINEER
@@ -399,16 +399,16 @@ serviceClasses:
   # Fully qualified classname of the event service being used to handle all insert, update, and read
   # audits by sending all events to persistentstorage.
   #
-  eventService : net.smartcosmos.platform.service.event.PersistedEventService
+  eventService: net.smartcosmos.platform.service.event.PersistedEventService
 
 #
 # Collection of entity-type specific visitors that serve as post-update, post-commit triggers.
 #
 visitors:
   #sample: net.smartcosmos.platform.service.visitor.SampleVisitorService
-  happyBirthdayFredObjectVisitor : ${package}.visitor.HappyBirthdayFredObjectVisitorService
-  happyBirthdayWaldoObjectVisitor : ${package}.visitor.HappyBirthdayWaldoObjectVisitorService
-  happyNewYearMetadataVisitor : ${package}.visitor.HappyNewYearMetadataVisitorService
+  happyBirthdayFredObjectVisitor: ${package}.visitor.HappyBirthdayFredObjectVisitorService
+  happyBirthdayWaldoObjectVisitor: ${package}.visitor.HappyBirthdayWaldoObjectVisitorService
+  happyNewYearMetadataVisitor: ${package}.visitor.HappyNewYearMetadataVisitorService
 
 #
 # Certain services require service-specific configurations. The SMART COSMOS platform framework provides this
@@ -436,13 +436,13 @@ serviceParameters:
   # NOTE: The Objects server can be turned into a queue client via Quartz, but this is not recommended
   # for production environments.
   #
-  queueServiceQueueName : batchProcessingQueue
+  queueServiceQueueName: batchProcessingQueue
 
   #
   # Well defined region value that be meaningful to the queueService class. In the case of the AwsQueueService, this
   # value must be one of the well-documented enum values found in the AWS class com.amazonaws.regions.Regions.
   #
-  queueServiceRegion : us-east-1
+  queueServiceRegion: us-east-1
 
   #
   # Path to the Freemarker *.ftl templates used for email generation. These templates are intended to be modified
@@ -478,7 +478,7 @@ oauth2:
   # This behavior ensures that the user-authorized access to these OAuth 2 managed external (non-SMART COSMOS) services
   # continues without interruption.
   oauthTokenManagers:
-    Box.com : net.smartcosmos.objects.job.tokenmanager.BoxOAuthTokenManager
+    Box.com: net.smartcosmos.objects.job.tokenmanager.BoxOAuthTokenManager
 
 #
 # Batch Upload is a custom Dropwizard bundle that enables the Objects server to act as a batch file upload repository.
@@ -493,7 +493,7 @@ batch:
   # anonymous batch processing requests where a the requestor must present a valid, registered
   # routingUrn in order to successfully be issued a file transmission response with upload instructions.
   #
-  enabled : true
+  enabled: true
 
   #
   # Determines if an authenticated user is required in order to submit a batch file for processing. This is
@@ -501,7 +501,7 @@ batch:
   # are statistically insignificant. However, open end-points are open end-points, and the admin may choose to require
   # actual user accounts on the Objects server in order to submit a file as a batch process.
   #
-  authenticationRequired : false
+  authenticationRequired: false
 
   #
   # Which upload protocol should be used when generating a pre-signed URL for upload
@@ -509,25 +509,25 @@ batch:
   #
   # It is STRONGLY recommended that you stick with HTTPS, but HTTP may be helpful for debugging
   #
-  uploadProtocol : HTTPS
+  uploadProtocol: HTTPS
 
   #
   # Dedicated bucket named or path (depending on the upload service) that defines where the uploaded
   # batch file should be stored for future processing
   #
-  uploadBucketName : batch-upload-test
+  uploadBucketName: batch-upload-test
 
   #
   # Define the maximum validity period of the signed batch upload URL. Any attempt to upload the batch
   # file after the expiration date must result in a failure.
   #
-  signedUrlLife :  30 minutes
+  signedUrlLife:  30 minutes
 
   #
   # The actual batch upload service that generates the pre-signed URL request is a pluging. The default
   # upload service relies on AWS S3 and its pre-signed URL capabilities.
   #
-  uploadService : net.smartcosmos.objects.service.S3UploadService
+  uploadService: net.smartcosmos.objects.service.S3UploadService
 
 #
 # SMART COSMOS provides tightly integrated support for the Quartz cron scheduling framework by implementing it as a
@@ -537,10 +537,10 @@ quartz:
 
   #
   # Enables or disables the ability of a server to schedule tasks
-  enabled : true
+  enabled: true
 
   # Setting to false to disable automatic registration of all Quartz jobs listed below
-  autoScheduleJobs : true
+  autoScheduleJobs: true
 
   # Quartz Job Scheduler Logical Instance Name
   instanceName: ObjectsQuartzScheduler
@@ -555,16 +555,16 @@ quartz:
 
     # Quartz properties specific to your JDBC Data Source:
     #properties:
-     #org.quartz.dataSource.MyQuartzDataSource.driver : com.mysql.jdbc.Driver
-     #org.quartz.dataSource.MyQuartzDataSource.URL : jdbc:mysql://localhost/quartz?autoReconnect=true
-     #org.quartz.dataSource.MyQuartzDataSource.user : quartzuser
-     #org.quartz.dataSource.MyQuartzDataSource.password : secret
+     #org.quartz.dataSource.MyQuartzDataSource.driver: com.mysql.jdbc.Driver
+     #org.quartz.dataSource.MyQuartzDataSource.URL: jdbc:mysql://localhost/quartz?autoReconnect=true
+     #org.quartz.dataSource.MyQuartzDataSource.user: quartzuser
+     #org.quartz.dataSource.MyQuartzDataSource.password: secret
 
   #
   # Set of Quartz job definitions
   #
   jobDefinitions:
-    oauthJob : net.smartcosmos.objects.job.OAuthTokenManagerJobDefinition
+    oauthJob: net.smartcosmos.objects.job.OAuthTokenManagerJobDefinition
 
 
 #
@@ -598,9 +598,9 @@ dataSourceFactory:
 
   # any properties specific to your JDBC driver:
   properties:
-     hibernate.dialect : org.hibernate.dialect.MySQL5InnoDBDialect
-     hibernate.hbm2ddl.auto : update
-     hiberante.show_sql : false
+     hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+     hibernate.hbm2ddl.auto: update
+     hiberante.show_sql: false
 
   # the maximum amount of time to wait on an empty pool before throwing an exception
   maxWaitForConnection: 1s
@@ -769,13 +769,13 @@ logging:
     "org.hibernate.cache": INFO
 
     # Log transaction related activity
-    "org.hibernate.transaction" : INFO
+    "org.hibernate.transaction": INFO
 
     # Amazon Web Services Client can be noisy
-    "com.amazonaws.http.AmazonHttpClient" : WARN
+    "com.amazonaws.http.AmazonHttpClient": WARN
 
     # Lower this to an INFO setting to see JDBC connection and statement statistics in the log
-    "org.hibernate.engine.internal.StatisticalLoggingSessionEventListener" : WARN
+    "org.hibernate.engine.internal.StatisticalLoggingSessionEventListener": WARN
 
     #org.hibernate.jdbc	Log all JDBC resource acquisition
     #org.hibernate.hql.ast.AST	 Log HQL and SQL ASTs during query parsing
