@@ -41,7 +41,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({ ANNOTATION_TYPE, FIELD, PARAMETER, ElementType.TYPE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = { ObjectsDataValidator.class})
-public @interface ObjectsData
+public @interface ObjectsMetadata
 {
     String message() default "{net.smartcosmos.objects.constraints.Date.message}";
 

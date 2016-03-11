@@ -34,7 +34,7 @@ import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.model.context.MetadataDataType;
-import net.smartcosmos.objects.constraints.ObjectsData;
+import net.smartcosmos.objects.constraints.ObjectsMetadata;
 import net.smartcosmos.pojo.base.ReferentialObject;
 import net.smartcosmos.util.json.JsonGenerationView;
 import net.smartcosmos.util.mapper.BooleanMapper;
@@ -44,7 +44,7 @@ import net.smartcosmos.util.mapper.IntegerMapper;
 import net.smartcosmos.util.mapper.LongMapper;
 import net.smartcosmos.util.mapper.StringMapper;
 
-@ObjectsData
+@ObjectsMetadata
 public class Metadata extends ReferentialObject<IMetadata> implements IMetadata
 {
     public static class MetadataObjectBuilder

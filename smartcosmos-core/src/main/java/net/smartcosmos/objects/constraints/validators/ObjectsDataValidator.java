@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.smartcosmos.model.context.IMetadata;
-import net.smartcosmos.objects.constraints.ObjectsData;
+import net.smartcosmos.objects.constraints.ObjectsMetadata;
 
 /**
  * Checks that a given character sequence is a valid objects data format.
@@ -37,12 +37,12 @@ import net.smartcosmos.objects.constraints.ObjectsData;
  * Currently only the Date validation is supported.
  * </p>
  */
-public class ObjectsDataValidator implements ConstraintValidator<ObjectsData, IMetadata>
+public class ObjectsDataValidator implements ConstraintValidator<ObjectsMetadata, IMetadata>
 {
     private static Logger logger = LoggerFactory.getLogger(ObjectsDataValidator.class);
 
     @Override
-    public void initialize(ObjectsData constraintAnnotation)
+    public void initialize(ObjectsMetadata constraintAnnotation)
     {
     }
 
