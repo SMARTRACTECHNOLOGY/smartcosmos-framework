@@ -32,7 +32,7 @@ import net.smartcosmos.model.context.IMetadata;
 import net.smartcosmos.objects.constraints.ObjectsData;
 
 /**
- * Checks that a given charater sequence is a valid objects data format.
+ * Checks that a given character sequence is a valid objects data format.
  * <p>
  * Currently only the Date validation is supported.
  * </p>
