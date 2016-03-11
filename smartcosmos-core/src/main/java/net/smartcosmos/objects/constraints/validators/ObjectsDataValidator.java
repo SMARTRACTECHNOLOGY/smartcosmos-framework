@@ -37,9 +37,9 @@ import net.smartcosmos.objects.constraints.ObjectsMetadata;
  * Currently only the Date validation is supported.
  * </p>
  */
-public class ObjectsDataValidator implements ConstraintValidator<ObjectsMetadata, IMetadata>
+public class ObjectsMetadataValidator implements ConstraintValidator<ObjectsMetadata, IMetadata>
 {
-    private static Logger logger = LoggerFactory.getLogger(ObjectsDataValidator.class);
+    private static Logger logger = LoggerFactory.getLogger(ObjectsMetadataValidator.class);
 
     @Override
     public void initialize(ObjectsMetadata constraintAnnotation)
