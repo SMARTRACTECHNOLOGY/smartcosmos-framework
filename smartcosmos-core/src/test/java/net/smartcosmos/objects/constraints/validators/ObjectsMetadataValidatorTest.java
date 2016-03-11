@@ -33,14 +33,14 @@ import static org.junit.Assert.*;
 /**
  * Test the ObjectsDataValidator.
  */
-public class ObjectsDataValidatorTest
+public class ObjectsMetadataValidatorTest
 {
-    private ObjectsDataValidator validator;
+    private ObjectsMetadataValidator validator;
 
     @Before
     public void setUp() throws Exception
     {
-        validator = new ObjectsDataValidator();
+        validator = new ObjectsMetadataValidator();
     }
 
     @Test
@@ -78,7 +78,7 @@ public class ObjectsDataValidatorTest
         metadata.setDataType(MetadataDataType.DateType);
         metadata.setRawValue("2016-03-09x13:12:00+01:00");
         assertFalse("Metadata should be invalid! data type: '" + metadata.getDataType().toString() + "', raw value: '" +
-                   metadata.getRawValue() + "'.",
-                   validator.isValid(metadata, null));
+                    metadata.getRawValue() + "'.",
+                    validator.isValid(metadata, null));
     }
 }

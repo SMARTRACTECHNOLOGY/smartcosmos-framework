@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import net.smartcosmos.objects.constraints.validators.ObjectsDataValidator;
+import net.smartcosmos.objects.constraints.validators.ObjectsMetadataValidator;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.FIELD;
@@ -40,7 +40,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Target({ ANNOTATION_TYPE, FIELD, PARAMETER, ElementType.TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = { ObjectsDataValidator.class})
+@Constraint(validatedBy = { ObjectsMetadataValidator.class})
 public @interface ObjectsMetadata
 {
     String message() default "{net.smartcosmos.objects.constraints.Date.message}";
