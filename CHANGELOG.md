@@ -9,6 +9,7 @@
 ### Bugfixes / Improvements
 
 * OBJECTS-620 Refer to Images Locally instead of remotely in documentation
+* Add separate SDKs for different AWS services to `smartcosmos-dependencies` (SCE-19)
 * Fix smartcosmos dependency scope in `smartcosmos-extension-archetype`
 
 ## Release 2.13.1 (March 8, 2016)
