@@ -87,9 +87,6 @@ public class EndpointsFactory
     @JsonProperty
     private Boolean realmEndpoints = true;
 
-    @JsonProperty
-    private Boolean tigEndpoints = true;
-
     public Boolean getTransactionEndpoints()
     {
         return transactionEndpoints;
@@ -195,8 +192,4 @@ public class EndpointsFactory
         return realmEndpoints;
     }
 
-    public boolean getTigEndpoints()
-    {
-        return tigEndpoints;
-    }
 }
