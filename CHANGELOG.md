@@ -9,6 +9,7 @@
 ### Bugfixes / Improvements
 
 * OBJECTS-620 Refer to Images Locally instead of remotely in documentation
+* Add separate SDKs for different AWS services to `smartcosmos-dependencies` (SCE-19)
 * Fix smartcosmos dependency scope in `smartcosmos-extension-archetype`
 * OBJECTS-377: Add data validation annotation for Metadata
 
