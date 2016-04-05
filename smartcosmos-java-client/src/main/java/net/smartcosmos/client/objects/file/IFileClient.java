@@ -20,6 +20,13 @@ package net.smartcosmos.client.objects.file;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+
+import org.restlet.data.MediaType;
+
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.ICreateableBaseClient;
 import net.smartcosmos.client.impl.IDeleteableBaseClient;
@@ -27,12 +34,6 @@ import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.objects.model.context.IFile;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.util.json.ViewType;
-import org.restlet.data.MediaType;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
 
 /**
  * Defines, deletes, or queries for {@link net.smartcosmos.objects.model.context.IFile} instances and the actual
@@ -48,7 +49,7 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      * @param entityReferenceType Entity reference type
      * @param referenceUrn        System-assigned reference URN
      * @return Non-null (but possibly empty) collection of files owned by the referential entity
-     * @throws ServiceException
+     * @throws ServiceException to indicate the file has no content or the URN specified cannot be located
      */
     Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType, String referenceUrn) throws ServiceException;
 
@@ -60,7 +61,7 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      * @param referenceUrn        System-assigned reference URN
      * @param viewType            Field verbosity
      * @return Non-null (but possibly empty) collection of files owned by the referential entity
-     * @throws ServiceException
+     * @throws ServiceException to indicate the file has no content or the URN specified cannot be located
      */
     Collection<IFile> listOwnedBy(EntityReferenceType entityReferenceType,
                                   String referenceUrn,
@@ -75,7 +76,7 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      * @param file      File to upload
      * @param mediaType Media type of the file being uploaded (must not be null)
      * @return Response entity indicating the success or failure of the operation
-     * @throws ServiceException
+     * @throws ServiceException to indicate the file has no content or the URN specified cannot be located
      */
     ResponseEntity uploadOctetStream(String urn, File file, MediaType mediaType) throws ServiceException;
 
@@ -88,7 +89,7 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      * @param inputStream Input stream to upload
      * @param mediaType   Media type of the file being uploaded (must not be null)
      * @return Response entity indicating the success or failure of the operation
-     * @throws ServiceException
+     * @throws ServiceException to indicate the file has no content or the URN specified cannot be located
      */
     ResponseEntity uploadOctetStream(String urn, InputStream inputStream, MediaType mediaType) throws ServiceException;
 
@@ -102,7 +103,7 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      * @param file      File to upload
      * @param mediaType Media type of the file being uploaded (must not be null)
      * @return Response entity indicating the success or failure of the operation
-     * @throws ServiceException
+     * @throws ServiceException to indicate the file has no content or the URN specified cannot be located 
      */
     ResponseEntity uploadAsMultiPartFormData(String urn, java.io.File file, MediaType mediaType)
             throws ServiceException;
@@ -114,8 +115,7 @@ public interface IFileClient extends ICreateableBaseClient<IFile>, IDeleteableBa
      *            content is associated with
      * @return Non-null input stream
      * @throws IOException
-     * @throws net.smartcosmos.client.connectivity.ServiceException to indicate if the file has no content or the URN
-     *                                                              specified cannot be located
+     * @throws ServiceException to indicate the file has no content or the URN specified cannot be located
      */
     InputStream getFileContents(String urn) throws ServiceException, IOException;
 }
