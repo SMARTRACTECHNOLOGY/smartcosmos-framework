@@ -20,12 +20,13 @@ package net.smartcosmos.client.impl;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.client.connectivity.ServiceException;
-import net.smartcosmos.pojo.base.ResponseEntity;
+import java.util.Collection;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Collection;
+import net.smartcosmos.client.connectivity.ServiceException;
+import net.smartcosmos.pojo.base.ResponseEntity;
 
 /**
  * Type-safe upsert routines for SMART COSMOS entities either by upserting an explicit strongly typed instance or
@@ -75,8 +76,8 @@ public interface IUpsertableBaseClient<T> extends IFindableBaseClient<T>
     ResponseEntity upsert(JSONObject instance) throws ServiceException;
 
     /**
-     * 
-     * @param jsonArray
+     *
+     * @param jsonArray JSON array to save
      * @return collection of responses
      * @throws ServiceException
      *             on error
