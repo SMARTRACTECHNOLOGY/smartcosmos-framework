@@ -423,20 +423,4 @@ public class SmartCosmosConfiguration extends Configuration
     {
         return supportUsers;
     }
-
-    @JsonProperty
-    private String extensionLibPath  = "lib";
-
-    public String getExtensionLibPath()
-    {
-        return extensionLibPath;
-    }
-
-    @JsonProperty
-    private String extensionConfigPath = "conf";
-
-    public String getExtensionConfigPath()
-    {
-        return extensionConfigPath;
-    }
 }
