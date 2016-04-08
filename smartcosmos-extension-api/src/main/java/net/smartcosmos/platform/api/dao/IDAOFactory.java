@@ -30,8 +30,6 @@ public interface IDAOFactory extends IExtendable<IAdvancedDAO<? extends IDomainR
 
     INamedObjectSearchDAO<? extends IDomainResource<?>> getNamedObjectSearchDAO(EntityReferenceType entityReferenceType);
 
-    IDeviceDAO getDeviceDAO();
-
     IGeospatialDAO getGeospatialDAO();
 
     IObjectDAO getObjectDAO();
@@ -43,10 +41,6 @@ public interface IDAOFactory extends IExtendable<IAdvancedDAO<? extends IDomainR
     IFileDAO getFileDAO();
 
     IMetadataDAO getMetadataDAO();
-
-    ITagDAO getTagDAO();
-
-    ITagAssignmentDAO getTagAssignmentDAO();
 
     IObjectAddressDAO getObjectAddressDAO();
 

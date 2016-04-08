@@ -24,7 +24,8 @@ import net.smartcosmos.objects.resource.secure.libraries.EmptyLibraryHierarchy;
 import net.smartcosmos.objects.resource.secure.libraries.ILibraryHierarchy;
 import net.smartcosmos.objects.resource.secure.libraries.LibraryHierarchy;
 
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by tcross on 05.02.2015.
@@ -48,10 +49,6 @@ public final class LibraryHierarchyFactory
 
     private static ILibraryHierarchy emptyLibraryHierarchy = EmptyLibraryHierarchy.getInstance();
 
-    private static int hierarchyListLength = 0;
-
-    private static int linkFlagsListLength = 0;
-
     /**
      * @return a singleton EmptyLibraryHierarchy instance if there is no library hierarchy specified in the
      * configuration, or if there is and it's not fully initialized. If there is a fully initialized
@@ -67,57 +64,45 @@ public final class LibraryHierarchyFactory
     }
 
     /**
-     * @param libraryHierarchyList: a List<String> names of LibraryElementTypes from objects.yml, from lowest to highest
+     * @param libraryHierarchyMap: a LinkedHashMap<String, Boolean> of names of LibraryElementTypes from objects.yml, from lowest to highest,
+     *                           paired with flags indicating whether LibraryElements of this type can have Relationships with entities
+     *                           other than LibraryLinks to other LibraryElements from the LibraryElementType hierarchy
      *                              <p>
      *                              See "LIBRARY HIERARCHY" section of objects.yml for an example
+     *                              This map must be a linked hash map to preserve ordering specified in configuration.
      */
-    public static void setLibraryHierarchyList(List<String> libraryHierarchyList)
+    public static void setLibraryHierarchy(LinkedHashMap<String, Boolean> libraryHierarchyMap)
     {
-        if (!libraryHierarchyInitialized && libraryHierarchyList != null)
+        if (!libraryHierarchyInitialized && libraryHierarchyMap != null)
         {
-            ((LibraryHierarchy) libraryHierarchy).setLibraryHierarchyList(libraryHierarchyList);
-            hierarchyListLength = libraryHierarchyList.size();
-            checkCompleteness();
+            ((LibraryHierarchy) libraryHierarchy).setLibraryHierarchyMap(libraryHierarchyMap);
+            checkCompleteness(libraryHierarchyMap);
+            libraryHierarchyInitialized = true;
         }
 
     }
 
     /**
-     * @param libraryLinkFlags a List\<Boolean\> of Booleans from objects.yml
-     *                         <p>
-     *                         Each flag indicates whether elements of LibraryElementType with the same index from
-     *                         the LibraryHierarchyList can have Objects directly attached directly to them. In the
-     *                         default/example version objects can only be attached to library elements of
-     *                         libraryElementType PageEntry, i.e., the lowest level of the hierarchy.
+     * In the libraryHierarchyMap, every key must be non-empty, and every value must be a Boolean.
      */
-    public static void setLibraryLinkFlagsList(List<Boolean> libraryLinkFlags)
+    private static void checkCompleteness(Map<String, Boolean> libraryHierarchyMap)
     {
-        if (!libraryHierarchyInitialized && libraryLinkFlags != null)
+        int hierarchyMapLength = libraryHierarchyMap.size();
+        // does nothing if the map has not yet been initialized
+        if (hierarchyMapLength > 0)
         {
-            ((LibraryHierarchy) libraryHierarchy).setLibraryLinkFlagsList(libraryLinkFlags);
-            linkFlagsListLength = libraryLinkFlags.size();
-            checkCompleteness();
-        }
-
-    }
-
-    /**
-     * if the hierachyList and the linkFlagsList have the same non-zero length, this sets the flag to return
-     * the non-empty LibraryHierarchy. As long as this flag is unset, this factory returns only the empty hierarchy.
-     */
-    private static void checkCompleteness()
-    {
-        // does nothing if one or the other arrays has not yet been initialized
-        if (hierarchyListLength > 0 && linkFlagsListLength > 0)
-        {
-            // if they're both initialized, and both the same size, we're cool
-            if (hierarchyListLength == linkFlagsListLength)
+            // every element must have a legitimate boolean value
+            for (Map.Entry<String, Boolean> entry:libraryHierarchyMap.entrySet())
             {
-                libraryHierarchyInitialized = true;
-            } else
-            {
-                throw new IllegalStateException("SMART COSMOS length mismatch between LibraryHierarchy and " +
-                        "LibraryLinkFlags - please correct your objects.yml configuration");
+                if (entry.getKey() == null || entry.getKey().isEmpty())
+                {
+                    throw new IllegalStateException("SMART COSMOS empty value in LibraryHierarchy. Please correct your objects.yml configuration");
+                }
+                if (entry.getValue() == null)
+                {
+                    throw new IllegalStateException("SMART COSMOS empty boolean in LibraryHierarchy element " + entry.getKey() +
+                        ". Please correct your objects.yml configuration");
+                }
             }
         }
 

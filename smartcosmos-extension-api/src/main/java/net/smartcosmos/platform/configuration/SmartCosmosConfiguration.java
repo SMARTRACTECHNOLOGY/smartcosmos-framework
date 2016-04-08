@@ -20,21 +20,24 @@ package net.smartcosmos.platform.configuration;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
 import io.dropwizard.Configuration;
 import io.dropwizard.client.HttpClientConfiguration;
 import io.dropwizard.db.DataSourceFactory;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import net.smartcosmos.platform.bundle.batch.BatchFactory;
 import net.smartcosmos.platform.bundle.quartz.QuartzFactory;
 import net.smartcosmos.platform.bundle.transformation.TransformationsFactory;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class SmartCosmosConfiguration extends Configuration
 {
@@ -146,10 +149,7 @@ public class SmartCosmosConfiguration extends Configuration
     private Map<String, String> transactionHandlerClasses = Maps.newLinkedHashMap();
 
     @JsonProperty
-    private ArrayList<String> libraryHierarchy;
-
-    @JsonProperty
-    private ArrayList<Boolean> libraryLinkFlags;
+    private List<Map<String, Boolean>> libraryHierarchy = new ArrayList<>();
 
     //
     //
@@ -299,14 +299,20 @@ public class SmartCosmosConfiguration extends Configuration
         this.includeEmailVerificationTokenInRegistrationJSON = flag;
     }
 
-    public void setLibraryHierarchy(final List<String> libraryHierarchy)
+    public void setLibraryHierarchy(final List<Map<String, Boolean>> libraryHierarchy)
     {
-        LibraryHierarchyFactory.setLibraryHierarchyList(libraryHierarchy);
-    }
-
-    public void setLibraryLinkFlags(final List<Boolean> libraryLinkFlags)
-    {
-        LibraryHierarchyFactory.setLibraryLinkFlagsList(libraryLinkFlags);
+        this.libraryHierarchy = libraryHierarchy;
+        // spectacularly ugly, but the only way to read in ordered maps from YML -
+        // they come in as an ordered array of single-entry maps.
+        LinkedHashMap<String, Boolean> flattenedMap = new LinkedHashMap<>();
+        for (Map<String, Boolean> arrayEntry: libraryHierarchy)
+        {
+            for (Map.Entry<String, Boolean> entry : arrayEntry.entrySet())
+            {
+                flattenedMap.put(entry.getKey(), entry.getValue());
+            }
+        }
+        LibraryHierarchyFactory.setLibraryHierarchy(flattenedMap);
     }
 
     @JsonProperty("license")
@@ -416,5 +422,44 @@ public class SmartCosmosConfiguration extends Configuration
     public boolean supportUsers()
     {
         return supportUsers;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "SmartCosmosConfiguration{" +
+               "serverRoot='" + serverRoot + '\'' +
+               ", urlPattern='" + urlPattern + '\'' +
+               ", adminEmailAddress='" + adminEmailAddress + '\'' +
+               ", appInstanceName='" + appInstanceName + '\'' +
+               ", appName='" + appName + '\'' +
+               ", oAuth2Factory=" + oAuth2Factory +
+               ", serviceClasses=" + serviceClasses +
+               ", endpointMethodControl=" + endpointMethodControl +
+               ", visitors=" + visitors +
+               ", resourceRegistrarClasses=" + resourceRegistrarClasses +
+               ", serviceParameters=" + serviceParameters +
+               ", dataSourceFactory=" + dataSourceFactory +
+               ", migrateSchemaOnStartup=" + migrateSchemaOnStartup +
+               ", batchFactory=" + batchFactory +
+               ", quartzFactory=" + quartzFactory +
+               ", transformationsFactory=" + transformationsFactory +
+               ", httpClient=" + httpClient +
+               ", endpointsFactory=" + endpointsFactory +
+               ", licenseFactory=" + licenseFactory +
+               ", serverExtensions=" + serverExtensions +
+               ", serverExtensionConfigurationPaths=" + serverExtensionConfigurationPaths +
+               ", supportRealmCheck=" + supportRealmCheck +
+               ", supportDynamicRegistration=" + supportDynamicRegistration +
+               ", supportStatusCheck=" + supportStatusCheck +
+               ", supportNotifications=" + supportNotifications +
+               ", supportExtensions=" + supportExtensions +
+               ", supportMultimediaFiles=" + supportMultimediaFiles +
+               ", supportInteractionSessions=" + supportInteractionSessions +
+               ", supportUsers=" + supportUsers +
+               ", includeEmailVerificationTokenInRegistrationJSON=" + includeEmailVerificationTokenInRegistrationJSON +
+               ", transactionHandlerClasses=" + transactionHandlerClasses +
+               ", libraryHierarchy=" + libraryHierarchy +
+               "} " + super.toString();
     }
 }

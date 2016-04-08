@@ -66,5 +66,6 @@ public final class InteractionBuilder extends AbstractReferentialBuilder<IObject
     protected void onValidate()
     {
         Preconditions.checkNotNull(instance.getType(), "type must not be null");
+        Preconditions.checkState(instance.getRecordedTimestamp() > 0, "recordedTimestamp must be set");
     }
 }

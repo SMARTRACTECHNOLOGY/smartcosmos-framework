@@ -20,32 +20,32 @@ package net.smartcosmos.objects.pojo.context;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Preconditions;
+import net.smartcosmos.Field;
 import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.objects.model.context.IObjectInteraction;
 import net.smartcosmos.objects.model.context.IObjectInteractionSession;
 import net.smartcosmos.pojo.base.ReferentialObject;
-import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@JsonIgnoreProperties({Field.OBJECT_URN_FIELD, Field.OBJECT_INTERACTION_SESSION_URN_FIELD})
 public class ObjectInteraction extends ReferentialObject<IObjectInteraction> implements IObjectInteraction
 {
-    @JsonView(JsonGenerationView.Full.class)
-    @JsonDeserialize(as = Account.class)
-    protected IAccount account;
-
     @JsonView(JsonGenerationView.Minimum.class)
     @JsonDeserialize(as = ObjectImpl.class)
     @NotNull
     protected IObject object;
 
     @JsonView(JsonGenerationView.Standard.class)
+    @Min(value = 1)
     protected long recordedTimestamp;
 
     @JsonView(JsonGenerationView.Full.class)
@@ -169,8 +169,7 @@ public class ObjectInteraction extends ReferentialObject<IObjectInteraction> imp
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + account.hashCode();
-        result = 31 * result + object.hashCode();
+        result = 31 * result + (object != null ? object.hashCode() : 0);
         result = 31 * result + (int) (recordedTimestamp ^ (recordedTimestamp >>> 32));
         result = 31 * result + (int) (receivedTimestamp ^ (receivedTimestamp >>> 32));
         result = 31 * result + (hasSessionMembership ? 1 : 0);

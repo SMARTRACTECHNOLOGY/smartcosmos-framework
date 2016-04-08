@@ -1,8 +1,9 @@
 = SMART COSMOS Getting Started Guide
 SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
+ifndef::env-github[:imagepath: ..]
 
 '''
-image::http://developer.smartcosmos.net/smartcosmos-framework/images/banner/miot.png[SMART COSMOS]
+image::images/banner/miot.png[SMART COSMOS]
 
 == Welcome to SMART COSMOS
 Welcome to SMART COSMOS!
@@ -102,7 +103,7 @@ about the SMART COSMOS platform and network with other professionals using
 SMART COSMOS to Monetize the IoT.
 
 == Extension Developer Quick Start
-image::http://developer.smartcosmos.net/smartcosmos-framework/images/quick-start.png[You Tube]
+image::images/quick-start.png[You Tube]
 There is a short 15 minute video, https://youtu.be/xmAQOvjJqmU[Extension Developer Quick Start],
 at the SMART COSMOS DevTube channel. This video will help you quickly setup
 a suitable development environment for creating and selling SMART COSMOS

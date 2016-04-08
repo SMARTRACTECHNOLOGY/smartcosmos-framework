@@ -28,6 +28,8 @@ import net.smartcosmos.model.context.IAccount;
 import net.smartcosmos.pojo.context.Account;
 import net.smartcosmos.util.json.JsonGenerationView;
 
+import javax.validation.constraints.NotNull;
+
 public abstract class ReferentialObject<T> extends DomainResource<T> implements IReferentialObject
 {
     @JsonView(JsonGenerationView.Full.class)
@@ -35,9 +37,11 @@ public abstract class ReferentialObject<T> extends DomainResource<T> implements 
     protected IAccount account;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
     protected EntityReferenceType entityReferenceType;
 
     @JsonView(JsonGenerationView.Minimum.class)
+    @NotNull
     protected String referenceUrn;
 
     @Override
@@ -96,9 +100,9 @@ public abstract class ReferentialObject<T> extends DomainResource<T> implements 
     public int hashCode()
     {
         int result = super.hashCode();
-        result = 31 * result + account.hashCode();
-        result = 31 * result + entityReferenceType.hashCode();
-        result = 31 * result + referenceUrn.hashCode();
+        result = 31 * result + (account != null ? account.hashCode() : 0);
+        result = 31 * result + (entityReferenceType != null ? entityReferenceType.hashCode() : 0);
+        result = 31 * result + (referenceUrn != null ? referenceUrn.hashCode() : 0);
         return result;
     }
 }

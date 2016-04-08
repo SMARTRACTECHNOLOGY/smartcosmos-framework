@@ -90,6 +90,8 @@ public final class Field
 
     public static final String OBJECT_INTERACTION_SESSION_FIELD = "objectInteractionSession";
 
+    public static final String OBJECT_INTERACTION_SESSION_URN_FIELD = "objectInteractionSessionUrn";
+
     public static final String START_TIMESTAMP_FIELD = "startTimestamp";
 
     public static final String STOP_TIMESTAMP_FIELD = "stopTimestamp";

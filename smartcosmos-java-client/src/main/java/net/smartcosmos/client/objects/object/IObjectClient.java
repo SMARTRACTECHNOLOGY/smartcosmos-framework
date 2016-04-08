@@ -41,6 +41,7 @@ public interface IObjectClient extends IUpdateableBaseClient<IObject>
      *
      * @param objectUrn Exact, case-sensitive object URN to locate
      * @return Matching object
+     * @throws ServiceException
      */
     IObject findByExactObjectUrn(String objectUrn) throws ServiceException;
 
@@ -51,6 +52,7 @@ public interface IObjectClient extends IUpdateableBaseClient<IObject>
      * @param objectUrn Exact, case-sensitive object URN to locate
      * @param viewType  Field verbosity
      * @return Matching object
+     * @throws ServiceException
      */
     IObject findByExactObjectUrn(String objectUrn, ViewType viewType) throws ServiceException;
 
@@ -59,6 +61,7 @@ public interface IObjectClient extends IUpdateableBaseClient<IObject>
      *
      * @param builder Builder that defines the query to perform
      * @return Non-null collection of matching entities; collection may have a size of 0 to indicate no matches found
+     * @throws ServiceException
      */
     Collection<IObject> query(ObjectEndpoints.Builder builder) throws ServiceException;
 }

@@ -34,7 +34,6 @@ public interface IVisitable<T>
      *
      * @return Event type
      * @see VisitableEvent
-     * @see VisitableDevice
      * @see VisitableFile
      * @see VisitableGeospatialEntry
      * @see VisitableMetadata

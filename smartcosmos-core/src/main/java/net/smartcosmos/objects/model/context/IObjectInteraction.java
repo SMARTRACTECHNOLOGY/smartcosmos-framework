@@ -35,8 +35,8 @@ import net.smartcosmos.model.base.ITypedObject;
  * <b>Drives</b> to successfully capture the simple interaction that "Jason drives the Jeep."
  * <p>
  * Additional metadata, including {@link IFile},
- * {@link net.smartcosmos.model.geo.IGeospatialEntry}, {@link net.smartcosmos.model.context.IMetadata},
- * and {@link ITagAssignment} are typically used to capture
+ * {@link net.smartcosmos.model.geo.IGeospatialEntry} and {@link net.smartcosmos.model.context.IMetadata},
+ * are typically used to capture
  * additional context about the interaction. Returning to the driving example, the
  * files might captures photos taken of Jason behind the driver's wheel, a geospatial record
  * to capture the route that Jason drove, metadata to capture the mileage of the vehicle at

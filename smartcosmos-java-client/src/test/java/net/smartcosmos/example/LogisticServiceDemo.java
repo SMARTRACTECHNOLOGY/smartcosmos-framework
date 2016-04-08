@@ -41,8 +41,6 @@ import net.smartcosmos.client.common.registration.RegistrationFactory;
 import net.smartcosmos.client.common.registration.RegistrationResponse;
 import net.smartcosmos.client.objects.relationship.IRelationshipClient;
 import net.smartcosmos.client.objects.relationship.RelationshipFactory;
-import net.smartcosmos.client.objects.tag.ITagClient;
-import net.smartcosmos.client.objects.tag.TagFactory;
 import net.smartcosmos.builder.MetadataBuilder;
 import net.smartcosmos.model.base.EntityReferenceType;
 import net.smartcosmos.model.context.IMetadata;
@@ -53,14 +51,12 @@ import net.smartcosmos.objects.builder.InteractionBuilder;
 import net.smartcosmos.objects.builder.ObjectAddressBuilder;
 import net.smartcosmos.objects.builder.ObjectBuilder;
 import net.smartcosmos.objects.builder.RelationshipBuilder;
-import net.smartcosmos.objects.builder.TagCollectionBuilder;
 import net.smartcosmos.objects.model.context.IFile;
 import net.smartcosmos.objects.model.context.ILibraryElement;
 import net.smartcosmos.objects.model.context.IObject;
 import net.smartcosmos.objects.model.context.IObjectAddress;
 import net.smartcosmos.objects.model.context.IObjectInteraction;
 import net.smartcosmos.objects.model.context.IRelationship;
-import net.smartcosmos.objects.model.context.ITag;
 import net.smartcosmos.objects.pojo.context.LibraryElement;
 import net.smartcosmos.pojo.base.ResponseEntity;
 import net.smartcosmos.pojo.base.Result;
@@ -86,8 +82,6 @@ public class LogisticServiceDemo
     private static final String DELIVERY_TYPE = "Delivery";
 
     private static final String HOME_ADDRESS_TYPE = "Home Address";
-
-    private static final String HAZMAT_TAG = "#hazmat";
 
     private static final String KEY_DATE_OF_BIRTH = "dob";
 
@@ -118,8 +112,6 @@ public class LogisticServiceDemo
     private IObject operatorObject;
 
     private IObject vehicleObject;
-
-    private String hazmatTagUrn;
 
     private String operatorDoBUrn;
 
@@ -220,7 +212,6 @@ public class LogisticServiceDemo
         System.out.printf("Assigned Operator URN %s\n", operatorUrn);
 
         setHomeAddress(context);
-        setHazMatQualifiedTag(context);
         setDateOfBirth(context);
         setPhoto(context);
     }
@@ -264,22 +255,6 @@ public class LogisticServiceDemo
 
         operatorDoBUrn = extractUrn(client.upsert(metadata));
         System.out.printf("Assigned Operator DoB Metadata URN %s\n", operatorDoBUrn);
-    }
-
-    private void setHazMatQualifiedTag(ServerContext context) throws ServiceException
-    {
-        ITagClient client = TagFactory.createClient(context);
-
-        Collection<ITag> tags = new TagCollectionBuilder()
-                .addTag(HAZMAT_TAG)
-                .build();
-
-        Collection<ResponseEntity> responses = client.assign(EntityReferenceType.Object, operatorUrn, tags);
-        for (ResponseEntity entity : responses)
-        {
-            hazmatTagUrn = extractUrn(entity);
-            System.out.printf("Assigned %s Tag URN %s", HAZMAT_TAG, hazmatTagUrn);
-        }
     }
 
     private void setHomeAddress(ServerContext context) throws ServiceException

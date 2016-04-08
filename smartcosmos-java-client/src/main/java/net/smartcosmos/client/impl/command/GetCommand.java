@@ -33,6 +33,7 @@ import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -88,10 +89,9 @@ public class GetCommand<T> extends AbstractBaseClient implements ICommand<T, T>
                 throw new ServiceException(responseEntity);
             }
 
-        } catch (JSONException | IOException e)
+        } catch (JSONException | IOException | ResourceException e)
         {
-            LOGGER.error("Unexpected Exception", e);
-            throw new ServiceException(e);
+            throwServiceException(service, e);
         }
 
         return instance;

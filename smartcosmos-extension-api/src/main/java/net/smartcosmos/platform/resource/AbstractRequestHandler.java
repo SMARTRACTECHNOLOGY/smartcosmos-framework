@@ -20,9 +20,12 @@ package net.smartcosmos.platform.resource;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import io.dropwizard.views.View;
@@ -200,6 +203,33 @@ public abstract class AbstractRequestHandler<T> implements IRequestHandler<T>
             try
             {
                 entity = jsonToEntity(jsonString, targetClass);
+            } catch (JsonParseException e)
+            {
+                LOG.warn("Unable to parse JSON Input: " + e.getMessage());
+                response = Response.status(Response.Status.BAD_REQUEST)
+                        .type(MediaType.APPLICATION_JSON_TYPE)
+                        .entity(ResponseEntity.toJson(Result.ERR_PARSE_ERROR))
+                        .build();
+            } catch (JsonMappingException e)
+            {
+                LOG.warn(e.getMessage());
+                if (e instanceof InvalidFormatException)
+                {
+                    InvalidFormatException invalidFormatException = (InvalidFormatException) e;
+
+                    if (invalidFormatException.getTargetType().equals(EntityReferenceType.class))
+                    {
+                        response = Response.status(Response.Status.BAD_REQUEST)
+                                .type(MediaType.APPLICATION_JSON_TYPE)
+                                .entity(ResponseEntity.toJson(Result.ERR_UNKNOWN_ENTITY_TYPE, invalidFormatException.getValue()))
+                                .build();
+                    }
+                }
+
+                if (response == null)
+                {
+                    response = VALIDATION_FAILURE;
+                }
             } catch (IOException e)
             {
                 LOG.warn(e.getMessage());
