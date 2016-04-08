@@ -20,22 +20,24 @@ package net.smartcosmos.platform.configuration;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
 import io.dropwizard.Configuration;
 import io.dropwizard.client.HttpClientConfiguration;
 import io.dropwizard.db.DataSourceFactory;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import net.smartcosmos.platform.bundle.batch.BatchFactory;
 import net.smartcosmos.platform.bundle.quartz.QuartzFactory;
 import net.smartcosmos.platform.bundle.transformation.TransformationsFactory;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 public class SmartCosmosConfiguration extends Configuration
 {
@@ -420,5 +422,44 @@ public class SmartCosmosConfiguration extends Configuration
     public boolean supportUsers()
     {
         return supportUsers;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "SmartCosmosConfiguration{" +
+               "serverRoot='" + serverRoot + '\'' +
+               ", urlPattern='" + urlPattern + '\'' +
+               ", adminEmailAddress='" + adminEmailAddress + '\'' +
+               ", appInstanceName='" + appInstanceName + '\'' +
+               ", appName='" + appName + '\'' +
+               ", oAuth2Factory=" + oAuth2Factory +
+               ", serviceClasses=" + serviceClasses +
+               ", endpointMethodControl=" + endpointMethodControl +
+               ", visitors=" + visitors +
+               ", resourceRegistrarClasses=" + resourceRegistrarClasses +
+               ", serviceParameters=" + serviceParameters +
+               ", dataSourceFactory=" + dataSourceFactory +
+               ", migrateSchemaOnStartup=" + migrateSchemaOnStartup +
+               ", batchFactory=" + batchFactory +
+               ", quartzFactory=" + quartzFactory +
+               ", transformationsFactory=" + transformationsFactory +
+               ", httpClient=" + httpClient +
+               ", endpointsFactory=" + endpointsFactory +
+               ", licenseFactory=" + licenseFactory +
+               ", serverExtensions=" + serverExtensions +
+               ", serverExtensionConfigurationPaths=" + serverExtensionConfigurationPaths +
+               ", supportRealmCheck=" + supportRealmCheck +
+               ", supportDynamicRegistration=" + supportDynamicRegistration +
+               ", supportStatusCheck=" + supportStatusCheck +
+               ", supportNotifications=" + supportNotifications +
+               ", supportExtensions=" + supportExtensions +
+               ", supportMultimediaFiles=" + supportMultimediaFiles +
+               ", supportInteractionSessions=" + supportInteractionSessions +
+               ", supportUsers=" + supportUsers +
+               ", includeEmailVerificationTokenInRegistrationJSON=" + includeEmailVerificationTokenInRegistrationJSON +
+               ", transactionHandlerClasses=" + transactionHandlerClasses +
+               ", libraryHierarchy=" + libraryHierarchy +
+               "} " + super.toString();
     }
 }
