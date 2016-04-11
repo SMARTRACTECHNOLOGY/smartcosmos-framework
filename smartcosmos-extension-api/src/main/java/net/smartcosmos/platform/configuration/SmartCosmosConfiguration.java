@@ -423,4 +423,43 @@ public class SmartCosmosConfiguration extends Configuration
     {
         return supportUsers;
     }
+
+    @Override
+    public String toString()
+    {
+        return "SmartCosmosConfiguration{" +
+               "serverRoot='" + serverRoot + '\'' +
+               ", urlPattern='" + urlPattern + '\'' +
+               ", adminEmailAddress='" + adminEmailAddress + '\'' +
+               ", appInstanceName='" + appInstanceName + '\'' +
+               ", appName='" + appName + '\'' +
+               ", oAuth2Factory=" + oAuth2Factory +
+               ", serviceClasses=" + serviceClasses +
+               ", endpointMethodControl=" + endpointMethodControl +
+               ", visitors=" + visitors +
+               ", resourceRegistrarClasses=" + resourceRegistrarClasses +
+               ", serviceParameters=" + serviceParameters +
+               ", dataSourceFactory=" + dataSourceFactory +
+               ", migrateSchemaOnStartup=" + migrateSchemaOnStartup +
+               ", batchFactory=" + batchFactory +
+               ", quartzFactory=" + quartzFactory +
+               ", transformationsFactory=" + transformationsFactory +
+               ", httpClient=" + httpClient +
+               ", endpointsFactory=" + endpointsFactory +
+               ", licenseFactory=" + licenseFactory +
+               ", serverExtensions=" + serverExtensions +
+               ", serverExtensionConfigurationPaths=" + serverExtensionConfigurationPaths +
+               ", supportRealmCheck=" + supportRealmCheck +
+               ", supportDynamicRegistration=" + supportDynamicRegistration +
+               ", supportStatusCheck=" + supportStatusCheck +
+               ", supportNotifications=" + supportNotifications +
+               ", supportExtensions=" + supportExtensions +
+               ", supportMultimediaFiles=" + supportMultimediaFiles +
+               ", supportInteractionSessions=" + supportInteractionSessions +
+               ", supportUsers=" + supportUsers +
+               ", includeEmailVerificationTokenInRegistrationJSON=" + includeEmailVerificationTokenInRegistrationJSON +
+               ", transactionHandlerClasses=" + transactionHandlerClasses +
+               ", libraryHierarchy=" + libraryHierarchy +
+               "} " + super.toString();
+    }
 }
