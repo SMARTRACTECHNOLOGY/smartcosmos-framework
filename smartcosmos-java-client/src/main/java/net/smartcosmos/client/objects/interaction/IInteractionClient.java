@@ -20,12 +20,12 @@ package net.smartcosmos.client.objects.interaction;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import java.util.Collection;
+
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.client.impl.ICreateableBaseClient;
 import net.smartcosmos.objects.model.context.IObjectInteraction;
 import net.smartcosmos.util.json.ViewType;
-
-import java.util.Collection;
 
 /**
  * Defines or queries for {@link net.smartcosmos.objects.model.context.IObjectInteraction} instances.
@@ -39,7 +39,7 @@ public interface IInteractionClient extends ICreateableBaseClient<IObjectInterac
      * <b>NOTE:</b> Use caution on this method as it may return a large amount of data!
      *
      * @return Non-null (but possibly empty) collection of object interaction definitions
-     * @throws ServiceException
+     * @throws ServiceException to indicate the interaction has no content or the URN specified cannot be located
      */
     Collection<IObjectInteraction> listAll() throws ServiceException;
 
@@ -50,7 +50,7 @@ public interface IInteractionClient extends ICreateableBaseClient<IObjectInterac
      *
      * @param viewType Field verbosity
      * @return Non-null (but possibly empty) collection of object interaction definitions
-     * @throws ServiceException
+     * @throws ServiceException to indicate the interaction has no content or the URN specified cannot be located
      */
     Collection<IObjectInteraction> listAll(ViewType viewType) throws ServiceException;
 
@@ -62,7 +62,7 @@ public interface IInteractionClient extends ICreateableBaseClient<IObjectInterac
      *
      * @param objectUrn Object URN
      * @return Non-null (but possibly empty) collection of object interaction definitions
-     * @throws ServiceException
+     * @throws ServiceException to indicate the interaction has no content or the URN specified cannot be located
      */
     Collection<IObjectInteraction> findByObjectUrn(String objectUrn) throws ServiceException;
 
@@ -74,7 +74,7 @@ public interface IInteractionClient extends ICreateableBaseClient<IObjectInterac
      * @param objectUrn Object URN
      * @param viewType      Field verbosity
      * @return Non-null (but possibly empty) collection of object interaction definitions
-     * @throws ServiceException
+     * @throws ServiceException to indicate the interaction has no content or the URN specified cannot be located
      */
     Collection<IObjectInteraction> findByObjectUrn(String objectUrn, ViewType viewType) throws ServiceException;
 }

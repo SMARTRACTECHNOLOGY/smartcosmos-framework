@@ -20,8 +20,9 @@ package net.smartcosmos.client.impl;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import net.smartcosmos.client.connectivity.ServiceException;
 import org.json.JSONObject;
+
+import net.smartcosmos.client.connectivity.ServiceException;
 
 /**
  * Type-safe update routines for SMART COSMOS entities either by providing an explicit strongly typed instance or
@@ -36,7 +37,6 @@ import org.json.JSONObject;
  *
  * @param <T> One of the updateable SMART COSMOS contextual entities.
  * @see net.smartcosmos.model.extension.IExternalExtension
- * @see net.smartcosmos.model.geo.IGeospatialEntry
  * @see net.smartcosmos.objects.model.context.IObject
  * @see net.smartcosmos.objects.model.context.IObjectAddress
  * @see net.smartcosmos.objects.model.context.IObjectInteractionSession

@@ -252,9 +252,9 @@ SMART COSMOS Objects Developer Edition locks the Directory Service Extension to 
 WARNING: This procedure is only necessary for those that want to create a Directory Service Extension!
 
 1. Change the `license.edition` to `DevKit`
-1. Change the `license.editionKey` to the alternative key denoted in the file with the comment `CHANGE TO DEVELOP AN AUTHENTICATION SERVICE` above it.
-1. Change the `license.objectCount` to `500`
-1. Comment out the EmbeddedApacheDS entries to disable the ApacheDS Server Extension:
+2. Change the `license.editionKey` to the alternative key denoted in the file with the comment `CHANGE TO DEVELOP AN AUTHENTICATION SERVICE` above it.
+3. Change the `license.objectCount` to `500`
+4. Comment out the EmbeddedApacheDS entries to disable the ApacheDS Server Extension:
 ```
 serverExtensions:
   #
