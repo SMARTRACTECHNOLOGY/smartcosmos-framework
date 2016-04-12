@@ -1,9 +1,6 @@
 = SMART COSMOS Getting Started Guide
 SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
-ifndef::env-github[:imagepath: ..]
-
-'''
-image::images/banner/miot.png[SMART COSMOS]
+:version: 3.0.0-SNAPSHOT
 
 == Welcome to SMART COSMOS
 Welcome to SMART COSMOS!
@@ -68,14 +65,7 @@ projects, submit pull requests, and access the latest documentation at GitHub:
 https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework
 
 IMPORTANT: The core of the Objects server itself is proprietary and must be
-properly licensed when deployed in a production environment. There are two
-versions of the software available for single-user development environments.
-First, the https://aws.amazon.com/marketplace/search/results/ref=srh_navgno_search_box?page=1&searchTerms=smartrac[AWS Marketplace]
-hosts a fully function *Developer Edition* that cannot be deployed in a
-highly-available/load balanced topology by restricting the way user accounts are
-created. Second, there is a *Developer Kit* version that does not restrict
-user account creation, but does define a maximum number of object records that
-can be manipulated before the endpoint returns a 403.
+properly licensed when deployed in a production environment.
 
 In addition to the open source development framework, the entirety of the
 SMART COSMOS REST Web Service APIs are fully documented at our API web site,
@@ -102,165 +92,33 @@ the site and register as a developer to gain access to more technical data
 about the SMART COSMOS platform and network with other professionals using
 SMART COSMOS to Monetize the IoT.
 
-== Extension Developer Quick Start
-image::images/quick-start.png[You Tube]
-There is a short 15 minute video, https://youtu.be/xmAQOvjJqmU[Extension Developer Quick Start],
-at the SMART COSMOS DevTube channel. This video will help you quickly setup
-a suitable development environment for creating and selling SMART COSMOS
-Extensions.
-
 == Maven Central
 Java developers that rely on Maven Central can access the SMART COSMOS
 libraries by searching for groupId of *net.smartcosmos*.:
 
-The http://search.maven.org/#artifactdetails%7Cnet.smartcosmos%7Csmartcosmos-core%7C2.10.13%7Cjar[core framework]
+The http://search.maven.org/#artifactdetails%7Cnet.smartcosmos%7Csmartcosmos-framework%7C{version}%7Cjar[core framework]
 has the following coordinates:
 
 ```
 <dependency>
   <groupId>net.smartcosmos</groupId>
-  <artifactId>smartcosmos-core</artifactId>
-  <version>2.10.13</version>
+  <artifactId>smartcosmos-framework</artifactId>
+  <version>{version}</version>
 </dependency>
 ```
 
-The http://search.maven.org/#artifactdetails%7Cnet.smartcosmos%7Csmartcosmos-extension-api%7C2.10.13%7Cjar[extension API]
-has the following coordinates:
+To make it easier to develop an extension, we also provide a parent POM file that you can extend:
 
 ```
-<dependency>
-  <groupId>net.smartcosmos</groupId>
-  <artifactId>smartcosmos-extension-api</artifactId>
-  <version>2.10.13</version>
-</dependency>
-```
-
-Finally, if you want to use a Maven Archetype to get started, use the following
-coordinates:
-
-```
-<dependency>
-  <groupId>net.smartcosmos.extension</groupId>
-  <artifactId>smartcosmos-extension-archetype</artifactId>
-  <version>2.10.13</version>
-</dependency>
+<parent>
+    <groupId>net.smartcosmos</groupId>
+    <artifactId>smartcosmos-build</artifactId>
+    <version>{version}</version>
+    <relativePath></relativePath>
+</parent>
 ```
 
 TIP: Remember, the artifacts in Maven Central are *living* artifacts and will
 have new releases from time to time. You are *strongly encouraged* to visit
 http://search.maven.org/#search%7Cga%7C1%7Cg%3Anet.smartcosmos[https://search.maven.org]
-to find the latest version after 2.10.13.
-
-If you are a Java developer interested in just building an Objects client, with
-no interest in building extensions, then you may consider using the SMART COSMOS
-Java Client for easy access to the platform without having to worry about the
-underlying HTTP, JSON, and REST calls. The Maven Central coordinates for this
-library are:
-
-```
-<dependency>
-  <groupId>net.smartcosmos</groupId>
-  <artifactId>smartcosmos-java-client</artifactId>
-  <version>2.10.13</version>
-</dependency>
-```
-
-== Getting Started
-Once you have become SMART COSMOS Certified and gained access to the SMART COSMOS Objects Developer Kit you need to get your server up and running.  This section helps with some basic commands to get you started.
-
-=== About the Kit
-In your SMART COSMOS Developer Kit are several files:
-
-* `README.pdf` -- The document you're reading right now.  This document is open source and we encourage feedback and improvements at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework
-* `CONTRIBUTING.pdf` -- The main framework or SMART COSMOS is actually Open Source and available at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework this guide provides ways for you to contribute.
-* `javadocs` -- Java Docs for the SMART COSMOS Extension API.  These Java Docs are also available online at  https://api.smartcosmos.net
-* `apacheds.yml` -- Configuration file necessary to run the Embedded Apache Directory Service Authentication Service Extension for your SMART COSMOS Embedded installation
-* `objects.yml` -- Configuration file for your SMART COSMOS Objects Developer Edition server.
-* `smartcosmos-extension-starter-test-all.jar` -- This is the test harness for the SMART COSMOS Framework that will be expanded upon heavily to help you, the developer, test and verify your extensions.  Additionally, this package also helps you populate your SMART COSMOS Objects server with some basic objects and an account to get you started.
-* `smartcosmos-objects-devkit-edition.jar` -- SMART COSMOS Objects Developer Edition packaged to include http://www.h2database.com/[H2 Database Engine] so you can get up and running without needing to install https://mariadb.org/[MariaDB] or another JDBC capable server.
-* `version.yml` -- We're always trying to provide you with the most up-to-date and best software, so the DevKit is automatically built each time we build SMART COSMOS Objects.  This file just helps let you know what version you have and when it was built.
-
-In addition to the files included in the Developer Kit, some directories will be created the first time you run SMART COSMOS Objects:
-
-* `apacheds-work` -- this folder contains your working files for https://directory.apache.org/[Apache Directory Service]
-* `files` -- all file entries created in SMART COSMOS Object go into this folder.  This is the default *Storage Service Extension* in SMART COSMOS Developer Kit, unlike the AWS Marketplace Developer Edition that uses S3.
-* `log` -- By default all of the server logs are written out to this folder into the `objects.log` file.  If you keep your server running this file will roll over daily.  Read the `logging` section of the `objects.yml` file for how you can change this functionality.
-* `server-work` -- The schema for the https://directory.apache.org/[Apache Directory Service] is written out to this folder.  Since the default Developer Edition runs with an embedded database, if you delete or move the database make sure you also delete or move this file, since your passwords and authentication details are stored in here.  This is a *Server Extension* and the *Directory Service Extension*.
-* `objects.mv.db` and `objects.trace.db` -- These are http://www.h2database.com/[H2 Database Engine] files for the embedded database.  They are created by the database connection at server start, and are specified in the `objects.yml`.
-
-=== Running SMART COSMOS Objects
-Your SMART COSMOS Objects Server comes already fully configured and ready to run, right out of the package.  To start your server, simply run the following from the command line:
-
-```
-java -jar smartcosmos-objects-devkit-edition.jar server objects.yml
-```
-
-The server starts up and is available by default on port `8080`, if you open your browser to `http://localhost:8080/` you should see some helpful information about SMART COSMOS Objects.  At this point the server is ready to respond to all REST calls:
-
-```
-➜  ~  curl http://localhost:8080/admin/ping -v
-*   Trying 127.0.0.1...
-* Connected to localhost (127.0.0.1) port 8080 (#0)
-> GET /admin/ping HTTP/1.1
-> User-Agent: curl/7.40.0
-> Host: localhost:8080
-> Accept: */*
->
-< HTTP/1.1 200 OK
-< Date: Thu, 01 Oct 2015 19:14:54 GMT
-< Cache-Control: must-revalidate,no-cache,no-store
-< Content-Type: text/plain; charset=ISO-8859-1
-< Content-Length: 5
-<
-pong
-* Connection #0 to host localhost left intact
-```
-
-=== Populating YOUR Server
-The DevKit comes with the SMART COSMOS Test Harness packaged in, which is code freely available in the SMART COSMOS Framework located at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework the default class for the Test Harness is a `PopulateObjectsServer` JUnit test that will connect to your server and populate the database with some details.  You can run the Test Harness with the following:
-
-```
-java -jar smartcosmos-extension-starter-test-all.jar
-```
-
-This will create a SMART COSMOS Account with a login of `api@smart-cosmos4.com` and password `1QXFBDRCf1?6` as well as putting some Objects, Metadata, Relationships, and Interactions into the server database.  All of the code for the Test Harness is open source, and provides an excellent sample base for interacting with SMART COSMOS.  The code used in the Test Harness is available at https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework
-
-If you want to customize the login, password, or even the server you're connecting to they can be overriden with system properties:
-
-```
-java \
--De2eAccountRealm=example.com \
--De2eAccountEmail=api@example.com \
--De2eAccountPassword=waldo \
--jar smartcosmos-extension-starter-test-all.jar
-```
-
-=== Adding YOUR Extension
-Once you develop your own Extension you'll want to add it to test with your own SMART COSMOS Objects Server.  This involves running
-the SMART COSMOS Server so that it can also detect your jar file.  The easiest way to do this is to create a new folder in the directory called `lib`, put your SMART COSMOS Extension into that folder, and run with the following command:
-
-```
-java -cp "lib/*" -jar smartcosmos-objects-devkit-edition.jar server objects.yml
-```
-TIP: Notice the addition of the `-cp "lib/*"` to the java command line.
-
-You'll also need to make sure you included your Extension's details in the `objects.yml` file.
-
-==== Special Procedure for Directory Service Extensions
-SMART COSMOS Objects Developer Edition locks the Directory Service Extension to the Embedded Apache DS Directory Service Extension.  However, developers for Directory Service Extensions need to be able to test their software.  For that reason, *only* the Developer Kit comes with the capability to switch to `DevKit` mode.  This limits the amount of Objects you can store in your Objects Server to *500*, but unlocks the Directory Service Extension so that developers can test their Extension.  All of these changes are done in the `objects.yml` configuration file.
-
-WARNING: This procedure is only necessary for those that want to create a Directory Service Extension!
-
-1. Change the `license.edition` to `DevKit`
-1. Change the `license.editionKey` to the alternative key denoted in the file with the comment `CHANGE TO DEVELOP AN AUTHENTICATION SERVICE` above it.
-1. Change the `license.objectCount` to `500`
-1. Comment out the EmbeddedApacheDS entries to disable the ApacheDS Server Extension:
-```
-serverExtensions:
-  #
-  # Embedded LDAP server bundle
-  # EmbeddedApacheDS : net.smartcosmos.bundle.apacheds.ApacheDSBundle
-
-serverExtensionConfigurationPaths:
-  # EmbeddedApacheDS : ./apacheds.yml
-```
+to find the latest version after {version}.
