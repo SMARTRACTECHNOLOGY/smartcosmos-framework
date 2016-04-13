@@ -99,24 +99,44 @@ libraries by searching for groupId of *net.smartcosmos*.:
 The http://search.maven.org/#artifactdetails%7Cnet.smartcosmos%7Csmartcosmos-framework%7C{version}%7Cjar[core framework]
 has the following coordinates:
 
-```
+[source,xml,subs="attributes,verbatim"]
+--
 <dependency>
   <groupId>net.smartcosmos</groupId>
   <artifactId>smartcosmos-framework</artifactId>
   <version>{version}</version>
 </dependency>
-```
+--
 
 To make it easier to develop an extension, we also provide a parent POM file that you can extend:
 
-```
+[source,xml,subs="attributes,verbatim"]
+--
 <parent>
     <groupId>net.smartcosmos</groupId>
-    <artifactId>smartcosmos-build</artifactId>
+    <artifactId>smartcosmos-framework-parent</artifactId>
     <version>{version}</version>
     <relativePath></relativePath>
 </parent>
-```
+--
+
+And in the event you already have a parent structure, we provide a dependency POM file that you can import:
+
+[source,xml,subs="attributes,verbatim"]
+--
+<dependencyManagement>
+     <dependencies>
+        <dependency>
+            <!-- Import dependency management -->
+            <groupId>net.smartcosmos</groupId>
+            <artifactId>smartcosmos-framework-dependencies</artifactId>
+            <version>{version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+--
 
 TIP: Remember, the artifacts in Maven Central are *living* artifacts and will
 have new releases from time to time. You are *strongly encouraged* to visit
