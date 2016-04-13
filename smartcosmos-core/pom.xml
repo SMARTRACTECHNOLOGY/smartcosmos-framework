@@ -30,6 +30,10 @@
     <description>Provides an interface driven SDK for working with the SMART COSMOS platform services</description>
     <dependencies>
         <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
