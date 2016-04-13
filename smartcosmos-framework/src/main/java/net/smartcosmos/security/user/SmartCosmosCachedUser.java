@@ -14,16 +14,16 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public class SmartCosmosCachedUser extends SmartCosmosUser {
 
-	// TODO Caching time is hardcoded at 5 minutes, should change this.
-	private final Date cachedDate = new Date(
-			System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
+    // TODO Caching time is hardcoded at 5 minutes, should change this.
+    private final Date cachedDate = new Date(
+            System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
 
-	public SmartCosmosCachedUser(String accountUrn, String userUrn, String username,
-			String password, Collection<? extends GrantedAuthority> authorities) {
-		super(accountUrn, userUrn, username, password, authorities);
-	}
+    public SmartCosmosCachedUser(String accountUrn, String userUrn, String username,
+            String password, Collection<? extends GrantedAuthority> authorities) {
+        super(accountUrn, userUrn, username, password, authorities);
+    }
 
-	public Date getCachedDate() {
-		return this.cachedDate;
-	}
+    public Date getCachedDate() {
+        return this.cachedDate;
+    }
 }

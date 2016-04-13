@@ -23,13 +23,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DirectAuthenticationConfiguration {
 
-	@Autowired
-	DirectAuthenticationSuccessHandler authenticationSuccessHandler;
+    @Autowired
+    DirectAuthenticationSuccessHandler authenticationSuccessHandler;
 
-	@Autowired
-	DirectAuthenticationFailureHandler authenticationFailureHandler;
+    @Autowired
+    DirectAuthenticationFailureHandler authenticationFailureHandler;
 
-	@Autowired
-	DirectLogoutSuccessHandler logoutSuccessHandler;
+    @Autowired
+    DirectLogoutSuccessHandler logoutSuccessHandler;
 
 }

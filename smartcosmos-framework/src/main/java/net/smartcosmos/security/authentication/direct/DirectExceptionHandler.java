@@ -24,46 +24,46 @@ import org.springframework.web.util.WebUtils;
 @ControllerAdvice
 public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
 
-	/**
-	 * Customize the response for AccessDeniedException.
-	 * <p>
-	 * This method logs a warning and delegates to {@link #handleExceptionInternal}.
-	 *
-	 * @param ex the exception
-	 * @param request the current request
-	 * @return a {@code ResponseEntity} instance
-	 */
-	@ExceptionHandler(AccessDeniedException.class)
-	protected ResponseEntity<Object> handleAccessDeniedRequestHandlingMethod(
-			AccessDeniedException ex, WebRequest request) {
-		HttpHeaders headers = new HttpHeaders();
-		HttpStatus status = HttpStatus.FORBIDDEN;
+    /**
+     * Customize the response for AccessDeniedException.
+     * <p>
+     * This method logs a warning and delegates to {@link #handleExceptionInternal}.
+     *
+     * @param ex the exception
+     * @param request the current request
+     * @return a {@code ResponseEntity} instance
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    protected ResponseEntity<Object> handleAccessDeniedRequestHandlingMethod(
+            AccessDeniedException ex, WebRequest request) {
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = HttpStatus.FORBIDDEN;
 
-		pageNotFoundLogger.warn(ex.getMessage());
+        pageNotFoundLogger.warn(ex.getMessage());
 
-		return handleExceptionInternal(ex, null, headers, status, request);
-	}
+        return handleExceptionInternal(ex, null, headers, status, request);
+    }
 
-	@ExceptionHandler(NoEntityFoundException.class)
-	protected ResponseEntity<Object> handleNoEntityFoundRequestHandlingMethod(
-			NoEntityFoundException ex, WebRequest request) {
-		HttpHeaders headers = new HttpHeaders();
-		HttpStatus status = HttpStatus.BAD_REQUEST;
+    @ExceptionHandler(NoEntityFoundException.class)
+    protected ResponseEntity<Object> handleNoEntityFoundRequestHandlingMethod(
+            NoEntityFoundException ex, WebRequest request) {
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
 
-		pageNotFoundLogger.warn(ex.getMessage());
+        pageNotFoundLogger.warn(ex.getMessage());
 
-		return handleExceptionInternal(ex, null, headers, status, request);
-	}
+        return handleExceptionInternal(ex, null, headers, status, request);
+    }
 
-	protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,
+            HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
-			request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex,
-					WebRequest.SCOPE_REQUEST);
-		}
+        if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
+            request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex,
+                    WebRequest.SCOPE_REQUEST);
+        }
 
-		return new ResponseEntity<Object>(body, headers, status);
-	}
+        return new ResponseEntity<Object>(body, headers, status);
+    }
 
 }

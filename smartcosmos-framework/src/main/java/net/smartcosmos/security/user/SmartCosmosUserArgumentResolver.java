@@ -19,31 +19,31 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 @Component
 public class SmartCosmosUserArgumentResolver implements HandlerMethodArgumentResolver {
 
-	public boolean supportsParameter(MethodParameter parameter) {
-		return parameter.getParameterType().equals(SmartCosmosUser.class);
-	}
+    public boolean supportsParameter(MethodParameter parameter) {
+        return parameter.getParameterType().equals(SmartCosmosUser.class);
+    }
 
-	@Override
-	public Object resolveArgument(MethodParameter parameter,
-			ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
-			WebDataBinderFactory binderFactory) throws Exception {
+    @Override
+    public Object resolveArgument(MethodParameter parameter,
+            ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
+            WebDataBinderFactory binderFactory) throws Exception {
 
-		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
+        HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 
-		if (null != SecurityContextHolder.getContext()) {
-			Object principal = SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
+        if (null != SecurityContextHolder.getContext()) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
 
-			if (principal instanceof OAuth2Authentication) {
-				principal = ((OAuth2Authentication) principal).getPrincipal();
-			}
+            if (principal instanceof OAuth2Authentication) {
+                principal = ((OAuth2Authentication) principal).getPrincipal();
+            }
 
-			if (principal instanceof SmartCosmosUser) {
-				return principal;
-			}
-		}
+            if (principal instanceof SmartCosmosUser) {
+                return principal;
+            }
+        }
 
-		throw new UserPrincipalNotFoundException(
-				"Could not find Smart Cosmos User in current request.");
-	}
+        throw new UserPrincipalNotFoundException(
+                "Could not find Smart Cosmos User in current request.");
+    }
 }

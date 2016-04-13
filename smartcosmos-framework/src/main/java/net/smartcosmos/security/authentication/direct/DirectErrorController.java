@@ -31,63 +31,63 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("${server.error.path:${error.path:/error}}")
 public class DirectErrorController extends AbstractErrorController {
 
-	private static final String PATH = "/error";
-	private final ErrorProperties errorProperties;
+    private static final String PATH = "/error";
+    private final ErrorProperties errorProperties;
 
-	/**
-	 * Create a new {@link DirectErrorController} instance.
-	 *
-	 * @param errorAttributes the error attributes
-	 */
-	@Autowired
-	public DirectErrorController(ErrorAttributes errorAttributes,
-			ServerProperties properties) {
-		super(errorAttributes);
-		Assert.notNull(properties.getError(), "ErrorProperties must not be null");
-		this.errorProperties = properties.getError();
-	}
+    /**
+     * Create a new {@link DirectErrorController} instance.
+     *
+     * @param errorAttributes the error attributes
+     */
+    @Autowired
+    public DirectErrorController(ErrorAttributes errorAttributes,
+            ServerProperties properties) {
+        super(errorAttributes);
+        Assert.notNull(properties.getError(), "ErrorProperties must not be null");
+        this.errorProperties = properties.getError();
+    }
 
-	@RequestMapping
-	@ResponseBody
-	public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
-		Map<String, Object> body = getErrorAttributes(request,
-				isIncludeStackTrace(request, MediaType.ALL));
-		HttpStatus status = getStatus(request);
+    @RequestMapping
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
+        Map<String, Object> body = getErrorAttributes(request,
+                isIncludeStackTrace(request, MediaType.ALL));
+        HttpStatus status = getStatus(request);
 
-		return new ResponseEntity<Map<String, Object>>(body, status);
-	}
+        return new ResponseEntity<Map<String, Object>>(body, status);
+    }
 
-	/**
-	 * Determine if the stacktrace attribute should be included.
-	 *
-	 * @param request the source request
-	 * @param produces the media type produced (or {@code MediaType.ALL})
-	 * @return if the stacktrace attribute should be included
-	 */
-	protected boolean isIncludeStackTrace(HttpServletRequest request,
-			MediaType produces) {
-		ErrorProperties.IncludeStacktrace include = getErrorProperties()
-				.getIncludeStacktrace();
-		if (include == ErrorProperties.IncludeStacktrace.ALWAYS) {
-			return true;
-		}
-		if (include == ErrorProperties.IncludeStacktrace.ON_TRACE_PARAM) {
-			return getTraceParameter(request);
-		}
-		return false;
-	}
+    /**
+     * Determine if the stacktrace attribute should be included.
+     *
+     * @param request the source request
+     * @param produces the media type produced (or {@code MediaType.ALL})
+     * @return if the stacktrace attribute should be included
+     */
+    protected boolean isIncludeStackTrace(HttpServletRequest request,
+            MediaType produces) {
+        ErrorProperties.IncludeStacktrace include = getErrorProperties()
+                .getIncludeStacktrace();
+        if (include == ErrorProperties.IncludeStacktrace.ALWAYS) {
+            return true;
+        }
+        if (include == ErrorProperties.IncludeStacktrace.ON_TRACE_PARAM) {
+            return getTraceParameter(request);
+        }
+        return false;
+    }
 
-	@Override
-	public String getErrorPath() {
-		return PATH;
-	}
+    @Override
+    public String getErrorPath() {
+        return PATH;
+    }
 
-	/**
-	 * Provide access to the error properties.
-	 *
-	 * @return the error properties
-	 */
-	protected ErrorProperties getErrorProperties() {
-		return this.errorProperties;
-	}
+    /**
+     * Provide access to the error properties.
+     *
+     * @return the error properties
+     */
+    protected ErrorProperties getErrorProperties() {
+        return this.errorProperties;
+    }
 }

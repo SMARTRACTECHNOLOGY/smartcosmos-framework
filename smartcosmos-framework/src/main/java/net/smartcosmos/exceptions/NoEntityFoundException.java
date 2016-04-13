@@ -5,11 +5,11 @@ package net.smartcosmos.exceptions;
  */
 public class NoEntityFoundException extends ServiceException {
 
-	public NoEntityFoundException(String message) {
-		super(message);
-	}
+    public NoEntityFoundException(String message) {
+        super(message);
+    }
 
-	public NoEntityFoundException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public NoEntityFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

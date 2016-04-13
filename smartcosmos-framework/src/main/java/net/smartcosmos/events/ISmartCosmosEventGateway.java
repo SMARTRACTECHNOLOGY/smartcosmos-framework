@@ -9,7 +9,7 @@ import org.springframework.integration.annotation.MessagingGateway;
 @MessagingGateway
 public interface ISmartCosmosEventGateway {
 
-	@Gateway(requestChannel = SmartCosmosEventSource.OUTPUT)
-	void convertAndSend(SmartCosmosEvent event);
+    @Gateway(requestChannel = SmartCosmosEventSource.OUTPUT)
+    void convertAndSend(SmartCosmosEvent event);
 
 }

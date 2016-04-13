@@ -7,7 +7,7 @@ import net.smartcosmos.events.SmartCosmosEvent;
  */
 public class TestSmartCosmosEventRestTemplate extends AbstractSmartCosmosEventTemplate {
 
-	@Override
-	public void convertAndSend(SmartCosmosEvent message) {
-	}
+    @Override
+    public void convertAndSend(SmartCosmosEvent message) {
+    }
 }

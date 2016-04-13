@@ -17,12 +17,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 public class SmartCosmosUserConfiguration extends WebMvcConfigurerAdapter {
 
-	@Autowired
-	SmartCosmosUserArgumentResolver smartCosmosUserArgumentResolver;
+    @Autowired
+    SmartCosmosUserArgumentResolver smartCosmosUserArgumentResolver;
 
-	@Override
-	public void addArgumentResolvers(
-			List<HandlerMethodArgumentResolver> argumentResolvers) {
-		argumentResolvers.add(smartCosmosUserArgumentResolver);
-	}
+    @Override
+    public void addArgumentResolvers(
+            List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(smartCosmosUserArgumentResolver);
+    }
 }

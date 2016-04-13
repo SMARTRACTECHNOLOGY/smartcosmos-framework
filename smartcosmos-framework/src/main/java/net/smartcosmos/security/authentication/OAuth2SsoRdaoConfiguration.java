@@ -30,59 +30,59 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @ComponentScan
 public class OAuth2SsoRdaoConfiguration {
 
-	@Bean
-	@Primary
-	public AuthenticationManager authenticationManager(
-			AuthenticationConfiguration configuration) throws Exception {
-		return configuration.getAuthenticationManager();
-	}
+    @Bean
+    @Primary
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
 
-	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER - 1)
-	@EnableDirectHandlers
-	@EnableResourceServer
-	@Configuration
-	@Profile({ "!test" })
-	protected static class OAuth2SsoConfigurerAdapter
-			extends WebSecurityConfigurerAdapter {
+    @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER - 1)
+    @EnableDirectHandlers
+    @EnableResourceServer
+    @Configuration
+    @Profile({ "!test" })
+    protected static class OAuth2SsoConfigurerAdapter
+            extends WebSecurityConfigurerAdapter {
 
-		@Override
-		protected void configure(HttpSecurity http) throws Exception {
-			log.debug(
-					"Smart Cosmos Security enabled, all requests must be authorized and no login redirect is offered.");
-			http.exceptionHandling().accessDeniedHandler(new DirectAccessDeniedHandler())
-					.authenticationEntryPoint(new DirectUnauthorizedEntryPoint()).and()
-					.antMatcher("/**").authorizeRequests().anyRequest().authenticated();
-		}
-	}
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            log.debug(
+                    "Smart Cosmos Security enabled, all requests must be authorized and no login redirect is offered.");
+            http.exceptionHandling().accessDeniedHandler(new DirectAccessDeniedHandler())
+                    .authenticationEntryPoint(new DirectUnauthorizedEntryPoint()).and()
+                    .antMatcher("/**").authorizeRequests().anyRequest().authenticated();
+        }
+    }
 
-	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-	@EnableDirectHandlers
-	@Configuration
-	@Profile({ "test" })
-	@EnableConfigurationProperties({ SmartCosmosTestProperties.class })
-	protected static class TestOAuth2SsoConfigurerAdapter
-			extends WebSecurityConfigurerAdapter {
+    @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+    @EnableDirectHandlers
+    @Configuration
+    @Profile({ "test" })
+    @EnableConfigurationProperties({ SmartCosmosTestProperties.class })
+    protected static class TestOAuth2SsoConfigurerAdapter
+            extends WebSecurityConfigurerAdapter {
 
-		@Autowired
-		SmartCosmosTestProperties smartCosmosTestProperties;
+        @Autowired
+        SmartCosmosTestProperties smartCosmosTestProperties;
 
-		@Bean
-		public UserDetailsService userDetailsService() {
-			return new TestUserDetailsService(smartCosmosTestProperties.getUsers());
-		}
+        @Bean
+        public UserDetailsService userDetailsService() {
+            return new TestUserDetailsService(smartCosmosTestProperties.getUsers());
+        }
 
-		protected void configure(HttpSecurity http) throws Exception {
-			http.csrf().disable().authorizeRequests().anyRequest().authenticated().and()
-					.httpBasic();
-		}
+        protected void configure(HttpSecurity http) throws Exception {
+            http.csrf().disable().authorizeRequests().anyRequest().authenticated().and()
+                    .httpBasic();
+        }
 
-		@Override
-		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-			log.warn(
-					"Test Smart Cosmos Security enabled, all requests should be made as user:password@ for testing.");
-			auth.userDetailsService(userDetailsService())
-					.passwordEncoder(new PlaintextPasswordEncoder());
-		}
-	}
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            log.warn(
+                    "Test Smart Cosmos Security enabled, all requests should be made as user:password@ for testing.");
+            auth.userDetailsService(userDetailsService())
+                    .passwordEncoder(new PlaintextPasswordEncoder());
+        }
+    }
 
 }

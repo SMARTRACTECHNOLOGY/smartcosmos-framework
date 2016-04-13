@@ -24,15 +24,15 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SmartCosmosTokenEnhancer implements JwtAccessTokenConverterConfigurer {
 
-	@Autowired
-	SmartCosmosUserAuthenticationConverter smartCosmosUserAuthenticationConverter;
+    @Autowired
+    SmartCosmosUserAuthenticationConverter smartCosmosUserAuthenticationConverter;
 
-	@Override
-	public void configure(JwtAccessTokenConverter converter) {
-		log.info(
-				"Installing SmartCosmosUserAuthenticationConverter, will contain additional Smart Cosmos Account fields in JWT tokens.");
-		((DefaultAccessTokenConverter) converter.getAccessTokenConverter())
-				.setUserTokenConverter(smartCosmosUserAuthenticationConverter);
+    @Override
+    public void configure(JwtAccessTokenConverter converter) {
+        log.info(
+                "Installing SmartCosmosUserAuthenticationConverter, will contain additional Smart Cosmos Account fields in JWT tokens.");
+        ((DefaultAccessTokenConverter) converter.getAccessTokenConverter())
+                .setUserTokenConverter(smartCosmosUserAuthenticationConverter);
 
-	}
+    }
 }

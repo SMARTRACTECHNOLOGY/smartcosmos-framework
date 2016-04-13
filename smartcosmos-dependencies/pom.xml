@@ -11,7 +11,8 @@
     <artifactId>smartcosmos-dependencies</artifactId>
     <packaging>pom</packaging>
     <name>SMART COSMOS Dependencies</name>
-    <description>Allows importing all of the dependencies associated with the SMART COSMOS Framework without having to use the parent pom.</description>
+    <description>Allows importing all of the dependencies associated with the SMART COSMOS Framework without having to
+        use the parent pom.</description>
     <dependencyManagement>
         <dependencies>
             <dependency>

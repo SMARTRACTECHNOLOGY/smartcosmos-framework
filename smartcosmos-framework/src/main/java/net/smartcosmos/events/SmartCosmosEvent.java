@@ -20,12 +20,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 @AllArgsConstructor
 @Builder
 public class SmartCosmosEvent<T> {
-	@NotEmpty
-	private String eventType;
+    @NotEmpty
+    private String eventType;
 
-	private String accountUrn;
-	private String userUrn;
+    private String accountUrn;
+    private String userUrn;
 
-	@NotNull
-	private T data;
+    @NotNull
+    private T data;
 }

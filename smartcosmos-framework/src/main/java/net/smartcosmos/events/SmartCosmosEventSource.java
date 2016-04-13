@@ -8,8 +8,8 @@ import org.springframework.messaging.MessageChannel;
  */
 public interface SmartCosmosEventSource {
 
-	String OUTPUT = "smartcosmoseventsoutput";
+    String OUTPUT = "smartcosmoseventsoutput";
 
-	@Output(SmartCosmosEventSource.OUTPUT)
-	MessageChannel output();
+    @Output(SmartCosmosEventSource.OUTPUT)
+    MessageChannel output();
 }

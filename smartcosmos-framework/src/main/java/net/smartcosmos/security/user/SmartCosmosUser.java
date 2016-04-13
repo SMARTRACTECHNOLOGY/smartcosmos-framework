@@ -21,27 +21,27 @@ import org.springframework.security.core.userdetails.User;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SmartCosmosUser extends User {
-	public final static String TOKEN_FIELD_URN_USER = "user_urn";
-	public final static String TOKEN_FIELD_URN_ACCOUNT = "account_urn";
+    public final static String TOKEN_FIELD_URN_USER = "user_urn";
+    public final static String TOKEN_FIELD_URN_ACCOUNT = "account_urn";
 
-	private final String userUrn;
+    private final String userUrn;
 
-	private final String accountUrn;
+    private final String accountUrn;
 
-	@JsonCreator
-	public SmartCosmosUser(String accountUrn, String userUrn, String username,
-			String password, Collection<? extends GrantedAuthority> authorities) {
-		super(username, password, authorities);
-		this.userUrn = userUrn;
-		this.accountUrn = accountUrn;
-	}
+    @JsonCreator
+    public SmartCosmosUser(String accountUrn, String userUrn, String username,
+            String password, Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, authorities);
+        this.userUrn = userUrn;
+        this.accountUrn = accountUrn;
+    }
 
-	public String getUserUrn() {
-		return this.userUrn;
-	}
+    public String getUserUrn() {
+        return this.userUrn;
+    }
 
-	public String getAccountUrn() {
-		return accountUrn;
-	}
+    public String getAccountUrn() {
+        return accountUrn;
+    }
 
 }

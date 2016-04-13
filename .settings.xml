@@ -14,14 +14,14 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <repositories>
-              <repository>
-                  <id>ossrh</id>
-                  <name>Sonatype OSS Snapshots</name>
-                  <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                  <snapshots>
-                      <enabled>true</enabled>
-                  </snapshots>
-              </repository>
+                <repository>
+                    <id>ossrh</id>
+                    <name>Sonatype OSS Snapshots</name>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
                 <repository>
                     <id>spring-snapshots</id>
                     <name>Spring Snapshots</name>

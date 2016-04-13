@@ -16,11 +16,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class DirectLogoutSuccessHandler extends
-		AbstractAuthenticationTargetUrlRequestHandler implements LogoutSuccessHandler {
+        AbstractAuthenticationTargetUrlRequestHandler implements LogoutSuccessHandler {
 
-	@Override
-	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException, ServletException {
-		response.setStatus(HttpServletResponse.SC_OK);
-	}
+    @Override
+    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
+        response.setStatus(HttpServletResponse.SC_OK);
+    }
 }

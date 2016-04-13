@@ -16,15 +16,15 @@ import org.springframework.http.RequestEntity;
 @Data
 @Builder
 public class SmartCosmosEventRequest<T> {
-	private String serviceName;
-	private String url;
-	private SmartCosmosEvent<T> event;
-	private HttpMethod httpMethod;
+    private String serviceName;
+    private String url;
+    private SmartCosmosEvent<T> event;
+    private HttpMethod httpMethod;
 
-	public RequestEntity<SmartCosmosEvent<T>> buildRequest() {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-		URI uri = URI.create("http://" + serviceName + "/" + url);
-		return new RequestEntity<>(event, headers, httpMethod, uri);
-	}
+    public RequestEntity<SmartCosmosEvent<T>> buildRequest() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        URI uri = URI.create("http://" + serviceName + "/" + url);
+        return new RequestEntity<>(event, headers, httpMethod, uri);
+    }
 }

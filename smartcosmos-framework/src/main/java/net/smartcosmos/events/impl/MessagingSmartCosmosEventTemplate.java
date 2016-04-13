@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessagingSmartCosmosEventTemplate extends AbstractSmartCosmosEventTemplate {
 
-	@Autowired
-	ISmartCosmosEventGateway smartCosmosEventGateway;
+    @Autowired
+    ISmartCosmosEventGateway smartCosmosEventGateway;
 
-	@Override
-	public void convertAndSend(SmartCosmosEvent message)
-			throws SmartCosmosEventException {
-		smartCosmosEventGateway.convertAndSend(message);
-	}
+    @Override
+    public void convertAndSend(SmartCosmosEvent message)
+            throws SmartCosmosEventException {
+        smartCosmosEventGateway.convertAndSend(message);
+    }
 }

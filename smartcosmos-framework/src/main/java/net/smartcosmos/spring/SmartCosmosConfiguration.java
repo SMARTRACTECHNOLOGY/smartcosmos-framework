@@ -33,70 +33,70 @@ import org.springframework.web.client.RestTemplate;
 @EnableConfigurationProperties({ SmartCosmosProperties.class })
 public class SmartCosmosConfiguration {
 
-	/**
-	 * Provides access to all of the properties defined in the file.
-	 */
-	@Autowired
-	private SmartCosmosProperties smartCosmosProperties;
+    /**
+     * Provides access to all of the properties defined in the file.
+     */
+    @Autowired
+    private SmartCosmosProperties smartCosmosProperties;
 
-	@Configuration
-	@ConditionalOnClass({ ConnectionFactory.class, RabbitOperations.class,
-			RabbitTemplate.class })
-	@Slf4j
-	protected static class RabbitConnectionConfiguration
-			implements RabbitListenerConfigurer {
+    @Configuration
+    @ConditionalOnClass({ ConnectionFactory.class, RabbitOperations.class,
+            RabbitTemplate.class })
+    @Slf4j
+    protected static class RabbitConnectionConfiguration
+            implements RabbitListenerConfigurer {
 
-		@Autowired
-		private SmartCosmosProperties smartCosmosProperties;
+        @Autowired
+        private SmartCosmosProperties smartCosmosProperties;
 
-		@Autowired
-		private ConnectionFactory connectionFactory;
+        @Autowired
+        private ConnectionFactory connectionFactory;
 
-		@Bean
-		public MappingJackson2MessageConverter jackson2Converter() {
-			MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
-			return converter;
-		}
+        @Bean
+        public MappingJackson2MessageConverter jackson2Converter() {
+            MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+            return converter;
+        }
 
-		@Bean
-		public DefaultMessageHandlerMethodFactory myHandlerMethodFactory() {
-			DefaultMessageHandlerMethodFactory factory = new DefaultMessageHandlerMethodFactory();
-			factory.setMessageConverter(jackson2Converter());
-			return factory;
-		}
+        @Bean
+        public DefaultMessageHandlerMethodFactory myHandlerMethodFactory() {
+            DefaultMessageHandlerMethodFactory factory = new DefaultMessageHandlerMethodFactory();
+            factory.setMessageConverter(jackson2Converter());
+            return factory;
+        }
 
-		@Override
-		public void configureRabbitListeners(RabbitListenerEndpointRegistrar registrar) {
-			registrar.setMessageHandlerMethodFactory(myHandlerMethodFactory());
-		}
-	}
+        @Override
+        public void configureRabbitListeners(RabbitListenerEndpointRegistrar registrar) {
+            registrar.setMessageHandlerMethodFactory(myHandlerMethodFactory());
+        }
+    }
 
-	@Configuration
-	@ConditionalOnMissingBean(ISmartCosmosEventTemplate.class)
-	@ConditionalOnMissingClass("org.springframework.amqp.rabbit.core.RabbitOperations")
-	protected static class SmartCosmosEventConfiguration {
+    @Configuration
+    @ConditionalOnMissingBean(ISmartCosmosEventTemplate.class)
+    @ConditionalOnMissingClass("org.springframework.amqp.rabbit.core.RabbitOperations")
+    protected static class SmartCosmosEventConfiguration {
 
-		@Autowired
-		private SmartCosmosProperties smartCosmosProperties;
+        @Autowired
+        private SmartCosmosProperties smartCosmosProperties;
 
-		@Bean
-		@Profile("!test")
-		ISmartCosmosEventTemplate smartCosmosEventTemplate(
-				SpringClientFactory clientFactory, LoadBalancerClient loadBalancer) {
-			RibbonClientHttpRequestFactory ribbonClientHttpRequestFactory = new RibbonClientHttpRequestFactory(
-					clientFactory, loadBalancer);
-			return new RestSmartCosmosEventTemplate(
-					new RestTemplate(ribbonClientHttpRequestFactory),
-					smartCosmosProperties.getEvents().getServiceName(),
-					smartCosmosProperties.getEvents().getHttpMethod(),
-					smartCosmosProperties.getEvents().getUrl());
-		}
+        @Bean
+        @Profile("!test")
+        ISmartCosmosEventTemplate smartCosmosEventTemplate(
+                SpringClientFactory clientFactory, LoadBalancerClient loadBalancer) {
+            RibbonClientHttpRequestFactory ribbonClientHttpRequestFactory = new RibbonClientHttpRequestFactory(
+                    clientFactory, loadBalancer);
+            return new RestSmartCosmosEventTemplate(
+                    new RestTemplate(ribbonClientHttpRequestFactory),
+                    smartCosmosProperties.getEvents().getServiceName(),
+                    smartCosmosProperties.getEvents().getHttpMethod(),
+                    smartCosmosProperties.getEvents().getUrl());
+        }
 
-		@Bean
-		@Profile("test")
-		ISmartCosmosEventTemplate SmartCosmosEventRestTemplate() {
-			return new TestSmartCosmosEventRestTemplate();
-		}
-	}
+        @Bean
+        @Profile("test")
+        ISmartCosmosEventTemplate SmartCosmosEventRestTemplate() {
+            return new TestSmartCosmosEventRestTemplate();
+        }
+    }
 
 }

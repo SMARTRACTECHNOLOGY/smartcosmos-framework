@@ -22,14 +22,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class EndpointFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-	@Override
-	public void onAuthenticationFailure(HttpServletRequest request,
-			HttpServletResponse response, AuthenticationException exception)
-					throws IOException, ServletException {
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request,
+            HttpServletResponse response, AuthenticationException exception)
+                    throws IOException, ServletException {
 
-		logger.debug("No failure URL set, sending 401 Unauthorized error");
-		logger.trace(exception.getMessage(), exception);
+        logger.debug("No failure URL set, sending 401 Unauthorized error");
+        logger.trace(exception.getMessage(), exception);
 
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed.");
-	}
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed.");
+    }
 }

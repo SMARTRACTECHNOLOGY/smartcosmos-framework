@@ -13,13 +13,13 @@ import org.springframework.security.web.access.AccessDeniedHandler;
  * @author voor
  */
 public class DirectAccessDeniedHandler implements AccessDeniedHandler {
-	@Override
-	public void handle(HttpServletRequest request, HttpServletResponse response,
-			AccessDeniedException accessDeniedException)
-					throws IOException, ServletException {
-		if (!response.isCommitted()) {
-			response.sendError(HttpServletResponse.SC_FORBIDDEN,
-					accessDeniedException.getMessage());
-		}
-	}
+    @Override
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+            AccessDeniedException accessDeniedException)
+                    throws IOException, ServletException {
+        if (!response.isCommitted()) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN,
+                    accessDeniedException.getMessage());
+        }
+    }
 }

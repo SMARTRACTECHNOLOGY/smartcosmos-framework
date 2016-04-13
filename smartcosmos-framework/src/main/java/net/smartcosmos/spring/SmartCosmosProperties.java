@@ -17,21 +17,21 @@ import org.springframework.http.HttpMethod;
 @ConfigurationProperties("smartcosmos")
 public class SmartCosmosProperties {
 
-	private Map<String, String> services = new LinkedHashMap<>();
+    private Map<String, String> services = new LinkedHashMap<>();
 
-	private EventProperties events = new EventProperties();
+    private EventProperties events = new EventProperties();
 
-	private Boolean debug = false;
+    private Boolean debug = false;
 
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	public static class EventProperties {
-		private String topic = "smartcosmos:events";
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class EventProperties {
+        private String topic = "smartcosmos:events";
 
-		private String serviceName = "smartcosmos-events";
-		private String url = "";
-		private HttpMethod httpMethod = HttpMethod.POST;
-	}
+        private String serviceName = "smartcosmos-events";
+        private String url = "";
+        private HttpMethod httpMethod = HttpMethod.POST;
+    }
 
 }

@@ -17,24 +17,24 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("smartcosmos.test")
 public class SmartCosmosTestProperties {
 
-	private Map<String, TestUser> users = new LinkedHashMap<>();
+    private Map<String, TestUser> users = new LinkedHashMap<>();
 
-	/**
-	 * Make sure there's at least one user for testing.
-	 */
-	@PostConstruct
-	public void init() {
-		if (users.isEmpty()) {
-			users.put("user",
-					new TestUser("urn:account:test:b5b52af3-9909-4ea4-97bf-07639d683c95",
-							"urn:user:test:e2174814-eb6d-4176-978c-58390105375b"));
-		}
-	}
+    /**
+     * Make sure there's at least one user for testing.
+     */
+    @PostConstruct
+    public void init() {
+        if (users.isEmpty()) {
+            users.put("user",
+                    new TestUser("urn:account:test:b5b52af3-9909-4ea4-97bf-07639d683c95",
+                            "urn:user:test:e2174814-eb6d-4176-978c-58390105375b"));
+        }
+    }
 
-	@Data
-	@AllArgsConstructor
-	public class TestUser {
-		private String accountUrn;
-		private String userUrn;
-	}
+    @Data
+    @AllArgsConstructor
+    public class TestUser {
+        private String accountUrn;
+        private String userUrn;
+    }
 }

@@ -8,8 +8,8 @@ import org.springframework.messaging.SubscribableChannel;
  */
 public interface SmartCosmosEventSink {
 
-	String INPUT = "smartcosmoseventsinput";
+    String INPUT = "smartcosmoseventsinput";
 
-	@Input(SmartCosmosEventSink.INPUT)
-	SubscribableChannel input();
+    @Input(SmartCosmosEventSink.INPUT)
+    SubscribableChannel input();
 }

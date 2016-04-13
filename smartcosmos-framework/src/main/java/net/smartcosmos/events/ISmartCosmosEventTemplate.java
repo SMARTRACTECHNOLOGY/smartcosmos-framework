@@ -10,14 +10,14 @@ import net.smartcosmos.security.user.SmartCosmosUser;
  */
 public interface ISmartCosmosEventTemplate {
 
-	void sendEvent(Object data, String eventType) throws SmartCosmosEventException;
+    void sendEvent(Object data, String eventType) throws SmartCosmosEventException;
 
-	void sendEvent(Object data, String eventType, String accountUrn)
-			throws SmartCosmosEventException;
+    void sendEvent(Object data, String eventType, String accountUrn)
+            throws SmartCosmosEventException;
 
-	void sendEvent(Object data, String eventType, SmartCosmosUser user)
-			throws SmartCosmosEventException;
+    void sendEvent(Object data, String eventType, SmartCosmosUser user)
+            throws SmartCosmosEventException;
 
-	void sendEvent(Object data, String eventType, String accountUrn, String userUrn)
-			throws SmartCosmosEventException;
+    void sendEvent(Object data, String eventType, String accountUrn, String userUrn)
+            throws SmartCosmosEventException;
 }
