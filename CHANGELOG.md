@@ -8,11 +8,13 @@
 
 ### Bugfixes / Improvements
 
+* OBJECTS-377 Add data validation annotation for Metadata
 * OBJECTS-620 Refer to Images Locally instead of remotely in documentation
+* SCE-20 get Device endpoints out of `EndpointsFactory`
+* SCE-21 get Hashtag endpoints out of `EndpointsFactory`
 * Add separate SDKs for different AWS services to `smartcosmos-dependencies` (SCE-19)
 * Fix smartcosmos dependency scope in `smartcosmos-extension-archetype`
 * Extract Geospatial from Objects into separate "Geospatial Extension" (OBJECTS-622)
-* OBJECTS-377: Add data validation annotation for Metadata
 
 ## Release 2.13.1 (March 8, 2016)
 
