@@ -40,9 +40,6 @@ public class EndpointsFactory
     private Boolean timelineEndpoints = true;
 
     @JsonProperty
-    private Boolean geospatialEndpoints = true;
-
-    @JsonProperty
     private Boolean relationshipEndpoints = true;
 
     @JsonProperty
@@ -99,11 +96,6 @@ public class EndpointsFactory
     public Boolean getRelationshipEndpoints()
     {
         return relationshipEndpoints;
-    }
-
-    public Boolean getGeospatialEndpoints()
-    {
-        return geospatialEndpoints;
     }
 
     public Boolean getTimelineEndpoints()
