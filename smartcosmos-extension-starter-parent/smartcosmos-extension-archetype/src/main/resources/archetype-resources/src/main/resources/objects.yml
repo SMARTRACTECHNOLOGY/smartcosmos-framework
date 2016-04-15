@@ -134,9 +134,7 @@ endpoints:
   eventsEndpoint: true
   objectAddressEndpoint: true
   metadataEndpoints: true
-  tagEndpoints: true
   timelineEndpoints: true
-  geospatialEndpoints: true
   relationshipEndpoints: true
   interactionEndpoints: true
   objectEndpoints: true
@@ -202,11 +200,6 @@ endpointMethodControl:
   relationships.reference.type.get: true
   relationships.reference.get: true
 
-  geospatial.put: true
-  geospatial.post: true
-  geospatial.get: true
-  geospatial.urn.get: true
-
   metadata.encode.post: true
   metadata.decode.post: true
   metadata.reference.put: true
@@ -221,14 +214,6 @@ endpointMethodControl:
   files.urn.contents.get: true
   files.entity.reference.get: true
   files.urn.delete: true
-
-  tags.put: true
-  tags.tag.get: true
-  tags.urn.get: true
-  tags.tag.reference.put: true
-  tags.get: true
-  tags.tag.delete: true
-  tags.tag.reference.delete: true
 
   notifications.enroll.put: true
   notifications.confirm.put: true
