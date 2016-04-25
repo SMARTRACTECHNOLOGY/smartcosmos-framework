@@ -8,12 +8,13 @@ import net.smartcosmos.events.SmartCosmosEventRequest;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.client.RestOperations;
 
 /**
  * @author voor
  */
-@AllArgsConstructor
 @Slf4j
 public class RestSmartCosmosEventTemplate extends AbstractSmartCosmosEventTemplate {
 
@@ -22,9 +23,17 @@ public class RestSmartCosmosEventTemplate extends AbstractSmartCosmosEventTempla
     private final HttpMethod eventHttpMethod;
     private final String eventUrl;
 
+    public RestSmartCosmosEventTemplate(RestOperations restOperations, String eventServiceName, HttpMethod eventHttpMethod, String eventUrl) {
+        this.restOperations = restOperations;
+        this.eventServiceName = eventServiceName;
+        this.eventHttpMethod = eventHttpMethod;
+        this.eventUrl = eventUrl;
+    }
+
     @Override
     public void convertAndSend(SmartCosmosEvent message)
             throws SmartCosmosEventException {
+
         try {
             RequestEntity request = SmartCosmosEventRequest.builder().event(message)
                     .httpMethod(eventHttpMethod).serviceName(eventServiceName)

@@ -23,7 +23,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 
 /**
  * Essentially a placeholder for now, as more commonly found configurations are discovered
@@ -82,11 +84,15 @@ public class SmartCosmosConfiguration {
         @Bean
         @Profile("!test")
         ISmartCosmosEventTemplate smartCosmosEventTemplate(
-                SpringClientFactory clientFactory, LoadBalancerClient loadBalancer) {
+                OAuth2ClientContext oauth2ClientContext,
+                OAuth2ProtectedResourceDetails details, SpringClientFactory clientFactory,
+                LoadBalancerClient loadBalancer) {
             RibbonClientHttpRequestFactory ribbonClientHttpRequestFactory = new RibbonClientHttpRequestFactory(
                     clientFactory, loadBalancer);
-            return new RestSmartCosmosEventTemplate(
-                    new RestTemplate(ribbonClientHttpRequestFactory),
+            OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(details,
+                    oauth2ClientContext);
+            restTemplate.setRequestFactory(ribbonClientHttpRequestFactory);
+            return new RestSmartCosmosEventTemplate(restTemplate,
                     smartCosmosProperties.getEvents().getServiceName(),
                     smartCosmosProperties.getEvents().getHttpMethod(),
                     smartCosmosProperties.getEvents().getUrl());
