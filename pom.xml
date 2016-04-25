@@ -71,6 +71,7 @@
         <metrics-spring.version>3.1.2</metrics-spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+        <prometheus.version>0.0.14</prometheus.version>
         <quartz.version>2.2.1</quartz.version>
         <querydsl.version>4.0.5</querydsl.version>
         <!-- Override this for public releases. -->
@@ -82,7 +83,6 @@
         <spring-security-ldap.version>2.0.4.RELEASE</spring-security-ldap.version>
         <spring.framework.version>4.2.1.RELEASE</spring.framework.version>
         <spring.security.version>4.0.2.RELEASE</spring.security.version>
-        <prometheus.version>0.0.14</prometheus.version>
     </properties>
     <build>
         <pluginManagement>
