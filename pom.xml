@@ -82,6 +82,7 @@
         <spring-security-ldap.version>2.0.4.RELEASE</spring-security-ldap.version>
         <spring.framework.version>4.2.1.RELEASE</spring.framework.version>
         <spring.security.version>4.0.2.RELEASE</spring.security.version>
+        <prometheus.version>0.0.13</prometheus.version>
     </properties>
     <build>
         <pluginManagement>
