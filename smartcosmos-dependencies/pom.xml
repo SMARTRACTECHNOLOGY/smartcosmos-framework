@@ -441,6 +441,26 @@
                 <version>1.2.4</version>
             </dependency>
             <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_dropwizard</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_hotspot</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_servlet</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
