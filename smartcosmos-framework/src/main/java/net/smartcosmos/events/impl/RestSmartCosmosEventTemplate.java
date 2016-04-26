@@ -1,6 +1,5 @@
 package net.smartcosmos.events.impl;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.smartcosmos.events.SmartCosmosEvent;
 import net.smartcosmos.events.SmartCosmosEventException;
@@ -8,8 +7,6 @@ import net.smartcosmos.events.SmartCosmosEventRequest;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.client.RestOperations;
 
 /**
