@@ -28,7 +28,7 @@ public class DirectAuthenticationFailureHandler
             HttpServletResponse response, AuthenticationException exception)
                     throws IOException, ServletException {
 
-        if (response.getContentType().startsWith("text/")) {
+        if (response.getContentType() == null || response.getContentType().startsWith("text/")) {
             super.onAuthenticationFailure(request, response, exception);
         }
         else {
