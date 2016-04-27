@@ -3,6 +3,7 @@ package net.smartcosmos.security.authentication.direct;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,10 +15,11 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Takes the {@link org.springframework.boot.autoconfigure.web.BasicErrorController} and
@@ -26,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author voor
  * @see org.springframework.boot.autoconfigure.web.BasicErrorController
  */
-@RestController
+@Controller
 @Slf4j
 @RequestMapping("${server.error.path:${error.path:/error}}")
 public class DirectErrorController extends AbstractErrorController {
@@ -45,6 +47,15 @@ public class DirectErrorController extends AbstractErrorController {
         super(errorAttributes);
         Assert.notNull(properties.getError(), "ErrorProperties must not be null");
         this.errorProperties = properties.getError();
+    }
+
+    @RequestMapping(produces = "text/html")
+    public ModelAndView errorHtml(HttpServletRequest request,
+                                  HttpServletResponse response) {
+        response.setStatus(getStatus(request).value());
+        Map<String, Object> model = getErrorAttributes(request,
+            isIncludeStackTrace(request, MediaType.TEXT_HTML));
+        return new ModelAndView("error", model);
     }
 
     @RequestMapping

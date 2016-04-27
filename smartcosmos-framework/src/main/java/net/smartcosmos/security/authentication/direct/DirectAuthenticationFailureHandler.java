@@ -1,14 +1,13 @@
 package net.smartcosmos.security.authentication.direct;
 
-import java.io.IOException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.stereotype.Component;
+import java.io.IOException;
 
 /**
  * Returns a 401 error code (Unauthorized) to the client rather than displaying an error
@@ -17,8 +16,8 @@ import org.springframework.stereotype.Component;
  * Code adapted from https://jhipster.github.io/
  *
  * @author voor
- * @see org.springframework.security.web.authentication.
- * SimpleUrlAuthenticationFailureHandler
+ * @see SimpleUrlAuthenticationFailureHandler
+ *
  */
 @Component
 public class DirectAuthenticationFailureHandler
@@ -29,6 +28,12 @@ public class DirectAuthenticationFailureHandler
             HttpServletResponse response, AuthenticationException exception)
                     throws IOException, ServletException {
 
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed");
+        if (response.getContentType().startsWith("text/")) {
+            super.onAuthenticationFailure(request, response, exception);
+        }
+        else {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                    "Authentication failed");
+        }
     }
 }

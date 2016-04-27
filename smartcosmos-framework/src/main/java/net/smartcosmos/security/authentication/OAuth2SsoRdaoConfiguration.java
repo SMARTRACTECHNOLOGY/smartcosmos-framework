@@ -50,7 +50,7 @@ public class OAuth2SsoRdaoConfiguration {
             log.debug(
                     "Smart Cosmos Security enabled, all requests must be authorized and no login redirect is offered.");
             http.exceptionHandling().accessDeniedHandler(new DirectAccessDeniedHandler())
-                    .authenticationEntryPoint(new DirectUnauthorizedEntryPoint()).and()
+                    .authenticationEntryPoint(new DirectUnauthorizedEntryPoint("/login")).and()
                     .antMatcher("/**").authorizeRequests().anyRequest().authenticated();
         }
     }

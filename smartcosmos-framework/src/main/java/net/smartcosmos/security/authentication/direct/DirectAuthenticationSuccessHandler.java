@@ -1,23 +1,21 @@
 package net.smartcosmos.security.authentication.direct;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
- * Success handler that returns OK rather than redirects to another page.
+ * Success handler that returns OK for anything that is not text rather than redirect to another page.
  * <p>
  * Code adapted from https://jhipster.github.io/
  *
  * @author voor
- * @see org.springframework.security.web.authentication.
- * SimpleUrlAuthenticationSuccessHandler
+ * @see SimpleUrlAuthenticationSuccessHandler
  */
 @Component
 public class DirectAuthenticationSuccessHandler
@@ -28,6 +26,11 @@ public class DirectAuthenticationSuccessHandler
             HttpServletResponse response, Authentication authentication)
                     throws IOException, ServletException {
 
-        response.setStatus(HttpServletResponse.SC_OK);
+        if (request.getContentType().startsWith("text/")) {
+            handle(request,response,authentication);
+        } else {
+            response.setStatus(HttpServletResponse.SC_OK);
+        }
+        clearAuthenticationAttributes(request);
     }
 }
