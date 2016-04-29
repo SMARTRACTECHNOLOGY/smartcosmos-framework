@@ -146,4 +146,8 @@ And in the event you already have a parent structure, we provide a dependency PO
 TIP: Remember, the artifacts in Maven Central are *living* artifacts and will
 have new releases from time to time. You are *strongly encouraged* to visit
 http://search.maven.org/#search%7Cga%7C1%7Cg%3Anet.smartcosmos[https://search.maven.org]
-to find the latest version after {version}.
+to find the latest version after {version}.amp
+
+== For More Information
+
+See github.
