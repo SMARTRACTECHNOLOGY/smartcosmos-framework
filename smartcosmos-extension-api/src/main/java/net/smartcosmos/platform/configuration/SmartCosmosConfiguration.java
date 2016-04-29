@@ -125,8 +125,8 @@ public class SmartCosmosConfiguration extends Configuration
     @JsonProperty
     private boolean supportStatusCheck;
 
-    @JsonProperty
-    private Boolean supportMonitoring;
+    @Valid
+    private SmartCosmosMetricsFactory metricsFactory = new SmartCosmosMetricsFactory();
 
     @JsonProperty
     private boolean supportNotifications;
@@ -374,6 +374,12 @@ public class SmartCosmosConfiguration extends Configuration
         this.supportStatusCheck = flag;
     }
 
+    @JsonProperty("metrics")
+    public void setMetricsFactory(final SmartCosmosMetricsFactory smartCosmosMetricsFactory)
+    {
+        this.metricsFactory = smartCosmosMetricsFactory;
+    }
+
     public void setSupportUsers(final boolean flag)
     {
         this.supportUsers = flag;
@@ -420,9 +426,10 @@ public class SmartCosmosConfiguration extends Configuration
         return supportStatusCheck;
     }
 
-    public Boolean supportMonitoring()
+    @JsonProperty("metrics")
+    public SmartCosmosMetricsFactory getSmartCosmosMetricsFactory()
     {
-        return supportMonitoring;
+        return metricsFactory;
     }
 
     public boolean supportUsers()
@@ -458,7 +465,7 @@ public class SmartCosmosConfiguration extends Configuration
                ", supportRealmCheck=" + supportRealmCheck +
                ", supportDynamicRegistration=" + supportDynamicRegistration +
                ", supportStatusCheck=" + supportStatusCheck +
-               ", supportMonitoring=" + supportMonitoring +
+               ", metrics=" + metricsFactory +
                ", supportNotifications=" + supportNotifications +
                ", supportExtensions=" + supportExtensions +
                ", supportMultimediaFiles=" + supportMultimediaFiles +
