@@ -20,24 +20,22 @@ package net.smartcosmos.platform.configuration;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
 import io.dropwizard.Configuration;
 import io.dropwizard.client.HttpClientConfiguration;
 import io.dropwizard.db.DataSourceFactory;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 import net.smartcosmos.platform.bundle.batch.BatchFactory;
 import net.smartcosmos.platform.bundle.quartz.QuartzFactory;
 import net.smartcosmos.platform.bundle.transformation.TransformationsFactory;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SmartCosmosConfiguration extends Configuration
 {
@@ -126,6 +124,9 @@ public class SmartCosmosConfiguration extends Configuration
 
     @JsonProperty
     private boolean supportStatusCheck;
+
+    @Valid
+    private SmartCosmosMetricsFactory metricsFactory = new SmartCosmosMetricsFactory();
 
     @JsonProperty
     private boolean supportNotifications;
@@ -373,6 +374,12 @@ public class SmartCosmosConfiguration extends Configuration
         this.supportStatusCheck = flag;
     }
 
+    @JsonProperty("metrics")
+    public void setMetricsFactory(final SmartCosmosMetricsFactory smartCosmosMetricsFactory)
+    {
+        this.metricsFactory = smartCosmosMetricsFactory;
+    }
+
     public void setSupportUsers(final boolean flag)
     {
         this.supportUsers = flag;
@@ -419,6 +426,12 @@ public class SmartCosmosConfiguration extends Configuration
         return supportStatusCheck;
     }
 
+    @JsonProperty("metrics")
+    public SmartCosmosMetricsFactory getSmartCosmosMetricsFactory()
+    {
+        return metricsFactory;
+    }
+
     public boolean supportUsers()
     {
         return supportUsers;
@@ -452,6 +465,7 @@ public class SmartCosmosConfiguration extends Configuration
                ", supportRealmCheck=" + supportRealmCheck +
                ", supportDynamicRegistration=" + supportDynamicRegistration +
                ", supportStatusCheck=" + supportStatusCheck +
+               ", metrics=" + metricsFactory +
                ", supportNotifications=" + supportNotifications +
                ", supportExtensions=" + supportExtensions +
                ", supportMultimediaFiles=" + supportMultimediaFiles +
