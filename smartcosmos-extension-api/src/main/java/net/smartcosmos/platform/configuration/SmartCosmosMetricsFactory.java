@@ -21,14 +21,16 @@ package net.smartcosmos.platform.configuration;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import net.smartcosmos.platform.constraint.annotation.CredentialsNotNullIfAuthEnabled;
 
+@CredentialsNotNullIfAuthEnabled
 public class SmartCosmosMetricsFactory
 {
     @JsonProperty
-    private Boolean enabled;
+    private Boolean enabled = false;
 
     @JsonProperty("basicAuth")
-    private Boolean authenticationEnabled;
+    private Boolean authenticationEnabled = false;
 
     @JsonProperty
     private String username;
