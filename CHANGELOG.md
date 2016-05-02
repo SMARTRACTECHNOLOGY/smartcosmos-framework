@@ -4,7 +4,8 @@
 
 ### New Features
 
-* No new features are added in this release.
+* Support for `/metrics` configuration in `SmartCosmosConfiguration` (OBJECTS-671)
+* Add validation for `metrics` endpoint configuration (OBJECTS-670)
 
 ### Bugfixes / Improvements
 
