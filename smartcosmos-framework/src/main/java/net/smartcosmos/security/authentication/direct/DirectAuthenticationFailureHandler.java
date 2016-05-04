@@ -3,6 +3,7 @@ package net.smartcosmos.security.authentication.direct;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ public class DirectAuthenticationFailureHandler
             HttpServletResponse response, AuthenticationException exception)
                     throws IOException, ServletException {
 
-        if (response.getContentType() == null || response.getContentType().startsWith("text/")) {
+        if (StringUtils.startsWithIgnoreCase(response.getContentType(),"text/")) {
             super.onAuthenticationFailure(request, response, exception);
         }
         else {
