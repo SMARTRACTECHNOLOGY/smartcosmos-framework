@@ -283,6 +283,16 @@ public class SmartCosmosConfiguration extends Configuration
         return migrateSchemaOnStartup;
     }
 
+    public void setAppInstanceName(String appInstanceName)
+    {
+        this.appInstanceName = appInstanceName;
+    }
+
+    public void setAppName(String appName)
+    {
+        this.appName = appName;
+    }
+
     @JsonProperty("batch")
     public void setBatchFactory(final BatchFactory batchFactory)
     {
