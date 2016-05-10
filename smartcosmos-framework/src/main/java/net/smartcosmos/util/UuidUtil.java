@@ -36,4 +36,24 @@ public final class UuidUtil {
         }
         return "urn:uuid:" + referenceUuid.toString();
     }
+
+    public static UUID getUuidFromAccountUrn(final String urn) {
+        if (!StringUtils.isEmpty(urn)) {
+            return UUID.fromString(urn.replaceFirst("urn:account:", ""));
+        }
+        return null;
+    }
+
+    /**
+     * @param referenceUuid the reference UUID
+     * @return the Sting version (in canonical UUID-as-String format) of an input UUID
+     */
+    public static String getAccountUrnFromUuid(final UUID referenceUuid)
+
+    {
+        if (referenceUuid == null) {
+            return null;
+        }
+        return "urn:account:" + referenceUuid.toString();
+    }
 }
