@@ -27,7 +27,7 @@ public class DirectAuthenticationSuccessHandler
             HttpServletResponse response, Authentication authentication)
                     throws IOException, ServletException {
 
-        if (StringUtils.startsWithIgnoreCase(response.getContentType(),"text/")) {
+        if (StringUtils.isEmpty(response.getContentType()) || StringUtils.startsWithIgnoreCase(response.getContentType(),"text/")) {
             handle(request,response,authentication);
         } else {
             response.setStatus(HttpServletResponse.SC_OK);
