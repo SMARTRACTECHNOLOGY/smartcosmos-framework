@@ -1,5 +1,23 @@
 # SMART COSMOS Framework Release Notes
 
+## 2.13.2 (May 12, 2016)
+
+### New Features
+
+* Support for (optional) `/metrics` configuration in `SmartCosmosConfiguration` (OBJECTS-671)
+* Add validation for `metrics` endpoint configuration (OBJECTS-670)
+
+### Bugfixes / Improvements
+
+* OBJECTS-377 Add data validation annotation for Metadata
+* OBJECTS-620 Refer to Images Locally instead of remotely in documentation
+* SCE-20 get Device endpoints out of `EndpointsFactory`
+* SCE-21 get Hashtag endpoints out of `EndpointsFactory`
+* SCE-22 get Geospatial endpoints out of `EndpointsFactory`
+* Add separate SDKs for different AWS services to `smartcosmos-dependencies` (SCE-19)
+* Fix smartcosmos dependency scope in `smartcosmos-extension-archetype`
+* Extract Geospatial from Objects into separate "Geospatial Extension" (OBJECTS-622)
+
 ## Release 2.13.1 (March 8, 2016)
 
 ### IMPORTANT CONFIGURATION NOTE

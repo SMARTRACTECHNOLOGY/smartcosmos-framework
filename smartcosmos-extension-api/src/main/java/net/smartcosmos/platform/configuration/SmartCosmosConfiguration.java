@@ -125,6 +125,9 @@ public class SmartCosmosConfiguration extends Configuration
     @JsonProperty
     private boolean supportStatusCheck;
 
+    @Valid
+    private SmartCosmosMetricsFactory metricsFactory = new SmartCosmosMetricsFactory();
+
     @JsonProperty
     private boolean supportNotifications;
 
@@ -280,6 +283,16 @@ public class SmartCosmosConfiguration extends Configuration
         return migrateSchemaOnStartup;
     }
 
+    public void setAppInstanceName(String appInstanceName)
+    {
+        this.appInstanceName = appInstanceName;
+    }
+
+    public void setAppName(String appName)
+    {
+        this.appName = appName;
+    }
+
     @JsonProperty("batch")
     public void setBatchFactory(final BatchFactory batchFactory)
     {
@@ -371,6 +384,12 @@ public class SmartCosmosConfiguration extends Configuration
         this.supportStatusCheck = flag;
     }
 
+    @JsonProperty("metrics")
+    public void setMetricsFactory(final SmartCosmosMetricsFactory smartCosmosMetricsFactory)
+    {
+        this.metricsFactory = smartCosmosMetricsFactory;
+    }
+
     public void setSupportUsers(final boolean flag)
     {
         this.supportUsers = flag;
@@ -417,8 +436,54 @@ public class SmartCosmosConfiguration extends Configuration
         return supportStatusCheck;
     }
 
+    @JsonProperty("metrics")
+    public SmartCosmosMetricsFactory getSmartCosmosMetricsFactory()
+    {
+        return metricsFactory;
+    }
+
     public boolean supportUsers()
     {
         return supportUsers;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "SmartCosmosConfiguration{" +
+               "serverRoot='" + serverRoot + '\'' +
+               ", urlPattern='" + urlPattern + '\'' +
+               ", adminEmailAddress='" + adminEmailAddress + '\'' +
+               ", appInstanceName='" + appInstanceName + '\'' +
+               ", appName='" + appName + '\'' +
+               ", oAuth2Factory=" + oAuth2Factory +
+               ", serviceClasses=" + serviceClasses +
+               ", endpointMethodControl=" + endpointMethodControl +
+               ", visitors=" + visitors +
+               ", resourceRegistrarClasses=" + resourceRegistrarClasses +
+               ", serviceParameters=" + serviceParameters +
+               ", dataSourceFactory=" + dataSourceFactory +
+               ", migrateSchemaOnStartup=" + migrateSchemaOnStartup +
+               ", batchFactory=" + batchFactory +
+               ", quartzFactory=" + quartzFactory +
+               ", transformationsFactory=" + transformationsFactory +
+               ", httpClient=" + httpClient +
+               ", endpointsFactory=" + endpointsFactory +
+               ", licenseFactory=" + licenseFactory +
+               ", serverExtensions=" + serverExtensions +
+               ", serverExtensionConfigurationPaths=" + serverExtensionConfigurationPaths +
+               ", supportRealmCheck=" + supportRealmCheck +
+               ", supportDynamicRegistration=" + supportDynamicRegistration +
+               ", supportStatusCheck=" + supportStatusCheck +
+               ", metrics=" + metricsFactory +
+               ", supportNotifications=" + supportNotifications +
+               ", supportExtensions=" + supportExtensions +
+               ", supportMultimediaFiles=" + supportMultimediaFiles +
+               ", supportInteractionSessions=" + supportInteractionSessions +
+               ", supportUsers=" + supportUsers +
+               ", includeEmailVerificationTokenInRegistrationJSON=" + includeEmailVerificationTokenInRegistrationJSON +
+               ", transactionHandlerClasses=" + transactionHandlerClasses +
+               ", libraryHierarchy=" + libraryHierarchy +
+               "} " + super.toString();
     }
 }

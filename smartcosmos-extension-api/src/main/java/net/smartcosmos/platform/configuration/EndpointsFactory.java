@@ -34,19 +34,10 @@ public class EndpointsFactory
     private Boolean objectAddressEndpoint = true;
 
     @JsonProperty
-    private Boolean deviceEndpoints = true;
-
-    @JsonProperty
     private Boolean metadataEndpoints = true;
 
     @JsonProperty
-    private Boolean tagEndpoints = true;
-
-    @JsonProperty
     private Boolean timelineEndpoints = true;
-
-    @JsonProperty
-    private Boolean geospatialEndpoints = true;
 
     @JsonProperty
     private Boolean relationshipEndpoints = true;
@@ -107,29 +98,14 @@ public class EndpointsFactory
         return relationshipEndpoints;
     }
 
-    public Boolean getGeospatialEndpoints()
-    {
-        return geospatialEndpoints;
-    }
-
     public Boolean getTimelineEndpoints()
     {
         return timelineEndpoints;
     }
 
-    public Boolean getTagEndpoints()
-    {
-        return tagEndpoints;
-    }
-
     public Boolean getMetadataEndpoints()
     {
         return metadataEndpoints;
-    }
-
-    public Boolean getDeviceEndpoints()
-    {
-        return deviceEndpoints;
     }
 
     public Boolean getObjectAddressEndpoint()
@@ -191,4 +167,5 @@ public class EndpointsFactory
     {
         return realmEndpoints;
     }
+
 }

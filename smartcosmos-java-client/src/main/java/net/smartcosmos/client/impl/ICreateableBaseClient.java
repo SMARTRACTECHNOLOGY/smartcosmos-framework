@@ -20,9 +20,10 @@ package net.smartcosmos.client.impl;
  * #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
  */
 
+import org.json.JSONObject;
+
 import net.smartcosmos.client.connectivity.ServiceException;
 import net.smartcosmos.pojo.base.ResponseEntity;
-import org.json.JSONObject;
 
 /**
  * Type-safe creation routines for SMART COSMOS entities either by providing an explicit strongly typed instance or
@@ -35,7 +36,6 @@ import org.json.JSONObject;
  * @param <T> One of the SMART COSMOS contextual entities. 
  * @see net.smartcosmos.model.extension.IExternalExtension
  * @see net.smartcosmos.objects.model.context.IFile
- * @see net.smartcosmos.model.geo.IGeospatialEntry
  * @see net.smartcosmos.model.context.IMetadata
  * @see net.smartcosmos.objects.model.context.IRelationship
  * @see net.smartcosmos.objects.model.context.ITimelineEntry
