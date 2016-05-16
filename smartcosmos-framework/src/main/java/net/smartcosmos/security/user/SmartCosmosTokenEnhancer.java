@@ -1,7 +1,6 @@
 package net.smartcosmos.security.user;
 
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.JwtAccessTokenConverterConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
@@ -25,7 +24,11 @@ import org.springframework.stereotype.Component;
 public class SmartCosmosTokenEnhancer implements JwtAccessTokenConverterConfigurer {
 
     @Autowired
-    SmartCosmosUserAuthenticationConverter smartCosmosUserAuthenticationConverter;
+    public SmartCosmosTokenEnhancer(SmartCosmosUserAuthenticationConverter smartCosmosUserAuthenticationConverter) {
+        this.smartCosmosUserAuthenticationConverter = smartCosmosUserAuthenticationConverter;
+    }
+
+    private final SmartCosmosUserAuthenticationConverter smartCosmosUserAuthenticationConverter;
 
     @Override
     public void configure(JwtAccessTokenConverter converter) {
