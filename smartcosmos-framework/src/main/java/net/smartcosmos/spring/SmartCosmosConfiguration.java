@@ -85,10 +85,9 @@ public class SmartCosmosConfiguration {
         @Profile("!test")
         ISmartCosmosEventTemplate smartCosmosEventTemplate(
                 OAuth2ClientContext oauth2ClientContext,
-                OAuth2ProtectedResourceDetails details, SpringClientFactory clientFactory,
-                LoadBalancerClient loadBalancer) {
+                OAuth2ProtectedResourceDetails details, SpringClientFactory clientFactory) {
             RibbonClientHttpRequestFactory ribbonClientHttpRequestFactory = new RibbonClientHttpRequestFactory(
-                    clientFactory, loadBalancer);
+                    clientFactory);
             OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(details,
                     oauth2ClientContext);
             restTemplate.setRequestFactory(ribbonClientHttpRequestFactory);
