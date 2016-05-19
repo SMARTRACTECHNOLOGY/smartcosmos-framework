@@ -56,4 +56,14 @@ public final class UuidUtil {
         }
         return "urn:account:" + referenceUuid.toString();
     }
+
+    public static UUID getNewUuid()
+    {
+        return UUID.randomUUID();
+    }
+
+    public static String getNewUuidAsString()
+    {
+        return UUID.randomUUID().toString();
+    }
 }
