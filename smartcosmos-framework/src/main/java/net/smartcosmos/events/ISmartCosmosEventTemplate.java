@@ -10,6 +10,8 @@ import net.smartcosmos.security.user.SmartCosmosUser;
  */
 public interface ISmartCosmosEventTemplate {
 
+    void sendEvent(SmartCosmosEvent event) throws SmartCosmosEventException;
+
     void sendEvent(Object data, String eventType) throws SmartCosmosEventException;
 
     void sendEvent(Object data, String eventType, String accountUrn)

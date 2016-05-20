@@ -2,6 +2,7 @@ package net.smartcosmos.events;
 
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;
+import org.springframework.messaging.Message;
 
 /**
  * @author voor
@@ -9,7 +10,7 @@ import org.springframework.integration.annotation.MessagingGateway;
 @MessagingGateway
 public interface ISmartCosmosEventGateway {
 
-    @Gateway(requestChannel = SmartCosmosEventSource.OUTPUT)
-    void convertAndSend(SmartCosmosEvent event);
+    @Gateway
+    void convertAndSend(Message message);
 
 }

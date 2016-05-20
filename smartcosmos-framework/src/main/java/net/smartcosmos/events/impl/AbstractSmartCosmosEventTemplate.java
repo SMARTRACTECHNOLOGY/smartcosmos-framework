@@ -36,7 +36,12 @@ public abstract class AbstractSmartCosmosEventTemplate
     @Override
     public void sendEvent(Object data, String eventType, String accountUrn,
             String userUrn) throws SmartCosmosEventException {
-        convertAndSend(SmartCosmosEvent.builder().data(data).accountUrn(accountUrn)
+        sendEvent(SmartCosmosEvent.builder().data(data).accountUrn(accountUrn)
                 .userUrn(userUrn).eventType(eventType).build());
+    }
+
+    @Override
+    public void sendEvent(SmartCosmosEvent event) throws SmartCosmosEventException {
+        convertAndSend(event);
     }
 }

@@ -2,6 +2,7 @@ package net.smartcosmos.spring;
 
 import lombok.extern.slf4j.Slf4j;
 import net.smartcosmos.events.ISmartCosmosEventTemplate;
+import net.smartcosmos.events.SmartCosmosEventProducer;
 import net.smartcosmos.events.impl.RestSmartCosmosEventTemplate;
 import net.smartcosmos.events.impl.TestSmartCosmosEventRestTemplate;
 
@@ -43,10 +44,11 @@ public class SmartCosmosConfiguration {
 
     @Configuration
     @ConditionalOnClass({ ConnectionFactory.class, RabbitOperations.class,
-            RabbitTemplate.class })
+        RabbitTemplate.class })
     @Slf4j
+    @SmartCosmosEventProducer
     protected static class RabbitConnectionConfiguration
-            implements RabbitListenerConfigurer {
+        implements RabbitListenerConfigurer {
 
         @Autowired
         private SmartCosmosProperties smartCosmosProperties;
@@ -84,17 +86,17 @@ public class SmartCosmosConfiguration {
         @Bean
         @Profile("!test")
         ISmartCosmosEventTemplate smartCosmosEventTemplate(
-                OAuth2ClientContext oauth2ClientContext,
-                OAuth2ProtectedResourceDetails details, SpringClientFactory clientFactory) {
+            OAuth2ClientContext oauth2ClientContext,
+            OAuth2ProtectedResourceDetails details, SpringClientFactory clientFactory) {
             RibbonClientHttpRequestFactory ribbonClientHttpRequestFactory = new RibbonClientHttpRequestFactory(
-                    clientFactory);
+                clientFactory);
             OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(details,
-                    oauth2ClientContext);
+                oauth2ClientContext);
             restTemplate.setRequestFactory(ribbonClientHttpRequestFactory);
             return new RestSmartCosmosEventTemplate(restTemplate,
-                    smartCosmosProperties.getEvents().getServiceName(),
-                    smartCosmosProperties.getEvents().getHttpMethod(),
-                    smartCosmosProperties.getEvents().getUrl());
+                smartCosmosProperties.getEvents().getServiceName(),
+                smartCosmosProperties.getEvents().getHttpMethod(),
+                smartCosmosProperties.getEvents().getUrl());
         }
 
         @Bean
