@@ -30,6 +30,8 @@ public class DefaultEventTypes {
      * Primary Core Events
      */
     final public static String ObjectCreated = "object:created";
+    final public static String ObjectCreatedTransactional = "object:createdTransactional:transactionId:";
+    final public static String ObjectTransactionalCreateFailure = "object:TransactionalCreateFailure:transactionId:";
     final public static String ObjectRead = "object:read";
     final public static String ObjectUpdated = "object:updated";
     final public static String ObjectDeactivated = "object:deactivated";
