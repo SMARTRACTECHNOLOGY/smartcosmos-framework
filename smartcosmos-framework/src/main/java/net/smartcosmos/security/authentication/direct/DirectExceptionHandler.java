@@ -68,7 +68,7 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
 
         logger.warn(ex.getMessage());
 
-        return handleExceptionInternal(ex, null, headers, status, request);
+        return handleExceptionInternal(ex, processNoEntityFound(ex), headers, status, request);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
@@ -76,6 +76,8 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
 
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        logger.warn(ex.getMessage());
 
         Set<ConstraintViolation<?>> fieldErrors = ex.getConstraintViolations();
         Set<String> fieldNames = fieldErrors.stream().map(violation -> violation.getPropertyPath().toString()).collect(Collectors.toSet());
@@ -94,6 +96,15 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, processFieldError(error), headers, status,
                 request);
+    }
+
+    private Map<String, Object> processNoEntityFound(NoEntityFoundException ex) {
+        Map<String, Object> message = new LinkedHashMap<>();
+
+        message.put("code", ex.getCode());
+        message.put("message", ex.getMessage());
+
+        return message;
     }
 
     private Map<String, Object> processConstraintViolation(Set<String> fieldNames) {
