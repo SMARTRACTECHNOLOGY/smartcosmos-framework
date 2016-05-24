@@ -71,11 +71,22 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, null, headers, status, request);
     }
 
+    /**
+     * Customize the response for ConstraintViolationException.
+     * <p>
+     * This method logs a warning and delegates to {@link #handleExceptionInternal}.
+     *
+     * @param ex the exception
+     * @param request the current request
+     * @return a {@code ResponseEntity} instance
+     */
     @ExceptionHandler(ConstraintViolationException.class)
     protected ResponseEntity<Object> handleConstraintViolationError(ConstraintViolationException ex, WebRequest request) {
 
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        logger.warn(ex.getMessage());
 
         Set<ConstraintViolation<?>> fieldErrors = ex.getConstraintViolations();
         Set<String> fieldNames = fieldErrors.stream().map(violation -> violation.getPropertyPath().toString()).collect(Collectors.toSet());
