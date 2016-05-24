@@ -23,7 +23,9 @@ public class NoEntityFoundException extends ServiceException {
     }
 
     /**
-     * This version of NoEntityFoundException produces an error message like
+     * This version of NoEntityFoundException produces an error message for entity records not matching a query parameter.
+     * 
+     * Example:
      * <code>
      *     {"code": -8, "message": "No matching Object record with objectUrn of urn:my-object-urn exists"}
      * </code>
@@ -43,7 +45,9 @@ public class NoEntityFoundException extends ServiceException {
     }
 
     /**
-     * This version of NoEntityFoundException produces an error message like
+     * This version of NoEntityFoundException produces an error message for unknown entities.
+     *
+     * Example:
      * <code>
      *     {"code": -9, "message": "Unknown Object entity with urn urn:uuid:71b81766-afb2-4be3-943f-6a24b6ae15cc"}
      * </code>
