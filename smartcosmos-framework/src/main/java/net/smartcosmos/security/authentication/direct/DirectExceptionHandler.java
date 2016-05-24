@@ -1,6 +1,7 @@
 package net.smartcosmos.security.authentication.direct;
 
 import net.smartcosmos.exceptions.NoEntityFoundException;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
@@ -16,9 +17,13 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.util.WebUtils;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Controller advice to translate the server side exceptions the media type that the
@@ -66,6 +71,19 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, null, headers, status, request);
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    protected ResponseEntity<Object> handleConstraintViolationError(ConstraintViolationException ex, WebRequest request) {
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        Set<ConstraintViolation<?>> fieldErrors = ex.getConstraintViolations();
+        Set<String> fieldNames = fieldErrors.stream().map(violation -> violation.getPropertyPath().toString()).collect(Collectors.toSet());
+
+        return handleExceptionInternal(ex, processConstraintViolation(fieldNames), headers, status,
+                request);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -76,6 +94,15 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, processFieldError(error), headers, status,
                 request);
+    }
+
+    private Map<String, Object> processConstraintViolation(Set<String> fieldNames) {
+        Map<String, Object> message = new LinkedHashMap<>();
+
+        message.put("code", -5);
+        message.put("message", "JSON is missing a required field or violates field constraints: " + StringUtils.join(fieldNames, ','));
+
+        return message;
     }
 
     private Map<String, Object> processFieldError(FieldError error) {
