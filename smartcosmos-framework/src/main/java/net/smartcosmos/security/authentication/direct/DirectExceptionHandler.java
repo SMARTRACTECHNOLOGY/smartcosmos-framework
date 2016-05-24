@@ -60,6 +60,15 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, null, headers, status, request);
     }
 
+    /**
+     * Customize the response for NoEntityFoundException.
+     * <p>
+     * This method logs a warning and delegates to {@link #handleExceptionInternal}.
+     *
+     * @param ex the exception
+     * @param request the current request
+     * @return a {@code ResponseEntity} instance
+     */
     @ExceptionHandler(NoEntityFoundException.class)
     protected ResponseEntity<Object> handleNoEntityFoundRequestHandlingMethod(
             NoEntityFoundException ex, WebRequest request) {
