@@ -108,7 +108,7 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
     private Map<String, Object> processFieldError(FieldError error) {
         Map<String, Object> message = new LinkedHashMap<>();
 
-        message.put("code", "-5");
+        message.put("code", -5);
         message.put("message", messageSource.getMessage(error, Locale.ENGLISH));
 
         return message;
