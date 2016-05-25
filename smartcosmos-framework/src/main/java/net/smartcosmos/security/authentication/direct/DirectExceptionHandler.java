@@ -80,6 +80,15 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, processNoEntityFound(ex), headers, status, request);
     }
 
+    /**
+     * Customize the response for ConstraintViolationException.
+     * <p>
+     * This method logs a warning and delegates to {@link #handleExceptionInternal}.
+     *
+     * @param ex the exception
+     * @param request the current request
+     * @return a {@code ResponseEntity} instance
+     */
     @ExceptionHandler(ConstraintViolationException.class)
     protected ResponseEntity<Object> handleConstraintViolationError(ConstraintViolationException ex, WebRequest request) {
 
