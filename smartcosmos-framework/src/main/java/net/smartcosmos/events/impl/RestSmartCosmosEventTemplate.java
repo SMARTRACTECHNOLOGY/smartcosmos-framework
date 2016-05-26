@@ -28,7 +28,7 @@ public class RestSmartCosmosEventTemplate extends AbstractSmartCosmosEventTempla
     }
 
     @Override
-    public void convertAndSend(SmartCosmosEvent message)
+    public void convertAndSend(SmartCosmosEvent<Object> message)
             throws SmartCosmosEventException {
 
         try {
