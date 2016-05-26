@@ -60,6 +60,15 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, null, headers, status, request);
     }
 
+    /**
+     * Customize the response for NoEntityFoundException.
+     * <p>
+     * This method logs a warning and delegates to {@link #handleExceptionInternal}.
+     *
+     * @param ex the exception
+     * @param request the current request
+     * @return a {@code ResponseEntity} instance
+     */
     @ExceptionHandler(NoEntityFoundException.class)
     protected ResponseEntity<Object> handleNoEntityFoundRequestHandlingMethod(
             NoEntityFoundException ex, WebRequest request) {
@@ -68,7 +77,7 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
 
         logger.warn(ex.getMessage());
 
-        return handleExceptionInternal(ex, null, headers, status, request);
+        return handleExceptionInternal(ex, processNoEntityFound(ex), headers, status, request);
     }
 
     /**
@@ -105,6 +114,15 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, processFieldError(error), headers, status,
                 request);
+    }
+
+    private Map<String, Object> processNoEntityFound(NoEntityFoundException ex) {
+        Map<String, Object> message = new LinkedHashMap<>();
+
+        message.put("code", ex.getCode());
+        message.put("message", ex.getMessage());
+
+        return message;
     }
 
     private Map<String, Object> processConstraintViolation(Set<String> fieldNames) {
