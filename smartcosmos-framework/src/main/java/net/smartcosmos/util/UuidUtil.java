@@ -23,11 +23,17 @@ public final class UuidUtil {
     public static final String URN_PREFIX_ACCOUNT = URN_PREFIX + URN_SEPARATOR + "account" + URN_SEPARATOR;
     public static final String URN_PREFIX_UUID = URN_PREFIX + URN_SEPARATOR + "uuid" + URN_SEPARATOR;
 
+    /**
+     *
+     * @param urn the urn
+     * @return the UUID
+     * @throws IllegalArgumentException
+     */
     public static UUID getUuidFromUrn(final String urn) {
-        if (StringUtils.isNotBlank(urn)) {
+        if (StringUtils.isNotBlank(urn) && urn.startsWith(URN_PREFIX_UUID)) {
             return UUID.fromString(StringUtils.substringAfterLast(urn, URN_SEPARATOR));
         }
-        return null;
+        throw new IllegalArgumentException(String.format("Invalid URN: %s", urn));
     }
 
     /**
@@ -48,12 +54,13 @@ public final class UuidUtil {
      *
      * @param urn the account URN
      * @return the UUID
+     * @throws IllegalArgumentException
      */
     public static UUID getUuidFromAccountUrn(final String urn) {
-        if (StringUtils.isNotBlank(urn)) {
+        if (StringUtils.isNotBlank(urn)&& urn.startsWith(URN_PREFIX_ACCOUNT)) {
             return UUID.fromString(StringUtils.substringAfterLast(urn, URN_SEPARATOR));
         }
-        return null;
+        throw new IllegalArgumentException(String.format("Invalid URN: %s", urn));
     }
 
     /**
