@@ -37,6 +37,8 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     MessageSource messageSource;
 
+    private static final int ERR_FIELD_CONSTRAINT_VIOLATION = -5;
+
     /**
      * Customize the response for AccessDeniedException.
      * <p>
@@ -126,7 +128,7 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
     private Map<String, Object> processConstraintViolation(Set<String> fieldNames) {
         Map<String, Object> message = new LinkedHashMap<>();
 
-        message.put("code", -5);
+        message.put("code", ERR_FIELD_CONSTRAINT_VIOLATION);
         message.put("message", "JSON is missing a required field or violates field constraints: " + StringUtils.join(fieldNames, ", "));
 
         return message;
