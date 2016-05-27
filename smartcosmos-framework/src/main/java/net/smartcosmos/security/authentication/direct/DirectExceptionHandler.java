@@ -19,10 +19,7 @@ import org.springframework.web.util.WebUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import java.util.LinkedHashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -110,9 +107,10 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
         logger.warn(ex.getMessage());
 
         BindingResult result = ex.getBindingResult();
-        FieldError error = result.getFieldError();
+        List<FieldError> errors = result.getFieldErrors();
+        Set<String> fieldNames = errors.stream().map(FieldError::getField).collect(Collectors.toSet());
 
-        return handleExceptionInternal(ex, processFieldError(error), headers, status,
+        return handleExceptionInternal(ex, processConstraintViolation(fieldNames), headers, status,
                 request);
     }
 
@@ -129,16 +127,7 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
         Map<String, Object> message = new LinkedHashMap<>();
 
         message.put("code", -5);
-        message.put("message", "JSON is missing a required field or violates field constraints: " + StringUtils.join(fieldNames, ','));
-
-        return message;
-    }
-
-    private Map<String, Object> processFieldError(FieldError error) {
-        Map<String, Object> message = new LinkedHashMap<>();
-
-        message.put("code", -5);
-        message.put("message", messageSource.getMessage(error, Locale.ENGLISH));
+        message.put("message", "JSON is missing a required field or violates field constraints: " + StringUtils.join(fieldNames, ", "));
 
         return message;
     }
@@ -151,7 +140,7 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
                     WebRequest.SCOPE_REQUEST);
         }
 
-        return new ResponseEntity<Object>(body, headers, status);
+        return new ResponseEntity<>(body, headers, status);
     }
 
 }
