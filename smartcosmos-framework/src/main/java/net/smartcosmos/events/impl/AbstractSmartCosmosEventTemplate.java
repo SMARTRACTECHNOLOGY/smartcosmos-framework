@@ -11,7 +11,7 @@ import net.smartcosmos.security.user.SmartCosmosUser;
 public abstract class AbstractSmartCosmosEventTemplate
         implements ISmartCosmosEventTemplate {
 
-    public abstract void convertAndSend(SmartCosmosEvent message)
+    public abstract void convertAndSend(SmartCosmosEvent<Object> message)
             throws SmartCosmosEventException;
 
     @Override

@@ -2,68 +2,85 @@ package net.smartcosmos.util;
 
 import java.util.UUID;
 
-import org.springframework.util.StringUtils;
+import lombok.AllArgsConstructor;
+
+import org.apache.commons.lang.StringUtils;
+
+import static lombok.AccessLevel.PRIVATE;
 
 /**
- * Motiviated by:
+ * Utilities for common UUID activities.
  * <p>
- * https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/
- *
- * @author tcross
+ * Inspired by:
+ * <a href="https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/">https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/</a>
+ * </p>
  */
+@AllArgsConstructor(access = PRIVATE)
 public final class UuidUtil {
 
-    private UuidUtil() {
-        // only static methods - no public constructor
-    }
+    public static final String URN_SEPARATOR = ":";
+    public static final String URN_PREFIX = "urn";
+    public static final String URN_PREFIX_ACCOUNT = URN_PREFIX + URN_SEPARATOR + "account" + URN_SEPARATOR;
+    public static final String URN_PREFIX_UUID = URN_PREFIX + URN_SEPARATOR + "uuid" + URN_SEPARATOR;
 
+    /**
+     *
+     * @param urn the urn
+     * @return the UUID
+     * @throws IllegalArgumentException
+     */
     public static UUID getUuidFromUrn(final String urn) {
-        if (!StringUtils.isEmpty(urn)) {
-            return UUID.fromString(urn.replaceFirst("urn:uuid:", ""));
+        if (StringUtils.isNotBlank(urn) && urn.startsWith(URN_PREFIX_UUID)) {
+            return UUID.fromString(StringUtils.substringAfterLast(urn, URN_SEPARATOR));
         }
-        return null;
+        throw new IllegalArgumentException(String.format("Invalid URN: %s", urn));
     }
 
     /**
+     * Create a URN for a provided UUID.
+     *
      * @param referenceUuid the reference UUID
-     * @return the Sting version (in canonical UUID-as-String format) of an input UUID
+     * @return the String version (in canonical UUID-as-String format) of an input UUID
      */
-    public static String getUrnFromUuid(final UUID referenceUuid)
-
-    {
+    public static String getUrnFromUuid(final UUID referenceUuid) {
         if (referenceUuid == null) {
             return null;
         }
-        return "urn:uuid:" + referenceUuid.toString();
+        return URN_PREFIX_UUID + referenceUuid.toString();
     }
 
+    /**
+     * Get the UUID portion of an account URN.
+     *
+     * @param urn the account URN
+     * @return the UUID
+     * @throws IllegalArgumentException
+     */
     public static UUID getUuidFromAccountUrn(final String urn) {
-        if (!StringUtils.isEmpty(urn)) {
-            return UUID.fromString(urn.replaceFirst("urn:account:", ""));
+        if (StringUtils.isNotBlank(urn)&& urn.startsWith(URN_PREFIX_ACCOUNT)) {
+            return UUID.fromString(StringUtils.substringAfterLast(urn, URN_SEPARATOR));
         }
-        return null;
+        throw new IllegalArgumentException(String.format("Invalid URN: %s", urn));
     }
 
     /**
+     * Create an account URN for a provided UUID.
+     *
      * @param referenceUuid the reference UUID
      * @return the Sting version (in canonical UUID-as-String format) of an input UUID
      */
-    public static String getAccountUrnFromUuid(final UUID referenceUuid)
-
-    {
+    public static String getAccountUrnFromUuid(final UUID referenceUuid) {
         if (referenceUuid == null) {
             return null;
         }
-        return "urn:account:" + referenceUuid.toString();
+        return URN_PREFIX_ACCOUNT + referenceUuid.toString();
     }
 
-    public static UUID getNewUuid()
-    {
+    public static UUID getNewUuid() {
         return UUID.randomUUID();
     }
 
-    public static String getNewUuidAsString()
-    {
-        return UUID.randomUUID().toString();
+    public static String getNewUuidAsString() {
+        return getNewUuid().toString();
     }
 }
