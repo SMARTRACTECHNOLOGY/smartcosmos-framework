@@ -25,7 +25,7 @@ public enum SmartCosmosErrorState {
     PARSE_FAILURE(-17, "Unable to parse input"),
     UNSUPPORTED_ENTITY_TYPE(-18, "Unsupported Entity Reference Type"),
     INVALID_EXTENSION_OPERATION(-50, "Extensions are not permitted to perform <…>"),
-    AUHTORIZATION_FAILURE(-51, "Caller lacked the authorization to complete the requested operation"),
+    AUThORIZATION_FAILURE(-51, "Caller lacked the authorization to complete the requested operation"),
     INTERNAL_ERROR(-500, "Internal Server Error");
 
     private int code;
