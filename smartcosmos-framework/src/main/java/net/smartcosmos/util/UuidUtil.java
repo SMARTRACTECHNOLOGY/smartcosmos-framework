@@ -1,10 +1,9 @@
 package net.smartcosmos.util;
 
-import java.util.UUID;
-
 import lombok.AllArgsConstructor;
-
 import org.apache.commons.lang.StringUtils;
+
+import java.util.UUID;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -21,6 +20,7 @@ public final class UuidUtil {
     public static final String URN_SEPARATOR = ":";
     public static final String URN_PREFIX = "urn";
     public static final String URN_PREFIX_ACCOUNT = URN_PREFIX + URN_SEPARATOR + "account" + URN_SEPARATOR;
+    public static final String URN_PREFIX_TENANT = URN_PREFIX + URN_SEPARATOR + "tenant" + URN_SEPARATOR;
     public static final String URN_PREFIX_UUID = URN_PREFIX + URN_SEPARATOR + "uuid" + URN_SEPARATOR;
 
     /**
@@ -56,8 +56,23 @@ public final class UuidUtil {
      * @return the UUID
      * @throws IllegalArgumentException
      */
+    @Deprecated
     public static UUID getUuidFromAccountUrn(final String urn) {
         if (StringUtils.isNotBlank(urn)&& urn.startsWith(URN_PREFIX_ACCOUNT)) {
+            return UUID.fromString(StringUtils.substringAfterLast(urn, URN_SEPARATOR));
+        }
+        throw new IllegalArgumentException(String.format("Invalid URN: %s", urn));
+    }
+
+    /**
+     * Get the UUID portion of a tenant URN.
+     *
+     * @param urn the tenant URN
+     * @return the UUID
+     * @throws IllegalArgumentException
+     */
+    public static UUID getUuidFromTenantUrn(final String urn) {
+        if (StringUtils.isNotBlank(urn)&& urn.startsWith(URN_PREFIX_TENANT)) {
             return UUID.fromString(StringUtils.substringAfterLast(urn, URN_SEPARATOR));
         }
         throw new IllegalArgumentException(String.format("Invalid URN: %s", urn));
