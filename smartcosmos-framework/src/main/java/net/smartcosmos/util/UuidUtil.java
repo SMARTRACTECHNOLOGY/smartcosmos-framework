@@ -84,11 +84,25 @@ public final class UuidUtil {
      * @param referenceUuid the reference UUID
      * @return the Sting version (in canonical UUID-as-String format) of an input UUID
      */
+    @Deprecated
     public static String getAccountUrnFromUuid(final UUID referenceUuid) {
         if (referenceUuid == null) {
             return null;
         }
         return URN_PREFIX_ACCOUNT + referenceUuid.toString();
+    }
+
+    /**
+     * Create a tenant URN for a provided UUID.
+     *
+     * @param referenceUuid the reference UUID
+     * @return the Sting version (in canonical UUID-as-String format) of an input UUID
+     */
+    public static String getTenantUrnFromUuid(final UUID referenceUuid) {
+        if (referenceUuid == null) {
+            return null;
+        }
+        return URN_PREFIX_TENANT + referenceUuid.toString();
     }
 
     public static UUID getNewUuid() {
