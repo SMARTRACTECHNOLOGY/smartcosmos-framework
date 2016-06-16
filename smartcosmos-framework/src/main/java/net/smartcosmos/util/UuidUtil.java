@@ -1,10 +1,9 @@
 package net.smartcosmos.util;
 
-import java.util.UUID;
-
 import lombok.AllArgsConstructor;
-
 import org.apache.commons.lang.StringUtils;
+
+import java.util.UUID;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -56,6 +55,7 @@ public final class UuidUtil {
      * @return the UUID
      * @throws IllegalArgumentException
      */
+    @Deprecated
     public static UUID getUuidFromAccountUrn(final String urn) {
         if (StringUtils.isNotBlank(urn)&& urn.startsWith(URN_PREFIX_ACCOUNT)) {
             return UUID.fromString(StringUtils.substringAfterLast(urn, URN_SEPARATOR));
@@ -69,6 +69,7 @@ public final class UuidUtil {
      * @param referenceUuid the reference UUID
      * @return the Sting version (in canonical UUID-as-String format) of an input UUID
      */
+    @Deprecated
     public static String getAccountUrnFromUuid(final UUID referenceUuid) {
         if (referenceUuid == null) {
             return null;
