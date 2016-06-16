@@ -1,9 +1,5 @@
 package net.smartcosmos.security.user;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +9,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.provider.token.UserAuthenticationConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Custom version of {@link UserAuthenticationConverter} that stores user details directly
@@ -65,6 +65,7 @@ public class SmartCosmosUserAuthenticationConverter
         if (authentication.getPrincipal() instanceof SmartCosmosUser) {
             SmartCosmosUser user = (SmartCosmosUser) authentication.getPrincipal();
             response.put(SmartCosmosUser.TOKEN_FIELD_URN_ACCOUNT, user.getAccountUrn());
+            response.put(SmartCosmosUser.TOKEN_FIELD_ID_TENANT, user.getTenantId());
             response.put(SmartCosmosUser.TOKEN_FIELD_URN_USER, user.getUserUrn());
         }
 
@@ -72,15 +73,22 @@ public class SmartCosmosUserAuthenticationConverter
     }
 
     public Authentication extractAuthentication(Map<String, ?> map) {
-        if (map.containsKey(SmartCosmosUser.TOKEN_FIELD_URN_ACCOUNT)) {
-            final String accountUrn = map.get(SmartCosmosUser.TOKEN_FIELD_URN_ACCOUNT)
-                    .toString();
-            final String userUrn = map.get(SmartCosmosUser.TOKEN_FIELD_URN_USER)
-                    .toString();
+        if (map.containsKey(SmartCosmosUser.TOKEN_FIELD_URN_ACCOUNT)
+                || map.containsKey(SmartCosmosUser.TOKEN_FIELD_ID_TENANT)) {
+            final String accountUrn = map.get(SmartCosmosUser.TOKEN_FIELD_URN_ACCOUNT).toString();
+            final String tenantId = map.get(SmartCosmosUser.TOKEN_FIELD_ID_TENANT).toString();
+            final String userUrn = map.get(SmartCosmosUser.TOKEN_FIELD_URN_USER).toString();
             final String username = map.get(USERNAME).toString();
             Collection<? extends GrantedAuthority> authorities = getAuthorities(map);
 
-            final SmartCosmosUser principal = new SmartCosmosUser(accountUrn, userUrn,
+            String identifier;
+            if (org.apache.commons.lang.StringUtils.isNotBlank(tenantId)) {
+                identifier = tenantId;
+            } else {
+                identifier = accountUrn;
+            }
+
+            final SmartCosmosUser principal = new SmartCosmosUser(identifier, userUrn,
                     username, "N/A", authorities);
 
             return new UsernamePasswordAuthenticationToken(principal, "N/A", authorities);
