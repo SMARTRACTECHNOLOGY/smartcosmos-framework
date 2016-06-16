@@ -20,7 +20,6 @@ public final class UuidUtil {
     public static final String URN_SEPARATOR = ":";
     public static final String URN_PREFIX = "urn";
     public static final String URN_PREFIX_ACCOUNT = URN_PREFIX + URN_SEPARATOR + "account" + URN_SEPARATOR;
-    public static final String URN_PREFIX_TENANT = URN_PREFIX + URN_SEPARATOR + "tenant" + URN_SEPARATOR;
     public static final String URN_PREFIX_UUID = URN_PREFIX + URN_SEPARATOR + "uuid" + URN_SEPARATOR;
 
     /**
@@ -65,20 +64,6 @@ public final class UuidUtil {
     }
 
     /**
-     * Get the UUID portion of a tenant URN.
-     *
-     * @param urn the tenant URN
-     * @return the UUID
-     * @throws IllegalArgumentException
-     */
-    public static UUID getUuidFromTenantUrn(final String urn) {
-        if (StringUtils.isNotBlank(urn)&& urn.startsWith(URN_PREFIX_TENANT)) {
-            return UUID.fromString(StringUtils.substringAfterLast(urn, URN_SEPARATOR));
-        }
-        throw new IllegalArgumentException(String.format("Invalid URN: %s", urn));
-    }
-
-    /**
      * Create an account URN for a provided UUID.
      *
      * @param referenceUuid the reference UUID
@@ -90,19 +75,6 @@ public final class UuidUtil {
             return null;
         }
         return URN_PREFIX_ACCOUNT + referenceUuid.toString();
-    }
-
-    /**
-     * Create a tenant URN for a provided UUID.
-     *
-     * @param referenceUuid the reference UUID
-     * @return the Sting version (in canonical UUID-as-String format) of an input UUID
-     */
-    public static String getTenantUrnFromUuid(final UUID referenceUuid) {
-        if (referenceUuid == null) {
-            return null;
-        }
-        return URN_PREFIX_TENANT + referenceUuid.toString();
     }
 
     public static UUID getNewUuid() {
