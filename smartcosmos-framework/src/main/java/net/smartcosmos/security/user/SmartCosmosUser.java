@@ -1,11 +1,11 @@
 package net.smartcosmos.security.user;
 
-import java.util.Collection;
-
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+
+import java.util.Collection;
 
 /**
  * The Smart Cosmos User object is not actually used for authentication or authorization.
@@ -22,26 +22,37 @@ import org.springframework.security.core.userdetails.User;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SmartCosmosUser extends User {
     public final static String TOKEN_FIELD_URN_USER = "user_urn";
+    @Deprecated
     public final static String TOKEN_FIELD_URN_ACCOUNT = "account_urn";
+    public final static String TOKEN_FIELD_ID_TENANT = "tenant_id";
 
     private final String userUrn;
 
+    @Deprecated
     private final String accountUrn;
 
+    private final String tenantId;
+
     @JsonCreator
-    public SmartCosmosUser(String accountUrn, String userUrn, String username,
+    public SmartCosmosUser(String tenantId, String userUrn, String username,
             String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.userUrn = userUrn;
-        this.accountUrn = accountUrn;
+        this.accountUrn = tenantId;
+        this.tenantId = tenantId;
     }
 
     public String getUserUrn() {
         return this.userUrn;
     }
 
+    @Deprecated
     public String getAccountUrn() {
         return accountUrn;
+    }
+
+    public String getTenantId() {
+        return tenantId;
     }
 
 }
