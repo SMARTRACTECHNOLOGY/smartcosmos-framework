@@ -29,12 +29,14 @@ public class DefaultEventTypes {
     /*
      * Primary Core Events
      */
-    final public static String ObjectCreated = "object:created";
-    final public static String ObjectCreatedTransactional = "object:createdTransactional:transactionId:";
-    final public static String ObjectTransactionalCreateFailure = "object:TransactionalCreateFailure:transactionId:";
-    final public static String ObjectRead = "object:read";
-    final public static String ObjectUpdated = "object:updated";
-    final public static String ObjectDeactivated = "object:deactivated";
+    final public static String ThingCreated = "thing:created";
+    final public static String ThingCreateFailedAlreadyExists = "thing:createFailedAlreadyExists";
+    final public static String ThingCreatedTransactional = "thing:createdTransactional:transactionId:";
+    final public static String ThingTransactionalCreateFailure = "thing:TransactionalCreateFailure:transactionId:";
+    final public static String ThingRead = "thing:read";
+    final public static String ThingUpdated = "thing:updated";
+    final public static String ThingDeactivated = "thing:deactivated";
+    final public static String ThingNotFound = "thing:notFound";
 
     final public static String MetadataUpserted = "metadata:updated";
     final public static String MetadataRead = "metadata:read";
@@ -82,13 +84,13 @@ public class DefaultEventTypes {
     final public static String NotificationUnsubscribe = "NotificationUnsubscribe";
     final public static String NotificationWithdrawn = "NotificationWithdrawn";
 
-    final public static String ObjectAddressAccessed = "ObjectAddressAccessed";
-    final public static String ObjectAddressDefined = "ObjectAddressDefined";
-    final public static String ObjectAddressDeleted = "ObjectAddressDeleted";
-    final public static String ObjectAddressUpdated = "ObjectAddressUpdated";
+    final public static String ThingAddressAccessed = "ThingAddressAccessed";
+    final public static String ThingAddressDefined = "ThingAddressDefined";
+    final public static String ThingAddressDeleted = "ThingAddressDeleted";
+    final public static String ThingAddressUpdated = "ThingAddressUpdated";
 
-    final public static String ObjectBatchStart = "ObjectBatchStart";
-    final public static String ObjectBatchStop = "ObjectBatchStop";
+    final public static String ThingBatchStart = "ThingBatchStart";
+    final public static String ThingBatchStop = "ThingBatchStop";
 
     final public static String RealmCheck = "RealmCheck";
     final public static String RealmDefined = "RealmDefined";
