@@ -8,7 +8,7 @@ import org.springframework.messaging.Message;
  * @author voor
  */
 @MessagingGateway
-public interface ISmartCosmosEventGateway {
+public interface SmartCosmosEventGateway {
 
     @Gateway
     void convertAndSend(Message message);

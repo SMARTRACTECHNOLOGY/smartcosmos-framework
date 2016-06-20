@@ -1,6 +1,7 @@
-package net.smartcosmos.events.impl;
+package net.smartcosmos.events.rest;
 
 import lombok.extern.slf4j.Slf4j;
+import net.smartcosmos.events.AbstractSmartCosmosEventTemplate;
 import net.smartcosmos.events.SmartCosmosEvent;
 import net.smartcosmos.events.SmartCosmosEventException;
 import net.smartcosmos.events.SmartCosmosEventRequest;

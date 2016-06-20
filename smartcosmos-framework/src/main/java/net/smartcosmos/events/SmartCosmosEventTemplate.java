@@ -8,7 +8,7 @@ import net.smartcosmos.security.user.SmartCosmosUser;
  *
  * @author voor
  */
-public interface ISmartCosmosEventTemplate {
+public interface SmartCosmosEventTemplate {
 
     void sendEvent(SmartCosmosEvent event) throws SmartCosmosEventException;
 
