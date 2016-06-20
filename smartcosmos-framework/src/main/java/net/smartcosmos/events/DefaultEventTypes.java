@@ -37,7 +37,8 @@ public class DefaultEventTypes {
     final public static String ThingUpdated = "thing:updated";
     final public static String ThingDeactivated = "thing:deactivated";
     final public static String ThingNotFound = "thing:notFound";
-
+    final public static String ThingDeleted = "thing:deleted";
+    
     final public static String MetadataUpserted = "metadata:updated";
     final public static String MetadataRead = "metadata:read";
     final public static String MetadataDeleted = "metadata:deleted";
