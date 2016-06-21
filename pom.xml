@@ -17,6 +17,7 @@
         <module>smartcosmos-dependencies</module>
         <module>smartcosmos-framework-parent</module>
         <module>smartcosmos-framework</module>
+        <module>smartcosmos-framework-messaging</module>
     </modules>
     <scm>
         <connection>scm:git:git://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework.git</connection>

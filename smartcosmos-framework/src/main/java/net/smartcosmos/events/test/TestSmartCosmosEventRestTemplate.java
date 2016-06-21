@@ -1,5 +1,6 @@
-package net.smartcosmos.events.impl;
+package net.smartcosmos.events.test;
 
+import net.smartcosmos.events.AbstractSmartCosmosEventTemplate;
 import net.smartcosmos.events.SmartCosmosEvent;
 
 /**

@@ -1,31 +1,21 @@
 package net.smartcosmos.spring;
 
-import lombok.extern.slf4j.Slf4j;
-import net.smartcosmos.events.ISmartCosmosEventTemplate;
-import net.smartcosmos.events.impl.RestSmartCosmosEventTemplate;
-import net.smartcosmos.events.impl.TestSmartCosmosEventRestTemplate;
-
-import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitOperations;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.netflix.ribbon.RibbonClientHttpRequestFactory;
 import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.messaging.converter.MappingJackson2MessageConverter;
-import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+
+import net.smartcosmos.events.SmartCosmosEventTemplate;
+import net.smartcosmos.events.rest.RestSmartCosmosEventTemplate;
+import net.smartcosmos.events.test.TestSmartCosmosEventRestTemplate;
 
 /**
  * Essentially a placeholder for now, as more commonly found configurations are discovered
@@ -42,66 +32,36 @@ public class SmartCosmosConfiguration {
     private SmartCosmosProperties smartCosmosProperties;
 
     @Configuration
-    @ConditionalOnClass({ ConnectionFactory.class, RabbitOperations.class,
-            RabbitTemplate.class })
-    @Slf4j
-    protected static class RabbitConnectionConfiguration
-            implements RabbitListenerConfigurer {
-
-        @Autowired
-        private SmartCosmosProperties smartCosmosProperties;
-
-        @Autowired
-        private ConnectionFactory connectionFactory;
-
-        @Bean
-        public MappingJackson2MessageConverter jackson2Converter() {
-            MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
-            return converter;
-        }
-
-        @Bean
-        public DefaultMessageHandlerMethodFactory myHandlerMethodFactory() {
-            DefaultMessageHandlerMethodFactory factory = new DefaultMessageHandlerMethodFactory();
-            factory.setMessageConverter(jackson2Converter());
-            return factory;
-        }
-
-        @Override
-        public void configureRabbitListeners(RabbitListenerEndpointRegistrar registrar) {
-            registrar.setMessageHandlerMethodFactory(myHandlerMethodFactory());
-        }
-    }
-
-    @Configuration
-    @ConditionalOnMissingBean(ISmartCosmosEventTemplate.class)
+    @ConditionalOnMissingBean(SmartCosmosEventTemplate.class)
     @ConditionalOnMissingClass("org.springframework.amqp.rabbit.core.RabbitOperations")
-    protected static class SmartCosmosEventConfiguration {
+    protected static class SmartCosmosRestTemplateConfiguration {
 
         @Autowired
         private SmartCosmosProperties smartCosmosProperties;
 
         @Bean
         @Profile("!test")
-        ISmartCosmosEventTemplate smartCosmosEventTemplate(
-                OAuth2ClientContext oauth2ClientContext,
-                OAuth2ProtectedResourceDetails details, SpringClientFactory clientFactory) {
+        SmartCosmosEventTemplate smartCosmosEventTemplate(
+            OAuth2ClientContext oauth2ClientContext,
+            OAuth2ProtectedResourceDetails details, SpringClientFactory clientFactory) {
             RibbonClientHttpRequestFactory ribbonClientHttpRequestFactory = new RibbonClientHttpRequestFactory(
-                    clientFactory);
+                clientFactory);
             OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(details,
-                    oauth2ClientContext);
+                oauth2ClientContext);
             restTemplate.setRequestFactory(ribbonClientHttpRequestFactory);
             return new RestSmartCosmosEventTemplate(restTemplate,
-                    smartCosmosProperties.getEvents().getServiceName(),
-                    smartCosmosProperties.getEvents().getHttpMethod(),
-                    smartCosmosProperties.getEvents().getUrl());
+                smartCosmosProperties.getEvents().getServiceName(),
+                smartCosmosProperties.getEvents().getHttpMethod(),
+                smartCosmosProperties.getEvents().getUrl());
         }
 
         @Bean
         @Profile("test")
-        ISmartCosmosEventTemplate SmartCosmosEventRestTemplate() {
+        SmartCosmosEventTemplate SmartCosmosEventRestTemplate() {
             return new TestSmartCosmosEventRestTemplate();
         }
     }
+
+
 
 }
