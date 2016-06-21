@@ -1,8 +1,12 @@
 package net.smartcosmos.events;
 
-import java.lang.annotation.*;
+import org.springframework.context.annotation.Import;
 
-import org.springframework.integration.annotation.IntegrationComponentScan;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author voor
@@ -10,6 +14,6 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@IntegrationComponentScan(basePackageClasses = EnableSmartCosmosEvents.class)
+@Import(SmartCosmosEventConfiguration.class)
 public @interface EnableSmartCosmosEvents {
 }
