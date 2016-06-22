@@ -9,7 +9,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -37,7 +36,6 @@ import static org.springframework.kafka.test.assertj.KafkaConditions.*;
  * @author Artem Bilan
  *
  */
-@Ignore
 public class SmartCosmosEventConfigurationTest {
 
 	private static final String INT_KEY_TOPIC = "intKeyTopic";
