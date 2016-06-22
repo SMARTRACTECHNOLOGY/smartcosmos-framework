@@ -33,7 +33,7 @@ public class SmartCosmosConfiguration {
 
     @Configuration
     @ConditionalOnMissingBean(SmartCosmosEventTemplate.class)
-    @ConditionalOnMissingClass("org.springframework.amqp.rabbit.core.RabbitOperations")
+    @ConditionalOnMissingClass("org.springframework.kafka.core.KafkaTemplate")
     protected static class SmartCosmosRestTemplateConfiguration {
 
         @Autowired
