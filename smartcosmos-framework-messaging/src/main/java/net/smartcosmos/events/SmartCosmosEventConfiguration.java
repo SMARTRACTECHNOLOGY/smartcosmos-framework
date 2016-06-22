@@ -32,9 +32,12 @@ public class SmartCosmosEventConfiguration {
     @Value("${kafka.broker.address}")
     private String brokerAddress;
 
-    @Value("${kafka.zookeeper.connect}")
+    @Value("${kafka.zookeeper.address}")
     private String zookeeperConnect;
 
+    /**
+     * Application Name defines the CONSUMER GROUP, which is vital to Pub/Sub so that only a single instance of each service will receive an event.
+     */
     @Value("${spring.application.name}")
     private String springApplicationName;
 
