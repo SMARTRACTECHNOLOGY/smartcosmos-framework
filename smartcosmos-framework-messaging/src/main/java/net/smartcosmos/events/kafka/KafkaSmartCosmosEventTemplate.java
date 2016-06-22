@@ -4,25 +4,21 @@ import lombok.extern.slf4j.Slf4j;
 import net.smartcosmos.events.AbstractSmartCosmosEventTemplate;
 import net.smartcosmos.events.SmartCosmosEvent;
 import net.smartcosmos.events.SmartCosmosEventException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.util.concurrent.ListenableFuture;
 
 /**
  * @author voor
  */
-@Service
 @Slf4j
 public class KafkaSmartCosmosEventTemplate extends AbstractSmartCosmosEventTemplate {
 
     private final KafkaTemplate kafkaTemplate;
 
-    @Autowired
     public KafkaSmartCosmosEventTemplate(final KafkaTemplate kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
