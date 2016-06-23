@@ -13,54 +13,15 @@
 
     <name>SMART COSMOS Framework Messaging Annotations</name>
     <description>Provides Spring Configuration and Annotations making it easier to develop SMART COSMOS Extensions that tie into events and asynchronous messaging.</description>
+
     <dependencies>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-        </dependency>
         <dependency>
             <groupId>net.smartcosmos</groupId>
             <artifactId>smartcosmos-framework</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-integration</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-security</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-stream-kafka</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-stream</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.integration</groupId>
-            <artifactId>spring-integration-kafka</artifactId>
-            <version>2.0.0.RC1</version>
-            <optional>true</optional>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -68,8 +29,18 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
