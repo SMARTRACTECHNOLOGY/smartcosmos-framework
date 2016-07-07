@@ -1,4 +1,4 @@
-package net.smartcosmos.spring;
+package net.smartcosmos.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -12,12 +12,11 @@ import net.smartcosmos.security.authentication.OAuth2SsoRdaoConfiguration;
 import net.smartcosmos.security.user.SmartCosmosUserConfiguration;
 
 /**
- * @author voor
+ * Activated the security aspects of Smart Cosmos Objects.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import({ OAuth2SsoRdaoConfiguration.class, SmartCosmosUserConfiguration.class })
-@Deprecated
 public @interface EnableSmartCosmosSecurity {
 }

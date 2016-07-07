@@ -1,4 +1,4 @@
-package net.smartcosmos.spring;
+package net.smartcosmos.annotation;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,10 +11,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.HttpMethod;
 
 /**
- * @see net.smartcosmos.annotation.SmartCosmosProperties
+ * @author voor
  */
 @Data
-@Deprecated
 @ConfigurationProperties("smartcosmos")
 public class SmartCosmosProperties {
 

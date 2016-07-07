@@ -1,10 +1,15 @@
-package net.smartcosmos.spring;
+package net.smartcosmos.annotation;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import java.lang.annotation.*;
 
 /**
  * Defines the class packages that must implement the configuration necessary for a Smart Cosmos Extension to receive
@@ -20,6 +25,5 @@ import java.lang.annotation.*;
 @Configuration
 @ComponentScan(basePackages = { "net.smartcosmos.dao", "net.smartcosmos.extension"})
 @SpringBootApplication
-@Deprecated
 public @interface EnableSmartCosmosExtension {
 }

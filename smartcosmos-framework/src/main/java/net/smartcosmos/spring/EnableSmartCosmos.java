@@ -15,5 +15,6 @@ import org.springframework.context.annotation.Import;
 @EnableDiscoveryClient
 @Documented
 @Import({ SmartCosmosConfiguration.class })
+@Deprecated
 public @interface EnableSmartCosmos {
 }
