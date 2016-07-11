@@ -36,15 +36,14 @@ public class SendsSmartCosmosEventAnnotationBeanPostProcessor implements BeanPos
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        Class<?> targetClass = AopUtils.getTargetClass(bean.getClass());
+        Class<?> targetClass = AopUtils.getTargetClass(bean);
 
-        Set<Method> methodsWithHandler = MethodIntrospector.selectMethods(targetClass,
-                                                                          (ReflectionUtils.MethodFilter) method -> AnnotationUtils
-                                                                                                                       .findAnnotation(method,
-                                                                                                                                       SendsSmartCosmosEvent.class) !=
-                                                                                                                   null);
+        Set<Method> methodsWithHandler = MethodIntrospector
+            .selectMethods(targetClass,
+                           (ReflectionUtils.MethodFilter) method -> AnnotationUtils.findAnnotation(method, SendsSmartCosmosEvent.class) != null);
+
         if (methodsWithHandler.size() > 0) {
-            log.info("Registering new listener for SendsSmartCosmosEvent at {}: {}", targetClass, beanName);
+            log.trace("Registering new listener for SendsSmartCosmosEvent at {}: {}", targetClass, beanName);
             AnnotationMatchingPointcut annotationMatchingPointcut = AnnotationMatchingPointcut.forMethodAnnotation(SendsSmartCosmosEvent.class);
             Advisor advisor = new DefaultPointcutAdvisor(annotationMatchingPointcut, sendsSmartCosmosEventAdvice);
             ProxyFactory factory;
