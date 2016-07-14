@@ -25,20 +25,13 @@ import net.smartcosmos.events.SendsSmartCosmosEventAdvice;
 import net.smartcosmos.events.SmartCosmosEventTemplate;
 import net.smartcosmos.events.rest.RestSmartCosmosEventTemplate;
 import net.smartcosmos.events.test.TestSmartCosmosEventRestTemplate;
-import net.smartcosmos.spring.SmartCosmosProperties;
 
 /**
  * {@code @Configuration} class that registers a
  */
 @Configuration
-@EnableConfigurationProperties({ SmartCosmosProperties.class })
 public class SmartCosmosBootstrapConfiguration {
 
-    /**
-     * Provides access to all of the properties defined in the file.
-     */
-    @Autowired
-    private SmartCosmosProperties smartCosmosProperties;
 
     @Configuration
     @ConditionalOnBean(FormatterRegistrar.class)
@@ -70,11 +63,15 @@ return new SendsSmartCosmosEventAdvice(smartCosmosEventTemplate);
 
     @Configuration
     @ConditionalOnMissingBean(SmartCosmosEventTemplate.class)
+    @EnableConfigurationProperties({ SmartCosmosEventsProperties.class })
     @ConditionalOnMissingClass("org.springframework.kafka.core.KafkaTemplate")
     protected static class SmartCosmosRestTemplateConfiguration {
 
+        /**
+         * Provides access to all of the properties defined in the file.
+         */
         @Autowired
-        private SmartCosmosProperties smartCosmosProperties;
+        private SmartCosmosEventsProperties smartCosmosEventsProperties;
 
         @Bean
         @Profile("!test")
@@ -87,9 +84,9 @@ return new SendsSmartCosmosEventAdvice(smartCosmosEventTemplate);
                                                                      oauth2ClientContext);
             restTemplate.setRequestFactory(ribbonClientHttpRequestFactory);
             return new RestSmartCosmosEventTemplate(restTemplate,
-                                                    smartCosmosProperties.getEvents().getServiceName(),
-                                                    smartCosmosProperties.getEvents().getHttpMethod(),
-                                                    smartCosmosProperties.getEvents().getUrl());
+                                                    smartCosmosEventsProperties.getServiceName(),
+                                                    smartCosmosEventsProperties.getHttpMethod(),
+                                                    smartCosmosEventsProperties.getUrl());
         }
 
         @Bean

@@ -12,7 +12,12 @@ import net.smartcosmos.security.authentication.OAuth2SsoRdaoConfiguration;
 import net.smartcosmos.security.user.SmartCosmosUserConfiguration;
 
 /**
- * Activated the security aspects of Smart Cosmos Objects.
+ * Initiates the OAuth2 Single Sign-On capabilities of the SMART COSMOS Platform enables authentication through JWT at each service, rather than
+ * requiring a stateful and centralized authentication process.  This will enable security on a service by default and additionally allows use of
+ * {@link net.smartcosmos.security.user.SmartCosmosUser SmartCosmosUser} in Spring MVC methods.
+ *
+ * @see net.smartcosmos.security.user.SmartCosmosUser
+ * @since 3.0.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
