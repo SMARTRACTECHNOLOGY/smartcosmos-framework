@@ -12,7 +12,8 @@ import net.smartcosmos.security.authentication.OAuth2SsoRdaoConfiguration;
 import net.smartcosmos.security.user.SmartCosmosUserConfiguration;
 
 /**
- * @author voor
+ *
+ * @see net.smartcosmos.annotation.EnableSmartCosmosSecurity
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
