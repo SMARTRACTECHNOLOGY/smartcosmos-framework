@@ -2,6 +2,7 @@ package net.smartcosmos.annotation;
 
 import java.util.Map;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.client.loadbalancer.RestTemplateCustomizer;
 import org.springframework.cloud.netflix.ribbon.RibbonClientHttpRequestFactory;
-import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -23,9 +21,6 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
-import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -83,17 +78,11 @@ return new SendsSmartCosmosEventAdvice(smartCosmosEventTemplate);
         private SmartCosmosEventsProperties smartCosmosEventsProperties;
 
         @Bean
-        @LoadBalanced
-        RestTemplate eventRestTemplate(final RestTemplateCustomizer restTemplateCustomizer) {
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplateCustomizer.customize(restTemplate);
-            return restTemplate;
-        }
-
-        @Bean
         @Profile("!test")
-        SmartCosmosEventTemplate smartCosmosEventTemplate(RestTemplate eventRestTemplate, OAuth2ClientContext oAuth2ClientContext,
+        SmartCosmosEventTemplate smartCosmosEventTemplate(RibbonClientHttpRequestFactory ribbonClientHttpRequestFactory, OAuth2ClientContext oAuth2ClientContext,
                 Executor smartCosmosEventTaskExecutor) {
+            RestTemplate eventRestTemplate = new RestTemplate();
+            eventRestTemplate.setRequestFactory(ribbonClientHttpRequestFactory);
             return new RestSmartCosmosEventTemplate(eventRestTemplate,
                                                     oAuth2ClientContext,
                                                     smartCosmosEventsProperties.getServiceName(),
@@ -115,7 +104,8 @@ return new SendsSmartCosmosEventAdvice(smartCosmosEventTemplate);
 
         @Bean
         public Executor smartCosmosEventTaskExecutor() {
-            return new DelegatingSecurityContextAndRequestAttributesExecutorService(Executors.newCachedThreadPool());
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            return new DelegatingSecurityContextAndRequestAttributesExecutorService(executorService);
         }
 
     }
