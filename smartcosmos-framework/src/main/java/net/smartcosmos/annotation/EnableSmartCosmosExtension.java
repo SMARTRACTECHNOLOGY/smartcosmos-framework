@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Configuration;
 @Documented
 @Inherited
 @Configuration
-@ComponentScan(basePackages = { "net.smartcosmos.dao", "net.smartcosmos.extension"})
+@ComponentScan(basePackages = { "net.smartcosmos" })
 @EnableAutoConfiguration
 public @interface EnableSmartCosmosExtension {
 }
