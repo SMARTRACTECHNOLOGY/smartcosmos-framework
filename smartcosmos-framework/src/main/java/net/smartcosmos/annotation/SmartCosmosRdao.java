@@ -1,6 +1,10 @@
-package net.smartcosmos.spring;
+package net.smartcosmos.annotation;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,13 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Designates a REST endpoint as one that will provide access to objects remotely, and
  * possibly play part into a composite service down the lines.
  *
- * @see net.smartcosmos.annotation.SmartCosmosRdao
+ * @author voor
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Controller
 @ResponseBody
 @Documented
-@Deprecated
 public @interface SmartCosmosRdao {
 }

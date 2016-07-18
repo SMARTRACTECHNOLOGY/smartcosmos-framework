@@ -11,9 +11,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.HttpMethod;
 
 /**
- * @author voor
+ * @see net.smartcosmos.annotation.SmartCosmosEventsProperties
  */
 @Data
+@Deprecated
 @ConfigurationProperties("smartcosmos")
 public class SmartCosmosProperties {
 
