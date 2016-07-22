@@ -10,21 +10,29 @@ public class DefaultEventTypes {
     /*
      * User Management Events
      */
-    final public static String AccountRead = "account:read";
-    final public static String AccountConfirmed = "account:confirmed";
-    final public static String AccountDefined = "account:created";
-    final public static String AccountUpdated = "account:updated";
+    final public static String TenantRead = "tenant:read";
+    final public static String TenantConfirmed = "tenant:confirmed";
+    final public static String TenantCreated = "tenant:created";
+    final public static String TenantUpdated = "tenant:updated";
+    final public static String TenantCreateFailedAlreadyExists = "tenant:createFailedAlreadyExists";
+    final public static String TenantNotFound = "tenant:notFound";
 
-    final public static String UserAccessed = "UserAccessed";
-    final public static String UserBatchStart = "UserBatchStart";
-    final public static String UserBatchStop = "UserBatchStop";
-    final public static String UserDefined = "UserDefined";
-    final public static String UserLoginFailure = "UserLoginFailure";
-    final public static String UserLoginSuccess = "UserLoginSuccess";
-    final public static String UserPasswordChanged = "UserPasswordChanged";
-    final public static String UserPasswordReset = "UserPasswordReset";
-    final public static String UserRegistrationRequest = "RegistrationRequest";
-    final public static String UserUpdated = "UserUpdated";
+    final public static String UserRead = "user:read";
+    final public static String UserBatchStart = "user:batch:start";
+    final public static String UserBatchStop = "user:batch:stop";
+    final public static String UserCreated = "user:created";
+    final public static String UserLoginFailure = "user:login:failure";
+    final public static String UserLoginSuccess = "user:login:success";
+    final public static String UserPasswordChanged = "user:password:changed";
+    final public static String UserPasswordReset = "user:password:reset";
+    final public static String UserRegistrationRequest = "user:registration:requested";
+    final public static String UserUpdated = "user:updated";
+    final public static String UserCreateFailedAlreadyExists = "user:createFailedAlreadyExists";
+    final public static String UserDeleted = "user:deleted";
+    final public static String UserNotFound = "user:notFound";
+
+    final public static String RoleCreated = "role:created";
+    final public static String RoleCreateFailedAlreadyExists = "role:createFailedAlreadyExists";
 
     /*
      * Primary Core Events
