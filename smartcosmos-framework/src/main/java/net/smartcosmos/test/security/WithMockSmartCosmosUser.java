@@ -12,7 +12,7 @@ import org.springframework.security.test.context.support.WithSecurityContext;
  * <p></p>
  * Example:
  * <pre>
- * {@code @WithMockSmartCosmosUser(authorities = {"https://authorities.smartcosmos.net/things/write"})}
+ * {@code @WithMockSmartCosmosUser(authorities = {"https://authorities.smartcosmos.net/things/create"})}
  * </pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -44,7 +44,7 @@ public @interface WithMockSmartCosmosUser {
     String password() default "password";
 
     /**
-     * Example: {@code "https://authorities.smartcosmos.net/things/write"},
+     * Example: {@code "https://authorities.smartcosmos.net/things/create"},
      * default: empty array
      * @return the mock user authorities
      */
