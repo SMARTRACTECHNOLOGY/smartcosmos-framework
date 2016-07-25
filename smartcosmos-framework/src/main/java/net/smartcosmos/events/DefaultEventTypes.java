@@ -32,7 +32,11 @@ public class DefaultEventTypes {
     final public static String UserNotFound = "user:notFound";
 
     final public static String RoleCreated = "role:created";
+    final public static String RoleRead = "role:read";
     final public static String RoleCreateFailedAlreadyExists = "role:createFailedAlreadyExists";
+    final public static String RoleNotFound = "role:notFound";
+    final public static String RoleDeleted = "role:deleted";
+    final public static String RoleUpdated = "role:updated";
 
     /*
      * Primary Core Events
