@@ -22,7 +22,7 @@
     <scm>
         <connection>scm:git:git://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework.git</connection>
         <developerConnection>scm:git:git@github.com:SMARTRACTECHNOLOGY/smartcosmos-framework.git</developerConnection>
-        <tag>HEAD</tag>
         <url>https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework/tree/master/</url>
+        <tag>HEAD</tag>
     </scm>
 </project>
