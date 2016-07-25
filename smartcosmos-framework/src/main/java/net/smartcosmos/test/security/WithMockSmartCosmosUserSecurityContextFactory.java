@@ -13,6 +13,9 @@ import org.springframework.security.test.context.support.WithSecurityContextFact
 
 import net.smartcosmos.security.user.SmartCosmosUser;
 
+/**
+ * Factory for the security context with authenticated {@link SmartCosmosUser} for testing, see {@link WithMockSmartCosmosUser} annotation.
+ */
 public class WithMockSmartCosmosUserSecurityContextFactory implements WithSecurityContextFactory<WithMockSmartCosmosUser> {
 
     @Override

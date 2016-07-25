@@ -5,6 +5,16 @@ import java.lang.annotation.RetentionPolicy;
 
 import org.springframework.security.test.context.support.WithSecurityContext;
 
+/**
+ * Adds a mocked {@link net.smartcosmos.security.user.SmartCosmosUser} instance to the security context. The principal will have a valid
+ * {@link org.springframework.security.core.Authentication} based on the parameters defined with the annotation. By default, the user will have the
+ * username {@code user} and password {@code password} without any authorities.
+ * <p></p>
+ * Example:
+ * <pre>
+ * {@code @WithMockSmartCosmosUser(authorities = {"https://authorities.smartcosmos.net/things/write"})}
+ * </pre>
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @WithSecurityContext(factory = WithMockSmartCosmosUserSecurityContextFactory.class)
 public @interface WithMockSmartCosmosUser {
