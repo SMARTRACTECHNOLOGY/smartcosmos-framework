@@ -19,13 +19,34 @@ import org.springframework.security.test.context.support.WithSecurityContext;
 @WithSecurityContext(factory = WithMockSmartCosmosUserSecurityContextFactory.class)
 public @interface WithMockSmartCosmosUser {
 
+    /**
+     * default value: {@code urn:tenant:uuid:b5b52af3-9909-4ea4-97bf-07639d683c95}
+     * @return the mock user tenant URN
+     */
     String tenantUrn() default "urn:tenant:uuid:b5b52af3-9909-4ea4-97bf-07639d683c95";
 
+    /**
+     * default value: {@code urn:user:uuid:e2174814-eb6d-4176-978c-58390105375b}
+     * @return the mock user URN
+     */
     String usernUrn() default "urn:user:uuid:e2174814-eb6d-4176-978c-58390105375b";
 
+    /**
+     * default value: {@code user}
+     * @return the mock user username
+     */
     String username() default "user";
 
+    /**
+     * default value: {@code password}
+     * @return the mock user password
+     */
     String password() default "password";
 
+    /**
+     * Example: {@code "https://authorities.smartcosmos.net/things/write"},
+     * default: empty array
+     * @return the mock user authorities
+     */
     String[] authorities() default {};
 }
