@@ -4,7 +4,9 @@ package net.smartcosmos.events;
  * Collection of SMART COSMOS events that capture virtually all interactions between a
  * user and the platform. In many ways, the event mechanism that powers the integration
  * features also indirectly provides a complete audit of user activities.
+ * @deprecated Instead of using the event types in this class, define the event types in the services actually sending events.
  */
+@Deprecated
 public class DefaultEventTypes {
 
     /*
