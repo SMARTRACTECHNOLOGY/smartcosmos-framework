@@ -18,6 +18,7 @@
         <module>smartcosmos-framework-parent</module>
         <module>smartcosmos-framework</module>
         <module>smartcosmos-framework-messaging</module>
+        <module>smartcosmos-framework-test</module>
     </modules>
     <scm>
         <connection>scm:git:git://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework.git</connection>
