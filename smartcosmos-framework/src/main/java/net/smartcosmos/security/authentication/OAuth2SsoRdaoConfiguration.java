@@ -1,25 +1,31 @@
 package net.smartcosmos.security.authentication;
 
 import lombok.extern.slf4j.Slf4j;
-import net.smartcosmos.security.authentication.direct.DirectAccessDeniedHandler;
-import net.smartcosmos.security.authentication.direct.DirectUnauthorizedEntryPoint;
-import net.smartcosmos.security.authentication.direct.EnableDirectHandlers;
-import net.smartcosmos.test.security.SmartCosmosTestProperties;
-import net.smartcosmos.test.security.TestUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.encoding.PlaintextPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+
+import net.smartcosmos.security.authentication.direct.DirectAccessDeniedHandler;
+import net.smartcosmos.security.authentication.direct.DirectUnauthorizedEntryPoint;
+import net.smartcosmos.security.authentication.direct.EnableDirectHandlers;
+import net.smartcosmos.test.security.SmartCosmosTestProperties;
+import net.smartcosmos.test.security.TestUserDetailsService;
 
 /**
  * @author voor
@@ -28,6 +34,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @Configuration
 @Slf4j
 @ComponentScan
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class OAuth2SsoRdaoConfiguration {
 
     @Bean
