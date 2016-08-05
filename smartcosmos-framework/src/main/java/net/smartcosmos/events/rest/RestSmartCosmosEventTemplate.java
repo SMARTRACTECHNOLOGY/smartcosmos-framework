@@ -62,13 +62,10 @@ public class RestSmartCosmosEventTemplate extends AbstractSmartCosmosEventTempla
         eventHttpHeaders.set("Authorization", String.format("%s %s", tokenType, accessToken.getValue()));
 
         try {
-            // smartCosmosEventTaskExecutor.execute(() -> );
-
-            // Initially, just send the event on the same thread.  Later versions will improve this process to be truly async.
-            restOperations.exchange(eventUri,
-                                    eventHttpMethod,
-                                    new HttpEntity<>(message, eventHttpHeaders),
-                                    Void.class);
+            smartCosmosEventTaskExecutor.execute(() -> restOperations.exchange(eventUri,
+                                                                               eventHttpMethod,
+                                                                               new HttpEntity<>(message, eventHttpHeaders),
+                                                                               Void.class));
         } catch (Exception e) {
             log.trace(e.getMessage(), e);
             throw new SmartCosmosEventException(
