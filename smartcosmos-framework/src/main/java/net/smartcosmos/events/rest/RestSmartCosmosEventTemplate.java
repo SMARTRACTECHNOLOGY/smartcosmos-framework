@@ -3,6 +3,8 @@ package net.smartcosmos.events.rest;
 import java.net.URI;
 import java.util.concurrent.Executor;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,8 +16,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-
-import lombok.extern.slf4j.Slf4j;
 
 import net.smartcosmos.events.AbstractSmartCosmosEventTemplate;
 import net.smartcosmos.events.SmartCosmosEvent;
@@ -37,7 +37,7 @@ public class RestSmartCosmosEventTemplate extends AbstractSmartCosmosEventTempla
 
     public RestSmartCosmosEventTemplate(
         RestOperations restOperations,
-            String eventServiceName,
+        String eventServiceName,
         HttpMethod eventHttpMethod,
         String eventUrl,
         Executor smartCosmosEventTaskExecutor) {
