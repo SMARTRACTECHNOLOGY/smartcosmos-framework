@@ -3,16 +3,19 @@ package net.smartcosmos.events.rest;
 import java.net.URI;
 import java.util.concurrent.Executor;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestOperations;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+
+import lombok.extern.slf4j.Slf4j;
 
 import net.smartcosmos.events.AbstractSmartCosmosEventTemplate;
 import net.smartcosmos.events.SmartCosmosEvent;
@@ -29,18 +32,16 @@ public class RestSmartCosmosEventTemplate extends AbstractSmartCosmosEventTempla
     private final RestOperations restOperations;
     private final HttpMethod eventHttpMethod;
     private final URI eventUri;
-    private final OAuth2ClientContext oAuth2ClientContext;
 
     private final Executor smartCosmosEventTaskExecutor;
 
     public RestSmartCosmosEventTemplate(
         RestOperations restOperations,
-        OAuth2ClientContext oAuth2ClientContext, String eventServiceName,
+            String eventServiceName,
         HttpMethod eventHttpMethod,
         String eventUrl,
         Executor smartCosmosEventTaskExecutor) {
         this.restOperations = restOperations;
-        this.oAuth2ClientContext = oAuth2ClientContext;
         this.eventHttpMethod = eventHttpMethod;
         this.eventUri = URI.create("http://" + eventServiceName + "/" + eventUrl);
         this.smartCosmosEventTaskExecutor = smartCosmosEventTaskExecutor;
@@ -54,7 +55,7 @@ public class RestSmartCosmosEventTemplate extends AbstractSmartCosmosEventTempla
         eventHttpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         // oAuth2ClientContext is not thread safe, so we need to retrieve this before.
-        OAuth2AccessToken accessToken = oAuth2ClientContext.getAccessToken();
+        OAuth2AccessToken accessToken = getRequestContextOAuth2Token();
         String tokenType = accessToken.getTokenType();
         if (!StringUtils.hasText(tokenType)) {
             tokenType = OAuth2AccessToken.BEARER_TYPE; // we'll assume basic bearer token type if none is specified.
@@ -73,4 +74,16 @@ public class RestSmartCosmosEventTemplate extends AbstractSmartCosmosEventTempla
         }
     }
 
+    private OAuth2AccessToken getRequestContextOAuth2Token() throws IllegalStateException {
+
+        RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+        Object accessTokenAttribute = requestAttributes.getAttribute(OAuth2AuthenticationDetails.ACCESS_TOKEN_VALUE, RequestAttributes.SCOPE_REQUEST);
+
+        if (accessTokenAttribute != null) {
+            String accessTokenString = String.valueOf(accessTokenAttribute);
+            return new DefaultOAuth2AccessToken(accessTokenString);
+        }
+
+        throw new IllegalStateException("Access Token Value attribute does not exist in the current request context");
+    }
 }
