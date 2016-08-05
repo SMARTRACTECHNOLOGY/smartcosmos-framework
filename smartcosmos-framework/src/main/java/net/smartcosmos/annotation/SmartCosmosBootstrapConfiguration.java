@@ -10,6 +10,8 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
+import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.WebMvcProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.netflix.ribbon.RibbonClientHttpRequestFactory;
 import org.springframework.context.annotation.Bean;
@@ -20,8 +22,9 @@ import org.springframework.format.FormatterRegistrar;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.filter.RequestContextFilter;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import net.smartcosmos.concurrent.DelegatingSecurityContextAndRequestAttributesExecutorService;
@@ -54,7 +57,6 @@ public class SmartCosmosBootstrapConfiguration {
     }
 
     @Bean
-    @SuppressWarnings("rawtypes")
     @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
     public SendsSmartCosmosEventAnnotationBeanPostProcessor sendsSmartCosmosEventAnnotationBeanPostProcessor() {
         return new SendsSmartCosmosEventAnnotationBeanPostProcessor();
@@ -78,13 +80,13 @@ return new SendsSmartCosmosEventAdvice(smartCosmosEventTemplate);
         private SmartCosmosEventsProperties smartCosmosEventsProperties;
 
         @Bean
+        @Autowired
         @Profile("!test")
-        SmartCosmosEventTemplate smartCosmosEventTemplate(RibbonClientHttpRequestFactory ribbonClientHttpRequestFactory, OAuth2ClientContext oAuth2ClientContext,
+        SmartCosmosEventTemplate smartCosmosEventTemplate(RibbonClientHttpRequestFactory ribbonClientHttpRequestFactory,
                 Executor smartCosmosEventTaskExecutor) {
             RestTemplate eventRestTemplate = new RestTemplate();
             eventRestTemplate.setRequestFactory(ribbonClientHttpRequestFactory);
             return new RestSmartCosmosEventTemplate(eventRestTemplate,
-                                                    oAuth2ClientContext,
                                                     smartCosmosEventsProperties.getServiceName(),
                                                     smartCosmosEventsProperties.getHttpMethod(),
                                                     smartCosmosEventsProperties.getUrl(),
@@ -108,5 +110,29 @@ return new SendsSmartCosmosEventAdvice(smartCosmosEventTemplate);
             return new DelegatingSecurityContextAndRequestAttributesExecutorService(executorService);
         }
 
+    }
+
+    @Configuration
+    @EnableAsync
+    protected static class ThreadInheritanceConfiguration extends WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter {
+
+        @Bean
+        public RequestContextFilter requestContextFilter() {
+            RequestContextFilter contextFilter = new RequestContextFilter();
+            contextFilter.setThreadContextInheritable(true);
+            return contextFilter;
+        }
+
+        @Bean
+        @Autowired
+        public DispatcherServlet dispatcherServlet(WebMvcProperties webMvcProperties) {
+            DispatcherServlet dispatcherServlet = new DispatcherServlet();
+            dispatcherServlet.setDispatchOptionsRequest(webMvcProperties.isDispatchOptionsRequest());
+            dispatcherServlet.setDispatchTraceRequest(webMvcProperties.isDispatchTraceRequest());
+            dispatcherServlet.setThrowExceptionIfNoHandlerFound(webMvcProperties.isThrowExceptionIfNoHandlerFound());
+            dispatcherServlet.setThreadContextInheritable(true);
+
+            return dispatcherServlet;
+        }
     }
 }
