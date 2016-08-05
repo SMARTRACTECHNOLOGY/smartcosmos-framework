@@ -118,6 +118,8 @@ return new SendsSmartCosmosEventAdvice(smartCosmosEventTemplate);
 
         @Bean
         public RequestContextFilter requestContextFilter() {
+
+            // Add request context filter to bind the request context to the threads and enable thread context inheritance
             RequestContextFilter contextFilter = new RequestContextFilter();
             contextFilter.setThreadContextInheritable(true);
             return contextFilter;
@@ -126,10 +128,14 @@ return new SendsSmartCosmosEventAdvice(smartCosmosEventTemplate);
         @Bean
         @Autowired
         public DispatcherServlet dispatcherServlet(WebMvcProperties webMvcProperties) {
+            
+            // Copy of DispatcherServlet Auto Configuration:
             DispatcherServlet dispatcherServlet = new DispatcherServlet();
             dispatcherServlet.setDispatchOptionsRequest(webMvcProperties.isDispatchOptionsRequest());
             dispatcherServlet.setDispatchTraceRequest(webMvcProperties.isDispatchTraceRequest());
             dispatcherServlet.setThrowExceptionIfNoHandlerFound(webMvcProperties.isThrowExceptionIfNoHandlerFound());
+
+            // Enable thread context inheritance to be able to access the request context in new threads
             dispatcherServlet.setThreadContextInheritable(true);
 
             return dispatcherServlet;
