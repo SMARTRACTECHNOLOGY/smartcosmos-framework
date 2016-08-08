@@ -1,13 +1,13 @@
 package net.smartcosmos.security;
 
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import org.springframework.http.HttpStatus;
+
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Provides an HTTP Method level enablement and role-based access control mechanism,
@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 @Retention(RUNTIME)
 @Target(METHOD)
 @Documented
+@Deprecated
 public @interface EndpointMethodControl {
     /**
      * Key within the <code>endpointMethodControl</code> section in the YML file that
