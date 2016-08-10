@@ -1,7 +1,6 @@
 package net.smartcosmos.security;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +15,7 @@ import org.springframework.stereotype.Component;
  * merely overrides that one, automatically always sending a 401 response.
  *
  * @author voor
- * @see org.springframework.security.web.authentication.
- * SimpleUrlAuthenticationFailureHandler
+ * @see org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler
  */
 @Component
 public class EndpointFailureHandler extends SimpleUrlAuthenticationFailureHandler {
