@@ -1,0 +1,30 @@
+= SMART COSMOS Framework Test
+
+This module provides facilities for testing SMART COSMOS RDAO resources and services.
+
+== Security
+
+=== Mocking an authenticated `SmartCosmosUser` principal
+
+You can use the `@WithMockSmartCosmosUser` annotation to mock a security context that holds an authenticated
+`SmartCosmosUser` principal. It therefore allows for testing authorization and authentication.
+
+By default, the annotation adds a user with username `user` and password `password` to the security context, but this user doesn't have any authorities.
+
+The annotation can be used to set a custom set of authorities, e.g.:
+```
+@WithMockSmartCosmosUser(authorities = {"https://authorities.smartcosmos.net/things/write"})
+```
+In addition to the authorities, also the other default values can be overridden by specifying the corresponding fields:
+- `tenantUrn`
+- `userUrn`
+- `username`
+- `password`
+
+To use the annotation, the `mockMvc` in the unit test has to be initialized like this:
+```
+this.mockMvc = MockMvcBuilders
+    .webAppContextSetup(webApplicationContext)
+    .apply(springSecurity())
+    .build();
+```
