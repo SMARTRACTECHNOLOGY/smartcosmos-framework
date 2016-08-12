@@ -6,10 +6,10 @@
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-build</artifactId>
         <version>3.0.0</version>
-        <relativePath></relativePath>
+        <relativePath />
     </parent>
     <artifactId>smartcosmos-framework-root</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>SMART COSMOS Framework Root</name>
@@ -25,6 +25,6 @@
         <connection>scm:git:ssh://git@github.com/SMARTRACTECHNOLOGY/smartcosmos-framework.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/SMARTRACTECHNOLOGY/smartcosmos-framework.git</developerConnection>
         <url>https://github.com/SMARTRACTECHNOLOGY/smartcosmos-framework/tree/master/</url>
-        <tag>v3.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 </project>
