@@ -1,0 +1,15 @@
+= SMART COSMOS Framework Release Notes
+
+== UNRELEASED
+
+=== New Features
+
+No new features are added in this release.
+
+=== Bugfixes & Improvements
+
+* OBJECTS-995 Thread context inheritance causes side effects with thread pools
+
+== Release 3.0.0 (August 12, 2016)
+
+Initial release.

@@ -5,6 +5,7 @@ import java.util.concurrent.Executor;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -35,6 +36,7 @@ public class RestSmartCosmosEventTemplate extends AbstractSmartCosmosEventTempla
 
     private final Executor smartCosmosEventTaskExecutor;
 
+    @Autowired
     public RestSmartCosmosEventTemplate(
         RestOperations restOperations,
         String eventServiceName,
