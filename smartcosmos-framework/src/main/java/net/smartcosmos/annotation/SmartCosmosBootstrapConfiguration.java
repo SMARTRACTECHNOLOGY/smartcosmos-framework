@@ -23,7 +23,6 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.filter.RequestContextFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -117,18 +116,9 @@ return new SendsSmartCosmosEventAdvice(smartCosmosEventTemplate);
     protected static class ThreadInheritanceConfiguration extends WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter {
 
         @Bean
-        public RequestContextFilter requestContextFilter() {
-
-            // Add request context filter to bind the request context to the threads and enable thread context inheritance
-            RequestContextFilter contextFilter = new RequestContextFilter();
-            contextFilter.setThreadContextInheritable(true);
-            return contextFilter;
-        }
-
-        @Bean
         @Autowired
         public DispatcherServlet dispatcherServlet(WebMvcProperties webMvcProperties) {
-            
+
             // Copy of DispatcherServlet Auto Configuration:
             DispatcherServlet dispatcherServlet = new DispatcherServlet();
             dispatcherServlet.setDispatchOptionsRequest(webMvcProperties.isDispatchOptionsRequest());
