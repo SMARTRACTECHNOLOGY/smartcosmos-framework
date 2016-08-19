@@ -18,7 +18,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Role;
 import org.springframework.format.FormatterRegistrar;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -104,7 +103,7 @@ public class SmartCosmosBootstrapConfiguration {
 
     @Configuration
     @EnableAsync
-    protected static class AsyncConfig extends AsyncConfigurerSupport {
+    protected static class AsyncConfig {
 
         @Bean
         public Executor smartCosmosEventTaskExecutor() {
