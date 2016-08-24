@@ -20,6 +20,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
 import net.smartcosmos.security.authentication.direct.DirectAccessDeniedHandler;
 import net.smartcosmos.security.authentication.direct.DirectUnauthorizedEntryPoint;
@@ -50,10 +51,10 @@ public class OAuth2SsoRdaoConfiguration {
     @Configuration
     @Profile({ "!test" })
     protected static class OAuth2SsoConfigurerAdapter
-            extends WebSecurityConfigurerAdapter {
+        extends ResourceServerConfigurerAdapter {
 
         @Override
-        protected void configure(HttpSecurity http) throws Exception {
+        public void configure(HttpSecurity http) throws Exception {
             log.debug(
                     "Smart Cosmos Security enabled, all requests must be authorized and no login redirect is offered.");
             http.exceptionHandling().accessDeniedHandler(new DirectAccessDeniedHandler())
