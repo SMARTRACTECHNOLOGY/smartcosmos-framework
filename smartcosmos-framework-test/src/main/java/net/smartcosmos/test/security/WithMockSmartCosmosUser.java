@@ -49,4 +49,8 @@ public @interface WithMockSmartCosmosUser {
      * @return the mock user authorities
      */
     String[] authorities() default {};
+
+    String[] scopes() default {};
+
+    String clientId() default "smartcosmosservice";
 }
