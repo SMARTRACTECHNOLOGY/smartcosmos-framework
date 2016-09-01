@@ -1,20 +1,18 @@
-package net.smartcosmos.actuate;
+package net.smartcosmos.metrics;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import io.prometheus.client.exporter.MetricsServlet;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.Endpoint;
 import org.springframework.boot.actuate.endpoint.mvc.HypermediaDisabled;
 import org.springframework.boot.actuate.endpoint.mvc.MvcEndpoint;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
@@ -28,36 +26,26 @@ import org.springframework.web.util.UrlPathHelper;
 /**
  * Wraps the prometheus client MetricsServlet.
  */
-@ConfigurationProperties(prefix = "endpoints.prometheus", ignoreUnknownFields = false)
 @HypermediaDisabled
-public class PrometheusMvcEndpoint implements MvcEndpoint, InitializingBean,
-                                              ApplicationContextAware, ServletContextAware,
-                                              EnvironmentAware {
+public class PrometheusEndpoint implements MvcEndpoint, InitializingBean,
+                                           ApplicationContextAware, ServletContextAware,
+                                           EnvironmentAware {
 
     private Environment environment;
-    /**
-     * Endpoint URL path.
-     */
-    @NotNull
-    @Pattern(regexp = "/.*", message = "Path must start with /")
-    private String path = "/prometheus";
 
-    /**
-     * Mark if the endpoint exposes sensitive information.
-     */
-    private Boolean sensitive = false;
-
-    /**
-     * Enable the endpoint.
-     */
-    private boolean enabled = true;
+    private String path;
+    private Boolean sensitive;
 
     private final ServletWrappingController controller = new ServletWrappingController();
 
-    public PrometheusMvcEndpoint() {
+    @Autowired
+    public PrometheusEndpoint(PrometheusProperties metricsProperties) {
+
+        this.path = metricsProperties.getPath();
+        this.sensitive = metricsProperties.getSensitive();
 
         this.controller.setServletClass(MetricsServlet.class);
-        this.controller.setServletName("prometheus");
+        this.controller.setServletName(metricsProperties.getServletName());
     }
 
     @Override
@@ -72,11 +60,6 @@ public class PrometheusMvcEndpoint implements MvcEndpoint, InitializingBean,
         this.controller.setServletContext(servletContext);
     }
 
-    //    public void setInitParameters(Properties initParameters) {
-    //
-    //        this.controller.setInitParameters(initParameters);
-    //    }
-
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 
@@ -89,36 +72,16 @@ public class PrometheusMvcEndpoint implements MvcEndpoint, InitializingBean,
         this.environment = environment;
     }
 
-    public boolean isEnabled() {
-
-        return this.enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-
-        this.enabled = enabled;
-    }
-
     @Override
     public boolean isSensitive() {
 
         return this.sensitive;
     }
 
-    public void setSensitive(boolean sensitive) {
-
-        this.sensitive = sensitive;
-    }
-
     @Override
     public String getPath() {
 
         return this.path;
-    }
-
-    public void setPath(String path) {
-
-        this.path = path;
     }
 
     @Override
