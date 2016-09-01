@@ -19,6 +19,7 @@
         <module>smartcosmos-framework-parent</module>
         <module>smartcosmos-framework</module>
         <module>smartcosmos-framework-messaging</module>
+        <module>smartcosmos-framework-monitoring</module>
         <module>smartcosmos-framework-test</module>
     </modules>
     <scm>
