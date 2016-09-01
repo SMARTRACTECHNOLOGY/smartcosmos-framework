@@ -13,27 +13,31 @@
     <name>SMART COSMOS Framework Monitoring Annotations</name>
     <description>Provides Spring Configuration and Annotations making it easier to add a monitoring endpoint to services</description>
 
+    <properties>
+        <prometheus.version>0.0.16</prometheus.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient</artifactId>
-            <version>0.0.16</version>
+            <version>${prometheus.version}</version>
         </dependency>
         <!-- Hotspot JVM metrics-->
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient_hotspot</artifactId>
-            <version>0.0.16</version>
+            <version>${prometheus.version}</version>
         </dependency>
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient_servlet</artifactId>
-            <version>0.0.16</version>
+            <version>${prometheus.version}</version>
         </dependency>
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient_spring_boot</artifactId>
-            <version>0.0.16</version>
+            <version>${prometheus.version}</version>
         </dependency>
         <dependency>
             <groupId>net.smartcosmos</groupId>
