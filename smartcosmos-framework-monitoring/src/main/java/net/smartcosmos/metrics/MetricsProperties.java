@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import static net.smartcosmos.metrics.MetricsConfiguration.PREFIX_ENDPOINTS_METRICS;
 
 /**
- * Properties for the Prometheus endpoint configuration.
+ * Properties for the default Metrics endpoint configuration.
  */
 @ConfigurationProperties(prefix = PREFIX_ENDPOINTS_METRICS)
 @Data
@@ -32,7 +32,7 @@ public class MetricsProperties {
     private String path = "/default_metrics";
 
     /**
-     *
+     * Enable the default metrics endpoint.
      */
     private Boolean enabled = false;
 
