@@ -4,7 +4,7 @@
 
 === New Features
 
-No new features are added in this release.
+* OBJECTS-980 New module `smartcosmos-framework-monitoring` and annotation `@EnableSmartCosmosMonitoring` to enable a https://prometheus.io/[Prometheus]-compatible `/metrics` endpoint
 
 === Bugfixes & Improvements
 
