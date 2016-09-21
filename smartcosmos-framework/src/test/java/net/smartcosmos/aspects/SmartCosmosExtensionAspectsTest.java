@@ -1,6 +1,5 @@
 package net.smartcosmos.aspects;
 
-import org.hamcrest.Matchers;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
@@ -16,8 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import net.smartcosmos.annotation.SmartCosmosService;
 import net.smartcosmos.exceptions.SmartCosmosException;
 
-import static org.hamcrest.Matchers.is;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
 @SpringApplicationConfiguration(classes = { LocalAopTestContextConfig.class })
@@ -29,25 +26,27 @@ public class SmartCosmosExtensionAspectsTest {
     @Autowired
     private SmartCosmosAopTestService testService;
 
-    @Test(expected = SmartCosmosException.class)
+    @Test
     public void capturesCheckedException() throws Exception {
 
+        thrown.reportMissingExceptionWithMessage("Expected '" + SmartCosmosException.class.getSimpleName() + "'!");
+        thrown.expect(SmartCosmosException.class);
         testService.testWithCheckedException();
     }
 
-    @Test(expected = SmartCosmosException.class)
+    @Test
     public void capturesRuntimeException() throws Exception {
 
+        thrown.reportMissingExceptionWithMessage("Expected '" + SmartCosmosException.class.getSimpleName() + "'!");
+        thrown.expect(SmartCosmosException.class);
         testService.testWithRuntimeException();
     }
 
     @Test
     public void capturesSmartCosmosException() throws Exception {
 
-        Exception expectedCause = null;
         thrown.reportMissingExceptionWithMessage("Expected '" + SmartCosmosException.class.getSimpleName() + "'!");
         thrown.expect(SmartCosmosException.class);
-        thrown.expectCause(is(Matchers.nullValue()));
         testService.testWithSmartCosmosException();
     }
 }
