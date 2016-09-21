@@ -55,7 +55,8 @@ public class SmartCosmosUserAuthenticationConverter
     }
 
     public Map<String, ?> convertUserAuthentication(Authentication authentication) {
-        Map<String, Object> response = new LinkedHashMap<String, Object>();
+
+        Map<String, Object> response = new LinkedHashMap<>();
         response.put(USERNAME, authentication.getName());
         if (authentication.getAuthorities() != null
                 && !authentication.getAuthorities().isEmpty()) {
@@ -72,32 +73,49 @@ public class SmartCosmosUserAuthenticationConverter
     }
 
     public Authentication extractAuthentication(Map<String, ?> map) {
-        if (map.containsKey(SmartCosmosUser.TOKEN_FIELD_URN_ACCOUNT)) {
-            final String accountUrn = map.get(SmartCosmosUser.TOKEN_FIELD_URN_ACCOUNT)
-                    .toString();
-            final String userUrn = map.get(SmartCosmosUser.TOKEN_FIELD_URN_USER)
-                    .toString();
-            final String username = map.get(USERNAME).toString();
-            Collection<? extends GrantedAuthority> authorities = getAuthorities(map);
 
-            final SmartCosmosUser principal = new SmartCosmosUser(accountUrn, userUrn,
-                    username, "N/A", authorities);
-
-            return new UsernamePasswordAuthenticationToken(principal, "N/A", authorities);
+        if (!map.containsKey(USERNAME)) {
+            return null;
         }
-        if (map.containsKey(USERNAME)) {
-            Object principal = map.get(USERNAME);
-            Collection<? extends GrantedAuthority> authorities = getAuthorities(map);
-            if (userDetailsService != null) {
-                UserDetails user = userDetailsService
-                        .loadUserByUsername((String) map.get(USERNAME));
-                authorities = user.getAuthorities();
-                principal = user;
 
-            }
-            return new UsernamePasswordAuthenticationToken(principal, "N/A", authorities);
+        if (map.containsKey(SmartCosmosUser.TOKEN_FIELD_URN_ACCOUNT)
+            && map.containsKey(SmartCosmosUser.TOKEN_FIELD_URN_USER)) {
+            return getAuthenticationFromToken(map);
+        } else {
+            return getAuthenticationFromUserDetailsService(map);
         }
-        return null;
+    }
+
+    private Authentication getAuthenticationFromToken(Map<String, ?> map) {
+
+        final String accountUrn = map.get(SmartCosmosUser.TOKEN_FIELD_URN_ACCOUNT)
+            .toString();
+        final String userUrn = map.get(SmartCosmosUser.TOKEN_FIELD_URN_USER)
+            .toString();
+        final String username = map.get(USERNAME)
+            .toString();
+
+        Collection<? extends GrantedAuthority> authorities = getAuthorities(map);
+
+        final SmartCosmosUser principal = new SmartCosmosUser(accountUrn, userUrn,
+                                                              username, "N/A", authorities);
+
+        return new UsernamePasswordAuthenticationToken(principal, "N/A", authorities);
+    }
+
+    private Authentication getAuthenticationFromUserDetailsService(Map<String, ?> map) {
+
+        Object principal = map.get(USERNAME);
+        Collection<? extends GrantedAuthority> authorities = getAuthorities(map);
+
+        if (userDetailsService != null) {
+            UserDetails user = userDetailsService
+                .loadUserByUsername((String) principal);
+            authorities = user.getAuthorities();
+            principal = user;
+        }
+
+        return new UsernamePasswordAuthenticationToken(principal, "N/A", authorities);
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(Map<String, ?> map) {
