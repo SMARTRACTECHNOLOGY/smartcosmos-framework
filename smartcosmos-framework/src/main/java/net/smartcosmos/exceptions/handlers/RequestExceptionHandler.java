@@ -22,6 +22,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import net.smartcosmos.exceptions.NoEntityFoundException;
 
+/**
+ * Controller advice to translate exceptions occurring on request processing to response entities.
+ */
 @ControllerAdvice
 @Slf4j
 public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -35,7 +38,7 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * <p>Customize the response for NoEntityFoundException.</p>
-     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}.</p>
+     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}. A {@code 400 Bad Request} response will be returned.</p>
      *
      * @param exception the exception
      * @param request the current request
@@ -52,6 +55,15 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(exception, getErrorResponseBody(exception.getCode(), exception.getMessage()), headers, status, request);
     }
 
+    /**
+     * <p>Customize the response for ConversionFailedException.</p>
+     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}. If the exception was caused by an IllegalArgumentException,
+     * a {@code 400 Bad Request} response will be returned, otherwise it will be a {@code 500 Internal Server Error}.</p>
+     *
+     * @param exception the exception
+     * @param request the current request
+     * @return a {@code ResponseEntity} instance
+     */
     @ExceptionHandler(ConversionFailedException.class)
     protected ResponseEntity<?> handleConversionFailure(ConversionFailedException exception, WebRequest request) {
 
@@ -69,7 +81,7 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * <p>Customize the response for {@link IllegalArgumentException} that, e.g., is thrown when invalid URNs were submitted.</p>
-     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}</p>
+     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}. A {@code 400 Bad Request} response will be returned.</p>
      *
      * @param exception the exception
      * @param request the current request
@@ -87,9 +99,8 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Customize the response for ConstraintViolationException.
-     * <p>
-     * This method logs a warning and delegates to {@link #handleExceptionInternal}.
+     * <p>Customize the response for ConstraintViolationException.</p>
+     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}. A {@code 400 Bad Request} response will be returned.</p>
      *
      * @param exception the exception
      * @param request the current request
