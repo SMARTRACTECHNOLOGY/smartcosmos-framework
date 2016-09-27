@@ -26,10 +26,6 @@ public class DirectExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     MessageSource messageSource;
 
-    private static final int ERR_FAILURE = -1;
-    private static final int ERR_FIELD_CONSTRAINT_VIOLATION = -5;
-    private static final int ERR_VALIDATION_FAILURE = -15;
-
     /**
      * Customize the response for AccessDeniedException.
      * <p>
