@@ -1,11 +1,9 @@
 package net.smartcosmos.exceptions.handlers;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +13,6 @@ import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -52,7 +49,41 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
 
         log.warn(exception.getMessage());
 
-        return handleExceptionInternal(exception, processNoEntityFound(exception), headers, status, request);
+        return handleExceptionInternal(exception, getErrorResponseBody(exception.getCode(), exception.getMessage()), headers, status, request);
+    }
+
+    @ExceptionHandler(ConversionFailedException.class)
+    protected ResponseEntity<?> handleConversionFailure(ConversionFailedException exception, WebRequest request) {
+
+        if (exception.getCause() instanceof IllegalArgumentException) {
+            return handleIllegalArgument((IllegalArgumentException) exception.getCause(), request);
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        log.warn(exception.toString());
+
+        return handleExceptionInternal(exception, getErrorResponseBody(ERR_FAILURE, exception.toString()), headers, status, request);
+    }
+
+    /**
+     * <p>Customize the response for {@link IllegalArgumentException} that, e.g., is thrown when invalid URNs were submitted.</p>
+     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}</p>
+     *
+     * @param exception the exception
+     * @param request the current request
+     * @return a {@code ResponseEntity} instances
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    protected ResponseEntity<?> handleIllegalArgument(IllegalArgumentException exception, WebRequest request) {
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        log.warn(exception.toString());
+
+        return handleExceptionInternal(exception, getErrorResponseBody(ERR_VALIDATION_FAILURE, exception.getMessage()), headers, status, request);
     }
 
     /**
@@ -65,62 +96,20 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
      * @return a {@code ResponseEntity} instance
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    protected ResponseEntity<Object> handleConstraintViolationError(ConstraintViolationException exception, WebRequest request) {
+    protected ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException exception, WebRequest request) {
 
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        log.warn(exception.getMessage());
+        log.warn(exception.toString());
 
-        Set<ConstraintViolation<?>> fieldErrors = exception.getConstraintViolations();
-        Set<String> fieldNames = fieldErrors.stream()
+        Set<String> fieldNames = exception.getConstraintViolations()
+            .stream()
             .map(violation -> violation.getPropertyPath()
                 .toString())
             .collect(Collectors.toSet());
 
         return handleExceptionInternal(exception, processConstraintViolation(fieldNames), headers, status, request);
-    }
-
-    @ExceptionHandler(ConversionFailedException.class)
-    protected ResponseEntity<?> handleConversionFailedException(ConversionFailedException exception, WebRequest request) {
-
-        if (exception.getCause() instanceof IllegalArgumentException) {
-            return handleIllegalArgumentException((IllegalArgumentException) exception.getCause(), request);
-        }
-
-        HttpHeaders headers = new HttpHeaders();
-        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-
-        Map<String, Object> message = new LinkedHashMap<>();
-        message.put(CODE, ERR_FAILURE);
-        message.put(MESSAGE, exception.toString());
-
-        log.warn(exception.toString());
-
-        return handleExceptionInternal(exception, message, headers, status, request);
-    }
-
-    /**
-     * <p>Customize the response for {@link IllegalArgumentException} that, e.g., is thrown when invalid URNs were submitted.</p>
-     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}</p>
-     *
-     * @param exception the exception
-     * @param request the current request
-     * @return a {@code ResponseEntity} instances
-     */
-    @ExceptionHandler(IllegalArgumentException.class)
-    protected ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException exception, WebRequest request) {
-
-        HttpHeaders headers = new HttpHeaders();
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-
-        Map<String, Object> message = new LinkedHashMap<>();
-        message.put(CODE, ERR_VALIDATION_FAILURE);
-        message.put(MESSAGE, exception.getMessage());
-
-        logger.warn(exception.getMessage());
-
-        return handleExceptionInternal(exception, message, headers, status, request);
     }
 
     @Override
@@ -130,34 +119,29 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpStatus status,
         WebRequest request) {
 
-        logger.warn(exception.getMessage());
+        log.warn(exception.toString());
 
-        BindingResult result = exception.getBindingResult();
-        List<FieldError> errors = result.getFieldErrors();
-        Set<String> fieldNames = errors.stream()
+        Set<String> fieldNames = exception.getBindingResult()
+            .getFieldErrors()
+            .stream()
             .map(FieldError::getField)
             .collect(Collectors.toSet());
 
         return handleExceptionInternal(exception, processConstraintViolation(fieldNames), headers, status, request);
     }
 
-    private Map<String, Object> processNoEntityFound(NoEntityFoundException exception) {
-
-        Map<String, Object> message = new LinkedHashMap<>();
-
-        message.put(CODE, exception.getCode());
-        message.put(MESSAGE, exception.getMessage());
-
-        return message;
-    }
-
     private Map<String, Object> processConstraintViolation(Set<String> fieldNames) {
 
-        Map<String, Object> message = new LinkedHashMap<>();
+        return getErrorResponseBody(ERR_FIELD_CONSTRAINT_VIOLATION,
+                                    String.format("JSON is missing a required field or violates field constraints: %s",
+                                                  StringUtils.join(fieldNames, ", ")));
+    }
 
-        message.put(CODE, ERR_FIELD_CONSTRAINT_VIOLATION);
-        message.put(MESSAGE, "JSON is missing a required field or violates field constraints: " + StringUtils.join(fieldNames, ", "));
+    private Map<String, Object> getErrorResponseBody(int code, String message) {
 
-        return message;
+        Map<String, Object> responseBody = new LinkedHashMap<>();
+        responseBody.put(CODE, code);
+        responseBody.put(MESSAGE, message);
+        return responseBody;
     }
 }
