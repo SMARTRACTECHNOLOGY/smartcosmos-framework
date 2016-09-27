@@ -50,7 +50,7 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        log.warn(exception.getMessage());
+        logException(exception, request);
 
         return handleExceptionInternal(exception, getErrorResponseBody(exception.getCode(), exception.getMessage()), headers, status, request);
     }
@@ -74,7 +74,7 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
-        log.warn(exception.toString());
+        logException(exception, request);
 
         return handleExceptionInternal(exception, getErrorResponseBody(ERR_FAILURE, exception.toString()), headers, status, request);
     }
@@ -93,7 +93,7 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        log.warn(exception.toString());
+        logException(exception, request);
 
         return handleExceptionInternal(exception, getErrorResponseBody(ERR_VALIDATION_FAILURE, exception.getMessage()), headers, status, request);
     }
@@ -112,7 +112,7 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        log.warn(exception.toString());
+        logException(exception, request);
 
         Set<String> fieldNames = exception.getConstraintViolations()
             .stream()
@@ -130,7 +130,7 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpStatus status,
         WebRequest request) {
 
-        log.warn(exception.toString());
+        logException(exception, request);
 
         Set<String> fieldNames = exception.getBindingResult()
             .getFieldErrors()
@@ -154,5 +154,14 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
         responseBody.put(CODE, code);
         responseBody.put(MESSAGE, message);
         return responseBody;
+    }
+
+    private void logException(Exception exception, WebRequest request) {
+
+        String msg = String.format("Exception on request %s: %s",
+                                   request,
+                                   exception.toString());
+        log.warn(msg);
+        log.debug(msg, exception);
     }
 }
