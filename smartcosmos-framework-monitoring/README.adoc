@@ -1,0 +1,46 @@
+= SMART COSMOS Monitoring
+
+This module provides the `@EnableSmartCosmosMonitoring` annotation to register an additional management endpoint for monitoring purposes.
+
+The monitoring endpoint is compatible with https://prometheus.io/[Prometheus], and therefore is made available as `/prometheus` by default.
+
+== Configuration
+
+=== Default
+
+If nothing is specified in one of the configuration YAML files, the following configuration is used:
+
+[source,yaml]
+----
+management:
+  port: 0
+  security:
+    enabled: true
+
+endpoints:
+  prometheus:
+    enabled: true
+    id: prometheus
+    sensitive: true
+----
+
+Management endpoints are available under a random port and require the same authentication as the actual application, usually an OAuth token.
+
+=== Custom Configuration
+
+If Spring's default `/metrics` endpoint shall be replaced by the new monitoring endpoint, the following configuration can be used.
+It will also set a specific port for management endpoints, and disables the authentication.
+
+[source,yaml]
+----
+management:
+  port: 8081
+  security:
+    enabled: true
+
+endpoints:
+  metrics:
+    enabled: false
+  prometheus:
+    id: metrics
+----
