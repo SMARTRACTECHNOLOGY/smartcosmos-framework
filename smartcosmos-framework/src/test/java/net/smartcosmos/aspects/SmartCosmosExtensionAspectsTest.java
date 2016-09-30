@@ -49,6 +49,14 @@ public class SmartCosmosExtensionAspectsTest {
         thrown.expect(SmartCosmosException.class);
         testService.testWithSmartCosmosException();
     }
+
+    @Test
+    public void capturesThrowable() throws Throwable {
+
+        thrown.reportMissingExceptionWithMessage("Expected '" + SmartCosmosException.class.getSimpleName() + "'!");
+        thrown.expect(SmartCosmosException.class);
+        testService.testWithThrowable();
+    }
 }
 
 @Configuration
@@ -56,17 +64,20 @@ public class SmartCosmosExtensionAspectsTest {
 @ComponentScan
 class LocalAopTestContextConfig {}
 
-@SmartCosmosService
+
 interface SmartCosmosAopTestService {
 
     void testWithCheckedException() throws Exception;
 
-    void testWithRuntimeException();
+    void testWithRuntimeException() throws SmartCosmosException;
 
     void testWithSmartCosmosException() throws Exception;
+
+    void testWithThrowable() throws Throwable;
 }
 
 @Component
+@SmartCosmosService
 class SmartCosmosAopTestServiceDefault implements SmartCosmosAopTestService {
 
     public void testWithCheckedException() throws Exception {
@@ -74,7 +85,7 @@ class SmartCosmosAopTestServiceDefault implements SmartCosmosAopTestService {
         throw new Exception("This is an exception");
     }
 
-    public void testWithRuntimeException() {
+    public void testWithRuntimeException() throws SmartCosmosException {
 
         throw new RuntimeException("This is a runtime exception");
     }
@@ -83,4 +94,10 @@ class SmartCosmosAopTestServiceDefault implements SmartCosmosAopTestService {
 
         throw new SmartCosmosException("This is a SmartCosmosException.");
     }
+
+    public void testWithThrowable() throws Throwable {
+
+        throw new Throwable("This is a Throwable");
+    }
+
 }

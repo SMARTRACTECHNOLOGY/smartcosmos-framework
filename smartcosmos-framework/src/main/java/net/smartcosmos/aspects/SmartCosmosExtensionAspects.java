@@ -12,6 +12,11 @@ import net.smartcosmos.exceptions.SmartCosmosException;
 
 /**
  * Aspects to be applied to extension services implemented in the SMART COSMOS Objects architecture.
+ * <p>
+ * Using this aspect will capture all exceptions and conver them into a {@see SmartCosmosException}.  If your methods do not declare
+ * they throw SmartCosmosException then you will receive an UndeclaredThrowableException
+ * </p>
+ *
  */
 @Aspect
 @Component
@@ -36,7 +41,8 @@ public class SmartCosmosExtensionAspects {
 
         String msg = String.format("Error in service: '%s', cause: '%s', method: '%s', arguments: '%s'",
                                    jp.getTarget(), t.toString(), jp.getSignature().toLongString(), StringUtils.join(jp.getArgs(), " , "));
-        Logger.getLogger(jp.getClass()).error(msg, t);
+        Logger.getLogger(jp.getClass()).error(msg);
+        Logger.getLogger(jp.getClass()).debug(msg, t);
         throw new SmartCosmosException(msg, t);
     }
 
