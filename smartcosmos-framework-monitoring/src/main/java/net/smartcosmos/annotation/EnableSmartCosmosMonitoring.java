@@ -6,9 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.springframework.context.annotation.Import;
-
-import net.smartcosmos.metrics.MetricsConfiguration;
+import de.marcoaust.prometheus.EnablePrometheusEndpoint;
 
 /**
  * <p>Enables Smart Cosmos Monitoring configuration that automatically adds a metrics management endpoint which is compatible with Prometheus.The
@@ -20,6 +18,6 @@ import net.smartcosmos.metrics.MetricsConfiguration;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import({ MetricsConfiguration.class })
+@EnablePrometheusEndpoint
 public @interface EnableSmartCosmosMonitoring {
 }
