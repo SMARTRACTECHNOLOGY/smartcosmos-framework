@@ -13,10 +13,13 @@ import net.smartcosmos.exceptions.SmartCosmosException;
 /**
  * Aspects to be applied to extension services implemented in the SMART COSMOS Objects architecture.
  * <p>
+ * To use this aspect you will need to enable aspects with @EnableAspectJAutoProxy in your @Configuration.  Then you need to add
+ * the @SmartCosmosService annotation to the service classes you with to apply the aspect to.
+ * </p>
+ * <p>
  * Using this aspect will capture all exceptions and conver them into a {@see SmartCosmosException}.  If your methods do not declare
  * they throw SmartCosmosException then you will receive an UndeclaredThrowableException
  * </p>
- *
  */
 @Aspect
 @Component
