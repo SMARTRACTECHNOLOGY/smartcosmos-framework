@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import org.junit.*;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Unit tests for UuidUtil class.
@@ -20,31 +20,22 @@ public class UuidUtilTest {
                    expectedResult.equals(actualResult));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGetUuidFromUrn_Null() throws Exception {
-        UUID expectedResult = null;
 
-        UUID actualResult = UuidUtil.getUuidFromUrn(null);
-        assertTrue("The expected result '" + expectedResult + "' did not match the actual result '" + actualResult + ".",
-                   expectedResult ==  actualResult);
+        UuidUtil.getUuidFromUrn(null);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGetUuidFromUrn_NullString() throws Exception {
-        UUID expectedResult = null;
 
-        UUID actualResult = UuidUtil.getUuidFromUrn("");
-        assertTrue("The expected result '" + expectedResult + "' did not match the actual result '" + actualResult + ".",
-                   expectedResult ==  actualResult);
+        UuidUtil.getUuidFromUrn("");
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGetUuidFromUrn_BlankString() throws Exception {
-        UUID expectedResult = null;
 
-        UUID actualResult = UuidUtil.getUuidFromUrn("   ");
-        assertTrue("The expected result '" + expectedResult + "' did not match the actual result '" + actualResult + ".",
-                   expectedResult ==  actualResult);
+        UuidUtil.getUuidFromUrn("   ");
     }
 
     @Test
@@ -75,31 +66,23 @@ public class UuidUtilTest {
                    expectedResult.equals(actualResult));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGetUuidFromAccountUrn_Null() throws Exception {
         UUID expectedResult = null;
 
         UUID actualResult = UuidUtil.getUuidFromAccountUrn(null);
-        assertTrue("The expected result '" + expectedResult + "' did not match the actual result '" + actualResult + ".",
-                   expectedResult == actualResult);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGetUuidFromAccountUrn_EmptyString() throws Exception {
-        UUID expectedResult = null;
 
-        UUID actualResult = UuidUtil.getUuidFromAccountUrn("");
-        assertTrue("The expected result '" + expectedResult + "' did not match the actual result '" + actualResult + ".",
-                   expectedResult == actualResult);
+        UuidUtil.getUuidFromAccountUrn("");
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGetUuidFromAccountUrn_BlankStringl() throws Exception {
-        UUID expectedResult = null;
 
-        UUID actualResult = UuidUtil.getUuidFromAccountUrn("    ");
-        assertTrue("The expected result '" + expectedResult + "' did not match the actual result '" + actualResult + ".",
-                   expectedResult == actualResult);
+        UuidUtil.getUuidFromAccountUrn("    ");
     }
 
     @Test

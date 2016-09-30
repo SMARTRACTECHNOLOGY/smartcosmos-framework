@@ -23,9 +23,6 @@ public class SmartCosmosExtensionAspects {
     @Pointcut("execution(public * *(..))")
     public void allPublicMethods() {}
 
-    @Pointcut("bean(*Service)")
-    public void allBeansEndingWithService() {}
-
     @Pointcut("hasSmartCosmosServiceAnnotation() && allPublicMethods()")
     public void allSmartCosmosServicePublicAnnotatedMethods() {}
 
