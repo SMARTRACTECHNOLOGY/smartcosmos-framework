@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 /**
  * Annotation used with AOP to indicate the annotated element is capable of participating in AOP based exception handling.
  * <p>
- * When using the AOP based exception handling introduced when using this annotation all pbluc methods must throw only
+ * When using the AOP based exception handling introduced when using this annotation all public methods must throw only
  * {@see net.smartcosmos.exceptions.SmartCosmosException}.
  * </p>
  */
