@@ -31,7 +31,8 @@ import static org.springframework.aop.interceptor.CustomizableTraceInterceptor.P
  * "execution(* net.smartcosmos.*.*(..))". Multiple pointcuts can be defined by combining pointcut definitions; e.g.
  * "execution(* net.smartcosmos.edge.bulkimport.*.*(..)) && execution(* net.smartcosmos.security.*.*(..))".
  * <p>
- For more information see <a href="http://docs .spring.io/spring-framework/docs/current/spring-framework-reference/html/aop.html#aop-pointcuts-combining">Spring AOP Combining pointcut expressions</a>.* </p>
+ * For more information see <a href="http://docs .spring.io/spring-framework/docs/current/spring-framework-reference/html/aop.html#aop-pointcuts
+ * -combining">Spring AOP Combining pointcut expressions</a>.* </p>
  */
 @Configuration
 @Profile("enableTracing")
