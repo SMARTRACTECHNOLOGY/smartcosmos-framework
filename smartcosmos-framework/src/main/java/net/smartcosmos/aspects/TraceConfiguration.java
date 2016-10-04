@@ -5,6 +5,7 @@ import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.interceptor.CustomizableTraceInterceptor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -36,15 +37,11 @@ import static org.springframework.aop.interceptor.CustomizableTraceInterceptor.P
  */
 @Configuration
 @Profile("enableTracing")
+@EnableConfigurationProperties({ TraceConfigurationProperties.class })
 public class TraceConfiguration {
 
-    TraceConfigurationProperties traceConfigurationProperties;
-
     @Autowired
-    public TraceConfiguration(TraceConfigurationProperties traceConfigurationProperties) {
-
-        this.traceConfigurationProperties = traceConfigurationProperties;
-    }
+    TraceConfigurationProperties traceConfigurationProperties;
 
     @Bean
     public CustomizableTraceInterceptor customizableTraceInterceptor() {
