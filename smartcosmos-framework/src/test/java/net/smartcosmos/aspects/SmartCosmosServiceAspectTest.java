@@ -18,7 +18,7 @@ import net.smartcosmos.exceptions.SmartCosmosException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
 @SpringApplicationConfiguration(classes = { LocalAopTestContextConfig.class })
-public class SmartCosmosExtensionAspectsTest {
+public class SmartCosmosServiceAspectTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

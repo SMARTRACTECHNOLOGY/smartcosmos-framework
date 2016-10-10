@@ -11,19 +11,22 @@ import org.springframework.stereotype.Component;
 import net.smartcosmos.exceptions.SmartCosmosException;
 
 /**
- * Aspects to be applied to extension services implemented in the SMART COSMOS Objects architecture.
+ * Aspect to be applied to extension services implemented in the SMART COSMOS Objects architecture.
  * <p>
- * To use this aspect you will need to enable aspects with @EnableAspectJAutoProxy in your @Configuration.  Then you need to add
- * the @SmartCosmosService annotation to the service classes you with to apply the aspect to.
+ * Using this aspect will capture all exceptions and convert them into a {@see SmartCosmosException}.  If your methods do not declare
+ * they throw SmartCosmosException then you will receive an {@see UndeclaredThrowableException}
  * </p>
  * <p>
- * Using this aspect will capture all exceptions and conver them into a {@see SmartCosmosException}.  If your methods do not declare
- * they throw SmartCosmosException then you will receive an UndeclaredThrowableException
+ * To use this aspect add the @SmartCosmosService annotation to the service class(es).  If you have interfaces with default methods
+ * This annotation will need to be applied to the interface.
+ * </p>
+ * <p>For this aspect to be enabled you will need to enable aspects with @EnableAspectJAutoProxy in your @Configuration.  Spring Boot will
+ * auto-configure this in most situations since at least 1.3.2.
  * </p>
  */
 @Aspect
 @Component
-public class SmartCosmosExtensionAspects {
+public class SmartCosmosServiceAspect {
 
     @Pointcut("@annotation(net.smartcosmos.annotation.SmartCosmosService) || @within(net.smartcosmos.annotation.SmartCosmosService)")
     public void hasSmartCosmosServiceAnnotation() {}
@@ -43,7 +46,7 @@ public class SmartCosmosExtensionAspects {
         }
 
         String msg = String.format("Error in service: '%s', cause: '%s', method: '%s', arguments: '%s'",
-                                   jp.getTarget(), t.toString(), jp.getSignature().toLongString(), StringUtils.join(jp.getArgs(), " , "));
+                                   jp.getTarget().toString(), t.toString(), jp.getSignature().toLongString(), StringUtils.join(jp.getArgs(), " , "));
         Logger.getLogger(jp.getClass()).error(msg);
         Logger.getLogger(jp.getClass()).debug(msg, t);
         throw new SmartCosmosException(msg, t);

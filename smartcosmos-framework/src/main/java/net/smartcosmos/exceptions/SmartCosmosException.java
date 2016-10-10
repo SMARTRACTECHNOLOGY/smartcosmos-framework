@@ -3,9 +3,9 @@ package net.smartcosmos.exceptions;
 /**
  * Generic base exception for the SMART COSMOS Objects platform.
  */
-public class SmartCosmosException extends Exception {
+public class SmartCosmosException extends RuntimeException {
 
-    private static final long serialVersionUID = -4863318680106697788L;
+    private static final long serialVersionUID = 8059819376742981420L;
 
     /**
      * Default Exception constructor.
