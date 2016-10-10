@@ -23,7 +23,7 @@ import net.smartcosmos.exceptions.SmartCosmosException;
  */
 @Aspect
 @Component
-public class SmartCosmosExtensionAspects {
+public class SmartCosmosServiceAspect {
 
     @Pointcut("@annotation(net.smartcosmos.annotation.SmartCosmosService) || @within(net.smartcosmos.annotation.SmartCosmosService)")
     public void hasSmartCosmosServiceAnnotation() {}
