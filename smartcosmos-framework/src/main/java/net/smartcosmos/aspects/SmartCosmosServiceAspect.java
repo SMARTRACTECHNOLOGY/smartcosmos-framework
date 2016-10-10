@@ -46,7 +46,7 @@ public class SmartCosmosServiceAspect {
         }
 
         String msg = String.format("Error in service: '%s', cause: '%s', method: '%s', arguments: '%s'",
-                                   jp.getTarget(), t.toString(), jp.getSignature().toLongString(), StringUtils.join(jp.getArgs(), " , "));
+                                   jp.getTarget().toString(), t.toString(), jp.getSignature().toLongString(), StringUtils.join(jp.getArgs(), " , "));
         Logger.getLogger(jp.getClass()).error(msg);
         Logger.getLogger(jp.getClass()).debug(msg, t);
         throw new SmartCosmosException(msg, t);
