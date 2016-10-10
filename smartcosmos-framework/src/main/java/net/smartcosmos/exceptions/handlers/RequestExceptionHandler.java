@@ -21,6 +21,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import net.smartcosmos.exceptions.NoEntityFoundException;
+import net.smartcosmos.exceptions.SmartCosmosException;
 
 /**
  * Controller advice to translate exceptions occurring on request processing to response entities.
@@ -121,6 +122,29 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
             .collect(Collectors.toSet());
 
         return handleExceptionInternal(exception, processConstraintViolation(fieldNames), headers, status, request);
+    }
+
+    /**
+     * <p>Customize the response for {@link SmartCosmosException} that, e.g., is thrown when invalid URNs were submitted.</p>
+     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}. A {@code 400 Bad Request} response will be returned.</p>
+     *
+     * @param exception the exception
+     * @param request the current request
+     * @return a {@code ResponseEntity} instances
+     */
+    @ExceptionHandler(SmartCosmosException.class)
+    protected ResponseEntity<?> handleSmartCosmosException(SmartCosmosException exception, WebRequest request) {
+
+        if (exception.getCause() instanceof IllegalArgumentException) {
+            return handleIllegalArgument((IllegalArgumentException) exception.getCause(), request);
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        logException(exception, request);
+
+        return handleExceptionInternal(exception, getErrorResponseBody(ERR_FAILURE, exception.getMessage()), headers, status, request);
     }
 
     @Override
