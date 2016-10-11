@@ -1,8 +1,8 @@
 package net.smartcosmos.aspects;
 
 import org.junit.*;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.junit.rules.*;
+import org.junit.runner.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -29,7 +29,6 @@ public class SmartCosmosServiceAspectTest {
     @Test
     public void capturesCheckedException() throws Exception {
 
-        thrown.reportMissingExceptionWithMessage("Expected '" + SmartCosmosException.class.getSimpleName() + "'!");
         thrown.expect(SmartCosmosException.class);
         testService.testWithCheckedException();
     }
@@ -37,7 +36,6 @@ public class SmartCosmosServiceAspectTest {
     @Test
     public void capturesRuntimeException() throws Exception {
 
-        thrown.reportMissingExceptionWithMessage("Expected '" + SmartCosmosException.class.getSimpleName() + "'!");
         thrown.expect(SmartCosmosException.class);
         testService.testWithRuntimeException();
     }
@@ -45,7 +43,6 @@ public class SmartCosmosServiceAspectTest {
     @Test
     public void capturesSmartCosmosException() throws Exception {
 
-        thrown.reportMissingExceptionWithMessage("Expected '" + SmartCosmosException.class.getSimpleName() + "'!");
         thrown.expect(SmartCosmosException.class);
         testService.testWithSmartCosmosException();
     }
@@ -53,18 +50,26 @@ public class SmartCosmosServiceAspectTest {
     @Test
     public void capturesThrowable() throws Throwable {
 
-        thrown.reportMissingExceptionWithMessage("Expected '" + SmartCosmosException.class.getSimpleName() + "'!");
         thrown.expect(SmartCosmosException.class);
         testService.testWithThrowable();
+    }
+
+    @Test
+    public void capturesExceptionFromDefaultMethod() throws Throwable {
+
+        thrown.expect(SmartCosmosException.class);
+        testService.testDefaultMethodWithException();
     }
 }
 
 @Configuration
 @EnableAspectJAutoProxy
 @ComponentScan
-class LocalAopTestContextConfig {}
+class LocalAopTestContextConfig {
 
+}
 
+@SmartCosmosService
 interface SmartCosmosAopTestService {
 
     void testWithCheckedException() throws Exception;
@@ -74,6 +79,12 @@ interface SmartCosmosAopTestService {
     void testWithSmartCosmosException() throws Exception;
 
     void testWithThrowable() throws Throwable;
+
+    default void testDefaultMethodWithException() throws Throwable {
+
+        throw new Exception("This is an Exception thrown by the default interface method.");
+    }
+
 }
 
 @Component
