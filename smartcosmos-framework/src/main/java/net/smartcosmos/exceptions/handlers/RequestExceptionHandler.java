@@ -1,5 +1,6 @@
 package net.smartcosmos.exceptions.handlers;
 
+import java.net.SocketTimeoutException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -123,6 +124,25 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(exception, processConstraintViolation(fieldNames), headers, status, request);
     }
 
+    /**
+     * <p>Customize the response for SocketTimeoutException.</p>
+     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}. A {@code 500 Internal Server Errror} response will be
+     * returned.</p>
+     *
+     * @param exception the exception
+     * @param request the current request
+     * @return a {@code ResponseEntity} instance
+     */
+    @ExceptionHandler(SocketTimeoutException.class)
+    protected ResponseEntity<Object> handleConstraintViolation(SocketTimeoutException exception, WebRequest request) {
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        logException(exception, request);
+
+        return handleExceptionInternal(exception, getErrorResponseBody(ERR_FAILURE, exception.getMessage()), headers, status, request);
+    }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
         MethodArgumentNotValidException exception,
