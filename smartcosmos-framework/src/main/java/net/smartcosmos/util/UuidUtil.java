@@ -14,7 +14,11 @@ import static lombok.AccessLevel.PRIVATE;
  * Inspired by:
  * <a href="https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/">https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/</a>
  * </p>
+ * @deprecated SMART COSMOS Objects v3 does not generally rely on UUIDs. Although DAO layer implementations may use UUID for IDs, the Framework
+ * puts no requirements on the ID type, this class therefore will be removed in future versions. Solutions therefore should provide their own
+ * specific utilities if required.
  */
+@Deprecated
 @AllArgsConstructor(access = PRIVATE)
 public final class UuidUtil {
 
@@ -28,7 +32,9 @@ public final class UuidUtil {
      * @param urn the urn
      * @return the UUID
      * @throws IllegalArgumentException
+     * @deprecated Default implementations in SMART COSMOS Objects v3 use a different scheme for URNs
      */
+    @Deprecated
     public static UUID getUuidFromUrn(final String urn) {
         if (StringUtils.isNotBlank(urn) && urn.startsWith(URN_PREFIX_UUID)) {
             return UUID.fromString(StringUtils.substringAfterLast(urn, URN_SEPARATOR));
@@ -41,7 +47,9 @@ public final class UuidUtil {
      *
      * @param referenceUuid the reference UUID
      * @return the String version (in canonical UUID-as-String format) of an input UUID
+     * @deprecated Default implementations in SMART COSMOS Objects v3 use a different scheme for URNs
      */
+    @Deprecated
     public static String getUrnFromUuid(final UUID referenceUuid) {
         if (referenceUuid == null) {
             return null;
@@ -55,7 +63,9 @@ public final class UuidUtil {
      * @param urn the account URN
      * @return the UUID
      * @throws IllegalArgumentException
+     * @deprecated SMART COSMOS Objects v3 uses a different scheme for tenant URNs
      */
+    @Deprecated
     public static UUID getUuidFromAccountUrn(final String urn) {
         if (StringUtils.isNotBlank(urn)&& urn.startsWith(URN_PREFIX_ACCOUNT)) {
             return UUID.fromString(StringUtils.substringAfterLast(urn, URN_SEPARATOR));
@@ -68,7 +78,9 @@ public final class UuidUtil {
      *
      * @param referenceUuid the reference UUID
      * @return the Sting version (in canonical UUID-as-String format) of an input UUID
+     * @deprecated SMART COSMOS Objects v3 uses a different scheme for tenant URNs
      */
+    @Deprecated
     public static String getAccountUrnFromUuid(final UUID referenceUuid) {
         if (referenceUuid == null) {
             return null;
@@ -76,10 +88,20 @@ public final class UuidUtil {
         return URN_PREFIX_ACCOUNT + referenceUuid.toString();
     }
 
+    /**
+     * @return
+     * @deprecated Use {@code UUID.randomUUID()} instead
+     */
+    @Deprecated
     public static UUID getNewUuid() {
         return UUID.randomUUID();
     }
 
+    /**
+     * @return
+     * @deprecated Use {@code UUID.randomUUID().toString()} instead
+     */
+    @Deprecated
     public static String getNewUuidAsString() {
         return getNewUuid().toString();
     }
