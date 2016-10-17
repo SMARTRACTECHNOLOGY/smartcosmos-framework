@@ -134,7 +134,7 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
      * @return a {@code ResponseEntity} instance
      */
     @ExceptionHandler(SocketTimeoutException.class)
-    protected ResponseEntity<Object> handleConstraintViolation(SocketTimeoutException exception, WebRequest request) {
+    protected ResponseEntity<Object> handleSocketTimeoutException(SocketTimeoutException exception, WebRequest request) {
 
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
