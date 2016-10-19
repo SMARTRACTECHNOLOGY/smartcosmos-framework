@@ -14,9 +14,8 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public class SmartCosmosCachedUser extends SmartCosmosUser {
 
-    // TODO Caching time is hardcoded at 5 minutes, should change this.
-    private final Date cachedDate = new Date(
-            System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
+    // Caching time is set in auth server config smartcosmos.security.cachedUserKeepAliveSecs
+    private final Date cachedDate = new Date(System.currentTimeMillis());
 
     public SmartCosmosCachedUser(String accountUrn, String userUrn, String username,
             String password, Collection<? extends GrantedAuthority> authorities) {
