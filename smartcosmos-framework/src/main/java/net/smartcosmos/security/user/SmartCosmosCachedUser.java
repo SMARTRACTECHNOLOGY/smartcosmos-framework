@@ -23,6 +23,11 @@ public class SmartCosmosCachedUser extends SmartCosmosUser {
         super(accountUrn, userUrn, username, password, authorities);
     }
 
+    @Override
+    public void eraseCredentials() {
+        // do nothing here, just prevent the password hash erase implemented in the base class
+    }
+
     public Date getCachedDate() {
         return this.cachedDate;
     }
