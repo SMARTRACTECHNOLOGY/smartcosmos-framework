@@ -15,11 +15,14 @@ import org.springframework.core.io.Resource;
 @ConfigurationProperties("smartcosmos.security.resource")
 public class SecurityResourceProperties {
 
+    public static final int DEFAULT_CACHED_USER_KEEP_ALIVE_SECS = 300;
+
     private KeyStoreProperties keystore = new KeyStoreProperties();
     private UserDetailsProperties userDetails = new UserDetailsProperties();
 
     private String clientId;
     private String clientSecret;
+    private Integer cachedUserKeepAliveSecs = DEFAULT_CACHED_USER_KEEP_ALIVE_SECS;
 
     @Data
     public class KeyStoreProperties {
