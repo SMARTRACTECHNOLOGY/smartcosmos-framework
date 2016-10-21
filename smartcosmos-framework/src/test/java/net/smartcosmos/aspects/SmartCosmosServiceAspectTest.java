@@ -13,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import net.smartcosmos.annotation.SmartCosmosService;
+import net.smartcosmos.events.SmartCosmosEventException;
 import net.smartcosmos.exceptions.SmartCosmosException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -48,6 +49,13 @@ public class SmartCosmosServiceAspectTest {
     }
 
     @Test
+    public void capturesSmartCosmosEventException() throws Exception {
+
+        thrown.expect(SmartCosmosException.class);
+        testService.testWithSmartCosmosEventException();
+    }
+
+    @Test
     public void capturesThrowable() throws Throwable {
 
         thrown.expect(SmartCosmosException.class);
@@ -78,6 +86,8 @@ interface SmartCosmosAopTestService {
 
     void testWithSmartCosmosException() throws Exception;
 
+    void testWithSmartCosmosEventException() throws Exception;
+
     void testWithThrowable() throws Throwable;
 
     default void testDefaultMethodWithException() throws Throwable {
@@ -104,6 +114,12 @@ class SmartCosmosAopTestServiceDefault implements SmartCosmosAopTestService {
     public void testWithSmartCosmosException() throws SmartCosmosException {
 
         throw new SmartCosmosException("This is a SmartCosmosException.");
+    }
+
+    public void testWithSmartCosmosEventException() throws SmartCosmosException {
+
+        Exception cause = new Exception("This is an exception");
+        throw new SmartCosmosEventException("This is a SmartCosmosEventException.", cause);
     }
 
     public void testWithThrowable() throws Throwable {
