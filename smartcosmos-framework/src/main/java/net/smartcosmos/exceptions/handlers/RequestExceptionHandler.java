@@ -21,6 +21,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import net.smartcosmos.exceptions.NoEntityFoundException;
+import net.smartcosmos.exceptions.SmartCosmosException;
 
 /**
  * Controller advice to translate exceptions occurring on request processing to response entities.
@@ -29,13 +30,49 @@ import net.smartcosmos.exceptions.NoEntityFoundException;
 @Slf4j
 public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final int ERR_FAILURE = -1;
-    private static final int ERR_FIELD_CONSTRAINT_VIOLATION = -5;
-    private static final int ERR_VALIDATION_FAILURE = -15;
+    public static final String DEFAULT_SMART_COSMOS_EXCEPTION_MESSAGE = "Unspecified SmartCosmosException";
+    protected static final int ERR_FAILURE = -1;
+    protected static final int ERR_FIELD_CONSTRAINT_VIOLATION = -5;
+    protected static final int ERR_VALIDATION_FAILURE = -15;
 
     private static final String CODE = "code";
     private static final String MESSAGE = "message";
 
+    @ExceptionHandler(SmartCosmosException.class)
+    protected ResponseEntity<?> handleSmartCosmosExceptionMethod(SmartCosmosException exception, WebRequest request) {
+
+        if (exception.getCause() == null) {
+            logException(exception, request);
+            HttpHeaders headers = new HttpHeaders();
+            HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return handleExceptionInternal(exception, getErrorResponseBody(ERR_FAILURE, exception.getMessage()), headers, status, request);
+
+
+        }
+        if (exception.getCause() instanceof NoEntityFoundException) {
+            return handleNoEntityFoundRequestHandlingMethod((NoEntityFoundException)exception.getCause(), request);
+        }
+        if (exception.getCause() instanceof ConversionFailedException) {
+            return handleConversionFailure((ConversionFailedException)exception.getCause(), request);
+        }
+        if (exception.getCause() instanceof IllegalArgumentException) {
+            return handleIllegalArgument((IllegalArgumentException)exception.getCause(), request);
+        }
+        if (exception.getCause() instanceof ConstraintViolationException) {
+            return handleConstraintViolation((ConstraintViolationException)exception.getCause(), request);
+        }
+        if (exception.getCause() instanceof MethodArgumentNotValidException) {
+            HttpHeaders headers = new HttpHeaders();
+            HttpStatus status = HttpStatus.BAD_REQUEST;
+            return handleMethodArgumentNotValid((MethodArgumentNotValidException)exception.getCause(), headers, status, request);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        return handleExceptionInternal(exception, getErrorResponseBody(ERR_FAILURE, exception.toString()), headers, status, request);
+
+
+    }
     /**
      * <p>Customize the response for NoEntityFoundException.</p>
      * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}. A {@code 400 Bad Request} response will be returned.</p>
