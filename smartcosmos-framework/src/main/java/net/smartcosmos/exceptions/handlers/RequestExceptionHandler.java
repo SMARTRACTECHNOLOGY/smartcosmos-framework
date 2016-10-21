@@ -30,7 +30,7 @@ import net.smartcosmos.exceptions.SmartCosmosException;
 @Slf4j
 public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    public static final String DEFAULT_SMART_COSMOS_EXCEPTION_MESSAGE = "Unspecifed SmartCosmosException";
+    public static final String DEFAULT_SMART_COSMOS_EXCEPTION_MESSAGE = "Unspecified SmartCosmosException";
     protected static final int ERR_FAILURE = -1;
     protected static final int ERR_FIELD_CONSTRAINT_VIOLATION = -5;
     protected static final int ERR_VALIDATION_FAILURE = -15;
