@@ -14,7 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public class SmartCosmosCachedUser extends SmartCosmosUser {
 
-    // Caching time is set in auth server config smartcosmos.security.cachedUserKeepAliveSecs
+    // Caching time is set in auth server config smartcosmos.security.resource.cachedUserKeepAliveSecs
     private final Date cachedDate = new Date(System.currentTimeMillis());
 
     public SmartCosmosCachedUser(String accountUrn, String userUrn, String username,
