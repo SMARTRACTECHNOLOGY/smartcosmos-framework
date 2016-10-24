@@ -1,9 +1,9 @@
 = SMART COSMOS Getting Started Guide
 SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
-:version: 3.0.0-SNAPSHOT
+:version: 3.0.1-SNAPSHOT
 ifdef::env-github[:USER: SMARTRACTECHNOLOGY]
 ifdef::env-github[:REPO: smartcosmos-framework]
-ifdef::env-github[:BRANCH: 3.0.x]
+ifdef::env-github[:BRANCH: master]
 
 image::https://travis-ci.org/{USER}/{REPO}.svg?branch={BRANCH}[Build Status, link=https://travis-ci.org/{USER}/{REPO}]
 
