@@ -5,6 +5,7 @@ ifdef::env-github[:USER: SMARTRACTECHNOLOGY]
 ifdef::env-github[:REPO: smartcosmos-framework]
 ifdef::env-github[:BRANCH: master]
 
+image::https://jenkins.smartcosmos.net/buildStatus/icon?job={USER}/{REPO}/{BRANCH}[Build Status, link=https://jenkins.smartcosmos.net/job/{USER}/job/{REPO}/job/{BRANCH}/]
 image::https://travis-ci.org/{USER}/{REPO}.svg?branch={BRANCH}[Build Status, link=https://travis-ci.org/{USER}/{REPO}]
 
 == Welcome to SMART COSMOS
@@ -146,7 +147,7 @@ And in the event you already have a parent structure, we provide a dependency PO
 TIP: Remember, the artifacts in Maven Central are *living* artifacts and will
 have new releases from time to time. You are *strongly encouraged* to visit
 http://search.maven.org/#search%7Cga%7C1%7Cg%3Anet.smartcosmos[https://search.maven.org]
-to find the latest version after {version}.amp
+to find the latest version after {version}.
 
 == For More Information
 
