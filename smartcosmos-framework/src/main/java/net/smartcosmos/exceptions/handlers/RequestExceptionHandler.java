@@ -17,6 +17,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -35,6 +36,9 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
     protected static final int ERR_FIELD_CONSTRAINT_VIOLATION = -5;
     protected static final int ERR_VALIDATION_FAILURE = -15;
 
+    private static final String TIMESTAMP = "timestamp";
+    private static final String STATUS = "status";
+    private static final String ERROR = "error";
     private static final String CODE = "code";
     private static final String MESSAGE = "message";
 
@@ -47,32 +51,34 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
             return handleExceptionInternal(exception, getErrorResponseBody(ERR_FAILURE, exception.getMessage()), headers, status, request);
 
-
         }
         if (exception.getCause() instanceof NoEntityFoundException) {
-            return handleNoEntityFoundRequestHandlingMethod((NoEntityFoundException)exception.getCause(), request);
+            return handleNoEntityFoundRequestHandlingMethod((NoEntityFoundException) exception.getCause(), request);
         }
         if (exception.getCause() instanceof ConversionFailedException) {
-            return handleConversionFailure((ConversionFailedException)exception.getCause(), request);
+            return handleConversionFailure((ConversionFailedException) exception.getCause(), request);
         }
         if (exception.getCause() instanceof IllegalArgumentException) {
-            return handleIllegalArgument((IllegalArgumentException)exception.getCause(), request);
+            return handleIllegalArgument((IllegalArgumentException) exception.getCause(), request);
         }
         if (exception.getCause() instanceof ConstraintViolationException) {
-            return handleConstraintViolation((ConstraintViolationException)exception.getCause(), request);
+            return handleConstraintViolation((ConstraintViolationException) exception.getCause(), request);
+        }
+        if (exception.getCause() instanceof HttpStatusCodeException) {
+            return handleHttpStatusCodeException((HttpStatusCodeException) exception.getCause(), request);
         }
         if (exception.getCause() instanceof MethodArgumentNotValidException) {
             HttpHeaders headers = new HttpHeaders();
             HttpStatus status = HttpStatus.BAD_REQUEST;
-            return handleMethodArgumentNotValid((MethodArgumentNotValidException)exception.getCause(), headers, status, request);
+            return handleMethodArgumentNotValid((MethodArgumentNotValidException) exception.getCause(), headers, status, request);
         }
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
         return handleExceptionInternal(exception, getErrorResponseBody(ERR_FAILURE, exception.toString()), headers, status, request);
 
-
     }
+
     /**
      * <p>Customize the response for NoEntityFoundException.</p>
      * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}. A {@code 400 Bad Request} response will be returned.</p>
@@ -158,6 +164,21 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
             .collect(Collectors.toSet());
 
         return handleExceptionInternal(exception, processConstraintViolation(fieldNames), headers, status, request);
+    }
+
+    @ExceptionHandler(HttpStatusCodeException.class)
+    protected ResponseEntity<?> handleHttpStatusCodeException(HttpStatusCodeException exception, WebRequest request) {
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        Map<String, Object> responseBody = new LinkedHashMap<>();
+        responseBody.put(TIMESTAMP, System.currentTimeMillis());
+        responseBody.put(STATUS, exception.getStatusCode());
+        responseBody.put(ERROR, exception.getStatusText());
+        responseBody.put(MESSAGE, exception.getResponseBodyAsString());
+
+        return handleExceptionInternal(exception, responseBody, headers, status, request);
     }
 
     @Override
