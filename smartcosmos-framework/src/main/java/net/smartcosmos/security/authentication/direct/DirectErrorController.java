@@ -1,7 +1,6 @@
 package net.smartcosmos.security.authentication.direct;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.AbstractErrorController;
-import org.springframework.boot.autoconfigure.web.ErrorAttributes;
+import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.http.HttpStatus;
@@ -38,13 +37,11 @@ public class DirectErrorController extends AbstractErrorController {
 
     /**
      * Create a new {@link DirectErrorController} instance.
-     *
-     * @param errorAttributes the error attributes
      */
     @Autowired
-    public DirectErrorController(ErrorAttributes errorAttributes,
-            ServerProperties properties) {
-        super(errorAttributes);
+    public DirectErrorController(ServerProperties properties) {
+
+        super(new DefaultErrorAttributes());
         Assert.notNull(properties.getError(), "ErrorProperties must not be null");
         this.errorProperties = properties.getError();
     }
@@ -65,7 +62,7 @@ public class DirectErrorController extends AbstractErrorController {
                 isIncludeStackTrace(request, MediaType.ALL));
         HttpStatus status = getStatus(request);
 
-        return new ResponseEntity<Map<String, Object>>(body, status);
+        return new ResponseEntity<>(body, status);
     }
 
     /**
