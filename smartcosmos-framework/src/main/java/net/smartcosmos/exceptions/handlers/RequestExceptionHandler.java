@@ -166,17 +166,36 @@ public class RequestExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(exception, processConstraintViolation(fieldNames), headers, status, request);
     }
 
+    /**
+     * <p>Customize the response for {@link HttpStatusCodeException} that, e.g., is thrown when requests to other services fail and are not handled
+     * .</p>
+     * <p>This method logs a warning and delegates to {@link #handleExceptionInternal}. A {@code 500 Internal Server Error} response will be
+     * returned, containing information on the original error response.</p>
+     *
+     * @param exception the exception
+     * @param request the current request
+     * @return a {@code ResponseEntity} instances
+     */
     @ExceptionHandler(HttpStatusCodeException.class)
     protected ResponseEntity<?> handleHttpStatusCodeException(HttpStatusCodeException exception, WebRequest request) {
 
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
+        String exceptionResponseBody = exception.getResponseBodyAsString();
+
         Map<String, Object> responseBody = new LinkedHashMap<>();
         responseBody.put(TIMESTAMP, System.currentTimeMillis());
         responseBody.put(STATUS, exception.getStatusCode());
         responseBody.put(ERROR, exception.getStatusText());
-        responseBody.put(MESSAGE, exception.getResponseBodyAsString());
+        responseBody.put(MESSAGE, exceptionResponseBody);
+
+        String msg = String.format("Exception on request %s: %s: %s",
+                                   request,
+                                   exception.toString(),
+                                   exceptionResponseBody);
+        log.warn(msg);
+        log.debug(msg, exception);
 
         return handleExceptionInternal(exception, responseBody, headers, status, request);
     }
