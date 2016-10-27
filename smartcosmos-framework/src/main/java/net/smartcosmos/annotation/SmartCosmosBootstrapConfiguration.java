@@ -83,9 +83,9 @@ public class SmartCosmosBootstrapConfiguration {
 
             RestTemplate eventRestTemplate = new RestTemplate();
             return new RestSmartCosmosEventTemplate(eventRestTemplate,
-                                                    smartCosmosEventsProperties.getServiceName(),
+                                                    smartCosmosEventsProperties.getAddress(),
                                                     smartCosmosEventsProperties.getHttpMethod(),
-                                                    smartCosmosEventsProperties.getUrl(),
+                                                    smartCosmosEventsProperties.getPath(),
                                                     smartCosmosEventTaskExecutor);
         }
 
