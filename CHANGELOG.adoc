@@ -11,6 +11,7 @@
 * OBJECTS-995 Thread context inheritance causes side effects with thread pools
 * OBJECTS-1047 Deprecate `UuidUtil` class
 * Improves testing to use an OAuth2 request instead of a mocked basic request
+* Removes Ribbon and Eureka
 
 == Release 3.0.0 (August 12, 2016)
 
