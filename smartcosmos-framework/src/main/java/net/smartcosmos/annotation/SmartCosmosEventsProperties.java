@@ -9,11 +9,11 @@ import org.springframework.http.HttpMethod;
  * @author voor
  */
 @Data
-@ConfigurationProperties("smartcosmos.events")
+@ConfigurationProperties("smartcosmos.service.events")
 public class SmartCosmosEventsProperties {
 
-        private String serviceName = "smartcosmos-events";
-        private String url = "";
-        private HttpMethod httpMethod = HttpMethod.POST;
+    private String address = "http://events";
+    private String path = "";
+    private HttpMethod httpMethod = HttpMethod.POST;
 
 }

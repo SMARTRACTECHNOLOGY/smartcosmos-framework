@@ -39,13 +39,13 @@ public class RestSmartCosmosEventTemplate extends AbstractSmartCosmosEventTempla
     @Autowired
     public RestSmartCosmosEventTemplate(
         RestOperations restOperations,
-        String eventServiceName,
+        String eventAddress,
         HttpMethod eventHttpMethod,
-        String eventUrl,
+        String eventPath,
         Executor smartCosmosEventTaskExecutor) {
         this.restOperations = restOperations;
         this.eventHttpMethod = eventHttpMethod;
-        this.eventUri = URI.create("http://" + eventServiceName + "/" + eventUrl);
+        this.eventUri = URI.create(eventAddress + "/" + eventPath);
         this.smartCosmosEventTaskExecutor = smartCosmosEventTaskExecutor;
     }
 

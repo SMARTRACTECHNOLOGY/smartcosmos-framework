@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.netflix.ribbon.RibbonClientHttpRequestFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -80,16 +79,13 @@ public class SmartCosmosBootstrapConfiguration {
         @Bean
         @Autowired
         @Profile("!test")
-        SmartCosmosEventTemplate smartCosmosEventTemplate(
-            RibbonClientHttpRequestFactory ribbonClientHttpRequestFactory,
-            Executor smartCosmosEventTaskExecutor) {
+        SmartCosmosEventTemplate smartCosmosEventTemplate(Executor smartCosmosEventTaskExecutor) {
 
             RestTemplate eventRestTemplate = new RestTemplate();
-            eventRestTemplate.setRequestFactory(ribbonClientHttpRequestFactory);
             return new RestSmartCosmosEventTemplate(eventRestTemplate,
-                                                    smartCosmosEventsProperties.getServiceName(),
+                                                    smartCosmosEventsProperties.getAddress(),
                                                     smartCosmosEventsProperties.getHttpMethod(),
-                                                    smartCosmosEventsProperties.getUrl(),
+                                                    smartCosmosEventsProperties.getPath(),
                                                     smartCosmosEventTaskExecutor);
         }
 
