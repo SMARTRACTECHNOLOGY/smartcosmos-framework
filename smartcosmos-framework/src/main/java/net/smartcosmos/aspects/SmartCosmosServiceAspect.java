@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import net.smartcosmos.exceptions.SmartCosmosException;
 
@@ -46,9 +47,21 @@ public class SmartCosmosServiceAspect {
         }
 
         String msg = String.format("Error in service: '%s', cause: '%s', method: '%s', arguments: '%s'",
-                                   jp.getTarget().toString(), t.toString(), jp.getSignature().toLongString(), StringUtils.join(jp.getArgs(), " , "));
-        Logger.getLogger(jp.getClass()).error(msg);
-        Logger.getLogger(jp.getClass()).debug(msg, t);
+                                   jp.getTarget()
+                                       .toString(),
+                                   t.toString(),
+                                   jp.getSignature()
+                                       .toLongString(),
+                                   StringUtils.join(jp.getArgs(), " , "));
+
+        if (t instanceof HttpStatusCodeException) {
+            msg = msg.concat(String.format(", HTTP response body: '%s'", ((HttpStatusCodeException) t).getResponseBodyAsString()));
+        }
+
+        Logger.getLogger(jp.getClass())
+            .warn(msg);
+        Logger.getLogger(jp.getClass())
+            .debug(msg, t);
         throw new SmartCosmosException(msg, t);
     }
 
