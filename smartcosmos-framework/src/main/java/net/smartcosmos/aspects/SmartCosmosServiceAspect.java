@@ -59,7 +59,7 @@ public class SmartCosmosServiceAspect {
         }
 
         Logger.getLogger(jp.getClass())
-            .error(msg);
+            .warn(msg);
         Logger.getLogger(jp.getClass())
             .debug(msg, t);
         throw new SmartCosmosException(msg, t);
