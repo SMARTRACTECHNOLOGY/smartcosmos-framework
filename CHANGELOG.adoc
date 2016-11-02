@@ -11,6 +11,7 @@
 * OBJECTS-995 Thread context inheritance causes side effects with thread pools
 * OBJECTS-1047 Deprecate `UuidUtil` class
 * OBJECTS-1060 Capture HttpStatusCodeException and Log Information in the SmartCosmosServiceAspect
+* PROFILES-750: Add request exception handler for `HttpStatusCodeException`
 * Improves testing to use an OAuth2 request instead of a mocked basic request
 * Removes Ribbon and Eureka
 
