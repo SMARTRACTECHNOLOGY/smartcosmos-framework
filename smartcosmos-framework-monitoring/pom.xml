@@ -24,12 +24,6 @@
             <artifactId>simpleclient_hotspot</artifactId>
             <version>${prometheus.version}</version>
         </dependency>
-        <!-- Pushgateway exposition-->
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient_pushgateway</artifactId>
-            <version>${prometheus.version}</version>
-        </dependency>
         <!-- Exposition servlet-->
         <dependency>
             <groupId>io.prometheus</groupId>
