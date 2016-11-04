@@ -14,26 +14,33 @@
     <description>Provides Spring Configuration and Annotations making it easier to add a monitoring endpoint to services</description>
 
     <properties>
-        <prometheus.version>0.0.16</prometheus.version>
-        <spring-boot-prometheus.version>0.1.0</spring-boot-prometheus.version>
+        <prometheus.version>0.0.18</prometheus.version>
     </properties>
 
     <dependencies>
+        <!-- Hotspot JVM metrics-->
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient_hotspot</artifactId>
             <version>${prometheus.version}</version>
         </dependency>
+        <!-- Pushgateway exposition-->
         <dependency>
-            <groupId>de.marcoaust.prometheus</groupId>
-            <artifactId>spring-boot-prometheus</artifactId>
-            <version>${spring-boot-prometheus.version}</version>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_pushgateway</artifactId>
+            <version>${prometheus.version}</version>
         </dependency>
-
+        <!-- Exposition servlet-->
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_servlet</artifactId>
+            <version>${prometheus.version}</version>
+        </dependency>
+        <!-- The client -->
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_spring_boot</artifactId>
+            <version>${prometheus.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
