@@ -8,8 +8,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.provider.token.UserAuthenticationConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -29,17 +27,6 @@ public class SmartCosmosUserAuthenticationConverter
 
     private Collection<? extends GrantedAuthority> defaultAuthorities;
 
-    private UserDetailsService userDetailsService;
-
-    /**
-     * Optional {@link UserDetailsService} to use when extracting an
-     * {@link Authentication} from the incoming map.
-     *
-     * @param userDetailsService the userDetailsService to set
-     */
-    public void setUserDetailsService(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
 
     /**
      * Default value for authorities if an Authentication is being created and the input
@@ -107,13 +94,6 @@ public class SmartCosmosUserAuthenticationConverter
 
         Object principal = map.get(USERNAME);
         Collection<? extends GrantedAuthority> authorities = getAuthorities(map);
-
-        if (userDetailsService != null) {
-            UserDetails user = userDetailsService
-                .loadUserByUsername((String) principal);
-            authorities = user.getAuthorities();
-            principal = user;
-        }
 
         return new UsernamePasswordAuthenticationToken(principal, "N/A", authorities);
     }
