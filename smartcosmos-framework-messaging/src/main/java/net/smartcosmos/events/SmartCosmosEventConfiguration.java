@@ -1,6 +1,9 @@
 package net.smartcosmos.events;
 
-import net.smartcosmos.events.kafka.KafkaSmartCosmosEventTemplate;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -20,9 +23,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import net.smartcosmos.events.kafka.KafkaSmartCosmosEventTemplate;
 
 /**
  * Configures the libraries based on current support mechanisms present.
@@ -35,10 +36,11 @@ public class SmartCosmosEventConfiguration {
     @ConditionalOnMissingBean(SmartCosmosEventTemplate.class)
     @ConditionalOnClass(KafkaTemplate.class)
     protected static class KafkaSmartCosmosEventTemplateConfiguration {
-        @Value("${kafka.broker.address}")
+
+        @Value("${smartcosmos.service.kafka.address}")
         private String brokerAddress;
 
-        @Value("${kafka.zookeeper.address}")
+        @Value("${smartcosmos.service.zookeeper.address}")
         private String zookeeperConnect;
 
         /**
