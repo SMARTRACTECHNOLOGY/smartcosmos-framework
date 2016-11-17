@@ -1,6 +1,6 @@
 = SMART COSMOS Framework Release Notes
 
-== UNRELEASED
+== Release 3.1.0 (November 17, 2016)
 
 === New Features
 
@@ -14,6 +14,7 @@
 * PROFILES-750: Add request exception handler for `HttpStatusCodeException`
 * Improves testing to use an OAuth2 request instead of a mocked basic request
 * Removes Ribbon and Eureka
+* Some configuration improvements
 
 == Release 3.0.0 (August 12, 2016)
 
