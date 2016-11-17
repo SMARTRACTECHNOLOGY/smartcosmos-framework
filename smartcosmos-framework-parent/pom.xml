@@ -5,7 +5,7 @@
     <parent>
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-dependencies</artifactId>
-        <version>3.1.0</version>
+        <version>3.1.0-SNAPSHOT</version>
         <relativePath>../smartcosmos-dependencies/pom.xml</relativePath>
     </parent>
     <artifactId>smartcosmos-framework-parent</artifactId>
