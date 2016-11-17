@@ -10,7 +10,7 @@ import org.springframework.web.servlet.support.RequestContext;
  * {@link DelegatingRequestAttributesCallable} and {@link Runnable} with
  * {@link DelegatingRequestAttributesRunnable}
  *
- * @see org.springframework.security.concurrent.AbstractDelegatingSecurityContextSupport
+ * @see Class org.springframework.security.concurrent.AbstractDelegatingSecurityContextSupport
  * @author Robert Van Voorhees
  */
 public class AbstractDelegatingRequestAttributesSupport {

@@ -96,12 +96,13 @@ public final class DelegatingRequestAttributesCallable<V> implements Callable<V>
 	 * the specified {@link RequestAttributes}. Cannot be null.
 	 * @param requestAttributes the {@link RequestAttributes} to establish for the delegate
 	 * {@link Callable}. If null, defaults to {@link SecurityContextHolder#getContext()}
-	 * @return
+	 * @return the callable
 	 */
 	public static <V> Callable<V> create(Callable<V> delegate,
                                          RequestAttributes requestAttributes) {
-		return requestAttributes == null ? new DelegatingRequestAttributesCallable<V>(
-				delegate) : new DelegatingRequestAttributesCallable<V>(delegate,
-                                                                       requestAttributes);
+
+		return requestAttributes == null ? new DelegatingRequestAttributesCallable<>(
+			delegate) : new DelegatingRequestAttributesCallable<>(delegate,
+																  requestAttributes);
 	}
 }

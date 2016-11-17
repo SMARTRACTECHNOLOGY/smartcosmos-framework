@@ -92,7 +92,7 @@ public final class DelegatingRequestAttributesRunnable implements Runnable {
 	 * @param requestAttributes the {@link RequestContextHolder} to establish before invoking the
 	 * delegate {@link Runnable}. If null, the current {@link RequestAttributes} from the
 	 * {@link RequestContextHolder} will be used.
-	 * @return
+	 * @return the runnable
 	 */
 	public static Runnable create(Runnable delegate, RequestAttributes requestAttributes) {
 		Assert.notNull(delegate, "delegate cannot be  null");
