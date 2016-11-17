@@ -31,7 +31,7 @@ public final class UuidUtil {
      *
      * @param urn the urn
      * @return the UUID
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException in case the URN has an invalid format
      * @deprecated Default implementations in SMART COSMOS Objects v3 use a different scheme for URNs
      */
     @Deprecated
@@ -62,7 +62,7 @@ public final class UuidUtil {
      *
      * @param urn the account URN
      * @return the UUID
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException in case the URN has an invalid format
      * @deprecated SMART COSMOS Objects v3 uses a different scheme for tenant URNs
      */
     @Deprecated
@@ -89,7 +89,7 @@ public final class UuidUtil {
     }
 
     /**
-     * @return
+     * @return a new UUID
      * @deprecated Use {@code UUID.randomUUID()} instead
      */
     @Deprecated
@@ -98,7 +98,7 @@ public final class UuidUtil {
     }
 
     /**
-     * @return
+     * @return a new UUID as String
      * @deprecated Use {@code UUID.randomUUID().toString()} instead
      */
     @Deprecated
