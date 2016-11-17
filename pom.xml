@@ -5,11 +5,11 @@
     <parent>
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-build</artifactId>
-        <version>3.0.1-SNAPSHOT</version>
+        <version>3.1.2</version>
         <relativePath></relativePath>
     </parent>
     <artifactId>smartcosmos-framework-root</artifactId>
-    <version>3.0.1-SNAPSHOT</version>
+    <version>3.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>SMART COSMOS Framework Root</name>

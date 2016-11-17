@@ -1,5 +1,7 @@
 package net.smartcosmos.aspects;
 
+import java.lang.reflect.UndeclaredThrowableException;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
@@ -14,8 +16,8 @@ import net.smartcosmos.exceptions.SmartCosmosException;
 /**
  * Aspect to be applied to extension services implemented in the SMART COSMOS Objects architecture.
  * <p>
- * Using this aspect will capture all exceptions and convert them into a {@see SmartCosmosException}.  If your methods do not declare
- * they throw SmartCosmosException then you will receive an {@see UndeclaredThrowableException}
+ * Using this aspect will capture all exceptions and convert them into a {@link SmartCosmosException}.  If your methods do not declare
+ * they throw SmartCosmosException then you will receive an {@link UndeclaredThrowableException}
  * </p>
  * <p>
  * To use this aspect add the @SmartCosmosService annotation to the service class(es).  If you have interfaces with default methods
