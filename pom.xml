@@ -6,7 +6,7 @@
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-build</artifactId>
         <version>3.1.2</version>
-        <relativePath />
+        <relativePath></relativePath>
     </parent>
     <artifactId>smartcosmos-framework-root</artifactId>
     <version>3.1.2-SNAPSHOT</version>

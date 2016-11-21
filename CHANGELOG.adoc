@@ -1,5 +1,13 @@
 = SMART COSMOS Framework Release Notes
 
+== UNRELEASED
+
+=== New Features
+
+No new features are added in this release.
+
+=== Bugfixes & Improvements
+
 == Release 3.1.1 (November 21, 2016)
 
 === New Features
