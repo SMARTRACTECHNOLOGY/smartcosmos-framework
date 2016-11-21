@@ -1,12 +1,14 @@
 = SMART COSMOS Framework Release Notes
 
-== UNRELEASED
+== Release 3.1.1 (November 21, 2016)
 
 === New Features
 
 No new features are added in this release.
 
 === Bugfixes & Improvements
+
+* provide new version of `smartcosmos-user-details` library after a new release
 
 == Release 3.1.0 (November 17, 2016)
 
