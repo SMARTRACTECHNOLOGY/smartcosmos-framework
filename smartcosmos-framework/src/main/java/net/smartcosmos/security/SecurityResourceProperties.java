@@ -16,6 +16,8 @@ import org.springframework.core.io.Resource;
 public class SecurityResourceProperties {
 
     public static final int DEFAULT_CACHED_USER_KEEP_ALIVE_SECS = 300;
+    public static final int DEFAULT_ACCESS_TOKEN_VALIDITY_SECS = 60 * 60 * 12; // default 12 hours.
+    public static final int DEFAULT_REFRESH_TOKEN_VALIDITY_SECS = 60 * 60 * 24 * 30; // default 30 days.
 
     private KeyStoreProperties keystore = new KeyStoreProperties();
     private UserDetailsProperties userDetails = new UserDetailsProperties();
@@ -23,6 +25,8 @@ public class SecurityResourceProperties {
     private String clientId;
     private String clientSecret;
     private Integer cachedUserKeepAliveSecs = DEFAULT_CACHED_USER_KEEP_ALIVE_SECS;
+    private Integer accessTokenValiditySecs = DEFAULT_ACCESS_TOKEN_VALIDITY_SECS;
+    private Integer refreshTokenValiditySecs = DEFAULT_REFRESH_TOKEN_VALIDITY_SECS;
 
     @Data
     public class KeyStoreProperties {

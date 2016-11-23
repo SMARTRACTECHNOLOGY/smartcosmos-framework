@@ -4,7 +4,7 @@
 
 === New Features
 
-No new features are added in this release.
+* add support for configuration of access and refresh token expiration
 
 === Bugfixes & Improvements
 
