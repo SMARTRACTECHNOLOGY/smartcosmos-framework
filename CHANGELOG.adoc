@@ -4,9 +4,11 @@
 
 === New Features
 
-* add support for configuration of access and refresh token expiration
+No new features are added in this release.
 
 === Bugfixes & Improvements
+
+* removed `SecurityResourceProperties` that actually were only used by the Auth Server (and particularly not by the Framework itself)
 
 == Release 3.1.1 (November 21, 2016)
 
