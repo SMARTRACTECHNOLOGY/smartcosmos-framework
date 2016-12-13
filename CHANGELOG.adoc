@@ -4,6 +4,14 @@
 
 === New Features
 
+No new features are added in this release.
+
+=== Bugfixes & Improvements
+
+== Release 3.2.0 (December 13, 2016)
+
+=== New Features
+
 * adds a default anonymous user principal of type `SmartCosmosUser` (FLOWS-682)
 
 === Bugfixes & Improvements

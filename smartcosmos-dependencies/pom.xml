@@ -5,7 +5,7 @@
     <parent>
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-framework-root</artifactId>
-        <version>3.2.0-SNAPSHOT</version>
+        <version>3.2.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>smartcosmos-dependencies</artifactId>
@@ -53,22 +53,22 @@
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-framework</artifactId>
-                <version>3.2.0-SNAPSHOT</version>
+                <version>3.2.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-framework-messaging</artifactId>
-                <version>3.2.0-SNAPSHOT</version>
+                <version>3.2.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-framework-monitoring</artifactId>
-                <version>3.2.0-SNAPSHOT</version>
+                <version>3.2.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
                 <artifactId>smartcosmos-framework-test</artifactId>
-                <version>3.2.0-SNAPSHOT</version>
+                <version>3.2.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.smartcosmos</groupId>
