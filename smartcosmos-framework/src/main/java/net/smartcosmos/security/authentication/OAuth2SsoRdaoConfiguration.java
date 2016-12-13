@@ -14,14 +14,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
-import net.smartcosmos.annotation.SmartCosmosAnonymousUser;
 import net.smartcosmos.security.authentication.direct.DirectAccessDeniedHandler;
 import net.smartcosmos.security.authentication.direct.DirectUnauthorizedEntryPoint;
 import net.smartcosmos.security.authentication.direct.EnableDirectHandlers;
-
-/**
- * @author voor
- */
+import net.smartcosmos.security.user.SmartCosmosUser;
 
 @Configuration
 @Slf4j
@@ -33,8 +29,7 @@ public class OAuth2SsoRdaoConfiguration {
     @EnableDirectHandlers
     @EnableResourceServer
     @Configuration
-    protected static class OAuth2SsoConfigurerAdapter
-        extends ResourceServerConfigurerAdapter {
+    protected static class OAuth2SsoConfigurerAdapter extends ResourceServerConfigurerAdapter {
 
         @Autowired
         private Environment environment;
@@ -60,8 +55,8 @@ public class OAuth2SsoRdaoConfiguration {
                     .anyRequest().authenticated()
                 .and()
                 .anonymous()
-                    .key(SmartCosmosAnonymousUser.ANONYMOUS_AUTHENTICATION_KEY)
-                    .principal(SmartCosmosAnonymousUser.ANONYMOUS_USER);
+                    .key(SmartCosmosUser.ANONYMOUS_AUTHENTICATION_KEY)
+                    .principal(SmartCosmosUser.ANONYMOUS_USER);
             // @formatter:on
         }
     }
