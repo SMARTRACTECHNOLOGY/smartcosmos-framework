@@ -14,7 +14,7 @@ import net.smartcosmos.security.user.SmartCosmosUser;
 public interface SmartCosmosAnonymousUser {
 
     /**
-     * Internal key to identify if this object made by an authorised client,
+     * Internal key to identify if this object was set by an authorized client,
      * see documentation for {@link org.springframework.security.authentication.AnonymousAuthenticationToken}.
      */
     String ANONYMOUS_AUTHENTICATION_KEY = "944d3969-8e68-49db-b200-50dd03d1169b";
