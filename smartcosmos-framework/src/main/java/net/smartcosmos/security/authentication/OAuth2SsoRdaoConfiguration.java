@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
+import net.smartcosmos.annotation.SmartCosmosAnonymousUser;
 import net.smartcosmos.security.authentication.direct.DirectAccessDeniedHandler;
 import net.smartcosmos.security.authentication.direct.DirectUnauthorizedEntryPoint;
 import net.smartcosmos.security.authentication.direct.EnableDirectHandlers;
@@ -48,11 +49,20 @@ public class OAuth2SsoRdaoConfiguration {
 
         @Override
         public void configure(HttpSecurity http) throws Exception {
-            log.debug(
-                    "Smart Cosmos Security enabled, all requests must be authorized and no login redirect is offered.");
-            http.exceptionHandling().accessDeniedHandler(new DirectAccessDeniedHandler())
-                    .authenticationEntryPoint(new DirectUnauthorizedEntryPoint("/login")).and()
-                    .antMatcher("/**").authorizeRequests().anyRequest().authenticated();
+
+            log.debug("Smart Cosmos Security enabled, all requests must be authorized and no login redirect is offered.");
+            http // @formatter:off
+                .exceptionHandling()
+                    .accessDeniedHandler(new DirectAccessDeniedHandler())
+                    .authenticationEntryPoint(new DirectUnauthorizedEntryPoint("/login"))
+                .and()
+                .antMatcher("/**").authorizeRequests()
+                    .anyRequest().authenticated()
+                .and()
+                .anonymous()
+                    .key(SmartCosmosAnonymousUser.ANONYMOUS_AUTHENTICATION_KEY)
+                    .principal(SmartCosmosAnonymousUser.ANONYMOUS_USER);
+            // @formatter:on
         }
     }
 
