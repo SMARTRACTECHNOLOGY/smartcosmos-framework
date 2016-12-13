@@ -4,7 +4,7 @@
 
 === New Features
 
-No new features are added in this release.
+* adds a default anonymous user principal of type `SmartCosmosUser` (FLOWS-682)
 
 === Bugfixes & Improvements
 

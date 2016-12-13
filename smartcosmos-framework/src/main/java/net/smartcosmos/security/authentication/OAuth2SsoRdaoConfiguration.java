@@ -17,10 +17,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import net.smartcosmos.security.authentication.direct.DirectAccessDeniedHandler;
 import net.smartcosmos.security.authentication.direct.DirectUnauthorizedEntryPoint;
 import net.smartcosmos.security.authentication.direct.EnableDirectHandlers;
-
-/**
- * @author voor
- */
+import net.smartcosmos.security.user.SmartCosmosUser;
 
 @Configuration
 @Slf4j
@@ -32,8 +29,7 @@ public class OAuth2SsoRdaoConfiguration {
     @EnableDirectHandlers
     @EnableResourceServer
     @Configuration
-    protected static class OAuth2SsoConfigurerAdapter
-        extends ResourceServerConfigurerAdapter {
+    protected static class OAuth2SsoConfigurerAdapter extends ResourceServerConfigurerAdapter {
 
         @Autowired
         private Environment environment;
@@ -48,11 +44,20 @@ public class OAuth2SsoRdaoConfiguration {
 
         @Override
         public void configure(HttpSecurity http) throws Exception {
-            log.debug(
-                    "Smart Cosmos Security enabled, all requests must be authorized and no login redirect is offered.");
-            http.exceptionHandling().accessDeniedHandler(new DirectAccessDeniedHandler())
-                    .authenticationEntryPoint(new DirectUnauthorizedEntryPoint("/login")).and()
-                    .antMatcher("/**").authorizeRequests().anyRequest().authenticated();
+
+            log.debug("Smart Cosmos Security enabled, all requests must be authorized and no login redirect is offered.");
+            http // @formatter:off
+                .exceptionHandling()
+                    .accessDeniedHandler(new DirectAccessDeniedHandler())
+                    .authenticationEntryPoint(new DirectUnauthorizedEntryPoint("/login"))
+                .and()
+                .antMatcher("/**").authorizeRequests()
+                    .anyRequest().authenticated()
+                .and()
+                .anonymous()
+                    .key(SmartCosmosUser.ANONYMOUS_AUTHENTICATION_KEY)
+                    .principal(SmartCosmosUser.ANONYMOUS_USER);
+            // @formatter:on
         }
     }
 
