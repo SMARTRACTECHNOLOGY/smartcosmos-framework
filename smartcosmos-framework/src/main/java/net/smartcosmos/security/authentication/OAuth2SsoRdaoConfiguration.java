@@ -19,9 +19,8 @@ import net.smartcosmos.security.authentication.direct.DirectUnauthorizedEntryPoi
 import net.smartcosmos.security.authentication.direct.EnableDirectHandlers;
 
 /**
- * @author voor
+ * This is the Resource Server Configuration that requires JWT and OAuth2.0 for all regular services.
  */
-
 @Configuration
 @Slf4j
 @ComponentScan
@@ -53,6 +52,7 @@ public class OAuth2SsoRdaoConfiguration {
             http.exceptionHandling().accessDeniedHandler(new DirectAccessDeniedHandler())
                     .authenticationEntryPoint(new DirectUnauthorizedEntryPoint("/login")).and()
                     .antMatcher("/**").authorizeRequests().anyRequest().authenticated();
+
         }
     }
 
