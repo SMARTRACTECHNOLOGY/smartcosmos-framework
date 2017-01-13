@@ -39,7 +39,23 @@ public class OAuth2SsoRdaoConfiguration {
 
             // This is necessary since it'll clear the context removing the mock user otherwise.
             // see https://stackoverflow.com/questions/37573361/springsecurity-withsecuritycontext-mockmvc-oauth2-always-unauthorised
-            resources.stateless(!environment.acceptsProfiles("test"));
+
+            boolean isTest = false;
+
+            String[] activeProfiles = environment.getActiveProfiles();
+            for(String profile: activeProfiles){
+                if(profile.startsWith("test")){
+                    isTest = true;
+                    break;
+                }
+            }
+            if(isTest){
+                resources.stateless(false);
+            }else {
+                resources.stateless(true);
+            }
+
+
         }
 
         @Override
