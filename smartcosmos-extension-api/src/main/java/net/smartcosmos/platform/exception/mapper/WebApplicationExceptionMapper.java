@@ -46,20 +46,7 @@ public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplica
             response = paramException(e);
         }
 
-        if (e.getResponse().getStatus() == Response.Status.UNAUTHORIZED.getStatusCode())
-        {
-            response = unauthorized(e);
-        }
-
         return response;
-    }
-
-    private Response unauthorized(WebApplicationException e)
-    {
-        return Response.status(Response.Status.UNAUTHORIZED)
-                .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity(ResponseEntity.toJson(Result.ERR_UNAUTHORIZED))
-                .build();
     }
 
     private Response paramException(WebApplicationException e)
