@@ -30,10 +30,12 @@ import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.util.json.JsonUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.Response;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,26 +61,44 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
         boolean isAvailable = false;
         ClientResource service = createClient(RegistrationEndpoints.checkRealmAvailability(realm));
 
+        Response response = null;
         try
         {
-            Representation result = service.get();
-            JsonRepresentation jsonRepresentation = new JsonRepresentation(result);
-            JSONObject jsonResult = jsonRepresentation.getJsonObject();
-            ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
-
-            if (!service.getStatus().equals(Status.SUCCESS_OK))
-            {
-                LOGGER.error("Unexpected HTTP status code returned: " + service.getStatus().getCode());
-                throw new ServiceException(responseEntity);
-            } else
-            {
-                isAvailable = (responseEntity.getCode() == Result.OK.getCode());
-            }
-
-        } catch (JSONException | IOException e)
+            service.get();
+            response = service.getResponse();
+        } catch (ResourceException e)
         {
             LOGGER.error("Unexpected exception", e);
             throw new ServiceException(e);
+        }
+
+        if (response != null)
+        {
+            try
+            {
+                JsonRepresentation jsonRepresentation = new JsonRepresentation(response.getEntityAsText());
+                JSONObject jsonResult = jsonRepresentation.getJsonObject();
+                ResponseEntity responseEntity = JsonUtil.fromJson(jsonResult, ResponseEntity.class);
+
+                if (!response.getStatus().equals(Status.SUCCESS_OK))
+                {
+                    LOGGER.error("Unexpected HTTP status code returned: " + service.getStatus().getCode());
+                    throw new ServiceException(responseEntity);
+                } else
+                {
+                    isAvailable = (responseEntity.getCode() == Result.OK.getCode());
+                }
+
+            } catch (JSONException e)
+            {
+                LOGGER.error("Unexpected exception", e);
+                throw new ServiceException(e);
+            }
+        } else
+        {
+            LOGGER.error("Unexpected NULL response");
+            ResponseEntity responseEntity = new ResponseEntity.Builder(Result.ERR_FAILURE.getCode(), "Response should not be NULL").build();
+            throw new ServiceException(responseEntity);
         }
 
         return isAvailable;
@@ -111,8 +131,7 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
 
         try
         {
-            JSONObject jsonObject = new JSONObject()
-                    .put(Field.EMAIL_ADDRESS_FIELD, emailAddress);
+            JSONObject jsonObject = new JSONObject().put(Field.EMAIL_ADDRESS_FIELD, emailAddress);
             jsonObject.put(Field.SEND_REGISTRATION_EMAIL_FIELD, sendEmail);
 
             if (realm != null)
@@ -125,8 +144,7 @@ final class RegistrationClient extends AbstractBaseClient implements IRegistrati
             ClientResource service = createClient(RegistrationEndpoints.registration());
             Representation result = service.post(sndJsonRepresentation);
 
-            if (service.getStatus().equals(Status.CLIENT_ERROR_CONFLICT) ||
-                service.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
+            if (service.getStatus().equals(Status.CLIENT_ERROR_CONFLICT) || service.getStatus().equals(Status.CLIENT_ERROR_BAD_REQUEST))
             {
                 // Email address or Realm is already registered
                 JsonRepresentation rcvJsonRepresentation = new JsonRepresentation(result);
