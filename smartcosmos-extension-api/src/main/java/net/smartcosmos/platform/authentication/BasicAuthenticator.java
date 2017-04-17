@@ -31,6 +31,8 @@ import net.smartcosmos.platform.api.IContext;
 import net.smartcosmos.platform.api.authentication.IAuthenticatedUser;
 import net.smartcosmos.platform.api.dao.IUserDAO;
 import net.smartcosmos.platform.api.service.IEventService;
+import net.smartcosmos.pojo.base.ResponseEntity;
+import net.smartcosmos.pojo.base.Result;
 import net.smartcosmos.pojo.context.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,8 +95,8 @@ public class BasicAuthenticator
 
             throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
                     .header(HttpHeaders.WWW_AUTHENTICATE, "SMART COSMOS")
-                    .entity("Credentials are required to access this resource.")
-                    .type(MediaType.TEXT_PLAIN_TYPE)
+                    .entity(ResponseEntity.toJson(Result.ERR_UNAUTHORIZED))
+                    .type(MediaType.APPLICATION_JSON)
                     .build());
 
 //            return Optional.absent();
